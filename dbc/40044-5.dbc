@@ -1,0 +1,220 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: UUT CTRL
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ NewSignal_0012 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ NewSignal_0013 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2565855697 CTRL1: 8 CTRL
+ SG_ Command M : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Ctrl_Output_1A m81 : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Ctrl_Output_1B m81 : 10|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Ctrl_Output_2A m81 : 12|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Ctrl_Output_2B m81 : 14|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Ctrl_Output_3A m81 : 16|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Ctrl_Output_3B m81 : 18|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Ctrl_Output_4A m81 : 20|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Ctrl_Output_4B m81 : 22|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Enable_Fault_Reset m82 : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Enable_DPLF1 m82 : 10|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Enable_DPLF2 m82 : 12|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Enable_DPLT1_DPLT2 m82 : 14|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SaveSettings m82 : 18|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ ADRaw m82 : 20|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ FREQ1 m82 : 24|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE1 m82 : 48|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE2 m82 : 52|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ ID1 m82 : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE1A m83 : 8|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE1B m83 : 12|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE2A m83 : 16|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE2B m83 : 20|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE3A m83 : 24|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE3B m83 : 28|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE4A m83 : 32|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE4B m83 : 36|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ TX_DIGIN m88 : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ TX_AD2 m88 : 16|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ TX_AD3 m88 : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566854105 DIGIN: 8 UUT
+ SG_ Input_1A : 0|2@1+ (1,0) [0|0] "BitPair" Vector__XXX
+ SG_ Input_1B : 2|2@1+ (1,0) [0|0] "BitPair" Vector__XXX
+ SG_ Input_2A : 4|2@1+ (1,0) [0|0] "BitPair" Vector__XXX
+ SG_ Input_2B : 6|2@1+ (1,0) [0|0] "BitPair" Vector__XXX
+ SG_ Input_3A : 8|2@1+ (1,0) [0|0] "BitPair" Vector__XXX
+ SG_ Input_3B : 10|2@1+ (1,0) [0|0] "BitPair" Vector__XXX
+ SG_ Input_4A : 12|2@1+ (1,0) [0|0] "BitPair" Vector__XXX
+ SG_ Input_4B : 14|2@1+ (1,0) [0|0] "BitPair" Vector__XXX
+
+BO_ 2566854361 AD2: 8 UUT
+ SG_ Port_1A : 0|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Port_1B : 16|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Port_2A : 32|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Port_2B : 48|16@1+ (0.001,0) [0|0] "" Vector__XXX
+
+BO_ 2566854617 AD3: 8 UUT
+ SG_ Port_3A : 0|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Port_3B : 16|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Port_4A : 32|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Port_4B : 48|16@1+ (0.001,0) [0|0] "" Vector__XXX
+
+BO_ 2565853657 STAT: 8 UUT
+ SG_ Version : 0|8@1+ (1,0) [0|255] "Dec" Vector__XXX
+ SG_ Revision : 8|8@1+ (1,0) [0|255] "Dec" Vector__XXX
+ SG_ Factory_Default_Configuration : 16|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ Configuration_Saved : 18|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ Alternate_Configuration_Saved : 20|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ Node_Alive : 22|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ Node_Fault_Present : 24|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ Fault_Counter_Not_Zero : 26|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ Spare : 28|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ Invalid_Configuration_Received : 30|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ Active_Fault_Code : 32|8@1+ (1,0) [0|0] "Dec" Vector__XXX
+ SG_ UserID : 40|8@1+ (1,0) [0|0] "Dec" Vector__XXX
+ SG_ D25 : 48|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ D26 : 50|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ D27 : 52|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ D28 : 54|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ D29 : 56|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ D30 : 58|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ Hardware_Dash : 60|4@1+ (1,0) [0|0] "Dec" Vector__XXX
+
+BO_ 2566912985 DPLF1: 8 UUT
+ SG_ Input_1_Sensor : 0|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ Sensor_Power_1 : 16|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ Sensor_Power_2 : 20|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ Sensor_Power_3 : 24|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ Sensor_Power_4 : 28|2@1+ (1,0) [0|0] "Bit" Vector__XXX
+ SG_ Save_Counter : 56|8@1+ (1,0) [0|0] "Int" Vector__XXX
+
+BO_ 2566913241 DPLF2: 8 UUT
+ SG_ CNFG1 : 0|8@1+ (1,0) [1|50] "Int" Vector__XXX
+ SG_ CNFG2 : 8|8@1+ (1,0) [1|36] "Int" Vector__XXX
+ SG_ VBAT : 16|12@1+ (0.1,0) [0|32] "Vdc" Vector__XXX
+ SG_ TEMP : 32|12@1+ (0.1,-100) [-100|300] "F" Vector__XXX
+ SG_ CNFG3 : 48|8@1+ (1,0) [1|250] "Int" Vector__XXX
+
+BO_ 2566907609 FAULT: 8 UUT
+ SG_ Fault_Counter_F1 : 0|8@1+ (1,0) [0|250] "Dec" Vector__XXX
+ SG_ Fault_Counter_F2 : 8|8@1+ (1,0) [0|250] "Dec" Vector__XXX
+ SG_ Fault_Counter_F3 : 16|8@1+ (1,0) [0|250] "Dec" Vector__XXX
+ SG_ Fault_Counter_F4 : 24|8@1+ (1,0) [0|250] "Dec" Vector__XXX
+ SG_ Fault_Counter_F5 : 32|8@1+ (1,0) [0|250] "Dec" Vector__XXX
+ SG_ Fault_Counter_F6 : 40|8@1+ (1,0) [0|250] "Dec" Vector__XXX
+ SG_ Fault_Counter_F7 : 48|8@1+ (1,0) [0|250] "Dec" Vector__XXX
+
+
+
+CM_ BO_ 2565855697 "Control Message #1";
+CM_ SG_ 2565855697 Ctrl_Sensor_Pwr_1 "Sensor power output control J1";
+CM_ SG_ 2565855697 Ctrl_Sensor_Pwr_2 "Sensor power output control J2";
+CM_ SG_ 2565855697 Ctrl_Sensor_Pwr_3 "Sensor power output control J3";
+CM_ SG_ 2565855697 Ctrl_Sensor_Pwr_4 "Sensor power output control J4";
+CM_ SG_ 2565855697 Enable_Fault_Reset "Enables Controller Mode Output Reset.";
+CM_ SG_ 2565855697 Enable_DPLF1 "Enables transmission of message [DPLF1]";
+CM_ SG_ 2565855697 Enable_DPLF2 "Enables transmission of message [DPLF2]";
+CM_ SG_ 2565855697 Enable_DPLT1_DPLT2 "Not Used.  Reserved for enables transmission of message [DPLT1] and [DPLT2].";
+CM_ SG_ 2565855697 SaveSettings "Set true to write configuration to module.  Preserves settings on power cycle.";
+CM_ SG_ 2565855697 ADRaw "Enables analog inputs to be transmitted as raw bits without processing.";
+CM_ SG_ 2565855697 FREQ1 "Not Used.  Reserved for PWM.";
+CM_ SG_ 2565855697 MODE1 "Not Used.  Reserved for outputs.";
+CM_ SG_ 2565855697 MODE2 "Global control sets the configuration for control of ALL inputs.";
+CM_ SG_ 2565855697 ID1 "User defined byte for configuration ID.";
+CM_ BO_ 2566854105 "Inputs Message";
+CM_ SG_ 2566854105 Input_1A "Digital Input Status 1A";
+CM_ SG_ 2566854105 Input_1B "Digital Input Status 1B";
+CM_ SG_ 2566854105 Input_2A "Digital Input Status 2A";
+CM_ SG_ 2566854105 Input_2B "Digital Input Status 2B";
+CM_ SG_ 2566854105 Input_3A "Digital Input Status 3A";
+CM_ SG_ 2566854105 Input_3B "Digital Input Status 3B";
+CM_ SG_ 2566854105 Input_4A "Digital Input Status 4A";
+CM_ SG_ 2566854105 Input_4B "Digital Input Status 4B";
+CM_ BO_ 2566854361 "Analog Input Message 2";
+CM_ SG_ 2566854361 Port_1A "Analog Input Port 1A";
+CM_ SG_ 2566854361 Port_1B "Analog Input Port 1B";
+CM_ SG_ 2566854361 Port_2A "Analog Input Port 2A";
+CM_ SG_ 2566854361 Port_2B "Analog Input Port 2B";
+CM_ BO_ 2566854617 "Analog Input Message 3";
+CM_ SG_ 2566854617 Port_3A "Analog Input Port 3A";
+CM_ SG_ 2566854617 Port_3B "Analog Input Port 3B";
+CM_ SG_ 2566854617 Port_4A "Analog Input Port 4A";
+CM_ SG_ 2566854617 Port_4B "Analog Input Port 4B";
+CM_ BO_ 2565853657 "Proprietary A Default Response Message ";
+CM_ SG_ 2565853657 Version "Software Version";
+CM_ SG_ 2565853657 Revision "Software Revision";
+CM_ SG_ 2565853657 Factory_Default_Configuration "Factory Default Configuration";
+CM_ SG_ 2565853657 Configuration_Saved "Configuration Saved";
+CM_ SG_ 2565853657 Alternate_Configuration_Saved "Alternate Configuration Received ";
+CM_ SG_ 2565853657 Node_Alive "Node Alive:  Set to 0x01b";
+CM_ SG_ 2565853657 Node_Fault_Present "Node Fault Present";
+CM_ SG_ 2565853657 Fault_Counter_Not_Zero "Fault Counters Not Zero";
+CM_ SG_ 2565853657 Spare "Spare - Set to 0x11b";
+CM_ SG_ 2565853657 Invalid_Configuration_Received "Invalid Configuration Received";
+CM_ SG_ 2565853657 Active_Fault_Code "Active Fault Code";
+CM_ SG_ 2565853657 UserID "User ID";
+CM_ SG_ 2565853657 D25 "True when message COMMAND 0x52h, times out after 1 second.";
+CM_ SG_ 2565853657 D26 "True when message COMMAND 0x53h, times out after 1 second.";
+CM_ SG_ 2565853657 D27 "True when message COMMAND 0x54h, times out after 1 second.";
+CM_ SG_ 2565853657 D28 "True when message COMMAND 0x55h, times out after 1 second.";
+CM_ SG_ 2565853657 D29 "True when message COMMAND 0x56h, times out after 1 second.";
+CM_ SG_ 2565853657 D30 "True when message COMMAND 0x57h, times out after 1 second.";
+CM_ SG_ 2565853657 Hardware_Dash "Hardware Identification";
+CM_ BO_ 2566912985 "Status Message";
+CM_ SG_ 2566912985 Input_1_Sensor "Magnetic Sensor";
+CM_ SG_ 2566912985 Sensor_Power_1 "Sensor Power 1";
+CM_ SG_ 2566912985 Sensor_Power_2 "Sensor Power 2";
+CM_ SG_ 2566912985 Sensor_Power_3 "Sensor Power 3";
+CM_ SG_ 2566912985 Sensor_Power_4 "Sensor Power 4";
+CM_ SG_ 2566912985 Save_Counter "Counter for SAVECNFG";
+CM_ BO_ 2566913241 "Status Message";
+CM_ SG_ 2566913241 CNFG1 "Hardware Configuration ";
+CM_ SG_ 2566913241 CNFG2 "PC Board Revision ";
+CM_ SG_ 2566913241 VBAT "Battery Voltage";
+CM_ SG_ 2566913241 TEMP "Module Temp";
+CM_ SG_ 2566913241 CNFG3 "Additional Configuration ";
+CM_ BO_ 2566907609 "Node Fault Counter Message";
+CM_ SG_ 2566907609 Fault_Counter_F1 "Fault Counter F1";
+CM_ SG_ 2566907609 Fault_Counter_F2 "Fault Counter F2";
+CM_ SG_ 2566907609 Fault_Counter_F3 "Fault Counter F3";
+CM_ SG_ 2566907609 Fault_Counter_F4 "Fault Counter F4";
+CM_ SG_ 2566907609 Fault_Counter_F5 "Fault Counter F5";
+CM_ SG_ 2566907609 Fault_Counter_F6 "Fault Counter F6";
+CM_ SG_ 2566907609 Fault_Counter_F7 "Fault Counter F7";
+VAL_ 2565853657 Active_Fault_Code 7 "EEPROM" 8 "VREF" 9 "I2C" 10 "CNFG" 11 "PROG" 12 "CHECKSUM" 21 "VOLT_LOW" 22 "VOLT_HI" 31 "COM_SA" 32 "COM_HW" 33 "COM_CTRL" 41 "VOLT_HOLD" 51 "OUTPUT_OVERCURRENT" 52 "OUTPUT_SHORT" 53 "INPUT_OVERVOLTAGE" 54 "OVER_TEMP" 0 "CLEAR" ;
+

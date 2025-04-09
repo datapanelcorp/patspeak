@@ -1,0 +1,144 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: PAT CTRL
+
+
+BO_ 2365581095 PAT_J0: 8 CTRL
+ SG_ J0_01_3A_LOAD : 0|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ J0_02_5A_LOAD : 2|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ J0_03_7A_LOAD : 4|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J0_04_12A_LOAD : 6|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J0_05_200MA_PULLUP : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J0_06_12MA_PULLUP : 10|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J0_07_GND_LOAD : 12|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J0_08_METER_LOAD : 14|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J0_09_TEST_SUPPLY : 16|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J0_10_MAIN_SUPPLY : 18|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J0_11_FREQ_GEN : 20|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J0_12_PROBE : 22|2@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2365581351 PAT_J1: 8 CTRL
+ SG_ J1_01 : 0|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ J1_02 : 2|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ J1_03 : 4|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J1_04 : 6|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J1_05 : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J1_06 : 10|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J1_07 : 12|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J1_08 : 14|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J1_09 : 16|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J1_10 : 18|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J1_11 : 20|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J1_12 : 22|2@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2365581607 PAT_J2: 8 CTRL
+ SG_ J2_01 : 0|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ J2_02 : 2|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ J2_03 : 4|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J2_04 : 6|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J2_05 : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J2_06 : 10|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J2_07 : 12|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J2_08 : 14|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J2_09 : 16|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J2_10 : 18|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J2_11 : 20|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J2_12 : 22|2@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2365581863 PAT_J3: 8 CTRL
+ SG_ J3_01 : 0|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ J3_02 : 2|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ J3_03 : 4|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J3_04 : 6|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J3_05 : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J3_06 : 10|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J3_07 : 12|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J3_08 : 14|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J3_09 : 16|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J3_10 : 18|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J3_11 : 20|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J3_12 : 22|2@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2365582119 PAT_J4: 8 CTRL
+ SG_ J4_01 : 0|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ J4_02 : 2|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ J4_03 : 4|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J4_04 : 6|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J4_05 : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J4_06 : 10|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J4_07 : 12|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J4_08 : 14|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J4_09 : 16|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J4_10 : 18|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J4_11 : 20|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J4_12 : 22|2@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2365582375 PAT_J5: 8 CTRL
+ SG_ J5_01 : 0|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ J5_02 : 2|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ J5_03 : 4|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J5_04 : 6|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J5_05 : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J5_06 : 10|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J5_07 : 12|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J5_08 : 14|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J5_09 : 16|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J5_10 : 18|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J5_11 : 20|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ J5_12 : 22|2@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2365521923 STAT_METER: 8 PAT
+ SG_ MeterVolts : 0|16@1+ (0.001,0) [0|0] "Volts" Vector__XXX
+ SG_ MeterCurrent : 16|16@1+ (0.001,0) [0|0] "Amps" Vector__XXX
+
+BO_ 2365521924 STAT_AMPS: 8 PAT
+ SG_ MeterAmps : 0|16@1+ (0.001,0) [0|0] "Volts" Vector__XXX
+ SG_ MeterSpare : 16|16@1+ (0.001,0) [0|0] "Amps" Vector__XXX
+
+BO_ 2365522176 CTRL_SUPPLY: 8 CTRL
+ SG_ PwrRemote : 0|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PwrEnable : 2|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PwrSetVoltage : 16|10@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PwrSetCurrent : 32|10@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2365522944 CTRL_LOAD: 8 CTRL
+ SG_ LdRemote : 0|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ LdEnable : 2|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ LdCurrentSet : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+
+
+
+
