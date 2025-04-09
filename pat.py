@@ -9,11 +9,25 @@ import time
 import keyboard
 from datetime import datetime
 
+import can
+
 from support.screens import DrawScreen 
 from support.events import ProcessEvents
-from support.can import CANThread
+#from support.pcan_interface import CANThread
 from support.script import ProcessScript
 import support.globals as globals
+
+try:
+    bus = can.Bus(channel='PCAN_USBBUS1', interface='pcan', bitrate=250000)
+    print("PCAN1 Detected")
+    bus.shutdown()
+    bus = can.Bus(channel='PCAN_USBBUS2', interface='pcan', bitrate=250000)
+    print("PCAN2 Detected")
+    bus.shutdown()
+    from support.pcan_interface import CANThread 
+except can.CanError:
+    print("No PCAN device detected")
+    from support.can import CANThread
 
 
 def ErrorTrap(error):
