@@ -38,16 +38,17 @@ def initialize():
     
     UUT_TestLog = "Started on: " + str(datetime.today().strftime(TimeStampFormat)) + "\n"
     
-    DBCPath = "C:\\Bin\\PAT3\\dbc\\"
-    DataPath = "C:\\Bin\\PAT3\\data\\"
-    LogPath = "C:\\Bin\\PAT3\\data\\"
+    TestPath = "C:\\Bin\\patspeak\\dut\\"
+    DBCPath = "C:\\Bin\\patspeak\\dbc\\"
+    DataPath = "C:\\Bin\\patspeak\\data\\"
+    LogPath = "C:\\Bin\\patspeak\\data\\"
     
-    SoundStart = "C:\\Bin\\PAT3\\sounds\\startup.wav"
-    SoundFail = "C:\\Bin\\PAT3\\sounds\\fail.wav"
-    SoundPass = "C:\\Bin\\PAT3\\sounds\\tada.wav"  
+    SoundStart = "C:\\Bin\\patspeak\\sounds\\startup.wav"
+    SoundFail = "C:\\Bin\\patspeak\\sounds\\fail.wav"
+    SoundPass = "C:\\Bin\\patspeak\\sounds\\tada.wav"  
 
     #find UUT DBC file name
-    test_file = open(TestFile, 'r')
+    test_file = open(TestPath + TestFile, 'r')
     Lines = test_file.readlines()
     test_file.seek(0)
     
