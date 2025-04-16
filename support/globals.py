@@ -40,8 +40,8 @@ def initialize():
     
     TestPath = "C:\\Bin\\patspeak\\dut\\"
     DBCPath = "C:\\Bin\\patspeak\\dbc\\"
-    DataPath = "C:\\Bin\\patspeak\\data\\"
-    LogPath = "C:\\Bin\\patspeak\\data\\"
+    DataPath = "C:\\Bin\\patspeak\\docs\\"
+    LogPath = "C:\\Bin\\patspeak\\docs\\"
     
     SoundStart = "C:\\Bin\\patspeak\\sounds\\startup.wav"
     SoundFail = "C:\\Bin\\patspeak\\sounds\\fail.wav"
