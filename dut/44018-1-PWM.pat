@@ -20,13 +20,13 @@ J2_01 = 1 : NULL : WAIT = 0.5
 #set current and turn on output and verify feedback
 LdCurrentSet = 1000, Pwm1DutyCmd = 500 : NULL : WAIT = 0.1
 #verify reading from load
-NULL : PwmOut1Current = 1.0 | 1.0 | 0.1
+NULL : PwmOut1Current = 1.0 | 0.1 | 0.1
 NULL : MeterCurrent = 1.0 | 0.01 | 0.1
 
 #set current and turn on output and verify feedback
 LdCurrentSet = 2000, Pwm1DutyCmd = 500 : NULL : WAIT = 0.1
 #verify reading from load
-NULL : PwmOut1Current = 2.0 | 1.0 | 0.1
+NULL : PwmOut1Current = 2.0 | 0.1 | 0.1
 NULL : MeterCurrent = 2.0 | 0.01 | 0.1
 
 J2_01 = 0 : NULL : WAIT = 0.1

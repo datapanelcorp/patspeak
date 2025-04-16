@@ -1,52 +1,69 @@
-from output_pwm_normal_write import WriteOutputTest
- 
-t = 0
-i = 0
-
-PortMode = 0
-
-#global setup
-TestName = "34044-3-PWM-NORMAL"
+# Global setup
+version = "1.2"
+TestName = "44018-1-PWM-"+version
 datafile = TestName + ".pat"
 
 outstr = ""
-outstr += "#34044-3\n"
-outstr += "#Verion 0.0\n"
-outstr += "#PWM test with 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)\n"
-outstr += "UUT_DBC = 34044-563.dbc\n"
-outstr += "UUT_DATANAME = " + TestName + "\n"
-outstr += "\n"
 
-outstr += "#-----setup 34044-----\n"
-outstr += "#disable global modes\n"
+# Header
+outstr += f"#44018-1\n"
+outstr += f"#Verion {version}\n"
+outstr += f"UUT_DBC = 44018-560.dbc\n"
+outstr += f"UUT_DATANAME = {TestName}\n"
+outstr += "#-----setup PAT-----\n"
 
-outstr += "#configure Ports\n"
-outstr += "Command = 83, MODE1A = 1, MODE1B = 3, MODE2A = 3, MODE2B = 3, MODE3A = 1, MODE3B = 3, MODE4A = 3, MODE4B = 3, MODE5A = 3, MODE5B = 3, MODE6A = 3, MODE6B = 3, MODE7A = 3, MODE7B = 3 : NULL : WAIT = 0.5\n"
-outstr += "Command = 84, MODE8A = 3, MODE8B = 3 : NULL : WAIT = 0.5\n"
-outstr += "Command = 93, PORT1_MODE = " + str(PortMode) + ", PORT2_MODE = " + str(PortMode) + ", PORT3_MODE = " + str(PortMode) + ", PORT4_MODE = " + str(PortMode) + ", PORT5_MODE = " + str(PortMode) + ", PORT6_MODE = " + str(PortMode) + ", PORT7_MODE = " + str(PortMode) + ", PORT8_MODE = " + str(PortMode) + " : NULL : WAIT = 0.5\n"
-outstr += "Command = 82, MODE1 = 0, MODE2 = 0, ADRaw = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL\n"
-outstr += "Command = 82, SaveSettings = 1 : NULL\n"
+# Load setup
+outstr += "#setup load\n"
+outstr += "LdRemote = 1 : NULL : WAIT = 0.1\n"
+outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
+outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
+outstr += "#switch in load line, set current\n"
+outstr += "J0_08_METER_LOAD = 1 : NULL : WAIT = 1\n\n"
 
-Frequancy = 40
-outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", SaveSettings = 1 : NULL\n"
-outstr = WriteOutputTest(outstr, Frequancy, 15)#all 15 outputs
+current_ma_test_points = {1000, 5000, 13000}
+duty_cycle_test_points = {1, 50, 99}
+number_of_channels = 12
 
-Frequancy = 500
-outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", SaveSettings = 1 : NULL\n"
-outstr = WriteOutputTest(outstr, Frequancy, 15)#only check 2
+# Generate test sections for each output channel
+for channel in range(1, number_of_channels + 1):
+    outstr += f"#### OUT{channel} START\n"
+    outstr += f"# switch in dut\n"
+    outstr += f"J2_{channel:02d} = 1 : NULL : WAIT = 0.5\n"
+    
+    for duty in duty_cycle_test_points:    
+        
+        for ma in current_ma_test_points:
+            outstr += f"## Duty: {duty}% Load: {ma}ma\n"
 
-Frequancy = 1200
-outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", SaveSettings = 1 : NULL\n"
-outstr = WriteOutputTest(outstr, Frequancy, 15)#only check 2
+            outstr += f"#set current and turn on output and verify feedback\n"
+            outstr += f"LdCurrentSet = {ma}, Pwm{channel}DutyCmd = {duty} : NULL : WAIT = 0.1\n"
+                
+            # Verify readings
+            current_A = ma / 1000.0
+            outstr += f"#verify reading from load\n"
+            outstr += f"NULL : PwmOut{channel}Current = {current_A:.1f} | 0.1 | 0.1\n"
+            outstr += f"NULL : MeterCurrent = {current_A:.1f} | 0.01 | 0.1\n"
+            
+    # Turn off DUT
+    outstr += f"J2_{channel:02d} = 0 : NULL : WAIT = 0.1\n"
+    outstr += f"#### OUT{channel} END\n\n"
 
-#shut down test
+# Cleanup and shutdown
+outstr += "#switch out load line, clear current\n"
+outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
+outstr += "LdRemote = 0 : NULL : WAIT = 0.1\n"
+outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
+outstr += "J0_08_METER_LOAD = 0 : NULL : WAIT = 1\n"
 outstr += "SAVE\n"
 outstr += "END\n"
-    
-f = open(datafile, 'w')
-f.write(outstr)
-f.close()    
-print(outstr)
 
 
+
+def write_to_file(content, filename):
+    """Write content to file"""
+    with open(filename, 'w') as f:
+        f.write(content)
+
+write_to_file(outstr, datafile)
+print(f"Script written to {datafile}")
 
