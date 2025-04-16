@@ -80,7 +80,8 @@ def CANThread(i):
             if(channel_number == 0):    
                 for frame in globals.uut_framebox_out.frames():
                     message = can.Message(arbitration_id=frame.id, data=frame.data, is_extended_id=True)
-                    ch.send(message)                 
+                    if not(message.arbitration_id == 0x18ef6027 and message.data[0] == 0): #TODO: implement way to do oneshot messages outside of main can thread
+                        ch.send(message)                 
             else:
                 for frame in globals.pat_framebox_out.frames():
                     message = can.Message(arbitration_id=frame.id, data=frame.data, is_extended_id=True)

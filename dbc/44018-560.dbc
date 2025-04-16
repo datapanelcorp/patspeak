@@ -36,87 +36,7 @@ BS_:
 BU_: UUT CTRL
 
 
-BO_ 2560974887 PWMCTRL3: 8 CTRL
- SG_ Pwm12DutyCmd : 48|16@1+ (0.1,0) [0|100] "%" Vector__XXX
- SG_ Pwm11DutyCmd : 32|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
- SG_ Pwm10DutyCmd : 16|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
- SG_ Pwm9DutyCmd : 0|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
-
-
-BO_ 2561040423 PWMCTRL2: 8 CTRL
- SG_ Pwm8DutyCmd : 48|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
- SG_ Pwm7DutyCmd : 32|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
- SG_ Pwm6DutyCmd : 16|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
- SG_ Pwm5DutyCmd : 0|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
-
-
-BO_ 2561105959 PWMCTRL1: 8 CTRL
- SG_ Pwm4DutyCmd : 48|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
- SG_ Pwm3DutyCmd : 32|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
- SG_ Pwm2DutyCmd : 16|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
- SG_ Pwm1DutyCmd : 0|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
-
-
-BO_ 2564171559 DM17: 8 UUT
- SG_ BootData : 0|64@1+ (1,0) [0|18446744073709551615] "" Vector__XXX
-
-
-BO_ 2564237095 DM16: 8 UUT
- SG_ Data : 8|56@1+ (1,0) [0|72057594037927935] "" Vector__XXX
- SG_ Count : 0|8@1+ (1,0) [0|255] "" Vector__XXX
-
-
-BO_ 2564302688 DM15: 8 UUT
- SG_ Seed : 48|16@1+ (1,0) [0|65535] "" Vector__XXX
- SG_ EdcExt : 40|8@1+ (1,0) [0|255] "" Vector__XXX
- SG_ ErrEdc : 16|24@1+ (1,0) [0|16777215] "" Vector__XXX
- SG_ LengthH : 13|3@1+ (1,0) [0|7] "" Vector__XXX
- SG_ Status : 9|3@1+ (1,0) [0|7] "" Vector__XXX
- SG_ LengthL : 0|8@1+ (1,0) [0|255] "" Vector__XXX
-
-
-BO_ 2564382759 DM14: 8 CTRL
- SG_ Key : 48|16@1+ (1,0) [0|65535] "" Vector__XXX
- SG_ PtrExt : 40|8@1+ (1,0) [0|255] "" Vector__XXX
- SG_ Pointer : 16|24@1+ (1,0) [0|16777215] "" Vector__XXX
- SG_ PtrType : 12|1@1+ (1,0) [0|1] "" Vector__XXX
- SG_ Command : 9|3@1+ (1,0) [0|7] "" Vector__XXX
- SG_ LengthL : 0|8@1+ (1,0) [0|255] "" Vector__XXX
-
-
-BO_ 2564775975 DM13: 8 CTRL
- SG_ Hold : 24|4@1+ (1,0) [0|15] "" Vector__XXX
- SG_ Link : 6|2@1+ (1,0) [0|3] "" Vector__XXX
-
-
-BO_ 2565406560 ACK: 8 UUT
- SG_ RequestedPGN : 40|24@1+ (1,0) [0|16777215] "" Vector__XXX
- SG_ RequesterAddress : 32|8@1+ (1,0) [0|255] "" Vector__XXX
- SG_ GroupFunctionValue : 8|8@1+ (1,0) [0|255] "" Vector__XXX
- SG_ ControlByte : 0|8@1+ (1,0) [0|255] "" Vector__XXX
-
-
-BO_ 2565496871 REQUEST: 3 CTRL
- SG_ PGN : 0|24@1+ (1,0) [0|16777215] "" Vector__XXX
-
-
-BO_ 2632656679 TP_DT: 8 UUT
- SG_ PacketizedData : 8|56@1+ (1,0) [0|72057594037927935] "" Vector__XXX
- SG_ SequenceNumber : 0|8@1+ (1,0) [1|255] "" Vector__XXX
-
-
-BO_ 2632722215 TP_CM: 8 UUT
- SG_ PGN m16 : 40|24@1+ (1,0) [0|16777215] "" Vector__XXX
- SG_ MaxPackets m16 : 32|8@1+ (1,0) [0|255] "packets" Vector__XXX
- SG_ SizePackets m16 : 24|8@1+ (1,0) [0|255] "packets" Vector__XXX
- SG_ NextPacket m17 : 16|8@1+ (1,0) [0|255] "" Vector__XXX
- SG_ ConnAbortReason m255 : 8|8@1+ (1,0) [0|255] "" Vector__XXX
- SG_ NumOkSend m17 : 8|8@1+ (1,0) [0|255] "packets" Vector__XXX
- SG_ SizeBytes m16 : 8|16@1+ (1,0) [0|65535] "bytes" Vector__XXX
- SG_ ControlByte : 0|8@1+ (1,0) [0|255] "" Vector__XXX
-
-
-BO_ 2565799776 CLAIM: 8 UUT
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
  SG_ ArbAddr : 63|1@1+ (1,0) [0|1] "" Vector__XXX
  SG_ IndustryGroup : 60|3@1+ (1,0) [0|7] "" Vector__XXX
  SG_ VehicleSysInst : 56|4@1+ (1,0) [0|15] "" Vector__XXX
@@ -126,23 +46,73 @@ BO_ 2565799776 CLAIM: 8 UUT
  SG_ EcuInst : 32|3@1+ (1,0) [0|7] "" Vector__XXX
  SG_ Mfg : 21|11@1+ (1,0) [0|2047] "" Vector__XXX
  SG_ Identity : 0|21@1+ (1,0) [0|2097151] "" Vector__XXX
+ SG_ PGN m16 : 40|24@1+ (1,0) [0|16777215] "" Vector__XXX
+ SG_ MaxPackets m16 : 32|8@1+ (1,0) [0|255] "packets" Vector__XXX
+ SG_ SizePackets m16 : 24|8@1+ (1,0) [0|255] "packets" Vector__XXX
+ SG_ NextPacket m17 : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ ConnAbortReason m255 : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ NumOkSend m17 : 8|8@1+ (1,0) [0|255] "packets" Vector__XXX
+ SG_ SizeBytes m16 : 8|16@1+ (1,0) [0|65535] "bytes" Vector__XXX
+ SG_ ControlByte : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ PacketizedData : 8|56@1+ (1,0) [0|7.2057594038e+16] "" Vector__XXX
+ SG_ SequenceNumber : 0|8@1+ (1,0) [1|255] "" Vector__XXX
+ SG_ PGN : 0|24@1+ (1,0) [0|16777215] "" Vector__XXX
+ SG_ RequestedPGN : 40|24@1+ (1,0) [0|16777215] "" Vector__XXX
+ SG_ RequesterAddress : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ GroupFunctionValue : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ ControlByte : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ Hold : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Link : 6|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ Key : 48|16@1+ (1,0) [0|65535] "" Vector__XXX
+ SG_ PtrExt : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ Pointer : 16|24@1+ (1,0) [0|16777215] "" Vector__XXX
+ SG_ PtrType : 12|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Command : 9|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ LengthL : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ Seed : 48|16@1+ (1,0) [0|65535] "" Vector__XXX
+ SG_ EdcExt : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ ErrEdc : 16|24@1+ (1,0) [0|16777215] "" Vector__XXX
+ SG_ LengthH : 13|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ Status : 9|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ LengthL : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ Data : 8|56@1+ (1,0) [0|7.2057594038e+16] "" Vector__XXX
+ SG_ Count : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ BootData : 0|64@1+ (1,0) [0|9.2233720369e+18] "" Vector__XXX
+ SG_ Hours : 32|32@1+ (0.05,0) [0|4294967295] "hours" Vector__XXX
 
+BO_ 2560974887 PWMCTRL3: 8 CTRL
+ SG_ Pwm12DutyCmd : 48|16@1+ (0.1,0) [0|100] "%" Vector__XXX
+ SG_ Pwm11DutyCmd : 32|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm10DutyCmd : 16|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm9DutyCmd : 0|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+
+BO_ 2561040423 PWMCTRL2: 8 CTRL
+ SG_ Pwm8DutyCmd : 48|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm7DutyCmd : 32|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm6DutyCmd : 16|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm5DutyCmd : 0|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+
+BO_ 2561105959 PWMCTRL1: 8 CTRL
+ SG_ Pwm4DutyCmd : 48|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm3DutyCmd : 32|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm2DutyCmd : 16|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm1DutyCmd : 0|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
 
 BO_ 2565824551 CTRL1: 8 CTRL
  SG_ DiagCpuUsageAvg m2559 : 32|8@1+ (0.4,0) [0|0] "%"  UUT,CTRL
  SG_ DiagCpuUsagePeak m2303 : 32|8@1+ (0.4,0) [0|0] "%"  UUT,CTRL
  SG_ DiagCpuUsageCur m2047 : 32|8@1+ (0.4,0) [0|0] "%"  UUT,CTRL
- SG_ DiagRtosHeapAllocMax m1791 : 32|32@1+ (1.0,0) [0|0] "bytes"  UUT,CTRL
- SG_ DiagRtosHeapAlloc m1535 : 32|32@1+ (1.0,0) [0|0] "bytes"  UUT,CTRL
- SG_ DiagRtosHeapFree m1279 : 32|32@1+ (1.0,0) [0|0] "bytes"  UUT,CTRL
- SG_ DiagRtosNumThreads m1023 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ DiagCanNumTxErr m767 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ DiagCanNumRxErr m511 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ DiagResetReason m255 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port1DisCurChopping m6345 : 32|1@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port1HBridgeInvertDir m4809 : 32|1@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port1CurLimitRetries m3529 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port1CurLimitReact m3273 : 32|2@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ DiagRtosHeapAllocMax m1791 : 32|32@1+ (1,0) [0|0] "bytes"  UUT,CTRL
+ SG_ DiagRtosHeapAlloc m1535 : 32|32@1+ (1,0) [0|0] "bytes"  UUT,CTRL
+ SG_ DiagRtosHeapFree m1279 : 32|32@1+ (1,0) [0|0] "bytes"  UUT,CTRL
+ SG_ DiagRtosNumThreads m1023 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ DiagCanNumTxErr m767 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ DiagCanNumRxErr m511 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ DiagResetReason m255 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1DisCurChopping m6345 : 32|1@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1HBridgeInvertDir m4809 : 32|1@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1CurLimitRetries m3529 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1CurLimitReact m3273 : 32|2@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ Port1CurSoftLimitTime m3017 : 32|16@1+ (0.001,0) [0|0] "s"  UUT,CTRL
  SG_ Port1CurSoftMax m2761 : 32|16@1+ (0.001,0) [0|0] "A"  UUT,CTRL
  SG_ Port1RampTimeRev m2505 : 32|16@1+ (0.001,0) [0|0] "s"  UUT,CTRL
@@ -151,57 +121,57 @@ BO_ 2565824551 CTRL1: 8 CTRL
  SG_ Port1PwmMinDuty m1737 : 32|16@1+ (0.01,0) [0|0] "%"  UUT,CTRL
  SG_ Port1PidKd m1481 : 32|8@1+ (0.01,0) [0|0] ""  UUT,CTRL
  SG_ Port1PidKi m1225 : 32|8@1+ (0.01,0) [0|0] ""  UUT,CTRL
- SG_ Port1PwmFreq m457 : 32|16@1+ (1.0,0) [0|0] "Hz"  UUT,CTRL
- SG_ Port1Mode m201 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault32 m8834 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault31 m8578 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault30 m8322 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault29 m8066 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault28 m7810 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault27 m7554 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault26 m7298 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault25 m7042 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault24 m6786 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault23 m6530 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault22 m6274 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault21 m6018 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault20 m5762 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault19 m5506 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault18 m5250 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault17 m4994 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault16 m4738 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault15 m4482 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault14 m4226 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault13 m3970 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault12 m3714 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault11 m3458 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault10 m3202 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault9 m2946 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault8 m2690 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault7 m2434 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault6 m2178 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault5 m1922 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault4 m1666 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault3 m1410 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault2 m1154 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault1 m898 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ FltClearTimestamp m642 : 32|32@1+ (1.0,0) [0|0] "s"  UUT,CTRL
- SG_ NumHistFaults m386 : 32|32@1+ (1.0,0) [0|0] "count"  UUT,CTRL
- SG_ NumActiveFaults m130 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ Port1PwmFreq m457 : 32|16@1+ (1,0) [0|0] "Hz"  UUT,CTRL
+ SG_ Port1Mode m201 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault32 m8834 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault31 m8578 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault30 m8322 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault29 m8066 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault28 m7810 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault27 m7554 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault26 m7298 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault25 m7042 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault24 m6786 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault23 m6530 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault22 m6274 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault21 m6018 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault20 m5762 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault19 m5506 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault18 m5250 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault17 m4994 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault16 m4738 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault15 m4482 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault14 m4226 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault13 m3970 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault12 m3714 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault11 m3458 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault10 m3202 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault9 m2946 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault8 m2690 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault7 m2434 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault6 m2178 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault5 m1922 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault4 m1666 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault3 m1410 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault2 m1154 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault1 m898 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ FltClearTimestamp m642 : 32|32@1+ (1,0) [0|0] "s"  UUT,CTRL
+ SG_ NumHistFaults m386 : 32|32@1+ (1,0) [0|0] "count"  UUT,CTRL
+ SG_ NumActiveFaults m130 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ UnderVHoldExitThreshold m2177 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
- SG_ CfgChangeCount m1921 : 32|32@1+ (1.0,0) [0|0] "count"  UUT,CTRL
- SG_ CTRLAddress m1665 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ CfgChangeCount m1921 : 32|32@1+ (1,0) [0|0] "count"  UUT,CTRL
+ SG_ CTRLAddress m1665 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ OverVWarnThreshold m1409 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
  SG_ UnderVWarnThreshold m1153 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
  SG_ UnderVHoldThreshold m897 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
- SG_ CanProtocolMode m641 : 32|16@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ CanBitrate m385 : 32|16@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ NodeAddress m129 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ SerialNumber m7296 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ PartNumber m7040 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ BootVerString m6784 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ RtosVerString m6528 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ AppVerString m6272 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ CanProtocolMode m641 : 32|16@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ CanBitrate m385 : 32|16@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ NodeAddress m129 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SerialNumber m7296 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ PartNumber m7040 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ BootVerString m6784 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ RtosVerString m6528 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ AppVerString m6272 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ BootVerBuild m6016 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ BootVerPatch m5760 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ BootVerMin m5504 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
@@ -214,54 +184,53 @@ BO_ 2565824551 CTRL1: 8 CTRL
  SG_ AppVerPatch m3712 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ AppVerMin m3456 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ AppVerMaj m3200 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
- SG_ Port8Type m2944 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port7Type m2688 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port6Type m2432 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port5Type m2176 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port4Type m1920 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port3Type m1664 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port2Type m1408 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port1Type m1152 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ NumPorts m896 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ Port8Type m2944 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port7Type m2688 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port6Type m2432 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port5Type m2176 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port4Type m1920 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port3Type m1664 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port2Type m1408 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1Type m1152 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ NumPorts m896 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ Cnfg3 m640 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ Cnfg2 m384 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ Cnfg1 m128 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
- SG_ SpnUptime m818176 : 32|32@1+ (1.0,0) [0|0] "s"  UUT,CTRL
- SG_ SpnCfgChangeCount m739072 : 32|16@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ SpnUptime m818176 : 32|32@1+ (1,0) [0|0] "s"  UUT,CTRL
+ SG_ SpnCfgChangeCount m739072 : 32|16@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnNameIndGroup m728576 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
- SG_ SpnNameSelfConfig m728064 : 32|2@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameSelfConfig m728064 : 32|2@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnNameVehInst m727808 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnNameVehSys m727552 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnNameFunc m727296 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnNameEcuInst m727040 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnNameFuncInst m726784 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
- SG_ SpnNameMfgCode m726528 : 32|11@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameMfgCode m726528 : 32|11@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnNameIdent m726272 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnEcuTemp m290816 : 32|16@1+ (0.03125,-273) [0|0] "?C"  UUT,CTRL
  SG_ SpnEcuHrs m264448 : 32|32@1+ (0.05,0) [0|0] "h"  UUT,CTRL
- SG_ SpnSerNum m150528 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ SpnSerNum m150528 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnBattV m43008 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
- SG_ SpnBootCount m38912 : 32|32@1+ (1.0,0) [0|0] "count"  UUT,CTRL
+ SG_ SpnBootCount m38912 : 32|32@1+ (1,0) [0|0] "count"  UUT,CTRL
  SG_ Confirm m221 : 8|32@1+ (1,0) [0|8589934591] ""  UUT
- SG_ ParamId m220M : 8|24@1+ (1,0) [0|33554431] ""  UUT
+ SG_ ParamId m220 : 8|24@1+ (1,0) [0|33554431] ""  UUT
  SG_ Command M : 0|8@1+ (1,0) [0|255] "" Vector__XXX
-
 
 BO_ 2565810016 STAT: 8 UUT
  SG_ DiagCpuUsageAvg m2559 : 32|8@1+ (0.4,0) [0|0] "%"  UUT,CTRL
  SG_ DiagCpuUsagePeak m2303 : 32|8@1+ (0.4,0) [0|0] "%"  UUT,CTRL
  SG_ DiagCpuUsageCur m2047 : 32|8@1+ (0.4,0) [0|0] "%"  UUT,CTRL
- SG_ DiagRtosHeapAllocMax m1791 : 32|32@1+ (1.0,0) [0|0] "bytes"  UUT,CTRL
- SG_ DiagRtosHeapAlloc m1535 : 32|32@1+ (1.0,0) [0|0] "bytes"  UUT,CTRL
- SG_ DiagRtosHeapFree m1279 : 32|32@1+ (1.0,0) [0|0] "bytes"  UUT,CTRL
- SG_ DiagRtosNumThreads m1023 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ DiagCanNumTxErr m767 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ DiagCanNumRxErr m511 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ DiagResetReason m255 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port1DisCurChopping m6345 : 32|1@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port1HBridgeInvertDir m4809 : 32|1@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port1CurLimitRetries m3529 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port1CurLimitReact m3273 : 32|2@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ DiagRtosHeapAllocMax m1791 : 32|32@1+ (1,0) [0|0] "bytes"  UUT,CTRL
+ SG_ DiagRtosHeapAlloc m1535 : 32|32@1+ (1,0) [0|0] "bytes"  UUT,CTRL
+ SG_ DiagRtosHeapFree m1279 : 32|32@1+ (1,0) [0|0] "bytes"  UUT,CTRL
+ SG_ DiagRtosNumThreads m1023 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ DiagCanNumTxErr m767 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ DiagCanNumRxErr m511 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ DiagResetReason m255 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1DisCurChopping m6345 : 32|1@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1HBridgeInvertDir m4809 : 32|1@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1CurLimitRetries m3529 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1CurLimitReact m3273 : 32|2@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ Port1CurSoftLimitTime m3017 : 32|16@1+ (0.001,0) [0|0] "s"  UUT,CTRL
  SG_ Port1CurSoftMax m2761 : 32|16@1+ (0.001,0) [0|0] "A"  UUT,CTRL
  SG_ Port1RampTimeRev m2505 : 32|16@1+ (0.001,0) [0|0] "s"  UUT,CTRL
@@ -270,57 +239,57 @@ BO_ 2565810016 STAT: 8 UUT
  SG_ Port1PwmMinDuty m1737 : 32|16@1+ (0.01,0) [0|0] "%"  UUT,CTRL
  SG_ Port1PidKd m1481 : 32|8@1+ (0.01,0) [0|0] ""  UUT,CTRL
  SG_ Port1PidKi m1225 : 32|8@1+ (0.01,0) [0|0] ""  UUT,CTRL
- SG_ Port1PwmFreq m457 : 32|16@1+ (1.0,0) [0|0] "Hz"  UUT,CTRL
- SG_ Port1Mode m201 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault32 m8834 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault31 m8578 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault30 m8322 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault29 m8066 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault28 m7810 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault27 m7554 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault26 m7298 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault25 m7042 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault24 m6786 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault23 m6530 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault22 m6274 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault21 m6018 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault20 m5762 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault19 m5506 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault18 m5250 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault17 m4994 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault16 m4738 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault15 m4482 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault14 m4226 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault13 m3970 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault12 m3714 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault11 m3458 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault10 m3202 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault9 m2946 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault8 m2690 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault7 m2434 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault6 m2178 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault5 m1922 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault4 m1666 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault3 m1410 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault2 m1154 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Fault1 m898 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ FltClearTimestamp m642 : 32|32@1+ (1.0,0) [0|0] "s"  UUT,CTRL
- SG_ NumHistFaults m386 : 32|32@1+ (1.0,0) [0|0] "count"  UUT,CTRL
- SG_ NumActiveFaults m130 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ Port1PwmFreq m457 : 32|16@1+ (1,0) [0|0] "Hz"  UUT,CTRL
+ SG_ Port1Mode m201 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault32 m8834 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault31 m8578 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault30 m8322 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault29 m8066 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault28 m7810 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault27 m7554 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault26 m7298 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault25 m7042 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault24 m6786 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault23 m6530 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault22 m6274 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault21 m6018 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault20 m5762 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault19 m5506 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault18 m5250 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault17 m4994 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault16 m4738 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault15 m4482 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault14 m4226 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault13 m3970 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault12 m3714 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault11 m3458 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault10 m3202 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault9 m2946 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault8 m2690 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault7 m2434 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault6 m2178 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault5 m1922 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault4 m1666 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault3 m1410 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault2 m1154 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault1 m898 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ FltClearTimestamp m642 : 32|32@1+ (1,0) [0|0] "s"  UUT,CTRL
+ SG_ NumHistFaults m386 : 32|32@1+ (1,0) [0|0] "count"  UUT,CTRL
+ SG_ NumActiveFaults m130 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ UnderVHoldExitThreshold m2177 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
- SG_ CfgChangeCount m1921 : 32|32@1+ (1.0,0) [0|0] "count"  UUT,CTRL
- SG_ CTRLAddress m1665 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ CfgChangeCount m1921 : 32|32@1+ (1,0) [0|0] "count"  UUT,CTRL
+ SG_ CTRLAddress m1665 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ OverVWarnThreshold m1409 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
  SG_ UnderVWarnThreshold m1153 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
  SG_ UnderVHoldThreshold m897 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
- SG_ CanProtocolMode m641 : 32|16@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ CanBitrate m385 : 32|16@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ NodeAddress m129 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ SerialNumber m7296 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ PartNumber m7040 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ BootVerString m6784 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ RtosVerString m6528 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ AppVerString m6272 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ CanProtocolMode m641 : 32|16@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ CanBitrate m385 : 32|16@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ NodeAddress m129 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SerialNumber m7296 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ PartNumber m7040 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ BootVerString m6784 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ RtosVerString m6528 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ AppVerString m6272 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ BootVerBuild m6016 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ BootVerPatch m5760 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ BootVerMin m5504 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
@@ -333,45 +302,40 @@ BO_ 2565810016 STAT: 8 UUT
  SG_ AppVerPatch m3712 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ AppVerMin m3456 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ AppVerMaj m3200 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
- SG_ Port8Type m2944 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port7Type m2688 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port6Type m2432 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port5Type m2176 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port4Type m1920 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port3Type m1664 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port2Type m1408 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ Port1Type m1152 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
- SG_ NumPorts m896 : 32|8@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ Port8Type m2944 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port7Type m2688 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port6Type m2432 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port5Type m2176 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port4Type m1920 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port3Type m1664 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port2Type m1408 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1Type m1152 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ NumPorts m896 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ Cnfg3 m640 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ Cnfg2 m384 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ Cnfg1 m128 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
- SG_ SpnUptime m818176 : 32|32@1+ (1.0,0) [0|0] "s"  UUT,CTRL
- SG_ SpnCfgChangeCount m739072 : 32|16@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ SpnUptime m818176 : 32|32@1+ (1,0) [0|0] "s"  UUT,CTRL
+ SG_ SpnCfgChangeCount m739072 : 32|16@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnNameIndGroup m728576 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
- SG_ SpnNameSelfConfig m728064 : 32|2@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameSelfConfig m728064 : 32|2@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnNameVehInst m727808 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnNameVehSys m727552 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnNameFunc m727296 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnNameEcuInst m727040 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnNameFuncInst m726784 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
- SG_ SpnNameMfgCode m726528 : 32|11@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameMfgCode m726528 : 32|11@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnNameIdent m726272 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnEcuTemp m290816 : 32|16@1+ (0.03125,-273) [0|0] "?C"  UUT,CTRL
  SG_ SpnEcuHrs m264448 : 32|32@1+ (0.05,0) [0|0] "h"  UUT,CTRL
- SG_ SpnSerNum m150528 : 32|32@1+ (1.0,0) [0|0] ""  UUT,CTRL
+ SG_ SpnSerNum m150528 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
  SG_ SpnBattV m43008 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
- SG_ SpnBootCount m38912 : 32|32@1+ (1.0,0) [0|0] "count"  UUT,CTRL
+ SG_ SpnBootCount m38912 : 32|32@1+ (1,0) [0|0] "count"  UUT,CTRL
  SG_ LegacyFaultCode m0 : 32|8@1+ (1,0) [0|511] ""  CTRL
  SG_ FaultPresent m0 : 24|2@1+ (1,0) [0|7] ""  CTRL
  SG_ SwVer m0 : 12|4@1+ (1,0) [0|31] ""  CTRL
  SG_ SwRev m0 : 8|4@1+ (1,0) [0|31] ""  CTRL
- SG_ ParamId m220M : 8|24@1+ (1,0) [0|33554431] ""  CTRL
+ SG_ ParamId m220 : 8|24@1+ (1,0) [0|33554431] ""  CTRL
  SG_ Command M : 0|8@1+ (1,0) [0|255] "" Vector__XXX
-
-
-BO_ 2633937248 EH: 8 UUT
- SG_ Hours : 32|32@1+ (0.05,0) [0|4294967295] "hours" Vector__XXX
-
 
 BO_ 2566869856 DPSTAT: 8 UUT
  SG_ ActiveFaultCode : 56|8@1+ (1,0) [0|255] "" Vector__XXX
@@ -383,8 +347,7 @@ BO_ 2566869856 DPSTAT: 8 UUT
  SG_ SysTemp : 16|8@1+ (1,-40) [0|250] "?C" Vector__XXX
  SG_ BattVoltage : 0|16@1+ (0.001,0) [0|65535] "V" Vector__XXX
 
-
-BO_ 2566889568 PWMSTAT1: 8 UUT
+BO_ 2365562976 PWMSTAT1: 8 UUT
  SG_ PwmOut6LedStat : 58|2@1+ (1,0) [0|3] "" Vector__XXX
  SG_ PwmOut5LedStat : 56|2@1+ (1,0) [0|3] "" Vector__XXX
  SG_ PwmOut4LedStat : 54|2@1+ (1,0) [0|3] "" Vector__XXX
@@ -398,8 +361,7 @@ BO_ 2566889568 PWMSTAT1: 8 UUT
  SG_ PwmOut2Current : 8|8@1+ (0.1,0) [0|250] "A" Vector__XXX
  SG_ PwmOut1Current : 0|8@1+ (0.1,0) [0|250] "A" Vector__XXX
 
-
-BO_ 2566889824 PWMSTAT2: 8 UUT
+BO_ 2365563232 PWMSTAT2: 8 UUT
  SG_ PwmOut12LedStat : 58|2@1+ (1,0) [0|3] "" Vector__XXX
  SG_ PwmOut11LedStat : 56|2@1+ (1,0) [0|3] "" Vector__XXX
  SG_ PwmOut10LedStat : 54|2@1+ (1,0) [0|3] "" Vector__XXX
@@ -413,6 +375,50 @@ BO_ 2566889824 PWMSTAT2: 8 UUT
  SG_ PwmOut8Current : 8|8@1+ (0.1,0) [0|250] "A" Vector__XXX
  SG_ PwmOut7Current : 0|8@1+ (0.1,0) [0|250] "A" Vector__XXX
 
+
+
+CM_ SG_ 3221225472 ArbAddr "Arbitrary-address capable";
+CM_ SG_ 3221225472 IndustryGroup "Industry group";
+CM_ SG_ 3221225472 VehicleSysInst "Vehicle system instance";
+CM_ SG_ 3221225472 VehicleSys "Vehicle system";
+CM_ SG_ 3221225472 Func "Function code";
+CM_ SG_ 3221225472 FuncInst "Function instance";
+CM_ SG_ 3221225472 EcuInst "ECU Instance";
+CM_ SG_ 3221225472 Mfg "Manufacturer code";
+CM_ SG_ 3221225472 Identity "Identity";
+CM_ SG_ 3221225472 PGN "PGN of packetized message";
+CM_ SG_ 3221225472 MaxPackets "Maximum number of response packets";
+CM_ SG_ 3221225472 SizePackets "Total number of packets";
+CM_ SG_ 3221225472 NextPacket "Next packet number";
+CM_ SG_ 3221225472 ConnAbortReason "Connection Abort Reason";
+CM_ SG_ 3221225472 NumOkSend "Number of packets to send";
+CM_ SG_ 3221225472 SizeBytes "Total message size";
+CM_ SG_ 3221225472 ControlByte "Control byte";
+CM_ SG_ 3221225472 PacketizedData "Packetized Data";
+CM_ SG_ 3221225472 SequenceNumber "Sequence Number";
+CM_ SG_ 3221225472 PGN "Requested PGN";
+CM_ SG_ 3221225472 RequestedPGN "Requested PGN";
+CM_ SG_ 3221225472 RequesterAddress "Requester Address";
+CM_ SG_ 3221225472 GroupFunctionValue "Group Function Value";
+CM_ SG_ 3221225472 ControlByte "Control byte";
+CM_ SG_ 3221225472 Hold "Hold Signal";
+CM_ SG_ 3221225472 Link "Current data link";
+CM_ SG_ 3221225472 Key "Key/User Level";
+CM_ SG_ 3221225472 PtrExt "Pointer Extension";
+CM_ SG_ 3221225472 Pointer "Pointer";
+CM_ SG_ 3221225472 PtrType "Pointer type";
+CM_ SG_ 3221225472 Command "Command";
+CM_ SG_ 3221225472 LengthL "Number requested";
+CM_ SG_ 3221225472 Seed "Seed";
+CM_ SG_ 3221225472 EdcExt "EDC Extension";
+CM_ SG_ 3221225472 ErrEdc "Error/EDC Parameter";
+CM_ SG_ 3221225472 LengthH "Length allowed (MSB)";
+CM_ SG_ 3221225472 Status "Status";
+CM_ SG_ 3221225472 LengthL "Length allowed (LSB)";
+CM_ SG_ 3221225472 Data "Raw binary data";
+CM_ SG_ 3221225472 Count "Count";
+CM_ SG_ 3221225472 BootData "Bootloader data";
+CM_ SG_ 3221225472 Hours "Total powered-on time";
 CM_ BO_ 2560974887 "PWM output control \#3";
 CM_ SG_ 2560974887 Pwm12DutyCmd "Control value for PWM output 12";
 CM_ SG_ 2560974887 Pwm11DutyCmd "Control value for PWM output 11";
@@ -428,57 +434,6 @@ CM_ SG_ 2561105959 Pwm4DutyCmd "Control value for PWM output 4";
 CM_ SG_ 2561105959 Pwm3DutyCmd "Control value for PWM output 3";
 CM_ SG_ 2561105959 Pwm2DutyCmd "Control value for PWM output 2";
 CM_ SG_ 2561105959 Pwm1DutyCmd "Control value for PWM output 1";
-CM_ BO_ 2564171559 "Boot Load Data";
-CM_ SG_ 2564171559 BootData "Bootloader data";
-CM_ BO_ 2564237095 "Binary Data Transfer";
-CM_ SG_ 2564237095 Data "Raw binary data";
-CM_ SG_ 2564237095 Count "Count";
-CM_ BO_ 2564302688 "Memory Access Response";
-CM_ SG_ 2564302688 Seed "Seed";
-CM_ SG_ 2564302688 EdcExt "EDC Extension";
-CM_ SG_ 2564302688 ErrEdc "Error/EDC Parameter";
-CM_ SG_ 2564302688 LengthH "Length allowed (MSB)";
-CM_ SG_ 2564302688 Status "Status";
-CM_ SG_ 2564302688 LengthL "Length allowed (LSB)";
-CM_ BO_ 2564382759 "Memory Access Request";
-CM_ SG_ 2564382759 Key "Key/User Level";
-CM_ SG_ 2564382759 PtrExt "Pointer Extension";
-CM_ SG_ 2564382759 Pointer "Pointer";
-CM_ SG_ 2564382759 PtrType "Pointer type";
-CM_ SG_ 2564382759 Command "Command";
-CM_ SG_ 2564382759 LengthL "Number requested";
-CM_ BO_ 2564775975 "Stop/Start Broadcast (DM13)";
-CM_ SG_ 2564775975 Hold "Hold Signal";
-CM_ SG_ 2564775975 Link "Current data link";
-CM_ BO_ 2565406560 "Acknowledgement";
-CM_ SG_ 2565406560 RequestedPGN "Requested PGN";
-CM_ SG_ 2565406560 RequesterAddress "Requester Address";
-CM_ SG_ 2565406560 GroupFunctionValue "Group Function Value";
-CM_ SG_ 2565406560 ControlByte "Control byte";
-CM_ BO_ 2565496871 "PGN Request";
-CM_ SG_ 2565496871 PGN "Requested PGN";
-CM_ BO_ 2632656679 "Transport Protocol - Data Transfer (TP.DT)";
-CM_ SG_ 2632656679 PacketizedData "Packetized Data";
-CM_ SG_ 2632656679 SequenceNumber "Sequence Number";
-CM_ BO_ 2632722215 "Transport Protocol - Connection Management";
-CM_ SG_ 2632722215 PGN "PGN of packetized message";
-CM_ SG_ 2632722215 MaxPackets "Maximum number of response packets";
-CM_ SG_ 2632722215 SizePackets "Total number of packets";
-CM_ SG_ 2632722215 NextPacket "Next packet number";
-CM_ SG_ 2632722215 ConnAbortReason "Connection Abort Reason";
-CM_ SG_ 2632722215 NumOkSend "Number of packets to send";
-CM_ SG_ 2632722215 SizeBytes "Total message size";
-CM_ SG_ 2632722215 ControlByte "Control byte";
-CM_ BO_ 2565799776 "Address claim";
-CM_ SG_ 2565799776 ArbAddr "Arbitrary-address capable";
-CM_ SG_ 2565799776 IndustryGroup "Industry group";
-CM_ SG_ 2565799776 VehicleSysInst "Vehicle system instance";
-CM_ SG_ 2565799776 VehicleSys "Vehicle system";
-CM_ SG_ 2565799776 Func "Function code";
-CM_ SG_ 2565799776 FuncInst "Function instance";
-CM_ SG_ 2565799776 EcuInst "ECU Instance";
-CM_ SG_ 2565799776 Mfg "Manufacturer code";
-CM_ SG_ 2565799776 Identity "Identity";
 CM_ BO_ 2565824551 "Control message \#1";
 CM_ SG_ 2565824551 DiagCpuUsageAvg "Average CPU usage";
 CM_ SG_ 2565824551 DiagCpuUsagePeak "Peak CPU usage";
@@ -716,8 +671,6 @@ CM_ SG_ 2565810016 SwVer "Software version";
 CM_ SG_ 2565810016 SwRev "Software revision";
 CM_ SG_ 2565810016 ParamId "Parameter Identifier";
 CM_ SG_ 2565810016 Command "Command byte";
-CM_ BO_ 2633937248 "ECU History";
-CM_ SG_ 2633937248 Hours "Total powered-on time";
 CM_ BO_ 2566869856 "UUT status";
 CM_ SG_ 2566869856 ActiveFaultCode "Active fault code";
 CM_ SG_ 2566869856 ActiveFaultFailureMode "Active fault failure mode";
@@ -727,32 +680,32 @@ CM_ SG_ 2566869856 CtrlSA "SA of controlling UUT";
 CM_ SG_ 2566869856 TotalCurrent "Total UUT current";
 CM_ SG_ 2566869856 SysTemp "PCB temperature";
 CM_ SG_ 2566869856 BattVoltage "Measured battery voltage";
-CM_ BO_ 2566889568 "PWM Status \#1";
-CM_ SG_ 2566889568 PwmOut6LedStat "Current state of status LED";
-CM_ SG_ 2566889568 PwmOut5LedStat "Current state of status LED";
-CM_ SG_ 2566889568 PwmOut4LedStat "Current state of status LED";
-CM_ SG_ 2566889568 PwmOut3LedStat "Current state of status LED";
-CM_ SG_ 2566889568 PwmOut2LedStat "Current state of status LED";
-CM_ SG_ 2566889568 PwmOut1LedStat "Current state of status LED";
-CM_ SG_ 2566889568 PwmOut6Current "Measured current of PWM output 6";
-CM_ SG_ 2566889568 PwmOut5Current "Measured current of PWM output 5";
-CM_ SG_ 2566889568 PwmOut4Current "Measured current of PWM output 4";
-CM_ SG_ 2566889568 PwmOut3Current "Measured current of PWM output 3";
-CM_ SG_ 2566889568 PwmOut2Current "Measured current of PWM output 2";
-CM_ SG_ 2566889568 PwmOut1Current "Measured current of PWM output 1";
-CM_ BO_ 2566889824 "PWM Status \#2";
-CM_ SG_ 2566889824 PwmOut12LedStat "Current state of status LED";
-CM_ SG_ 2566889824 PwmOut11LedStat "Current state of status LED";
-CM_ SG_ 2566889824 PwmOut10LedStat "Current state of status LED";
-CM_ SG_ 2566889824 PwmOut9LedStat "Current state of status LED";
-CM_ SG_ 2566889824 PwmOut8LedStat "Current state of status LED";
-CM_ SG_ 2566889824 PwmOut7LedStat "Current state of status LED";
-CM_ SG_ 2566889824 PwmOut12Current "Measured current of PWM output 12";
-CM_ SG_ 2566889824 PwmOut11Current "Measured current of PWM output 11";
-CM_ SG_ 2566889824 PwmOut10Current "Measured current of PWM output 10";
-CM_ SG_ 2566889824 PwmOut9Current "Measured current of PWM output 9";
-CM_ SG_ 2566889824 PwmOut8Current "Measured current of PWM output 8";
-CM_ SG_ 2566889824 PwmOut7Current "Measured current of PWM output 7";
+CM_ BO_ 2365562976 "PWM Status \#1";
+CM_ SG_ 2365562976 PwmOut6LedStat "Current state of status LED";
+CM_ SG_ 2365562976 PwmOut5LedStat "Current state of status LED";
+CM_ SG_ 2365562976 PwmOut4LedStat "Current state of status LED";
+CM_ SG_ 2365562976 PwmOut3LedStat "Current state of status LED";
+CM_ SG_ 2365562976 PwmOut2LedStat "Current state of status LED";
+CM_ SG_ 2365562976 PwmOut1LedStat "Current state of status LED";
+CM_ SG_ 2365562976 PwmOut6Current "Measured current of PWM output 6";
+CM_ SG_ 2365562976 PwmOut5Current "Measured current of PWM output 5";
+CM_ SG_ 2365562976 PwmOut4Current "Measured current of PWM output 4";
+CM_ SG_ 2365562976 PwmOut3Current "Measured current of PWM output 3";
+CM_ SG_ 2365562976 PwmOut2Current "Measured current of PWM output 2";
+CM_ SG_ 2365562976 PwmOut1Current "Measured current of PWM output 1";
+CM_ BO_ 2365563232 "PWM Status \#2";
+CM_ SG_ 2365563232 PwmOut12LedStat "Current state of status LED";
+CM_ SG_ 2365563232 PwmOut11LedStat "Current state of status LED";
+CM_ SG_ 2365563232 PwmOut10LedStat "Current state of status LED";
+CM_ SG_ 2365563232 PwmOut9LedStat "Current state of status LED";
+CM_ SG_ 2365563232 PwmOut8LedStat "Current state of status LED";
+CM_ SG_ 2365563232 PwmOut7LedStat "Current state of status LED";
+CM_ SG_ 2365563232 PwmOut12Current "Measured current of PWM output 12";
+CM_ SG_ 2365563232 PwmOut11Current "Measured current of PWM output 11";
+CM_ SG_ 2365563232 PwmOut10Current "Measured current of PWM output 10";
+CM_ SG_ 2365563232 PwmOut9Current "Measured current of PWM output 9";
+CM_ SG_ 2365563232 PwmOut8Current "Measured current of PWM output 8";
+CM_ SG_ 2365563232 PwmOut7Current "Measured current of PWM output 7";
 BA_DEF_ BO_  "J1939FdTpADS" INT 0 52;
 BA_DEF_ BO_  "J1939FdTpADT" INT 0 255;
 BA_DEF_ BO_  "J1939PgAppearanceOnBus" ENUM  "Default","CAN_Extended","CANFD_Extended";
@@ -825,6 +778,7 @@ BA_DEF_DEF_  "GenMsgILSupport" "Yes";
 BA_DEF_DEF_  "GenMsgStartDelayTime" 0;
 BA_DEF_DEF_  "NodeLayerModules" "";
 BA_DEF_DEF_  "ECU" "";
+BA_DEF_DEF_  "NmJ1939SystemInstance" 0;
 BA_DEF_DEF_  "NmJ1939System" 0;
 BA_DEF_DEF_  "NmJ1939ManufacturerCode" 0;
 BA_DEF_DEF_  "NmJ1939IndustryGroup" 0;
@@ -843,33 +797,15 @@ BA_DEF_DEF_  "BusType" "CAN";
 BA_DEF_DEF_  "ProtocolType" "J1939";
 BA_DEF_DEF_  "VFrameFormat" "J1939PG";
 BA_ "BusType" "CAN";
-BA_ "NmJ1939ManufacturerCode" BU_ UUT 659;
-BA_ "NmStationAddress" BU_ UUT 96;
-BA_ "NmStationAddress" BU_ CTRL 39;
 BA_ "GenMsgCycleTime" BO_ 2560974887 100;
 BA_ "GenMsgCycleTime" BO_ 2561040423 100;
 BA_ "GenMsgCycleTime" BO_ 2561105959 100;
-BA_ "GenMsgCycleTime" BO_ 2564775975 5000;
 BA_ "GenMsgCycleTime" BO_ 2566869856 100;
-BA_ "GenMsgCycleTime" BO_ 2566889568 100;
-BA_ "GenMsgCycleTime" BO_ 2566889824 100;
-VAL_ 2564237095 Count 1 "1 byte" 2 "2 bytes" 3 "3 bytes" 4 "4 bytes" 5 "5 bytes" 6 "6 bytes" 7 "7 bytes" 255 "Multipacket" ;
-VAL_ 2564302688 EdcExt 0 "Completed" 2 "More (High)" 3 "More (Low)" 6 "Data is error (see ErrEdc)" 7 "Data is error, seed is time to completion" 255 "No error inidcator available" ;
-VAL_ 2564302688 ErrEdc 0 "No error" 1 "Error not identified" 2 "Busy" 16 "Processing ERASE request" 17 "Processing READ request" 18 "Processing WRITE request" 19 "Processing STATUS request" 22 "Processing BOOTLOAD request" 23 "Processing EDCP request" 31 "Processing unspecified request" 32 "EDC parameter not correct" 33 "Write to RAM failed verification" 34 "Write to flash failed verification" 35 "Write to PROM failed verification" 36 "Internal failure" 256 "Addressing or data general error" 257 "Addressing error - alignment" 258 "Addressing error - Length not valid" 259 "Addressing error - Required memory exceeds available" 260 "Addressing error - requested operation requires erase of data memory" 261 "Addressing error - requested operation requires erase of program memory" 262 "Addressing error - requested operation requires execution transfer" 263 "Addressing error - requested address for transfer is not within executable memory" 264 "Addressing error - requested address for transfer is not on a valid boundary" 265 "Data error - data out of range" 266 "Data error - invalid NAME" 4096 "Security error - general" 4097 "Security error - invalid password" 4098 "Security error - invalid user level" 4099 "Security error - invalid key/seed" 4100 "Security error - not in diagnostic mode" 4101 "Security error - not in engineering/development mode" 4102 "Security error - engine running" 4103 "Security error - vehicle not in park" 65536 "Abort from external to normal" 65537 "Too many retires" 65538 "Timeout waiting for response" 65539 "Timeout waiting for transfer to start" 65540 "Timeout waiting for transfer to complete" 16777215 "No error indicator available" ;
-VAL_ 2564302688 Status 0 "Proceed" 1 "Busy" 4 "Operation completed" 5 "Operation failed" ;
-VAL_ 2564382759 Key 0 "Everybody" 5 "OEM" 6 "Manufacturer" 7 "Engineering/Development" 255 "Not supported" ;
-VAL_ 2564382759 PtrType 0 "Direct Memory Addressing" 1 "Directed Spatial Addressing" ;
-VAL_ 2564382759 Command 0 "Erase" 1 "Read" 2 "Write" 3 "Status Request" 4 "Operation Completed" 5 "Operation Failed" 6 "Boot load" 7 "EDCP Generation" ;
-VAL_ 2564775975 Hold 0 "All UUTs" 1 "UUTs with modified broadcast state" 15 "Not available" ;
-VAL_ 2564775975 Link 0 "Stop" 1 "Start" 3 "No change" ;
-VAL_ 2565406560 ControlByte 0 "Positive Acknowledgement" 1 "Negative Acknowledgement" 2 "Access Denied" 3 "Cannot Respond" 255 "Not available" ;
-VAL_ 2632722215 ConnAbortReason 1 "Session already in progress" 2 "Not enough resources to manage connection" 3 "Session timeout" 4 "CTS received when data transfer in progress" 5 "Maximum retries exceeded" 255 "Not available" ;
-VAL_ 2632722215 ControlByte 16 "Request-to-send (RTS)" 17 "Clear-to-send (CTS)" 19 "End of Message Acknowledgement (EOM ACK)" 32 "Brodcast Announce Message (BAM)" 255 "Connection Abort" ;
-VAL_ 2565799776 ArbAddr 0 "Fixed address" 1 "Arbitrary address capable" ;
-VAL_ 2565799776 IndustryGroup 0 "Global" 1 "On-highway Equipment" 2 "Agricultural and Forestry Equipment" 3 "Construction Equipment" 4 "Marine" 5 "Industrial-process Control-Stationary (Gen-Sets)" ;
-VAL_ 2565799776 VehicleSys 0 "Non-specific system" 127 "Not available" ;
-VAL_ 2565799776 Func 28 "Off-vehicle gateway" 37 "Cab CTRL" 66 "I/O CTRL" 67 "Electrical System CTRL" 81 "Hydraulic Powertrain" 255 "Not available" ;
-VAL_ 2565799776 Mfg 659 "Data Panel Corporation" ;
+BA_ "GenMsgCycleTime" BO_ 2365562976 100;
+BA_ "GenMsgCycleTime" BO_ 2365563232 100;
+BA_ "NmJ1939ManufacturerCode" BU_ UUT 659;
+BA_ "NmStationAddress" BU_ UUT 96;
+BA_ "NmStationAddress" BU_ CTRL 39;
 VAL_ 2565824551 DiagResetReason 0 "Unknown" 1 "Power" 2 "Brownout" 3 "Trap" 4 "External" 5 "Software" 6 "Watchdog" 7 "Other" ;
 VAL_ 2565824551 Port1CurLimitReact 0 "FAULT" 1 "DISABLE" 2 "IGNORE" ;
 VAL_ 2565824551 Port1Mode 0 "DISABLED" 1 "DIN_POSITIVE" 2 "DIN_GROUND" 3 "AIN_0_25_mA" 4 "AIN_0_5_V" 5 "AIN_0_10_V" 6 "AIN_0_32_V" 7 "FREQ" 8 "COUNTER" 9 "RATIOMETRIC" 10 "ENCODER" 11 "DOUT" 12 "PWMOUT" 13 "PWMIOUT" 14 "AOUT_0_5_V" 15 "AOUT_0_25_mA" ;
@@ -909,15 +845,16 @@ VAL_ 2566869856 ActiveFaultCode 0 "FC_NONE" 65 "FC_SYS_POST_FAILED" 66 "FC_SYS_P
 VAL_ 2566869856 ActiveFaultFailureMode 0 "FM_NONE" 1 "FM_EXISTS" 2 "FM_DATA_WARN_HIGH" 3 "FM_DATA_WARN_LOW" 4 "FM_DATA_CRITICAL_HIGH" 5 "FM_DATA_CRITICAL_LOW" 6 "FM_DATA_INTERMITTENT" 7 "FM_DATA_INVALID" 8 "FM_DATA_INTEGRITY" 9 "FM_VOLTAGE_WARN_HIGH" 10 "FM_VOLTAGE_WARN_LOW" 11 "FM_VOLTAGE_CRITICAL_HIGH" 12 "FM_VOLTAGE_CRITICAL_LOW" 13 "FM_CURRENT_WARN_HIGH" 14 "FM_CURRENT_WARN_LOW" 15 "FM_CURRENT_CRITICAL_HIGH" 16 "FM_CURRENT_CRITICAL_LOW" 17 "FM_TEMPERATURE_WARN_HIGH" 18 "FM_TEMPERATURE_WARN_LOW" 19 "FM_TEMPERATURE_CRITICAL_HIGH" 20 "FM_TEMPERATURE_CRITICAL_LOW" 21 "FM_ABNORMAL_FREQ" 22 "FM_COMM_INTERNAL" 23 "FM_COMM_EXTERNAL" 24 "FM_SECURITY" 25 "FM_TIMEOUT" 26 "FM_NO_RESOURCE" 27 "FM_WATCHDOG" 255 "FM_UNKNOWN" ;
 VAL_ 2566869856 ComLed 0 "Off" 1 "Red" 2 "Green" 3 "Yellow" 4 "Blue" 5 "Magenta" 6 "Cyan" 7 "White" 14 "Error" 15 "Not available" ;
 VAL_ 2566869856 StatLed 0 "Off" 1 "Red" 2 "Green" 3 "Yellow" 4 "Blue" 5 "Magenta" 6 "Cyan" 7 "White" 14 "Error" 15 "Not available" ;
-VAL_ 2566889568 PwmOut6LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
-VAL_ 2566889568 PwmOut5LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
-VAL_ 2566889568 PwmOut4LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
-VAL_ 2566889568 PwmOut3LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
-VAL_ 2566889568 PwmOut2LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
-VAL_ 2566889568 PwmOut1LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
-VAL_ 2566889824 PwmOut12LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
-VAL_ 2566889824 PwmOut11LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
-VAL_ 2566889824 PwmOut10LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
-VAL_ 2566889824 PwmOut9LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
-VAL_ 2566889824 PwmOut8LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
-VAL_ 2566889824 PwmOut7LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365562976 PwmOut6LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365562976 PwmOut5LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365562976 PwmOut4LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365562976 PwmOut3LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365562976 PwmOut2LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365562976 PwmOut1LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365563232 PwmOut12LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365563232 PwmOut11LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365563232 PwmOut10LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365563232 PwmOut9LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365563232 PwmOut8LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365563232 PwmOut7LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+
