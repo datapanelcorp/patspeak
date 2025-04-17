@@ -2,7 +2,7 @@ import csv
 from canlib import kvadblib
 from datetime import datetime
 import time
-
+import os
 import support.globals as globals
 
 
@@ -10,7 +10,7 @@ def initialize():
     global finished, TestStep, TestPhase, TestLine, PAT_Fdbk, UUT_Fdbk, pat_db, uut_db, test_file, TotalTime, StartTime, FailCount
     global pat_framebox_out, uut_framebox_out, PassTime, tracker_last_time, StepTime, UUT_Results, UUT_TestLog
     global WaitTime, WaitDone, SoundStart, SoundFail, SoundPass, TimeStampFormat, UnitName, HeaderAdded
-    global MeterData, UUTData, TestFile, DataLogTag, DataPath, LogPath, CAN_1, CAN_2, Verbose, AllCollectedData
+    global MeterData, UUTData, TestFile, DataLogTag, DataPath, LogPath, CAN_1, CAN_2, Verbose, AllCollectedData, SuppressPatSupport
 
     UnitNumber = 0
     MeterData = []
@@ -33,22 +33,22 @@ def initialize():
     DataLogTag = ""
     HeaderAdded = 0
     FailCount = 0
+    SuppressPatSupport = 'False'
     
     TimeStampFormat = '%Y-%m-%d-%H:%M:%S'
     
     UUT_TestLog = "Started on: " + str(datetime.today().strftime(TimeStampFormat)) + "\n"
     
-    TestPath = "C:\\Bin\\patspeak\\dut\\"
-    DBCPath = "C:\\Bin\\patspeak\\dbc\\"
-    DataPath = "C:\\Bin\\patspeak\\docs\\"
-    LogPath = "C:\\Bin\\patspeak\\docs\\"
+    DBCPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","dbc/"))
+    DataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","dut/"))
+    LogPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","dut/"))
     
-    SoundStart = "C:\\Bin\\patspeak\\sounds\\startup.wav"
-    SoundFail = "C:\\Bin\\patspeak\\sounds\\fail.wav"
-    SoundPass = "C:\\Bin\\patspeak\\sounds\\tada.wav"  
+    SoundStart = os.path.join(os.path.dirname(__file__), "..", "..", "startup.wav")
+    SoundFail = os.path.join(os.path.dirname(__file__), "..", "..", "fail.wav")
+    SoundPass = os.path.join(os.path.dirname(__file__), "..", "..", "tada.wav")  
 
     #find UUT DBC file name
-    test_file = open(TestPath + TestFile, 'r')
+    test_file = open(os.path.join(DataPath, TestFile), 'r')
     Lines = test_file.readlines()
     test_file.seek(0)
     
@@ -70,14 +70,14 @@ def initialize():
         print("No DBC file specified, add 'UUT_DBC = filename.dbc' to script")
         quit()
 
-    DBCFileName = "PAT.dbc"
+    DBCFileName = "\\PAT.dbc"
     print("Loading", DBCFileName + "...")
     pat_db = kvadblib.Dbc(filename=DBCPath + DBCFileName)
 
     
     DBCFileName = UUTDBCName[1].strip()
     print("Loading", DBCFileName + "...")
-    uut_db = kvadblib.Dbc(filename=DBCPath + DBCFileName)
+    uut_db = kvadblib.Dbc(filename=DBCPath + "\\" + DBCFileName)
     print("Updating UUT_Fdbk...")
     
     print("Verifing...")
