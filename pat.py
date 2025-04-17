@@ -17,23 +17,13 @@ from support.events import ProcessEvents
 from support.script import ProcessScript
 import support.globals as globals
 
-try:
-    bus = can.Bus(channel='PCAN_USBBUS1', interface='pcan', bitrate=250000)
-    print("PCAN1 Detected")
-    bus.shutdown()
-    bus = can.Bus(channel='PCAN_USBBUS2', interface='pcan', bitrate=250000)
-    print("PCAN2 Detected")
-    bus.shutdown()
-    from support.pcan_interface import CANThread 
-except can.CanError:
-    print("No PCAN device detected")
-    from support.can import CANThread
 
 
 def ErrorTrap(error):
     sink = error #sink errors for now
     globals.CAN1.terminate() 
-    globals.CAN2.terminate() 
+    if globals.SuppressPatSupport == 'False':
+        globals.CAN2.terminate() 
     globals.finished = 1
     quit()
     
@@ -72,6 +62,19 @@ if(globals.Verbose == 1):
 #--------
 
 globals.initialize()
+
+try:
+    bus = can.Bus(channel='PCAN_USBBUS1', interface='pcan', bitrate=250000)
+    print("PCAN1 Detected")
+    bus.shutdown()
+    if globals.SuppressPatSupport == 'False':
+        bus = can.Bus(channel='PCAN_USBBUS2', interface='pcan', bitrate=250000)
+        print("PCAN2 Detected")
+        bus.shutdown()
+    from support.pcan_interface import CANThread 
+except can.CanError:
+    print("No PCAN device detected")
+    from support.can import CANThread
 
 #print("\nInit screen...")
 #init screen
