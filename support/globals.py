@@ -70,37 +70,53 @@ def initialize():
         print("No DBC file specified, add 'UUT_DBC = filename.dbc' to script")
         quit()
 
-    DBCFileName = "\\PAT.dbc"
-    print("Loading", DBCFileName + "...")
-    pat_db = kvadblib.Dbc(filename=DBCPath + DBCFileName)
-
-    
+    for line in Lines:
+        if(line.startswith("SUPPRESS_PAT_SUPPORT")):
+            SuppressPatSupport = line.split("=")
+            SuppressPatSupport = SuppressPatSupport[1].strip()
+            break
+                    
+    # read uut
     DBCFileName = UUTDBCName[1].strip()
+    filename = os.path.join(DBCPath, DBCFileName)
     print("Loading", DBCFileName + "...")
-    uut_db = kvadblib.Dbc(filename=DBCPath + "\\" + DBCFileName)
+    uut_db = kvadblib.Dbc(filename=filename)
     print("Updating UUT_Fdbk...")
-    
-    print("Verifing...")
-    for pm in pat_db:
-        for ps in pm.signals():
-            for um in uut_db:
-                for us in um.signals():
-                    if(ps.name == us.name):
-                        print("\nDuplicate Signal Found, Aborting...", us.name)
-                        quit()
-                        
-    print("Setting up PAT I/O...")
-    #TODO: update PAT_Fdbk globals.PAT_Fdbk[s.name] = value
-    print(pat_db)
-    pat_framebox_in = pat_framebox_out = kvadblib.FrameBox(pat_db)
-    for message in pat_db:
-        for s in message.signals():
-            globals.PAT_Fdbk[s.name] = 0#s.name
-            if(globals.Verbose == 1):
-                print(message.name, s.name)
-        if(message.send_node.name == "CTRL"):
-            pat_framebox_out.add_message(message.name)
+        
+    # Load PAT.dbc file only if SuppressPatSupport is not set to True
+    if(SuppressPatSupport == 'True'):
+        print("Suppression of PAT support active; UUT testing only")
+    else:
+        # read pat
+        DBCFileName = "PAT.dbc"
+        filename = os.path.join(DBCPath, DBCFileName)
+        print("Loading", DBCFileName + "...")
+        pat_db = kvadblib.Dbc(filename=filename)
+        
+        # compare uut and pat. skip if pat suppressed
+        print("Verifing...")
+        for pm in pat_db:
+            for ps in pm.signals():
+                for um in uut_db:
+                    for us in um.signals():
+                        if(ps.name == us.name):
+                            print("\nDuplicate Signal Found, Aborting...", us.name)
+                            quit()
+        
+        # init pat
+        print("Setting up PAT I/O...")
+        #TODO: update PAT_Fdbk globals.PAT_Fdbk[s.name] = value
+        print(pat_db)
+        pat_framebox_in = pat_framebox_out = kvadblib.FrameBox(pat_db)
+        for message in pat_db:
+            for s in message.signals():
+                globals.PAT_Fdbk[s.name] = 0#s.name
+                if(globals.Verbose == 1):
+                    print(message.name, s.name)
+            if(message.send_node.name == "CTRL"):
+                pat_framebox_out.add_message(message.name)
 
+    # init uut
     print("Setting up UUT I/O...")    
     #TODO: update UUT_Fdbk globals.UUT_Fdbk[s.name] = value
     print(uut_db)

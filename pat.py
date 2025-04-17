@@ -86,8 +86,10 @@ globals.initialize()
 globals.CAN_1 = threading.Thread(target=CANThread, args=(0,))
 globals.CAN_1.start()
    
-globals.CAN_2 = threading.Thread(target=CANThread, args=(1,))
-globals.CAN_2.start()
+#Start CAN thread for PAT
+if(globals.SuppressPatSupport == 'False'): # skip if suppressed
+    globals.CAN_2 = threading.Thread(target=CANThread, args=(1,))
+    globals.CAN_2.start()
 time.sleep(2)
 
 #playsound(globals.SoundStart)

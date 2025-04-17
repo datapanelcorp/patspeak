@@ -67,10 +67,11 @@ def CANThread(i):
                     value = s.phys_from(data)
                     globals.UUT_Fdbk[s.name] = value
             else:
-                msg = globals.pat_db.get_message_by_id(can_id, kvadblib.MessageFlag.EXT)
-                for s in msg.signals():
-                    value = s.phys_from(data)
-                    globals.PAT_Fdbk[s.name] = value
+                if globals.SuppressPatSupport == 'False': # skip if suppressed
+                    msg = globals.pat_db.get_message_by_id(can_id, kvadblib.MessageFlag.EXT)
+                    for s in msg.signals():
+                        value = s.phys_from(data)
+                        globals.PAT_Fdbk[s.name] = value
         except:
             ErrorTrap(0)
 
@@ -83,7 +84,8 @@ def CANThread(i):
                     if not(message.arbitration_id == 0x18ef6027 and message.data[0] == 0): #TODO: implement way to do oneshot messages outside of main can thread
                         ch.send(message)                 
             else:
-                for frame in globals.pat_framebox_out.frames():
-                    message = can.Message(arbitration_id=frame.id, data=frame.data, is_extended_id=True)
-                    ch.send(message)
+                if globals.SuppressPatSupport == 'False': # skip if suppressed
+                    for frame in globals.pat_framebox_out.frames():
+                        message = can.Message(arbitration_id=frame.id, data=frame.data, is_extended_id=True)
+                        ch.send(message)
     close_channel(ch)
