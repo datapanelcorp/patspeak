@@ -1,5 +1,6 @@
 import os
 import sys
+import msvcrt
 #from playsound import playsound
 #os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (1,1)
 #os.environ["DISPLAY"] = ':0'
@@ -107,16 +108,18 @@ print("Test Name:", globals.UnitName)
 
 while not globals.finished:
 
-    if keyboard.is_pressed('esc'):
-        userinput = input("Are you sure you want to stop.\nPress Y to stop, any key to continue.")
-        if((userinput == "y") or (userinput == "Y")):
-            logfile = globals.LogPath + str(globals.UnitName) + "_" + globals.TestFile + ".log"
-            f = open(logfile, 'w')
-            f.write("Esc - user interruption @ " + str(datetime.today().strftime(globals.TimeStampFormat)) + "\n")
-            f.write(globals.UUT_TestLog)
-            f.close()        
-            globals.finished = 1
-            break  # finishing the loop
+    if msvcrt.kbhit():
+        key = msvcrt.getch()
+        if key == b'\x1b':  # ESC key
+            userinput = input("Are you sure you want to stop.\nPress Y to stop, any key to continue.")
+            if((userinput == "y") or (userinput == "Y")):
+                logfile = globals.LogPath + str(globals.UnitName) + "_" + globals.TestFile + ".log"
+                f = open(logfile, 'w')
+                f.write("Esc - user interruption @ " + str(datetime.today().strftime(globals.TimeStampFormat)) + "\n")
+                f.write(globals.UUT_TestLog)
+                f.close()        
+                globals.finished = 1
+                break  # finishing the loop
 
     ScreenMode = 0
     #screen.fill((0, 0, 0))
