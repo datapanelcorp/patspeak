@@ -81,8 +81,10 @@ def CANThread(i):
             if(channel_number == 0):    
                 for frame in globals.uut_framebox_out.frames():
                     message = can.Message(arbitration_id=frame.id, data=frame.data, is_extended_id=True)
-                    if not(message.arbitration_id == 0x18ef6027 and message.data[0] == 0): #TODO: implement way to do oneshot messages outside of main can thread
-                        ch.send(message)                 
+                    ###### This is a hack way to keep certain messages from being sent continuously, and send on command only.
+                    # if not(message.arbitration_id == 0x18ef6027 and message.data[0] == 0): #TODO: implement way to do oneshot messages outside of main can thread
+                        # ch.send(message)                 
+                    ch.send(message)
             else:
                 if globals.SuppressPatSupport == 'False': # skip if suppressed
                     for frame in globals.pat_framebox_out.frames():
