@@ -1,5 +1,3 @@
-
-
 idea:  change format w/ "toleracne | time" to something more like the first parameters: "TOLERANCE = 0.5, TIME = 0.5".  -jaron 4/23/25
 idea:  change SAVE command to support a filename parameter allowing saving seperate files during test. -jaron 4/23/25
 
