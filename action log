@@ -3,6 +3,6 @@ idea:  change SAVE command to support a filename parameter allowing saving seper
 idea:  is it possbile to have a single command to clear all multiplexs fields? Or automatic in the background? -jaron 4/23/25
 idea:  Can AllCollectedData contain the expected value? -jaron 4/23/25
 idea:  Add ability stop & prompt untill keypress? -jaron 4/23/25
-idea:  have ability to turn on/off "stop on fail"? (failure mode)
+idea:  have ability to turn on/off "stop on fail"? (failure mode) -jaron 4/23/25
 
 
