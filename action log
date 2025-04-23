@@ -1,5 +1,8 @@
 idea:  change format w/ "toleracne | time" to something more like the first parameters: "TOLERANCE = 0.5, TIME = 0.5".  -jaron 4/23/25
 idea:  change SAVE command to support a filename parameter allowing saving seperate files during test. -jaron 4/23/25
-idea:  could the "Node NAME" in the DBC file dertermine when a message is a "One Shot"? We use currently use CTRL and UUT.
+idea:  is it possbile to have a single command to clear all multiplexs fields? Or automatic in the background? -jaron 4/23/25
+idea:  Can AllCollectedData contain the expected value? -jaron 4/23/25
+idea:  Add ability stop & prompt untill keypress? -jaron 4/23/25
+idea:  have ability to turn on/off "stop on fail"? (failure mode)
 
 
