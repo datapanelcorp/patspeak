@@ -4,5 +4,7 @@ idea:  is it possbile to have a single command to clear all multiplexs fields? O
 idea:  Can AllCollectedData contain the expected value? -jaron 4/23/25
 idea:  Add ability stop & prompt untill keypress? -jaron 4/23/25
 idea:  have ability to turn on/off "stop on fail"? (failure mode) -jaron 4/23/25
+idea:  have the ability to execute external pat scripts as subtests, combined with "stop on fail" we can the subtest early. -jaron 4/24/25
+
 
 
