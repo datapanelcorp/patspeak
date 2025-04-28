@@ -10,15 +10,12 @@ import time
 import keyboard
 from datetime import datetime
 
-import can
+import can # Imports python-can library for pcan support : "pip install python-can"
 
 from support.screens import DrawScreen 
 from support.events import ProcessEvents
-#from support.pcan_interface import CANThread
 from support.script import ProcessScript
 import support.globals as globals
-
-
 
 def ErrorTrap(error):
     sink = error #sink errors for now
@@ -107,7 +104,9 @@ if(globals.UnitName == ""):
 print("Test Name:", globals.UnitName)
 
 while not globals.finished:
-
+    # If ESC key pressed in main loop, while focused on terminal
+    # Pause test and prompt user to confirm exit of test
+    # (msvcrt is a windows compatible library)
     if msvcrt.kbhit():
         key = msvcrt.getch()
         if key == b'\x1b':  # ESC key
