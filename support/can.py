@@ -45,10 +45,11 @@ def CANThread(i):
                     value = s.phys_from(can_frame.data)
                     globals.UUT_Fdbk[s.name] = value
             else:
-                msg = globals.pat_db.get_message_by_id(can_frame.id, kvadblib.MessageFlag.EXT)
-                for s in msg.signals():
-                    value = s.phys_from(can_frame.data)
-                    globals.PAT_Fdbk[s.name] = value
+                if globals.SuppressPatSupport == 'False': # skip if suppressed
+                    msg = globals.pat_db.get_message_by_id(can_frame.id, kvadblib.MessageFlag.EXT)
+                    for s in msg.signals():
+                        value = s.phys_from(can_frame.data)
+                        globals.PAT_Fdbk[s.name] = value
         except:
             ErrorTrap(0)
 
@@ -59,6 +60,7 @@ def CANThread(i):
                 for frame in globals.uut_framebox_out.frames():
                     ch.write(frame)                 
             else:
-                for frame in globals.pat_framebox_out.frames():
-                    ch.write(frame)
+                if globals.SuppressPatSupport == 'False': # skip if suppressed
+                    for frame in globals.pat_framebox_out.frames():
+                        ch.write(frame)
     close_channel(ch)

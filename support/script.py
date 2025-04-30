@@ -114,6 +114,9 @@ def ProcessScript():
     if(globals.TestLine.startswith("UUT_DATANAME")):
         globals.TestLine = "" #clear to stop further processing
 
+    if(globals.TestLine.startswith("SUPPRESS_PAT_SUPPORT")):
+        globals.TestLine = "" #clear to stop further processing
+
     #TODO: verify format
     if((globals.TestLine.startswith("#")) or (globals.TestLine=="")):
         if(globals.Verbose == 1):
@@ -174,12 +177,14 @@ def ProcessScript():
                 else:
                     try:
                         globals.pat_framebox_out.signal(SignalName).phys = float(s[1])
+                        globals.PAT_Fdbk[SignalName] = float(s[1])
                         RealValue = float(s[1])
                     except:
                         pass
                     #TODO: why is this called twice?    
                     try:
                         globals.uut_framebox_out.signal(SignalName).phys = float(s[1])
+                        globals.UUT_Fdbk[SignalName] = float(s[1])
                         RealValue = float(s[1])
                     except:
                         pass

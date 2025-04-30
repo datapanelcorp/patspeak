@@ -1,0 +1,860 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: UUT CTRL
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ ArbAddr : 63|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IndustryGroup : 60|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ VehicleSysInst : 56|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ VehicleSys : 49|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ Func : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ FuncInst : 35|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ EcuInst : 32|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ Mfg : 21|11@1+ (1,0) [0|2047] "" Vector__XXX
+ SG_ Identity : 0|21@1+ (1,0) [0|2097151] "" Vector__XXX
+ SG_ PGN m16 : 40|24@1+ (1,0) [0|16777215] "" Vector__XXX
+ SG_ MaxPackets m16 : 32|8@1+ (1,0) [0|255] "packets" Vector__XXX
+ SG_ SizePackets m16 : 24|8@1+ (1,0) [0|255] "packets" Vector__XXX
+ SG_ NextPacket m17 : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ ConnAbortReason m255 : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ NumOkSend m17 : 8|8@1+ (1,0) [0|255] "packets" Vector__XXX
+ SG_ SizeBytes m16 : 8|16@1+ (1,0) [0|65535] "bytes" Vector__XXX
+ SG_ ControlByte : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ PacketizedData : 8|56@1+ (1,0) [0|7.2057594038e+16] "" Vector__XXX
+ SG_ SequenceNumber : 0|8@1+ (1,0) [1|255] "" Vector__XXX
+ SG_ PGN : 0|24@1+ (1,0) [0|16777215] "" Vector__XXX
+ SG_ RequestedPGN : 40|24@1+ (1,0) [0|16777215] "" Vector__XXX
+ SG_ RequesterAddress : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ GroupFunctionValue : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ ControlByte : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ Hold : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Link : 6|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ Key : 48|16@1+ (1,0) [0|65535] "" Vector__XXX
+ SG_ PtrExt : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ Pointer : 16|24@1+ (1,0) [0|16777215] "" Vector__XXX
+ SG_ PtrType : 12|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Command : 9|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ LengthL : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ Seed : 48|16@1+ (1,0) [0|65535] "" Vector__XXX
+ SG_ EdcExt : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ ErrEdc : 16|24@1+ (1,0) [0|16777215] "" Vector__XXX
+ SG_ LengthH : 13|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ Status : 9|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ LengthL : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ Data : 8|56@1+ (1,0) [0|7.2057594038e+16] "" Vector__XXX
+ SG_ Count : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ BootData : 0|64@1+ (1,0) [0|9.2233720369e+18] "" Vector__XXX
+ SG_ Hours : 32|32@1+ (0.05,0) [0|4294967295] "hours" Vector__XXX
+
+BO_ 2560974887 PWMCTRL3: 8 CTRL
+ SG_ Pwm12DutyCmd : 48|16@1+ (0.1,0) [0|100] "%" Vector__XXX
+ SG_ Pwm11DutyCmd : 32|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm10DutyCmd : 16|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm9DutyCmd : 0|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+
+BO_ 2561040423 PWMCTRL2: 8 CTRL
+ SG_ Pwm8DutyCmd : 48|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm7DutyCmd : 32|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm6DutyCmd : 16|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm5DutyCmd : 0|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+
+BO_ 2561105959 PWMCTRL1: 8 CTRL
+ SG_ Pwm4DutyCmd : 48|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm3DutyCmd : 32|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm2DutyCmd : 16|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+ SG_ Pwm1DutyCmd : 0|16@1+ (0.1,0) [0|1000] "%" Vector__XXX
+
+BO_ 2565824551 CTRL1: 8 CTRL
+ SG_ DiagCpuUsageAvg m2559 : 32|8@1+ (0.4,0) [0|0] "%"  UUT,CTRL
+ SG_ DiagCpuUsagePeak m2303 : 32|8@1+ (0.4,0) [0|0] "%"  UUT,CTRL
+ SG_ DiagCpuUsageCur m2047 : 32|8@1+ (0.4,0) [0|0] "%"  UUT,CTRL
+ SG_ DiagRtosHeapAllocMax m1791 : 32|32@1+ (1,0) [0|0] "bytes"  UUT,CTRL
+ SG_ DiagRtosHeapAlloc m1535 : 32|32@1+ (1,0) [0|0] "bytes"  UUT,CTRL
+ SG_ DiagRtosHeapFree m1279 : 32|32@1+ (1,0) [0|0] "bytes"  UUT,CTRL
+ SG_ DiagRtosNumThreads m1023 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ DiagCanNumTxErr m767 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ DiagCanNumRxErr m511 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ DiagResetReason m255 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1DisCurChopping m6345 : 32|1@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1HBridgeInvertDir m4809 : 32|1@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1CurLimitRetries m3529 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1CurLimitReact m3273 : 32|2@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1CurSoftLimitTime m3017 : 32|16@1+ (0.001,0) [0|0] "s"  UUT,CTRL
+ SG_ Port1CurSoftMax m2761 : 32|16@1+ (0.001,0) [0|0] "A"  UUT,CTRL
+ SG_ Port1RampTimeRev m2505 : 32|16@1+ (0.001,0) [0|0] "s"  UUT,CTRL
+ SG_ Port1RampTimeFwd m2249 : 32|16@1+ (0.001,0) [0|0] "s"  UUT,CTRL
+ SG_ Port1PwmMaxDuty m1993 : 32|16@1+ (0.01,0) [0|0] "%"  UUT,CTRL
+ SG_ Port1PwmMinDuty m1737 : 32|16@1+ (0.01,0) [0|0] "%"  UUT,CTRL
+ SG_ Port1PidKd m1481 : 32|8@1+ (0.01,0) [0|0] ""  UUT,CTRL
+ SG_ Port1PidKi m1225 : 32|8@1+ (0.01,0) [0|0] ""  UUT,CTRL
+ SG_ Port1PwmFreq m457 : 32|16@1+ (1,0) [0|0] "Hz"  UUT,CTRL
+ SG_ Port1Mode m201 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault32 m8834 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault31 m8578 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault30 m8322 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault29 m8066 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault28 m7810 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault27 m7554 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault26 m7298 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault25 m7042 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault24 m6786 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault23 m6530 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault22 m6274 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault21 m6018 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault20 m5762 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault19 m5506 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault18 m5250 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault17 m4994 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault16 m4738 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault15 m4482 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault14 m4226 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault13 m3970 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault12 m3714 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault11 m3458 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault10 m3202 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault9 m2946 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault8 m2690 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault7 m2434 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault6 m2178 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault5 m1922 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault4 m1666 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault3 m1410 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault2 m1154 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault1 m898 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ FltClearTimestamp m642 : 32|32@1+ (1,0) [0|0] "s"  UUT,CTRL
+ SG_ NumHistFaults m386 : 32|32@1+ (1,0) [0|0] "count"  UUT,CTRL
+ SG_ NumActiveFaults m130 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ UnderVHoldExitThreshold m2177 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
+ SG_ CfgChangeCount m1921 : 32|32@1+ (1,0) [0|0] "count"  UUT,CTRL
+ SG_ CTRLAddress m1665 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ OverVWarnThreshold m1409 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
+ SG_ UnderVWarnThreshold m1153 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
+ SG_ UnderVHoldThreshold m897 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
+ SG_ CanProtocolMode m641 : 32|16@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ CanBitrate m385 : 32|16@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ NodeAddress m129 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SerialNumber m7296 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ PartNumber m7040 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ BootVerString m6784 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ RtosVerString m6528 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ AppVerString m6272 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ BootVerBuild m6016 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ BootVerPatch m5760 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ BootVerMin m5504 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ BootVerMaj m5248 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ RtosVerBuild m4992 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ RtosVerPatch m4736 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ RtosVerMin m4480 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ RtosVerMaj m4224 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ AppVerBuild m3968 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ AppVerPatch m3712 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ AppVerMin m3456 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ AppVerMaj m3200 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port8Type m2944 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port7Type m2688 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port6Type m2432 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port5Type m2176 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port4Type m1920 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port3Type m1664 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port2Type m1408 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1Type m1152 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ NumPorts m896 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Cnfg3 m640 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Cnfg2 m384 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Cnfg1 m128 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnUptime m818176 : 32|32@1+ (1,0) [0|0] "s"  UUT,CTRL
+ SG_ SpnCfgChangeCount m739072 : 32|16@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameIndGroup m728576 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameSelfConfig m728064 : 32|2@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameVehInst m727808 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameVehSys m727552 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameFunc m727296 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameEcuInst m727040 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameFuncInst m726784 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameMfgCode m726528 : 32|11@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameIdent m726272 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnEcuTemp m290816 : 32|16@1+ (0.03125,-273) [0|0] "?C"  UUT,CTRL
+ SG_ SpnEcuHrs m264448 : 32|32@1+ (0.05,0) [0|0] "h"  UUT,CTRL
+ SG_ SpnSerNum m150528 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnBattV m43008 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
+ SG_ SpnBootCount m38912 : 32|32@1+ (1,0) [0|0] "count"  UUT,CTRL
+ SG_ Confirm m221 : 8|32@1+ (1,0) [0|8589934591] ""  UUT
+ SG_ ParamId m220 : 8|24@1+ (1,0) [0|33554431] ""  UUT
+ SG_ Command M : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 2565810016 STAT: 8 UUT
+ SG_ DiagCpuUsageAvg m2559 : 32|8@1+ (0.4,0) [0|0] "%"  UUT,CTRL
+ SG_ DiagCpuUsagePeak m2303 : 32|8@1+ (0.4,0) [0|0] "%"  UUT,CTRL
+ SG_ DiagCpuUsageCur m2047 : 32|8@1+ (0.4,0) [0|0] "%"  UUT,CTRL
+ SG_ DiagRtosHeapAllocMax m1791 : 32|32@1+ (1,0) [0|0] "bytes"  UUT,CTRL
+ SG_ DiagRtosHeapAlloc m1535 : 32|32@1+ (1,0) [0|0] "bytes"  UUT,CTRL
+ SG_ DiagRtosHeapFree m1279 : 32|32@1+ (1,0) [0|0] "bytes"  UUT,CTRL
+ SG_ DiagRtosNumThreads m1023 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ DiagCanNumTxErr m767 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ DiagCanNumRxErr m511 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ DiagResetReason m255 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1DisCurChopping m6345 : 32|1@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1HBridgeInvertDir m4809 : 32|1@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1CurLimitRetries m3529 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1CurLimitReact m3273 : 32|2@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1CurSoftLimitTime m3017 : 32|16@1+ (0.001,0) [0|0] "s"  UUT,CTRL
+ SG_ Port1CurSoftMax m2761 : 32|16@1+ (0.001,0) [0|0] "A"  UUT,CTRL
+ SG_ Port1RampTimeRev m2505 : 32|16@1+ (0.001,0) [0|0] "s"  UUT,CTRL
+ SG_ Port1RampTimeFwd m2249 : 32|16@1+ (0.001,0) [0|0] "s"  UUT,CTRL
+ SG_ Port1PwmMaxDuty m1993 : 32|16@1+ (0.01,0) [0|0] "%"  UUT,CTRL
+ SG_ Port1PwmMinDuty m1737 : 32|16@1+ (0.01,0) [0|0] "%"  UUT,CTRL
+ SG_ Port1PidKd m1481 : 32|8@1+ (0.01,0) [0|0] ""  UUT,CTRL
+ SG_ Port1PidKi m1225 : 32|8@1+ (0.01,0) [0|0] ""  UUT,CTRL
+ SG_ Port1PwmFreq m457 : 32|16@1+ (1,0) [0|0] "Hz"  UUT,CTRL
+ SG_ Port1Mode m201 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault32 m8834 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault31 m8578 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault30 m8322 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault29 m8066 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault28 m7810 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault27 m7554 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault26 m7298 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault25 m7042 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault24 m6786 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault23 m6530 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault22 m6274 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault21 m6018 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault20 m5762 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault19 m5506 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault18 m5250 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault17 m4994 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault16 m4738 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault15 m4482 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault14 m4226 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault13 m3970 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault12 m3714 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault11 m3458 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault10 m3202 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault9 m2946 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault8 m2690 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault7 m2434 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault6 m2178 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault5 m1922 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault4 m1666 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault3 m1410 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault2 m1154 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Fault1 m898 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ FltClearTimestamp m642 : 32|32@1+ (1,0) [0|0] "s"  UUT,CTRL
+ SG_ NumHistFaults m386 : 32|32@1+ (1,0) [0|0] "count"  UUT,CTRL
+ SG_ NumActiveFaults m130 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ UnderVHoldExitThreshold m2177 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
+ SG_ CfgChangeCount m1921 : 32|32@1+ (1,0) [0|0] "count"  UUT,CTRL
+ SG_ CTRLAddress m1665 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ OverVWarnThreshold m1409 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
+ SG_ UnderVWarnThreshold m1153 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
+ SG_ UnderVHoldThreshold m897 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
+ SG_ CanProtocolMode m641 : 32|16@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ CanBitrate m385 : 32|16@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ NodeAddress m129 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SerialNumber m7296 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ PartNumber m7040 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ BootVerString m6784 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ RtosVerString m6528 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ AppVerString m6272 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ BootVerBuild m6016 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ BootVerPatch m5760 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ BootVerMin m5504 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ BootVerMaj m5248 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ RtosVerBuild m4992 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ RtosVerPatch m4736 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ RtosVerMin m4480 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ RtosVerMaj m4224 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ AppVerBuild m3968 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ AppVerPatch m3712 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ AppVerMin m3456 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ AppVerMaj m3200 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port8Type m2944 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port7Type m2688 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port6Type m2432 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port5Type m2176 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port4Type m1920 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port3Type m1664 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port2Type m1408 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Port1Type m1152 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ NumPorts m896 : 32|8@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Cnfg3 m640 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Cnfg2 m384 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ Cnfg1 m128 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnUptime m818176 : 32|32@1+ (1,0) [0|0] "s"  UUT,CTRL
+ SG_ SpnCfgChangeCount m739072 : 32|16@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameIndGroup m728576 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameSelfConfig m728064 : 32|2@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameVehInst m727808 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameVehSys m727552 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameFunc m727296 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameEcuInst m727040 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameFuncInst m726784 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameMfgCode m726528 : 32|11@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnNameIdent m726272 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnEcuTemp m290816 : 32|16@1+ (0.03125,-273) [0|0] "?C"  UUT,CTRL
+ SG_ SpnEcuHrs m264448 : 32|32@1+ (0.05,0) [0|0] "h"  UUT,CTRL
+ SG_ SpnSerNum m150528 : 32|32@1+ (1,0) [0|0] ""  UUT,CTRL
+ SG_ SpnBattV m43008 : 32|16@1+ (0.001,0) [0|0] "V"  UUT,CTRL
+ SG_ SpnBootCount m38912 : 32|32@1+ (1,0) [0|0] "count"  UUT,CTRL
+ SG_ LegacyFaultCode m0 : 32|8@1+ (1,0) [0|511] ""  CTRL
+ SG_ FaultPresent m0 : 24|2@1+ (1,0) [0|7] ""  CTRL
+ SG_ SwVer m0 : 12|4@1+ (1,0) [0|31] ""  CTRL
+ SG_ SwRev m0 : 8|4@1+ (1,0) [0|31] ""  CTRL
+ SG_ ParamId m220 : 8|24@1+ (1,0) [0|33554431] ""  CTRL
+ SG_ Command M : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 2566869856 DPSTAT: 8 UUT
+ SG_ ActiveFaultCode : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ ActiveFaultFailureMode : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ ComLed : 44|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ StatLed : 40|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ CtrlSA : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ TotalCurrent : 24|8@1+ (1,0) [0|255] "A" Vector__XXX
+ SG_ SysTemp : 16|8@1+ (1,-40) [0|250] "?C" Vector__XXX
+ SG_ BattVoltage : 0|16@1+ (0.001,0) [0|65535] "V" Vector__XXX
+
+BO_ 2365562976 PWMSTAT1: 8 UUT
+ SG_ PwmOut6LedStat : 58|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PwmOut5LedStat : 56|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PwmOut4LedStat : 54|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PwmOut3LedStat : 52|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PwmOut2LedStat : 50|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PwmOut1LedStat : 48|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PwmOut6Current : 40|8@1+ (0.1,0) [0|250] "A" Vector__XXX
+ SG_ PwmOut5Current : 32|8@1+ (0.1,0) [0|250] "A" Vector__XXX
+ SG_ PwmOut4Current : 24|8@1+ (0.1,0) [0|250] "A" Vector__XXX
+ SG_ PwmOut3Current : 16|8@1+ (0.1,0) [0|250] "A" Vector__XXX
+ SG_ PwmOut2Current : 8|8@1+ (0.1,0) [0|250] "A" Vector__XXX
+ SG_ PwmOut1Current : 0|8@1+ (0.1,0) [0|250] "A" Vector__XXX
+
+BO_ 2365563232 PWMSTAT2: 8 UUT
+ SG_ PwmOut12LedStat : 58|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PwmOut11LedStat : 56|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PwmOut10LedStat : 54|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PwmOut9LedStat : 52|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PwmOut8LedStat : 50|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PwmOut7LedStat : 48|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PwmOut12Current : 40|8@1+ (0.1,0) [0|250] "A" Vector__XXX
+ SG_ PwmOut11Current : 32|8@1+ (0.1,0) [0|250] "A" Vector__XXX
+ SG_ PwmOut10Current : 24|8@1+ (0.1,0) [0|250] "A" Vector__XXX
+ SG_ PwmOut9Current : 16|8@1+ (0.1,0) [0|250] "A" Vector__XXX
+ SG_ PwmOut8Current : 8|8@1+ (0.1,0) [0|250] "A" Vector__XXX
+ SG_ PwmOut7Current : 0|8@1+ (0.1,0) [0|250] "A" Vector__XXX
+
+
+
+CM_ SG_ 3221225472 ArbAddr "Arbitrary-address capable";
+CM_ SG_ 3221225472 IndustryGroup "Industry group";
+CM_ SG_ 3221225472 VehicleSysInst "Vehicle system instance";
+CM_ SG_ 3221225472 VehicleSys "Vehicle system";
+CM_ SG_ 3221225472 Func "Function code";
+CM_ SG_ 3221225472 FuncInst "Function instance";
+CM_ SG_ 3221225472 EcuInst "ECU Instance";
+CM_ SG_ 3221225472 Mfg "Manufacturer code";
+CM_ SG_ 3221225472 Identity "Identity";
+CM_ SG_ 3221225472 PGN "PGN of packetized message";
+CM_ SG_ 3221225472 MaxPackets "Maximum number of response packets";
+CM_ SG_ 3221225472 SizePackets "Total number of packets";
+CM_ SG_ 3221225472 NextPacket "Next packet number";
+CM_ SG_ 3221225472 ConnAbortReason "Connection Abort Reason";
+CM_ SG_ 3221225472 NumOkSend "Number of packets to send";
+CM_ SG_ 3221225472 SizeBytes "Total message size";
+CM_ SG_ 3221225472 ControlByte "Control byte";
+CM_ SG_ 3221225472 PacketizedData "Packetized Data";
+CM_ SG_ 3221225472 SequenceNumber "Sequence Number";
+CM_ SG_ 3221225472 PGN "Requested PGN";
+CM_ SG_ 3221225472 RequestedPGN "Requested PGN";
+CM_ SG_ 3221225472 RequesterAddress "Requester Address";
+CM_ SG_ 3221225472 GroupFunctionValue "Group Function Value";
+CM_ SG_ 3221225472 ControlByte "Control byte";
+CM_ SG_ 3221225472 Hold "Hold Signal";
+CM_ SG_ 3221225472 Link "Current data link";
+CM_ SG_ 3221225472 Key "Key/User Level";
+CM_ SG_ 3221225472 PtrExt "Pointer Extension";
+CM_ SG_ 3221225472 Pointer "Pointer";
+CM_ SG_ 3221225472 PtrType "Pointer type";
+CM_ SG_ 3221225472 Command "Command";
+CM_ SG_ 3221225472 LengthL "Number requested";
+CM_ SG_ 3221225472 Seed "Seed";
+CM_ SG_ 3221225472 EdcExt "EDC Extension";
+CM_ SG_ 3221225472 ErrEdc "Error/EDC Parameter";
+CM_ SG_ 3221225472 LengthH "Length allowed (MSB)";
+CM_ SG_ 3221225472 Status "Status";
+CM_ SG_ 3221225472 LengthL "Length allowed (LSB)";
+CM_ SG_ 3221225472 Data "Raw binary data";
+CM_ SG_ 3221225472 Count "Count";
+CM_ SG_ 3221225472 BootData "Bootloader data";
+CM_ SG_ 3221225472 Hours "Total powered-on time";
+CM_ BO_ 2560974887 "PWM output control \#3";
+CM_ SG_ 2560974887 Pwm12DutyCmd "Control value for PWM output 12";
+CM_ SG_ 2560974887 Pwm11DutyCmd "Control value for PWM output 11";
+CM_ SG_ 2560974887 Pwm10DutyCmd "Control value for PWM output 10";
+CM_ SG_ 2560974887 Pwm9DutyCmd "Control value for PWM output 9";
+CM_ BO_ 2561040423 "PWM output control \#2";
+CM_ SG_ 2561040423 Pwm8DutyCmd "Control value for PWM output 8";
+CM_ SG_ 2561040423 Pwm7DutyCmd "Control value for PWM output 7";
+CM_ SG_ 2561040423 Pwm6DutyCmd "Control value for PWM output 6";
+CM_ SG_ 2561040423 Pwm5DutyCmd "Control value for PWM output 5";
+CM_ BO_ 2561105959 "PWM output control \#1";
+CM_ SG_ 2561105959 Pwm4DutyCmd "Control value for PWM output 4";
+CM_ SG_ 2561105959 Pwm3DutyCmd "Control value for PWM output 3";
+CM_ SG_ 2561105959 Pwm2DutyCmd "Control value for PWM output 2";
+CM_ SG_ 2561105959 Pwm1DutyCmd "Control value for PWM output 1";
+CM_ BO_ 2565824551 "Control message \#1";
+CM_ SG_ 2565824551 DiagCpuUsageAvg "Average CPU usage";
+CM_ SG_ 2565824551 DiagCpuUsagePeak "Peak CPU usage";
+CM_ SG_ 2565824551 DiagCpuUsageCur "Current CPU usage";
+CM_ SG_ 2565824551 DiagRtosHeapAllocMax "RTOS heap allocated max";
+CM_ SG_ 2565824551 DiagRtosHeapAlloc "RTOS heap allocated";
+CM_ SG_ 2565824551 DiagRtosHeapFree "RTOS heap free";
+CM_ SG_ 2565824551 DiagRtosNumThreads "RTOS thread count";
+CM_ SG_ 2565824551 DiagCanNumTxErr "CAN TX error count";
+CM_ SG_ 2565824551 DiagCanNumRxErr "CAN RX error count";
+CM_ SG_ 2565824551 DiagResetReason "Reset Reason";
+CM_ SG_ 2565824551 Port1DisCurChopping "Disable current chopping";
+CM_ SG_ 2565824551 Port1HBridgeInvertDir "H-bridge invert direction";
+CM_ SG_ 2565824551 Port1CurLimitRetries "Output current soft limit max retries";
+CM_ SG_ 2565824551 Port1CurLimitReact "Output current soft limit reaction";
+CM_ SG_ 2565824551 Port1CurSoftLimitTime "Output current soft limit time";
+CM_ SG_ 2565824551 Port1CurSoftMax "Output current soft limit";
+CM_ SG_ 2565824551 Port1RampTimeRev "Ramp time reverse";
+CM_ SG_ 2565824551 Port1RampTimeFwd "Ramp time forward";
+CM_ SG_ 2565824551 Port1PwmMaxDuty "PWM Output maximum duty cycle";
+CM_ SG_ 2565824551 Port1PwmMinDuty "PWM Output minimum duty cycle";
+CM_ SG_ 2565824551 Port1PidKd "PID proportional gain (Kd)";
+CM_ SG_ 2565824551 Port1PidKi "PID proportional gain (Ki)";
+CM_ SG_ 2565824551 Port1PwmFreq "PWM output frequency";
+CM_ SG_ 2565824551 Port1Mode "I/O mode";
+CM_ SG_ 2565824551 Fault32 "Fault history 32";
+CM_ SG_ 2565824551 Fault31 "Fault history 31";
+CM_ SG_ 2565824551 Fault30 "Fault history 30";
+CM_ SG_ 2565824551 Fault29 "Fault history 29";
+CM_ SG_ 2565824551 Fault28 "Fault history 28";
+CM_ SG_ 2565824551 Fault27 "Fault history 27";
+CM_ SG_ 2565824551 Fault26 "Fault history 26";
+CM_ SG_ 2565824551 Fault25 "Fault history 25";
+CM_ SG_ 2565824551 Fault24 "Fault history 24";
+CM_ SG_ 2565824551 Fault23 "Fault history 23";
+CM_ SG_ 2565824551 Fault22 "Fault history 22";
+CM_ SG_ 2565824551 Fault21 "Fault history 21";
+CM_ SG_ 2565824551 Fault20 "Fault history 20";
+CM_ SG_ 2565824551 Fault19 "Fault history 19";
+CM_ SG_ 2565824551 Fault18 "Fault history 18";
+CM_ SG_ 2565824551 Fault17 "Fault history 17";
+CM_ SG_ 2565824551 Fault16 "Fault history 16";
+CM_ SG_ 2565824551 Fault15 "Fault history 15";
+CM_ SG_ 2565824551 Fault14 "Fault history 14";
+CM_ SG_ 2565824551 Fault13 "Fault history 13";
+CM_ SG_ 2565824551 Fault12 "Fault history 12";
+CM_ SG_ 2565824551 Fault11 "Fault history 11";
+CM_ SG_ 2565824551 Fault10 "Fault history 10";
+CM_ SG_ 2565824551 Fault9 "Fault history 9";
+CM_ SG_ 2565824551 Fault8 "Fault history 8";
+CM_ SG_ 2565824551 Fault7 "Fault history 7";
+CM_ SG_ 2565824551 Fault6 "Fault history 6";
+CM_ SG_ 2565824551 Fault5 "Fault history 5";
+CM_ SG_ 2565824551 Fault4 "Fault history 4";
+CM_ SG_ 2565824551 Fault3 "Fault history 3";
+CM_ SG_ 2565824551 Fault2 "Fault history 2";
+CM_ SG_ 2565824551 Fault1 "Fault history 1";
+CM_ SG_ 2565824551 FltClearTimestamp "Last cleared timestamp";
+CM_ SG_ 2565824551 NumHistFaults "Number of historical faults";
+CM_ SG_ 2565824551 NumActiveFaults "Number of active faults";
+CM_ SG_ 2565824551 UnderVHoldExitThreshold "Undervoltage Hold Exit Threshold";
+CM_ SG_ 2565824551 CfgChangeCount "Configuration change count";
+CM_ SG_ 2565824551 CTRLAddress "J1939 Control Address";
+CM_ SG_ 2565824551 OverVWarnThreshold "Overvoltage Warn Threshold";
+CM_ SG_ 2565824551 UnderVWarnThreshold "Undervoltage Warn Threshold";
+CM_ SG_ 2565824551 UnderVHoldThreshold "Undervoltage Hold Threshold";
+CM_ SG_ 2565824551 CanProtocolMode "CAN Protocol Mode";
+CM_ SG_ 2565824551 CanBitrate "CAN interface bitrate";
+CM_ SG_ 2565824551 NodeAddress "J1939 CA address";
+CM_ SG_ 2565824551 SerialNumber "Serial Number";
+CM_ SG_ 2565824551 PartNumber "Part Number";
+CM_ SG_ 2565824551 BootVerString "Bootloader version string";
+CM_ SG_ 2565824551 RtosVerString "RTOS version string";
+CM_ SG_ 2565824551 AppVerString "Application version string";
+CM_ SG_ 2565824551 BootVerBuild "Bootloader version (build)";
+CM_ SG_ 2565824551 BootVerPatch "Bootloader version (patch)";
+CM_ SG_ 2565824551 BootVerMin "Bootloader version (minor)";
+CM_ SG_ 2565824551 BootVerMaj "Bootloader version (major)";
+CM_ SG_ 2565824551 RtosVerBuild "RTOS version (build)";
+CM_ SG_ 2565824551 RtosVerPatch "RTOS version (patch)";
+CM_ SG_ 2565824551 RtosVerMin "RTOS version (minor)";
+CM_ SG_ 2565824551 RtosVerMaj "RTOS version (major)";
+CM_ SG_ 2565824551 AppVerBuild "Application version (build)";
+CM_ SG_ 2565824551 AppVerPatch "Application version (patch)";
+CM_ SG_ 2565824551 AppVerMin "Application version (minor)";
+CM_ SG_ 2565824551 AppVerMaj "Application version (major)";
+CM_ SG_ 2565824551 Port8Type "Port 8 Type";
+CM_ SG_ 2565824551 Port7Type "Port 7 Type";
+CM_ SG_ 2565824551 Port6Type "Port 6 Type";
+CM_ SG_ 2565824551 Port5Type "Port 5 Type";
+CM_ SG_ 2565824551 Port4Type "Port 4 Type";
+CM_ SG_ 2565824551 Port3Type "Port 3 Type";
+CM_ SG_ 2565824551 Port2Type "Port 2 Type";
+CM_ SG_ 2565824551 Port1Type "Port 1 Type";
+CM_ SG_ 2565824551 NumPorts "Number of ports";
+CM_ SG_ 2565824551 Cnfg3 "CNFG3";
+CM_ SG_ 2565824551 Cnfg2 "CNFG2";
+CM_ SG_ 2565824551 Cnfg1 "CNFG1";
+CM_ SG_ 2565824551 SpnUptime "Uptime since last reset";
+CM_ SG_ 2565824551 SpnCfgChangeCount "Configuration change count";
+CM_ SG_ 2565824551 SpnNameIndGroup "J1939 NAME Industry Group";
+CM_ SG_ 2565824551 SpnNameSelfConfig "J1939 NAME Self-configurable Address";
+CM_ SG_ 2565824551 SpnNameVehInst "J1939 NAME Vehicle Instance";
+CM_ SG_ 2565824551 SpnNameVehSys "J1939 NAME Vehicle System";
+CM_ SG_ 2565824551 SpnNameFunc "J1939 NAME Function";
+CM_ SG_ 2565824551 SpnNameEcuInst "J1939 NAME ECU Instance";
+CM_ SG_ 2565824551 SpnNameFuncInst "J1939 NAME Function Instance";
+CM_ SG_ 2565824551 SpnNameMfgCode "J1939 NAME Manufacturer Code";
+CM_ SG_ 2565824551 SpnNameIdent "J1939 NAME Identity";
+CM_ SG_ 2565824551 SpnEcuTemp "ECU temperature";
+CM_ SG_ 2565824551 SpnEcuHrs "ECU Hours";
+CM_ SG_ 2565824551 SpnSerNum "Serial number";
+CM_ SG_ 2565824551 SpnBattV "Battery voltage";
+CM_ SG_ 2565824551 SpnBootCount "Boot count";
+CM_ SG_ 2565824551 Confirm "Confirmation Value";
+CM_ SG_ 2565824551 ParamId "Parameter Identifier";
+CM_ SG_ 2565824551 Command "Command byte";
+CM_ BO_ 2565810016 "Status message";
+CM_ SG_ 2565810016 DiagCpuUsageAvg "Average CPU usage";
+CM_ SG_ 2565810016 DiagCpuUsagePeak "Peak CPU usage";
+CM_ SG_ 2565810016 DiagCpuUsageCur "Current CPU usage";
+CM_ SG_ 2565810016 DiagRtosHeapAllocMax "RTOS heap allocated max";
+CM_ SG_ 2565810016 DiagRtosHeapAlloc "RTOS heap allocated";
+CM_ SG_ 2565810016 DiagRtosHeapFree "RTOS heap free";
+CM_ SG_ 2565810016 DiagRtosNumThreads "RTOS thread count";
+CM_ SG_ 2565810016 DiagCanNumTxErr "CAN TX error count";
+CM_ SG_ 2565810016 DiagCanNumRxErr "CAN RX error count";
+CM_ SG_ 2565810016 DiagResetReason "Reset Reason";
+CM_ SG_ 2565810016 Port1DisCurChopping "Disable current chopping";
+CM_ SG_ 2565810016 Port1HBridgeInvertDir "H-bridge invert direction";
+CM_ SG_ 2565810016 Port1CurLimitRetries "Output current soft limit max retries";
+CM_ SG_ 2565810016 Port1CurLimitReact "Output current soft limit reaction";
+CM_ SG_ 2565810016 Port1CurSoftLimitTime "Output current soft limit time";
+CM_ SG_ 2565810016 Port1CurSoftMax "Output current soft limit";
+CM_ SG_ 2565810016 Port1RampTimeRev "Ramp time reverse";
+CM_ SG_ 2565810016 Port1RampTimeFwd "Ramp time forward";
+CM_ SG_ 2565810016 Port1PwmMaxDuty "PWM Output maximum duty cycle";
+CM_ SG_ 2565810016 Port1PwmMinDuty "PWM Output minimum duty cycle";
+CM_ SG_ 2565810016 Port1PidKd "PID proportional gain (Kd)";
+CM_ SG_ 2565810016 Port1PidKi "PID proportional gain (Ki)";
+CM_ SG_ 2565810016 Port1PwmFreq "PWM output frequency";
+CM_ SG_ 2565810016 Port1Mode "I/O mode";
+CM_ SG_ 2565810016 Fault32 "Fault history 32";
+CM_ SG_ 2565810016 Fault31 "Fault history 31";
+CM_ SG_ 2565810016 Fault30 "Fault history 30";
+CM_ SG_ 2565810016 Fault29 "Fault history 29";
+CM_ SG_ 2565810016 Fault28 "Fault history 28";
+CM_ SG_ 2565810016 Fault27 "Fault history 27";
+CM_ SG_ 2565810016 Fault26 "Fault history 26";
+CM_ SG_ 2565810016 Fault25 "Fault history 25";
+CM_ SG_ 2565810016 Fault24 "Fault history 24";
+CM_ SG_ 2565810016 Fault23 "Fault history 23";
+CM_ SG_ 2565810016 Fault22 "Fault history 22";
+CM_ SG_ 2565810016 Fault21 "Fault history 21";
+CM_ SG_ 2565810016 Fault20 "Fault history 20";
+CM_ SG_ 2565810016 Fault19 "Fault history 19";
+CM_ SG_ 2565810016 Fault18 "Fault history 18";
+CM_ SG_ 2565810016 Fault17 "Fault history 17";
+CM_ SG_ 2565810016 Fault16 "Fault history 16";
+CM_ SG_ 2565810016 Fault15 "Fault history 15";
+CM_ SG_ 2565810016 Fault14 "Fault history 14";
+CM_ SG_ 2565810016 Fault13 "Fault history 13";
+CM_ SG_ 2565810016 Fault12 "Fault history 12";
+CM_ SG_ 2565810016 Fault11 "Fault history 11";
+CM_ SG_ 2565810016 Fault10 "Fault history 10";
+CM_ SG_ 2565810016 Fault9 "Fault history 9";
+CM_ SG_ 2565810016 Fault8 "Fault history 8";
+CM_ SG_ 2565810016 Fault7 "Fault history 7";
+CM_ SG_ 2565810016 Fault6 "Fault history 6";
+CM_ SG_ 2565810016 Fault5 "Fault history 5";
+CM_ SG_ 2565810016 Fault4 "Fault history 4";
+CM_ SG_ 2565810016 Fault3 "Fault history 3";
+CM_ SG_ 2565810016 Fault2 "Fault history 2";
+CM_ SG_ 2565810016 Fault1 "Fault history 1";
+CM_ SG_ 2565810016 FltClearTimestamp "Last cleared timestamp";
+CM_ SG_ 2565810016 NumHistFaults "Number of historical faults";
+CM_ SG_ 2565810016 NumActiveFaults "Number of active faults";
+CM_ SG_ 2565810016 UnderVHoldExitThreshold "Undervoltage Hold Exit Threshold";
+CM_ SG_ 2565810016 CfgChangeCount "Configuration change count";
+CM_ SG_ 2565810016 CTRLAddress "J1939 Control Address";
+CM_ SG_ 2565810016 OverVWarnThreshold "Overvoltage Warn Threshold";
+CM_ SG_ 2565810016 UnderVWarnThreshold "Undervoltage Warn Threshold";
+CM_ SG_ 2565810016 UnderVHoldThreshold "Undervoltage Hold Threshold";
+CM_ SG_ 2565810016 CanProtocolMode "CAN Protocol Mode";
+CM_ SG_ 2565810016 CanBitrate "CAN interface bitrate";
+CM_ SG_ 2565810016 NodeAddress "J1939 CA address";
+CM_ SG_ 2565810016 SerialNumber "Serial Number";
+CM_ SG_ 2565810016 PartNumber "Part Number";
+CM_ SG_ 2565810016 BootVerString "Bootloader version string";
+CM_ SG_ 2565810016 RtosVerString "RTOS version string";
+CM_ SG_ 2565810016 AppVerString "Application version string";
+CM_ SG_ 2565810016 BootVerBuild "Bootloader version (build)";
+CM_ SG_ 2565810016 BootVerPatch "Bootloader version (patch)";
+CM_ SG_ 2565810016 BootVerMin "Bootloader version (minor)";
+CM_ SG_ 2565810016 BootVerMaj "Bootloader version (major)";
+CM_ SG_ 2565810016 RtosVerBuild "RTOS version (build)";
+CM_ SG_ 2565810016 RtosVerPatch "RTOS version (patch)";
+CM_ SG_ 2565810016 RtosVerMin "RTOS version (minor)";
+CM_ SG_ 2565810016 RtosVerMaj "RTOS version (major)";
+CM_ SG_ 2565810016 AppVerBuild "Application version (build)";
+CM_ SG_ 2565810016 AppVerPatch "Application version (patch)";
+CM_ SG_ 2565810016 AppVerMin "Application version (minor)";
+CM_ SG_ 2565810016 AppVerMaj "Application version (major)";
+CM_ SG_ 2565810016 Port8Type "Port 8 Type";
+CM_ SG_ 2565810016 Port7Type "Port 7 Type";
+CM_ SG_ 2565810016 Port6Type "Port 6 Type";
+CM_ SG_ 2565810016 Port5Type "Port 5 Type";
+CM_ SG_ 2565810016 Port4Type "Port 4 Type";
+CM_ SG_ 2565810016 Port3Type "Port 3 Type";
+CM_ SG_ 2565810016 Port2Type "Port 2 Type";
+CM_ SG_ 2565810016 Port1Type "Port 1 Type";
+CM_ SG_ 2565810016 NumPorts "Number of ports";
+CM_ SG_ 2565810016 Cnfg3 "CNFG3";
+CM_ SG_ 2565810016 Cnfg2 "CNFG2";
+CM_ SG_ 2565810016 Cnfg1 "CNFG1";
+CM_ SG_ 2565810016 SpnUptime "Uptime since last reset";
+CM_ SG_ 2565810016 SpnCfgChangeCount "Configuration change count";
+CM_ SG_ 2565810016 SpnNameIndGroup "J1939 NAME Industry Group";
+CM_ SG_ 2565810016 SpnNameSelfConfig "J1939 NAME Self-configurable Address";
+CM_ SG_ 2565810016 SpnNameVehInst "J1939 NAME Vehicle Instance";
+CM_ SG_ 2565810016 SpnNameVehSys "J1939 NAME Vehicle System";
+CM_ SG_ 2565810016 SpnNameFunc "J1939 NAME Function";
+CM_ SG_ 2565810016 SpnNameEcuInst "J1939 NAME ECU Instance";
+CM_ SG_ 2565810016 SpnNameFuncInst "J1939 NAME Function Instance";
+CM_ SG_ 2565810016 SpnNameMfgCode "J1939 NAME Manufacturer Code";
+CM_ SG_ 2565810016 SpnNameIdent "J1939 NAME Identity";
+CM_ SG_ 2565810016 SpnEcuTemp "ECU temperature";
+CM_ SG_ 2565810016 SpnEcuHrs "ECU Hours";
+CM_ SG_ 2565810016 SpnSerNum "Serial number";
+CM_ SG_ 2565810016 SpnBattV "Battery voltage";
+CM_ SG_ 2565810016 SpnBootCount "Boot count";
+CM_ SG_ 2565810016 LegacyFaultCode "Active fault code";
+CM_ SG_ 2565810016 FaultPresent "Fault active";
+CM_ SG_ 2565810016 SwVer "Software version";
+CM_ SG_ 2565810016 SwRev "Software revision";
+CM_ SG_ 2565810016 ParamId "Parameter Identifier";
+CM_ SG_ 2565810016 Command "Command byte";
+CM_ BO_ 2566869856 "UUT status";
+CM_ SG_ 2566869856 ActiveFaultCode "Active fault code";
+CM_ SG_ 2566869856 ActiveFaultFailureMode "Active fault failure mode";
+CM_ SG_ 2566869856 ComLed "COM LED indicator state";
+CM_ SG_ 2566869856 StatLed "STAT LED indicator state";
+CM_ SG_ 2566869856 CtrlSA "SA of controlling UUT";
+CM_ SG_ 2566869856 TotalCurrent "Total UUT current";
+CM_ SG_ 2566869856 SysTemp "PCB temperature";
+CM_ SG_ 2566869856 BattVoltage "Measured battery voltage";
+CM_ BO_ 2365562976 "PWM Status \#1";
+CM_ SG_ 2365562976 PwmOut6LedStat "Current state of status LED";
+CM_ SG_ 2365562976 PwmOut5LedStat "Current state of status LED";
+CM_ SG_ 2365562976 PwmOut4LedStat "Current state of status LED";
+CM_ SG_ 2365562976 PwmOut3LedStat "Current state of status LED";
+CM_ SG_ 2365562976 PwmOut2LedStat "Current state of status LED";
+CM_ SG_ 2365562976 PwmOut1LedStat "Current state of status LED";
+CM_ SG_ 2365562976 PwmOut6Current "Measured current of PWM output 6";
+CM_ SG_ 2365562976 PwmOut5Current "Measured current of PWM output 5";
+CM_ SG_ 2365562976 PwmOut4Current "Measured current of PWM output 4";
+CM_ SG_ 2365562976 PwmOut3Current "Measured current of PWM output 3";
+CM_ SG_ 2365562976 PwmOut2Current "Measured current of PWM output 2";
+CM_ SG_ 2365562976 PwmOut1Current "Measured current of PWM output 1";
+CM_ BO_ 2365563232 "PWM Status \#2";
+CM_ SG_ 2365563232 PwmOut12LedStat "Current state of status LED";
+CM_ SG_ 2365563232 PwmOut11LedStat "Current state of status LED";
+CM_ SG_ 2365563232 PwmOut10LedStat "Current state of status LED";
+CM_ SG_ 2365563232 PwmOut9LedStat "Current state of status LED";
+CM_ SG_ 2365563232 PwmOut8LedStat "Current state of status LED";
+CM_ SG_ 2365563232 PwmOut7LedStat "Current state of status LED";
+CM_ SG_ 2365563232 PwmOut12Current "Measured current of PWM output 12";
+CM_ SG_ 2365563232 PwmOut11Current "Measured current of PWM output 11";
+CM_ SG_ 2365563232 PwmOut10Current "Measured current of PWM output 10";
+CM_ SG_ 2365563232 PwmOut9Current "Measured current of PWM output 9";
+CM_ SG_ 2365563232 PwmOut8Current "Measured current of PWM output 8";
+CM_ SG_ 2365563232 PwmOut7Current "Measured current of PWM output 7";
+BA_DEF_ BO_  "J1939FdTpADS" INT 0 52;
+BA_DEF_ BO_  "J1939FdTpADT" INT 0 255;
+BA_DEF_ BO_  "J1939PgAppearanceOnBus" ENUM  "Default","CAN_Extended","CANFD_Extended";
+BA_DEF_ BO_  "J1939CPgSendTimeout" INT -1 3600000;
+BA_DEF_ BO_  "J1939CPgTOS" INT 0 7;
+BA_DEF_ BO_  "J1939CPgTF" INT 0 7;
+BA_DEF_ BU_  "J1939MultiPgSendTimeout" INT 0 3600000;
+BA_DEF_ BU_  "J1939MultiPgSizeThreshold" INT 0 64;
+BA_DEF_ BU_  "J1939MultiPgBroadcastType" ENUM  "FBFF","FEFF";
+BA_DEF_  "DatabaseVersion" STRING ;
+BA_DEF_ BO_  "FsJ1939UseCrcAndCounter" STRING ;
+BA_DEF_ BO_  "FsJ1939NeedsSHM" ENUM  "No","Yes";
+BA_DEF_ BO_  "FsJ1939Delay" INT 0 1000;
+BA_DEF_ BO_  "TpJ1939VarDlc" ENUM  "No","Yes";
+BA_DEF_ SG_  "SigType" ENUM  "Default","Range","RangeSigned","ASCII","Discrete","Control","ReferencePGN","DTC","StringDelimiter","StringLength","StringLengthControl","MessageCounter","MessageChecksum";
+BA_DEF_ SG_  "GenSigILSupport" ENUM  "No","Yes";
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Cyclic","OnWrite","OnWriteWithRepetition","OnChange","OnChangeWithRepetition","IfActive","IfActiveWithRepetition","NoSigSendType";
+BA_DEF_ BO_  "GenMsgFastOnStart" INT 0 100000;
+BA_DEF_ SG_  "GenSigInactiveValue" INT 0 0;
+BA_DEF_ BO_  "GenMsgCycleTimeFast" INT 0 3600000;
+BA_DEF_ BO_  "GenMsgNrOfRepetition" INT 0 1000000;
+BA_DEF_ SG_  "GenSigStartValue" INT 0 2147483647;
+BA_DEF_ BO_  "GenMsgDelayTime" INT 0 1000;
+BA_DEF_ BO_  "GenMsgILSupport" ENUM  "No","Yes";
+BA_DEF_ BO_  "GenMsgStartDelayTime" INT 0 100000;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BU_  "ECU" STRING ;
+BA_DEF_ BU_  "NmJ1939SystemInstance" INT 0 15;
+BA_DEF_ BU_  "NmJ1939System" INT 0 127;
+BA_DEF_ BU_  "NmJ1939ManufacturerCode" INT 0 2047;
+BA_DEF_ BU_  "NmJ1939IndustryGroup" INT 0 7;
+BA_DEF_ BU_  "NmJ1939IdentityNumber" INT 0 2097151;
+BA_DEF_ BU_  "NmJ1939FunctionInstance" INT 0 7;
+BA_DEF_ BU_  "NmJ1939Function" INT 0 255;
+BA_DEF_ BU_  "NmJ1939ECUInstance" INT 0 7;
+BA_DEF_ BU_  "NmJ1939AAC" INT 0 1;
+BA_DEF_ BU_  "NmStationAddress" INT 0 255;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "cyclic","NotUsed","NotUsed","NotUsed","NotUsed","NotUsed","NotUsed","IfActive","noMsgSendType";
+BA_DEF_ BO_  "GenMsgRequestable" INT 0 1;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 3600000;
+BA_DEF_ SG_  "SPN" INT 0 524287;
+BA_DEF_  "DBName" STRING ;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_  "ProtocolType" STRING ;
+BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","reserved","J1939PG","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","StandardCAN_FD","ExtendedCAN_FD";
+BA_DEF_DEF_  "J1939FdTpADS" 0;
+BA_DEF_DEF_  "J1939FdTpADT" 0;
+BA_DEF_DEF_  "J1939PgAppearanceOnBus" "Default";
+BA_DEF_DEF_  "J1939CPgSendTimeout" -1;
+BA_DEF_DEF_  "J1939CPgTOS" 2;
+BA_DEF_DEF_  "J1939CPgTF" 0;
+BA_DEF_DEF_  "J1939MultiPgSendTimeout" 2;
+BA_DEF_DEF_  "J1939MultiPgSizeThreshold" 56;
+BA_DEF_DEF_  "J1939MultiPgBroadcastType" "FBFF";
+BA_DEF_DEF_  "DatabaseVersion" "";
+BA_DEF_DEF_  "FsJ1939UseCrcAndCounter" "";
+BA_DEF_DEF_  "FsJ1939NeedsSHM" "No";
+BA_DEF_DEF_  "FsJ1939Delay" 0;
+BA_DEF_DEF_  "TpJ1939VarDlc" "No";
+BA_DEF_DEF_  "SigType" "Default";
+BA_DEF_DEF_  "GenSigILSupport" "Yes";
+BA_DEF_DEF_  "GenSigSendType" "NoSigSendType";
+BA_DEF_DEF_  "GenMsgFastOnStart" 0;
+BA_DEF_DEF_  "GenSigInactiveValue" 0;
+BA_DEF_DEF_  "GenMsgCycleTimeFast" 0;
+BA_DEF_DEF_  "GenMsgNrOfRepetition" 0;
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_DEF_DEF_  "GenMsgDelayTime" 0;
+BA_DEF_DEF_  "GenMsgILSupport" "Yes";
+BA_DEF_DEF_  "GenMsgStartDelayTime" 0;
+BA_DEF_DEF_  "NodeLayerModules" "";
+BA_DEF_DEF_  "ECU" "";
+BA_DEF_DEF_  "NmJ1939SystemInstance" 0;
+BA_DEF_DEF_  "NmJ1939System" 0;
+BA_DEF_DEF_  "NmJ1939ManufacturerCode" 0;
+BA_DEF_DEF_  "NmJ1939IndustryGroup" 0;
+BA_DEF_DEF_  "NmJ1939IdentityNumber" 0;
+BA_DEF_DEF_  "NmJ1939FunctionInstance" 0;
+BA_DEF_DEF_  "NmJ1939Function" 0;
+BA_DEF_DEF_  "NmJ1939ECUInstance" 0;
+BA_DEF_DEF_  "NmJ1939AAC" 0;
+BA_DEF_DEF_  "NmStationAddress" 254;
+BA_DEF_DEF_  "GenMsgSendType" "noMsgSendType";
+BA_DEF_DEF_  "GenMsgRequestable" 1;
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "SPN" 0;
+BA_DEF_DEF_  "DBName" "";
+BA_DEF_DEF_  "BusType" "CAN";
+BA_DEF_DEF_  "ProtocolType" "J1939";
+BA_DEF_DEF_  "VFrameFormat" "J1939PG";
+BA_ "BusType" "CAN";
+BA_ "GenMsgCycleTime" BO_ 2560974887 100;
+BA_ "GenMsgCycleTime" BO_ 2561040423 100;
+BA_ "GenMsgCycleTime" BO_ 2561105959 100;
+BA_ "GenMsgCycleTime" BO_ 2566869856 100;
+BA_ "GenMsgCycleTime" BO_ 2365562976 100;
+BA_ "GenMsgCycleTime" BO_ 2365563232 100;
+BA_ "NmJ1939ManufacturerCode" BU_ UUT 659;
+BA_ "NmStationAddress" BU_ UUT 96;
+BA_ "NmStationAddress" BU_ CTRL 39;
+VAL_ 2565824551 DiagResetReason 0 "Unknown" 1 "Power" 2 "Brownout" 3 "Trap" 4 "External" 5 "Software" 6 "Watchdog" 7 "Other" ;
+VAL_ 2565824551 Port1CurLimitReact 0 "FAULT" 1 "DISABLE" 2 "IGNORE" ;
+VAL_ 2565824551 Port1Mode 0 "DISABLED" 1 "DIN_POSITIVE" 2 "DIN_GROUND" 3 "AIN_0_25_mA" 4 "AIN_0_5_V" 5 "AIN_0_10_V" 6 "AIN_0_32_V" 7 "FREQ" 8 "COUNTER" 9 "RATIOMETRIC" 10 "ENCODER" 11 "DOUT" 12 "PWMOUT" 13 "PWMIOUT" 14 "AOUT_0_5_V" 15 "AOUT_0_25_mA" ;
+VAL_ 2565824551 CanProtocolMode 51939 "J1939" 6736 "CANopen" ;
+VAL_ 2565824551 CanBitrate 100 "100kbps" 125 "125kbps" 250 "250kbps" 500 "500kbps" 1000 "1Mbps" ;
+VAL_ 2565824551 Port8Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565824551 Port7Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565824551 Port6Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565824551 Port5Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565824551 Port4Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565824551 Port3Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565824551 Port2Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565824551 Port1Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565824551 SpnNameMfgCode 0 "Reserved" 1 "BendixCommercialVehicleSystems" 2 "AllisonTransmissionGMC" 3 "AmetekUSGaugeDivision" 4 "AmetekDixson" 5 "AMP" 6 "BeriforsElectronics" 7 "Case" 8 "Caterpillar" 9 "Chrysler" 10 "Cummins" 11 "DearbornGroup" 12 "DeerePrecisionFarming" 13 "DelcoElectronics" 14 "DetroitDiesel" 15 "Dickeyjohn" 16 "Eaton" 17 "EatonResAndDev" 18 "EatonTransmissionDiv" 19 "EatonTruckingInfoServices" 20 "Eaton" 21 "EchlinMidlandBrake" 22 "FordMotorCoElectronicConceptsAndSystems" 23 "FordMotorCoHeavyTruck" 24 "FordMotorCoVehicleControls" 25 "DaimlerTrucksNorthAmerica" 26 "GeneralMotorsServiceTechnologyGrp" 27 "GMC" 28 "GroteInd" 29 "HinoMotors" 30 "IsuzuMotors" 31 "JPollak" 32 "JacobsVehicleSystems" 33 "JohnDeere" 34 "KelseyHayes" 35 "KenworthTruck" 36 "LucasInd" 37 "MackTrucks" 38 "MicroProcessorSystems" 39 "Microfirm" 40 "MotorolaAIEG" 41 "Motorola" 42 "InternationalTruckandEngineEngineElectronics" 43 "InternationalTruckandEngineVehicleElectronics" 44 "Nippondenso" 45 "PACCAR" 46 "NoregonSystems" 47 "PhillipsSemiconductor" 48 "PollakAlphabet" 49 "REAmerica" 50 "RobertBosch" 51 "RobertBosch" 52 "MeritorAutomotive" 53 "ContinentalAutomotiveSystemsUS" 54 "MeritorWabco" 55 "RyderSystem" 56 "SAIC" 57 "Danfoss" 58 "SPXOTCDiv" 59 "VES" 60 "VolvoTrucksNorthAmerica" 61 "VolvoTruck" 62 "Wabco" 63 "ZFIndustries" 64 "unused" 65 "MANNutzfahrzeuge" 66 "JohnDeereConstructionEquipmentDivision" 67 "JohnDeereCoffeyvilleWorks" 68 "Scania" 69 "TrimbleNavigation" 70 "Flexcoil" 71 "VanscoElectronics" 72 "Sisu" 73 "LeTourneau" 74 "EatonAxleBrakeDivision" 75 "DeereAndCoAgriculturalDivision" 76 "unused" 77 "DeerePowerSystemsGroup" 78 "FrankWMurphyManufacturing" 79 "DaimlerBenzAGEngineDivision" 80 "TwinDisc" 81 "FireResearch" 82 "Bobcat" 83 "BendixVORADTechnologies" 84 "NewHollandUK" 85 "Kohler" 86 "CENiehoff" 87 "JCBamfordExcavators" 88 "SatlocPrecisionGPS" 89 "KvernelandGroupElectronicsDivision" 90 "KnorrBremse" 91 "BSGBodenseeSteuergeraete" 92 "AgChemEquipment" 93 "PerkinsEngines" 94 "CNHIndustrialNV" 95 "PacificInsightElectronics" 96 "Mech@tronicIT" 97 "AgLeaderTechnology" 98 "MuellerElektronik" 99 "InternationalTransmissions" 100 "VDOTechnik" 101 "Sensoria" 102 "AGCO" 103 "CLAASAgrosystems" 104 "ClaasSelbstfahrendeErntemaschinen" 105 "KiepeElektrik" 106 "BAESystemsControls" 107 "GrimmeLandmaschinen" 108 "WTKElecktronik" 109 "TeeJetTechnologiesDenmark" 110 "EPIQSensorNite" 111 "MaschinenfabrikBernhardKrone" 112 "MECALAC" 113 "StressTek" 114 "EControls" 115 "NACCOMaterialsHandlingGroup" 116 "BEELINETechnologies" 117 "HUSCOInternational" 118 "Intron" 119 "IntegriNautics??" 120 "RDSTechnology" 121 "HED" 122 "FGWilson" 123 "BaslerElectric" 124 "HydacElectronic" 125 "NevadaAutomotiveTestCenter" 126 "DriverTech" 127 "HollandUSA" 128 "GerhardDuecker" 129 "OMNEXControlSystems" 130 "NidoUniversalMachines" 131 "ITTIndustries" 132 "MulagFahrzeugwerk" 133 "BucherSchoerling" 134 "IrisTechnology" 135 "AirmarTechnology" 136 "Komatsu" 137 "Maretron" 138 "GeorgFritzmeier" 139 "CaterpillarTrimbleControlTechnologies" 140 "LowranceElectronics" 141 "ThalesNavigation" 142 "TRWAutomotive" 143 "WGmeinerAnd" 144 "MercuryMarine" 145 "MurCalControls" 146 "MaximaTechnologies" 147 "Nautibuselectronic" 148 "BlueWaterData" 149 "Holset" 150 "Fleetguard" 151 "RavenIndustriesFlowControlsDivision" 152 "elobau" 153 "WoodwardIndustrialControlsDivision" 154 "Westerbeke" 155 "Vetronix" 156 "ITTIndustriesCannon" 157 "ISSPRO" 158 "FirestoneIndustrialProducts" 159 "NTechIndustries" 160 "Nido" 161 "OffshoreSystems" 162 "AxiomaticTechnologies" 163 "BRP" 164 "MTUFriedrichshafen" 165 "CPACSystems" 166 "JohnDeereElectronicSolutions" 167 "JLGIndustries" 168 "Xantrex" 169 "MarlinTechnologies" 170 "Computronics" 171 "WachendorffElektronik" 172 "YanmarMarineUSA" 173 "Ryeso" 174 "VolvoPenta" 175 "VerisTechnologies" 176 "MoritzAerospace" 177 "DiagnosticSystemsAssociates" 178 "SiemensVDOAutomotiveAG" 179 "TeeJetTechnologiesSpringfield" 180 "SmartPowerSystems" 181 "Coretronics" 182 "VehicleSystemsEngineering" 183 "KDSControls" 184 "EIAElectronics" 185 "BeedeElectricalInstrument" 186 "Altronic" 187 "AirWeigh" 188 "EMP" 189 "QUALCOMM" 190 "HellaKGaAHueck" 191 "XRS" 192 "Floscan" 193 "JeppesenMarine" 194 "TriMark" 195 "GeneralEngineProducts" 196 "LEMKEN" 197 "MechronPowerSystems" 198 "MysticValleyCommunications" 199 "Actia" 200 "MGMBrakes" 201 "DisenosyTecnologia" 202 "CurtisInstruments" 203 "MILtronik" 204 "TheMorey" 205 "SmarTireSystems" 206 "port" 207 "OttoEngineering" 208 "DrewTechnologies" 209 "BellEquip" 210 "Iteris" 211 "DNAGroup" 212 "SurePowerIndustries" 213 "CNHBelgium" 214 "MCelettronica" 215 "AetnaEngineeringFireboyXintex" 216 "Paneltronics" 217 "RMMichaelidesSoftwareAndElektronik" 218 "GitsManufacturing" 219 "CatOEMSolutions" 220 "BeedeElectricalInstrument" 221 "SiE" 222 "GeneracPowerSystems" 223 "VaueoRetarder" 224 "EMMINetwork" 225 "SKF" 226 "MonacoCoach" 227 "Lykketronic" 228 "ZFMarineElectronics" 229 "GarminInternational" 230 "SauconTechnologies" 231 "TopconPositioningSystems" 232 "TSDIntegratedControls" 233 "YachtMonitoringSolutions" 234 "Mondialelectronic" 235 "SailorMadeMarineTelemetryTetraTechnology" 236 "NoracSystemsInternational" 237 "AgtronEnterprises" 238 "ZFFriedrichshafen" 239 "MayAndScofield" 240 "VanairMfg" 241 "SchneiderAutomation" 242 "Kokusandenki" 243 "eRide" 244 "TechnoMatic" 245 "CapstanAgSystems" 246 "Class1" 247 "ePULSE" 248 "CooperStandardAutomotiveActiveSystemsGroup" 249 "Schaltbau" 250 "KuhnGroup" 251 "GermanAgriculturalSocietyTestCenter" 252 "SensorTechnikWiedemann" 253 "MobileControlSystems" 254 "GESensing" 255 "MEASFrance" 256 "TycoElectronicsAMP" 257 "HondaMotor" 258 "ARAG" 259 "JetterAG" 260 "ReichhardtSteuerungstechnik" 261 "RedDot" 262 "HydraForce" 263 "IMMI" 264 "Autolync" 265 "MTSSensorTechnologie" 266 "InternationalThermalResearch" 267 "RedLionControls" 268 "AccurateTechnologies" 269 "SaftAmericaSpaceAndDefenseDivision" 270 "Tennant" 271 "ColeHersee" 272 "GrossMechanicalLaboratories" 273 "ActiveResearch" 274 "LTWTechnology" 275 "NavicoEgersundAS" 276 "AquaHotHeatingSystems" 277 "LHPTelematics" 278 "TakataElectronics" 279 "Geometris" 280 "LeicaGeosystems" 281 "PrecisionGovernors" 282 "MedallionInstrumentationSystems" 283 "CWFHamiltonAnd" 284 "MobileTechChile" 285 "SeaRecovery" 286 "Coelmosrl" 287 "NTechIndustries" 288 "MitsubishiFUSOTruckAndBus" 289 "Watlow" 290 "Kuebler" 291 "GroeneveldTransportEfficiency" 292 "IKUSIAngelIglesias" 293 "SpyderControls" 294 "Grayhill" 295 "BEPMarine" 296 "microdynamics" 297 "ZonarSystems" 298 "HolleyPerformance" 299 "Rauch" 300 "SystronDonnerAutomotive" 301 "ParkerHannifinFDEgroup" 302 "NissinKogyoCo" 303 "CTS" 304 "EmpirBus" 305 "NovAtel" 306 "SleipnerMotor" 307 "MASTechnologies" 308 "Cyntrx" 309 "KraussMaffeiWegmann" 310 "TECNORDsrl" 311 "PatrickPowerProducts" 312 "Lectronix" 313 "IlmorEngineering" 314 "CSM" 315 "Icomorporated" 316 "ITTFlowControl" 317 "NavtronicsBvba" 318 "SATPlan" 319 "CadecGlobal" 320 "MiedemaLandbouwwerktuigenfabriek" 321 "UltraElectronicsElectrics" 322 "MICHENKA" 323 "MobileyeVisionTechnologies" 324 "SnaponDiagnostics" 325 "ASMAutomationSensorikMesstechnik" 326 "AkronBrass" 327 "Sonceboz" 328 "QwertyElectronik" 329 "Deif" 330 "KiddeAerospaceandDefense" 331 "Horton" 332 "HWH" 333 "HadleyProducts" 334 "TakataPetri" 335 "EvoElectric" 336 "APE" 337 "Carraro" 338 "GRAFSYTECO" 339 "CompetenceCenterISOBUS" 340 "ContinentalAG" 341 "BoningAnd" 342 "THOMASMAGNETE" 343 "BaumerGroup" 344 "Parvus" 345 "KoreanMaritimeUniversity" 346 "ControlSolutions" 347 "Honeywell" 348 "AmazonenWerkeHDreyer" 349 "Suonentieto" 350 "NorisMarineSystems" 351 "ThraneAndThrane" 352 "SAMEDEUTZFAHR" 353 "HegemonElectronics" 354 "Junkkari" 355 "MastervoltInternational" 356 "FischerPandaGenerators" 357 "HardiInternational" 358 "VictronEnergy" 359 "LudwigBergmann" 360 "HJSEmissionTechnology" 361 "InMach" 362 "AloisPoettingerMaschinenfabrik" 363 "BEIDuncan" 364 "OEMControls" 365 "DigiStar" 366 "Viewnyx" 367 "FlieglAgrartechnik" 368 "HANSENHOF_electronic" 369 "PowerTorqueEngineering" 370 "RollyceMarine" 371 "Heinzmann" 372 "Delphi" 373 "ElectronicDesign" 374 "NorthernLights" 375 "WilliamsControls" 376 "QuakeGlobal" 377 "ifmelectronic" 378 "GlendinningMarineProducts" 379 "Yamabiko" 380 "SuntechInternational" 381 "BAndG" 382 "NationalAgricultureandFoodResearchOrganization" 383 "MCLIndustries" 384 "CamanoLight" 385 "JohnsonOutdoorMarineElectronics" 386 "JLGAutomation" 387 "OrschelnProducts" 388 "Innomatix" 389 "BenchmarkElectronicsMinnesotaDivision" 390 "Partech" 391 "ElectronicDesignforIndustry" 392 "TianyuanTechnology" 393 "HarvestTec" 394 "Capi2Nederland" 395 "GENTECSRL" 396 "BeyondMeasure" 397 "Sanyokiki" 398 "HiliteInternational" 399 "ISEKI" 400 "LivorsiMarine" 401 "Torqeedo" 402 "SimmaSoftware" 403 "Trackwell" 404 "ComNavMarine" 405 "WemaSystem" 406 "VecimaNetworks" 407 "ComtechMobileDatacom" 408 "CorvusEnergy" 409 "Transfluid" 410 "COBOSpADivisione3B6" 411 "HyDriveTechnologies" 412 "WebTechWireless" 413 "DataprossNijbroek" 414 "CattronGroupInternational" 415 "ValidManufacturing" 416 "Kubota" 417 "KZValve" 418 "Intellistick" 419 "FusionElectronics" 420 "VermeerACSGroup" 421 "VertexStandard" 422 "TrueHeading" 423 "BSMWireless" 424 "Odyne" 425 "MethodeElectronics" 429 "RotaEngineering" 430 "AuteqTelematica" 431 "Tohatsu" 432 "SAndASystems" 433 "RoweElectronics" 434 "StoredEnergySystems" 435 "Zunhammer" 436 "KinzeManufacturing" 437 "DigitalYacht" 438 "ComarSystems" 439 "HyundaiHeavyIndustries" 440 "CumminsPowerGeneration" 441 "PTGReifendruckregelsysteme" 442 "HorschMaschinen" 443 "SignalQuest" 444 "ITTPowerSolutions" 445 "KATMECHATRONICElectronicProductDivision" 446 "CertTech" 447 "GreatPlainsMfg" 448 "StanadyneElectronicsSystems" 449 "PolarisIndustries" 450 "DycorTechnologies" 451 "ParkerHannifin" 452 "WIKAAlexanderWiegand" 453 "CooperBussmann" 454 "NGKSparkPlug" 455 "ADZNAGANO" 456 "GeneralKinetics" 457 "RUSELPROMElectricDrive" 458 "ControlSolutions" 459 "AlltekMarineElectronics" 460 "SanGiorgioSEIN" 461 "HAWEHydraulik" 462 "IHIShibauraMachinery" 463 "PROBOTIQ" 464 "LeachInternational" 465 "Ashcroft" 466 "VeethreeElectronicsandMarine" 467 "LelyIndustriesNV" 468 "TycoFireProtectionProducts" 469 "RAConsulting" 470 "SITEXMarineElectronics" 471 "SeaCrossMarine" 472 "Tenneco" 473 "BossIndustries" 474 "PersenTechnologies" 475 "GME" 476 "HummingbirdMarineElectronics" 477 "OilQuick" 478 "OceanSat" 479 "VaporBusInternational" 480 "EnerDel" 481 "ChetcoDigitalInstruments" 482 "TriconElectronics" 483 "Valeo" 484 "Headsight" 485 "MATTautomotive" 486 "WestportInnovations" 487 "DSETestSolutions" 488 "TheCharlesMachineWorks" 489 "AppareoSystems" 490 "QuikQ" 491 "PennyandGiles" 492 "InergyAutomotiveSystems" 493 "Watcheye" 494 "Synerject" 495 "HOLMERMaschinenbau" 496 "WGessmann" 497 "SENTRONSistemasEmbarcados" 498 "InnovativeDesignSolutions" 499 "LCJCapteurs" 500 "OxboInternational" 501 "AgrotronixSA" 502 "Attwood" 503 "NaviopSRL" 504 "VesperMarine" 505 "YetterFarmEquipment" 506 "IHISTARMachinery" 507 "ISOBUSTestCenter" 508 "TranstechInnovations" 509 "MOTORTECH" 510 "Marinesoft" 511 "Sulky" 512 "Inpower" 513 "FarmscanAg" 514 "DISTekIntegration" 515 "GINAFTrucksNederland" 516 "AVATAutomation" 517 "NolandEngineering" 518 "TransasUSA" 519 "PeetersLandbouwmachines" 520 "Trapeze" 521 "CleverUUTs" 522 "NebraskaTractorTestLaboratory" 523 "ReggioEmiliaInnovazione" 524 "VomaxInstrumentation" 525 "RustSalesINC" 526 "LOFAIndustries" 527 "GKNWalterscheid" 528 "HoganasElectricDriveSystems" 529 "NationalInstrumentsKorea" 530 "NMEA" 531 "GengeAndThomaAG" 532 "OnwaMarineElectronics" 533 "DoranManufacturing" 534 "WebastoThermoAndComfort" 535 "MOTORPALas" 536 "SSITechnologies" 537 "SchraderElectronics" 538 "CropVentures" 539 "Mobileview" 540 "Dinex" 541 "TotalFireSystems" 542 "DinamicaGeneralespa" 543 "BAUERMaschinen" 544 "AuGroupElectronics" 545 "GSHydraulics" 546 "MaruyamaMfg" 547 "ThomsonLinear" 548 "TM4" 549 "ROADDeutschland" 550 "SUNA" 551 "WexlerCSD" 552 "MatsuyamaPlowMfg" 553 "KIBElectronics" 554 "irisinfraredAndintelligentsensors" 555 "Sasaki" 556 "DoosanInfracoreNorway" 557 "RocksonAutomation" 558 "DavisInstruments" 559 "FourPeaksNavigation" 560 "IowaStateUniversityAgriculturalandBiosystemsEngineering" 561 "bplus" 562 "BombardierTransportation" 563 "LOHRSistemasEletronicos" 564 "AutoPowerElectronic" 565 "MicroTrakSystems" 566 "GeodeTechnology" 567 "Lithiumstart" 568 "Makersan" 569 "LORDMicroStrainSensingSystems" 570 "frenzelbergelectronic" 571 "Marinecraft" 572 "FasseValves" 573 "Orolia" 574 "VishayPrecisionGroup" 575 "Lytx" 576 "Vectia" 577 "DenchiPower" 578 "advanSea" 579 "KVHIndustries" 580 "SanJoseTechnology" 581 "V?derstadVerken" 582 "InnovativeSoftwareEngineering" 583 "Yachtcontrol" 584 "CarMedialab" 585 "IndustrialElectronicControls" 586 "SuzukiMotor" 587 "JCAElectronics" 588 "VignalSystems" 589 "MICO" 590 "ARGOHYTOS" 591 "UnitedStatesCoastGuard" 592 "tecsis" 593 "SensataTechnologies" 594 "KongsbergAutomotive" 595 "CustomWare" 596 "BrunelcoElectronicInnovators" 597 "HydacFilterSystems" 598 "BTurboSystems" 599 "SpudnikEquipment" 600 "AquaticAV" 601 "NavitasSystems" 602 "NomadDigital" 603 "Kereval" 604 "IndexatorRototiltSystems" 605 "Aventics" 606 "IntellianTechnologies" 607 "KnappcoCivacon" 608 "GaleBanksEngineering" 609 "WalvoilSpA" 610 "TrailTech" 611 "Esterline" 612 "SamwonIT" 613 "HKS" 614 "ARLTTechnologies" 615 "NetworkfleetVerizonTelematics" 616 "SMARTTEC" 617 "ZeroEmissionVehicles" 618 "EvrardSA" 619 "RightWeighLoadScales" 620 "Sevcon" 621 "HagieManufacturing" 622 "FloydBell" 623 "XirgoTechnologies" 624 "BlackboxMachineControl" 625 "GlobalMRV" 626 "AVLDiTEST" 627 "RadioOcean" 628 "FalckSchmidtDefenceSystems" 1850 "Teleflex" 1851 "RayMarine" 1852 "Navionics" 1853 "JapanRadio" 1854 "NorthstarTechnologies" 1855 "FurunoUSA" 1856 "Trimble" 1857 "Simrad" 1858 "Litton" 1859 "Kvasar" 1860 "MMP" 1861 "VectorCantech" 1862 "Sanshin" 1863 "ThomasGFaria" 659 "DataPanel" ;
+VAL_ 2565824551 Confirm 1819238756 "Confirm" ;
+VAL_ 2565824551 ParamId 38912 "SpnBootCount" 43008 "SpnBattV" 150528 "SpnSerNum" 264448 "SpnEcuHrs" 290816 "SpnEcuTemp" 726272 "SpnNameIdent" 726528 "SpnNameMfgCode" 726784 "SpnNameFuncInst" 727040 "SpnNameEcuInst" 727296 "SpnNameFunc" 727552 "SpnNameVehSys" 727808 "SpnNameVehInst" 728064 "SpnNameSelfConfig" 728576 "SpnNameIndGroup" 739072 "SpnCfgChangeCount" 818176 "SpnUptime" 128 "Cnfg1" 384 "Cnfg2" 640 "Cnfg3" 896 "NumPorts" 1152 "Port1Type" 1408 "Port2Type" 1664 "Port3Type" 1920 "Port4Type" 2176 "Port5Type" 2432 "Port6Type" 2688 "Port7Type" 2944 "Port8Type" 3200 "AppVerMaj" 3456 "AppVerMin" 3712 "AppVerPatch" 3968 "AppVerBuild" 4224 "RtosVerMaj" 4480 "RtosVerMin" 4736 "RtosVerPatch" 4992 "RtosVerBuild" 5248 "BootVerMaj" 5504 "BootVerMin" 5760 "BootVerPatch" 6016 "BootVerBuild" 6272 "AppVerString" 6528 "RtosVerString" 6784 "BootVerString" 7040 "PartNumber" 7296 "SerialNumber" 129 "NodeAddress" 385 "CanBitrate" 641 "CanProtocolMode" 897 "UnderVHoldThreshold" 1153 "UnderVWarnThreshold" 1409 "OverVWarnThreshold" 1665 "CTRLAddress" 1921 "CfgChangeCount" 2177 "UnderVHoldExitThreshold" 130 "NumActiveFaults" 386 "NumHistFaults" 642 "FltClearTimestamp" 898 "Fault1" 1154 "Fault2" 1410 "Fault3" 1666 "Fault4" 1922 "Fault5" 2178 "Fault6" 2434 "Fault7" 2690 "Fault8" 2946 "Fault9" 3202 "Fault10" 3458 "Fault11" 3714 "Fault12" 3970 "Fault13" 4226 "Fault14" 4482 "Fault15" 4738 "Fault16" 4994 "Fault17" 5250 "Fault18" 5506 "Fault19" 5762 "Fault20" 6018 "Fault21" 6274 "Fault22" 6530 "Fault23" 6786 "Fault24" 7042 "Fault25" 7298 "Fault26" 7554 "Fault27" 7810 "Fault28" 8066 "Fault29" 8322 "Fault30" 8578 "Fault31" 8834 "Fault32" 201 "Port1Mode" 457 "Port1PwmFreq" 1225 "Port1PidKi" 1481 "Port1PidKd" 1737 "Port1PwmMinDuty" 1993 "Port1PwmMaxDuty" 2249 "Port1RampTimeFwd" 2505 "Port1RampTimeRev" 2761 "Port1CurSoftMax" 3017 "Port1CurSoftLimitTime" 3273 "Port1CurLimitReact" 3529 "Port1CurLimitRetries" 4809 "Port1HBridgeInvertDir" 6345 "Port1DisCurChopping" 255 "DiagResetReason" 511 "DiagCanNumRxErr" 767 "DiagCanNumTxErr" 1023 "DiagRtosNumThreads" 1279 "DiagRtosHeapFree" 1535 "DiagRtosHeapAlloc" 1791 "DiagRtosHeapAllocMax" 2047 "DiagCpuUsageCur" 2303 "DiagCpuUsagePeak" 2559 "DiagCpuUsageAvg" ;
+VAL_ 2565824551 Command 0 "No-operation" 255 "Request status" 220 "UUT configuration data" 254 "Error or Negative Acknowledge" ;
+VAL_ 2565810016 DiagResetReason 0 "Unknown" 1 "Power" 2 "Brownout" 3 "Trap" 4 "External" 5 "Software" 6 "Watchdog" 7 "Other" ;
+VAL_ 2565810016 Port1CurLimitReact 0 "FAULT" 1 "DISABLE" 2 "IGNORE" ;
+VAL_ 2565810016 Port1Mode 0 "DISABLED" 1 "DIN_POSITIVE" 2 "DIN_GROUND" 3 "AIN_0_25_mA" 4 "AIN_0_5_V" 5 "AIN_0_10_V" 6 "AIN_0_32_V" 7 "FREQ" 8 "COUNTER" 9 "RATIOMETRIC" 10 "ENCODER" 11 "DOUT" 12 "PWMOUT" 13 "PWMIOUT" 14 "AOUT_0_5_V" 15 "AOUT_0_25_mA" ;
+VAL_ 2565810016 CanProtocolMode 51939 "J1939" 6736 "CANopen" ;
+VAL_ 2565810016 CanBitrate 100 "100kbps" 125 "125kbps" 250 "250kbps" 500 "500kbps" 1000 "1Mbps" ;
+VAL_ 2565810016 Port8Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565810016 Port7Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565810016 Port6Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565810016 Port5Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565810016 Port4Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565810016 Port3Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565810016 Port2Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565810016 Port1Type 0 "INVALID" 1 "HBRIDGE" 2 "DIN" 3 "MIN" 4 "DOUT" 5 "PWM" 6 "PWMi" 7 "TYPE7" 8 "TYPE8" 9 "TYPE9" 10 "TYPE10" 11 "TYPE11" 12 "TYPE12" 13 "TYPE13" 14 "TYPE14" 15 "TYPE15" ;
+VAL_ 2565810016 SpnNameMfgCode 0 "Reserved" 1 "BendixCommercialVehicleSystems" 2 "AllisonTransmissionGMC" 3 "AmetekUSGaugeDivision" 4 "AmetekDixson" 5 "AMP" 6 "BeriforsElectronics" 7 "Case" 8 "Caterpillar" 9 "Chrysler" 10 "Cummins" 11 "DearbornGroup" 12 "DeerePrecisionFarming" 13 "DelcoElectronics" 14 "DetroitDiesel" 15 "Dickeyjohn" 16 "Eaton" 17 "EatonResAndDev" 18 "EatonTransmissionDiv" 19 "EatonTruckingInfoServices" 20 "Eaton" 21 "EchlinMidlandBrake" 22 "FordMotorCoElectronicConceptsAndSystems" 23 "FordMotorCoHeavyTruck" 24 "FordMotorCoVehicleControls" 25 "DaimlerTrucksNorthAmerica" 26 "GeneralMotorsServiceTechnologyGrp" 27 "GMC" 28 "GroteInd" 29 "HinoMotors" 30 "IsuzuMotors" 31 "JPollak" 32 "JacobsVehicleSystems" 33 "JohnDeere" 34 "KelseyHayes" 35 "KenworthTruck" 36 "LucasInd" 37 "MackTrucks" 38 "MicroProcessorSystems" 39 "Microfirm" 40 "MotorolaAIEG" 41 "Motorola" 42 "InternationalTruckandEngineEngineElectronics" 43 "InternationalTruckandEngineVehicleElectronics" 44 "Nippondenso" 45 "PACCAR" 46 "NoregonSystems" 47 "PhillipsSemiconductor" 48 "PollakAlphabet" 49 "REAmerica" 50 "RobertBosch" 51 "RobertBosch" 52 "MeritorAutomotive" 53 "ContinentalAutomotiveSystemsUS" 54 "MeritorWabco" 55 "RyderSystem" 56 "SAIC" 57 "Danfoss" 58 "SPXOTCDiv" 59 "VES" 60 "VolvoTrucksNorthAmerica" 61 "VolvoTruck" 62 "Wabco" 63 "ZFIndustries" 64 "unused" 65 "MANNutzfahrzeuge" 66 "JohnDeereConstructionEquipmentDivision" 67 "JohnDeereCoffeyvilleWorks" 68 "Scania" 69 "TrimbleNavigation" 70 "Flexcoil" 71 "VanscoElectronics" 72 "Sisu" 73 "LeTourneau" 74 "EatonAxleBrakeDivision" 75 "DeereAndCoAgriculturalDivision" 76 "unused" 77 "DeerePowerSystemsGroup" 78 "FrankWMurphyManufacturing" 79 "DaimlerBenzAGEngineDivision" 80 "TwinDisc" 81 "FireResearch" 82 "Bobcat" 83 "BendixVORADTechnologies" 84 "NewHollandUK" 85 "Kohler" 86 "CENiehoff" 87 "JCBamfordExcavators" 88 "SatlocPrecisionGPS" 89 "KvernelandGroupElectronicsDivision" 90 "KnorrBremse" 91 "BSGBodenseeSteuergeraete" 92 "AgChemEquipment" 93 "PerkinsEngines" 94 "CNHIndustrialNV" 95 "PacificInsightElectronics" 96 "Mech@tronicIT" 97 "AgLeaderTechnology" 98 "MuellerElektronik" 99 "InternationalTransmissions" 100 "VDOTechnik" 101 "Sensoria" 102 "AGCO" 103 "CLAASAgrosystems" 104 "ClaasSelbstfahrendeErntemaschinen" 105 "KiepeElektrik" 106 "BAESystemsControls" 107 "GrimmeLandmaschinen" 108 "WTKElecktronik" 109 "TeeJetTechnologiesDenmark" 110 "EPIQSensorNite" 111 "MaschinenfabrikBernhardKrone" 112 "MECALAC" 113 "StressTek" 114 "EControls" 115 "NACCOMaterialsHandlingGroup" 116 "BEELINETechnologies" 117 "HUSCOInternational" 118 "Intron" 119 "IntegriNautics??" 120 "RDSTechnology" 121 "HED" 122 "FGWilson" 123 "BaslerElectric" 124 "HydacElectronic" 125 "NevadaAutomotiveTestCenter" 126 "DriverTech" 127 "HollandUSA" 128 "GerhardDuecker" 129 "OMNEXControlSystems" 130 "NidoUniversalMachines" 131 "ITTIndustries" 132 "MulagFahrzeugwerk" 133 "BucherSchoerling" 134 "IrisTechnology" 135 "AirmarTechnology" 136 "Komatsu" 137 "Maretron" 138 "GeorgFritzmeier" 139 "CaterpillarTrimbleControlTechnologies" 140 "LowranceElectronics" 141 "ThalesNavigation" 142 "TRWAutomotive" 143 "WGmeinerAnd" 144 "MercuryMarine" 145 "MurCalControls" 146 "MaximaTechnologies" 147 "Nautibuselectronic" 148 "BlueWaterData" 149 "Holset" 150 "Fleetguard" 151 "RavenIndustriesFlowControlsDivision" 152 "elobau" 153 "WoodwardIndustrialControlsDivision" 154 "Westerbeke" 155 "Vetronix" 156 "ITTIndustriesCannon" 157 "ISSPRO" 158 "FirestoneIndustrialProducts" 159 "NTechIndustries" 160 "Nido" 161 "OffshoreSystems" 162 "AxiomaticTechnologies" 163 "BRP" 164 "MTUFriedrichshafen" 165 "CPACSystems" 166 "JohnDeereElectronicSolutions" 167 "JLGIndustries" 168 "Xantrex" 169 "MarlinTechnologies" 170 "Computronics" 171 "WachendorffElektronik" 172 "YanmarMarineUSA" 173 "Ryeso" 174 "VolvoPenta" 175 "VerisTechnologies" 176 "MoritzAerospace" 177 "DiagnosticSystemsAssociates" 178 "SiemensVDOAutomotiveAG" 179 "TeeJetTechnologiesSpringfield" 180 "SmartPowerSystems" 181 "Coretronics" 182 "VehicleSystemsEngineering" 183 "KDSControls" 184 "EIAElectronics" 185 "BeedeElectricalInstrument" 186 "Altronic" 187 "AirWeigh" 188 "EMP" 189 "QUALCOMM" 190 "HellaKGaAHueck" 191 "XRS" 192 "Floscan" 193 "JeppesenMarine" 194 "TriMark" 195 "GeneralEngineProducts" 196 "LEMKEN" 197 "MechronPowerSystems" 198 "MysticValleyCommunications" 199 "Actia" 200 "MGMBrakes" 201 "DisenosyTecnologia" 202 "CurtisInstruments" 203 "MILtronik" 204 "TheMorey" 205 "SmarTireSystems" 206 "port" 207 "OttoEngineering" 208 "DrewTechnologies" 209 "BellEquip" 210 "Iteris" 211 "DNAGroup" 212 "SurePowerIndustries" 213 "CNHBelgium" 214 "MCelettronica" 215 "AetnaEngineeringFireboyXintex" 216 "Paneltronics" 217 "RMMichaelidesSoftwareAndElektronik" 218 "GitsManufacturing" 219 "CatOEMSolutions" 220 "BeedeElectricalInstrument" 221 "SiE" 222 "GeneracPowerSystems" 223 "VaueoRetarder" 224 "EMMINetwork" 225 "SKF" 226 "MonacoCoach" 227 "Lykketronic" 228 "ZFMarineElectronics" 229 "GarminInternational" 230 "SauconTechnologies" 231 "TopconPositioningSystems" 232 "TSDIntegratedControls" 233 "YachtMonitoringSolutions" 234 "Mondialelectronic" 235 "SailorMadeMarineTelemetryTetraTechnology" 236 "NoracSystemsInternational" 237 "AgtronEnterprises" 238 "ZFFriedrichshafen" 239 "MayAndScofield" 240 "VanairMfg" 241 "SchneiderAutomation" 242 "Kokusandenki" 243 "eRide" 244 "TechnoMatic" 245 "CapstanAgSystems" 246 "Class1" 247 "ePULSE" 248 "CooperStandardAutomotiveActiveSystemsGroup" 249 "Schaltbau" 250 "KuhnGroup" 251 "GermanAgriculturalSocietyTestCenter" 252 "SensorTechnikWiedemann" 253 "MobileControlSystems" 254 "GESensing" 255 "MEASFrance" 256 "TycoElectronicsAMP" 257 "HondaMotor" 258 "ARAG" 259 "JetterAG" 260 "ReichhardtSteuerungstechnik" 261 "RedDot" 262 "HydraForce" 263 "IMMI" 264 "Autolync" 265 "MTSSensorTechnologie" 266 "InternationalThermalResearch" 267 "RedLionControls" 268 "AccurateTechnologies" 269 "SaftAmericaSpaceAndDefenseDivision" 270 "Tennant" 271 "ColeHersee" 272 "GrossMechanicalLaboratories" 273 "ActiveResearch" 274 "LTWTechnology" 275 "NavicoEgersundAS" 276 "AquaHotHeatingSystems" 277 "LHPTelematics" 278 "TakataElectronics" 279 "Geometris" 280 "LeicaGeosystems" 281 "PrecisionGovernors" 282 "MedallionInstrumentationSystems" 283 "CWFHamiltonAnd" 284 "MobileTechChile" 285 "SeaRecovery" 286 "Coelmosrl" 287 "NTechIndustries" 288 "MitsubishiFUSOTruckAndBus" 289 "Watlow" 290 "Kuebler" 291 "GroeneveldTransportEfficiency" 292 "IKUSIAngelIglesias" 293 "SpyderControls" 294 "Grayhill" 295 "BEPMarine" 296 "microdynamics" 297 "ZonarSystems" 298 "HolleyPerformance" 299 "Rauch" 300 "SystronDonnerAutomotive" 301 "ParkerHannifinFDEgroup" 302 "NissinKogyoCo" 303 "CTS" 304 "EmpirBus" 305 "NovAtel" 306 "SleipnerMotor" 307 "MASTechnologies" 308 "Cyntrx" 309 "KraussMaffeiWegmann" 310 "TECNORDsrl" 311 "PatrickPowerProducts" 312 "Lectronix" 313 "IlmorEngineering" 314 "CSM" 315 "Icomorporated" 316 "ITTFlowControl" 317 "NavtronicsBvba" 318 "SATPlan" 319 "CadecGlobal" 320 "MiedemaLandbouwwerktuigenfabriek" 321 "UltraElectronicsElectrics" 322 "MICHENKA" 323 "MobileyeVisionTechnologies" 324 "SnaponDiagnostics" 325 "ASMAutomationSensorikMesstechnik" 326 "AkronBrass" 327 "Sonceboz" 328 "QwertyElectronik" 329 "Deif" 330 "KiddeAerospaceandDefense" 331 "Horton" 332 "HWH" 333 "HadleyProducts" 334 "TakataPetri" 335 "EvoElectric" 336 "APE" 337 "Carraro" 338 "GRAFSYTECO" 339 "CompetenceCenterISOBUS" 340 "ContinentalAG" 341 "BoningAnd" 342 "THOMASMAGNETE" 343 "BaumerGroup" 344 "Parvus" 345 "KoreanMaritimeUniversity" 346 "ControlSolutions" 347 "Honeywell" 348 "AmazonenWerkeHDreyer" 349 "Suonentieto" 350 "NorisMarineSystems" 351 "ThraneAndThrane" 352 "SAMEDEUTZFAHR" 353 "HegemonElectronics" 354 "Junkkari" 355 "MastervoltInternational" 356 "FischerPandaGenerators" 357 "HardiInternational" 358 "VictronEnergy" 359 "LudwigBergmann" 360 "HJSEmissionTechnology" 361 "InMach" 362 "AloisPoettingerMaschinenfabrik" 363 "BEIDuncan" 364 "OEMControls" 365 "DigiStar" 366 "Viewnyx" 367 "FlieglAgrartechnik" 368 "HANSENHOF_electronic" 369 "PowerTorqueEngineering" 370 "RollyceMarine" 371 "Heinzmann" 372 "Delphi" 373 "ElectronicDesign" 374 "NorthernLights" 375 "WilliamsControls" 376 "QuakeGlobal" 377 "ifmelectronic" 378 "GlendinningMarineProducts" 379 "Yamabiko" 380 "SuntechInternational" 381 "BAndG" 382 "NationalAgricultureandFoodResearchOrganization" 383 "MCLIndustries" 384 "CamanoLight" 385 "JohnsonOutdoorMarineElectronics" 386 "JLGAutomation" 387 "OrschelnProducts" 388 "Innomatix" 389 "BenchmarkElectronicsMinnesotaDivision" 390 "Partech" 391 "ElectronicDesignforIndustry" 392 "TianyuanTechnology" 393 "HarvestTec" 394 "Capi2Nederland" 395 "GENTECSRL" 396 "BeyondMeasure" 397 "Sanyokiki" 398 "HiliteInternational" 399 "ISEKI" 400 "LivorsiMarine" 401 "Torqeedo" 402 "SimmaSoftware" 403 "Trackwell" 404 "ComNavMarine" 405 "WemaSystem" 406 "VecimaNetworks" 407 "ComtechMobileDatacom" 408 "CorvusEnergy" 409 "Transfluid" 410 "COBOSpADivisione3B6" 411 "HyDriveTechnologies" 412 "WebTechWireless" 413 "DataprossNijbroek" 414 "CattronGroupInternational" 415 "ValidManufacturing" 416 "Kubota" 417 "KZValve" 418 "Intellistick" 419 "FusionElectronics" 420 "VermeerACSGroup" 421 "VertexStandard" 422 "TrueHeading" 423 "BSMWireless" 424 "Odyne" 425 "MethodeElectronics" 429 "RotaEngineering" 430 "AuteqTelematica" 431 "Tohatsu" 432 "SAndASystems" 433 "RoweElectronics" 434 "StoredEnergySystems" 435 "Zunhammer" 436 "KinzeManufacturing" 437 "DigitalYacht" 438 "ComarSystems" 439 "HyundaiHeavyIndustries" 440 "CumminsPowerGeneration" 441 "PTGReifendruckregelsysteme" 442 "HorschMaschinen" 443 "SignalQuest" 444 "ITTPowerSolutions" 445 "KATMECHATRONICElectronicProductDivision" 446 "CertTech" 447 "GreatPlainsMfg" 448 "StanadyneElectronicsSystems" 449 "PolarisIndustries" 450 "DycorTechnologies" 451 "ParkerHannifin" 452 "WIKAAlexanderWiegand" 453 "CooperBussmann" 454 "NGKSparkPlug" 455 "ADZNAGANO" 456 "GeneralKinetics" 457 "RUSELPROMElectricDrive" 458 "ControlSolutions" 459 "AlltekMarineElectronics" 460 "SanGiorgioSEIN" 461 "HAWEHydraulik" 462 "IHIShibauraMachinery" 463 "PROBOTIQ" 464 "LeachInternational" 465 "Ashcroft" 466 "VeethreeElectronicsandMarine" 467 "LelyIndustriesNV" 468 "TycoFireProtectionProducts" 469 "RAConsulting" 470 "SITEXMarineElectronics" 471 "SeaCrossMarine" 472 "Tenneco" 473 "BossIndustries" 474 "PersenTechnologies" 475 "GME" 476 "HummingbirdMarineElectronics" 477 "OilQuick" 478 "OceanSat" 479 "VaporBusInternational" 480 "EnerDel" 481 "ChetcoDigitalInstruments" 482 "TriconElectronics" 483 "Valeo" 484 "Headsight" 485 "MATTautomotive" 486 "WestportInnovations" 487 "DSETestSolutions" 488 "TheCharlesMachineWorks" 489 "AppareoSystems" 490 "QuikQ" 491 "PennyandGiles" 492 "InergyAutomotiveSystems" 493 "Watcheye" 494 "Synerject" 495 "HOLMERMaschinenbau" 496 "WGessmann" 497 "SENTRONSistemasEmbarcados" 498 "InnovativeDesignSolutions" 499 "LCJCapteurs" 500 "OxboInternational" 501 "AgrotronixSA" 502 "Attwood" 503 "NaviopSRL" 504 "VesperMarine" 505 "YetterFarmEquipment" 506 "IHISTARMachinery" 507 "ISOBUSTestCenter" 508 "TranstechInnovations" 509 "MOTORTECH" 510 "Marinesoft" 511 "Sulky" 512 "Inpower" 513 "FarmscanAg" 514 "DISTekIntegration" 515 "GINAFTrucksNederland" 516 "AVATAutomation" 517 "NolandEngineering" 518 "TransasUSA" 519 "PeetersLandbouwmachines" 520 "Trapeze" 521 "CleverUUTs" 522 "NebraskaTractorTestLaboratory" 523 "ReggioEmiliaInnovazione" 524 "VomaxInstrumentation" 525 "RustSalesINC" 526 "LOFAIndustries" 527 "GKNWalterscheid" 528 "HoganasElectricDriveSystems" 529 "NationalInstrumentsKorea" 530 "NMEA" 531 "GengeAndThomaAG" 532 "OnwaMarineElectronics" 533 "DoranManufacturing" 534 "WebastoThermoAndComfort" 535 "MOTORPALas" 536 "SSITechnologies" 537 "SchraderElectronics" 538 "CropVentures" 539 "Mobileview" 540 "Dinex" 541 "TotalFireSystems" 542 "DinamicaGeneralespa" 543 "BAUERMaschinen" 544 "AuGroupElectronics" 545 "GSHydraulics" 546 "MaruyamaMfg" 547 "ThomsonLinear" 548 "TM4" 549 "ROADDeutschland" 550 "SUNA" 551 "WexlerCSD" 552 "MatsuyamaPlowMfg" 553 "KIBElectronics" 554 "irisinfraredAndintelligentsensors" 555 "Sasaki" 556 "DoosanInfracoreNorway" 557 "RocksonAutomation" 558 "DavisInstruments" 559 "FourPeaksNavigation" 560 "IowaStateUniversityAgriculturalandBiosystemsEngineering" 561 "bplus" 562 "BombardierTransportation" 563 "LOHRSistemasEletronicos" 564 "AutoPowerElectronic" 565 "MicroTrakSystems" 566 "GeodeTechnology" 567 "Lithiumstart" 568 "Makersan" 569 "LORDMicroStrainSensingSystems" 570 "frenzelbergelectronic" 571 "Marinecraft" 572 "FasseValves" 573 "Orolia" 574 "VishayPrecisionGroup" 575 "Lytx" 576 "Vectia" 577 "DenchiPower" 578 "advanSea" 579 "KVHIndustries" 580 "SanJoseTechnology" 581 "V?derstadVerken" 582 "InnovativeSoftwareEngineering" 583 "Yachtcontrol" 584 "CarMedialab" 585 "IndustrialElectronicControls" 586 "SuzukiMotor" 587 "JCAElectronics" 588 "VignalSystems" 589 "MICO" 590 "ARGOHYTOS" 591 "UnitedStatesCoastGuard" 592 "tecsis" 593 "SensataTechnologies" 594 "KongsbergAutomotive" 595 "CustomWare" 596 "BrunelcoElectronicInnovators" 597 "HydacFilterSystems" 598 "BTurboSystems" 599 "SpudnikEquipment" 600 "AquaticAV" 601 "NavitasSystems" 602 "NomadDigital" 603 "Kereval" 604 "IndexatorRototiltSystems" 605 "Aventics" 606 "IntellianTechnologies" 607 "KnappcoCivacon" 608 "GaleBanksEngineering" 609 "WalvoilSpA" 610 "TrailTech" 611 "Esterline" 612 "SamwonIT" 613 "HKS" 614 "ARLTTechnologies" 615 "NetworkfleetVerizonTelematics" 616 "SMARTTEC" 617 "ZeroEmissionVehicles" 618 "EvrardSA" 619 "RightWeighLoadScales" 620 "Sevcon" 621 "HagieManufacturing" 622 "FloydBell" 623 "XirgoTechnologies" 624 "BlackboxMachineControl" 625 "GlobalMRV" 626 "AVLDiTEST" 627 "RadioOcean" 628 "FalckSchmidtDefenceSystems" 1850 "Teleflex" 1851 "RayMarine" 1852 "Navionics" 1853 "JapanRadio" 1854 "NorthstarTechnologies" 1855 "FurunoUSA" 1856 "Trimble" 1857 "Simrad" 1858 "Litton" 1859 "Kvasar" 1860 "MMP" 1861 "VectorCantech" 1862 "Sanshin" 1863 "ThomasGFaria" 659 "DataPanel" ;
+VAL_ 2565810016 LegacyFaultCode 0 "No fault condition detected" 7 "EEPROM validation error" 8 "Reference voltage error" 9 "Internal communication error (e.g., I^2^C)" 10 "Error reading CNFG pins" 11 "Mag input switch fault" 12 "Checksum mismatch" 13 "Error determining port type" 14 "Voltage too low" 15 "Voltage too high" 21 "System voltage too low" 22 "System voltage too high" 31 "Error claiming or setting communication address" 32 "Communication hardware error (bus fault)" 33 "Communication protocol error" 41 "Low-voltage system hold" 51 "Output overcurrent detected" 52 "Output short circuit detected" 53 "Input voltage out of range" 54 "System temperature too high" ;
+VAL_ 2565810016 FaultPresent 0 "No fault condition detected." 1 "One or more fault conditions exist." 2 "Error" 3 "Not available" ;
+VAL_ 2565810016 ParamId 38912 "SpnBootCount" 43008 "SpnBattV" 150528 "SpnSerNum" 264448 "SpnEcuHrs" 290816 "SpnEcuTemp" 726272 "SpnNameIdent" 726528 "SpnNameMfgCode" 726784 "SpnNameFuncInst" 727040 "SpnNameEcuInst" 727296 "SpnNameFunc" 727552 "SpnNameVehSys" 727808 "SpnNameVehInst" 728064 "SpnNameSelfConfig" 728576 "SpnNameIndGroup" 739072 "SpnCfgChangeCount" 818176 "SpnUptime" 128 "Cnfg1" 384 "Cnfg2" 640 "Cnfg3" 896 "NumPorts" 1152 "Port1Type" 1408 "Port2Type" 1664 "Port3Type" 1920 "Port4Type" 2176 "Port5Type" 2432 "Port6Type" 2688 "Port7Type" 2944 "Port8Type" 3200 "AppVerMaj" 3456 "AppVerMin" 3712 "AppVerPatch" 3968 "AppVerBuild" 4224 "RtosVerMaj" 4480 "RtosVerMin" 4736 "RtosVerPatch" 4992 "RtosVerBuild" 5248 "BootVerMaj" 5504 "BootVerMin" 5760 "BootVerPatch" 6016 "BootVerBuild" 6272 "AppVerString" 6528 "RtosVerString" 6784 "BootVerString" 7040 "PartNumber" 7296 "SerialNumber" 129 "NodeAddress" 385 "CanBitrate" 641 "CanProtocolMode" 897 "UnderVHoldThreshold" 1153 "UnderVWarnThreshold" 1409 "OverVWarnThreshold" 1665 "CTRLAddress" 1921 "CfgChangeCount" 2177 "UnderVHoldExitThreshold" 130 "NumActiveFaults" 386 "NumHistFaults" 642 "FltClearTimestamp" 898 "Fault1" 1154 "Fault2" 1410 "Fault3" 1666 "Fault4" 1922 "Fault5" 2178 "Fault6" 2434 "Fault7" 2690 "Fault8" 2946 "Fault9" 3202 "Fault10" 3458 "Fault11" 3714 "Fault12" 3970 "Fault13" 4226 "Fault14" 4482 "Fault15" 4738 "Fault16" 4994 "Fault17" 5250 "Fault18" 5506 "Fault19" 5762 "Fault20" 6018 "Fault21" 6274 "Fault22" 6530 "Fault23" 6786 "Fault24" 7042 "Fault25" 7298 "Fault26" 7554 "Fault27" 7810 "Fault28" 8066 "Fault29" 8322 "Fault30" 8578 "Fault31" 8834 "Fault32" 201 "Port1Mode" 457 "Port1PwmFreq" 1225 "Port1PidKi" 1481 "Port1PidKd" 1737 "Port1PwmMinDuty" 1993 "Port1PwmMaxDuty" 2249 "Port1RampTimeFwd" 2505 "Port1RampTimeRev" 2761 "Port1CurSoftMax" 3017 "Port1CurSoftLimitTime" 3273 "Port1CurLimitReact" 3529 "Port1CurLimitRetries" 4809 "Port1HBridgeInvertDir" 6345 "Port1DisCurChopping" 255 "DiagResetReason" 511 "DiagCanNumRxErr" 767 "DiagCanNumTxErr" 1023 "DiagRtosNumThreads" 1279 "DiagRtosHeapFree" 1535 "DiagRtosHeapAlloc" 1791 "DiagRtosHeapAllocMax" 2047 "DiagCpuUsageCur" 2303 "DiagCpuUsagePeak" 2559 "DiagCpuUsageAvg" ;
+VAL_ 2565810016 Command 0 "Status" 220 "UUT configuration data" 254 "Error or negative acknowledge" 255 "No operation" ;
+VAL_ 2566869856 ActiveFaultCode 0 "FC_NONE" 65 "FC_SYS_POST_FAILED" 66 "FC_SYS_PORTID" 67 "FC_SYS_CONFIG" 68 "FC_SYS_VSUPPLY" 69 "FC_SYS_VINTERNAL" 70 "FC_SYS_CAN" 71 "FC_SYS_HOLD" 72 "FC_SYS_TEMP" 73 "FC_SYS_OS_FAULT" 74 "FC_SYS_HW_FAULT" 129 "FC_IO_INPUT_FAULT" 130 "FC_IO_OUTPUT_FAULT" 193 "FC_COMM_PROTOCOL" 194 "FC_COMM_ADDR" 195 "FC_COMM_CONTROL" ;
+VAL_ 2566869856 ActiveFaultFailureMode 0 "FM_NONE" 1 "FM_EXISTS" 2 "FM_DATA_WARN_HIGH" 3 "FM_DATA_WARN_LOW" 4 "FM_DATA_CRITICAL_HIGH" 5 "FM_DATA_CRITICAL_LOW" 6 "FM_DATA_INTERMITTENT" 7 "FM_DATA_INVALID" 8 "FM_DATA_INTEGRITY" 9 "FM_VOLTAGE_WARN_HIGH" 10 "FM_VOLTAGE_WARN_LOW" 11 "FM_VOLTAGE_CRITICAL_HIGH" 12 "FM_VOLTAGE_CRITICAL_LOW" 13 "FM_CURRENT_WARN_HIGH" 14 "FM_CURRENT_WARN_LOW" 15 "FM_CURRENT_CRITICAL_HIGH" 16 "FM_CURRENT_CRITICAL_LOW" 17 "FM_TEMPERATURE_WARN_HIGH" 18 "FM_TEMPERATURE_WARN_LOW" 19 "FM_TEMPERATURE_CRITICAL_HIGH" 20 "FM_TEMPERATURE_CRITICAL_LOW" 21 "FM_ABNORMAL_FREQ" 22 "FM_COMM_INTERNAL" 23 "FM_COMM_EXTERNAL" 24 "FM_SECURITY" 25 "FM_TIMEOUT" 26 "FM_NO_RESOURCE" 27 "FM_WATCHDOG" 255 "FM_UNKNOWN" ;
+VAL_ 2566869856 ComLed 0 "Off" 1 "Red" 2 "Green" 3 "Yellow" 4 "Blue" 5 "Magenta" 6 "Cyan" 7 "White" 14 "Error" 15 "Not available" ;
+VAL_ 2566869856 StatLed 0 "Off" 1 "Red" 2 "Green" 3 "Yellow" 4 "Blue" 5 "Magenta" 6 "Cyan" 7 "White" 14 "Error" 15 "Not available" ;
+VAL_ 2365562976 PwmOut6LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365562976 PwmOut5LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365562976 PwmOut4LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365562976 PwmOut3LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365562976 PwmOut2LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365562976 PwmOut1LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365563232 PwmOut12LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365563232 PwmOut11LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365563232 PwmOut10LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365563232 PwmOut9LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365563232 PwmOut8LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+VAL_ 2365563232 PwmOut7LedStat 0 "LED off" 1 "LED on" 2 "Error" 3 "Not available" ;
+
