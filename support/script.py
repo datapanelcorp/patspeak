@@ -177,12 +177,14 @@ def ProcessScript():
                 else:
                     try:
                         globals.pat_framebox_out.signal(SignalName).phys = float(s[1])
+                        globals.PAT_Fdbk[SignalName] = float(s[1])
                         RealValue = float(s[1])
                     except:
                         pass
                     #TODO: why is this called twice?    
                     try:
                         globals.uut_framebox_out.signal(SignalName).phys = float(s[1])
+                        globals.UUT_Fdbk[SignalName] = float(s[1])
                         RealValue = float(s[1])
                     except:
                         pass
