@@ -114,6 +114,9 @@ def ProcessScript():
     if(globals.TestLine.startswith("UUT_DATANAME")):
         globals.TestLine = "" #clear to stop further processing
 
+    if(globals.TestLine.startswith("SUPPRESS_PAT_SUPPORT")):
+        globals.TestLine = "" #clear to stop further processing
+
     #TODO: verify format
     if((globals.TestLine.startswith("#")) or (globals.TestLine=="")):
         if(globals.Verbose == 1):

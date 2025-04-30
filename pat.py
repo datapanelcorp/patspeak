@@ -1,5 +1,6 @@
 import os
 import sys
+import msvcrt
 #from playsound import playsound
 #os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (1,1)
 #os.environ["DISPLAY"] = ':0'
@@ -9,17 +10,18 @@ import time
 import keyboard
 from datetime import datetime
 
+import can # Imports python-can library for pcan support : "pip install python-can"
+
 from support.screens import DrawScreen 
 from support.events import ProcessEvents
-from support.can import CANThread
 from support.script import ProcessScript
 import support.globals as globals
-
 
 def ErrorTrap(error):
     sink = error #sink errors for now
     globals.CAN1.terminate() 
-    globals.CAN2.terminate() 
+    if globals.SuppressPatSupport == 'False':
+        globals.CAN2.terminate() 
     globals.finished = 1
     quit()
     
@@ -59,6 +61,19 @@ if(globals.Verbose == 1):
 
 globals.initialize()
 
+try:
+    bus = can.Bus(channel='PCAN_USBBUS1', interface='pcan', bitrate=250000)
+    print("PCAN1 Detected")
+    bus.shutdown()
+    if globals.SuppressPatSupport == 'False':
+        bus = can.Bus(channel='PCAN_USBBUS2', interface='pcan', bitrate=250000)
+        print("PCAN2 Detected")
+        bus.shutdown()
+    from support.pcan_interface import CANThread 
+except can.CanError:
+    print("No PCAN device detected")
+    from support.can import CANThread
+
 #print("\nInit screen...")
 #init screen
 #pygame.init()
@@ -72,8 +87,10 @@ globals.initialize()
 globals.CAN_1 = threading.Thread(target=CANThread, args=(0,))
 globals.CAN_1.start()
    
-globals.CAN_2 = threading.Thread(target=CANThread, args=(1,))
-globals.CAN_2.start()
+#Start CAN thread for PAT
+if(globals.SuppressPatSupport == 'False'): # skip if suppressed
+    globals.CAN_2 = threading.Thread(target=CANThread, args=(1,))
+    globals.CAN_2.start()
 time.sleep(2)
 
 #playsound(globals.SoundStart)
@@ -87,17 +104,21 @@ if(globals.UnitName == ""):
 print("Test Name:", globals.UnitName)
 
 while not globals.finished:
-
-    if keyboard.is_pressed('esc'):
-        userinput = input("Are you sure you want to stop.\nPress Y to stop, any key to continue.")
-        if((userinput == "y") or (userinput == "Y")):
-            logfile = globals.LogPath + str(globals.UnitName) + "_" + globals.TestFile + ".log"
-            f = open(logfile, 'w')
-            f.write("Esc - user interruption @ " + str(datetime.today().strftime(globals.TimeStampFormat)) + "\n")
-            f.write(globals.UUT_TestLog)
-            f.close()        
-            globals.finished = 1
-            break  # finishing the loop
+    # If ESC key pressed in main loop, while focused on terminal
+    # Pause test and prompt user to confirm exit of test
+    # (msvcrt is a windows compatible library)
+    if msvcrt.kbhit():
+        key = msvcrt.getch()
+        if key == b'\x1b':  # ESC key
+            userinput = input("Are you sure you want to stop.\nPress Y to stop, any key to continue.")
+            if((userinput == "y") or (userinput == "Y")):
+                logfile = globals.LogPath + str(globals.UnitName) + "_" + globals.TestFile + ".log"
+                f = open(logfile, 'w')
+                f.write("Esc - user interruption @ " + str(datetime.today().strftime(globals.TimeStampFormat)) + "\n")
+                f.write(globals.UUT_TestLog)
+                f.close()        
+                globals.finished = 1
+                break  # finishing the loop
 
     ScreenMode = 0
     #screen.fill((0, 0, 0))
