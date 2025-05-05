@@ -29,7 +29,11 @@ def download_and_install_kvaser():
         
         # Run the installer with elevated privileges
         print(f"Running the installer for {file_name} with admin privileges...")
-        subprocess.check_call(["powershell", "-Command", f"Start-Process '{file_name}' -Verb runAs"])
+        process = subprocess.Popen(
+            ["powershell", "-Command", f"Start-Process '{file_name}' -Verb runAs -Wait"],
+            shell=True
+        )
+        process.wait()  # Wait for the installer process to complete
         print("Kvaser driver installed successfully.")
         
         # Clean up the installer file

@@ -8,7 +8,7 @@ from datetime import datetime
 
 import can # Imports python-can library for pcan support : "pip install python-can"
 
-from support.events import ProcessEvents
+#from support.events import ProcessEvents
 from support.script import ProcessScript
 import support.globals as globals
 
