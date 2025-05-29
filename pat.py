@@ -1,10 +1,6 @@
 import os
 import sys
 import msvcrt
-#from playsound import playsound
-#os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (1,1)
-#os.environ["DISPLAY"] = ':0'
-#import pygame
 import threading
 import time
 import keyboard
@@ -12,8 +8,7 @@ from datetime import datetime
 
 import can # Imports python-can library for pcan support : "pip install python-can"
 
-from support.screens import DrawScreen 
-from support.events import ProcessEvents
+#from support.events import ProcessEvents
 from support.script import ProcessScript
 import support.globals as globals
 
@@ -74,15 +69,6 @@ except can.CanError:
     print("No PCAN device detected")
     from support.can import CANThread
 
-#print("\nInit screen...")
-#init screen
-#pygame.init()
-#screen = pygame.display.set_mode((800, 600), pygame.RESIZABLE)
-#pygame.display.set_caption('PAT')
-#print(pygame.display.Info())
-#pygame.mouse.set_visible(0)
-#pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
-
 #start CAN
 globals.CAN_1 = threading.Thread(target=CANThread, args=(0,))
 globals.CAN_1.start()
@@ -120,12 +106,7 @@ while not globals.finished:
                 globals.finished = 1
                 break  # finishing the loop
 
-    ScreenMode = 0
-    #screen.fill((0, 0, 0))
-    #DrawScreen(screen, ScreenMode)
     ProcessScript()
-    #ProcessEvents()
-    #pygame.display.flip()
     time.sleep(0.01)
 
 globals.finished = 1

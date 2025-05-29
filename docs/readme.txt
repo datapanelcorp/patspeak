@@ -1,7 +1,15 @@
 PATSpeak is a collection of scripts allowing the automation of the PAT test fixture
-12/19/21
+Updated 05/02/25
 
-Syntax:
+Setup Requirements:
+	Run prerequisite_setup.py to install necessary python libraries and CAN drivers
+
+Test Execution: 
+	Run pat.py, passing the name of the .pat test file as an argument. Executable test files are stored within the /dut folder.
+
+	Example command line: python pat.py '44018-PWM-100-DUTY.pat'
+
+Test Script Syntax:
 
 [Output Commands] : [Input Commands] : [Optional Flags]
 
@@ -49,12 +57,6 @@ Examples:
 		NULL : MeterVolts = 1.0 | 0.5 | 0.5
 		
 		
-Example Scripts:
-
-40044-2-3.8.1A.pat excersises all 40044-2 I/O
-40044-5-SweepOutput1A.pat sweeep 40044-5 output 1A from 100ma upto 7A recording the load and feedback current
-
-
 
 Ideas:
 	setup a command called before a test to look at additial items during a test. (like shorted inputs / outputs)
