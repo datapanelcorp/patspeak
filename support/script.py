@@ -6,6 +6,8 @@ from datetime import datetime
 import support.globals as globals
 from datetime import timedelta
 
+import re
+
 
 def SaveData():
 
@@ -110,7 +112,10 @@ def ProcessScript():
         
     if(globals.TestLine.startswith("UUT_DBC")):
         globals.TestLine = "" #clear to stop further processing
-        
+
+    if(globals.TestLine.startswith("UUT_EDS")):
+        globals.TestLine = "" #clear to stop further processing
+
     if(globals.TestLine.startswith("UUT_DATANAME")):
         globals.TestLine = "" #clear to stop further processing
 
@@ -175,17 +180,24 @@ def ProcessScript():
                     RealValue = globals.pat_framebox_out.signal(SignalName).phys
                     globals.UUT_Results[str(globals.TestStep) + "-" + SignalName + "-" + globals.DataLogTag] = RealValue 
                 else:
+                    #PAT
                     try:
                         globals.pat_framebox_out.signal(SignalName).phys = float(s[1])
                         globals.PAT_Fdbk[SignalName] = float(s[1])
                         RealValue = float(s[1])
                     except:
                         pass
-                    #TODO: why is this called twice?    
+                    #UUT
                     try:
-                        globals.uut_framebox_out.signal(SignalName).phys = float(s[1])
-                        globals.UUT_Fdbk[SignalName] = float(s[1])
-                        RealValue = float(s[1])
+                        if(globals.uut_db):
+                            globals.uut_framebox_out.signal(SignalName).phys = float(s[1])
+                            globals.UUT_Fdbk[SignalName] = float(s[1])
+                            RealValue = float(s[1])
+                        else:
+                            numbers = re.findall(r'0x[0-9a-fA-F]+|\d+', SignalName)
+                            sdo_param = [int(num, 16) if num.startswith('0x') else int(num) for num in numbers]
+                            globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].raw = float(s[1])
+                            globals.UUT_Fdbk[SignalName] = float(s[1])
                     except:
                         pass
         
@@ -222,7 +234,13 @@ def ProcessScript():
                             RealValue = float(globals.PAT_Fdbk[SignalName])
                         except:
                             try:
-                                RealValue = float(globals.UUT_Fdbk[SignalName])
+                                if(globals.uut_db):
+                                    RealValue = float(globals.UUT_Fdbk[SignalName])
+                                else:
+                                    numbers = re.findall(r'0x[0-9a-fA-F]+|\d+', SignalName)
+                                    sdo_param = [int(num, 16) if num.startswith('0x') else int(num) for num in numbers]
+                                    RealValue = float(globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].raw)
+                                    globals.UUT_Fdbk[SignalName] = RealValue
                             except:
                                 print("signal not found!", SignalName)
                                 globals.StepTime = Timeout #force exit

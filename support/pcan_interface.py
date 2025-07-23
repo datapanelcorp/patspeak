@@ -62,10 +62,11 @@ def CANThread(i):
             data = can_frame.data
             
             if(channel_number == 0):
-                msg = globals.uut_db.get_message_by_id(can_id, kvadblib.MessageFlag.EXT)
-                for s in msg.signals():
-                    value = s.phys_from(data)
-                    globals.UUT_Fdbk[s.name] = value
+                if(globals.uut_db):
+                    msg = globals.uut_db.get_message_by_id(can_id, kvadblib.MessageFlag.EXT)
+                    for s in msg.signals():
+                        value = s.phys_from(data)
+                        globals.UUT_Fdbk[s.name] = value
             else:
                 if globals.SuppressPatSupport == 'False': # skip if suppressed
                     msg = globals.pat_db.get_message_by_id(can_id, kvadblib.MessageFlag.EXT)

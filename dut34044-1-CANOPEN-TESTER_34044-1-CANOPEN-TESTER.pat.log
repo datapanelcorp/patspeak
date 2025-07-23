@@ -1,0 +1,402 @@
+Started on: 2025-07-23-11:09:09
+00000 #34044-1
+00000 #Verion 0.0
+00000 #digital normal test using the E-LOAD
+00000 UUT_EDS = 37000-561.eds
+00000 UUT_DATANAME = 34044-1-CANOPEN-TESTER
+00000 
+00000 #-----setup PAT-----
+00000 #setup load
+00000 LdRemote = 1 : NULL : WAIT = 0.1
+00001 LdEnable = 1 : NULL : WAIT = 0.1
+00002 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00003 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
+00004 #-----setup 34044-----
+00004 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00005 sdo[0x2001][1] = 0x11 : NULL : WAIT = 0.2
+00006 #switch in load line, set current
+00006 J2_01 = 1 : NULL : WAIT = 0.5
+00007 
+00007 #set current and turn on output and verify feedback
+00007 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00008 LdCurrentSet = 0: NULL : WAIT = 0.1
+00009 #verify reading from load
+00009 NULL : sdo[0x5003][1] = 0 | 1000 | 0.1
+00009 TEST: sdo[0x5003][1] 0.0 +/- 1000.0
+00009 PASS: sdo[0x5003][1] 0.0
+00010 
+00010 #set current and turn on output and verify feedback
+00010 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00011 LdCurrentSet = 100: NULL : WAIT = 0.1
+00012 #verify reading from load
+00012 NULL : sdo[0x5003][1] = 100 | 1000 | 0.1
+00012 TEST: sdo[0x5003][1] 100.0 +/- 1000.0
+00012 PASS: sdo[0x5003][1] 0.0
+00013 
+00013 #set current and turn on output and verify feedback
+00013 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00014 LdCurrentSet = 200: NULL : WAIT = 0.1
+00015 #verify reading from load
+00015 NULL : sdo[0x5003][1] = 200 | 1000 | 0.1
+00015 TEST: sdo[0x5003][1] 200.0 +/- 1000.0
+00015 PASS: sdo[0x5003][1] 87.0
+00016 
+00016 #set current and turn on output and verify feedback
+00016 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00017 LdCurrentSet = 300: NULL : WAIT = 0.1
+00018 #verify reading from load
+00018 NULL : sdo[0x5003][1] = 300 | 1000 | 0.1
+00018 TEST: sdo[0x5003][1] 300.0 +/- 1000.0
+00018 PASS: sdo[0x5003][1] 258.0
+00019 
+00019 #set current and turn on output and verify feedback
+00019 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00020 LdCurrentSet = 400: NULL : WAIT = 0.1
+00021 #verify reading from load
+00021 NULL : sdo[0x5003][1] = 400 | 1000 | 0.1
+00021 TEST: sdo[0x5003][1] 400.0 +/- 1000.0
+00021 PASS: sdo[0x5003][1] 294.0
+00022 
+00022 #set current and turn on output and verify feedback
+00022 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00023 LdCurrentSet = 500: NULL : WAIT = 0.1
+00024 #verify reading from load
+00024 NULL : sdo[0x5003][1] = 500 | 1000 | 0.1
+00024 TEST: sdo[0x5003][1] 500.0 +/- 1000.0
+00024 PASS: sdo[0x5003][1] 453.0
+00025 
+00025 #set current and turn on output and verify feedback
+00025 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00026 LdCurrentSet = 600: NULL : WAIT = 0.1
+00027 #verify reading from load
+00027 NULL : sdo[0x5003][1] = 600 | 1000 | 0.1
+00027 TEST: sdo[0x5003][1] 600.0 +/- 1000.0
+00027 PASS: sdo[0x5003][1] 501.0
+00028 
+00028 #set current and turn on output and verify feedback
+00028 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00029 LdCurrentSet = 700: NULL : WAIT = 0.1
+00030 #verify reading from load
+00030 NULL : sdo[0x5003][1] = 700 | 1000 | 0.1
+00030 TEST: sdo[0x5003][1] 700.0 +/- 1000.0
+00030 PASS: sdo[0x5003][1] 637.0
+00031 
+00031 #set current and turn on output and verify feedback
+00031 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00032 LdCurrentSet = 800: NULL : WAIT = 0.1
+00033 #verify reading from load
+00033 NULL : sdo[0x5003][1] = 800 | 1000 | 0.1
+00033 TEST: sdo[0x5003][1] 800.0 +/- 1000.0
+00033 PASS: sdo[0x5003][1] 712.0
+00034 
+00034 #set current and turn on output and verify feedback
+00034 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00035 LdCurrentSet = 900: NULL : WAIT = 0.1
+00036 #verify reading from load
+00036 NULL : sdo[0x5003][1] = 900 | 1000 | 0.1
+00036 TEST: sdo[0x5003][1] 900.0 +/- 1000.0
+00036 PASS: sdo[0x5003][1] 808.0
+00037 
+00037 #set current and turn on output and verify feedback
+00037 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00038 LdCurrentSet = 1000: NULL : WAIT = 0.1
+00039 #verify reading from load
+00039 NULL : sdo[0x5003][1] = 1000 | 1000 | 0.1
+00039 TEST: sdo[0x5003][1] 1000.0 +/- 1000.0
+00039 PASS: sdo[0x5003][1] 919.0
+00040 
+00040 #set current and turn on output and verify feedback
+00040 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00041 LdCurrentSet = 1100: NULL : WAIT = 0.1
+00042 #verify reading from load
+00042 NULL : sdo[0x5003][1] = 1100 | 1000 | 0.1
+00042 TEST: sdo[0x5003][1] 1100.0 +/- 1000.0
+00042 PASS: sdo[0x5003][1] 1027.0
+00043 
+00043 #set current and turn on output and verify feedback
+00043 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00044 LdCurrentSet = 1200: NULL : WAIT = 0.1
+00045 #verify reading from load
+00045 NULL : sdo[0x5003][1] = 1200 | 1000 | 0.1
+00045 TEST: sdo[0x5003][1] 1200.0 +/- 1000.0
+00045 PASS: sdo[0x5003][1] 1130.0
+00046 
+00046 #set current and turn on output and verify feedback
+00046 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00047 LdCurrentSet = 1300: NULL : WAIT = 0.1
+00048 #verify reading from load
+00048 NULL : sdo[0x5003][1] = 1300 | 1000 | 0.1
+00048 TEST: sdo[0x5003][1] 1300.0 +/- 1000.0
+00048 PASS: sdo[0x5003][1] 1234.0
+00049 
+00049 #set current and turn on output and verify feedback
+00049 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00050 LdCurrentSet = 1400: NULL : WAIT = 0.1
+00051 #verify reading from load
+00051 NULL : sdo[0x5003][1] = 1400 | 1000 | 0.1
+00051 TEST: sdo[0x5003][1] 1400.0 +/- 1000.0
+00051 PASS: sdo[0x5003][1] 1397.0
+00052 
+00052 #set current and turn on output and verify feedback
+00052 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00053 LdCurrentSet = 1500: NULL : WAIT = 0.1
+00054 #verify reading from load
+00054 NULL : sdo[0x5003][1] = 1500 | 1000 | 0.1
+00054 TEST: sdo[0x5003][1] 1500.0 +/- 1000.0
+00054 PASS: sdo[0x5003][1] 1473.0
+00055 
+00055 #set current and turn on output and verify feedback
+00055 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00056 LdCurrentSet = 1600: NULL : WAIT = 0.1
+00057 #verify reading from load
+00057 NULL : sdo[0x5003][1] = 1600 | 1000 | 0.1
+00057 TEST: sdo[0x5003][1] 1600.0 +/- 1000.0
+00057 PASS: sdo[0x5003][1] 1568.0
+00058 
+00058 #set current and turn on output and verify feedback
+00058 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00059 LdCurrentSet = 1700: NULL : WAIT = 0.1
+00060 #verify reading from load
+00060 NULL : sdo[0x5003][1] = 1700 | 1000 | 0.1
+00060 TEST: sdo[0x5003][1] 1700.0 +/- 1000.0
+00060 PASS: sdo[0x5003][1] 1660.0
+00061 
+00061 #set current and turn on output and verify feedback
+00061 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00062 LdCurrentSet = 1800: NULL : WAIT = 0.1
+00063 #verify reading from load
+00063 NULL : sdo[0x5003][1] = 1800 | 1000 | 0.1
+00063 TEST: sdo[0x5003][1] 1800.0 +/- 1000.0
+00063 PASS: sdo[0x5003][1] 1764.0
+00064 
+00064 #set current and turn on output and verify feedback
+00064 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00065 LdCurrentSet = 1900: NULL : WAIT = 0.1
+00066 #verify reading from load
+00066 NULL : sdo[0x5003][1] = 1900 | 1000 | 0.1
+00066 TEST: sdo[0x5003][1] 1900.0 +/- 1000.0
+00066 PASS: sdo[0x5003][1] 1867.0
+00067 
+00067 #set current and turn on output and verify feedback
+00067 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00068 LdCurrentSet = 2000: NULL : WAIT = 0.1
+00069 #verify reading from load
+00069 NULL : sdo[0x5003][1] = 2000 | 1000 | 0.1
+00069 TEST: sdo[0x5003][1] 2000.0 +/- 1000.0
+00069 PASS: sdo[0x5003][1] 1975.0
+00070 
+00070 #set current and turn on output and verify feedback
+00070 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00071 LdCurrentSet = 2100: NULL : WAIT = 0.1
+00072 #verify reading from load
+00072 NULL : sdo[0x5003][1] = 2100 | 1000 | 0.1
+00072 TEST: sdo[0x5003][1] 2100.0 +/- 1000.0
+00072 PASS: sdo[0x5003][1] 2134.0
+00073 
+00073 #set current and turn on output and verify feedback
+00073 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00074 LdCurrentSet = 2200: NULL : WAIT = 0.1
+00075 #verify reading from load
+00075 NULL : sdo[0x5003][1] = 2200 | 1000 | 0.1
+00075 TEST: sdo[0x5003][1] 2200.0 +/- 1000.0
+00075 PASS: sdo[0x5003][1] 2182.0
+00076 
+00076 #set current and turn on output and verify feedback
+00076 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00077 LdCurrentSet = 2300: NULL : WAIT = 0.1
+00078 #verify reading from load
+00078 NULL : sdo[0x5003][1] = 2300 | 1000 | 0.1
+00078 TEST: sdo[0x5003][1] 2300.0 +/- 1000.0
+00078 PASS: sdo[0x5003][1] 2305.0
+00079 
+00079 #set current and turn on output and verify feedback
+00079 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00080 LdCurrentSet = 2400: NULL : WAIT = 0.1
+00081 #verify reading from load
+00081 NULL : sdo[0x5003][1] = 2400 | 1000 | 0.1
+00081 TEST: sdo[0x5003][1] 2400.0 +/- 1000.0
+00081 PASS: sdo[0x5003][1] 2401.0
+00082 
+00082 #set current and turn on output and verify feedback
+00082 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00083 LdCurrentSet = 2500: NULL : WAIT = 0.1
+00084 #verify reading from load
+00084 NULL : sdo[0x5003][1] = 2500 | 1000 | 0.1
+00084 TEST: sdo[0x5003][1] 2500.0 +/- 1000.0
+00084 PASS: sdo[0x5003][1] 2504.0
+00085 
+00085 #set current and turn on output and verify feedback
+00085 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00086 LdCurrentSet = 2600: NULL : WAIT = 0.1
+00087 #verify reading from load
+00087 NULL : sdo[0x5003][1] = 2600 | 1000 | 0.1
+00087 TEST: sdo[0x5003][1] 2600.0 +/- 1000.0
+00087 PASS: sdo[0x5003][1] 2604.0
+00088 
+00088 #set current and turn on output and verify feedback
+00088 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00089 LdCurrentSet = 2700: NULL : WAIT = 0.1
+00090 #verify reading from load
+00090 NULL : sdo[0x5003][1] = 2700 | 1000 | 0.1
+00090 TEST: sdo[0x5003][1] 2700.0 +/- 1000.0
+00090 PASS: sdo[0x5003][1] 2779.0
+00091 
+00091 #set current and turn on output and verify feedback
+00091 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00092 LdCurrentSet = 2800: NULL : WAIT = 0.1
+00093 #verify reading from load
+00093 NULL : sdo[0x5003][1] = 2800 | 1000 | 0.1
+00093 TEST: sdo[0x5003][1] 2800.0 +/- 1000.0
+00093 PASS: sdo[0x5003][1] 2811.0
+00094 
+00094 #set current and turn on output and verify feedback
+00094 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00095 LdCurrentSet = 2900: NULL : WAIT = 0.1
+00096 #verify reading from load
+00096 NULL : sdo[0x5003][1] = 2900 | 1000 | 0.1
+00096 TEST: sdo[0x5003][1] 2900.0 +/- 1000.0
+00096 PASS: sdo[0x5003][1] 2978.0
+00097 
+00097 #set current and turn on output and verify feedback
+00097 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00098 LdCurrentSet = 3000: NULL : WAIT = 0.1
+00099 #verify reading from load
+00099 NULL : sdo[0x5003][1] = 3000 | 1000 | 0.1
+00099 TEST: sdo[0x5003][1] 3000.0 +/- 1000.0
+00099 PASS: sdo[0x5003][1] 3058.0
+00100 
+00100 #set current and turn on output and verify feedback
+00100 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00101 LdCurrentSet = 3100: NULL : WAIT = 0.1
+00102 #verify reading from load
+00102 NULL : sdo[0x5003][1] = 3100 | 1000 | 0.1
+00102 TEST: sdo[0x5003][1] 3100.0 +/- 1000.0
+00102 PASS: sdo[0x5003][1] 3129.0
+00103 
+00103 #set current and turn on output and verify feedback
+00103 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00104 LdCurrentSet = 3200: NULL : WAIT = 0.1
+00105 #verify reading from load
+00105 NULL : sdo[0x5003][1] = 3200 | 1000 | 0.1
+00105 TEST: sdo[0x5003][1] 3200.0 +/- 1000.0
+00105 PASS: sdo[0x5003][1] 3253.0
+00106 
+00106 #set current and turn on output and verify feedback
+00106 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00107 LdCurrentSet = 3300: NULL : WAIT = 0.1
+00108 #verify reading from load
+00108 NULL : sdo[0x5003][1] = 3300 | 1000 | 0.1
+00108 TEST: sdo[0x5003][1] 3300.0 +/- 1000.0
+00108 PASS: sdo[0x5003][1] 3352.0
+00109 
+00109 #set current and turn on output and verify feedback
+00109 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00110 LdCurrentSet = 3400: NULL : WAIT = 0.1
+00111 #verify reading from load
+00111 NULL : sdo[0x5003][1] = 3400 | 1000 | 0.1
+00111 TEST: sdo[0x5003][1] 3400.0 +/- 1000.0
+00111 PASS: sdo[0x5003][1] 3444.0
+00112 
+00112 #set current and turn on output and verify feedback
+00112 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00113 LdCurrentSet = 3500: NULL : WAIT = 0.1
+00114 #verify reading from load
+00114 NULL : sdo[0x5003][1] = 3500 | 1000 | 0.1
+00114 TEST: sdo[0x5003][1] 3500.0 +/- 1000.0
+00114 PASS: sdo[0x5003][1] 3547.0
+00115 
+00115 #set current and turn on output and verify feedback
+00115 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00116 LdCurrentSet = 3600: NULL : WAIT = 0.1
+00117 #verify reading from load
+00117 NULL : sdo[0x5003][1] = 3600 | 1000 | 0.1
+00117 TEST: sdo[0x5003][1] 3600.0 +/- 1000.0
+00117 PASS: sdo[0x5003][1] 3735.0
+00118 
+00118 #set current and turn on output and verify feedback
+00118 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00119 LdCurrentSet = 3700: NULL : WAIT = 0.1
+00120 #verify reading from load
+00120 NULL : sdo[0x5003][1] = 3700 | 1000 | 0.1
+00120 TEST: sdo[0x5003][1] 3700.0 +/- 1000.0
+00120 PASS: sdo[0x5003][1] 3762.0
+00121 
+00121 #set current and turn on output and verify feedback
+00121 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00122 LdCurrentSet = 3800: NULL : WAIT = 0.1
+00123 #verify reading from load
+00123 NULL : sdo[0x5003][1] = 3800 | 1000 | 0.1
+00123 TEST: sdo[0x5003][1] 3800.0 +/- 1000.0
+00123 PASS: sdo[0x5003][1] 3862.0
+00124 
+00124 #set current and turn on output and verify feedback
+00124 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00125 LdCurrentSet = 3900: NULL : WAIT = 0.1
+00126 #verify reading from load
+00126 NULL : sdo[0x5003][1] = 3900 | 1000 | 0.1
+00126 TEST: sdo[0x5003][1] 3900.0 +/- 1000.0
+00126 PASS: sdo[0x5003][1] 4001.0
+00127 
+00127 #set current and turn on output and verify feedback
+00127 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00128 LdCurrentSet = 4000: NULL : WAIT = 0.1
+00129 #verify reading from load
+00129 NULL : sdo[0x5003][1] = 4000 | 1000 | 0.1
+00129 TEST: sdo[0x5003][1] 4000.0 +/- 1000.0
+00129 PASS: sdo[0x5003][1] 4073.0
+00130 
+00130 #set current and turn on output and verify feedback
+00130 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00131 LdCurrentSet = 4100: NULL : WAIT = 0.1
+00132 #verify reading from load
+00132 NULL : sdo[0x5003][1] = 4100 | 1000 | 0.1
+00132 TEST: sdo[0x5003][1] 4100.0 +/- 1000.0
+00132 PASS: sdo[0x5003][1] 4181.0
+00133 
+00133 #set current and turn on output and verify feedback
+00133 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00134 LdCurrentSet = 4200: NULL : WAIT = 0.1
+00135 #verify reading from load
+00135 NULL : sdo[0x5003][1] = 4200 | 1000 | 0.1
+00135 TEST: sdo[0x5003][1] 4200.0 +/- 1000.0
+00135 PASS: sdo[0x5003][1] 4288.0
+00136 
+00136 #set current and turn on output and verify feedback
+00136 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00137 LdCurrentSet = 4300: NULL : WAIT = 0.1
+00138 #verify reading from load
+00138 NULL : sdo[0x5003][1] = 4300 | 1000 | 0.1
+00138 TEST: sdo[0x5003][1] 4300.0 +/- 1000.0
+00138 PASS: sdo[0x5003][1] 4388.0
+00139 
+00139 #set current and turn on output and verify feedback
+00139 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00140 LdCurrentSet = 4400: NULL : WAIT = 0.1
+00141 #verify reading from load
+00141 NULL : sdo[0x5003][1] = 4400 | 1000 | 0.1
+00141 TEST: sdo[0x5003][1] 4400.0 +/- 1000.0
+00141 FAIL: sdo[0x5003][1] 0.0
+00142 
+00142 #set current and turn on output and verify feedback
+00142 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00143 LdCurrentSet = 4500: NULL : WAIT = 0.1
+00144 #verify fault #1
+00144 NULL : sdo[0x5003][1] = 0 | 0.1 | 0.1
+00144 TEST: sdo[0x5003][1] 0.0 +/- 0.1
+00144 PASS: sdo[0x5003][1] 0.0
+00145 
+00145 #switch out load line, clear current
+00145 sdo[0x6200][1] = 0 : NULL : WAIT = 0.1
+00146 J2_01 = 0 : NULL : WAIT = 0.5
+00147 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00148 NULL : sdo[0x5001][1] = 0 | 0.1 | 0.1
+00148 TEST: sdo[0x5001][1] 0.0 +/- 0.1
+00148 PASS: sdo[0x5001][1] 0.0
+00149 LdRemote = 0 : NULL : WAIT = 0.1
+00150 LdEnable = 0 : NULL : WAIT = 0.1
+00151 J0_08_METER_LOAD = 0 : NULL : WAIT = 1
+00152 SAVE
+00152 END
+Fail count: 1
+Finished on: 2025-07-23-11:09:37
+elapsed time: 0:00:25.592923

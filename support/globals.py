@@ -4,6 +4,8 @@ from datetime import datetime
 import time
 import os
 import support.globals as globals
+import canopen
+network = canopen.Network()#TODO: should this only be created w/ eds file?
 
 
 def initialize(): 
@@ -11,7 +13,7 @@ def initialize():
     global pat_framebox_out, uut_framebox_out, PassTime, tracker_last_time, StepTime, UUT_Results, UUT_TestLog
     global WaitTime, WaitDone, SoundStart, SoundFail, SoundPass, TimeStampFormat, UnitName, HeaderAdded
     global MeterData, UUTData, TestFile, DataLogTag, DataPath, LogPath, CAN_1, CAN_2, Verbose, AllCollectedData, SuppressPatSupport
-
+    global uut_eds, canopen_full_eds_path
     UnitNumber = 0
     MeterData = []
     UUTData = []
@@ -40,6 +42,7 @@ def initialize():
     UUT_TestLog = "Started on: " + str(datetime.today().strftime(TimeStampFormat)) + "\n"
     
     DBCPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","dbc/"))
+    EDSPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","eds/"))
     DataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","dut/"))
     LogPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","dut/"))
     
@@ -53,10 +56,14 @@ def initialize():
     test_file.seek(0)
     
     UUTDBCName = ""
+    UUTEDSName = ""
+
     for line in Lines:
         if(line.startswith("UUT_DBC")):
             UUTDBCName = line.split("=")
-            
+        if(line.startswith("UUT_EDS")):
+            UUTEDSName = line.split("=")
+
     TempCheck = ""
     for line in Lines:
         if(line.startswith("UUT_DATANAME")):
@@ -66,8 +73,8 @@ def initialize():
     if(TempCheck != ""):
         UnitName = TempCheck[1].strip()
         
-    if(UUTDBCName == ""):
-        print("No DBC file specified, add 'UUT_DBC = filename.dbc' to script")
+    if((UUTDBCName == "")and(UUTEDSName == "")):
+        print("No DBC or EDS file specified, add 'UUT_DBC = filename.dbc' or 'UUT_EDS = filename.eds' to script")
         quit()
 
     for line in Lines:
@@ -76,13 +83,25 @@ def initialize():
             SuppressPatSupport = SuppressPatSupport[1].strip()
             break
                     
-    # read uut
-    DBCFileName = UUTDBCName[1].strip()
-    filename = os.path.join(DBCPath, DBCFileName)
-    print("Loading", DBCFileName + "...")
-    uut_db = kvadblib.Dbc(filename=filename)
-    print("Updating UUT_Fdbk...")
-        
+    # read uut DBC
+    if(UUTDBCName != ""):
+        DBCFileName = UUTDBCName[1].strip()
+        filename = os.path.join(DBCPath, DBCFileName)
+        print("Loading", DBCFileName + "...")
+        uut_db = kvadblib.Dbc(filename=filename)
+        uut_eds = ""
+        print("Updating UUT_Fdbk...")
+
+    # read uut EDS
+    if(UUTEDSName != ""):
+        EDSFileName = UUTEDSName[1].strip()
+        filename = os.path.join(EDSPath, EDSFileName)
+        canopen_full_eds_path = filename
+        print("Found", EDSFileName + "...")
+        #uut_eds = network.add_node(1, filename)
+        uut_db = ""
+        #print("Updating UUT_Fdbk...")
+
     # Load PAT.dbc file only if SuppressPatSupport is not set to True
     if(SuppressPatSupport == 'True'):
         print("Suppression of PAT support active; UUT testing only")
@@ -94,14 +113,17 @@ def initialize():
         pat_db = kvadblib.Dbc(filename=filename)
         
         # compare uut and pat. skip if pat suppressed
-        print("Verifing...")
-        for pm in pat_db:
-            for ps in pm.signals():
-                for um in uut_db:
-                    for us in um.signals():
-                        if(ps.name == us.name):
-                            print("\nDuplicate Signal Found, Aborting...", us.name)
-                            quit()
+        if(uut_db):
+            print("Verifing DBC...")
+            for pm in pat_db:
+                for ps in pm.signals():
+                    for um in uut_db:
+                        for us in um.signals():
+                            if(ps.name == us.name):
+                                print("\nDuplicate Signal Found, Aborting...", us.name)
+                                quit()
+        else:
+            print("TODO Verifing EDS...")
         
         # init pat
         print("Setting up PAT I/O...")
@@ -119,16 +141,20 @@ def initialize():
     # init uut
     print("Setting up UUT I/O...")    
     #TODO: update UUT_Fdbk globals.UUT_Fdbk[s.name] = value
-    print(uut_db)
-    uut_framebox_in = uut_framebox_out = kvadblib.FrameBox(uut_db)
-    for message in uut_db:
-        for s in message.signals():
-            globals.UUT_Fdbk[s.name] = 0#s.name
-            if(globals.Verbose == 1):
-                print(message.name, s.name)  
-        if(message.send_node.name == "CTRL"):
-            uut_framebox_out.add_message(message.name)
+    if(uut_db):
+        print(uut_db)
 
-    #TODO: check signal names are in script.
-    #TODO: check test commands are not
+                    
+    if(uut_db):
+        uut_framebox_in = uut_framebox_out = kvadblib.FrameBox(uut_db)
+        for message in uut_db:
+            for s in message.signals():
+                globals.UUT_Fdbk[s.name] = 0#s.name
+                if(globals.Verbose == 1):
+                    print(message.name, s.name)  
+            if(message.send_node.name == "CTRL"):
+                uut_framebox_out.add_message(message.name)
+
+        #TODO: check signal names are in script.
+        #TODO: check test commands are not
     

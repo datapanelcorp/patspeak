@@ -5,7 +5,7 @@ import threading
 import time
 import keyboard
 from datetime import datetime
-
+import canopen
 import can # Imports python-can library for pcan support : "pip install python-can"
 
 #from support.events import ProcessEvents
@@ -70,9 +70,26 @@ except can.CanError:
     from support.can import CANThread
 
 #start CAN
-globals.CAN_1 = threading.Thread(target=CANThread, args=(0,))
-globals.CAN_1.start()
-   
+if(globals.uut_db):
+    globals.CAN_1 = threading.Thread(target=CANThread, args=(0,))
+    globals.CAN_1.start()
+else:
+    globals.network.connect(bustype='kvaser', channel=0, bitrate=250000)
+    # This will attempt to read an SDO from nodes 1 - 127
+    globals.network.scanner.search()
+    # We may need to wait a short while here to allow all nodes to respond
+    time.sleep(0.05)
+    for node_id in globals.network.scanner.nodes:
+        print("Found node %d!" % node_id)
+    print("Loading", globals.canopen_full_eds_path + "...")
+    globals.uut_eds = globals.network.add_node(node_id, globals.canopen_full_eds_path)
+    globals.uut_eds.nmt.state = 'OPERATIONAL'
+
+    for obj in globals.uut_eds.object_dictionary.values():
+        print('0x%X: %s' % (obj.index, obj.name))
+        if isinstance(obj, canopen.objectdictionary.Record):
+            for subobj in obj.values():
+                print('  %d: %s' % (subobj.subindex, subobj.name))
 #Start CAN thread for PAT
 if(globals.SuppressPatSupport == 'False'): # skip if suppressed
     globals.CAN_2 = threading.Thread(target=CANThread, args=(1,))

@@ -56,9 +56,10 @@ def CANThread(i):
         #transmit control messages
         if(TxTime >= 0.01):
             TxTime = 0        
-            if(channel_number == 0):    
-                for frame in globals.uut_framebox_out.frames():
-                    ch.write(frame)                 
+            if(channel_number == 0):
+                if(globals.uut_db):    
+                    for frame in globals.uut_framebox_out.frames():
+                        ch.write(frame)                 
             else:
                 if globals.SuppressPatSupport == 'False': # skip if suppressed
                     for frame in globals.pat_framebox_out.frames():
