@@ -155,6 +155,6 @@ def initialize():
             if(message.send_node.name == "CTRL"):
                 uut_framebox_out.add_message(message.name)
 
+
         #TODO: check signal names are in script.
         #TODO: check test commands are not
-    

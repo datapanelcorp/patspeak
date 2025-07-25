@@ -8,6 +8,7 @@ from datetime import timedelta
 
 import re
 
+last_printed_line = ""
 
 def SaveData():
 
@@ -60,7 +61,7 @@ def SaveData():
     globals.UUT_Results.clear()
 
 def ProcessScript():
-    
+    global last_printed_line
     time_delta = 0      
     tracker_time = time.time()
     if(globals.tracker_last_time):
@@ -70,8 +71,14 @@ def ProcessScript():
     logfile = globals.LogPath + str(globals.UnitName) + "_" + str(globals.TestFile) + ".log"
     #logfile = globals.LogPath + globals.TestFile + ".log"
     print_test = 0
-    
+
     StepStr = str(globals.TestStep).zfill(5) + ' ' #* len(str(globals.TestStep))
+
+    if(globals.Verbose == 1):
+        if(last_printed_line != StepStr + globals.TestLine):
+            last_printed_line = StepStr + globals.TestLine
+            print(last_printed_line)
+
     if(globals.TestLine == ""):
         globals.TestLine = globals.test_file.readline().rstrip()
         if(globals.TestStep == 0):
@@ -122,11 +129,20 @@ def ProcessScript():
     if(globals.TestLine.startswith("SUPPRESS_PAT_SUPPORT")):
         globals.TestLine = "" #clear to stop further processing
 
+    if(globals.TestLine.startswith("OPERATIONAL")):
+        globals.uut_eds.nmt.state = 'OPERATIONAL'
+        print(f"NMT state is now: {globals.uut_eds.nmt.state}")
+        globals.TestLine = "" #clear to stop further processing
+        
+
+    if(globals.TestLine.startswith("PRE_OPERATIONAL")):
+        globals.uut_eds.nmt.state = 'PRE-OPERATIONAL'
+        print(f"NMT state is now: {globals.uut_eds.nmt.state}")
+        globals.TestLine = "" #clear to stop further processing
+        
+
     #TODO: verify format
     if((globals.TestLine.startswith("#")) or (globals.TestLine=="")):
-        if(globals.Verbose == 1):
-            if(globals.TestLine.startswith("#")):
-                print(StepStr + globals.TestLine)
         globals.TestLine = ""
 
     else:

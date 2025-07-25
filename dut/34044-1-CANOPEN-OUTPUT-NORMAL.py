@@ -18,9 +18,9 @@ outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
 
-#verify faults clear
-outstr += "NULL : sdo[0x5001][3] = 0 | 0.1 | 0.1\n"
-outstr += "NULL : sdo[0x5001][4] = 0 | 0.1 | 0.1\n"
+outstr += "PRE_OPERATIONAL\n"
+
+
 
 outstr += "#-----setup PAT-----\n"
 outstr += "#setup load\n"
@@ -30,6 +30,9 @@ outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
 outstr += "J0_08_METER_LOAD = 1 : NULL : WAIT = 1\n"
 
 
+#verify faults clear
+outstr += "NULL : sdo[0x5001][3] = 0 | 0.1 | 0.1\n"
+outstr += "NULL : sdo[0x5001][4] = 0 | 0.1 | 0.1\n"
 
 FdbkBits = 0
 FltBits = 0
@@ -142,7 +145,9 @@ while t <= 7:
 
     outstr += "#switch in load line, set current\n"
     outstr += OutputConnector + " = 1 : NULL : WAIT = 0.5\n"
-
+    
+    outstr += "OPERATIONAL\n"
+    
     outstr += "\n"
     i = 0
     while i <= 4500:
@@ -153,19 +158,21 @@ while t <= 7:
             outstr += "#verify reading from load\n" 
             outstr += "NULL : " + FeedbackName + " = " + str(i) + " | 1000 | 0.1\n" 
             outstr += "NULL : " + OutputStatus + " = " + str(FdbkBits) + " | 0.01 | 0.1\n" 
-            #outstr += "NULL : MeterCurrent = " + str(i*0.001) + " | 0.1 | 0.1\n" 
+            outstr += "NULL : MeterCurrent = " + str(i*0.001) + " | 0.1 | 0.1\n" 
             outstr += "\n"
         else:
             outstr += "#verify fault #1\n" 
             outstr += "NULL : " + FeedbackName + " = 0 | 0.1 | 0.1\n" 
             outstr += "NULL : " + OutputStatus + " = " + str(FltBits) + " | 0.1 | 0.1\n" 
-            #outstr += "NULL : MeterCurrent = 0  | 0.01 | 0.1\n" 
+            outstr += "NULL : MeterCurrent = 0  | 0.01 | 0.1\n" 
             outstr += "\n"
-        i += 500
+        i += 10
 
     outstr += "#switch out load line, clear current\n"
     outstr += OutputName + " = 0 : NULL : WAIT = 0.1\n"
     outstr += OutputConnector + " = 0 : NULL : WAIT = 0.5\n"
+    outstr += "#read signal value to update\n"
+    outstr += "NULL : " + FeedbackName + " = 0 | 155 | 0.5\n"
     outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
     outstr += "NULL : " + OutputStatus + " = 0 | 0.1 | 0.1\n" 
     t += 1
@@ -343,6 +350,7 @@ outstr += "NULL : sdo[0x5001][4] = 170 | 0.1 | 0.1\n"
 outstr += "LdRemote = 0 : NULL : WAIT = 0.1\n"
 outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
 outstr += "J0_08_METER_LOAD = 0 : NULL : WAIT = 1\n"
+outstr += "PRE_OPERATIONAL\n"
 outstr += "SAVE\n"
 outstr += "END\n"
     

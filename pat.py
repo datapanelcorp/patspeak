@@ -83,13 +83,19 @@ else:
         print("Found node %d!" % node_id)
     print("Loading", globals.canopen_full_eds_path + "...")
     globals.uut_eds = globals.network.add_node(node_id, globals.canopen_full_eds_path)
-    globals.uut_eds.nmt.state = 'OPERATIONAL'
 
-    for obj in globals.uut_eds.object_dictionary.values():
-        print('0x%X: %s' % (obj.index, obj.name))
-        if isinstance(obj, canopen.objectdictionary.Record):
-            for subobj in obj.values():
-                print('  %d: %s' % (subobj.subindex, subobj.name))
+    # parse all object dictionary entries
+    print("Object Dictionary:")
+    for index in globals.uut_eds.object_dictionary:
+        entry = globals.uut_eds.object_dictionary[index]
+        if hasattr(entry, 'subindices'):
+            for subidx in entry.subindices:
+                sub = entry[subidx]
+                sig_name = f"sdo[0x{index:04X}][{sub.subindex}]"
+                print(sig_name, sub.name)#TODO: Add this to the test log?
+                globals.UUT_Fdbk[sig_name] = 0
+        print()
+
 #Start CAN thread for PAT
 if(globals.SuppressPatSupport == 'False'): # skip if suppressed
     globals.CAN_2 = threading.Thread(target=CANThread, args=(1,))

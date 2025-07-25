@@ -1,0 +1,168 @@
+Esc - user interruption @ 2025-07-25-11:41:39
+Started on: 2025-07-25-11:41:27
+00000 #34044-1
+00000 #Verion 0.0
+00000 #digital normal test using the E-LOAD
+00000 UUT_EDS = 37000-561.eds
+00000 UUT_DATANAME = 34044-1-CANOPEN-OUTPUT-NORMAL
+00000 
+00000 PRE_OPERATIONAL
+00000 #-----setup PAT-----
+00000 #setup load
+00000 LdRemote = 1 : NULL : WAIT = 0.1
+00001 LdEnable = 1 : NULL : WAIT = 0.1
+00002 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00003 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
+00004 NULL : sdo[0x5001][3] = 0 | 0.1 | 0.1
+00004 TEST: sdo[0x5001][3] 0.0 +/- 0.1
+00004 PASS: sdo[0x5001][3] 0.0
+00005 NULL : sdo[0x5001][4] = 0 | 0.1 | 0.1
+00005 TEST: sdo[0x5001][4] 0.0 +/- 0.1
+00005 PASS: sdo[0x5001][4] 0.0
+00006 #-----setup 34044-----
+00006 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
+00007 sdo[0x2001][1] = 17 : NULL : WAIT = 0.2
+00008 #switch in load line, set current
+00008 J2_01 = 1 : NULL : WAIT = 0.5
+00009 OPERATIONAL
+00009 
+00009 #set current and turn on output and verify feedback
+00009 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00010 LdCurrentSet = 0: NULL : WAIT = 0.1
+00011 #verify reading from load
+00011 NULL : sdo[0x5003][1] = 0 | 1000 | 0.1
+00011 TEST: sdo[0x5003][1] 0.0 +/- 1000.0
+00011 PASS: sdo[0x5003][1] 0.0
+00012 NULL : sdo[0x5001][3] = 1 | 0.01 | 0.1
+00012 TEST: sdo[0x5001][3] 1.0 +/- 0.01
+00012 PASS: sdo[0x5001][3] 1.0
+00013 NULL : MeterCurrent = 0.0 | 0.1 | 0.1
+00013 TEST: MeterCurrent 0.0 +/- 0.1
+00013 PASS: MeterCurrent 0.0
+00014 
+00014 #set current and turn on output and verify feedback
+00014 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00015 LdCurrentSet = 10: NULL : WAIT = 0.1
+00016 #verify reading from load
+00016 NULL : sdo[0x5003][1] = 10 | 1000 | 0.1
+00016 TEST: sdo[0x5003][1] 10.0 +/- 1000.0
+00016 PASS: sdo[0x5003][1] 0.0
+00017 NULL : sdo[0x5001][3] = 1 | 0.01 | 0.1
+00017 TEST: sdo[0x5001][3] 1.0 +/- 0.01
+00017 PASS: sdo[0x5001][3] 1.0
+00018 NULL : MeterCurrent = 0.01 | 0.1 | 0.1
+00018 TEST: MeterCurrent 0.01 +/- 0.1
+00018 PASS: MeterCurrent 0.0
+00019 
+00019 #set current and turn on output and verify feedback
+00019 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00020 LdCurrentSet = 20: NULL : WAIT = 0.1
+00021 #verify reading from load
+00021 NULL : sdo[0x5003][1] = 20 | 1000 | 0.1
+00021 TEST: sdo[0x5003][1] 20.0 +/- 1000.0
+00021 PASS: sdo[0x5003][1] 6.0
+00022 NULL : sdo[0x5001][3] = 1 | 0.01 | 0.1
+00022 TEST: sdo[0x5001][3] 1.0 +/- 0.01
+00022 PASS: sdo[0x5001][3] 1.0
+00023 NULL : MeterCurrent = 0.02 | 0.1 | 0.1
+00023 TEST: MeterCurrent 0.02 +/- 0.1
+00023 PASS: MeterCurrent 0.01
+00024 
+00024 #set current and turn on output and verify feedback
+00024 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00025 LdCurrentSet = 30: NULL : WAIT = 0.1
+00026 #verify reading from load
+00026 NULL : sdo[0x5003][1] = 30 | 1000 | 0.1
+00026 TEST: sdo[0x5003][1] 30.0 +/- 1000.0
+00026 PASS: sdo[0x5003][1] 12.0
+00027 NULL : sdo[0x5001][3] = 1 | 0.01 | 0.1
+00027 TEST: sdo[0x5001][3] 1.0 +/- 0.01
+00027 PASS: sdo[0x5001][3] 1.0
+00028 NULL : MeterCurrent = 0.03 | 0.1 | 0.1
+00028 TEST: MeterCurrent 0.03 +/- 0.1
+00028 PASS: MeterCurrent 0.02
+00029 
+00029 #set current and turn on output and verify feedback
+00029 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00030 LdCurrentSet = 40: NULL : WAIT = 0.1
+00031 #verify reading from load
+00031 NULL : sdo[0x5003][1] = 40 | 1000 | 0.1
+00031 TEST: sdo[0x5003][1] 40.0 +/- 1000.0
+00031 PASS: sdo[0x5003][1] 18.0
+00032 NULL : sdo[0x5001][3] = 1 | 0.01 | 0.1
+00032 TEST: sdo[0x5001][3] 1.0 +/- 0.01
+00032 PASS: sdo[0x5001][3] 1.0
+00033 NULL : MeterCurrent = 0.04 | 0.1 | 0.1
+00033 TEST: MeterCurrent 0.04 +/- 0.1
+00033 PASS: MeterCurrent 0.029
+00034 
+00034 #set current and turn on output and verify feedback
+00034 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00035 LdCurrentSet = 50: NULL : WAIT = 0.1
+00036 #verify reading from load
+00036 NULL : sdo[0x5003][1] = 50 | 1000 | 0.1
+00036 TEST: sdo[0x5003][1] 50.0 +/- 1000.0
+00036 PASS: sdo[0x5003][1] 31.0
+00037 NULL : sdo[0x5001][3] = 1 | 0.01 | 0.1
+00037 TEST: sdo[0x5001][3] 1.0 +/- 0.01
+00037 PASS: sdo[0x5001][3] 1.0
+00038 NULL : MeterCurrent = 0.05 | 0.1 | 0.1
+00038 TEST: MeterCurrent 0.05 +/- 0.1
+00038 PASS: MeterCurrent 0.039
+00039 
+00039 #set current and turn on output and verify feedback
+00039 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00040 LdCurrentSet = 60: NULL : WAIT = 0.1
+00041 #verify reading from load
+00041 NULL : sdo[0x5003][1] = 60 | 1000 | 0.1
+00041 TEST: sdo[0x5003][1] 60.0 +/- 1000.0
+00041 PASS: sdo[0x5003][1] 46.0
+00042 NULL : sdo[0x5001][3] = 1 | 0.01 | 0.1
+00042 TEST: sdo[0x5001][3] 1.0 +/- 0.01
+00042 PASS: sdo[0x5001][3] 1.0
+00043 NULL : MeterCurrent = 0.06 | 0.1 | 0.1
+00043 TEST: MeterCurrent 0.06 +/- 0.1
+00043 PASS: MeterCurrent 0.04
+00044 
+00044 #set current and turn on output and verify feedback
+00044 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00045 LdCurrentSet = 70: NULL : WAIT = 0.1
+00046 #verify reading from load
+00046 NULL : sdo[0x5003][1] = 70 | 1000 | 0.1
+00046 TEST: sdo[0x5003][1] 70.0 +/- 1000.0
+00046 PASS: sdo[0x5003][1] 52.0
+00047 NULL : sdo[0x5001][3] = 1 | 0.01 | 0.1
+00047 TEST: sdo[0x5001][3] 1.0 +/- 0.01
+00047 PASS: sdo[0x5001][3] 1.0
+00048 NULL : MeterCurrent = 0.07 | 0.1 | 0.1
+00048 TEST: MeterCurrent 0.07 +/- 0.1
+00048 PASS: MeterCurrent 0.059
+00049 
+00049 #set current and turn on output and verify feedback
+00049 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00050 LdCurrentSet = 80: NULL : WAIT = 0.1
+00051 #verify reading from load
+00051 NULL : sdo[0x5003][1] = 80 | 1000 | 0.1
+00051 TEST: sdo[0x5003][1] 80.0 +/- 1000.0
+00051 PASS: sdo[0x5003][1] 71.0
+00052 NULL : sdo[0x5001][3] = 1 | 0.01 | 0.1
+00052 TEST: sdo[0x5001][3] 1.0 +/- 0.01
+00052 PASS: sdo[0x5001][3] 1.0
+00053 NULL : MeterCurrent = 0.08 | 0.1 | 0.1
+00053 TEST: MeterCurrent 0.08 +/- 0.1
+00053 PASS: MeterCurrent 0.064
+00054 
+00054 #set current and turn on output and verify feedback
+00054 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00055 LdCurrentSet = 90: NULL : WAIT = 0.1
+00056 #verify reading from load
+00056 NULL : sdo[0x5003][1] = 90 | 1000 | 0.1
+00056 TEST: sdo[0x5003][1] 90.0 +/- 1000.0
+00056 PASS: sdo[0x5003][1] 71.0
+00057 NULL : sdo[0x5001][3] = 1 | 0.01 | 0.1
+00057 TEST: sdo[0x5001][3] 1.0 +/- 0.01
+00057 PASS: sdo[0x5001][3] 1.0
+00058 NULL : MeterCurrent = 0.09 | 0.1 | 0.1
+00058 TEST: MeterCurrent 0.09 +/- 0.1
+00058 PASS: MeterCurrent 0.077
+00059 
