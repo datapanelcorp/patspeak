@@ -14,6 +14,10 @@ J0_08_METER_LOAD = 1 : NULL : WAIT = 1
 NULL : sdo[0x5001][3] = 0 | 0.1 | 0.1
 NULL : sdo[0x5001][4] = 0 | 0.1 | 0.1
 #-----setup 34044-----
+sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+#disable global modes
+sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2001][1] = 17 : NULL : WAIT = 0.2
 #switch in load line, set current
@@ -3636,6 +3640,10 @@ NULL : sdo[0x5003][1] = 0 | 155 | 0.5
 LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : sdo[0x5001][3] = 0 | 0.1 | 0.1
 #-----setup 34044-----
+sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+#disable global modes
+sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2001][1] = 17 : NULL : WAIT = 0.2
 #switch in load line, set current
@@ -7258,6 +7266,10 @@ NULL : sdo[0x5003][2] = 0 | 155 | 0.5
 LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : sdo[0x5001][3] = 0 | 0.1 | 0.1
 #-----setup 34044-----
+sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+#disable global modes
+sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2001][2] = 17 : NULL : WAIT = 0.2
 #switch in load line, set current
@@ -10880,6 +10892,10 @@ NULL : sdo[0x5003][3] = 0 | 155 | 0.5
 LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : sdo[0x5001][3] = 0 | 0.1 | 0.1
 #-----setup 34044-----
+sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+#disable global modes
+sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2001][2] = 17 : NULL : WAIT = 0.2
 #switch in load line, set current
@@ -14502,6 +14518,10 @@ NULL : sdo[0x5003][4] = 0 | 155 | 0.5
 LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : sdo[0x5001][3] = 0 | 0.1 | 0.1
 #-----setup 34044-----
+sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+#disable global modes
+sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2001][3] = 17 : NULL : WAIT = 0.2
 #switch in load line, set current
@@ -18124,6 +18144,10 @@ NULL : sdo[0x5003][5] = 0 | 155 | 0.5
 LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : sdo[0x5001][4] = 0 | 0.1 | 0.1
 #-----setup 34044-----
+sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+#disable global modes
+sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2001][3] = 17 : NULL : WAIT = 0.2
 #switch in load line, set current
@@ -21746,6 +21770,10 @@ NULL : sdo[0x5003][6] = 0 | 155 | 0.5
 LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : sdo[0x5001][4] = 0 | 0.1 | 0.1
 #-----setup 34044-----
+sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+#disable global modes
+sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2001][4] = 17 : NULL : WAIT = 0.2
 #switch in load line, set current
@@ -25368,6 +25396,10 @@ NULL : sdo[0x5003][7] = 0 | 155 | 0.5
 LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : sdo[0x5001][4] = 0 | 0.1 | 0.1
 #-----setup 34044-----
+sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+#disable global modes
+sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2001][4] = 17 : NULL : WAIT = 0.2
 #switch in load line, set current

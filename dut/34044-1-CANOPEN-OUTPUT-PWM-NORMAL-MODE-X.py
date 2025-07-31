@@ -114,12 +114,12 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
         Step2 = 500
         Step3 = 1000
         
-        if(OutputMode == 2):
+        if(OutputMode == 0x22):
             Step1 = 1000
             Step2 = 2000
             Step3 = 4000
             
-        if(OutputMode == 3):
+        if(OutputMode == 0x33):
             Step1 = 250
             Step2 = 500
             Step3 = 1000
@@ -127,13 +127,13 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
         #TODO test duty at 50% and 100%
         outstr += OutputName + " = " + str(Step1) + " : NULL : WAIT = 0.2\n"
         outstr += "NULL : MeterAmps = 0.8 | 0.2 | 0.5\n"
-        outstr += "NULL : " + FeedbackName + " = 0.8 | 0.2 | 0.5\n"
+        outstr += "NULL : " + FeedbackName + " = 800 | 200 | 0.5\n"
         outstr += OutputName + " = " + str(Step2) + " : NULL : WAIT = 0.2\n"
         outstr += "NULL : MeterAmps = 1.6 | 0.2 | 0.5\n"
-        outstr += "NULL : " + FeedbackName + " = 1.6 | 0.2 | 0.5\n"
+        outstr += "NULL : " + FeedbackName + " = 1600 | 200 | 0.5\n"
         outstr += OutputName + " = " + str(Step3) + " : NULL : WAIT = 0.2\n"
         outstr += "NULL : MeterAmps = 3.3 | 0.2 | 0.5\n"
-        outstr += "NULL : " + FeedbackName + " = 3.3 | 0.2 | 0.5\n"
+        outstr += "NULL : " + FeedbackName + " = 3300 | 200 | 0.5\n"
         #verify feedback and w/ ammeter
         outstr += "#switch out load line, switch coil\n"
         outstr += OutputName + " = 0 : NULL : WAIT = 0.5\n"
@@ -142,14 +142,11 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
         t += 1
         
     return outstr
-    
-
 
 t = 0
 i = 0
+OutputMode = 0x33
 
-PortMode = 0
-OutputMode = 2
 #global setup
 TestName = "34044-1-CANOPEN-OUTPUT-PWM-NORMAL-MODE-" + str(OutputMode)
 datafile = TestName + ".pat"
@@ -158,34 +155,44 @@ outstr = ""
 outstr += "#34044-1\n"
 outstr += "#Verion 0.0\n"
 outstr += "#PWM test with 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)\n"
-outstr += "UUT_EDS = 34044-561.eds\n"
+outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
 
+
+
 outstr += "#-----setup 34044-----\n"
 outstr += "#disable global modes\n"
-
+outstr += "sdo[0x2000][3] = 0 : NULL : WAIT = 0.1\n"
+outstr += "sdo[0x2000][4] = 0 : NULL : WAIT = 0.1\n"
+        
 outstr += "#configure Ports\n"
-outstr += "Command = 83, MODE1A = " + str(OutputMode) + ", MODE1B = " + str(OutputMode) + ", MODE2A = " + str(OutputMode) + ", MODE2B = " + str(OutputMode) + ", MODE3A = " + str(OutputMode) + ", MODE3B = " + str(OutputMode) + ", MODE4A = " + str(OutputMode) + ", MODE4B = " + str(OutputMode) + " : NULL : WAIT = 0.5\n"
-outstr += "Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL\n"
-outstr += "Command = 93, PORT1_MODE = " + str(PortMode) + ", PORT2_MODE = " + str(PortMode) + ", PORT3_MODE = " + str(PortMode) + ", PORT4_MODE = " + str(PortMode) + " : NULL : WAIT = 0.5\n"
-outstr += "Command = 0, PORT1_MODE = 0, PORT2_MODE = 0, PORT3_MODE = 0, PORT4_MODE = 0 : NULL : WAIT = 0.5\n"
-outstr += "Command = 82, SaveSettings = 1, MODE1 = 0, MODE2 = 0, ADRaw = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
-outstr += "Command = 0, SaveSettings = 0, MODE1 = 0, MODE2 = 0, ADRaw = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
+outstr += "sdo[0x2001][1] = " + str(OutputMode) + " : NULL : WAIT = 0.1\n"
+outstr += "sdo[0x2001][2] = " + str(OutputMode) + " : NULL : WAIT = 0.1\n"
+outstr += "sdo[0x2001][3] = " + str(OutputMode) + " : NULL : WAIT = 0.1\n"
+outstr += "sdo[0x2001][4] = " + str(OutputMode) + " : NULL : WAIT = 0.1\n"
+#node.sdo[0x3000].raw = 500
 
-Frequancy = 40
-outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
-outstr += "Command = 0, FREQ1 = 0, SaveSettings = 0 : NULL\n"
+
+Frequancy = 1000#64
+outstr += "PRE_OPERATIONAL\n"
+outstr += "#test at 1000hz\n"
+outstr += "sdo[0x3000] = " + str(Frequancy) + " : NULL : WAIT = 0.5\n"
+outstr += "OPERATIONAL\n"
 outstr = WriteOutputTest(outstr, Frequancy, 7, OutputMode)
 
 Frequancy = 500
-outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
-outstr += "Command = 0, FREQ1 = 0, SaveSettings = 0 : NULL\n"
+outstr += "PRE_OPERATIONAL\n"
+outstr += "#test at 500hz\n"
+outstr += "sdo[0x3000] = " + str(Frequancy) + " : NULL : WAIT = 0.5\n"
+outstr += "OPERATIONAL\n"
 outstr = WriteOutputTest(outstr, Frequancy, 7, OutputMode)
 
-Frequancy = 1200
-outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
-outstr += "Command = 0, FREQ1 = 0, SaveSettings = 0 : NULL\n"
+Frequancy = 64#1000
+outstr += "PRE_OPERATIONAL\n"
+outstr += "#test at 64hz\n"
+outstr += "sdo[0x3000] = " + str(Frequancy) + " : NULL : WAIT = 0.5\n"
+outstr += "OPERATIONAL\n"
 outstr = WriteOutputTest(outstr, Frequancy, 7, OutputMode)
 
 #shut down test

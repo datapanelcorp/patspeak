@@ -212,7 +212,10 @@ def ProcessScript():
                         else:
                             numbers = re.findall(r'0x[0-9a-fA-F]+|\d+', SignalName)
                             sdo_param = [int(num, 16) if num.startswith('0x') else int(num) for num in numbers]
-                            globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].raw = float(s[1])
+                            if(len(sdo_param) == 2):
+                                globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].raw = float(s[1])
+                            if(len(sdo_param) == 1):
+                                globals.uut_eds.sdo[sdo_param[0]].raw = float(s[1])    
                             globals.UUT_Fdbk[SignalName] = float(s[1])
                     except:
                         pass
@@ -255,7 +258,10 @@ def ProcessScript():
                                 else:
                                     numbers = re.findall(r'0x[0-9a-fA-F]+|\d+', SignalName)
                                     sdo_param = [int(num, 16) if num.startswith('0x') else int(num) for num in numbers]
-                                    RealValue = float(globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].raw)
+                                    if(len(sdo_param) == 2):
+                                        RealValue = float(globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].raw)
+                                    if(len(sdo_param) == 1):
+                                        RealValue = float(globals.uut_eds.sdo[sdo_param[0]].raw)
                                     globals.UUT_Fdbk[SignalName] = RealValue
                             except:
                                 print("signal not found!", SignalName)

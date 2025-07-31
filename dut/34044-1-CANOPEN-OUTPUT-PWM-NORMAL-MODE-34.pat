@@ -2,16 +2,19 @@
 #Verion 0.0
 #PWM test with 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
 UUT_EDS = 37000-561.eds
-UUT_DATANAME = 34044-1-CANOPEN-OUTPUT-PWM-NORMAL-MODE-2
+UUT_DATANAME = 34044-1-CANOPEN-OUTPUT-PWM-NORMAL-MODE-34
 
-#-----setup 34044-----
+PRE_OPERATIONAL#-----setup 34044-----
 #disable global modes
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
 #configure Ports
-sdo[0x2001][1] = 2, sdo[0x2001][2] = 2, sdo[0x2001][3] = 2, sdo[0x2001][4] = 2, sdo[0x2001][5] = 2, sdo[0x2001][6] = 2, sdo[0x2001][7] = 2, sdo[0x2001][8] = 2 : NULL : WAIT = 0.5
-#test at 40hz
-node.sdo[0x3000].raw  = 40 : NULL : WAIT = 0.5
+sdo[0x2001][1] = 34 : NULL : WAIT = 0.1
+sdo[0x2001][2] = 34 : NULL : WAIT = 0.1
+sdo[0x2001][3] = 34 : NULL : WAIT = 0.1
+sdo[0x2001][4] = 34 : NULL : WAIT = 0.1
+OPERATIONAL#test at 1000hz
+sdo[0x3000] = 1000 : NULL : WAIT = 0.5
 #switch in 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
 J4_01 = 1 : NULL : WAIT = 0.2
 J4_03 = 1 : NULL : WAIT = 0.2
@@ -136,7 +139,7 @@ NULL : sdo[0x5003][8] = 3300 | 200 | 0.5
 sdo[0x6411][8] = 0 : NULL : WAIT = 0.5
 J2_08 = 0 : NULL : WAIT = 0.5
 #test at 500hz
-node.sdo[0x3000].raw  = 500 : NULL : WAIT = 0.5
+sdo[0x3000] = 500 : NULL : WAIT = 0.5
 #switch in 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
 J4_01 = 1 : NULL : WAIT = 0.2
 J4_03 = 1 : NULL : WAIT = 0.2
@@ -260,8 +263,8 @@ NULL : sdo[0x5003][8] = 3300 | 200 | 0.5
 #switch out load line, switch coil
 sdo[0x6411][8] = 0 : NULL : WAIT = 0.5
 J2_08 = 0 : NULL : WAIT = 0.5
-#test at 1200hz
-node.sdo[0x3000].raw = 1200 : NULL : WAIT = 0.5
+#test at 64hz
+sdo[0x3000] = 64 : NULL : WAIT = 0.5
 #switch in 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
 J4_01 = 1 : NULL : WAIT = 0.2
 J4_03 = 1 : NULL : WAIT = 0.2

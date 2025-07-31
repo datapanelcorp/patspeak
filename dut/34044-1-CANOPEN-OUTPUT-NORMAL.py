@@ -140,6 +140,10 @@ while t <= 7:
     TheMode = 0x11
 
     outstr += "#-----setup 34044-----\n"
+    outstr += "sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1\n"
+    outstr += "#disable global modes\n"
+    outstr += "sdo[0x2000][3] = 0 : NULL : WAIT = 0.1\n"
+    outstr += "sdo[0x2000][4] = 0 : NULL : WAIT = 0.1\n"
     outstr += Cmd0x52 + " = " + str(FaultReset) + " : NULL : WAIT = 0.2\n"
     outstr += PortMode + " = " + str(TheMode) + " : NULL : WAIT = 0.2\n"
 
