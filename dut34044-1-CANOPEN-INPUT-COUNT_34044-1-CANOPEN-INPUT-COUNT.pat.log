@@ -1,0 +1,1188 @@
+Started on: 2025-08-01-15:23:19
+00000 #34044-1
+00000 #Verion 0.0
+00000 #input test
+00000 UUT_EDS = 37000-561.eds
+00000 UUT_DATANAME = 34044-1-CANOPEN-INPUT-COUNT
+00000 
+00000 #-----setup 34044-----
+00000 #setup meter
+00000 LdRemote = 1 : NULL : WAIT = 0.1
+00001 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00002 LdEnable = 0 : NULL : WAIT = 0.1
+00003 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
+00004 
+00004 #setup PS1
+00004 PwrRemote = 1 : NULL : WAIT = 0.1
+00005 PwrSetCurrent = 20 : NULL : WAIT = 0.1
+00006 PwrSetVoltage = 0 : NULL : WAIT = 0.1
+00007 PwrEnable = 1 : NULL : WAIT = 0.1
+00008 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1
+00009 
+00009 OPERATIONAL
+00009 #****** NO OVERFLOW, SET POINT = 5, MAX COUNT = 5, OUTPUT INTERLOCK
+00009 #disable global modes
+00009 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00010 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00011 
+00011 #configure Port Modes
+00011 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00012 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00013 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00014 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00015 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00016 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00017 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00018 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00019 
+00019 #config counter
+00019 sdo[0x2003][1] = 69 : NULL : WAIT = 0.1
+00020 
+00020 #config set point
+00020 sdo[0x3001][1] = 5 : NULL : WAIT = 0.1
+00021 
+00021 #verify setpoint
+00021 NULL : sdo[0x6401][10] = 5 | 0 | 0.1
+00021 TEST: sdo[0x6401][10] 5.0 +/- 0.0
+00021 PASS: sdo[0x6401][10] 5.0
+00022 #switch in and on interlock output
+00022 J2_05 = 1 : NULL : WAIT = 0.2
+00023 sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+00024 #verify voltage
+00024 NULL : MeterVolts = 14 | 1 | 0.1
+00024 TEST: MeterVolts 14.0 +/- 1.0
+00024 PASS: MeterVolts 14.298
+00025 #switch out interlock output
+00025 J2_05 = 0 : NULL : WAIT = 0.2
+00026 #switch in test supply
+00026 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00027 #switch in input
+00027 J3_01 = 1 : NULL : WAIT = 0.2
+00028 
+00028 #testing count events
+00028 PwrSetVoltage = 140 : NULL
+00029 #verify count
+00029 NULL : sdo[0x6401][9] = 1 | 0 | 0.1
+00029 TEST: sdo[0x6401][9] 1.0 +/- 0.0
+00029 PASS: sdo[0x6401][9] 1.0
+00030 PwrSetVoltage = 0 : NULL
+00031 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00031 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00031 PASS: sdo[0x6000][1] 0.0
+00032 
+00032 PwrSetVoltage = 140 : NULL
+00033 #verify count
+00033 NULL : sdo[0x6401][9] = 2 | 0 | 0.1
+00033 TEST: sdo[0x6401][9] 2.0 +/- 0.0
+00033 PASS: sdo[0x6401][9] 2.0
+00034 PwrSetVoltage = 0 : NULL
+00035 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00035 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00035 PASS: sdo[0x6000][1] 0.0
+00036 
+00036 PwrSetVoltage = 140 : NULL
+00037 #verify count
+00037 NULL : sdo[0x6401][9] = 3 | 0 | 0.1
+00037 TEST: sdo[0x6401][9] 3.0 +/- 0.0
+00037 PASS: sdo[0x6401][9] 3.0
+00038 PwrSetVoltage = 0 : NULL
+00039 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00039 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00039 PASS: sdo[0x6000][1] 0.0
+00040 
+00040 PwrSetVoltage = 140 : NULL
+00041 #verify count
+00041 NULL : sdo[0x6401][9] = 4 | 0 | 0.1
+00041 TEST: sdo[0x6401][9] 4.0 +/- 0.0
+00041 PASS: sdo[0x6401][9] 4.0
+00042 PwrSetVoltage = 0 : NULL
+00043 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00043 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00043 PASS: sdo[0x6000][1] 0.0
+00044 
+00044 PwrSetVoltage = 140 : NULL
+00045 #verify count
+00045 NULL : sdo[0x6401][9] = 5 | 0 | 0.1
+00045 TEST: sdo[0x6401][9] 5.0 +/- 0.0
+00045 PASS: sdo[0x6401][9] 5.0
+00046 PwrSetVoltage = 0 : NULL
+00047 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00047 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00047 PASS: sdo[0x6000][1] 0.0
+00048 #verify output status at setpoint
+00048 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00049 J3_01 = 0 : NULL : WAIT = 0.2
+00050 J2_05 = 1 : NULL : WAIT = 0.2
+00051 NULL : MeterVolts = 0 | 1 | 0.1
+00051 TEST: MeterVolts 0.0 +/- 1.0
+00051 PASS: MeterVolts 0.825
+00052 J2_05 = 0 : NULL : WAIT = 0.2
+00053 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00054 J3_01 = 1 : NULL : WAIT = 0.2
+00055 
+00055 PwrSetVoltage = 140 : NULL
+00056 #verify no rollover
+00056 NULL : sdo[0x6401][9] = 5 | 0 | 0.1
+00056 TEST: sdo[0x6401][9] 5.0 +/- 0.0
+00056 PASS: sdo[0x6401][9] 5.0
+00057 PwrSetVoltage = 0 : NULL
+00058 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00058 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00058 PASS: sdo[0x6000][1] 0.0
+00059 
+00059 #switch out input
+00059 J3_01 = 0 : NULL : WAIT = 0.2
+00060 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00061 #turn off output and switch out is off
+00061 sdo[0x6411][5] = 0 : NULL : WAIT = 0.2
+00062 #disable counter
+00062 sdo[0x2003][1] = 1 : NULL : WAIT = 0.1
+00063 #verify count
+00063 NULL : sdo[0x6401][9] = 6 | 0 | 0.1
+00063 TEST: sdo[0x6401][9] 6.0 +/- 0.0
+00063 FAIL: sdo[0x6401][9] 5.0
+00064 #send counter reset
+00064 sdo[0x2003][1] = 4 : NULL : WAIT = 0.1
+00065 #verify count reset
+00065 NULL : sdo[0x6401][9] = 0 | 0 | 0.1
+00065 TEST: sdo[0x6401][9] 0.0 +/- 0.0
+00065 PASS: sdo[0x6401][9] 0.0
+00066 
+00066 sdo[0x3001][1] = 0 : NULL : WAIT = 0.1
+00067 #disable global modes
+00067 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00068 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00069 
+00069 #configure Port Modes
+00069 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00070 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00071 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00072 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00073 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00074 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00075 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00076 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00077 
+00077 #config counter
+00077 sdo[0x2003][2] = 69 : NULL : WAIT = 0.1
+00078 
+00078 #config set point
+00078 sdo[0x3001][2] = 5 : NULL : WAIT = 0.1
+00079 
+00079 #verify setpoint
+00079 NULL : sdo[0x6401][12] = 5 | 0 | 0.1
+00079 TEST: sdo[0x6401][12] 5.0 +/- 0.0
+00079 PASS: sdo[0x6401][12] 5.0
+00080 #switch in and on interlock output
+00080 J2_07 = 1 : NULL : WAIT = 0.2
+00081 sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+00082 #verify voltage
+00082 NULL : MeterVolts = 14 | 1 | 0.1
+00082 TEST: MeterVolts 14.0 +/- 1.0
+00082 PASS: MeterVolts 14.453
+00083 #switch out interlock output
+00083 J2_07 = 0 : NULL : WAIT = 0.2
+00084 #switch in test supply
+00084 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00085 #switch in input
+00085 J3_03 = 1 : NULL : WAIT = 0.2
+00086 
+00086 #testing count events
+00086 PwrSetVoltage = 140 : NULL
+00087 #verify count
+00087 NULL : sdo[0x6401][11] = 1 | 0 | 0.1
+00087 TEST: sdo[0x6401][11] 1.0 +/- 0.0
+00087 PASS: sdo[0x6401][11] 1.0
+00088 PwrSetVoltage = 0 : NULL
+00089 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00089 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00089 PASS: sdo[0x6000][1] 0.0
+00090 
+00090 PwrSetVoltage = 140 : NULL
+00091 #verify count
+00091 NULL : sdo[0x6401][11] = 2 | 0 | 0.1
+00091 TEST: sdo[0x6401][11] 2.0 +/- 0.0
+00091 PASS: sdo[0x6401][11] 2.0
+00092 PwrSetVoltage = 0 : NULL
+00093 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00093 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00093 PASS: sdo[0x6000][1] 0.0
+00094 
+00094 PwrSetVoltage = 140 : NULL
+00095 #verify count
+00095 NULL : sdo[0x6401][11] = 3 | 0 | 0.1
+00095 TEST: sdo[0x6401][11] 3.0 +/- 0.0
+00095 PASS: sdo[0x6401][11] 3.0
+00096 PwrSetVoltage = 0 : NULL
+00097 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00097 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00097 PASS: sdo[0x6000][1] 0.0
+00098 
+00098 PwrSetVoltage = 140 : NULL
+00099 #verify count
+00099 NULL : sdo[0x6401][11] = 4 | 0 | 0.1
+00099 TEST: sdo[0x6401][11] 4.0 +/- 0.0
+00099 PASS: sdo[0x6401][11] 4.0
+00100 PwrSetVoltage = 0 : NULL
+00101 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00101 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00101 PASS: sdo[0x6000][1] 0.0
+00102 
+00102 PwrSetVoltage = 140 : NULL
+00103 #verify count
+00103 NULL : sdo[0x6401][11] = 5 | 0 | 0.1
+00103 TEST: sdo[0x6401][11] 5.0 +/- 0.0
+00103 PASS: sdo[0x6401][11] 5.0
+00104 PwrSetVoltage = 0 : NULL
+00105 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00105 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00105 PASS: sdo[0x6000][1] 0.0
+00106 #verify output status at setpoint
+00106 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00107 J3_03 = 0 : NULL : WAIT = 0.2
+00108 J2_07 = 1 : NULL : WAIT = 0.2
+00109 NULL : MeterVolts = 0 | 1 | 0.1
+00109 TEST: MeterVolts 0.0 +/- 1.0
+00109 PASS: MeterVolts 0.814
+00110 J2_07 = 0 : NULL : WAIT = 0.2
+00111 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00112 J3_03 = 1 : NULL : WAIT = 0.2
+00113 
+00113 PwrSetVoltage = 140 : NULL
+00114 #verify no rollover
+00114 NULL : sdo[0x6401][11] = 5 | 0 | 0.1
+00114 TEST: sdo[0x6401][11] 5.0 +/- 0.0
+00114 PASS: sdo[0x6401][11] 5.0
+00115 PwrSetVoltage = 0 : NULL
+00116 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00116 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00116 PASS: sdo[0x6000][1] 0.0
+00117 
+00117 #switch out input
+00117 J3_03 = 0 : NULL : WAIT = 0.2
+00118 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00119 #turn off output and switch out is off
+00119 sdo[0x6411][7] = 0 : NULL : WAIT = 0.2
+00120 #disable counter
+00120 sdo[0x2003][2] = 1 : NULL : WAIT = 0.1
+00121 #verify count
+00121 NULL : sdo[0x6401][11] = 6 | 0 | 0.1
+00121 TEST: sdo[0x6401][11] 6.0 +/- 0.0
+00121 FAIL: sdo[0x6401][11] 5.0
+00122 #send counter reset
+00122 sdo[0x2003][2] = 4 : NULL : WAIT = 0.1
+00123 #verify count reset
+00123 NULL : sdo[0x6401][11] = 0 | 0 | 0.1
+00123 TEST: sdo[0x6401][11] 0.0 +/- 0.0
+00123 PASS: sdo[0x6401][11] 0.0
+00124 
+00124 sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
+00125 #switch out load line
+00125 J3_03 = 0 : NULL : WAIT = 0.1
+00126 #****** OVERFLOW, SET POINT = 3, MAX COUNT = 5, NO OUTPUT INTERLOCK
+00126 #disable global modes
+00126 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00127 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00128 
+00128 #configure Port Modes
+00128 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00129 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00130 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00131 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00132 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00133 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00134 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00135 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00136 
+00136 #config counter
+00136 sdo[0x2003][1] = 21 : NULL : WAIT = 0.1
+00137 
+00137 #config set point
+00137 sdo[0x3001][1] = 3 : NULL : WAIT = 0.1
+00138 
+00138 #verify setpoint
+00138 NULL : sdo[0x6401][10] = 3 | 0 | 0.1
+00138 TEST: sdo[0x6401][10] 3.0 +/- 0.0
+00138 PASS: sdo[0x6401][10] 3.0
+00139 #switch in and on interlock output
+00139 J2_05 = 1 : NULL : WAIT = 0.2
+00140 sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+00141 #verify voltage
+00141 NULL : MeterVolts = 14 | 1 | 0.1
+00141 TEST: MeterVolts 14.0 +/- 1.0
+00141 PASS: MeterVolts 14.453
+00142 #switch out interlock output
+00142 J2_05 = 0 : NULL : WAIT = 0.2
+00143 #switch in test supply
+00143 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00144 #switch in input
+00144 J3_01 = 1 : NULL : WAIT = 0.2
+00145 
+00145 #testing count events
+00145 PwrSetVoltage = 140 : NULL
+00146 #verify count
+00146 NULL : sdo[0x6401][9] = 1 | 0 | 0.1
+00146 TEST: sdo[0x6401][9] 1.0 +/- 0.0
+00146 PASS: sdo[0x6401][9] 1.0
+00147 PwrSetVoltage = 0 : NULL
+00148 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00148 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00148 PASS: sdo[0x6000][1] 0.0
+00149 
+00149 PwrSetVoltage = 140 : NULL
+00150 #verify count
+00150 NULL : sdo[0x6401][9] = 2 | 0 | 0.1
+00150 TEST: sdo[0x6401][9] 2.0 +/- 0.0
+00150 PASS: sdo[0x6401][9] 2.0
+00151 PwrSetVoltage = 0 : NULL
+00152 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00152 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00152 PASS: sdo[0x6000][1] 0.0
+00153 
+00153 PwrSetVoltage = 140 : NULL
+00154 #verify count
+00154 NULL : sdo[0x6401][9] = 3 | 0 | 0.1
+00154 TEST: sdo[0x6401][9] 3.0 +/- 0.0
+00154 PASS: sdo[0x6401][9] 3.0
+00155 PwrSetVoltage = 0 : NULL
+00156 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00156 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00156 PASS: sdo[0x6000][1] 0.0
+00157 #verify output status at setpoint
+00157 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00158 J3_01 = 0 : NULL : WAIT = 0.2
+00159 J2_05 = 1 : NULL : WAIT = 0.2
+00160 NULL : MeterVolts = 14 | 1 | 0.1
+00160 TEST: MeterVolts 14.0 +/- 1.0
+00160 PASS: MeterVolts 14.453
+00161 J2_05 = 0 : NULL : WAIT = 0.2
+00162 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00163 J3_01 = 1 : NULL : WAIT = 0.2
+00164 
+00164 PwrSetVoltage = 140 : NULL
+00165 #verify count
+00165 NULL : sdo[0x6401][9] = 4 | 0 | 0.1
+00165 TEST: sdo[0x6401][9] 4.0 +/- 0.0
+00165 PASS: sdo[0x6401][9] 4.0
+00166 PwrSetVoltage = 0 : NULL
+00167 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00167 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00167 PASS: sdo[0x6000][1] 0.0
+00168 
+00168 PwrSetVoltage = 140 : NULL
+00169 #verify count
+00169 NULL : sdo[0x6401][9] = 5 | 0 | 0.1
+00169 TEST: sdo[0x6401][9] 5.0 +/- 0.0
+00169 PASS: sdo[0x6401][9] 5.0
+00170 PwrSetVoltage = 0 : NULL
+00171 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00171 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00171 PASS: sdo[0x6000][1] 0.0
+00172 
+00172 PwrSetVoltage = 140 : NULL
+00173 #verify count
+00173 NULL : sdo[0x6401][9] = 6 | 0 | 0.1
+00173 TEST: sdo[0x6401][9] 6.0 +/- 0.0
+00173 PASS: sdo[0x6401][9] 6.0
+00174 PwrSetVoltage = 0 : NULL
+00175 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00175 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00175 PASS: sdo[0x6000][1] 0.0
+00176 
+00176 #switch out input
+00176 J3_01 = 0 : NULL : WAIT = 0.2
+00177 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00178 #turn off output and switch out is off
+00178 sdo[0x6411][5] = 0 : NULL : WAIT = 0.2
+00179 #disable counter
+00179 sdo[0x2003][1] = 1 : NULL : WAIT = 0.1
+00180 #verify count
+00180 NULL : sdo[0x6401][9] = 3 | 0 | 0.1
+00180 TEST: sdo[0x6401][9] 3.0 +/- 0.0
+00180 PASS: sdo[0x6401][9] 3.0
+00181 #send counter reset
+00181 sdo[0x2003][1] = 4 : NULL : WAIT = 0.1
+00182 #verify count reset
+00182 NULL : sdo[0x6401][9] = 0 | 0 | 0.1
+00182 TEST: sdo[0x6401][9] 0.0 +/- 0.0
+00182 PASS: sdo[0x6401][9] 0.0
+00183 
+00183 sdo[0x3001][1] = 0 : NULL : WAIT = 0.1
+00184 #disable global modes
+00184 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00185 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00186 
+00186 #configure Port Modes
+00186 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00187 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00188 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00189 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00190 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00191 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00192 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00193 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00194 
+00194 #config counter
+00194 sdo[0x2003][2] = 21 : NULL : WAIT = 0.1
+00195 
+00195 #config set point
+00195 sdo[0x3001][2] = 3 : NULL : WAIT = 0.1
+00196 
+00196 #verify setpoint
+00196 NULL : sdo[0x6401][12] = 3 | 0 | 0.1
+00196 TEST: sdo[0x6401][12] 3.0 +/- 0.0
+00196 PASS: sdo[0x6401][12] 3.0
+00197 #switch in and on interlock output
+00197 J2_07 = 1 : NULL : WAIT = 0.2
+00198 sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+00199 #verify voltage
+00199 NULL : MeterVolts = 14 | 1 | 0.1
+00199 TEST: MeterVolts 14.0 +/- 1.0
+00199 PASS: MeterVolts 14.453
+00200 #switch out interlock output
+00200 J2_07 = 0 : NULL : WAIT = 0.2
+00201 #switch in test supply
+00201 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00202 #switch in input
+00202 J3_03 = 1 : NULL : WAIT = 0.2
+00203 
+00203 #testing count events
+00203 PwrSetVoltage = 140 : NULL
+00204 #verify count
+00204 NULL : sdo[0x6401][11] = 1 | 0 | 0.1
+00204 TEST: sdo[0x6401][11] 1.0 +/- 0.0
+00204 PASS: sdo[0x6401][11] 1.0
+00205 PwrSetVoltage = 0 : NULL
+00206 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00206 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00206 PASS: sdo[0x6000][1] 0.0
+00207 
+00207 PwrSetVoltage = 140 : NULL
+00208 #verify count
+00208 NULL : sdo[0x6401][11] = 2 | 0 | 0.1
+00208 TEST: sdo[0x6401][11] 2.0 +/- 0.0
+00208 PASS: sdo[0x6401][11] 2.0
+00209 PwrSetVoltage = 0 : NULL
+00210 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00210 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00210 PASS: sdo[0x6000][1] 0.0
+00211 
+00211 PwrSetVoltage = 140 : NULL
+00212 #verify count
+00212 NULL : sdo[0x6401][11] = 3 | 0 | 0.1
+00212 TEST: sdo[0x6401][11] 3.0 +/- 0.0
+00212 PASS: sdo[0x6401][11] 3.0
+00213 PwrSetVoltage = 0 : NULL
+00214 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00214 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00214 PASS: sdo[0x6000][1] 0.0
+00215 #verify output status at setpoint
+00215 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00216 J3_03 = 0 : NULL : WAIT = 0.2
+00217 J2_07 = 1 : NULL : WAIT = 0.2
+00218 NULL : MeterVolts = 14 | 1 | 0.1
+00218 TEST: MeterVolts 14.0 +/- 1.0
+00218 PASS: MeterVolts 14.454
+00219 J2_07 = 0 : NULL : WAIT = 0.2
+00220 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00221 J3_03 = 1 : NULL : WAIT = 0.2
+00222 
+00222 PwrSetVoltage = 140 : NULL
+00223 #verify count
+00223 NULL : sdo[0x6401][11] = 4 | 0 | 0.1
+00223 TEST: sdo[0x6401][11] 4.0 +/- 0.0
+00223 PASS: sdo[0x6401][11] 4.0
+00224 PwrSetVoltage = 0 : NULL
+00225 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00225 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00225 PASS: sdo[0x6000][1] 0.0
+00226 
+00226 PwrSetVoltage = 140 : NULL
+00227 #verify count
+00227 NULL : sdo[0x6401][11] = 5 | 0 | 0.1
+00227 TEST: sdo[0x6401][11] 5.0 +/- 0.0
+00227 PASS: sdo[0x6401][11] 5.0
+00228 PwrSetVoltage = 0 : NULL
+00229 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00229 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00229 PASS: sdo[0x6000][1] 0.0
+00230 
+00230 PwrSetVoltage = 140 : NULL
+00231 #verify count
+00231 NULL : sdo[0x6401][11] = 6 | 0 | 0.1
+00231 TEST: sdo[0x6401][11] 6.0 +/- 0.0
+00231 PASS: sdo[0x6401][11] 6.0
+00232 PwrSetVoltage = 0 : NULL
+00233 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00233 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00233 PASS: sdo[0x6000][1] 0.0
+00234 
+00234 #switch out input
+00234 J3_03 = 0 : NULL : WAIT = 0.2
+00235 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00236 #turn off output and switch out is off
+00236 sdo[0x6411][7] = 0 : NULL : WAIT = 0.2
+00237 #disable counter
+00237 sdo[0x2003][2] = 1 : NULL : WAIT = 0.1
+00238 #verify count
+00238 NULL : sdo[0x6401][11] = 3 | 0 | 0.1
+00238 TEST: sdo[0x6401][11] 3.0 +/- 0.0
+00238 PASS: sdo[0x6401][11] 3.0
+00239 #send counter reset
+00239 sdo[0x2003][2] = 4 : NULL : WAIT = 0.1
+00240 #verify count reset
+00240 NULL : sdo[0x6401][11] = 0 | 0 | 0.1
+00240 TEST: sdo[0x6401][11] 0.0 +/- 0.0
+00240 PASS: sdo[0x6401][11] 0.0
+00241 
+00241 sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
+00242 #switch out load line
+00242 J3_03 = 0 : NULL : WAIT = 0.1
+00243 #****** OVERFLOW, SET POINT = 3, MAX COUNT = 5, OUTPUT INTERLOCK
+00243 #disable global modes
+00243 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00244 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00245 
+00245 #configure Port Modes
+00245 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00246 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00247 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00248 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00249 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00250 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00251 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00252 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00253 
+00253 #config counter
+00253 sdo[0x2003][1] = 85 : NULL : WAIT = 0.1
+00254 
+00254 #config set point
+00254 sdo[0x3001][1] = 2 : NULL : WAIT = 0.1
+00255 
+00255 #verify setpoint
+00255 NULL : sdo[0x6401][10] = 2 | 0 | 0.1
+00255 TEST: sdo[0x6401][10] 2.0 +/- 0.0
+00255 PASS: sdo[0x6401][10] 2.0
+00256 #switch in and on interlock output
+00256 J2_05 = 1 : NULL : WAIT = 0.2
+00257 sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+00258 #verify voltage
+00258 NULL : MeterVolts = 14 | 1 | 0.1
+00258 TEST: MeterVolts 14.0 +/- 1.0
+00258 PASS: MeterVolts 14.453
+00259 #switch out interlock output
+00259 J2_05 = 0 : NULL : WAIT = 0.2
+00260 #switch in test supply
+00260 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00261 #switch in input
+00261 J3_01 = 1 : NULL : WAIT = 0.2
+00262 
+00262 #testing count events
+00262 PwrSetVoltage = 140 : NULL
+00263 #verify count
+00263 NULL : sdo[0x6401][9] = 1 | 0 | 0.1
+00263 TEST: sdo[0x6401][9] 1.0 +/- 0.0
+00263 PASS: sdo[0x6401][9] 1.0
+00264 PwrSetVoltage = 0 : NULL
+00265 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00265 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00265 PASS: sdo[0x6000][1] 0.0
+00266 
+00266 PwrSetVoltage = 140 : NULL
+00267 #verify count
+00267 NULL : sdo[0x6401][9] = 2 | 0 | 0.1
+00267 TEST: sdo[0x6401][9] 2.0 +/- 0.0
+00267 PASS: sdo[0x6401][9] 2.0
+00268 PwrSetVoltage = 0 : NULL
+00269 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00269 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00269 PASS: sdo[0x6000][1] 0.0
+00270 #verify output status at setpoint
+00270 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00271 J3_01 = 0 : NULL : WAIT = 0.2
+00272 J2_05 = 1 : NULL : WAIT = 0.2
+00273 NULL : MeterVolts = 0 | 1 | 0.1
+00273 TEST: MeterVolts 0.0 +/- 1.0
+00273 PASS: MeterVolts 0.087
+00274 J2_05 = 0 : NULL : WAIT = 0.2
+00275 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00276 J3_01 = 1 : NULL : WAIT = 0.2
+00277 
+00277 PwrSetVoltage = 140 : NULL
+00278 #verify count
+00278 NULL : sdo[0x6401][9] = 3 | 0 | 0.1
+00278 TEST: sdo[0x6401][9] 3.0 +/- 0.0
+00278 PASS: sdo[0x6401][9] 3.0
+00279 PwrSetVoltage = 0 : NULL
+00280 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00280 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00280 PASS: sdo[0x6000][1] 0.0
+00281 
+00281 PwrSetVoltage = 140 : NULL
+00282 #verify count
+00282 NULL : sdo[0x6401][9] = 4 | 0 | 0.1
+00282 TEST: sdo[0x6401][9] 4.0 +/- 0.0
+00282 PASS: sdo[0x6401][9] 4.0
+00283 PwrSetVoltage = 0 : NULL
+00284 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00284 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00284 PASS: sdo[0x6000][1] 0.0
+00285 
+00285 PwrSetVoltage = 140 : NULL
+00286 #verify count
+00286 NULL : sdo[0x6401][9] = 5 | 0 | 0.1
+00286 TEST: sdo[0x6401][9] 5.0 +/- 0.0
+00286 PASS: sdo[0x6401][9] 5.0
+00287 PwrSetVoltage = 0 : NULL
+00288 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00288 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00288 PASS: sdo[0x6000][1] 0.0
+00289 
+00289 PwrSetVoltage = 140 : NULL
+00290 #verify count
+00290 NULL : sdo[0x6401][9] = 6 | 0 | 0.1
+00290 TEST: sdo[0x6401][9] 6.0 +/- 0.0
+00290 PASS: sdo[0x6401][9] 6.0
+00291 PwrSetVoltage = 0 : NULL
+00292 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00292 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00292 PASS: sdo[0x6000][1] 0.0
+00293 
+00293 #switch out input
+00293 J3_01 = 0 : NULL : WAIT = 0.2
+00294 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00295 #turn off output and switch out is off
+00295 sdo[0x6411][5] = 0 : NULL : WAIT = 0.2
+00296 #disable counter
+00296 sdo[0x2003][1] = 1 : NULL : WAIT = 0.1
+00297 #verify count
+00297 NULL : sdo[0x6401][9] = 2 | 0 | 0.1
+00297 TEST: sdo[0x6401][9] 2.0 +/- 0.0
+00297 PASS: sdo[0x6401][9] 2.0
+00298 #send counter reset
+00298 sdo[0x2003][1] = 4 : NULL : WAIT = 0.1
+00299 #verify count reset
+00299 NULL : sdo[0x6401][9] = 0 | 0 | 0.1
+00299 TEST: sdo[0x6401][9] 0.0 +/- 0.0
+00299 PASS: sdo[0x6401][9] 0.0
+00300 
+00300 sdo[0x3001][1] = 0 : NULL : WAIT = 0.1
+00301 #disable global modes
+00301 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00302 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00303 
+00303 #configure Port Modes
+00303 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00304 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00305 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00306 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00307 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00308 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00309 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00310 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00311 
+00311 #config counter
+00311 sdo[0x2003][2] = 85 : NULL : WAIT = 0.1
+00312 
+00312 #config set point
+00312 sdo[0x3001][2] = 2 : NULL : WAIT = 0.1
+00313 
+00313 #verify setpoint
+00313 NULL : sdo[0x6401][12] = 2 | 0 | 0.1
+00313 TEST: sdo[0x6401][12] 2.0 +/- 0.0
+00313 PASS: sdo[0x6401][12] 2.0
+00314 #switch in and on interlock output
+00314 J2_07 = 1 : NULL : WAIT = 0.2
+00315 sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+00316 #verify voltage
+00316 NULL : MeterVolts = 14 | 1 | 0.1
+00316 TEST: MeterVolts 14.0 +/- 1.0
+00316 PASS: MeterVolts 14.454
+00317 #switch out interlock output
+00317 J2_07 = 0 : NULL : WAIT = 0.2
+00318 #switch in test supply
+00318 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00319 #switch in input
+00319 J3_03 = 1 : NULL : WAIT = 0.2
+00320 
+00320 #testing count events
+00320 PwrSetVoltage = 140 : NULL
+00321 #verify count
+00321 NULL : sdo[0x6401][11] = 1 | 0 | 0.1
+00321 TEST: sdo[0x6401][11] 1.0 +/- 0.0
+00321 PASS: sdo[0x6401][11] 1.0
+00322 PwrSetVoltage = 0 : NULL
+00323 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00323 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00323 PASS: sdo[0x6000][1] 0.0
+00324 
+00324 PwrSetVoltage = 140 : NULL
+00325 #verify count
+00325 NULL : sdo[0x6401][11] = 2 | 0 | 0.1
+00325 TEST: sdo[0x6401][11] 2.0 +/- 0.0
+00325 PASS: sdo[0x6401][11] 2.0
+00326 PwrSetVoltage = 0 : NULL
+00327 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00327 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00327 PASS: sdo[0x6000][1] 0.0
+00328 #verify output status at setpoint
+00328 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00329 J3_03 = 0 : NULL : WAIT = 0.2
+00330 J2_07 = 1 : NULL : WAIT = 0.2
+00331 NULL : MeterVolts = 0 | 1 | 0.1
+00331 TEST: MeterVolts 0.0 +/- 1.0
+00331 PASS: MeterVolts 0.181
+00332 J2_07 = 0 : NULL : WAIT = 0.2
+00333 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00334 J3_03 = 1 : NULL : WAIT = 0.2
+00335 
+00335 PwrSetVoltage = 140 : NULL
+00336 #verify count
+00336 NULL : sdo[0x6401][11] = 3 | 0 | 0.1
+00336 TEST: sdo[0x6401][11] 3.0 +/- 0.0
+00336 PASS: sdo[0x6401][11] 3.0
+00337 PwrSetVoltage = 0 : NULL
+00338 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00338 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00338 PASS: sdo[0x6000][1] 0.0
+00339 
+00339 PwrSetVoltage = 140 : NULL
+00340 #verify count
+00340 NULL : sdo[0x6401][11] = 4 | 0 | 0.1
+00340 TEST: sdo[0x6401][11] 4.0 +/- 0.0
+00340 PASS: sdo[0x6401][11] 4.0
+00341 PwrSetVoltage = 0 : NULL
+00342 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00342 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00342 PASS: sdo[0x6000][1] 0.0
+00343 
+00343 PwrSetVoltage = 140 : NULL
+00344 #verify count
+00344 NULL : sdo[0x6401][11] = 5 | 0 | 0.1
+00344 TEST: sdo[0x6401][11] 5.0 +/- 0.0
+00344 PASS: sdo[0x6401][11] 5.0
+00345 PwrSetVoltage = 0 : NULL
+00346 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00346 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00346 PASS: sdo[0x6000][1] 0.0
+00347 
+00347 PwrSetVoltage = 140 : NULL
+00348 #verify count
+00348 NULL : sdo[0x6401][11] = 6 | 0 | 0.1
+00348 TEST: sdo[0x6401][11] 6.0 +/- 0.0
+00348 PASS: sdo[0x6401][11] 6.0
+00349 PwrSetVoltage = 0 : NULL
+00350 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00350 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00350 PASS: sdo[0x6000][1] 0.0
+00351 
+00351 #switch out input
+00351 J3_03 = 0 : NULL : WAIT = 0.2
+00352 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00353 #turn off output and switch out is off
+00353 sdo[0x6411][7] = 0 : NULL : WAIT = 0.2
+00354 #disable counter
+00354 sdo[0x2003][2] = 1 : NULL : WAIT = 0.1
+00355 #verify count
+00355 NULL : sdo[0x6401][11] = 2 | 0 | 0.1
+00355 TEST: sdo[0x6401][11] 2.0 +/- 0.0
+00355 PASS: sdo[0x6401][11] 2.0
+00356 #send counter reset
+00356 sdo[0x2003][2] = 4 : NULL : WAIT = 0.1
+00357 #verify count reset
+00357 NULL : sdo[0x6401][11] = 0 | 0 | 0.1
+00357 TEST: sdo[0x6401][11] 0.0 +/- 0.0
+00357 PASS: sdo[0x6401][11] 0.0
+00358 
+00358 sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
+00359 #switch out load line
+00359 J3_03 = 0 : NULL : WAIT = 0.1
+00360 #****** OVERFLOW, SET POINT = 0, MAX COUNT = 5, NO OUTPUT INTERLOCK
+00360 #disable global modes
+00360 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00361 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00362 
+00362 #configure Port Modes
+00362 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00363 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00364 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00365 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00366 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00367 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00368 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00369 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00370 
+00370 #config counter
+00370 sdo[0x2003][1] = 21 : NULL : WAIT = 0.1
+00371 
+00371 #config set point
+00371 sdo[0x3001][1] = 0 : NULL : WAIT = 0.1
+00372 
+00372 #verify setpoint
+00372 NULL : sdo[0x6401][10] = 0 | 0 | 0.1
+00372 TEST: sdo[0x6401][10] 0.0 +/- 0.0
+00372 PASS: sdo[0x6401][10] 0.0
+00373 #switch in and on interlock output
+00373 J2_05 = 1 : NULL : WAIT = 0.2
+00374 sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+00375 #verify voltage
+00375 NULL : MeterVolts = 14 | 1 | 0.1
+00375 TEST: MeterVolts 14.0 +/- 1.0
+00375 PASS: MeterVolts 14.454
+00376 #switch out interlock output
+00376 J2_05 = 0 : NULL : WAIT = 0.2
+00377 #switch in test supply
+00377 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00378 #switch in input
+00378 J3_01 = 1 : NULL : WAIT = 0.2
+00379 
+00379 #testing count events
+00379 PwrSetVoltage = 140 : NULL
+00380 #verify count
+00380 NULL : sdo[0x6401][9] = 1 | 0 | 0.1
+00380 TEST: sdo[0x6401][9] 1.0 +/- 0.0
+00380 PASS: sdo[0x6401][9] 1.0
+00381 PwrSetVoltage = 0 : NULL
+00382 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00382 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00382 PASS: sdo[0x6000][1] 0.0
+00383 
+00383 PwrSetVoltage = 140 : NULL
+00384 #verify count
+00384 NULL : sdo[0x6401][9] = 2 | 0 | 0.1
+00384 TEST: sdo[0x6401][9] 2.0 +/- 0.0
+00384 PASS: sdo[0x6401][9] 2.0
+00385 PwrSetVoltage = 0 : NULL
+00386 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00386 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00386 PASS: sdo[0x6000][1] 0.0
+00387 
+00387 PwrSetVoltage = 140 : NULL
+00388 #verify count
+00388 NULL : sdo[0x6401][9] = 3 | 0 | 0.1
+00388 TEST: sdo[0x6401][9] 3.0 +/- 0.0
+00388 PASS: sdo[0x6401][9] 3.0
+00389 PwrSetVoltage = 0 : NULL
+00390 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00390 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00390 PASS: sdo[0x6000][1] 0.0
+00391 
+00391 PwrSetVoltage = 140 : NULL
+00392 #verify count
+00392 NULL : sdo[0x6401][9] = 4 | 0 | 0.1
+00392 TEST: sdo[0x6401][9] 4.0 +/- 0.0
+00392 PASS: sdo[0x6401][9] 4.0
+00393 PwrSetVoltage = 0 : NULL
+00394 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00394 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00394 PASS: sdo[0x6000][1] 0.0
+00395 
+00395 PwrSetVoltage = 140 : NULL
+00396 #verify count
+00396 NULL : sdo[0x6401][9] = 5 | 0 | 0.1
+00396 TEST: sdo[0x6401][9] 5.0 +/- 0.0
+00396 PASS: sdo[0x6401][9] 5.0
+00397 PwrSetVoltage = 0 : NULL
+00398 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00398 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00398 PASS: sdo[0x6000][1] 0.0
+00399 
+00399 PwrSetVoltage = 140 : NULL
+00400 #verify count
+00400 NULL : sdo[0x6401][9] = 6 | 0 | 0.1
+00400 TEST: sdo[0x6401][9] 6.0 +/- 0.0
+00400 PASS: sdo[0x6401][9] 6.0
+00401 PwrSetVoltage = 0 : NULL
+00402 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00402 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00402 PASS: sdo[0x6000][1] 0.0
+00403 
+00403 #switch out input
+00403 J3_01 = 0 : NULL : WAIT = 0.2
+00404 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00405 #turn off output and switch out is off
+00405 sdo[0x6411][5] = 0 : NULL : WAIT = 0.2
+00406 #disable counter
+00406 sdo[0x2003][1] = 1 : NULL : WAIT = 0.1
+00407 #verify count
+00407 NULL : sdo[0x6401][9] = 0 | 0 | 0.1
+00407 TEST: sdo[0x6401][9] 0.0 +/- 0.0
+00407 PASS: sdo[0x6401][9] 0.0
+00408 #send counter reset
+00408 sdo[0x2003][1] = 4 : NULL : WAIT = 0.1
+00409 #verify count reset
+00409 NULL : sdo[0x6401][9] = 0 | 0 | 0.1
+00409 TEST: sdo[0x6401][9] 0.0 +/- 0.0
+00409 PASS: sdo[0x6401][9] 0.0
+00410 
+00410 sdo[0x3001][1] = 0 : NULL : WAIT = 0.1
+00411 #disable global modes
+00411 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00412 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00413 
+00413 #configure Port Modes
+00413 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00414 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00415 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00416 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00417 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00418 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00419 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00420 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00421 
+00421 #config counter
+00421 sdo[0x2003][2] = 21 : NULL : WAIT = 0.1
+00422 
+00422 #config set point
+00422 sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
+00423 
+00423 #verify setpoint
+00423 NULL : sdo[0x6401][12] = 0 | 0 | 0.1
+00423 TEST: sdo[0x6401][12] 0.0 +/- 0.0
+00423 PASS: sdo[0x6401][12] 0.0
+00424 #switch in and on interlock output
+00424 J2_07 = 1 : NULL : WAIT = 0.2
+00425 sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+00426 #verify voltage
+00426 NULL : MeterVolts = 14 | 1 | 0.1
+00426 TEST: MeterVolts 14.0 +/- 1.0
+00426 PASS: MeterVolts 14.454
+00427 #switch out interlock output
+00427 J2_07 = 0 : NULL : WAIT = 0.2
+00428 #switch in test supply
+00428 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00429 #switch in input
+00429 J3_03 = 1 : NULL : WAIT = 0.2
+00430 
+00430 #testing count events
+00430 PwrSetVoltage = 140 : NULL
+00431 #verify count
+00431 NULL : sdo[0x6401][11] = 1 | 0 | 0.1
+00431 TEST: sdo[0x6401][11] 1.0 +/- 0.0
+00431 PASS: sdo[0x6401][11] 1.0
+00432 PwrSetVoltage = 0 : NULL
+00433 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00433 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00433 PASS: sdo[0x6000][1] 0.0
+00434 
+00434 PwrSetVoltage = 140 : NULL
+00435 #verify count
+00435 NULL : sdo[0x6401][11] = 2 | 0 | 0.1
+00435 TEST: sdo[0x6401][11] 2.0 +/- 0.0
+00435 PASS: sdo[0x6401][11] 2.0
+00436 PwrSetVoltage = 0 : NULL
+00437 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00437 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00437 PASS: sdo[0x6000][1] 0.0
+00438 
+00438 PwrSetVoltage = 140 : NULL
+00439 #verify count
+00439 NULL : sdo[0x6401][11] = 3 | 0 | 0.1
+00439 TEST: sdo[0x6401][11] 3.0 +/- 0.0
+00439 PASS: sdo[0x6401][11] 3.0
+00440 PwrSetVoltage = 0 : NULL
+00441 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00441 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00441 PASS: sdo[0x6000][1] 0.0
+00442 
+00442 PwrSetVoltage = 140 : NULL
+00443 #verify count
+00443 NULL : sdo[0x6401][11] = 4 | 0 | 0.1
+00443 TEST: sdo[0x6401][11] 4.0 +/- 0.0
+00443 PASS: sdo[0x6401][11] 4.0
+00444 PwrSetVoltage = 0 : NULL
+00445 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00445 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00445 PASS: sdo[0x6000][1] 0.0
+00446 
+00446 PwrSetVoltage = 140 : NULL
+00447 #verify count
+00447 NULL : sdo[0x6401][11] = 5 | 0 | 0.1
+00447 TEST: sdo[0x6401][11] 5.0 +/- 0.0
+00447 PASS: sdo[0x6401][11] 5.0
+00448 PwrSetVoltage = 0 : NULL
+00449 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00449 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00449 PASS: sdo[0x6000][1] 0.0
+00450 
+00450 PwrSetVoltage = 140 : NULL
+00451 #verify count
+00451 NULL : sdo[0x6401][11] = 6 | 0 | 0.1
+00451 TEST: sdo[0x6401][11] 6.0 +/- 0.0
+00451 PASS: sdo[0x6401][11] 6.0
+00452 PwrSetVoltage = 0 : NULL
+00453 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00453 TEST: sdo[0x6000][1] 0.0 +/- 0.0
+00453 PASS: sdo[0x6000][1] 0.0
+00454 
+00454 #switch out input
+00454 J3_03 = 0 : NULL : WAIT = 0.2
+00455 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00456 #turn off output and switch out is off
+00456 sdo[0x6411][7] = 0 : NULL : WAIT = 0.2
+00457 #disable counter
+00457 sdo[0x2003][2] = 1 : NULL : WAIT = 0.1
+00458 #verify count
+00458 NULL : sdo[0x6401][11] = 0 | 0 | 0.1
+00458 TEST: sdo[0x6401][11] 0.0 +/- 0.0
+00458 PASS: sdo[0x6401][11] 0.0
+00459 #send counter reset
+00459 sdo[0x2003][2] = 4 : NULL : WAIT = 0.1
+00460 #verify count reset
+00460 NULL : sdo[0x6401][11] = 0 | 0 | 0.1
+00460 TEST: sdo[0x6401][11] 0.0 +/- 0.0
+00460 PASS: sdo[0x6401][11] 0.0
+00461 
+00461 sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
+00462 #switch out load line
+00462 J3_03 = 0 : NULL : WAIT = 0.1
+00463 #****** MAX MCOUNT
+00463 #disable global modes
+00463 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00464 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00465 
+00465 #configure Port Modes
+00465 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00466 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00467 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00468 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00469 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00470 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00471 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00472 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00473 
+00473 
+00473 #config counter
+00473 sdo[0x2003][1] = 69 : NULL : WAIT = 0.1
+00474 
+00474 #verify setpoint
+00474 NULL : sdo[0x6401][10] = 65535 | 0 | 0.1
+00474 TEST: sdo[0x6401][10] 65535.0 +/- 0.0
+00474 FAIL: sdo[0x6401][10] 0.0
+00475 #switch in and on interlock output
+00475 J0_08_METER_LOAD = 1 : NULL : WAIT = 0.2
+00476 J2_05 = 1 : NULL : WAIT = 0.2
+00477 sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+00478 #verify voltage
+00478 NULL : MeterVolts = 14 | 1 | 0.1
+00478 TEST: MeterVolts 14.0 +/- 1.0
+00478 FAIL: MeterVolts 0.0
+00479 #switch out interlock output
+00479 J2_05 = 0 : NULL : WAIT = 0.2
+00480 J0_08_METER_LOAD = 0 : NULL : WAIT = 0.2
+00481 #switch in test supply
+00481 #switch in input
+00481 J3_01 = 1 : NULL : WAIT = 0.2
+00482 
+00482 
+00482 #-----setup pat-----
+00482 #setup freq
+00482 J0_11_FREQ_GEN = 1 : NULL : WAIT = 1
+00483 
+00483 #testing max count
+00483 #wait for signal gen to max count
+00483 NULL : NULL : WAIT = 20
+00484 NULL : sdo[0x5001][4] = 0 | 0 | 0.4
+00484 TEST: sdo[0x5001][4] 0.0 +/- 0.0
+00484 PASS: sdo[0x5001][4] 0.0
+00485 
+00485 #switch out input
+00485 J3_01 = 0 : NULL : WAIT = 0.2
+00486 J0_11_FREQ_GEN = 0 : NULL : WAIT = 1
+00487 #turn off output and switch out is off
+00487 sdo[0x6411][5] = 0 : NULL : WAIT = 0.2
+00488 #disable counter
+00488 sdo[0x2003][1] = 1 : NULL : WAIT = 0.2
+00489 #verify count
+00489 NULL : sdo[0x6401][9] = 65535 | 0 | 0.1
+00489 TEST: sdo[0x6401][9] 65535.0 +/- 0.0
+00489 FAIL: sdo[0x6401][9] 0.0
+00490 #send counter reset
+00490 sdo[0x2003][1] = 4 : NULL : WAIT = 0.2
+00491 #verify count reset
+00491 NULL : sdo[0x6401][9] = 0 | 0 | 0.1
+00491 TEST: sdo[0x6401][9] 0.0 +/- 0.0
+00491 PASS: sdo[0x6401][9] 0.0
+00492 
+00492 sdo[0x3001][1] = 0 : NULL : WAIT = 0.1
+00493 #disable global modes
+00493 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00494 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00495 
+00495 #configure Port Modes
+00495 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00496 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00497 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00498 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00499 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00500 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00501 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00502 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00503 
+00503 
+00503 #config counter
+00503 sdo[0x2003][2] = 69 : NULL : WAIT = 0.1
+00504 
+00504 #verify setpoint
+00504 NULL : sdo[0x6401][12] = 65535 | 0 | 0.1
+00504 TEST: sdo[0x6401][12] 65535.0 +/- 0.0
+00504 FAIL: sdo[0x6401][12] 0.0
+00505 #switch in and on interlock output
+00505 J0_08_METER_LOAD = 1 : NULL : WAIT = 0.2
+00506 J2_07 = 1 : NULL : WAIT = 0.2
+00507 sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+00508 #verify voltage
+00508 NULL : MeterVolts = 14 | 1 | 0.1
+00508 TEST: MeterVolts 14.0 +/- 1.0
+00508 FAIL: MeterVolts 0.0
+00509 #switch out interlock output
+00509 J2_07 = 0 : NULL : WAIT = 0.2
+00510 J0_08_METER_LOAD = 0 : NULL : WAIT = 0.2
+00511 #switch in test supply
+00511 #switch in input
+00511 J3_03 = 1 : NULL : WAIT = 0.2
+00512 
+00512 
+00512 #-----setup pat-----
+00512 #setup freq
+00512 J0_11_FREQ_GEN = 1 : NULL : WAIT = 1
+00513 
+00513 #testing max count
+00513 #wait for signal gen to max count
+00513 NULL : NULL : WAIT = 20
+00514 NULL : sdo[0x5001][4] = 0 | 0 | 0.4
+00514 TEST: sdo[0x5001][4] 0.0 +/- 0.0
+00514 PASS: sdo[0x5001][4] 0.0
+00515 
+00515 #switch out input
+00515 J3_03 = 0 : NULL : WAIT = 0.2
+00516 J0_11_FREQ_GEN = 0 : NULL : WAIT = 1
+00517 #turn off output and switch out is off
+00517 sdo[0x6411][7] = 0 : NULL : WAIT = 0.2
+00518 #disable counter
+00518 sdo[0x2003][2] = 1 : NULL : WAIT = 0.2
+00519 #verify count
+00519 NULL : sdo[0x6401][11] = 65535 | 0 | 0.1
+00519 TEST: sdo[0x6401][11] 65535.0 +/- 0.0
+00519 FAIL: sdo[0x6401][11] 0.0
+00520 #send counter reset
+00520 sdo[0x2003][2] = 4 : NULL : WAIT = 0.2
+00521 #verify count reset
+00521 NULL : sdo[0x6401][11] = 0 | 0 | 0.1
+00521 TEST: sdo[0x6401][11] 0.0 +/- 0.0
+00521 PASS: sdo[0x6401][11] 0.0
+00522 
+00522 sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
+00523 #switch out load line
+00523 J3_03 = 0 : NULL : WAIT = 0.1
+00524 #switch out power supply
+00524 LdRemote = 0 : NULL : WAIT = 0.1
+00525 LdEnable = 0 : NULL : WAIT = 0.1
+00526 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00527 J0_08_METER_LOAD = 0 : NULL : WAIT = 0.1
+00528 PRE_OPERATIONAL
+00528 SAVE
+00528 END
+Fail count: 8
+Finished on: 2025-08-01-15:27:36
+elapsed time: 0:04:14.269775

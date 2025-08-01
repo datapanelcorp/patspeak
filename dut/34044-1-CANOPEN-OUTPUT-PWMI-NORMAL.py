@@ -1,8 +1,8 @@
 t = 0
 i = 0
-Frequancy = 100
-Kp = 0.2
-Ki = 0.1
+Frequancy = 200
+Kp = 0.3
+Ki = 0.2
 
 #PortMode = 0
 
@@ -35,7 +35,7 @@ outstr += "sdo[0x2002][7] = " + f"{Kp}" + ", sdo[0x2002][8] = " + f"{Ki}" + ", s
 outstr += "sdo[0x2002][13] = " + f"{Kp}" + ", sdo[0x2002][14] = " + f"{Ki}" + ", sdo[0x2002][15] = " + f"{Kp}" + ", sdo[0x2002][16] = " + f"{Ki}" + " : NULL : WAIT = 0.5\n"
 
 outstr += "#-----set freq-----\n"
-outstr += "sdo[0x3000][0] = " + str(Frequancy) + " : NULL : WAIT = 0.2\n"
+outstr += "sdo[0x3000] = " + str(Frequancy) + " : NULL : WAIT = 0.2\n"
 
 t = 0
 while t <= 7:
