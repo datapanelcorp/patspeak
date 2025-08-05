@@ -42,7 +42,9 @@ sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
 #config counter
 sdo[0x2003][1] = 69 : NULL : WAIT = 0.1
 
-#verify setpoint
+#config SetPointValue - 65535
+sdo[0x3001][1] = 65535 : NULL : WAIT = 0.1
+#verify setpoint - 65535
 NULL : sdo[0x6401][10] = 65535 | 0 | 0.1
 #switch in and on interlock output
 J0_08_METER_LOAD = 1 : NULL : WAIT = 0.2
@@ -72,6 +74,8 @@ J3_01 = 0 : NULL : WAIT = 0.2
 J0_11_FREQ_GEN = 0 : NULL : WAIT = 1
 #turn off output and switch out is off
 sdo[0x6411][5] = 0 : NULL : WAIT = 0.2
+#disable counter
+sdo[0x2003][1] = 1 : NULL : WAIT = 0.2
 #verify count
 NULL : sdo[0x6401][9] = 65535 | 0 | 0.1
 #send counter reset
@@ -98,7 +102,9 @@ sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
 #config counter
 sdo[0x2003][2] = 69 : NULL : WAIT = 0.1
 
-#verify setpoint
+#config SetPointValue - 65535
+sdo[0x3001][2] = 65535 : NULL : WAIT = 0.1
+#verify setpoint - 65535
 NULL : sdo[0x6401][12] = 65535 | 0 | 0.1
 #switch in and on interlock output
 J0_08_METER_LOAD = 1 : NULL : WAIT = 0.2
@@ -128,6 +134,8 @@ J3_03 = 0 : NULL : WAIT = 0.2
 J0_11_FREQ_GEN = 0 : NULL : WAIT = 1
 #turn off output and switch out is off
 sdo[0x6411][7] = 0 : NULL : WAIT = 0.2
+#disable counter
+sdo[0x2003][2] = 1 : NULL : WAIT = 0.2
 #verify count
 NULL : sdo[0x6401][11] = 65535 | 0 | 0.1
 #send counter reset

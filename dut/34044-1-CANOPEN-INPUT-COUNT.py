@@ -1,5 +1,13 @@
 #from input_count_write import WriteCountTest
 #from input_count_write import WriteMaxCountTest
+def unsigned_to_signed(value, bit_size):
+    # Calculate the maximum value for the given bit size
+    #max_value = 2 ** bit_size
+    # If the value exceeds the signed range, adjust it
+    #if value >= max_value // 2:
+    #    value -= max_value
+    return value
+    
 def WriteCountTest(outstr, SetPointValue, MaxCount, RolloverMode, InterlockMode):
     InPortAMode = 8
     InPortBMode = 0
@@ -105,7 +113,7 @@ def WriteCountTest(outstr, SetPointValue, MaxCount, RolloverMode, InterlockMode)
             # outstr += "Command = 87, Counter_7A_Enable_OUT3A = 0, Counter_8A_Enable_OUT4A = 0 : NULL : WAIT = 0.2\n"
         # else:
             # outstr += "Command = 87, Counter_7A_Enable_OUT3A = 1, Counter_8A_Enable_OUT4A = 1 : NULL : WAIT = 0.2\n"
-        outstr += "#config set point\n"    
+        outstr += "#config SetPointValue\n"    
         outstr += SetPoint + " = " + str(SetPointValue) + " : NULL : WAIT = 0.1\n"
         outstr += "\n"
         outstr += "#verify setpoint\n"
@@ -283,8 +291,10 @@ def WriteMaxCountTest(outstr, SetPointValue, MaxCount, RolloverMode, InterlockMo
             # outstr += "Command = 87, Counter_7A_Enable_OUT3A = 0, Counter_8A_Enable_OUT4A = 0 : NULL : WAIT = 0.2\n"
         # else:
             # outstr += "Command = 87, Counter_7A_Enable_OUT3A = 1, Counter_8A_Enable_OUT4A = 1 : NULL : WAIT = 0.2\n"
-
-        outstr += "#verify setpoint\n"
+            
+        outstr += "#config SetPointValue - " + str(SetPointValue) + "\n" 
+        outstr += SetPoint + " = " + str(unsigned_to_signed(SetPointValue, 16)) + " : NULL : WAIT = 0.1\n"
+        outstr += "#verify setpoint - " + str(unsigned_to_signed(SetPointValue, 16)) + "\n"
         outstr += "NULL : " + SetPointSet + " = " + str(SetPointValue) + " | 0 | 0.1\n"
         outstr += "#switch in and on interlock output\n"
         outstr += "J0_08_METER_LOAD = 1 : NULL : WAIT = 0.2\n"
