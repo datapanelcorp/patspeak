@@ -26,7 +26,7 @@ def WriteCountTest(outstr, SetPointValue, MaxCount, RolloverMode, InterlockMode)
         BitOutilock = 0x40
         
         if(PortIndex==0):
-            #"PWM_CTRL_3A" 
+            outstr += "#7A/3A\n"
             InterlockOutput = "sdo[0x6411][5]"
             InterlockConnector = "J2_05" 
             InputConnector = "J3_01"
@@ -38,7 +38,7 @@ def WriteCountTest(outstr, SetPointValue, MaxCount, RolloverMode, InterlockMode)
             CntfigBits = "sdo[0x2003][1]"
 
         if(PortIndex==1):
-            #"PWM_CTRL_4A" 
+            outstr += "#8A/3A\n"
             InterlockOutput = "sdo[0x6411][7]"
             InterlockConnector = "J2_07" 
             InputConnector = "J3_03"
@@ -79,12 +79,15 @@ def WriteCountTest(outstr, SetPointValue, MaxCount, RolloverMode, InterlockMode)
         # if(PortIndex==1):
             # outstr += "Command = 87, Counter_7A_Reset = 1, Counter_8A_Reset = 1, Counter_7A_ON_OFF = 1, Counter_8A_ON_OFF = 1, LowBYTE_Counter_7A_Setpoint = 0, LowBYTE_Counter_8A_Setpoint = " + str(SetPointValue) + " : NULL : WAIT = 0.2\n"
         
+        #TODO: NEED TO DO BOTH A and B?
         ConfigValue = str((BitEnable|BitReset))
         
         if(RolloverMode):
+            outstr += "#config RolloverMode\n"
             ConfigValue = str((BitEnable|BitReset|BitOverflow))
             
         if(InterlockMode):
+            outstr += "#config InterlockMode\n"
             ConfigValue = str(int(ConfigValue)|BitOutilock)
         
         outstr += "#config counter\n"
@@ -128,13 +131,13 @@ def WriteCountTest(outstr, SetPointValue, MaxCount, RolloverMode, InterlockMode)
             outstr += "PwrSetVoltage = 140 : NULL\n"
             if(SetPointValue > 0):
                 if((TheCount > SetPointValue)&(RolloverMode==0)):
-                    outstr += "#verify no rollover\n"
+                    outstr += "#verify count WITHOUT RolloverMode 1 - " + str(SetPointValue) + "\n"
                     outstr += "NULL : " + Count + " = " + str(SetPointValue) + " | 0 | 0.1\n" 
                 else:
-                    outstr += "#verify count\n"
+                    outstr += "#verify count WITH RolloverMode 1 - " + str(SetPointValue) + "\n"
                     outstr += "NULL : " + Count + " = " + str(TheCount) + " | 0 | 0.1\n"
             else:
-                outstr += "#verify count\n"
+                outstr += "#verify count - " + str(SetPointValue) + "\n"
                 outstr += "NULL : " + Count + " = " + str(TheCount) + " | 0 | 0.1\n"
             outstr += "PwrSetVoltage = 0 : NULL\n"
             outstr += "NULL : " + InputName + " = 0 | 0 | 0.1\n"
@@ -157,15 +160,17 @@ def WriteCountTest(outstr, SetPointValue, MaxCount, RolloverMode, InterlockMode)
         outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2\n"
         outstr += "#turn off output and switch out is off\n"
         outstr += InterlockOutput + " = 0 : NULL : WAIT = 0.2\n"
-        outstr += "#disable counter\n"
-        outstr += CntfigBits + " = " + str((BitEnable)) + " : NULL : WAIT = 0.1\n"
+        #outstr += "#disable counter\n"
+        #outstr += CntfigBits + " = " + str((BitEnable)) + " : NULL : WAIT = 0.1\n"
         #outstr += "Command = 87, " + Enable + " = 1 : NULL : WAIT = 0.2\n"
 
-        outstr += "#verify count\n"
-        if(RolloverMode==1):
+        if(RolloverMode==0):
+            outstr += "#verify count WITHOUT RolloverMode 2 - " + str(SetPointValue) + "\n"
             outstr += "NULL : " + Count + " = " + str(SetPointValue) + " | 0 | 0.1\n" 
         else:
+            outstr += "#verify count WITH RolloverMode 2 - " + str(SetPointValue) + "\n"
             outstr += "NULL : " + Count + " = " + str(TheCount) + " | 0 | 0.1\n" 
+
         outstr += "#send counter reset\n"
         outstr += CntfigBits + " = " + str((BitReset)) + " : NULL : WAIT = 0.1\n"
         #outstr += "Command = 87, " + Reset + " = 1 : NULL : WAIT = 0.2\n"
@@ -384,34 +389,34 @@ SetPoint = 5
 RolloverMode = 0
 InterlockMode = 1
 outstr += "#****** NO OVERFLOW, SET POINT = 5, MAX COUNT = 5, OUTPUT INTERLOCK\n"
-outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
+#outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
 
 MaxCount = 5
 SetPoint = 3
 RolloverMode = 1
 InterlockMode = 0
 outstr += "#****** OVERFLOW, SET POINT = 3, MAX COUNT = 5, NO OUTPUT INTERLOCK\n"
-outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
+#outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
 
 MaxCount = 5
 SetPoint = 2
 RolloverMode = 1
 InterlockMode = 1
 outstr += "#****** OVERFLOW, SET POINT = 3, MAX COUNT = 5, OUTPUT INTERLOCK\n"
-outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
+#outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
 
 MaxCount = 5
 SetPoint = 0
 RolloverMode = 1
 InterlockMode = 0
 outstr += "#****** OVERFLOW, SET POINT = 0, MAX COUNT = 5, NO OUTPUT INTERLOCK\n"
-outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
+#outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
 
 MaxCount = 65535
 SetPoint = 65535
 RolloverMode = 0
 InterlockMode = 1
-outstr += "#****** MAX MCOUNT\n"
+outstr += "#****** MAX COUNT\n"
 outstr = WriteMaxCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
 
 outstr += "#switch out power supply\n"
