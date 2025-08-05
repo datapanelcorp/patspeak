@@ -2,10 +2,10 @@
 #from input_count_write import WriteMaxCountTest
 def unsigned_to_signed(value, bit_size):
     # Calculate the maximum value for the given bit size
-    #max_value = 2 ** bit_size
+    max_value = 2 ** bit_size
     # If the value exceeds the signed range, adjust it
-    #if value >= max_value // 2:
-    #    value -= max_value
+    if value >= max_value // 2:
+        value -= max_value
     return value
     
 def WriteCountTest(outstr, SetPointValue, MaxCount, RolloverMode, InterlockMode):
@@ -293,9 +293,9 @@ def WriteMaxCountTest(outstr, SetPointValue, MaxCount, RolloverMode, InterlockMo
             # outstr += "Command = 87, Counter_7A_Enable_OUT3A = 1, Counter_8A_Enable_OUT4A = 1 : NULL : WAIT = 0.2\n"
             
         outstr += "#config SetPointValue - " + str(SetPointValue) + "\n" 
-        outstr += SetPoint + " = " + str(unsigned_to_signed(SetPointValue, 16)) + " : NULL : WAIT = 0.1\n"
-        outstr += "#verify setpoint - " + str(unsigned_to_signed(SetPointValue, 16)) + "\n"
-        outstr += "NULL : " + SetPointSet + " = " + str(SetPointValue) + " | 0 | 0.1\n"
+        outstr += SetPoint + " = " + str(SetPointValue) + " : NULL : WAIT = 0.1\n"
+        outstr += "#verify setpoint - " +  str(SetPointValue) + "\n"
+        outstr += "NULL : " + SetPointSet + " = " + str(-1) + " | 0 | 0.1\n"
         outstr += "#switch in and on interlock output\n"
         outstr += "J0_08_METER_LOAD = 1 : NULL : WAIT = 0.2\n"
         outstr += InterlockConnector + " = 1 : NULL : WAIT = 0.2\n"
@@ -342,7 +342,7 @@ def WriteMaxCountTest(outstr, SetPointValue, MaxCount, RolloverMode, InterlockMo
             # outstr += "NULL : " + Count + " = " + str(SetPointValue) + " | 0 | 0.1\n" 
         # else:
             # outstr += "NULL : " + Count + " = " + str(TheCount) + " | 0 | 0.1\n" 
-        outstr += "NULL : " + Count + " = " + str(SetPointValue) + " | 0 | 0.1\n" 
+        outstr += "NULL : " + Count + " = " + str(-1) + " | 0 | 0.1\n" 
         outstr += "#send counter reset\n"
         outstr += CntfigBits + " = " + str((BitReset)) + " : NULL : WAIT = 0.2\n"
         #outstr += "Command = 87, " + Reset + " = 1 : NULL : WAIT = 0.2\n"
@@ -399,28 +399,28 @@ SetPoint = 5
 RolloverMode = 0
 InterlockMode = 1
 outstr += "#****** NO OVERFLOW, SET POINT = 5, MAX COUNT = 5, OUTPUT INTERLOCK\n"
-#outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
+outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
 
 MaxCount = 5
 SetPoint = 3
 RolloverMode = 1
 InterlockMode = 0
 outstr += "#****** OVERFLOW, SET POINT = 3, MAX COUNT = 5, NO OUTPUT INTERLOCK\n"
-#outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
+outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
 
 MaxCount = 5
 SetPoint = 2
 RolloverMode = 1
 InterlockMode = 1
 outstr += "#****** OVERFLOW, SET POINT = 3, MAX COUNT = 5, OUTPUT INTERLOCK\n"
-#outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
+outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
 
 MaxCount = 5
 SetPoint = 0
 RolloverMode = 1
 InterlockMode = 0
 outstr += "#****** OVERFLOW, SET POINT = 0, MAX COUNT = 5, NO OUTPUT INTERLOCK\n"
-#outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
+outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
 
 MaxCount = 65535
 SetPoint = 65535
