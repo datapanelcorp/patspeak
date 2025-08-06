@@ -4,16 +4,28 @@ PortIndex = 0
 ModeIndex = 0
 
 #global setup
-TestName = "34044-1-CANOPEN-INPUT-FREQ"
+TestName = "37000-1-CANOPEN-INPUT-FREQ"
 datafile = TestName + ".pat"
 
 outstr = ""
-outstr += "#34044-1\n"
+outstr += "#37000-1\n"
 outstr += "#Verion 0.0\n"
 outstr += "#input test\n"
 outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
+
+outstr += "#-----get info 37000-1-----\n"
+outstr += "#-VBAT\n"
+outstr += "NULL : sdo[0x5002][1] = 0 | 9999 | 0.1\n" 
+outstr += "#-TEMP\n"
+outstr += "NULL : sdo[0x5002][2] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG1\n"
+outstr += "NULL : sdo[0x5002][3] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG2\n"
+outstr += "NULL : sdo[0x5002][4] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG3\n"
+outstr += "NULL : sdo[0x5002][5] = 0 | 9999 | 0.1\n" 
 
 outstr += "\n"
 outstr += "#-----setup pat-----\n"

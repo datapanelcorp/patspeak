@@ -6,17 +6,29 @@ PortMode = 0
 FaultReset = 1
 
 #global setup
-TestName = "34044-1-CANOPEN-OUTPUT-NORMAL"
+TestName = "37000-1-CANOPEN-OUTPUT-DIGITAL-NORMAL"
 datafile = TestName + ".pat"
 
 outstr = ""
 
-outstr += "#34044-1\n"
+outstr += "#37000-1\n"
 outstr += "#Verion 0.0\n"
 outstr += "#digital normal test using the E-LOAD\n"
 outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
+
+outstr += "#-----get info 37000-1-----\n"
+outstr += "#-VBAT\n"
+outstr += "NULL : sdo[0x5002][1] = 0 | 9999 | 0.1\n" 
+outstr += "#-TEMP\n"
+outstr += "NULL : sdo[0x5002][2] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG1\n"
+outstr += "NULL : sdo[0x5002][3] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG2\n"
+outstr += "NULL : sdo[0x5002][4] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG3\n"
+outstr += "NULL : sdo[0x5002][5] = 0 | 9999 | 0.1\n" 
 
 outstr += "PRE_OPERATIONAL\n"
 
@@ -36,6 +48,12 @@ outstr += "NULL : sdo[0x5001][4] = 0 | 0.1 | 0.1\n"
 
 FdbkBits = 0
 FltBits = 0
+
+#MaxLimit = 4500
+#FaultLimit = 4400
+
+MaxLimit = 4500
+FaultLimit = 4300
 
 t = 0
 while t <= 7:
@@ -154,11 +172,11 @@ while t <= 7:
     
     outstr += "\n"
     i = 0
-    while i <= 4500:
+    while i <= MaxLimit:
         outstr += "#set current and turn on output and verify feedback\n" 
         outstr += OutputName + " = " + str(OutputBits) + " : NULL : WAIT = 0.1\n"
         outstr += "LdCurrentSet = " + str(i) + ": NULL : WAIT = 0.1\n"
-        if(i <= 4400):
+        if(i <= FaultLimit):
             outstr += "#verify reading from load\n" 
             outstr += "NULL : " + FeedbackName + " = " + str(i) + " | 1000 | 0.1\n" 
             outstr += "NULL : " + OutputStatus + " = " + str(FdbkBits) + " | 0.01 | 0.1\n" 
@@ -170,7 +188,7 @@ while t <= 7:
             outstr += "NULL : " + OutputStatus + " = " + str(FltBits) + " | 0.1 | 0.1\n" 
             outstr += "NULL : MeterCurrent = 0  | 0.01 | 0.1\n" 
             outstr += "\n"
-        i += 10
+        i += 100
 
     outstr += "#switch out load line, clear current\n"
     outstr += OutputName + " = 0 : NULL : WAIT = 0.1\n"

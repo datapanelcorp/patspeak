@@ -1,10 +1,21 @@
-#34044-1
+#37000-1
 #Verion 0.0
 #input test
 UUT_EDS = 37000-561.eds
-UUT_DATANAME = 34044-1-CANOPEN-INPUT-COUNT
+UUT_DATANAME = 37000-1-CANOPEN-INPUT-COUNT
 
-#-----setup 34044-----
+#-----get info 37000-1-----
+#-VBAT
+NULL : sdo[0x5002][1] = 0 | 9999 | 0.1
+#-TEMP
+NULL : sdo[0x5002][2] = 0 | 9999 | 0.1
+#-CNFG1
+NULL : sdo[0x5002][3] = 0 | 9999 | 0.1
+#-CNFG2
+NULL : sdo[0x5002][4] = 0 | 9999 | 0.1
+#-CNFG3
+NULL : sdo[0x5002][5] = 0 | 9999 | 0.1
+#-----setup 37000-----
 #setup meter
 LdRemote = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 0 : NULL : WAIT = 0.1

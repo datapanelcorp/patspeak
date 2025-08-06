@@ -1,16 +1,28 @@
 PortMode = 0
 
 #global setup
-TestName = "34044-1-CANOPEN-INPUT-ADC"
+TestName = "37000-1-CANOPEN-INPUT-ADC"
 datafile = TestName + ".pat"
 
 outstr = ""
-outstr += "#34044-1\n"
+outstr += "#37000-1\n"
 outstr += "#Verion 0.0\n"
 outstr += "#input test\n"
 outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
+
+outstr += "#-----get info 37000-1-----\n"
+outstr += "#-VBAT\n"
+outstr += "NULL : sdo[0x5002][1] = 0 | 9999 | 0.1\n" 
+outstr += "#-TEMP\n"
+outstr += "NULL : sdo[0x5002][2] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG1\n"
+outstr += "NULL : sdo[0x5002][3] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG2\n"
+outstr += "NULL : sdo[0x5002][4] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG3\n"
+outstr += "NULL : sdo[0x5002][5] = 0 | 9999 | 0.1\n" 
 
 outstr += "\n"
 outstr += "#-----setup pat-----\n"
@@ -43,7 +55,11 @@ while ModeIndex <= MaxMode:
         PortMode = 64#0x40
         StartVolts = 1
         MaxVolts = 5
-        FaultLimit = 5.6#5.51
+        FaultLimit = 5.5#RevD limit
+        #RevG limit
+        #FaultLimit = 5.5#5.6#5.51
+        #Enhanced limit
+        #FaultLimit = 5.6
         BVoltInc = 0.5
         SVoltInc = 0.1
         
@@ -51,7 +67,11 @@ while ModeIndex <= MaxMode:
         PortMode = 80#0x50
         StartVolts = 1
         MaxVolts = 10
-        FaultLimit = 11.1#12#11.15
+        FaultLimit = 10.5#RevD limit
+        #RevG limit
+        #FaultLimit = 10.5#11.1#12#11.15
+        #Enhanced limit
+        #FaultLimit = 11.1
         BVoltInc = 0.5
         SVoltInc = 0.1
         
@@ -59,7 +79,11 @@ while ModeIndex <= MaxMode:
         PortMode = 96#0x60
         StartVolts = 1
         MaxVolts = 32
-        FaultLimit = 36.5#36.5
+        FaultLimit = 34#RevD limit
+        #RevG limit
+        #FaultLimit = 32#36.5#36.5
+        #Enhanced limit
+        #FaultLimit = 36.5
         BVoltInc = 0.5
         SVoltInc = 0.1
         

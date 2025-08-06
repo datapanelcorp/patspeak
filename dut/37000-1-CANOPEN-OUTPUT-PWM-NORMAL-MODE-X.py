@@ -27,6 +27,7 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
                 FltBits = 0b00001010
             PortMode = "sdo[0x2001][1]"#Port1Mode
             OutputName = "sdo[0x6411][2]"#Output
+            OutputStatus = "sdo[0x5001][3]"#OutStat
             FeedbackName = "sdo[0x5003][2]"#Feedback1B
             OutputConnector = "J2_02"
         if(t == 2):
@@ -145,23 +146,34 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
 
 t = 0
 i = 0
-OutputMode = 0x33
+OutputMode = 0x22
 
 #global setup
-TestName = "34044-1-CANOPEN-OUTPUT-PWM-NORMAL-MODE-" + str(OutputMode)
+TestName = "37000-1-CANOPEN-OUTPUT-PWM-NORMAL-MODE-" + str(OutputMode)
 datafile = TestName + ".pat"
 
 outstr = ""
-outstr += "#34044-1\n"
+outstr += "#37000-1\n"
 outstr += "#Verion 0.0\n"
 outstr += "#PWM test with 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)\n"
 outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
 
+outstr += "#-----get info 37000-1-----\n"
+outstr += "#-VBAT\n"
+outstr += "NULL : sdo[0x5002][1] = 0 | 9999 | 0.1\n" 
+outstr += "#-TEMP\n"
+outstr += "NULL : sdo[0x5002][2] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG1\n"
+outstr += "NULL : sdo[0x5002][3] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG2\n"
+outstr += "NULL : sdo[0x5002][4] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG3\n"
+outstr += "NULL : sdo[0x5002][5] = 0 | 9999 | 0.1\n" 
 
 
-outstr += "#-----setup 34044-----\n"
+outstr += "#-----setup 37000-----\n"
 outstr += "#disable global modes\n"
 outstr += "sdo[0x2000][3] = 0 : NULL : WAIT = 0.1\n"
 outstr += "sdo[0x2000][4] = 0 : NULL : WAIT = 0.1\n"

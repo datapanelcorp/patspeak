@@ -1,13 +1,6 @@
 #from input_count_write import WriteCountTest
 #from input_count_write import WriteMaxCountTest
-def unsigned_to_signed(value, bit_size):
-    # Calculate the maximum value for the given bit size
-    max_value = 2 ** bit_size
-    # If the value exceeds the signed range, adjust it
-    if value >= max_value // 2:
-        value -= max_value
-    return value
-    
+#from input_count_write import WriteMaxCountTest
 def WriteCountTest(outstr, SetPointValue, MaxCount, RolloverMode, InterlockMode):
     InPortAMode = 8
     InPortBMode = 0
@@ -364,18 +357,30 @@ ModeIndex = 0
 PortMode = 0
 
 #global setup
-TestName = "34044-1-CANOPEN-INPUT-COUNT"
+TestName = "37000-1-CANOPEN-INPUT-COUNT"
 datafile = TestName + ".pat"
 
 outstr = ""
-outstr += "#34044-1\n"
+outstr += "#37000-1\n"
 outstr += "#Verion 0.0\n"
 outstr += "#input test\n"
 outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
 
-outstr += "#-----setup 34044-----\n"
+outstr += "#-----get info 37000-1-----\n"
+outstr += "#-VBAT\n"
+outstr += "NULL : sdo[0x5002][1] = 0 | 9999 | 0.1\n" 
+outstr += "#-TEMP\n"
+outstr += "NULL : sdo[0x5002][2] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG1\n"
+outstr += "NULL : sdo[0x5002][3] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG2\n"
+outstr += "NULL : sdo[0x5002][4] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG3\n"
+outstr += "NULL : sdo[0x5002][5] = 0 | 9999 | 0.1\n" 
+
+outstr += "#-----setup 37000-----\n"
 
 outstr += "#setup meter\n"
 outstr += "LdRemote = 1 : NULL : WAIT = 0.1\n"

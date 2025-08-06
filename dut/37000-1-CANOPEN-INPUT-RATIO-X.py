@@ -1,20 +1,32 @@
-MaxVolts = 12#14.5
+MaxVolts = 12
 
 PortIndex = 0
 ModeIndex = 0
 PortMode = 0
 
 #global setup
-TestName = "34044-1-CANOPEN-INPUT-RATIO-"+str(MaxVolts).replace('.', '_')
+TestName = "37000-1-CANOPEN-INPUT-RATIO-"+str(MaxVolts).replace('.', '_')
 datafile = TestName + ".pat"
 
 outstr = ""
-outstr += "#34044-1\n"
+outstr += "#37000-1\n"
 outstr += "#Verion 0.0\n"
 outstr += "#input test\n"
 outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
+
+outstr += "#-----get info 37000-1-----\n"
+outstr += "#-VBAT\n"
+outstr += "NULL : sdo[0x5002][1] = 0 | 9999 | 0.1\n" 
+outstr += "#-TEMP\n"
+outstr += "NULL : sdo[0x5002][2] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG1\n"
+outstr += "NULL : sdo[0x5002][3] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG2\n"
+outstr += "NULL : sdo[0x5002][4] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG3\n"
+outstr += "NULL : sdo[0x5002][5] = 0 | 9999 | 0.1\n" 
 
 outstr += "\n"
 outstr += "#-----setup pat-----\n"
@@ -30,7 +42,7 @@ outstr += "#-----setup main supply-----\n"
 outstr += "#setup meter\n"
 outstr += "J0_10_MAIN_SUPPLY = 1 : NULL : WAIT = 1\n"
 outstr += "PAUSE-VERIFY MAIN SUPPLY IS SET TO " + str(MaxVolts) + "\n"
-outstr += "NULL : MeterVolts = " + str(MaxVolts) + " | 0.155 | 0.1\n"
+outstr += "NULL : MeterVolts = " + str(MaxVolts) + " | 0.2 | 0.1\n"
 outstr += "J0_10_MAIN_SUPPLY = 0 : NULL : WAIT = 1\n"
 outstr += "\n"
 
