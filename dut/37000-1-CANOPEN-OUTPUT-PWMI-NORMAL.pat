@@ -1,18 +1,29 @@
-#34044-1
+#37000-1
 #Verion 0.0
 #PWMi h-bridge test with a 'red coil' 6.4 ohm inductive load. (2.27 amps @ 14.5 VDC)
 UUT_EDS = 37000-561.eds
-UUT_DATANAME = 34044-1-CANOPEN-OUTPUT-PWMI-NORMAL
+UUT_DATANAME = 37000-1-CANOPEN-OUTPUT-PWMI-NORMAL
 
+#-----get info 37000-1-----
+#-VBAT
+NULL : sdo[0x5002][1] = 0 | 9999 | 0.1
+#-TEMP
+NULL : sdo[0x5002][2] = 0 | 9999 | 0.1
+#-CNFG1
+NULL : sdo[0x5002][3] = 0 | 9999 | 0.1
+#-CNFG2
+NULL : sdo[0x5002][4] = 0 | 9999 | 0.1
+#-CNFG3
+NULL : sdo[0x5002][5] = 0 | 9999 | 0.1
 PRE_OPERATIONAL
 #-----configure PWMi-----
 sdo[0x2002][1] = 30.0, sdo[0x2002][2] = 20.0, sdo[0x2002][3] = 30.0, sdo[0x2002][4] = 20.0, sdo[0x2002][5] = 30.0, sdo[0x2002][6] = 20.0 : NULL : WAIT = 0.5
 sdo[0x2002][7] = 30.0, sdo[0x2002][8] = 20.0, sdo[0x2002][9] = 30.0, sdo[0x2002][10] = 20.0, sdo[0x2002][11] = 30.0, sdo[0x2002][12] = 20.0 : NULL : WAIT = 0.5
 sdo[0x2002][13] = 30.0, sdo[0x2002][14] = 20.0, sdo[0x2002][15] = 30.0, sdo[0x2002][16] = 20.0 : NULL : WAIT = 0.5
 #-----set freq-----
-sdo[0x3000] = 400 : NULL : WAIT = 0.2
+sdo[0x3000] = 200 : NULL : WAIT = 0.2
 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
-#-----setup 34044-----
+#-----setup 37000-----
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
@@ -330,7 +341,7 @@ J2_01 = 0 : NULL : WAIT = 1
 NULL : sdo[0x5003][1] = 0 | 155 | 0.5
 J4_01 = 0, J4_03 = 1 : NULL : WAIT = 0.5
 J4_02 = 1, J4_03 = 1 : NULL : WAIT = 1
-#-----setup 34044-----
+#-----setup 37000-----
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
@@ -648,7 +659,7 @@ J2_02 = 0 : NULL : WAIT = 1
 NULL : sdo[0x5003][2] = 0 | 155 | 0.5
 J4_02 = 0, J4_03 = 1 : NULL : WAIT = 0.5
 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
-#-----setup 34044-----
+#-----setup 37000-----
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
@@ -966,7 +977,7 @@ J2_03 = 0 : NULL : WAIT = 1
 NULL : sdo[0x5003][3] = 0 | 155 | 0.5
 J4_01 = 0, J4_03 = 1 : NULL : WAIT = 0.5
 J4_02 = 1, J4_03 = 1 : NULL : WAIT = 1
-#-----setup 34044-----
+#-----setup 37000-----
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
@@ -1284,7 +1295,7 @@ J2_04 = 0 : NULL : WAIT = 1
 NULL : sdo[0x5003][4] = 0 | 155 | 0.5
 J4_02 = 0, J4_03 = 1 : NULL : WAIT = 0.5
 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
-#-----setup 34044-----
+#-----setup 37000-----
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
@@ -1602,7 +1613,7 @@ J2_05 = 0 : NULL : WAIT = 1
 NULL : sdo[0x5003][5] = 0 | 155 | 0.5
 J4_01 = 0, J4_03 = 1 : NULL : WAIT = 0.5
 J4_02 = 1, J4_03 = 1 : NULL : WAIT = 1
-#-----setup 34044-----
+#-----setup 37000-----
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
@@ -1920,7 +1931,7 @@ J2_06 = 0 : NULL : WAIT = 1
 NULL : sdo[0x5003][6] = 0 | 155 | 0.5
 J4_02 = 0, J4_03 = 1 : NULL : WAIT = 0.5
 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
-#-----setup 34044-----
+#-----setup 37000-----
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
@@ -2238,7 +2249,7 @@ J2_07 = 0 : NULL : WAIT = 1
 NULL : sdo[0x5003][7] = 0 | 155 | 0.5
 J4_01 = 0, J4_03 = 1 : NULL : WAIT = 0.5
 J4_02 = 1, J4_03 = 1 : NULL : WAIT = 1
-#-----setup 34044-----
+#-----setup 37000-----
 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2

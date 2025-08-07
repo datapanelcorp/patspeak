@@ -1,9 +1,10 @@
 t = 0
 i = 0
-Frequancy = 100
-Kp = 0.8
-Ki = 0.5
+Frequancy = 200
+Kp = 0.3
+Ki = 0.2
 
+#PortMode = 0
 
 FaultReset = 1
 
@@ -15,17 +16,28 @@ Kp = Kp * 100
 Ki = Ki * 100
 
 #global setup
-TestName = "34044-1-CANOPEN-OUTPUT-PWMI-OVERCURRENT"
+TestName = "37000-1-CANOPEN-OUTPUT-PWMI-NORMAL"
 datafile = TestName + ".pat"
 
 outstr = ""
-outstr += "#34044-1\n"
+outstr += "#37000-1\n"
 outstr += "#Verion 0.0\n"
-outstr += "#PWMi normal test with a 2.1 Ohm resistive load. (6.9 amps @ 14.5 VDC)\n"
-outstr += "#PWMi overshoot should cause the output to overcurrent\n"
+outstr += "#PWMi h-bridge test with a 'red coil' 6.4 ohm inductive load. (2.27 amps @ 14.5 VDC)\n"
 outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
+
+outstr += "#-----get info 37000-1-----\n"
+outstr += "#-VBAT\n"
+outstr += "NULL : sdo[0x5002][1] = 0 | 9999 | 0.1\n" 
+outstr += "#-TEMP\n"
+outstr += "NULL : sdo[0x5002][2] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG1\n"
+outstr += "NULL : sdo[0x5002][3] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG2\n"
+outstr += "NULL : sdo[0x5002][4] = 0 | 9999 | 0.1\n" 
+outstr += "#-CNFG3\n"
+outstr += "NULL : sdo[0x5002][5] = 0 | 9999 | 0.1\n" 
 
 outstr += "PRE_OPERATIONAL\n"
 
@@ -35,16 +47,14 @@ outstr += "sdo[0x2002][7] = " + f"{Kp}" + ", sdo[0x2002][8] = " + f"{Ki}" + ", s
 outstr += "sdo[0x2002][13] = " + f"{Kp}" + ", sdo[0x2002][14] = " + f"{Ki}" + ", sdo[0x2002][15] = " + f"{Kp}" + ", sdo[0x2002][16] = " + f"{Ki}" + " : NULL : WAIT = 0.5\n"
 
 outstr += "#-----set freq-----\n"
-outstr += "sdo[0x3000][0] = " + str(Frequancy) + " : NULL : WAIT = 0.2\n"
+outstr += "sdo[0x3000] = " + str(Frequancy) + " : NULL : WAIT = 0.2\n"
 
-
+t = 0
 while t <= 7:
-    outstr += Coil1 + " = 1, " + Scope + " = 1 : NULL : WAIT = 1\n"
-    # if t % 2 == 0:
-        # outstr += Coil1 + " = 1, " + Scope + " = 1 : NULL : WAIT = 1\n"
-    # else:
-        # outstr += Coil2 + " = 1, " + Scope + " = 1 : NULL : WAIT = 1\n"
-        
+    if t % 2 == 0:
+        outstr += Coil1 + " = 1, " + Scope + " = 1 : NULL : WAIT = 1\n"
+    else:
+        outstr += Coil2 + " = 1, " + Scope + " = 1 : NULL : WAIT = 1\n"
     if(t == 0):
         OutputBits = 0b00000001
         FdbkBits = 0b00000001
@@ -140,7 +150,7 @@ while t <= 7:
         OutputStatus = "sdo[0x5001][4]"#OutStat
         FeedbackName = "sdo[0x5003][8]"#Feedback4B
         OutputConnector = "J2_08"
-
+        
     Cmd0x52 = "sdo[0x2000][1]"
     
     TheGlobalOutputMode = "sdo[0x2000][3]"
@@ -148,7 +158,7 @@ while t <= 7:
     
     TheMode = 0x44 #PWMI Mode
 
-    outstr += "#-----setup 34044-----\n"
+    outstr += "#-----setup 37000-----\n"
     outstr += Cmd0x52 + " = " + str(FaultReset) + " : NULL : WAIT = 0.2\n"
     outstr += TheGlobalOutputMode + " = " + str(0) + " : NULL : WAIT = 0.2\n"
     outstr += TheGlobalInputMode + " = " + str(0) + " : NULL : WAIT = 0.2\n"
@@ -157,24 +167,24 @@ while t <= 7:
     outstr += OutputConnector + " = 1 : NULL : WAIT = 0.5\n"
     outstr += "OPERATIONAL\n"
     outstr += "\n"
-
-    outstr += "\n"
-    i = 4000
-    while i <= 4000:
-        outstr += OutputName + " = " + str(i) + " : " + OutputStatus + " = " + str(FltBits) + " | 0.1 | 1\n"
-        i += 1000
-    #outstr += "NULL : " + OutputStatus + " = " + str(FltBits) + " | 0.1 | 0.1\n" 
-    
+    i = 0
+    while i <= 1500:
+        outstr += OutputName + " = " + str(i) + " : MeterAmps = " + str(i/1000) + " | 0.155 | 0.5\n"
+        outstr += OutputName + " = " + str(i) + " : " + FeedbackName + " = " + str(i) + " | 155 | 0.5\n"
+        i += 10
+            
     outstr += "#switch out load line, switch coil\n"
     outstr += OutputName + " = 0 : NULL : WAIT = 1\n"
     outstr += OutputConnector + " = 0 : NULL : WAIT = 1\n"
-    #outstr += "SAVE\n"
-    # if t % 2 == 0:
-        # outstr += Coil1 + " = 0, " + Scope + " = 1 : NULL : WAIT = 0.5\n"
-    # else:
-        # outstr += Coil2 + " = 0, " + Scope + " = 1 : NULL : WAIT = 0.5\n"
+    outstr += "#read signal value to update\n"
+    outstr += "NULL : " + FeedbackName + " = 0 | 155 | 0.5\n"
+    if t % 2 == 0:
+        outstr += Coil1 + " = 0, " + Scope + " = 1 : NULL : WAIT = 0.5\n"
+    else:
+        outstr += Coil2 + " = 0, " + Scope + " = 1 : NULL : WAIT = 0.5\n"
     t += 1
-    #outstr += "SAVE\n"
+    
+outstr += "PRE_OPERATIONAL\n"
 #shut down test
 outstr += "SAVE\n"
 outstr += "END\n"

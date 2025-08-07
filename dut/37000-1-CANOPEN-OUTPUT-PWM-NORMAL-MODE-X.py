@@ -146,7 +146,7 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
 
 t = 0
 i = 0
-OutputMode = 0x22
+OutputMode = 0x33
 
 #global setup
 TestName = "37000-1-CANOPEN-OUTPUT-PWM-NORMAL-MODE-" + str(OutputMode)
