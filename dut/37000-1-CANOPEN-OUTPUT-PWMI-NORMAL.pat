@@ -24,7 +24,7 @@ sdo[0x2002][13] = 30.0, sdo[0x2002][14] = 20.0, sdo[0x2002][15] = 30.0, sdo[0x20
 sdo[0x3000] = 200 : NULL : WAIT = 0.2
 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
 #-----setup 37000-----
-sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
+sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
 sdo[0x2001][1] = 68 : NULL : WAIT = 0.2
@@ -342,7 +342,7 @@ NULL : sdo[0x5003][1] = 0 | 155 | 0.5
 J4_01 = 0, J4_03 = 1 : NULL : WAIT = 0.5
 J4_02 = 1, J4_03 = 1 : NULL : WAIT = 1
 #-----setup 37000-----
-sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
+sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
 sdo[0x2001][1] = 68 : NULL : WAIT = 0.2
@@ -660,7 +660,7 @@ NULL : sdo[0x5003][2] = 0 | 155 | 0.5
 J4_02 = 0, J4_03 = 1 : NULL : WAIT = 0.5
 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
 #-----setup 37000-----
-sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
+sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
 sdo[0x2001][2] = 68 : NULL : WAIT = 0.2
@@ -978,7 +978,7 @@ NULL : sdo[0x5003][3] = 0 | 155 | 0.5
 J4_01 = 0, J4_03 = 1 : NULL : WAIT = 0.5
 J4_02 = 1, J4_03 = 1 : NULL : WAIT = 1
 #-----setup 37000-----
-sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
+sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
 sdo[0x2001][2] = 68 : NULL : WAIT = 0.2
@@ -1296,7 +1296,7 @@ NULL : sdo[0x5003][4] = 0 | 155 | 0.5
 J4_02 = 0, J4_03 = 1 : NULL : WAIT = 0.5
 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
 #-----setup 37000-----
-sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
+sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
 sdo[0x2001][3] = 68 : NULL : WAIT = 0.2
@@ -1614,7 +1614,7 @@ NULL : sdo[0x5003][5] = 0 | 155 | 0.5
 J4_01 = 0, J4_03 = 1 : NULL : WAIT = 0.5
 J4_02 = 1, J4_03 = 1 : NULL : WAIT = 1
 #-----setup 37000-----
-sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
+sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
 sdo[0x2001][3] = 68 : NULL : WAIT = 0.2
@@ -1932,7 +1932,7 @@ NULL : sdo[0x5003][6] = 0 | 155 | 0.5
 J4_02 = 0, J4_03 = 1 : NULL : WAIT = 0.5
 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
 #-----setup 37000-----
-sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
+sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
 sdo[0x2001][4] = 68 : NULL : WAIT = 0.2
@@ -2250,7 +2250,7 @@ NULL : sdo[0x5003][7] = 0 | 155 | 0.5
 J4_01 = 0, J4_03 = 1 : NULL : WAIT = 0.5
 J4_02 = 1, J4_03 = 1 : NULL : WAIT = 1
 #-----setup 37000-----
-sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
+sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
 sdo[0x2001][4] = 68 : NULL : WAIT = 0.2

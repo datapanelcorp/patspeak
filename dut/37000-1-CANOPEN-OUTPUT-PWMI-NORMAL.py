@@ -6,7 +6,7 @@ Ki = 0.2
 
 #PortMode = 0
 
-FaultReset = 1
+FaultReset = 0
 
 Coil1 = "J4_01"
 Coil2 = "J4_02"
