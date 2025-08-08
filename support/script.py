@@ -261,9 +261,10 @@ def ProcessScript():
                                     sdo_param = [int(num, 16) if num.startswith('0x') else int(num) for num in numbers]
                                     if(len(sdo_param) == 2):
                                         RealValue = float(globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].raw)
+                                        globals.UUT_Fdbk[SignalName] = RealValue
                                     if(len(sdo_param) == 1):
                                         RealValue = float(globals.uut_eds.sdo[sdo_param[0]].raw)
-                                    globals.UUT_Fdbk[SignalName] = RealValue
+                                        globals.UUT_Fdbk[SignalName] = RealValue
                             except:
                                 print("signal not found!", SignalName)
                                 globals.StepTime = Timeout #force exit

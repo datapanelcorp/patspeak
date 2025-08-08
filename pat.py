@@ -81,34 +81,7 @@ else:
     time.sleep(0.05)
     for node_id in globals.network.scanner.nodes:
         print("Found node %d!" % node_id)
-    print("Loading", globals.canopen_full_eds_path + "...")
-    globals.uut_eds = globals.network.add_node(1, globals.canopen_full_eds_path)
-    
-    # Display general device info
-    print("Device Information:")
-    for key in ['ManufacturerDeviceName', 'ManufacturerHardwareVersion', 'ManufacturerSoftwareVersion']:
-        try:
-            print(f"{key}: {globals.uut_eds.sdo[key].raw}")
-        except KeyError:
-            pass
-    print()
 
-    # Display all object dictionary entries
-    print("Object Dictionary:")
-    for index in globals.uut_eds.object_dictionary:
-        entry = globals.uut_eds.object_dictionary[index]
-        try:
-            print(f"Index: 0x{index:04X}, Name: {entry.name}, Type: {entry.object_type}")
-        except:
-            print(f"Index: 0x{index:04X}, Name: {entry.name}")
-        if hasattr(entry, 'subindices'):
-            for subidx in entry.subindices:
-                sub = entry[subidx]
-                try:
-                    print(f"  SubIndex: {sub.subindex}, Name: {sub.name}, DataType: {sub.data_type}")
-                except:
-                    print(f"  SubIndex: {sub.subindex}, Name: {sub.name}")
-        print()
 
 #Start CAN thread for PAT
 if(globals.SuppressPatSupport == 'False'): # skip if suppressed

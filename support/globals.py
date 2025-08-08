@@ -100,8 +100,29 @@ def initialize():
         print("Found", EDSFileName + "...")
         #uut_eds = network.add_node(1, filename)
         uut_db = ""
-        #print("Updating UUT_Fdbk...")
+        
+        print("Loading", globals.canopen_full_eds_path + "...")
+        globals.uut_eds = globals.network.add_node(1, globals.canopen_full_eds_path)
+        #print("Object Dictionary:")
+        print("Updating UUT_Fdbk...")
+        for index in uut_eds.object_dictionary:
+            entry = uut_eds.object_dictionary[index]
+            try:
+                print(f"Index: 0x{index:04X}, Name: {entry.name}, Type: {entry.object_type}")
+            except:
+                print(f"Index: 0x{index:04X}, Name: {entry.name}")
+            if hasattr(entry, 'subindices'):
+                for subidx in entry.subindices:
+                    sub = entry[subidx]
+                    try:
+                        print(f"  SubIndex: {sub.subindex}, Name: {sub.name}, DataType: {sub.data_type}")
+                        SignalName = f"sdo[0x{index:04X}][{sub.subindex}]"
+                        #print(SignalName)
+                        globals.UUT_Fdbk[SignalName] = 0
+                    except:
+                        print(f"  SubIndex: {sub.subindex}, Name: {sub.name}")
 
+            print()
     # Load PAT.dbc file only if SuppressPatSupport is not set to True
     if(SuppressPatSupport == 'True'):
         print("Suppression of PAT support active; UUT testing only")

@@ -69,7 +69,7 @@ InputMode = str(int(InPortAMode | (InPortBMode << 4)))
 
 StartVolts = 1
 
-VoltInc = 0.5
+VoltInc = 1#0.5
         
 while PortIndex <= 3:
 
