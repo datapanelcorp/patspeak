@@ -368,17 +368,6 @@ outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
 
-outstr += "#-----get info 37000-1-----\n"
-outstr += "#-VBAT\n"
-outstr += "NULL : sdo[0x5002][1] = 0 | 9999 | 0.1\n" 
-outstr += "#-TEMP\n"
-outstr += "NULL : sdo[0x5002][2] = 0 | 9999 | 0.1\n" 
-outstr += "#-CNFG1\n"
-outstr += "NULL : sdo[0x5002][3] = 0 | 9999 | 0.1\n" 
-outstr += "#-CNFG2\n"
-outstr += "NULL : sdo[0x5002][4] = 0 | 9999 | 0.1\n" 
-outstr += "#-CNFG3\n"
-outstr += "NULL : sdo[0x5002][5] = 0 | 9999 | 0.1\n" 
 
 outstr += "#-----setup 37000-----\n"
 

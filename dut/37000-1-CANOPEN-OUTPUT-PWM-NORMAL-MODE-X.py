@@ -146,7 +146,7 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
 
 t = 0
 i = 0
-OutputMode = 0x33
+OutputMode = 0x22
 
 #global setup
 TestName = "37000-1-CANOPEN-OUTPUT-PWM-NORMAL-MODE-" + str(OutputMode)
@@ -159,18 +159,6 @@ outstr += "#PWM test with 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)\n"
 outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
-
-outstr += "#-----get info 37000-1-----\n"
-outstr += "#-VBAT\n"
-outstr += "NULL : sdo[0x5002][1] = 0 | 9999 | 0.1\n" 
-outstr += "#-TEMP\n"
-outstr += "NULL : sdo[0x5002][2] = 0 | 9999 | 0.1\n" 
-outstr += "#-CNFG1\n"
-outstr += "NULL : sdo[0x5002][3] = 0 | 9999 | 0.1\n" 
-outstr += "#-CNFG2\n"
-outstr += "NULL : sdo[0x5002][4] = 0 | 9999 | 0.1\n" 
-outstr += "#-CNFG3\n"
-outstr += "NULL : sdo[0x5002][5] = 0 | 9999 | 0.1\n" 
 
 
 outstr += "#-----setup 37000-----\n"
