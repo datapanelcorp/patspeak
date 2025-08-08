@@ -4,17 +4,6 @@
 UUT_EDS = 37000-561.eds
 UUT_DATANAME = 37000-1-CANOPEN-INPUT-ADC
 
-#-----get info 37000-1-----
-#-VBAT
-NULL : sdo[0x5002][1] = 0 | 9999 | 0.1
-#-TEMP
-NULL : sdo[0x5002][2] = 0 | 9999 | 0.1
-#-CNFG1
-NULL : sdo[0x5002][3] = 0 | 9999 | 0.1
-#-CNFG2
-NULL : sdo[0x5002][4] = 0 | 9999 | 0.1
-#-CNFG3
-NULL : sdo[0x5002][5] = 0 | 9999 | 0.1
 
 #-----setup pat-----
 #setup meter

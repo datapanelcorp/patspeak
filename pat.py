@@ -81,7 +81,19 @@ else:
     time.sleep(0.05)
     for node_id in globals.network.scanner.nodes:
         print("Found node %d!" % node_id)
-
+    for index in globals.uut_eds.object_dictionary:
+        entry = globals.uut_eds.object_dictionary[index]
+        if hasattr(entry, 'subindices'):
+            for subidx in entry.subindices:
+                sub = entry[subidx]
+                SignalName = f"sdo[0x{index:04X}][{sub.subindex}]"
+                try:
+                    RealValue = float(globals.uut_eds.sdo[index][sub.subindex].raw)
+                    globals.UUT_Fdbk[SignalName] = RealValue
+                    print(f"INIT -  SubIndex: {sub.subindex}, Name: {sub.name}, RealValue: {RealValue}")
+                except:
+                    globals.UUT_Fdbk[SignalName] = 0
+                    print(f"FAIL -  SubIndex: {sub.subindex}, Name: {sub.name}")
 
 #Start CAN thread for PAT
 if(globals.SuppressPatSupport == 'False'): # skip if suppressed

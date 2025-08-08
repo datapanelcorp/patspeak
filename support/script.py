@@ -9,46 +9,23 @@ from datetime import timedelta
 import re
 
 last_printed_line = ""
+def GetEDSName(name):
+    LongName = name
+    try:
+        numbers = re.findall(r'0x[0-9a-fA-F]+|\d+', name)
+        sdo_param = [int(num, 16) if num.startswith('0x') else int(num) for num in numbers]
+        if(len(sdo_param) == 2):
+            LongName = (globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].name)
+        if(len(sdo_param) == 1):
+            LongName = (globals.uut_eds.sdo[sdo_param[0]].raw).name
+    except:
+        return LongName
+    return LongName
 
 def SaveData():
 
     print("Writing Data Collected.")
     print("Fail Count:", globals.FailCount)
-    for key,value in globals.UUT_Results.items():
-        if(not "NULL" in key):
-            tmp = key.split("-")
-            TestStep = tmp[0]
-            SignalName = tmp[1]
-            DataLogTag = tmp[2]
-            
-            # HeaderName = ""
-            
-            # if(DataLogTag != ""):
-                # #HeaderName = str(globals.UnitName) + "_" + SignalName + "_" + DataLogTag
-                # HeaderName =  DataLogTag + "_" + str(globals.UnitName) + "_" + SignalName 
-            # else:
-                # HeaderName = str(globals.UnitName) + "_" + SignalName
-                
-            # datafile = globals.DataPath + HeaderName + ".csv"
-            
-            # ShowStep = 1
-            
-            # if(ShowStep == 1):
-                # FullHeaderName = "Step," + HeaderName
-                # FullValue = TestStep + "," + str(value)
-            # else:
-                # FullHeaderName = HeaderName
-                # FullValue = str(value)
-
-            # if(os.path.exists(datafile)): #TODO: improve w/ header detection
-                # f = open(datafile, 'a')
-                # f.write(str(FullValue) + "\n")
-                # f.close()
-            # else:
-                # f = open(datafile, 'w')
-                # f.write(FullHeaderName + "\n")
-                # f.write(str(FullValue) + "\n")
-                # f.close()
             
     datafile = globals.DataPath + str(globals.UnitName) + ".csv"
     f = open(datafile, 'a')
@@ -58,7 +35,6 @@ def SaveData():
     f.close()
     
     globals.AllCollectedData = ""            
-    globals.UUT_Results.clear()
 
 def ProcessScript():
     global last_printed_line
@@ -180,6 +156,7 @@ def ProcessScript():
 
         TestToStr = ""
         SignalName = ""
+        TestSignalName = ""
         TestValue = 0
         TestTol = 0
         TestTime = 0
@@ -191,42 +168,36 @@ def ProcessScript():
             if(s[0] == "NULL"):
                 pass
             else:
-                if(s[1] == "DATALOG"):
-                    TestTime = globals.PassTime = 0 #force pass
-                    RealValue = globals.pat_framebox_out.signal(SignalName).phys
-                    globals.UUT_Results[str(globals.TestStep) + "-" + SignalName + "-" + globals.DataLogTag] = RealValue 
-                else:
-                    #PAT
-                    try:
-                        globals.pat_framebox_out.signal(SignalName).phys = float(s[1])
-                        globals.PAT_Fdbk[SignalName] = float(s[1])
+                #PAT
+                try:
+                    globals.pat_framebox_out.signal(SignalName).phys = float(s[1])
+                    globals.PAT_Fdbk[SignalName] = float(s[1])
+                    RealValue = float(s[1])
+                except:
+                    pass
+                #UUT
+                try:
+                    if(globals.uut_db):
+                        globals.uut_framebox_out.signal(SignalName).phys = float(s[1])
+                        globals.UUT_Fdbk[SignalName] = float(s[1])
                         RealValue = float(s[1])
-                    except:
-                        pass
-                    #UUT
-                    try:
-                        if(globals.uut_db):
-                            globals.uut_framebox_out.signal(SignalName).phys = float(s[1])
+                    else:
+                        numbers = re.findall(r'0x[0-9a-fA-F]+|\d+', SignalName)
+                        sdo_param = [int(num, 16) if num.startswith('0x') else int(num) for num in numbers]
+                        if(len(sdo_param) == 2):
+                            globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].raw = float(s[1])
                             globals.UUT_Fdbk[SignalName] = float(s[1])
-                            RealValue = float(s[1])
-                        else:
-                            numbers = re.findall(r'0x[0-9a-fA-F]+|\d+', SignalName)
-                            sdo_param = [int(num, 16) if num.startswith('0x') else int(num) for num in numbers]
-                            if(len(sdo_param) == 2):
-                                globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].raw = float(s[1])
-                                globals.UUT_Fdbk[SignalName] = float(s[1])
-                            if(len(sdo_param) == 1):
-                                globals.uut_eds.sdo[sdo_param[0]].raw = float(s[1])
-                                globals.UUT_Fdbk[SignalName] = float(s[1])
-                    except:
-                        pass
+                        if(len(sdo_param) == 1):
+                            globals.uut_eds.sdo[sdo_param[0]].raw = float(s[1])
+                            globals.UUT_Fdbk[SignalName] = float(s[1])
+                except:
+                    pass
         
         if(Wait):
             globals.WaitTime += time_delta
             if(globals.WaitTime >= Wait):
                 globals.WaitDone = 1 #stop from resetting
                 globals.WaitTime = Wait = 0 #allow to pass
-
         if(Wait == 0):
             for i in Ins:
                 s = i.split("=")
@@ -234,51 +205,40 @@ def ProcessScript():
                 if(SignalName == "NULL"):
                     pass
                 else:
-                    if(s[1] == "DATALOG"):
-                        TestTime = globals.PassTime = 0 #force pass
+                    t = s[1].split("|")
+                    TestValue = float(t[0].rstrip())
+                    TestTol = float(t[1].rstrip())
+                    TestToStr = "+/- " + str(TestTol)
+                    TestTime = float(t[2].rstrip())
+                    try:
+                        RealValue = float(globals.PAT_Fdbk[SignalName])
+                    except:
                         try:
-                            RealValue = float(globals.PAT_Fdbk[SignalName])
-                        except:
-                            try:
+                            if(globals.uut_db):
                                 RealValue = float(globals.UUT_Fdbk[SignalName])
-                            except:
-                                print("signal not found!", SignalName)
-                                globals.StepTime = Timeout #force exit
-                    else:
-                        t = s[1].split("|")
-                        TestValue = float(t[0].rstrip())
-                        TestTol = float(t[1].rstrip())
-                        TestToStr = "+/- " + str(TestTol)
-                        TestTime = float(t[2].rstrip())
-                        try:
-                            RealValue = float(globals.PAT_Fdbk[SignalName])
+                            else:
+                                numbers = re.findall(r'0x[0-9a-fA-F]+|\d+', SignalName)
+                                sdo_param = [int(num, 16) if num.startswith('0x') else int(num) for num in numbers]
+                                if(len(sdo_param) == 2):
+                                    RealValue = float(globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].raw)
+                                    #globals.UUT_Fdbk[SignalName] = RealValue
+                                if(len(sdo_param) == 1):
+                                    RealValue = float(globals.uut_eds.sdo[sdo_param[0]].raw)
+                                    #globals.UUT_Fdbk[SignalName] = RealValue
                         except:
-                            try:
-                                if(globals.uut_db):
-                                    RealValue = float(globals.UUT_Fdbk[SignalName])
-                                else:
-                                    numbers = re.findall(r'0x[0-9a-fA-F]+|\d+', SignalName)
-                                    sdo_param = [int(num, 16) if num.startswith('0x') else int(num) for num in numbers]
-                                    if(len(sdo_param) == 2):
-                                        RealValue = float(globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].raw)
-                                        globals.UUT_Fdbk[SignalName] = RealValue
-                                    if(len(sdo_param) == 1):
-                                        RealValue = float(globals.uut_eds.sdo[sdo_param[0]].raw)
-                                        globals.UUT_Fdbk[SignalName] = RealValue
-                            except:
-                                print("signal not found!", SignalName)
-                                globals.StepTime = Timeout #force exit
-                            
-                        RealValue = round(RealValue, 4)
-                        TestValue = round(TestValue, 4)
+                            print("signal not found!", SignalName)
+                            globals.StepTime = Timeout #force exit
                         
-                        if((RealValue <= (TestValue + TestTol))&(RealValue >= (TestValue - TestTol))):
-                            #if(RealValue >= (TestValue - TestTol)):
-                            globals.PassTime += time_delta
-                        else:
-                            globals.PassTime = 0
-                        #else:
-                       #     globals.PassTime = 0
+                    RealValue = round(RealValue, 4)
+                    TestValue = round(TestValue, 4)
+                    
+                    if((RealValue <= (TestValue + TestTol))&(RealValue >= (TestValue - TestTol))):
+                        #if(RealValue >= (TestValue - TestTol)):
+                        globals.PassTime += time_delta
+                    else:
+                        globals.PassTime = 0
+                    #else:
+                    #     globals.PassTime = 0
 
             if(Hold):
                 globals.PassTime = 0
@@ -288,20 +248,36 @@ def ProcessScript():
 
             if((globals.PassTime >= TestTime)|((Timeout)&(globals.StepTime >= Timeout))):
                 if(SignalName != 'NULL'):
-                    globals.UUT_Results[str(globals.TestStep) + "-" + SignalName + "-" + globals.DataLogTag] = RealValue
+                    LongName = GetEDSName(SignalName)
                     if((Timeout)&(globals.StepTime >= Timeout)):
-                        TestString = StepStr + "FAIL:" + " " + SignalName + " " + str(RealValue)
+                        TestString = StepStr + "FAIL:" + " " + LongName + " " + str(RealValue)
                         globals.FailCount += 1
                     else:
-                        TestString = StepStr + "PASS:" + " " + SignalName + " " + str(RealValue)
+                        TestString = StepStr + "PASS:" + " " + LongName + " " + str(RealValue)
                     globals.UUT_TestLog += TestString + "\n"
                     print(TestString)
-                    
+
+                    try:
+                        IsThisAPatTest = float(globals.PAT_Fdbk[SignalName])
+                    except:
+                        #update all CANopen values
+                        for index in globals.uut_eds.object_dictionary:
+                            entry = globals.uut_eds.object_dictionary[index]
+                            if hasattr(entry, 'subindices'):
+                                for subidx in entry.subindices:
+                                    sub = entry[subidx]
+                                    AllSignalName = f"sdo[0x{index:04X}][{sub.subindex}]"
+                                    try:
+                                        globals.UUT_Fdbk[AllSignalName] = float(globals.uut_eds.sdo[index][sub.subindex].raw)
+                                    except:
+                                        globals.UUT_Fdbk[AllSignalName] = 0
+
                     name_header = "Step,"
                     the_fdbk_values = str(globals.TestStep) + ","
                     
                     for name in globals.UUT_Fdbk:
-                        name_header += name + ","
+                        LongName = GetEDSName(name)
+                        name_header += LongName + ","
                         the_fdbk_values += str(round(float(globals.UUT_Fdbk[name]),3)) + ","
                         
                     for name in globals.PAT_Fdbk:
@@ -325,7 +301,8 @@ def ProcessScript():
                 globals.TestStep += 1              
             else:
                 if(print_test):
-                    TestString = StepStr + "TEST:" + " " + SignalName + " " + str(TestValue) + " " + TestToStr
+                    LongName = GetEDSName(SignalName)
+                    TestString = StepStr + "TEST:" + " " + LongName + " " + str(TestValue) + " " + TestToStr
                     globals.UUT_TestLog += TestString + "\n"
                     print(TestString)
 

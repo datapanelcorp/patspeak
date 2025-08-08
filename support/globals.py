@@ -10,7 +10,7 @@ network = canopen.Network()#TODO: should this only be created w/ eds file?
 
 def initialize(): 
     global finished, TestStep, TestPhase, TestLine, PAT_Fdbk, UUT_Fdbk, pat_db, uut_db, test_file, TotalTime, StartTime, FailCount
-    global pat_framebox_out, uut_framebox_out, PassTime, tracker_last_time, StepTime, UUT_Results, UUT_TestLog
+    global pat_framebox_out, uut_framebox_out, PassTime, tracker_last_time, StepTime, UUT_TestLog
     global WaitTime, WaitDone, SoundStart, SoundFail, SoundPass, TimeStampFormat, UnitName, HeaderAdded
     global MeterData, UUTData, TestFile, DataLogTag, DataPath, LogPath, CAN_1, CAN_2, Verbose, AllCollectedData, SuppressPatSupport
     global uut_eds, canopen_full_eds_path
@@ -30,7 +30,6 @@ def initialize():
     finished = 0
     PAT_Fdbk = { }
     UUT_Fdbk = { }
-    UUT_Results = { }
     AllCollectedData = ""
     DataLogTag = ""
     HeaderAdded = 0
@@ -105,8 +104,8 @@ def initialize():
         globals.uut_eds = globals.network.add_node(1, globals.canopen_full_eds_path)
         #print("Object Dictionary:")
         print("Updating UUT_Fdbk...")
-        for index in uut_eds.object_dictionary:
-            entry = uut_eds.object_dictionary[index]
+        for index in globals.uut_eds.object_dictionary:
+            entry = globals.uut_eds.object_dictionary[index]
             try:
                 print(f"Index: 0x{index:04X}, Name: {entry.name}, Type: {entry.object_type}")
             except:
