@@ -214,9 +214,10 @@ def ProcessScript():
                             sdo_param = [int(num, 16) if num.startswith('0x') else int(num) for num in numbers]
                             if(len(sdo_param) == 2):
                                 globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].raw = float(s[1])
+                                globals.UUT_Fdbk[SignalName] = float(s[1])
                             if(len(sdo_param) == 1):
-                                globals.uut_eds.sdo[sdo_param[0]].raw = float(s[1])    
-                            globals.UUT_Fdbk[SignalName] = float(s[1])
+                                globals.uut_eds.sdo[sdo_param[0]].raw = float(s[1])
+                                globals.UUT_Fdbk[SignalName] = float(s[1])
                     except:
                         pass
         

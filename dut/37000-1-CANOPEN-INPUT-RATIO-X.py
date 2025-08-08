@@ -1,4 +1,4 @@
-MaxVolts = 12
+MaxVolts = 14.5
 
 PortIndex = 0
 ModeIndex = 0
@@ -135,7 +135,7 @@ while PortIndex <= 3:
         outstr += "#test power supply\n"
         outstr += "NULL : MeterVolts = " + str(Voltage) + " | 0.155 | 0.1\n"
         outstr += "#test feedback\n"    
-        outstr += "NULL : " + Feedback + " = " + str(int((Voltage / MaxVolts)*1000))  + " | 10 | 0.1\n" 
+        outstr += "NULL : " + Feedback + " = " + str(int((Voltage / MaxVolts)*1000))  + " | 100 | 0.1\n" 
         Voltage += VoltInc
     
     outstr += "\n"

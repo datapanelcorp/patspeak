@@ -55,11 +55,11 @@ while ModeIndex <= MaxMode:
         PortMode = 64#0x40
         StartVolts = 1
         MaxVolts = 5
-        FaultLimit = 5.5#RevD limit
+        #FaultLimit = 5.5#RevD limit
         #RevG limit
         #FaultLimit = 5.5#5.6#5.51
         #Enhanced limit
-        #FaultLimit = 5.6
+        FaultLimit = 5.6
         BVoltInc = 0.5
         SVoltInc = 0.1
         
@@ -67,11 +67,11 @@ while ModeIndex <= MaxMode:
         PortMode = 80#0x50
         StartVolts = 1
         MaxVolts = 10
-        FaultLimit = 10.5#RevD limit
+        #FaultLimit = 10.5#RevD limit
         #RevG limit
         #FaultLimit = 10.5#11.1#12#11.15
         #Enhanced limit
-        #FaultLimit = 11.1
+        FaultLimit = 11.1
         BVoltInc = 0.5
         SVoltInc = 0.1
         
@@ -79,11 +79,11 @@ while ModeIndex <= MaxMode:
         PortMode = 96#0x60
         StartVolts = 1
         MaxVolts = 32
-        FaultLimit = 34#RevD limit
+        #FaultLimit = 34#RevD limit
         #RevG limit
         #FaultLimit = 32#36.5#36.5
         #Enhanced limit
-        #FaultLimit = 36.5
+        FaultLimit = 36.5
         BVoltInc = 0.5
         SVoltInc = 0.1
         

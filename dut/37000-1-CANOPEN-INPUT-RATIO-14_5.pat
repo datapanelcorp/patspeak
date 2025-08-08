@@ -60,176 +60,92 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 J2_10 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Input_5B from 1 to 14.5 in 0.5 increments
+#Sweep of Input_5B from 1 to 14.5 in 1 increments
 
 #set power supply
 PwrSetVoltage = 10 : NULL : WAIT = 0.1
 #test power supply
 NULL : MeterVolts = 1 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][2] = 68 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 15 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 1.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][2] = 103 | 10 | 0.1
+NULL : sdo[0x6401][2] = 68 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 20 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.0 | 0.155 | 0.1
+NULL : MeterVolts = 2 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][2] = 137 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 25 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 2.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][2] = 172 | 10 | 0.1
+NULL : sdo[0x6401][2] = 137 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 30 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.0 | 0.155 | 0.1
+NULL : MeterVolts = 3 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][2] = 206 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 35 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 3.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][2] = 241 | 10 | 0.1
+NULL : sdo[0x6401][2] = 206 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 40 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.0 | 0.155 | 0.1
+NULL : MeterVolts = 4 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][2] = 275 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 45 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 4.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][2] = 310 | 10 | 0.1
+NULL : sdo[0x6401][2] = 275 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 50 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.0 | 0.155 | 0.1
+NULL : MeterVolts = 5 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][2] = 344 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 55 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 5.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][2] = 379 | 10 | 0.1
+NULL : sdo[0x6401][2] = 344 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 60 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 6.0 | 0.155 | 0.1
+NULL : MeterVolts = 6 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][2] = 413 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 65 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 6.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][2] = 448 | 10 | 0.1
+NULL : sdo[0x6401][2] = 413 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 70 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 7.0 | 0.155 | 0.1
+NULL : MeterVolts = 7 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][2] = 482 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 75 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 7.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][2] = 517 | 10 | 0.1
+NULL : sdo[0x6401][2] = 482 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 80 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 8.0 | 0.155 | 0.1
+NULL : MeterVolts = 8 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][2] = 551 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 85 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 8.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][2] = 586 | 10 | 0.1
+NULL : sdo[0x6401][2] = 551 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 90 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 9.0 | 0.155 | 0.1
+NULL : MeterVolts = 9 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][2] = 620 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 95 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 9.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][2] = 655 | 10 | 0.1
+NULL : sdo[0x6401][2] = 620 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 100 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 10.0 | 0.155 | 0.1
+NULL : MeterVolts = 10 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][2] = 689 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 105 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 10.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][2] = 724 | 10 | 0.1
+NULL : sdo[0x6401][2] = 689 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 110 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 11.0 | 0.155 | 0.1
+NULL : MeterVolts = 11 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][2] = 758 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 115 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 11.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][2] = 793 | 10 | 0.1
+NULL : sdo[0x6401][2] = 758 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 120 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 12.0 | 0.155 | 0.1
+NULL : MeterVolts = 12 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][2] = 827 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 125 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 12.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][2] = 862 | 10 | 0.1
+NULL : sdo[0x6401][2] = 827 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 130 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 13.0 | 0.155 | 0.1
+NULL : MeterVolts = 13 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][2] = 896 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 135 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 13.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][2] = 931 | 10 | 0.1
+NULL : sdo[0x6401][2] = 896 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14.0 | 0.155 | 0.1
+NULL : MeterVolts = 14 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][2] = 965 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 145 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 14.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][2] = 1000 | 10 | 0.1
+NULL : sdo[0x6401][2] = 965 | 100 | 0.1
 
 #Finished with port
 #switch out input
@@ -256,176 +172,92 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 J2_12 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Input_6B from 1 to 14.5 in 0.5 increments
+#Sweep of Input_6B from 1 to 14.5 in 1 increments
 
 #set power supply
 PwrSetVoltage = 10 : NULL : WAIT = 0.1
 #test power supply
 NULL : MeterVolts = 1 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][4] = 68 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 15 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 1.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][4] = 103 | 10 | 0.1
+NULL : sdo[0x6401][4] = 68 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 20 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.0 | 0.155 | 0.1
+NULL : MeterVolts = 2 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][4] = 137 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 25 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 2.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][4] = 172 | 10 | 0.1
+NULL : sdo[0x6401][4] = 137 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 30 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.0 | 0.155 | 0.1
+NULL : MeterVolts = 3 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][4] = 206 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 35 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 3.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][4] = 241 | 10 | 0.1
+NULL : sdo[0x6401][4] = 206 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 40 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.0 | 0.155 | 0.1
+NULL : MeterVolts = 4 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][4] = 275 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 45 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 4.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][4] = 310 | 10 | 0.1
+NULL : sdo[0x6401][4] = 275 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 50 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.0 | 0.155 | 0.1
+NULL : MeterVolts = 5 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][4] = 344 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 55 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 5.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][4] = 379 | 10 | 0.1
+NULL : sdo[0x6401][4] = 344 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 60 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 6.0 | 0.155 | 0.1
+NULL : MeterVolts = 6 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][4] = 413 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 65 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 6.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][4] = 448 | 10 | 0.1
+NULL : sdo[0x6401][4] = 413 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 70 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 7.0 | 0.155 | 0.1
+NULL : MeterVolts = 7 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][4] = 482 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 75 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 7.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][4] = 517 | 10 | 0.1
+NULL : sdo[0x6401][4] = 482 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 80 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 8.0 | 0.155 | 0.1
+NULL : MeterVolts = 8 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][4] = 551 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 85 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 8.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][4] = 586 | 10 | 0.1
+NULL : sdo[0x6401][4] = 551 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 90 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 9.0 | 0.155 | 0.1
+NULL : MeterVolts = 9 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][4] = 620 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 95 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 9.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][4] = 655 | 10 | 0.1
+NULL : sdo[0x6401][4] = 620 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 100 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 10.0 | 0.155 | 0.1
+NULL : MeterVolts = 10 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][4] = 689 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 105 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 10.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][4] = 724 | 10 | 0.1
+NULL : sdo[0x6401][4] = 689 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 110 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 11.0 | 0.155 | 0.1
+NULL : MeterVolts = 11 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][4] = 758 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 115 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 11.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][4] = 793 | 10 | 0.1
+NULL : sdo[0x6401][4] = 758 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 120 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 12.0 | 0.155 | 0.1
+NULL : MeterVolts = 12 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][4] = 827 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 125 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 12.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][4] = 862 | 10 | 0.1
+NULL : sdo[0x6401][4] = 827 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 130 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 13.0 | 0.155 | 0.1
+NULL : MeterVolts = 13 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][4] = 896 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 135 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 13.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][4] = 931 | 10 | 0.1
+NULL : sdo[0x6401][4] = 896 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14.0 | 0.155 | 0.1
+NULL : MeterVolts = 14 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][4] = 965 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 145 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 14.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][4] = 1000 | 10 | 0.1
+NULL : sdo[0x6401][4] = 965 | 100 | 0.1
 
 #Finished with port
 #switch out input
@@ -452,176 +284,92 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 J3_02 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Input_7B from 1 to 14.5 in 0.5 increments
+#Sweep of Input_7B from 1 to 14.5 in 1 increments
 
 #set power supply
 PwrSetVoltage = 10 : NULL : WAIT = 0.1
 #test power supply
 NULL : MeterVolts = 1 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][6] = 68 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 15 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 1.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][6] = 103 | 10 | 0.1
+NULL : sdo[0x6401][6] = 68 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 20 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.0 | 0.155 | 0.1
+NULL : MeterVolts = 2 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][6] = 137 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 25 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 2.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][6] = 172 | 10 | 0.1
+NULL : sdo[0x6401][6] = 137 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 30 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.0 | 0.155 | 0.1
+NULL : MeterVolts = 3 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][6] = 206 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 35 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 3.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][6] = 241 | 10 | 0.1
+NULL : sdo[0x6401][6] = 206 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 40 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.0 | 0.155 | 0.1
+NULL : MeterVolts = 4 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][6] = 275 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 45 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 4.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][6] = 310 | 10 | 0.1
+NULL : sdo[0x6401][6] = 275 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 50 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.0 | 0.155 | 0.1
+NULL : MeterVolts = 5 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][6] = 344 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 55 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 5.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][6] = 379 | 10 | 0.1
+NULL : sdo[0x6401][6] = 344 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 60 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 6.0 | 0.155 | 0.1
+NULL : MeterVolts = 6 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][6] = 413 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 65 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 6.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][6] = 448 | 10 | 0.1
+NULL : sdo[0x6401][6] = 413 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 70 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 7.0 | 0.155 | 0.1
+NULL : MeterVolts = 7 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][6] = 482 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 75 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 7.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][6] = 517 | 10 | 0.1
+NULL : sdo[0x6401][6] = 482 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 80 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 8.0 | 0.155 | 0.1
+NULL : MeterVolts = 8 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][6] = 551 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 85 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 8.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][6] = 586 | 10 | 0.1
+NULL : sdo[0x6401][6] = 551 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 90 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 9.0 | 0.155 | 0.1
+NULL : MeterVolts = 9 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][6] = 620 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 95 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 9.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][6] = 655 | 10 | 0.1
+NULL : sdo[0x6401][6] = 620 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 100 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 10.0 | 0.155 | 0.1
+NULL : MeterVolts = 10 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][6] = 689 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 105 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 10.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][6] = 724 | 10 | 0.1
+NULL : sdo[0x6401][6] = 689 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 110 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 11.0 | 0.155 | 0.1
+NULL : MeterVolts = 11 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][6] = 758 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 115 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 11.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][6] = 793 | 10 | 0.1
+NULL : sdo[0x6401][6] = 758 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 120 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 12.0 | 0.155 | 0.1
+NULL : MeterVolts = 12 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][6] = 827 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 125 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 12.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][6] = 862 | 10 | 0.1
+NULL : sdo[0x6401][6] = 827 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 130 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 13.0 | 0.155 | 0.1
+NULL : MeterVolts = 13 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][6] = 896 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 135 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 13.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][6] = 931 | 10 | 0.1
+NULL : sdo[0x6401][6] = 896 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14.0 | 0.155 | 0.1
+NULL : MeterVolts = 14 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][6] = 965 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 145 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 14.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][6] = 1000 | 10 | 0.1
+NULL : sdo[0x6401][6] = 965 | 100 | 0.1
 
 #Finished with port
 #switch out input
@@ -648,176 +396,92 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 J3_04 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Input_8B from 1 to 14.5 in 0.5 increments
+#Sweep of Input_8B from 1 to 14.5 in 1 increments
 
 #set power supply
 PwrSetVoltage = 10 : NULL : WAIT = 0.1
 #test power supply
 NULL : MeterVolts = 1 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][8] = 68 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 15 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 1.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][8] = 103 | 10 | 0.1
+NULL : sdo[0x6401][8] = 68 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 20 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.0 | 0.155 | 0.1
+NULL : MeterVolts = 2 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][8] = 137 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 25 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 2.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][8] = 172 | 10 | 0.1
+NULL : sdo[0x6401][8] = 137 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 30 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.0 | 0.155 | 0.1
+NULL : MeterVolts = 3 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][8] = 206 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 35 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 3.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][8] = 241 | 10 | 0.1
+NULL : sdo[0x6401][8] = 206 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 40 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.0 | 0.155 | 0.1
+NULL : MeterVolts = 4 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][8] = 275 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 45 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 4.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][8] = 310 | 10 | 0.1
+NULL : sdo[0x6401][8] = 275 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 50 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.0 | 0.155 | 0.1
+NULL : MeterVolts = 5 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][8] = 344 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 55 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 5.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][8] = 379 | 10 | 0.1
+NULL : sdo[0x6401][8] = 344 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 60 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 6.0 | 0.155 | 0.1
+NULL : MeterVolts = 6 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][8] = 413 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 65 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 6.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][8] = 448 | 10 | 0.1
+NULL : sdo[0x6401][8] = 413 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 70 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 7.0 | 0.155 | 0.1
+NULL : MeterVolts = 7 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][8] = 482 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 75 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 7.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][8] = 517 | 10 | 0.1
+NULL : sdo[0x6401][8] = 482 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 80 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 8.0 | 0.155 | 0.1
+NULL : MeterVolts = 8 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][8] = 551 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 85 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 8.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][8] = 586 | 10 | 0.1
+NULL : sdo[0x6401][8] = 551 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 90 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 9.0 | 0.155 | 0.1
+NULL : MeterVolts = 9 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][8] = 620 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 95 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 9.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][8] = 655 | 10 | 0.1
+NULL : sdo[0x6401][8] = 620 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 100 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 10.0 | 0.155 | 0.1
+NULL : MeterVolts = 10 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][8] = 689 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 105 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 10.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][8] = 724 | 10 | 0.1
+NULL : sdo[0x6401][8] = 689 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 110 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 11.0 | 0.155 | 0.1
+NULL : MeterVolts = 11 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][8] = 758 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 115 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 11.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][8] = 793 | 10 | 0.1
+NULL : sdo[0x6401][8] = 758 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 120 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 12.0 | 0.155 | 0.1
+NULL : MeterVolts = 12 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][8] = 827 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 125 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 12.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][8] = 862 | 10 | 0.1
+NULL : sdo[0x6401][8] = 827 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 130 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 13.0 | 0.155 | 0.1
+NULL : MeterVolts = 13 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][8] = 896 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 135 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 13.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][8] = 931 | 10 | 0.1
+NULL : sdo[0x6401][8] = 896 | 100 | 0.1
 #set power supply
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14.0 | 0.155 | 0.1
+NULL : MeterVolts = 14 | 0.155 | 0.1
 #test feedback
-NULL : sdo[0x6401][8] = 965 | 10 | 0.1
-#set power supply
-PwrSetVoltage = 145 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 14.5 | 0.155 | 0.1
-#test feedback
-NULL : sdo[0x6401][8] = 1000 | 10 | 0.1
+NULL : sdo[0x6401][8] = 965 | 100 | 0.1
 
 #Finished with port
 #switch out input
