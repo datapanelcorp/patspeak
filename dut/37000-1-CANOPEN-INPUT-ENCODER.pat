@@ -34,14 +34,14 @@ sdo[0x2001][8] = 170 : NULL : WAIT = 0.1
 
 sdo[0x2003][1] = 5 : NULL : WAIT = 0.1
 sdo[0x2003][2] = 5 : NULL : WAIT = 0.1
-sdo[0x3001][1] = 0 : NULL : WAIT = 0.1
-sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
+sdo[0x3001][1] = 85 : NULL : WAIT = 0.1
+sdo[0x3001][2] = 85 : NULL : WAIT = 0.1
 
 J4_03 = 1 : NULL : WAIT = 0.1
 #switch in test supply
 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
 
-PwrSetVoltage = 140 : NULL
+PwrSetVoltage = 145 : NULL
 #testing encoder foward
 PwrEnable = 1 : NULL : WAIT = 0.2
 J3_01 = 1 : NULL : WAIT = 0.2

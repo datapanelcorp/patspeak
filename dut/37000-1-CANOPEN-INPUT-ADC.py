@@ -45,14 +45,12 @@ while ModeIndex <= MaxMode:
         StartVolts = 1
         MaxVolts = 5
         
-        #RevD limit
+        #Classic limit
         FaultLimit = 5.5
-        
-        #RevG limit
-        #FaultLimit = 5.5
-        
+
         #Enhanced limit
         #FaultLimit = 5.6
+        
         BVoltInc = 0.5
         SVoltInc = 0.1
         
@@ -61,11 +59,8 @@ while ModeIndex <= MaxMode:
         StartVolts = 1
         MaxVolts = 10
         
-        #RevD limit
+        #Classic limit
         FaultLimit = 10.5
-        
-        #RevG limit
-        #FaultLimit = 10.5
         
         #Enhanced limit
         #FaultLimit = 11.1
@@ -78,11 +73,8 @@ while ModeIndex <= MaxMode:
         StartVolts = 1
         MaxVolts = 32
         
-        #RevD limit
+        #Classic limit
         FaultLimit = 34
-        
-        #RevG limit
-        #FaultLimit = 34
         
         #Enhanced limit
         #FaultLimit = 36.5

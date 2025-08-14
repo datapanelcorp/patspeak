@@ -15,10 +15,11 @@ def GetEDSName(name):
         numbers = re.findall(r'0x[0-9a-fA-F]+|\d+', name)
         sdo_param = [int(num, 16) if num.startswith('0x') else int(num) for num in numbers]
         if(len(sdo_param) == 2):
-            LongName = (globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].name)
+            LongName = globals.uut_eds.sdo[sdo_param[0]][sdo_param[1]].name
         if(len(sdo_param) == 1):
-            LongName = (globals.uut_eds.sdo[sdo_param[0]].raw).name
+            LongName = globals.uut_eds.sdo[sdo_param[0]].name
     except:
+        print("except", name, sdo_param, len(sdo_param))
         return LongName
     return LongName
 
