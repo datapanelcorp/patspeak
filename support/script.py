@@ -271,6 +271,12 @@ def ProcessScript():
                                         globals.UUT_Fdbk[AllSignalName] = float(globals.uut_eds.sdo[index][sub.subindex].raw)
                                     except:
                                         globals.UUT_Fdbk[AllSignalName] = 0
+                            else:
+                                AllSignalName = entry.name
+                                try:
+                                    globals.UUT_Fdbk[AllSignalName] = float(globals.uut_eds.sdo[index].raw)
+                                except:
+                                    globals.UUT_Fdbk[AllSignalName] = 0
 
                     name_header = "Step,"
                     the_fdbk_values = str(globals.TestStep) + ","

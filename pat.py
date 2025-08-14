@@ -94,7 +94,15 @@ else:
                 except:
                     globals.UUT_Fdbk[SignalName] = 0
                     print(f"FAIL -  SubIndex: {sub.subindex}, Name: {sub.name}")
-
+        else:
+            SignalName = entry.name
+            try:
+                RealValue = float(globals.uut_eds.sdo[index].raw)
+                globals.UUT_Fdbk[SignalName] = RealValue
+                print(f"INIT -  Name: {entry.name}, RealValue: {RealValue}")
+            except:
+                globals.UUT_Fdbk[SignalName] = 0
+                print(f"FAIL -  Name: {entry.name}")
 #Start CAN thread for PAT
 if(globals.SuppressPatSupport == 'False'): # skip if suppressed
     globals.CAN_2 = threading.Thread(target=CANThread, args=(1,))
