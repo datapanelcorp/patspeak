@@ -34,8 +34,8 @@ sdo[0x2001][8] = 170 : NULL : WAIT = 0.1
 
 sdo[0x2003][1] = 5 : NULL : WAIT = 0.1
 sdo[0x2003][2] = 5 : NULL : WAIT = 0.1
-sdo[0x3001][1] = 85 : NULL : WAIT = 0.1
-sdo[0x3001][2] = 85 : NULL : WAIT = 0.1
+sdo[0x3001][1] = 0 : NULL : WAIT = 0.1
+sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
 
 J4_03 = 1 : NULL : WAIT = 0.1
 #switch in test supply
@@ -45,202 +45,70 @@ PwrSetVoltage = 145 : NULL
 #testing encoder foward
 PwrEnable = 1 : NULL : WAIT = 0.2
 J3_01 = 1 : NULL : WAIT = 0.2
+NULL : sdo[0x6401][9] = 0 | 0 | 0.1
+J3_03 = 1 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = 1 | 0 | 0.1
-J3_03 = 1 : NULL : WAIT = 0.2
+J3_01 = 0 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = 2 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
+J3_03 = 0 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = 3 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
+PwrEnable = 0 : NULL : WAIT = 0.2
+
+PwrEnable = 1 : NULL : WAIT = 0.2
+J3_01 = 1 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = 4 | 0 | 0.1
-PwrEnable = 0 : NULL : WAIT = 0.2
-
-PwrEnable = 1 : NULL : WAIT = 0.2
-J3_01 = 1 : NULL : WAIT = 0.2
+J3_03 = 1 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = 5 | 0 | 0.1
-J3_03 = 1 : NULL : WAIT = 0.2
+J3_01 = 0 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = 6 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
+J3_03 = 0 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = 7 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 8 | 0 | 0.1
-PwrEnable = 0 : NULL : WAIT = 0.2
-
-PwrEnable = 1 : NULL : WAIT = 0.2
-J3_01 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 9 | 0 | 0.1
-J3_03 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 10 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 11 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 12 | 0 | 0.1
-PwrEnable = 0 : NULL : WAIT = 0.2
-
-PwrEnable = 1 : NULL : WAIT = 0.2
-J3_01 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 13 | 0 | 0.1
-J3_03 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 14 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 15 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 16 | 0 | 0.1
-PwrEnable = 0 : NULL : WAIT = 0.2
-
-PwrEnable = 1 : NULL : WAIT = 0.2
-J3_01 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 17 | 0 | 0.1
-J3_03 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 18 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 19 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 20 | 0 | 0.1
-PwrEnable = 0 : NULL : WAIT = 0.2
-
-PwrEnable = 1 : NULL : WAIT = 0.2
-J3_01 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 21 | 0 | 0.1
-J3_03 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 22 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 23 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 24 | 0 | 0.1
 PwrEnable = 0 : NULL : WAIT = 0.2
 
 #testing encoder reverse
 PwrEnable = 1 : NULL : WAIT = 0.2
 J3_03 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 23 | 0 | 0.1
-J3_01 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 22 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 21 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 20 | 0 | 0.1
-PwrEnable = 0 : NULL : WAIT = 0.2
-
-PwrEnable = 1 : NULL : WAIT = 0.2
-J3_03 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 19 | 0 | 0.1
-J3_01 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 18 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 17 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 16 | 0 | 0.1
-PwrEnable = 0 : NULL : WAIT = 0.2
-
-PwrEnable = 1 : NULL : WAIT = 0.2
-J3_03 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 15 | 0 | 0.1
-J3_01 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 14 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 13 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 12 | 0 | 0.1
-PwrEnable = 0 : NULL : WAIT = 0.2
-
-PwrEnable = 1 : NULL : WAIT = 0.2
-J3_03 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 11 | 0 | 0.1
-J3_01 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 10 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 9 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 8 | 0 | 0.1
-PwrEnable = 0 : NULL : WAIT = 0.2
-
-PwrEnable = 1 : NULL : WAIT = 0.2
-J3_03 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 7 | 0 | 0.1
-J3_01 = 1 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = 6 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
+J3_01 = 1 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = 5 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
+J3_03 = 0 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = 4 | 0 | 0.1
+J3_01 = 0 : NULL : WAIT = 0.2
+NULL : sdo[0x6401][9] = 3 | 0 | 0.1
 PwrEnable = 0 : NULL : WAIT = 0.2
 
 PwrEnable = 1 : NULL : WAIT = 0.2
 J3_03 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = 3 | 0 | 0.1
-J3_01 = 1 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = 2 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
+J3_01 = 1 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = 1 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
+J3_03 = 0 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = 0 | 0 | 0.1
+J3_01 = 0 : NULL : WAIT = 0.2
+NULL : sdo[0x6401][9] = -1 | 0 | 0.1
 PwrEnable = 0 : NULL : WAIT = 0.2
 
 #testing encoder reverse rollover
 PwrEnable = 1 : NULL : WAIT = 0.2
 J3_03 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -1 | 0 | 0.1
-J3_01 = 1 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = -2 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
+J3_01 = 1 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = -3 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
+J3_03 = 0 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = -4 | 0 | 0.1
-PwrEnable = 0 : NULL : WAIT = 0.2
-
-PwrEnable = 1 : NULL : WAIT = 0.2
-J3_03 = 1 : NULL : WAIT = 0.2
+J3_01 = 0 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = -5 | 0 | 0.1
-J3_01 = 1 : NULL : WAIT = 0.2
+PwrEnable = 0 : NULL : WAIT = 0.2
+
+PwrEnable = 1 : NULL : WAIT = 0.2
+J3_03 = 1 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = -6 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
+J3_01 = 1 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = -7 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
+J3_03 = 0 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = -8 | 0 | 0.1
-PwrEnable = 0 : NULL : WAIT = 0.2
-
-PwrEnable = 1 : NULL : WAIT = 0.2
-J3_03 = 1 : NULL : WAIT = 0.2
+J3_01 = 0 : NULL : WAIT = 0.2
 NULL : sdo[0x6401][9] = -9 | 0 | 0.1
-J3_01 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -10 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -11 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -12 | 0 | 0.1
-PwrEnable = 0 : NULL : WAIT = 0.2
-
-PwrEnable = 1 : NULL : WAIT = 0.2
-J3_03 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -13 | 0 | 0.1
-J3_01 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -14 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -15 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -16 | 0 | 0.1
-PwrEnable = 0 : NULL : WAIT = 0.2
-
-PwrEnable = 1 : NULL : WAIT = 0.2
-J3_03 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -17 | 0 | 0.1
-J3_01 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -18 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -19 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -20 | 0 | 0.1
-PwrEnable = 0 : NULL : WAIT = 0.2
-
-PwrEnable = 1 : NULL : WAIT = 0.2
-J3_03 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -21 | 0 | 0.1
-J3_01 = 1 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -22 | 0 | 0.1
-J3_03 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -23 | 0 | 0.1
-J3_01 = 0 : NULL : WAIT = 0.2
-NULL : sdo[0x6401][9] = -24 | 0 | 0.1
 PwrEnable = 0 : NULL : WAIT = 0.2
 
 #switch out input
@@ -251,7 +119,7 @@ J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
 #disable counter
 sdo[0x2003][1] = 1 : NULL : WAIT = 0.1
 #verify count
-NULL : sdo[0x6401][9] = -24 | 0 | 0.1
+NULL : sdo[0x6401][9] = -9 | 0 | 0.1
 #send counter reset
 sdo[0x2003][1] = 4 : NULL : WAIT = 0.1
 #verify count reset

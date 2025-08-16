@@ -31,6 +31,7 @@ outstr += "\n"
 #outstr += "#switch in o-scope\n"
 outstr += "J4_03 = 1 : NULL : WAIT = 0.2\n"
 
+
 PortIndex = 0
 ModeIndex = 0
 
@@ -83,6 +84,9 @@ while ModeIndex <= MaxMode:
         SVoltInc = 0.1
         
     while PortIndex <= 3:
+        outstr += "#cycle IGN to clear any faults\n"
+        outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
+        outstr += "RLY_K1 = 0 : NULL : WAIT = 0.2\n"
         
         VoltInc = BVoltInc
         
@@ -164,8 +168,11 @@ while ModeIndex <= MaxMode:
 
         outstr += "\n"
 
-        outstr += "PAUSE- CYCLE POWER TO CLEAR FAULT\n"
-
+        #outstr += "PAUSE- CYCLE POWER TO CLEAR FAULT\n"
+        #outstr += "#cycle IGN\n"
+        #outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
+        #outstr += "RLY_K1 = 0 : NULL : WAIT = 0.2\n"
+        
     ModeIndex += 1
     PortIndex = 0
     outstr += "\n"

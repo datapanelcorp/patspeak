@@ -91,7 +91,7 @@ outstr += "\n"
 outstr += "PwrSetVoltage = 145 : NULL\n"
 
 TheCount = 0
-MaxCount = 20
+MaxCount = 5
 EncoderValue = "sdo[0x6401][9]"
 
 outstr += "#testing encoder foward\n"
@@ -99,7 +99,8 @@ outstr += "#testing encoder foward\n"
 while TheCount <= MaxCount:
     outstr += "PwrEnable = 1 : NULL : WAIT = 0.2\n"
     outstr += InputConnectorA + " = 1 : NULL : WAIT = 0.2\n"
-    TheCount += 1
+    if(TheCount > 0):   #37000 firmware does not increment count on inital rising edge
+        TheCount += 1
     outstr += "NULL : " + EncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
     outstr += InputConnectorB + " = 1 : NULL : WAIT = 0.2\n"
     TheCount += 1
@@ -132,7 +133,7 @@ while TheCount > 0:
     outstr += "\n"
     
 outstr += "#testing encoder reverse rollover\n"
-TheRevCount = 0#4294967295 + 1
+TheRevCount = TheCount#4294967295 + 1
 while TheCount <= MaxCount:
     outstr += "PwrEnable = 1 : NULL : WAIT = 0.2\n"
     outstr += InputConnectorB + " = 1 : NULL : WAIT = 0.2\n"

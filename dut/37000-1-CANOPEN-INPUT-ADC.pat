@@ -20,6 +20,9 @@ PwrEnable = 1 : NULL : WAIT = 0.1
 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 1
 
 J4_03 = 1 : NULL : WAIT = 0.2
+#cycle IGN to clear any faults
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 0.2
 #-----setup 34044-----
 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
 #disable global modes
@@ -134,7 +137,9 @@ NULL : sdo[0x1003][0] = 1 | 0.1 | 0.1
 #switch out input
 J2_10 = 0 : NULL : WAIT = 0.1
 
-PAUSE- CYCLE POWER TO CLEAR FAULT
+#cycle IGN to clear any faults
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 0.2
 #-----setup 34044-----
 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
 #disable global modes
@@ -249,7 +254,9 @@ NULL : sdo[0x1003][0] = 1 | 0.1 | 0.1
 #switch out input
 J2_12 = 0 : NULL : WAIT = 0.1
 
-PAUSE- CYCLE POWER TO CLEAR FAULT
+#cycle IGN to clear any faults
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 0.2
 #-----setup 34044-----
 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
 #disable global modes
@@ -364,7 +371,9 @@ NULL : sdo[0x1003][0] = 1 | 0.1 | 0.1
 #switch out input
 J3_02 = 0 : NULL : WAIT = 0.1
 
-PAUSE- CYCLE POWER TO CLEAR FAULT
+#cycle IGN to clear any faults
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 0.2
 #-----setup 34044-----
 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
 #disable global modes
@@ -479,9 +488,11 @@ NULL : sdo[0x1003][0] = 1 | 0.1 | 0.1
 #switch out input
 J3_04 = 0 : NULL : WAIT = 0.1
 
-PAUSE- CYCLE POWER TO CLEAR FAULT
 
 #Finished with mode
+#cycle IGN to clear any faults
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 0.2
 #-----setup 34044-----
 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
 #disable global modes
@@ -676,7 +687,9 @@ NULL : sdo[0x1003][0] = 1 | 0.1 | 0.1
 #switch out input
 J2_10 = 0 : NULL : WAIT = 0.1
 
-PAUSE- CYCLE POWER TO CLEAR FAULT
+#cycle IGN to clear any faults
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 0.2
 #-----setup 34044-----
 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
 #disable global modes
@@ -871,7 +884,9 @@ NULL : sdo[0x1003][0] = 1 | 0.1 | 0.1
 #switch out input
 J2_12 = 0 : NULL : WAIT = 0.1
 
-PAUSE- CYCLE POWER TO CLEAR FAULT
+#cycle IGN to clear any faults
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 0.2
 #-----setup 34044-----
 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
 #disable global modes
@@ -1066,7 +1081,9 @@ NULL : sdo[0x1003][0] = 1 | 0.1 | 0.1
 #switch out input
 J3_02 = 0 : NULL : WAIT = 0.1
 
-PAUSE- CYCLE POWER TO CLEAR FAULT
+#cycle IGN to clear any faults
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 0.2
 #-----setup 34044-----
 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
 #disable global modes
@@ -1261,9 +1278,11 @@ NULL : sdo[0x1003][0] = 1 | 0.1 | 0.1
 #switch out input
 J3_04 = 0 : NULL : WAIT = 0.1
 
-PAUSE- CYCLE POWER TO CLEAR FAULT
 
 #Finished with mode
+#cycle IGN to clear any faults
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 0.2
 #-----setup 34044-----
 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
 #disable global modes
@@ -1834,7 +1853,9 @@ NULL : sdo[0x1003][0] = 1 | 0.1 | 0.1
 #switch out input
 J2_10 = 0 : NULL : WAIT = 0.1
 
-PAUSE- CYCLE POWER TO CLEAR FAULT
+#cycle IGN to clear any faults
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 0.2
 #-----setup 34044-----
 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
 #disable global modes
@@ -2405,7 +2426,9 @@ NULL : sdo[0x1003][0] = 1 | 0.1 | 0.1
 #switch out input
 J2_12 = 0 : NULL : WAIT = 0.1
 
-PAUSE- CYCLE POWER TO CLEAR FAULT
+#cycle IGN to clear any faults
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 0.2
 #-----setup 34044-----
 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
 #disable global modes
@@ -2976,7 +2999,9 @@ NULL : sdo[0x1003][0] = 1 | 0.1 | 0.1
 #switch out input
 J3_02 = 0 : NULL : WAIT = 0.1
 
-PAUSE- CYCLE POWER TO CLEAR FAULT
+#cycle IGN to clear any faults
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 0.2
 #-----setup 34044-----
 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
 #disable global modes
@@ -3547,7 +3572,6 @@ NULL : sdo[0x1003][0] = 1 | 0.1 | 0.1
 #switch out input
 J3_04 = 0 : NULL : WAIT = 0.1
 
-PAUSE- CYCLE POWER TO CLEAR FAULT
 
 #Finished with mode
 #switch out load line, set current
