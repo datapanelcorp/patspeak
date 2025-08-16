@@ -12,15 +12,15 @@ import RPi.GPIO as GPIO
 can_channel = "can1"
 
 # Pin configuration
-LED_PIN = 26
+K1_PIN = 26
 
 # Setup
 GPIO.setmode(GPIO.BCM)  # Use BCM pin numbering
-GPIO.setup(LED_PIN, GPIO.OUT)
-GPIO.output(LED_PIN, GPIO.HIGH)   # Turn LED off
+GPIO.setup(K1_PIN, GPIO.OUT)
+GPIO.output(K1_PIN, GPIO.HIGH)   # Turn LED off
 
 
-RLY_ID = 0x0CFF0500
+RLY_CTRL_ID = 0x0CFF0500
 K1State = 0
 
 # Create a stop event for clean thread shutdown
@@ -32,16 +32,16 @@ def receive_can_messages():
     print("Receiver thread started. Listening for CAN messages...")
     while not stop_event.is_set():
         message = cbus.recv(timeout=1.0)
-        if(message and message.arbitration_id == RLY_ID):
+        if(message and message.arbitration_id == RLY_CTRL_ID):
             first_byte = message.data[0]
             if(first_byte & 0x03 == 0x01):
                 K1State = 1
             else:
                 K1State = 0
             if(K1State):
-                GPIO.output(LED_PIN, GPIO.LOW)  # Turn LED on
+                GPIO.output(K1_PIN, GPIO.LOW)  # Turn LED on
             else:
-                GPIO.output(LED_PIN, GPIO.HIGH)   # Turn LED off
+                GPIO.output(K1_PIN, GPIO.HIGH)   # Turn LED off
 
 def is_number(value):
     try:

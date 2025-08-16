@@ -1,4 +1,4 @@
-MaxVolts = 12
+MaxVolts = 14.5
 
 PortIndex = 0
 ModeIndex = 0
@@ -15,6 +15,10 @@ outstr += "#input test\n"
 outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
+
+outstr += "#cycle IGN to clean slate\n"
+outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
+outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 
 outstr += "\n"
 outstr += "#-----setup pat-----\n"

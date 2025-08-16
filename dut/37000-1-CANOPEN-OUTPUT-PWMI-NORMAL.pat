@@ -4,6 +4,9 @@
 UUT_EDS = 37000-561.eds
 UUT_DATANAME = 37000-1-CANOPEN-OUTPUT-PWMI-NORMAL
 
+#cycle IGN to clean slate
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 1
 PRE_OPERATIONAL
 #-----configure PWMi-----
 sdo[0x2002][1] = 30.0, sdo[0x2002][2] = 20.0, sdo[0x2002][3] = 30.0, sdo[0x2002][4] = 20.0, sdo[0x2002][5] = 30.0, sdo[0x2002][6] = 20.0 : NULL : WAIT = 0.5

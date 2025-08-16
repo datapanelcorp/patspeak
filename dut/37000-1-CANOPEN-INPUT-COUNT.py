@@ -368,6 +368,9 @@ outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
 
+outstr += "#cycle IGN to clean slate\n"
+outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
+outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 
 outstr += "#-----setup 37000-----\n"
 

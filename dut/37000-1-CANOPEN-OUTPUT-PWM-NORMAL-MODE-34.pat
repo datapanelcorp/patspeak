@@ -4,6 +4,9 @@
 UUT_EDS = 37000-561.eds
 UUT_DATANAME = 37000-1-CANOPEN-OUTPUT-PWM-NORMAL-MODE-34
 
+#cycle IGN to clean slate
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 1
 #-----setup 37000-----
 #disable global modes
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
