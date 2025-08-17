@@ -93,7 +93,9 @@ for line in process.stdout:
 #**********************
 winsound.Beep(frequency, duration)
 print("Set resisitive load to 3.9 Ohms")
-print("All tests from now on will not need interaction!")
+print("****************************************************")
+print("* All tests from now on will not need interaction! *")
+print("****************************************************")
 input("Press Enter to continue...")
 process = subprocess.Popen(
     [venv_python, "-u", "pat.py", "37000-1-CANOPEN-OUTPUT-PWM-NORMAL-MODE-51.pat"],
