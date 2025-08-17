@@ -16,7 +16,7 @@ outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
 outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 
 outstr += "#switch in 420ma gen\n"
-outstr += "J4_01 = 1 : NULL : WAIT = 0.2\n"
+outstr += "J4_05 = 1 : NULL : WAIT = 0.2\n"
 
 PortIndex = 0
 ModeIndex = 0
@@ -61,10 +61,7 @@ while AmpsValue <= AmpsMax:
             OutputConnector = "J3_04"
             InputName = "Input_8B"
             Feedback = "sdo[0x6401][8]"
-            
-            
 
-        
         outstr += "#-----setup 37000-1-----\n"
         outstr += "#disable global modes\n"
         outstr += "sdo[0x2000][3] = 0 : NULL : WAIT = 0.1\n"
@@ -110,7 +107,7 @@ outstr += "\n"
 outstr += "#switch out load line\n"
 outstr += OutputConnector + " = 0 : NULL : WAIT = 0.1\n"
 outstr += "#switch out 420ma gen\n"
-outstr += "J4_01 = 0 : NULL : WAIT = 0.2\n"
+outstr += "J4_05 = 0 : NULL : WAIT = 0.2\n"
 outstr += "SAVE\n"
 outstr += "END\n"
 

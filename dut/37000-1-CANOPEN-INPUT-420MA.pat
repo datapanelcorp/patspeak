@@ -8,7 +8,7 @@ UUT_DATANAME = 37000-1-CANOPEN-INPUT-420MA
 RLY_K1 = 1 : NULL : WAIT = 1
 RLY_K1 = 0 : NULL : WAIT = 1
 #switch in 420ma gen
-J4_01 = 1 : NULL : WAIT = 0.2
+J4_05 = 1 : NULL : WAIT = 0.2
 #promp user
 PAUSE- SET GEN TO 5.0ma
 #-----setup 37000-1-----
@@ -454,6 +454,6 @@ J3_04 = 0 : NULL : WAIT = 0.2
 #switch out load line
 J3_04 = 0 : NULL : WAIT = 0.1
 #switch out 420ma gen
-J4_01 = 0 : NULL : WAIT = 0.2
+J4_05 = 0 : NULL : WAIT = 0.2
 SAVE
 END

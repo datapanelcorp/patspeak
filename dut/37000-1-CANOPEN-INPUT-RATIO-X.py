@@ -1,4 +1,4 @@
-MaxVolts = 14.5
+MaxVolts = 12
 
 PortIndex = 0
 ModeIndex = 0
@@ -33,7 +33,7 @@ outstr += "\n"
 outstr += "#-----setup main supply-----\n"
 outstr += "#setup meter\n"
 outstr += "J0_10_MAIN_SUPPLY = 1 : NULL : WAIT = 1\n"
-outstr += "PAUSE-VERIFY MAIN SUPPLY IS SET TO " + str(MaxVolts) + "\n"
+#outstr += "PAUSE-VERIFY MAIN SUPPLY IS SET TO " + str(MaxVolts) + "\n"
 outstr += "NULL : MeterVolts = " + str(MaxVolts) + " | 0.2 | 0.1\n"
 outstr += "J0_10_MAIN_SUPPLY = 0 : NULL : WAIT = 1\n"
 outstr += "\n"

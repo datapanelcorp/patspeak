@@ -1,0 +1,1197 @@
+Started on: 2025-08-16-18:57:24
+00000 #37000-1
+00000 #Verion 0.0
+00000 #input test
+00000 UUT_EDS = 37000-561.eds
+00000 UUT_DATANAME = 37000-1-CANOPEN-INPUT-COUNT
+00000 
+00000 #cycle IGN to clean slate
+00000 RLY_K1 = 1 : NULL : WAIT = 1
+00001 RLY_K1 = 0 : NULL : WAIT = 1
+00002 #-----setup 37000-----
+00002 #setup meter
+00002 LdRemote = 1 : NULL : WAIT = 0.1
+00003 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00004 LdEnable = 0 : NULL : WAIT = 0.1
+00005 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
+00006 
+00006 #setup PS1
+00006 PwrRemote = 1 : NULL : WAIT = 0.1
+00007 PwrSetCurrent = 20 : NULL : WAIT = 0.1
+00008 PwrSetVoltage = 0 : NULL : WAIT = 0.1
+00009 PwrEnable = 1 : NULL : WAIT = 0.1
+00010 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1
+00011 
+00011 OPERATIONAL
+00011 #****** NO OVERFLOW, SET POINT = 5, MAX COUNT = 5, OUTPUT INTERLOCK
+00011 #7A/3A
+00011 #disable global modes
+00011 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00012 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00013 
+00013 #configure Port Modes
+00013 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00014 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00015 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00016 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00017 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00018 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00019 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00020 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00021 
+00021 #config InterlockMode
+00021 #config counter
+00021 sdo[0x2003][1] = 69 : NULL : WAIT = 0.1
+00022 
+00022 #config SetPointValue
+00022 sdo[0x3001][1] = 5 : NULL : WAIT = 0.1
+00023 
+00023 #verify setpoint
+00023 NULL : sdo[0x6401][10] = 5 | 0 | 0.1
+00023 TEST: Read Analogue Input 16-Bit.FREQ_2 5.0 +/- 0.0
+00023 PASS: Read Analogue Input 16-Bit.FREQ_2 5.0
+00024 #switch in and on interlock output
+00024 J2_05 = 1 : NULL : WAIT = 0.2
+00025 sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+00026 #verify voltage
+00026 NULL : MeterVolts = 14 | 1 | 0.1
+00026 TEST: MeterVolts 14.0 +/- 1.0
+00026 PASS: MeterVolts 14.424
+00027 #switch out interlock output
+00027 J2_05 = 0 : NULL : WAIT = 0.2
+00028 #switch in test supply
+00028 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00029 #switch in input
+00029 J3_01 = 1 : NULL : WAIT = 0.2
+00030 
+00030 #testing count events
+00030 PwrSetVoltage = 140 : NULL
+00031 #verify count WITH RolloverMode 1 - 5
+00031 NULL : sdo[0x6401][9] = 1 | 0 | 0.1
+00031 TEST: Read Analogue Input 16-Bit.FREQ_1 1.0 +/- 0.0
+00031 PASS: Read Analogue Input 16-Bit.FREQ_1 1.0
+00032 PwrSetVoltage = 0 : NULL
+00033 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00033 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00033 PASS: Read Input 8-Bit.Input_1 0.0
+00034 
+00034 PwrSetVoltage = 140 : NULL
+00035 #verify count WITH RolloverMode 1 - 5
+00035 NULL : sdo[0x6401][9] = 2 | 0 | 0.1
+00035 TEST: Read Analogue Input 16-Bit.FREQ_1 2.0 +/- 0.0
+00035 FAIL: Read Analogue Input 16-Bit.FREQ_1 3.0
+00036 PwrSetVoltage = 0 : NULL
+00037 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00037 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00037 PASS: Read Input 8-Bit.Input_1 0.0
+00038 
+00038 PwrSetVoltage = 140 : NULL
+00039 #verify count WITH RolloverMode 1 - 5
+00039 NULL : sdo[0x6401][9] = 3 | 0 | 0.1
+00039 TEST: Read Analogue Input 16-Bit.FREQ_1 3.0 +/- 0.0
+00039 PASS: Read Analogue Input 16-Bit.FREQ_1 3.0
+00040 PwrSetVoltage = 0 : NULL
+00041 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00041 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00041 PASS: Read Input 8-Bit.Input_1 0.0
+00042 
+00042 PwrSetVoltage = 140 : NULL
+00043 #verify count WITH RolloverMode 1 - 5
+00043 NULL : sdo[0x6401][9] = 4 | 0 | 0.1
+00043 TEST: Read Analogue Input 16-Bit.FREQ_1 4.0 +/- 0.0
+00043 FAIL: Read Analogue Input 16-Bit.FREQ_1 5.0
+00044 PwrSetVoltage = 0 : NULL
+00045 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00045 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00045 PASS: Read Input 8-Bit.Input_1 0.0
+00046 
+00046 PwrSetVoltage = 140 : NULL
+00047 #verify count WITH RolloverMode 1 - 5
+00047 NULL : sdo[0x6401][9] = 5 | 0 | 0.1
+00047 TEST: Read Analogue Input 16-Bit.FREQ_1 5.0 +/- 0.0
+00047 PASS: Read Analogue Input 16-Bit.FREQ_1 5.0
+00048 PwrSetVoltage = 0 : NULL
+00049 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00049 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00049 PASS: Read Input 8-Bit.Input_1 0.0
+00050 #verify output status at setpoint
+00050 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00051 J3_01 = 0 : NULL : WAIT = 0.2
+00052 J2_05 = 1 : NULL : WAIT = 0.2
+00053 NULL : MeterVolts = 0 | 1 | 0.1
+00053 TEST: MeterVolts 0.0 +/- 1.0
+00053 PASS: MeterVolts 0.993
+00054 J2_05 = 0 : NULL : WAIT = 0.2
+00055 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00056 J3_01 = 1 : NULL : WAIT = 0.2
+00057 
+00057 PwrSetVoltage = 140 : NULL
+00058 #verify count WITHOUT RolloverMode 1 - 5
+00058 NULL : sdo[0x6401][9] = 5 | 0 | 0.1
+00058 TEST: Read Analogue Input 16-Bit.FREQ_1 5.0 +/- 0.0
+00058 PASS: Read Analogue Input 16-Bit.FREQ_1 5.0
+00059 PwrSetVoltage = 0 : NULL
+00060 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00060 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00060 PASS: Read Input 8-Bit.Input_1 0.0
+00061 
+00061 #switch out input
+00061 J3_01 = 0 : NULL : WAIT = 0.2
+00062 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00063 #turn off output and switch out is off
+00063 sdo[0x6411][5] = 0 : NULL : WAIT = 0.2
+00064 #verify count WITHOUT RolloverMode 2 - 5
+00064 NULL : sdo[0x6401][9] = 5 | 0 | 0.1
+00064 TEST: Read Analogue Input 16-Bit.FREQ_1 5.0 +/- 0.0
+00064 PASS: Read Analogue Input 16-Bit.FREQ_1 5.0
+00065 #send counter reset
+00065 sdo[0x2003][1] = 4 : NULL : WAIT = 0.1
+00066 #verify count reset
+00066 NULL : sdo[0x6401][9] = 0 | 0 | 0.1
+00066 TEST: Read Analogue Input 16-Bit.FREQ_1 0.0 +/- 0.0
+00066 PASS: Read Analogue Input 16-Bit.FREQ_1 0.0
+00067 
+00067 sdo[0x3001][1] = 0 : NULL : WAIT = 0.1
+00068 #8A/3A
+00068 #disable global modes
+00068 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00069 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00070 
+00070 #configure Port Modes
+00070 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00071 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00072 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00073 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00074 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00075 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00076 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00077 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00078 
+00078 #config InterlockMode
+00078 #config counter
+00078 sdo[0x2003][2] = 69 : NULL : WAIT = 0.1
+00079 
+00079 #config SetPointValue
+00079 sdo[0x3001][2] = 5 : NULL : WAIT = 0.1
+00080 
+00080 #verify setpoint
+00080 NULL : sdo[0x6401][12] = 5 | 0 | 0.1
+00080 TEST: Read Analogue Input 16-Bit.FREQ_4 5.0 +/- 0.0
+00080 PASS: Read Analogue Input 16-Bit.FREQ_4 5.0
+00081 #switch in and on interlock output
+00081 J2_07 = 1 : NULL : WAIT = 0.2
+00082 sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+00083 #verify voltage
+00083 NULL : MeterVolts = 14 | 1 | 0.1
+00083 TEST: MeterVolts 14.0 +/- 1.0
+00083 PASS: MeterVolts 13.213
+00084 #switch out interlock output
+00084 J2_07 = 0 : NULL : WAIT = 0.2
+00085 #switch in test supply
+00085 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00086 #switch in input
+00086 J3_03 = 1 : NULL : WAIT = 0.2
+00087 
+00087 #testing count events
+00087 PwrSetVoltage = 140 : NULL
+00088 #verify count WITH RolloverMode 1 - 5
+00088 NULL : sdo[0x6401][11] = 1 | 0 | 0.1
+00088 TEST: Read Analogue Input 16-Bit.FREQ_3 1.0 +/- 0.0
+00088 PASS: Read Analogue Input 16-Bit.FREQ_3 1.0
+00089 PwrSetVoltage = 0 : NULL
+00090 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00090 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00090 PASS: Read Input 8-Bit.Input_1 0.0
+00091 
+00091 PwrSetVoltage = 140 : NULL
+00092 #verify count WITH RolloverMode 1 - 5
+00092 NULL : sdo[0x6401][11] = 2 | 0 | 0.1
+00092 TEST: Read Analogue Input 16-Bit.FREQ_3 2.0 +/- 0.0
+00092 PASS: Read Analogue Input 16-Bit.FREQ_3 2.0
+00093 PwrSetVoltage = 0 : NULL
+00094 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00094 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00094 PASS: Read Input 8-Bit.Input_1 0.0
+00095 
+00095 PwrSetVoltage = 140 : NULL
+00096 #verify count WITH RolloverMode 1 - 5
+00096 NULL : sdo[0x6401][11] = 3 | 0 | 0.1
+00096 TEST: Read Analogue Input 16-Bit.FREQ_3 3.0 +/- 0.0
+00096 PASS: Read Analogue Input 16-Bit.FREQ_3 3.0
+00097 PwrSetVoltage = 0 : NULL
+00098 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00098 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00098 PASS: Read Input 8-Bit.Input_1 0.0
+00099 
+00099 PwrSetVoltage = 140 : NULL
+00100 #verify count WITH RolloverMode 1 - 5
+00100 NULL : sdo[0x6401][11] = 4 | 0 | 0.1
+00100 TEST: Read Analogue Input 16-Bit.FREQ_3 4.0 +/- 0.0
+00100 PASS: Read Analogue Input 16-Bit.FREQ_3 4.0
+00101 PwrSetVoltage = 0 : NULL
+00102 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00102 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00102 PASS: Read Input 8-Bit.Input_1 0.0
+00103 
+00103 PwrSetVoltage = 140 : NULL
+00104 #verify count WITH RolloverMode 1 - 5
+00104 NULL : sdo[0x6401][11] = 5 | 0 | 0.1
+00104 TEST: Read Analogue Input 16-Bit.FREQ_3 5.0 +/- 0.0
+00104 PASS: Read Analogue Input 16-Bit.FREQ_3 5.0
+00105 PwrSetVoltage = 0 : NULL
+00106 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00106 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00106 PASS: Read Input 8-Bit.Input_1 0.0
+00107 #verify output status at setpoint
+00107 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00108 J3_03 = 0 : NULL : WAIT = 0.2
+00109 J2_07 = 1 : NULL : WAIT = 0.2
+00110 NULL : MeterVolts = 0 | 1 | 0.1
+00110 TEST: MeterVolts 0.0 +/- 1.0
+00110 PASS: MeterVolts 0.339
+00111 J2_07 = 0 : NULL : WAIT = 0.2
+00112 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00113 J3_03 = 1 : NULL : WAIT = 0.2
+00114 
+00114 PwrSetVoltage = 140 : NULL
+00115 #verify count WITHOUT RolloverMode 1 - 5
+00115 NULL : sdo[0x6401][11] = 5 | 0 | 0.1
+00115 TEST: Read Analogue Input 16-Bit.FREQ_3 5.0 +/- 0.0
+00115 PASS: Read Analogue Input 16-Bit.FREQ_3 5.0
+00116 PwrSetVoltage = 0 : NULL
+00117 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00117 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00117 PASS: Read Input 8-Bit.Input_1 0.0
+00118 
+00118 #switch out input
+00118 J3_03 = 0 : NULL : WAIT = 0.2
+00119 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00120 #turn off output and switch out is off
+00120 sdo[0x6411][7] = 0 : NULL : WAIT = 0.2
+00121 #verify count WITHOUT RolloverMode 2 - 5
+00121 NULL : sdo[0x6401][11] = 5 | 0 | 0.1
+00121 TEST: Read Analogue Input 16-Bit.FREQ_3 5.0 +/- 0.0
+00121 PASS: Read Analogue Input 16-Bit.FREQ_3 5.0
+00122 #send counter reset
+00122 sdo[0x2003][2] = 4 : NULL : WAIT = 0.1
+00123 #verify count reset
+00123 NULL : sdo[0x6401][11] = 0 | 0 | 0.1
+00123 TEST: Read Analogue Input 16-Bit.FREQ_3 0.0 +/- 0.0
+00123 PASS: Read Analogue Input 16-Bit.FREQ_3 0.0
+00124 
+00124 sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
+00125 #switch out load line
+00125 J3_03 = 0 : NULL : WAIT = 0.1
+00126 #****** OVERFLOW, SET POINT = 3, MAX COUNT = 5, NO OUTPUT INTERLOCK
+00126 #7A/3A
+00126 #disable global modes
+00126 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00127 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00128 
+00128 #configure Port Modes
+00128 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00129 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00130 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00131 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00132 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00133 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00134 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00135 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00136 
+00136 #config RolloverMode
+00136 #config counter
+00136 sdo[0x2003][1] = 21 : NULL : WAIT = 0.1
+00137 
+00137 #config SetPointValue
+00137 sdo[0x3001][1] = 3 : NULL : WAIT = 0.1
+00138 
+00138 #verify setpoint
+00138 NULL : sdo[0x6401][10] = 3 | 0 | 0.1
+00138 TEST: Read Analogue Input 16-Bit.FREQ_2 3.0 +/- 0.0
+00138 PASS: Read Analogue Input 16-Bit.FREQ_2 3.0
+00139 #switch in and on interlock output
+00139 J2_05 = 1 : NULL : WAIT = 0.2
+00140 sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+00141 #verify voltage
+00141 NULL : MeterVolts = 14 | 1 | 0.1
+00141 TEST: MeterVolts 14.0 +/- 1.0
+00141 PASS: MeterVolts 14.424
+00142 #switch out interlock output
+00142 J2_05 = 0 : NULL : WAIT = 0.2
+00143 #switch in test supply
+00143 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00144 #switch in input
+00144 J3_01 = 1 : NULL : WAIT = 0.2
+00145 
+00145 #testing count events
+00145 PwrSetVoltage = 140 : NULL
+00146 #verify count WITH RolloverMode 1 - 3
+00146 NULL : sdo[0x6401][9] = 1 | 0 | 0.1
+00146 TEST: Read Analogue Input 16-Bit.FREQ_1 1.0 +/- 0.0
+00146 PASS: Read Analogue Input 16-Bit.FREQ_1 1.0
+00147 PwrSetVoltage = 0 : NULL
+00148 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00148 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00148 PASS: Read Input 8-Bit.Input_1 0.0
+00149 
+00149 PwrSetVoltage = 140 : NULL
+00150 #verify count WITH RolloverMode 1 - 3
+00150 NULL : sdo[0x6401][9] = 2 | 0 | 0.1
+00150 TEST: Read Analogue Input 16-Bit.FREQ_1 2.0 +/- 0.0
+00150 PASS: Read Analogue Input 16-Bit.FREQ_1 2.0
+00151 PwrSetVoltage = 0 : NULL
+00152 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00152 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00152 PASS: Read Input 8-Bit.Input_1 0.0
+00153 
+00153 PwrSetVoltage = 140 : NULL
+00154 #verify count WITH RolloverMode 1 - 3
+00154 NULL : sdo[0x6401][9] = 3 | 0 | 0.1
+00154 TEST: Read Analogue Input 16-Bit.FREQ_1 3.0 +/- 0.0
+00154 FAIL: Read Analogue Input 16-Bit.FREQ_1 4.0
+00155 PwrSetVoltage = 0 : NULL
+00156 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00156 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00156 PASS: Read Input 8-Bit.Input_1 0.0
+00157 #verify output status at setpoint
+00157 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00158 J3_01 = 0 : NULL : WAIT = 0.2
+00159 J2_05 = 1 : NULL : WAIT = 0.2
+00160 NULL : MeterVolts = 14 | 1 | 0.1
+00160 TEST: MeterVolts 14.0 +/- 1.0
+00160 PASS: MeterVolts 13.847
+00161 J2_05 = 0 : NULL : WAIT = 0.2
+00162 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00163 J3_01 = 1 : NULL : WAIT = 0.2
+00164 
+00164 PwrSetVoltage = 140 : NULL
+00165 #verify count WITH RolloverMode 1 - 3
+00165 NULL : sdo[0x6401][9] = 4 | 0 | 0.1
+00165 TEST: Read Analogue Input 16-Bit.FREQ_1 4.0 +/- 0.0
+00165 FAIL: Read Analogue Input 16-Bit.FREQ_1 7.0
+00166 PwrSetVoltage = 0 : NULL
+00167 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00167 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00167 PASS: Read Input 8-Bit.Input_1 0.0
+00168 
+00168 PwrSetVoltage = 140 : NULL
+00169 #verify count WITH RolloverMode 1 - 3
+00169 NULL : sdo[0x6401][9] = 5 | 0 | 0.1
+00169 TEST: Read Analogue Input 16-Bit.FREQ_1 5.0 +/- 0.0
+00169 FAIL: Read Analogue Input 16-Bit.FREQ_1 9.0
+00170 PwrSetVoltage = 0 : NULL
+00171 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00171 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00171 PASS: Read Input 8-Bit.Input_1 0.0
+00172 
+00172 PwrSetVoltage = 140 : NULL
+00173 #verify count WITH RolloverMode 1 - 3
+00173 NULL : sdo[0x6401][9] = 6 | 0 | 0.1
+00173 TEST: Read Analogue Input 16-Bit.FREQ_1 6.0 +/- 0.0
+00173 FAIL: Read Analogue Input 16-Bit.FREQ_1 10.0
+00174 PwrSetVoltage = 0 : NULL
+00175 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00175 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00175 PASS: Read Input 8-Bit.Input_1 0.0
+00176 
+00176 #switch out input
+00176 J3_01 = 0 : NULL : WAIT = 0.2
+00177 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00178 #turn off output and switch out is off
+00178 sdo[0x6411][5] = 0 : NULL : WAIT = 0.2
+00179 #verify count WITH RolloverMode 2 - 3
+00179 NULL : sdo[0x6401][9] = 6 | 0 | 0.1
+00179 TEST: Read Analogue Input 16-Bit.FREQ_1 6.0 +/- 0.0
+00179 FAIL: Read Analogue Input 16-Bit.FREQ_1 10.0
+00180 #send counter reset
+00180 sdo[0x2003][1] = 4 : NULL : WAIT = 0.1
+00181 #verify count reset
+00181 NULL : sdo[0x6401][9] = 0 | 0 | 0.1
+00181 TEST: Read Analogue Input 16-Bit.FREQ_1 0.0 +/- 0.0
+00181 PASS: Read Analogue Input 16-Bit.FREQ_1 0.0
+00182 
+00182 sdo[0x3001][1] = 0 : NULL : WAIT = 0.1
+00183 #8A/3A
+00183 #disable global modes
+00183 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00184 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00185 
+00185 #configure Port Modes
+00185 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00186 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00187 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00188 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00189 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00190 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00191 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00192 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00193 
+00193 #config RolloverMode
+00193 #config counter
+00193 sdo[0x2003][2] = 21 : NULL : WAIT = 0.1
+00194 
+00194 #config SetPointValue
+00194 sdo[0x3001][2] = 3 : NULL : WAIT = 0.1
+00195 
+00195 #verify setpoint
+00195 NULL : sdo[0x6401][12] = 3 | 0 | 0.1
+00195 TEST: Read Analogue Input 16-Bit.FREQ_4 3.0 +/- 0.0
+00195 PASS: Read Analogue Input 16-Bit.FREQ_4 3.0
+00196 #switch in and on interlock output
+00196 J2_07 = 1 : NULL : WAIT = 0.2
+00197 sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+00198 #verify voltage
+00198 NULL : MeterVolts = 14 | 1 | 0.1
+00198 TEST: MeterVolts 14.0 +/- 1.0
+00198 PASS: MeterVolts 14.414
+00199 #switch out interlock output
+00199 J2_07 = 0 : NULL : WAIT = 0.2
+00200 #switch in test supply
+00200 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00201 #switch in input
+00201 J3_03 = 1 : NULL : WAIT = 0.2
+00202 
+00202 #testing count events
+00202 PwrSetVoltage = 140 : NULL
+00203 #verify count WITH RolloverMode 1 - 3
+00203 NULL : sdo[0x6401][11] = 1 | 0 | 0.1
+00203 TEST: Read Analogue Input 16-Bit.FREQ_3 1.0 +/- 0.0
+00203 PASS: Read Analogue Input 16-Bit.FREQ_3 1.0
+00204 PwrSetVoltage = 0 : NULL
+00205 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00205 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00205 PASS: Read Input 8-Bit.Input_1 0.0
+00206 
+00206 PwrSetVoltage = 140 : NULL
+00207 #verify count WITH RolloverMode 1 - 3
+00207 NULL : sdo[0x6401][11] = 2 | 0 | 0.1
+00207 TEST: Read Analogue Input 16-Bit.FREQ_3 2.0 +/- 0.0
+00207 FAIL: Read Analogue Input 16-Bit.FREQ_3 3.0
+00208 PwrSetVoltage = 0 : NULL
+00209 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00209 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00209 PASS: Read Input 8-Bit.Input_1 0.0
+00210 
+00210 PwrSetVoltage = 140 : NULL
+00211 #verify count WITH RolloverMode 1 - 3
+00211 NULL : sdo[0x6401][11] = 3 | 0 | 0.1
+00211 TEST: Read Analogue Input 16-Bit.FREQ_3 3.0 +/- 0.0
+00211 PASS: Read Analogue Input 16-Bit.FREQ_3 3.0
+00212 PwrSetVoltage = 0 : NULL
+00213 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00213 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00213 PASS: Read Input 8-Bit.Input_1 0.0
+00214 #verify output status at setpoint
+00214 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00215 J3_03 = 0 : NULL : WAIT = 0.2
+00216 J2_07 = 1 : NULL : WAIT = 0.2
+00217 NULL : MeterVolts = 14 | 1 | 0.1
+00217 TEST: MeterVolts 14.0 +/- 1.0
+00217 PASS: MeterVolts 14.412
+00218 J2_07 = 0 : NULL : WAIT = 0.2
+00219 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00220 J3_03 = 1 : NULL : WAIT = 0.2
+00221 
+00221 PwrSetVoltage = 140 : NULL
+00222 #verify count WITH RolloverMode 1 - 3
+00222 NULL : sdo[0x6401][11] = 4 | 0 | 0.1
+00222 TEST: Read Analogue Input 16-Bit.FREQ_3 4.0 +/- 0.0
+00222 PASS: Read Analogue Input 16-Bit.FREQ_3 4.0
+00223 PwrSetVoltage = 0 : NULL
+00224 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00224 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00224 PASS: Read Input 8-Bit.Input_1 0.0
+00225 
+00225 PwrSetVoltage = 140 : NULL
+00226 #verify count WITH RolloverMode 1 - 3
+00226 NULL : sdo[0x6401][11] = 5 | 0 | 0.1
+00226 TEST: Read Analogue Input 16-Bit.FREQ_3 5.0 +/- 0.0
+00226 PASS: Read Analogue Input 16-Bit.FREQ_3 5.0
+00227 PwrSetVoltage = 0 : NULL
+00228 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00228 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00228 PASS: Read Input 8-Bit.Input_1 0.0
+00229 
+00229 PwrSetVoltage = 140 : NULL
+00230 #verify count WITH RolloverMode 1 - 3
+00230 NULL : sdo[0x6401][11] = 6 | 0 | 0.1
+00230 TEST: Read Analogue Input 16-Bit.FREQ_3 6.0 +/- 0.0
+00230 FAIL: Read Analogue Input 16-Bit.FREQ_3 8.0
+00231 PwrSetVoltage = 0 : NULL
+00232 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00232 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00232 PASS: Read Input 8-Bit.Input_1 0.0
+00233 
+00233 #switch out input
+00233 J3_03 = 0 : NULL : WAIT = 0.2
+00234 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00235 #turn off output and switch out is off
+00235 sdo[0x6411][7] = 0 : NULL : WAIT = 0.2
+00236 #verify count WITH RolloverMode 2 - 3
+00236 NULL : sdo[0x6401][11] = 6 | 0 | 0.1
+00236 TEST: Read Analogue Input 16-Bit.FREQ_3 6.0 +/- 0.0
+00236 FAIL: Read Analogue Input 16-Bit.FREQ_3 9.0
+00237 #send counter reset
+00237 sdo[0x2003][2] = 4 : NULL : WAIT = 0.1
+00238 #verify count reset
+00238 NULL : sdo[0x6401][11] = 0 | 0 | 0.1
+00238 TEST: Read Analogue Input 16-Bit.FREQ_3 0.0 +/- 0.0
+00238 PASS: Read Analogue Input 16-Bit.FREQ_3 0.0
+00239 
+00239 sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
+00240 #switch out load line
+00240 J3_03 = 0 : NULL : WAIT = 0.1
+00241 #****** OVERFLOW, SET POINT = 3, MAX COUNT = 5, OUTPUT INTERLOCK
+00241 #7A/3A
+00241 #disable global modes
+00241 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00242 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00243 
+00243 #configure Port Modes
+00243 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00244 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00245 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00246 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00247 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00248 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00249 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00250 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00251 
+00251 #config RolloverMode
+00251 #config InterlockMode
+00251 #config counter
+00251 sdo[0x2003][1] = 85 : NULL : WAIT = 0.1
+00252 
+00252 #config SetPointValue
+00252 sdo[0x3001][1] = 2 : NULL : WAIT = 0.1
+00253 
+00253 #verify setpoint
+00253 NULL : sdo[0x6401][10] = 2 | 0 | 0.1
+00253 TEST: Read Analogue Input 16-Bit.FREQ_2 2.0 +/- 0.0
+00253 PASS: Read Analogue Input 16-Bit.FREQ_2 2.0
+00254 #switch in and on interlock output
+00254 J2_05 = 1 : NULL : WAIT = 0.2
+00255 sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+00256 #verify voltage
+00256 NULL : MeterVolts = 14 | 1 | 0.1
+00256 TEST: MeterVolts 14.0 +/- 1.0
+00256 PASS: MeterVolts 14.424
+00257 #switch out interlock output
+00257 J2_05 = 0 : NULL : WAIT = 0.2
+00258 #switch in test supply
+00258 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00259 #switch in input
+00259 J3_01 = 1 : NULL : WAIT = 0.2
+00260 
+00260 #testing count events
+00260 PwrSetVoltage = 140 : NULL
+00261 #verify count WITH RolloverMode 1 - 2
+00261 NULL : sdo[0x6401][9] = 1 | 0 | 0.1
+00261 TEST: Read Analogue Input 16-Bit.FREQ_1 1.0 +/- 0.0
+00261 PASS: Read Analogue Input 16-Bit.FREQ_1 1.0
+00262 PwrSetVoltage = 0 : NULL
+00263 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00263 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00263 PASS: Read Input 8-Bit.Input_1 0.0
+00264 
+00264 PwrSetVoltage = 140 : NULL
+00265 #verify count WITH RolloverMode 1 - 2
+00265 NULL : sdo[0x6401][9] = 2 | 0 | 0.1
+00265 TEST: Read Analogue Input 16-Bit.FREQ_1 2.0 +/- 0.0
+00265 PASS: Read Analogue Input 16-Bit.FREQ_1 2.0
+00266 PwrSetVoltage = 0 : NULL
+00267 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00267 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00267 PASS: Read Input 8-Bit.Input_1 0.0
+00268 #verify output status at setpoint
+00268 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00269 J3_01 = 0 : NULL : WAIT = 0.2
+00270 J2_05 = 1 : NULL : WAIT = 0.2
+00271 NULL : MeterVolts = 0 | 1 | 0.1
+00271 TEST: MeterVolts 0.0 +/- 1.0
+00271 PASS: MeterVolts 0.923
+00272 J2_05 = 0 : NULL : WAIT = 0.2
+00273 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00274 J3_01 = 1 : NULL : WAIT = 0.2
+00275 
+00275 PwrSetVoltage = 140 : NULL
+00276 #verify count WITH RolloverMode 1 - 2
+00276 NULL : sdo[0x6401][9] = 3 | 0 | 0.1
+00276 TEST: Read Analogue Input 16-Bit.FREQ_1 3.0 +/- 0.0
+00276 PASS: Read Analogue Input 16-Bit.FREQ_1 3.0
+00277 PwrSetVoltage = 0 : NULL
+00278 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00278 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00278 PASS: Read Input 8-Bit.Input_1 0.0
+00279 
+00279 PwrSetVoltage = 140 : NULL
+00280 #verify count WITH RolloverMode 1 - 2
+00280 NULL : sdo[0x6401][9] = 4 | 0 | 0.1
+00280 TEST: Read Analogue Input 16-Bit.FREQ_1 4.0 +/- 0.0
+00280 PASS: Read Analogue Input 16-Bit.FREQ_1 4.0
+00281 PwrSetVoltage = 0 : NULL
+00282 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00282 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00282 PASS: Read Input 8-Bit.Input_1 0.0
+00283 
+00283 PwrSetVoltage = 140 : NULL
+00284 #verify count WITH RolloverMode 1 - 2
+00284 NULL : sdo[0x6401][9] = 5 | 0 | 0.1
+00284 TEST: Read Analogue Input 16-Bit.FREQ_1 5.0 +/- 0.0
+00284 PASS: Read Analogue Input 16-Bit.FREQ_1 5.0
+00285 PwrSetVoltage = 0 : NULL
+00286 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00286 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00286 PASS: Read Input 8-Bit.Input_1 0.0
+00287 
+00287 PwrSetVoltage = 140 : NULL
+00288 #verify count WITH RolloverMode 1 - 2
+00288 NULL : sdo[0x6401][9] = 6 | 0 | 0.1
+00288 TEST: Read Analogue Input 16-Bit.FREQ_1 6.0 +/- 0.0
+00288 PASS: Read Analogue Input 16-Bit.FREQ_1 6.0
+00289 PwrSetVoltage = 0 : NULL
+00290 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00290 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00290 PASS: Read Input 8-Bit.Input_1 0.0
+00291 
+00291 #switch out input
+00291 J3_01 = 0 : NULL : WAIT = 0.2
+00292 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00293 #turn off output and switch out is off
+00293 sdo[0x6411][5] = 0 : NULL : WAIT = 0.2
+00294 #verify count WITH RolloverMode 2 - 2
+00294 NULL : sdo[0x6401][9] = 6 | 0 | 0.1
+00294 TEST: Read Analogue Input 16-Bit.FREQ_1 6.0 +/- 0.0
+00294 PASS: Read Analogue Input 16-Bit.FREQ_1 6.0
+00295 #send counter reset
+00295 sdo[0x2003][1] = 4 : NULL : WAIT = 0.1
+00296 #verify count reset
+00296 NULL : sdo[0x6401][9] = 0 | 0 | 0.1
+00296 TEST: Read Analogue Input 16-Bit.FREQ_1 0.0 +/- 0.0
+00296 PASS: Read Analogue Input 16-Bit.FREQ_1 0.0
+00297 
+00297 sdo[0x3001][1] = 0 : NULL : WAIT = 0.1
+00298 #8A/3A
+00298 #disable global modes
+00298 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00299 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00300 
+00300 #configure Port Modes
+00300 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00301 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00302 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00303 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00304 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00305 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00306 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00307 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00308 
+00308 #config RolloverMode
+00308 #config InterlockMode
+00308 #config counter
+00308 sdo[0x2003][2] = 85 : NULL : WAIT = 0.1
+00309 
+00309 #config SetPointValue
+00309 sdo[0x3001][2] = 2 : NULL : WAIT = 0.1
+00310 
+00310 #verify setpoint
+00310 NULL : sdo[0x6401][12] = 2 | 0 | 0.1
+00310 TEST: Read Analogue Input 16-Bit.FREQ_4 2.0 +/- 0.0
+00310 PASS: Read Analogue Input 16-Bit.FREQ_4 2.0
+00311 #switch in and on interlock output
+00311 J2_07 = 1 : NULL : WAIT = 0.2
+00312 sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+00313 #verify voltage
+00313 NULL : MeterVolts = 14 | 1 | 0.1
+00313 TEST: MeterVolts 14.0 +/- 1.0
+00313 PASS: MeterVolts 14.414
+00314 #switch out interlock output
+00314 J2_07 = 0 : NULL : WAIT = 0.2
+00315 #switch in test supply
+00315 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00316 #switch in input
+00316 J3_03 = 1 : NULL : WAIT = 0.2
+00317 
+00317 #testing count events
+00317 PwrSetVoltage = 140 : NULL
+00318 #verify count WITH RolloverMode 1 - 2
+00318 NULL : sdo[0x6401][11] = 1 | 0 | 0.1
+00318 TEST: Read Analogue Input 16-Bit.FREQ_3 1.0 +/- 0.0
+00318 PASS: Read Analogue Input 16-Bit.FREQ_3 1.0
+00319 PwrSetVoltage = 0 : NULL
+00320 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00320 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00320 PASS: Read Input 8-Bit.Input_1 0.0
+00321 
+00321 PwrSetVoltage = 140 : NULL
+00322 #verify count WITH RolloverMode 1 - 2
+00322 NULL : sdo[0x6401][11] = 2 | 0 | 0.1
+00322 TEST: Read Analogue Input 16-Bit.FREQ_3 2.0 +/- 0.0
+00322 FAIL: Read Analogue Input 16-Bit.FREQ_3 3.0
+00323 PwrSetVoltage = 0 : NULL
+00324 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00324 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00324 PASS: Read Input 8-Bit.Input_1 0.0
+00325 #verify output status at setpoint
+00325 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00326 J3_03 = 0 : NULL : WAIT = 0.2
+00327 J2_07 = 1 : NULL : WAIT = 0.2
+00328 NULL : MeterVolts = 0 | 1 | 0.1
+00328 TEST: MeterVolts 0.0 +/- 1.0
+00328 PASS: MeterVolts 0.695
+00329 J2_07 = 0 : NULL : WAIT = 0.2
+00330 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00331 J3_03 = 1 : NULL : WAIT = 0.2
+00332 
+00332 PwrSetVoltage = 140 : NULL
+00333 #verify count WITH RolloverMode 1 - 2
+00333 NULL : sdo[0x6401][11] = 3 | 0 | 0.1
+00333 TEST: Read Analogue Input 16-Bit.FREQ_3 3.0 +/- 0.0
+00333 PASS: Read Analogue Input 16-Bit.FREQ_3 3.0
+00334 PwrSetVoltage = 0 : NULL
+00335 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00335 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00335 PASS: Read Input 8-Bit.Input_1 0.0
+00336 
+00336 PwrSetVoltage = 140 : NULL
+00337 #verify count WITH RolloverMode 1 - 2
+00337 NULL : sdo[0x6401][11] = 4 | 0 | 0.1
+00337 TEST: Read Analogue Input 16-Bit.FREQ_3 4.0 +/- 0.0
+00337 PASS: Read Analogue Input 16-Bit.FREQ_3 4.0
+00338 PwrSetVoltage = 0 : NULL
+00339 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00339 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00339 PASS: Read Input 8-Bit.Input_1 0.0
+00340 
+00340 PwrSetVoltage = 140 : NULL
+00341 #verify count WITH RolloverMode 1 - 2
+00341 NULL : sdo[0x6401][11] = 5 | 0 | 0.1
+00341 TEST: Read Analogue Input 16-Bit.FREQ_3 5.0 +/- 0.0
+00341 PASS: Read Analogue Input 16-Bit.FREQ_3 5.0
+00342 PwrSetVoltage = 0 : NULL
+00343 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00343 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00343 PASS: Read Input 8-Bit.Input_1 0.0
+00344 
+00344 PwrSetVoltage = 140 : NULL
+00345 #verify count WITH RolloverMode 1 - 2
+00345 NULL : sdo[0x6401][11] = 6 | 0 | 0.1
+00345 TEST: Read Analogue Input 16-Bit.FREQ_3 6.0 +/- 0.0
+00345 FAIL: Read Analogue Input 16-Bit.FREQ_3 7.0
+00346 PwrSetVoltage = 0 : NULL
+00347 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00347 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00347 PASS: Read Input 8-Bit.Input_1 0.0
+00348 
+00348 #switch out input
+00348 J3_03 = 0 : NULL : WAIT = 0.2
+00349 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00350 #turn off output and switch out is off
+00350 sdo[0x6411][7] = 0 : NULL : WAIT = 0.2
+00351 #verify count WITH RolloverMode 2 - 2
+00351 NULL : sdo[0x6401][11] = 6 | 0 | 0.1
+00351 TEST: Read Analogue Input 16-Bit.FREQ_3 6.0 +/- 0.0
+00351 FAIL: Read Analogue Input 16-Bit.FREQ_3 7.0
+00352 #send counter reset
+00352 sdo[0x2003][2] = 4 : NULL : WAIT = 0.1
+00353 #verify count reset
+00353 NULL : sdo[0x6401][11] = 0 | 0 | 0.1
+00353 TEST: Read Analogue Input 16-Bit.FREQ_3 0.0 +/- 0.0
+00353 PASS: Read Analogue Input 16-Bit.FREQ_3 0.0
+00354 
+00354 sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
+00355 #switch out load line
+00355 J3_03 = 0 : NULL : WAIT = 0.1
+00356 #****** OVERFLOW, SET POINT = 0, MAX COUNT = 5, NO OUTPUT INTERLOCK
+00356 #7A/3A
+00356 #disable global modes
+00356 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00357 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00358 
+00358 #configure Port Modes
+00358 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00359 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00360 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00361 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00362 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00363 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00364 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00365 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00366 
+00366 #config RolloverMode
+00366 #config counter
+00366 sdo[0x2003][1] = 21 : NULL : WAIT = 0.1
+00367 
+00367 #config SetPointValue
+00367 sdo[0x3001][1] = 0 : NULL : WAIT = 0.1
+00368 
+00368 #verify setpoint
+00368 NULL : sdo[0x6401][10] = 0 | 0 | 0.1
+00368 TEST: Read Analogue Input 16-Bit.FREQ_2 0.0 +/- 0.0
+00368 PASS: Read Analogue Input 16-Bit.FREQ_2 0.0
+00369 #switch in and on interlock output
+00369 J2_05 = 1 : NULL : WAIT = 0.2
+00370 sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+00371 #verify voltage
+00371 NULL : MeterVolts = 14 | 1 | 0.1
+00371 TEST: MeterVolts 14.0 +/- 1.0
+00371 PASS: MeterVolts 13.021
+00372 #switch out interlock output
+00372 J2_05 = 0 : NULL : WAIT = 0.2
+00373 #switch in test supply
+00373 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00374 #switch in input
+00374 J3_01 = 1 : NULL : WAIT = 0.2
+00375 
+00375 #testing count events
+00375 PwrSetVoltage = 140 : NULL
+00376 #verify count - 0
+00376 NULL : sdo[0x6401][9] = 1 | 0 | 0.1
+00376 TEST: Read Analogue Input 16-Bit.FREQ_1 1.0 +/- 0.0
+00376 PASS: Read Analogue Input 16-Bit.FREQ_1 1.0
+00377 PwrSetVoltage = 0 : NULL
+00378 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00378 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00378 PASS: Read Input 8-Bit.Input_1 0.0
+00379 
+00379 PwrSetVoltage = 140 : NULL
+00380 #verify count - 0
+00380 NULL : sdo[0x6401][9] = 2 | 0 | 0.1
+00380 TEST: Read Analogue Input 16-Bit.FREQ_1 2.0 +/- 0.0
+00380 PASS: Read Analogue Input 16-Bit.FREQ_1 2.0
+00381 PwrSetVoltage = 0 : NULL
+00382 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00382 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00382 PASS: Read Input 8-Bit.Input_1 0.0
+00383 
+00383 PwrSetVoltage = 140 : NULL
+00384 #verify count - 0
+00384 NULL : sdo[0x6401][9] = 3 | 0 | 0.1
+00384 TEST: Read Analogue Input 16-Bit.FREQ_1 3.0 +/- 0.0
+00384 PASS: Read Analogue Input 16-Bit.FREQ_1 3.0
+00385 PwrSetVoltage = 0 : NULL
+00386 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00386 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00386 PASS: Read Input 8-Bit.Input_1 0.0
+00387 
+00387 PwrSetVoltage = 140 : NULL
+00388 #verify count - 0
+00388 NULL : sdo[0x6401][9] = 4 | 0 | 0.1
+00388 TEST: Read Analogue Input 16-Bit.FREQ_1 4.0 +/- 0.0
+00388 PASS: Read Analogue Input 16-Bit.FREQ_1 4.0
+00389 PwrSetVoltage = 0 : NULL
+00390 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00390 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00390 PASS: Read Input 8-Bit.Input_1 0.0
+00391 
+00391 PwrSetVoltage = 140 : NULL
+00392 #verify count - 0
+00392 NULL : sdo[0x6401][9] = 5 | 0 | 0.1
+00392 TEST: Read Analogue Input 16-Bit.FREQ_1 5.0 +/- 0.0
+00392 PASS: Read Analogue Input 16-Bit.FREQ_1 5.0
+00393 PwrSetVoltage = 0 : NULL
+00394 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00394 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00394 PASS: Read Input 8-Bit.Input_1 0.0
+00395 
+00395 PwrSetVoltage = 140 : NULL
+00396 #verify count - 0
+00396 NULL : sdo[0x6401][9] = 6 | 0 | 0.1
+00396 TEST: Read Analogue Input 16-Bit.FREQ_1 6.0 +/- 0.0
+00396 PASS: Read Analogue Input 16-Bit.FREQ_1 6.0
+00397 PwrSetVoltage = 0 : NULL
+00398 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00398 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00398 PASS: Read Input 8-Bit.Input_1 0.0
+00399 
+00399 #switch out input
+00399 J3_01 = 0 : NULL : WAIT = 0.2
+00400 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00401 #turn off output and switch out is off
+00401 sdo[0x6411][5] = 0 : NULL : WAIT = 0.2
+00402 #verify count WITH RolloverMode 2 - 0
+00402 NULL : sdo[0x6401][9] = 6 | 0 | 0.1
+00402 TEST: Read Analogue Input 16-Bit.FREQ_1 6.0 +/- 0.0
+00402 PASS: Read Analogue Input 16-Bit.FREQ_1 6.0
+00403 #send counter reset
+00403 sdo[0x2003][1] = 4 : NULL : WAIT = 0.1
+00404 #verify count reset
+00404 NULL : sdo[0x6401][9] = 0 | 0 | 0.1
+00404 TEST: Read Analogue Input 16-Bit.FREQ_1 0.0 +/- 0.0
+00404 PASS: Read Analogue Input 16-Bit.FREQ_1 0.0
+00405 
+00405 sdo[0x3001][1] = 0 : NULL : WAIT = 0.1
+00406 #8A/3A
+00406 #disable global modes
+00406 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00407 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00408 
+00408 #configure Port Modes
+00408 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00409 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00410 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00411 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00412 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00413 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00414 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00415 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00416 
+00416 #config RolloverMode
+00416 #config counter
+00416 sdo[0x2003][2] = 21 : NULL : WAIT = 0.1
+00417 
+00417 #config SetPointValue
+00417 sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
+00418 
+00418 #verify setpoint
+00418 NULL : sdo[0x6401][12] = 0 | 0 | 0.1
+00418 TEST: Read Analogue Input 16-Bit.FREQ_4 0.0 +/- 0.0
+00418 PASS: Read Analogue Input 16-Bit.FREQ_4 0.0
+00419 #switch in and on interlock output
+00419 J2_07 = 1 : NULL : WAIT = 0.2
+00420 sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+00421 #verify voltage
+00421 NULL : MeterVolts = 14 | 1 | 0.1
+00421 TEST: MeterVolts 14.0 +/- 1.0
+00421 PASS: MeterVolts 13.643
+00422 #switch out interlock output
+00422 J2_07 = 0 : NULL : WAIT = 0.2
+00423 #switch in test supply
+00423 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00424 #switch in input
+00424 J3_03 = 1 : NULL : WAIT = 0.2
+00425 
+00425 #testing count events
+00425 PwrSetVoltage = 140 : NULL
+00426 #verify count - 0
+00426 NULL : sdo[0x6401][11] = 1 | 0 | 0.1
+00426 TEST: Read Analogue Input 16-Bit.FREQ_3 1.0 +/- 0.0
+00426 PASS: Read Analogue Input 16-Bit.FREQ_3 1.0
+00427 PwrSetVoltage = 0 : NULL
+00428 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00428 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00428 PASS: Read Input 8-Bit.Input_1 0.0
+00429 
+00429 PwrSetVoltage = 140 : NULL
+00430 #verify count - 0
+00430 NULL : sdo[0x6401][11] = 2 | 0 | 0.1
+00430 TEST: Read Analogue Input 16-Bit.FREQ_3 2.0 +/- 0.0
+00430 PASS: Read Analogue Input 16-Bit.FREQ_3 2.0
+00431 PwrSetVoltage = 0 : NULL
+00432 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00432 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00432 PASS: Read Input 8-Bit.Input_1 0.0
+00433 
+00433 PwrSetVoltage = 140 : NULL
+00434 #verify count - 0
+00434 NULL : sdo[0x6401][11] = 3 | 0 | 0.1
+00434 TEST: Read Analogue Input 16-Bit.FREQ_3 3.0 +/- 0.0
+00434 FAIL: Read Analogue Input 16-Bit.FREQ_3 4.0
+00435 PwrSetVoltage = 0 : NULL
+00436 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00436 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00436 PASS: Read Input 8-Bit.Input_1 0.0
+00437 
+00437 PwrSetVoltage = 140 : NULL
+00438 #verify count - 0
+00438 NULL : sdo[0x6401][11] = 4 | 0 | 0.1
+00438 TEST: Read Analogue Input 16-Bit.FREQ_3 4.0 +/- 0.0
+00438 PASS: Read Analogue Input 16-Bit.FREQ_3 4.0
+00439 PwrSetVoltage = 0 : NULL
+00440 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00440 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00440 PASS: Read Input 8-Bit.Input_1 0.0
+00441 
+00441 PwrSetVoltage = 140 : NULL
+00442 #verify count - 0
+00442 NULL : sdo[0x6401][11] = 5 | 0 | 0.1
+00442 TEST: Read Analogue Input 16-Bit.FREQ_3 5.0 +/- 0.0
+00442 FAIL: Read Analogue Input 16-Bit.FREQ_3 7.0
+00443 PwrSetVoltage = 0 : NULL
+00444 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00444 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00444 PASS: Read Input 8-Bit.Input_1 0.0
+00445 
+00445 PwrSetVoltage = 140 : NULL
+00446 #verify count - 0
+00446 NULL : sdo[0x6401][11] = 6 | 0 | 0.1
+00446 TEST: Read Analogue Input 16-Bit.FREQ_3 6.0 +/- 0.0
+00446 FAIL: Read Analogue Input 16-Bit.FREQ_3 8.0
+00447 PwrSetVoltage = 0 : NULL
+00448 NULL : sdo[0x6000][1] = 0 | 0 | 0.1
+00448 TEST: Read Input 8-Bit.Input_1 0.0 +/- 0.0
+00448 PASS: Read Input 8-Bit.Input_1 0.0
+00449 
+00449 #switch out input
+00449 J3_03 = 0 : NULL : WAIT = 0.2
+00450 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00451 #turn off output and switch out is off
+00451 sdo[0x6411][7] = 0 : NULL : WAIT = 0.2
+00452 #verify count WITH RolloverMode 2 - 0
+00452 NULL : sdo[0x6401][11] = 6 | 0 | 0.1
+00452 TEST: Read Analogue Input 16-Bit.FREQ_3 6.0 +/- 0.0
+00452 FAIL: Read Analogue Input 16-Bit.FREQ_3 8.0
+00453 #send counter reset
+00453 sdo[0x2003][2] = 4 : NULL : WAIT = 0.1
+00454 #verify count reset
+00454 NULL : sdo[0x6401][11] = 0 | 0 | 0.1
+00454 TEST: Read Analogue Input 16-Bit.FREQ_3 0.0 +/- 0.0
+00454 PASS: Read Analogue Input 16-Bit.FREQ_3 0.0
+00455 
+00455 sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
+00456 #switch out load line
+00456 J3_03 = 0 : NULL : WAIT = 0.1
+00457 #****** MAX COUNT
+00457 #disable global modes
+00457 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00458 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00459 
+00459 #configure Port Modes
+00459 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00460 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00461 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00462 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00463 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00464 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00465 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00466 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00467 
+00467 
+00467 #config counter
+00467 sdo[0x2003][1] = 69 : NULL : WAIT = 0.1
+00468 
+00468 #config SetPointValue - 65535
+00468 sdo[0x3001][1] = 65535 : NULL : WAIT = 0.1
+00469 #verify setpoint - 65535
+00469 NULL : sdo[0x6401][10] = -1 | 0 | 0.1
+00469 TEST: Read Analogue Input 16-Bit.FREQ_2 -1.0 +/- 0.0
+00469 PASS: Read Analogue Input 16-Bit.FREQ_2 -1.0
+00470 #switch in and on interlock output
+00470 J0_08_METER_LOAD = 1 : NULL : WAIT = 0.2
+00471 J2_05 = 1 : NULL : WAIT = 0.2
+00472 sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+00473 #verify voltage
+00473 NULL : MeterVolts = 14 | 1 | 0.1
+00473 TEST: MeterVolts 14.0 +/- 1.0
+00473 PASS: MeterVolts 14.424
+00474 #switch out interlock output
+00474 J2_05 = 0 : NULL : WAIT = 0.2
+00475 J0_08_METER_LOAD = 0 : NULL : WAIT = 0.2
+00476 #switch in test supply
+00476 #switch in input
+00476 J3_01 = 1 : NULL : WAIT = 0.2
+00477 
+00477 
+00477 #-----setup pat-----
+00477 #setup freq
+00477 J0_11_FREQ_GEN = 1 : NULL : WAIT = 1
+00478 
+00478 #testing max count
+00478 #wait for signal gen to max count
+00478 NULL : NULL : WAIT = 20
+00479 NULL : sdo[0x5001][4] = 0 | 0 | 0.4
+00479 TEST: Status Message F1.Status_Output3-4 0.0 +/- 0.0
+00479 PASS: Status Message F1.Status_Output3-4 0.0
+00480 
+00480 #switch out input
+00480 J3_01 = 0 : NULL : WAIT = 0.2
+00481 J0_11_FREQ_GEN = 0 : NULL : WAIT = 1
+00482 #turn off output and switch out is off
+00482 sdo[0x6411][5] = 0 : NULL : WAIT = 0.2
+00483 #disable counter
+00483 sdo[0x2003][1] = 1 : NULL : WAIT = 0.2
+00484 #verify count
+00484 NULL : sdo[0x6401][9] = -1 | 0 | 0.1
+00484 TEST: Read Analogue Input 16-Bit.FREQ_1 -1.0 +/- 0.0
+00484 PASS: Read Analogue Input 16-Bit.FREQ_1 -1.0
+00485 #send counter reset
+00485 sdo[0x2003][1] = 4 : NULL : WAIT = 0.2
+00486 #verify count reset
+00486 NULL : sdo[0x6401][9] = 0 | 0 | 0.1
+00486 TEST: Read Analogue Input 16-Bit.FREQ_1 0.0 +/- 0.0
+00486 PASS: Read Analogue Input 16-Bit.FREQ_1 0.0
+00487 
+00487 sdo[0x3001][1] = 0 : NULL : WAIT = 0.1
+00488 #disable global modes
+00488 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00489 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00490 
+00490 #configure Port Modes
+00490 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00491 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00492 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00493 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00494 sdo[0x2001][5] = 8 : NULL : WAIT = 0.1
+00495 sdo[0x2001][6] = 8 : NULL : WAIT = 0.1
+00496 sdo[0x2001][7] = 8 : NULL : WAIT = 0.1
+00497 sdo[0x2001][8] = 8 : NULL : WAIT = 0.1
+00498 
+00498 
+00498 #config counter
+00498 sdo[0x2003][2] = 69 : NULL : WAIT = 0.1
+00499 
+00499 #config SetPointValue - 65535
+00499 sdo[0x3001][2] = 65535 : NULL : WAIT = 0.1
+00500 #verify setpoint - 65535
+00500 NULL : sdo[0x6401][12] = -1 | 0 | 0.1
+00500 TEST: Read Analogue Input 16-Bit.FREQ_4 -1.0 +/- 0.0
+00500 PASS: Read Analogue Input 16-Bit.FREQ_4 -1.0
+00501 #switch in and on interlock output
+00501 J0_08_METER_LOAD = 1 : NULL : WAIT = 0.2
+00502 J2_07 = 1 : NULL : WAIT = 0.2
+00503 sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+00504 #verify voltage
+00504 NULL : MeterVolts = 14 | 1 | 0.1
+00504 TEST: MeterVolts 14.0 +/- 1.0
+00504 PASS: MeterVolts 14.414
+00505 #switch out interlock output
+00505 J2_07 = 0 : NULL : WAIT = 0.2
+00506 J0_08_METER_LOAD = 0 : NULL : WAIT = 0.2
+00507 #switch in test supply
+00507 #switch in input
+00507 J3_03 = 1 : NULL : WAIT = 0.2
+00508 
+00508 
+00508 #-----setup pat-----
+00508 #setup freq
+00508 J0_11_FREQ_GEN = 1 : NULL : WAIT = 1
+00509 
+00509 #testing max count
+00509 #wait for signal gen to max count
+00509 NULL : NULL : WAIT = 20
+00510 NULL : sdo[0x5001][4] = 0 | 0 | 0.4
+00510 TEST: Status Message F1.Status_Output3-4 0.0 +/- 0.0
+00510 PASS: Status Message F1.Status_Output3-4 0.0
+00511 
+00511 #switch out input
+00511 J3_03 = 0 : NULL : WAIT = 0.2
+00512 J0_11_FREQ_GEN = 0 : NULL : WAIT = 1
+00513 #turn off output and switch out is off
+00513 sdo[0x6411][7] = 0 : NULL : WAIT = 0.2
+00514 #disable counter
+00514 sdo[0x2003][2] = 1 : NULL : WAIT = 0.2
+00515 #verify count
+00515 NULL : sdo[0x6401][11] = -1 | 0 | 0.1
+00515 TEST: Read Analogue Input 16-Bit.FREQ_3 -1.0 +/- 0.0
+00515 PASS: Read Analogue Input 16-Bit.FREQ_3 -1.0
+00516 #send counter reset
+00516 sdo[0x2003][2] = 4 : NULL : WAIT = 0.2
+00517 #verify count reset
+00517 NULL : sdo[0x6401][11] = 0 | 0 | 0.1
+00517 TEST: Read Analogue Input 16-Bit.FREQ_3 0.0 +/- 0.0
+00517 PASS: Read Analogue Input 16-Bit.FREQ_3 0.0
+00518 
+00518 sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
+00519 #switch out load line
+00519 J3_03 = 0 : NULL : WAIT = 0.1
+00520 #switch out power supply
+00520 LdRemote = 0 : NULL : WAIT = 0.1
+00521 LdEnable = 0 : NULL : WAIT = 0.1
+00522 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00523 J0_08_METER_LOAD = 0 : NULL : WAIT = 0.1
+00524 PRE_OPERATIONAL
+00524 SAVE
+00524 END
+Fail count: 17
+Finished on: 2025-08-16-19:04:44
+elapsed time: 0:07:16.642894

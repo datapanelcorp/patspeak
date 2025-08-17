@@ -19,7 +19,6 @@ J0_08_METER_LOAD = 1 : NULL : WAIT = 1
 #-----setup main supply-----
 #setup meter
 J0_10_MAIN_SUPPLY = 1 : NULL : WAIT = 1
-PAUSE-VERIFY MAIN SUPPLY IS SET TO 14.5
 NULL : MeterVolts = 14.5 | 0.2 | 0.1
 J0_10_MAIN_SUPPLY = 0 : NULL : WAIT = 1
 

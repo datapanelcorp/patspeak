@@ -87,7 +87,7 @@ def ProcessScript():
         
     if(globals.TestLine.startswith("PAUSE")):
         the_prompt = globals.TestLine.split("-")
-        yn = input(the_prompt[1])
+        yn = input(the_prompt[1].strip() + "\n")
         globals.TestLine = "" #clear to stop further processing
         
     if(globals.TestLine == "SAVE"):

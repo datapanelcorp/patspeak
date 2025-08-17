@@ -1,0 +1,294 @@
+Started on: 2025-08-16-17:06:17
+00000 #37000-1
+00000 #Verion 0.0
+00000 #input test
+00000 UUT_EDS = 37000-561.eds
+00000 UUT_DATANAME = 37000-1-CANOPEN-INPUT-FREQ
+00000 
+00000 #cycle IGN to clean slate
+00000 RLY_K1 = 1 : NULL : WAIT = 1
+00001 RLY_K1 = 0 : NULL : WAIT = 1
+00002 
+00002 #-----setup pat-----
+00002 #setup freq
+00002 J0_11_FREQ_GEN = 1 : NULL : WAIT = 1
+00003 
+00003 PAUSE- FREQ_GEN TO 500Hz 15% Duty
+00003 #-----setup 34044-----
+00003 #disable global modes
+00003 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00004 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00005 #configure Port Modes
+00005 sdo[0x2001][1] = 0 : NULL : WAIT = 0.1
+00006 sdo[0x2001][2] = 0 : NULL : WAIT = 0.1
+00007 sdo[0x2001][3] = 0 : NULL : WAIT = 0.1
+00008 sdo[0x2001][4] = 0 : NULL : WAIT = 0.1
+00009 sdo[0x2001][5] = 7 : NULL : WAIT = 0.1
+00010 sdo[0x2001][6] = 7 : NULL : WAIT = 0.1
+00011 sdo[0x2001][7] = 7 : NULL : WAIT = 0.1
+00012 sdo[0x2001][8] = 7 : NULL : WAIT = 0.1
+00013 #switch input to load line
+00013 J3_01 = 1 : NULL : WAIT = 1
+00014 NULL : sdo[0x6401][9] = 500 | 30 | 0.1
+00014 TEST: Read Analogue Input 16-Bit.FREQ_1 500.0 +/- 30.0
+00014 PASS: Read Analogue Input 16-Bit.FREQ_1 499.0
+00015 NULL : sdo[0x6401][10] = 15 | 1 | 0.1
+00015 PASS: Read Analogue Input 16-Bit.FREQ_2 15.0
+00016 J3_01 = 0 : NULL : WAIT = 1
+00017 
+00017 #-----setup 34044-----
+00017 #disable global modes
+00017 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00018 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00019 #configure Port Modes
+00019 sdo[0x2001][1] = 0 : NULL : WAIT = 0.1
+00020 sdo[0x2001][2] = 0 : NULL : WAIT = 0.1
+00021 sdo[0x2001][3] = 0 : NULL : WAIT = 0.1
+00022 sdo[0x2001][4] = 0 : NULL : WAIT = 0.1
+00023 sdo[0x2001][5] = 7 : NULL : WAIT = 0.1
+00024 sdo[0x2001][6] = 7 : NULL : WAIT = 0.1
+00025 sdo[0x2001][7] = 7 : NULL : WAIT = 0.1
+00026 sdo[0x2001][8] = 7 : NULL : WAIT = 0.1
+00027 #switch input to load line
+00027 J3_03 = 1 : NULL : WAIT = 1
+00028 NULL : sdo[0x6401][11] = 500 | 30 | 0.1
+00028 TEST: Read Analogue Input 16-Bit.FREQ_3 500.0 +/- 30.0
+00028 PASS: Read Analogue Input 16-Bit.FREQ_3 499.0
+00029 NULL : sdo[0x6401][12] = 15 | 1 | 0.1
+00029 PASS: Read Analogue Input 16-Bit.FREQ_4 15.0
+00030 J3_03 = 0 : NULL : WAIT = 1
+00031 
+00031 PAUSE- FREQ_GEN TO 1000Hz 30% Duty
+00031 #-----setup 34044-----
+00031 #disable global modes
+00031 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00032 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00033 #configure Port Modes
+00033 sdo[0x2001][1] = 0 : NULL : WAIT = 0.1
+00034 sdo[0x2001][2] = 0 : NULL : WAIT = 0.1
+00035 sdo[0x2001][3] = 0 : NULL : WAIT = 0.1
+00036 sdo[0x2001][4] = 0 : NULL : WAIT = 0.1
+00037 sdo[0x2001][5] = 7 : NULL : WAIT = 0.1
+00038 sdo[0x2001][6] = 7 : NULL : WAIT = 0.1
+00039 sdo[0x2001][7] = 7 : NULL : WAIT = 0.1
+00040 sdo[0x2001][8] = 7 : NULL : WAIT = 0.1
+00041 #switch input to load line
+00041 J3_01 = 1 : NULL : WAIT = 1
+00042 NULL : sdo[0x6401][9] = 1000 | 30 | 0.1
+00042 TEST: Read Analogue Input 16-Bit.FREQ_1 1000.0 +/- 30.0
+00042 PASS: Read Analogue Input 16-Bit.FREQ_1 1000.0
+00043 NULL : sdo[0x6401][10] = 30 | 1 | 0.1
+00043 PASS: Read Analogue Input 16-Bit.FREQ_2 30.0
+00044 J3_01 = 0 : NULL : WAIT = 1
+00045 
+00045 #-----setup 34044-----
+00045 #disable global modes
+00045 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00046 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00047 #configure Port Modes
+00047 sdo[0x2001][1] = 0 : NULL : WAIT = 0.1
+00048 sdo[0x2001][2] = 0 : NULL : WAIT = 0.1
+00049 sdo[0x2001][3] = 0 : NULL : WAIT = 0.1
+00050 sdo[0x2001][4] = 0 : NULL : WAIT = 0.1
+00051 sdo[0x2001][5] = 7 : NULL : WAIT = 0.1
+00052 sdo[0x2001][6] = 7 : NULL : WAIT = 0.1
+00053 sdo[0x2001][7] = 7 : NULL : WAIT = 0.1
+00054 sdo[0x2001][8] = 7 : NULL : WAIT = 0.1
+00055 #switch input to load line
+00055 J3_03 = 1 : NULL : WAIT = 1
+00056 NULL : sdo[0x6401][11] = 1000 | 30 | 0.1
+00056 TEST: Read Analogue Input 16-Bit.FREQ_3 1000.0 +/- 30.0
+00056 PASS: Read Analogue Input 16-Bit.FREQ_3 1000.0
+00057 NULL : sdo[0x6401][12] = 30 | 1 | 0.1
+00057 PASS: Read Analogue Input 16-Bit.FREQ_4 30.0
+00058 J3_03 = 0 : NULL : WAIT = 1
+00059 
+00059 PAUSE- FREQ_GEN TO 1500Hz 45% Duty
+00059 #-----setup 34044-----
+00059 #disable global modes
+00059 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00060 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00061 #configure Port Modes
+00061 sdo[0x2001][1] = 0 : NULL : WAIT = 0.1
+00062 sdo[0x2001][2] = 0 : NULL : WAIT = 0.1
+00063 sdo[0x2001][3] = 0 : NULL : WAIT = 0.1
+00064 sdo[0x2001][4] = 0 : NULL : WAIT = 0.1
+00065 sdo[0x2001][5] = 7 : NULL : WAIT = 0.1
+00066 sdo[0x2001][6] = 7 : NULL : WAIT = 0.1
+00067 sdo[0x2001][7] = 7 : NULL : WAIT = 0.1
+00068 sdo[0x2001][8] = 7 : NULL : WAIT = 0.1
+00069 #switch input to load line
+00069 J3_01 = 1 : NULL : WAIT = 1
+00070 NULL : sdo[0x6401][9] = 1500 | 30 | 0.1
+00070 TEST: Read Analogue Input 16-Bit.FREQ_1 1500.0 +/- 30.0
+00070 PASS: Read Analogue Input 16-Bit.FREQ_1 1492.0
+00071 NULL : sdo[0x6401][10] = 45 | 1 | 0.1
+00071 PASS: Read Analogue Input 16-Bit.FREQ_2 45.0
+00072 J3_01 = 0 : NULL : WAIT = 1
+00073 
+00073 #-----setup 34044-----
+00073 #disable global modes
+00073 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00074 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00075 #configure Port Modes
+00075 sdo[0x2001][1] = 0 : NULL : WAIT = 0.1
+00076 sdo[0x2001][2] = 0 : NULL : WAIT = 0.1
+00077 sdo[0x2001][3] = 0 : NULL : WAIT = 0.1
+00078 sdo[0x2001][4] = 0 : NULL : WAIT = 0.1
+00079 sdo[0x2001][5] = 7 : NULL : WAIT = 0.1
+00080 sdo[0x2001][6] = 7 : NULL : WAIT = 0.1
+00081 sdo[0x2001][7] = 7 : NULL : WAIT = 0.1
+00082 sdo[0x2001][8] = 7 : NULL : WAIT = 0.1
+00083 #switch input to load line
+00083 J3_03 = 1 : NULL : WAIT = 1
+00084 NULL : sdo[0x6401][11] = 1500 | 30 | 0.1
+00084 TEST: Read Analogue Input 16-Bit.FREQ_3 1500.0 +/- 30.0
+00084 PASS: Read Analogue Input 16-Bit.FREQ_3 1492.0
+00085 NULL : sdo[0x6401][12] = 45 | 1 | 0.1
+00085 PASS: Read Analogue Input 16-Bit.FREQ_4 45.0
+00086 J3_03 = 0 : NULL : WAIT = 1
+00087 
+00087 PAUSE- FREQ_GEN TO 2000Hz 60% Duty
+00087 #-----setup 34044-----
+00087 #disable global modes
+00087 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00088 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00089 #configure Port Modes
+00089 sdo[0x2001][1] = 0 : NULL : WAIT = 0.1
+00090 sdo[0x2001][2] = 0 : NULL : WAIT = 0.1
+00091 sdo[0x2001][3] = 0 : NULL : WAIT = 0.1
+00092 sdo[0x2001][4] = 0 : NULL : WAIT = 0.1
+00093 sdo[0x2001][5] = 7 : NULL : WAIT = 0.1
+00094 sdo[0x2001][6] = 7 : NULL : WAIT = 0.1
+00095 sdo[0x2001][7] = 7 : NULL : WAIT = 0.1
+00096 sdo[0x2001][8] = 7 : NULL : WAIT = 0.1
+00097 #switch input to load line
+00097 J3_01 = 1 : NULL : WAIT = 1
+00098 NULL : sdo[0x6401][9] = 2000 | 30 | 0.1
+00098 TEST: Read Analogue Input 16-Bit.FREQ_1 2000.0 +/- 30.0
+00098 PASS: Read Analogue Input 16-Bit.FREQ_1 1987.0
+00099 NULL : sdo[0x6401][10] = 60 | 1 | 0.1
+00099 PASS: Read Analogue Input 16-Bit.FREQ_2 60.0
+00100 J3_01 = 0 : NULL : WAIT = 1
+00101 
+00101 #-----setup 34044-----
+00101 #disable global modes
+00101 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00102 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00103 #configure Port Modes
+00103 sdo[0x2001][1] = 0 : NULL : WAIT = 0.1
+00104 sdo[0x2001][2] = 0 : NULL : WAIT = 0.1
+00105 sdo[0x2001][3] = 0 : NULL : WAIT = 0.1
+00106 sdo[0x2001][4] = 0 : NULL : WAIT = 0.1
+00107 sdo[0x2001][5] = 7 : NULL : WAIT = 0.1
+00108 sdo[0x2001][6] = 7 : NULL : WAIT = 0.1
+00109 sdo[0x2001][7] = 7 : NULL : WAIT = 0.1
+00110 sdo[0x2001][8] = 7 : NULL : WAIT = 0.1
+00111 #switch input to load line
+00111 J3_03 = 1 : NULL : WAIT = 1
+00112 NULL : sdo[0x6401][11] = 2000 | 30 | 0.1
+00112 TEST: Read Analogue Input 16-Bit.FREQ_3 2000.0 +/- 30.0
+00112 PASS: Read Analogue Input 16-Bit.FREQ_3 1987.0
+00113 NULL : sdo[0x6401][12] = 60 | 1 | 0.1
+00113 PASS: Read Analogue Input 16-Bit.FREQ_4 60.0
+00114 J3_03 = 0 : NULL : WAIT = 1
+00115 
+00115 PAUSE- FREQ_GEN TO 2500Hz 75% Duty
+00115 #-----setup 34044-----
+00115 #disable global modes
+00115 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00116 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00117 #configure Port Modes
+00117 sdo[0x2001][1] = 0 : NULL : WAIT = 0.1
+00118 sdo[0x2001][2] = 0 : NULL : WAIT = 0.1
+00119 sdo[0x2001][3] = 0 : NULL : WAIT = 0.1
+00120 sdo[0x2001][4] = 0 : NULL : WAIT = 0.1
+00121 sdo[0x2001][5] = 7 : NULL : WAIT = 0.1
+00122 sdo[0x2001][6] = 7 : NULL : WAIT = 0.1
+00123 sdo[0x2001][7] = 7 : NULL : WAIT = 0.1
+00124 sdo[0x2001][8] = 7 : NULL : WAIT = 0.1
+00125 #switch input to load line
+00125 J3_01 = 1 : NULL : WAIT = 1
+00126 NULL : sdo[0x6401][9] = 2500 | 30 | 0.1
+00126 TEST: Read Analogue Input 16-Bit.FREQ_1 2500.0 +/- 30.0
+00126 PASS: Read Analogue Input 16-Bit.FREQ_1 2496.0
+00127 NULL : sdo[0x6401][10] = 75 | 1 | 0.1
+00127 PASS: Read Analogue Input 16-Bit.FREQ_2 76.0
+00128 J3_01 = 0 : NULL : WAIT = 1
+00129 
+00129 #-----setup 34044-----
+00129 #disable global modes
+00129 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00130 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00131 #configure Port Modes
+00131 sdo[0x2001][1] = 0 : NULL : WAIT = 0.1
+00132 sdo[0x2001][2] = 0 : NULL : WAIT = 0.1
+00133 sdo[0x2001][3] = 0 : NULL : WAIT = 0.1
+00134 sdo[0x2001][4] = 0 : NULL : WAIT = 0.1
+00135 sdo[0x2001][5] = 7 : NULL : WAIT = 0.1
+00136 sdo[0x2001][6] = 7 : NULL : WAIT = 0.1
+00137 sdo[0x2001][7] = 7 : NULL : WAIT = 0.1
+00138 sdo[0x2001][8] = 7 : NULL : WAIT = 0.1
+00139 #switch input to load line
+00139 J3_03 = 1 : NULL : WAIT = 1
+00140 NULL : sdo[0x6401][11] = 2500 | 30 | 0.1
+00140 TEST: Read Analogue Input 16-Bit.FREQ_3 2500.0 +/- 30.0
+00140 PASS: Read Analogue Input 16-Bit.FREQ_3 2496.0
+00141 NULL : sdo[0x6401][12] = 75 | 1 | 0.1
+00141 PASS: Read Analogue Input 16-Bit.FREQ_4 76.0
+00142 J3_03 = 0 : NULL : WAIT = 1
+00143 
+00143 PAUSE- FREQ_GEN TO 3000Hz 90% Duty
+00143 #-----setup 34044-----
+00143 #disable global modes
+00143 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00144 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00145 #configure Port Modes
+00145 sdo[0x2001][1] = 0 : NULL : WAIT = 0.1
+00146 sdo[0x2001][2] = 0 : NULL : WAIT = 0.1
+00147 sdo[0x2001][3] = 0 : NULL : WAIT = 0.1
+00148 sdo[0x2001][4] = 0 : NULL : WAIT = 0.1
+00149 sdo[0x2001][5] = 7 : NULL : WAIT = 0.1
+00150 sdo[0x2001][6] = 7 : NULL : WAIT = 0.1
+00151 sdo[0x2001][7] = 7 : NULL : WAIT = 0.1
+00152 sdo[0x2001][8] = 7 : NULL : WAIT = 0.1
+00153 #switch input to load line
+00153 J3_01 = 1 : NULL : WAIT = 1
+00154 NULL : sdo[0x6401][9] = 3000 | 30 | 0.1
+00154 TEST: Read Analogue Input 16-Bit.FREQ_1 3000.0 +/- 30.0
+00154 PASS: Read Analogue Input 16-Bit.FREQ_1 3000.0
+00155 NULL : sdo[0x6401][10] = 90 | 1 | 0.1
+00155 PASS: Read Analogue Input 16-Bit.FREQ_2 91.0
+00156 J3_01 = 0 : NULL : WAIT = 1
+00157 
+00157 #-----setup 34044-----
+00157 #disable global modes
+00157 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00158 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00159 #configure Port Modes
+00159 sdo[0x2001][1] = 0 : NULL : WAIT = 0.1
+00160 sdo[0x2001][2] = 0 : NULL : WAIT = 0.1
+00161 sdo[0x2001][3] = 0 : NULL : WAIT = 0.1
+00162 sdo[0x2001][4] = 0 : NULL : WAIT = 0.1
+00163 sdo[0x2001][5] = 7 : NULL : WAIT = 0.1
+00164 sdo[0x2001][6] = 7 : NULL : WAIT = 0.1
+00165 sdo[0x2001][7] = 7 : NULL : WAIT = 0.1
+00166 sdo[0x2001][8] = 7 : NULL : WAIT = 0.1
+00167 #switch input to load line
+00167 J3_03 = 1 : NULL : WAIT = 1
+00168 NULL : sdo[0x6401][11] = 3000 | 30 | 0.1
+00168 TEST: Read Analogue Input 16-Bit.FREQ_3 3000.0 +/- 30.0
+00168 PASS: Read Analogue Input 16-Bit.FREQ_3 3000.0
+00169 NULL : sdo[0x6401][12] = 90 | 1 | 0.1
+00169 PASS: Read Analogue Input 16-Bit.FREQ_4 91.0
+00170 J3_03 = 0 : NULL : WAIT = 1
+00171 
+00171 #switch out load line
+00171 J3_03 = 0 : NULL : WAIT = 0.1
+00172 J0_11_FREQ_GEN = 0 : NULL : WAIT = 1
+00173 J4_03 = 0 : NULL : WAIT = 0.2
+00174 SAVE
+00174 END
+Fail count: 0
+Finished on: 2025-08-16-17:09:12
+elapsed time: 0:02:52.059884
