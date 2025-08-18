@@ -19,7 +19,6 @@ GPIO.setmode(GPIO.BCM)  # Use BCM pin numbering
 GPIO.setup(K1_PIN, GPIO.OUT)
 GPIO.output(K1_PIN, GPIO.HIGH)   # Turn LED off
 
-
 RLY_CTRL_ID = 0x0CFF0500
 K1State = 0
 
