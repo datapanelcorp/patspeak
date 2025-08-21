@@ -56,10 +56,10 @@ BO_ 2566854396 AD2: 8 UUT
  SG_ AINPUT01_PSI : 0|16@1- (1,0) [0|0] "" Vector__XXX
 
 BO_ 2566854652 AD3: 8 UUT
- SG_ AMPS_FET4 : 48|16@1- (1,0) [0|0] "" Vector__XXX
- SG_ AMPS_FET3 : 32|16@1- (1,0) [0|0] "" Vector__XXX
- SG_ AMPS_FET2 : 16|16@1- (1,0) [0|0] "" Vector__XXX
- SG_ AMPS_FET1 : 0|16@1- (1,0) [0|0] "" Vector__XXX
+ SG_ AMPS_FET4 : 48|16@1- (0.001,0) [0|0] "" Vector__XXX
+ SG_ AMPS_FET3 : 32|16@1- (0.001,0) [0|0] "" Vector__XXX
+ SG_ AMPS_FET2 : 16|16@1- (0.001,0) [0|0] "" Vector__XXX
+ SG_ AMPS_FET1 : 0|16@1- (0.001,0) [0|0] "" Vector__XXX
 
 BO_ 2566907644 FAULT: 8 UUT
  SG_ FaultCode : 56|8@1- (1,0) [0|0] "" Vector__XXX
