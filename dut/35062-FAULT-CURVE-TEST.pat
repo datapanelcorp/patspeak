@@ -20,9 +20,20 @@ J1_01 = 1 : NULL : WAIT = 0.1
 OUTPUT01 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET1 = 5000 | 1000 | 0
+NULL : Out_Stat1 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET1 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat1 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET1 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat1 = 1 | 0 | 0
 LdCurrentSet = 0 : NULL : WAIT = 0.5
+NULL : AMPS_FET1 = 0 | 1000 | 0
+NULL : MeterCurrent = 0.0 | 1 | 0
+NULL : Out_Stat1 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT01 = 0 : NULL : WAIT = 0.5
 #switch in load line, set current
@@ -32,9 +43,20 @@ J1_01 = 1 : NULL : WAIT = 0.1
 OUTPUT01 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET1 = 5000 | 1000 | 0
+NULL : Out_Stat1 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET1 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat1 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET1 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat1 = 1 | 0 | 0
 LdCurrentSet = 0 : NULL : WAIT = 0.5
+NULL : AMPS_FET1 = 0 | 1000 | 0
+NULL : MeterCurrent = 0.0 | 1 | 0
+NULL : Out_Stat1 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT01 = 0 : NULL : WAIT = 0.5
 #switch in load line, set current
@@ -44,9 +66,20 @@ J1_01 = 1 : NULL : WAIT = 0.1
 OUTPUT01 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET1 = 5000 | 1000 | 0
+NULL : Out_Stat1 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET1 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat1 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET1 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat1 = 1 | 0 | 0
 LdCurrentSet = 0 : NULL : WAIT = 0.5
+NULL : AMPS_FET1 = 0 | 1000 | 0
+NULL : MeterCurrent = 0.0 | 1 | 0
+NULL : Out_Stat1 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT01 = 0 : NULL : WAIT = 0.5
 #switch in load line, set current
@@ -56,9 +89,20 @@ J1_01 = 1 : NULL : WAIT = 0.1
 OUTPUT01 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET1 = 5000 | 1000 | 0
+NULL : Out_Stat1 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET1 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat1 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET1 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat1 = 1 | 0 | 0
 LdCurrentSet = 2000 : NULL : WAIT = 0.5
+NULL : AMPS_FET1 = 2000 | 1000 | 0
+NULL : MeterCurrent = 2.0 | 1 | 0
+NULL : Out_Stat1 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT01 = 0 : NULL : WAIT = 0.5
 LdCurrentSet = 0 : NULL : WAIT = 0.1
@@ -73,9 +117,20 @@ J1_02 = 1 : NULL : WAIT = 0.1
 OUTPUT02 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET2 = 5000 | 1000 | 0
+NULL : Out_Stat2 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET2 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat2 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET2 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat2 = 1 | 0 | 0
 LdCurrentSet = 0 : NULL : WAIT = 0.5
+NULL : AMPS_FET2 = 0 | 1000 | 0
+NULL : MeterCurrent = 0.0 | 1 | 0
+NULL : Out_Stat2 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT02 = 0 : NULL : WAIT = 0.5
 #switch in load line, set current
@@ -85,9 +140,20 @@ J1_02 = 1 : NULL : WAIT = 0.1
 OUTPUT02 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET2 = 5000 | 1000 | 0
+NULL : Out_Stat2 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET2 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat2 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET2 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat2 = 1 | 0 | 0
 LdCurrentSet = 0 : NULL : WAIT = 0.5
+NULL : AMPS_FET2 = 0 | 1000 | 0
+NULL : MeterCurrent = 0.0 | 1 | 0
+NULL : Out_Stat2 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT02 = 0 : NULL : WAIT = 0.5
 #switch in load line, set current
@@ -97,9 +163,20 @@ J1_02 = 1 : NULL : WAIT = 0.1
 OUTPUT02 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET2 = 5000 | 1000 | 0
+NULL : Out_Stat2 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET2 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat2 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET2 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat2 = 1 | 0 | 0
 LdCurrentSet = 0 : NULL : WAIT = 0.5
+NULL : AMPS_FET2 = 0 | 1000 | 0
+NULL : MeterCurrent = 0.0 | 1 | 0
+NULL : Out_Stat2 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT02 = 0 : NULL : WAIT = 0.5
 #switch in load line, set current
@@ -109,9 +186,20 @@ J1_02 = 1 : NULL : WAIT = 0.1
 OUTPUT02 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET2 = 5000 | 1000 | 0
+NULL : Out_Stat2 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET2 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat2 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET2 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat2 = 1 | 0 | 0
 LdCurrentSet = 2000 : NULL : WAIT = 0.5
+NULL : AMPS_FET2 = 2000 | 1000 | 0
+NULL : MeterCurrent = 2.0 | 1 | 0
+NULL : Out_Stat2 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT02 = 0 : NULL : WAIT = 0.5
 LdCurrentSet = 0 : NULL : WAIT = 0.1
@@ -126,9 +214,20 @@ J1_03 = 1 : NULL : WAIT = 0.1
 OUTPUT03 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET3 = 5000 | 1000 | 0
+NULL : Out_Stat3 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET3 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat3 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET3 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat3 = 1 | 0 | 0
 LdCurrentSet = 0 : NULL : WAIT = 0.5
+NULL : AMPS_FET3 = 0 | 1000 | 0
+NULL : MeterCurrent = 0.0 | 1 | 0
+NULL : Out_Stat3 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT03 = 0 : NULL : WAIT = 0.5
 #switch in load line, set current
@@ -138,9 +237,20 @@ J1_03 = 1 : NULL : WAIT = 0.1
 OUTPUT03 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET3 = 5000 | 1000 | 0
+NULL : Out_Stat3 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET3 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat3 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET3 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat3 = 1 | 0 | 0
 LdCurrentSet = 0 : NULL : WAIT = 0.5
+NULL : AMPS_FET3 = 0 | 1000 | 0
+NULL : MeterCurrent = 0.0 | 1 | 0
+NULL : Out_Stat3 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT03 = 0 : NULL : WAIT = 0.5
 #switch in load line, set current
@@ -150,9 +260,20 @@ J1_03 = 1 : NULL : WAIT = 0.1
 OUTPUT03 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET3 = 5000 | 1000 | 0
+NULL : Out_Stat3 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET3 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat3 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET3 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat3 = 1 | 0 | 0
 LdCurrentSet = 0 : NULL : WAIT = 0.5
+NULL : AMPS_FET3 = 0 | 1000 | 0
+NULL : MeterCurrent = 0.0 | 1 | 0
+NULL : Out_Stat3 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT03 = 0 : NULL : WAIT = 0.5
 #switch in load line, set current
@@ -162,9 +283,20 @@ J1_03 = 1 : NULL : WAIT = 0.1
 OUTPUT03 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET3 = 5000 | 1000 | 0
+NULL : Out_Stat3 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET3 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat3 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET3 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat3 = 1 | 0 | 0
 LdCurrentSet = 2000 : NULL : WAIT = 0.5
+NULL : AMPS_FET3 = 2000 | 1000 | 0
+NULL : MeterCurrent = 2.0 | 1 | 0
+NULL : Out_Stat3 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT03 = 0 : NULL : WAIT = 0.5
 LdCurrentSet = 0 : NULL : WAIT = 0.1
@@ -179,9 +311,20 @@ J1_04 = 1 : NULL : WAIT = 0.1
 OUTPUT04 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET4 = 5000 | 1000 | 0
+NULL : Out_Stat4 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET4 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat4 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET4 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat4 = 1 | 0 | 0
 LdCurrentSet = 0 : NULL : WAIT = 0.5
+NULL : AMPS_FET4 = 0 | 1000 | 0
+NULL : MeterCurrent = 0.0 | 1 | 0
+NULL : Out_Stat4 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT04 = 0 : NULL : WAIT = 0.5
 #switch in load line, set current
@@ -191,9 +334,20 @@ J1_04 = 1 : NULL : WAIT = 0.1
 OUTPUT04 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET4 = 5000 | 1000 | 0
+NULL : Out_Stat4 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET4 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat4 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET4 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat4 = 1 | 0 | 0
 LdCurrentSet = 0 : NULL : WAIT = 0.5
+NULL : AMPS_FET4 = 0 | 1000 | 0
+NULL : MeterCurrent = 0.0 | 1 | 0
+NULL : Out_Stat4 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT04 = 0 : NULL : WAIT = 0.5
 #switch in load line, set current
@@ -203,9 +357,20 @@ J1_04 = 1 : NULL : WAIT = 0.1
 OUTPUT04 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET4 = 5000 | 1000 | 0
+NULL : Out_Stat4 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET4 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat4 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET4 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat4 = 1 | 0 | 0
 LdCurrentSet = 0 : NULL : WAIT = 0.5
+NULL : AMPS_FET4 = 0 | 1000 | 0
+NULL : MeterCurrent = 0.0 | 1 | 0
+NULL : Out_Stat4 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT04 = 0 : NULL : WAIT = 0.5
 #switch in load line, set current
@@ -215,9 +380,20 @@ J1_04 = 1 : NULL : WAIT = 0.1
 OUTPUT04 = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 5000 : NULL
 LdEnable = 1 : NULL : WAIT = 0.2
+NULL : AMPS_FET4 = 5000 | 1000 | 0
+NULL : Out_Stat4 = 1 | 0 | 0
 LdCurrentSet = 3000 : NULL : WAIT = 0.5
+NULL : AMPS_FET4 = 3000 | 1000 | 0
+NULL : MeterCurrent = 3.0 | 1 | 0
+NULL : Out_Stat4 = 1 | 0 | 0
 LdCurrentSet = 1000 : NULL : WAIT = 0.7
+NULL : AMPS_FET4 = 1000 | 1000 | 0
+NULL : MeterCurrent = 1.0 | 1 | 0
+NULL : Out_Stat4 = 1 | 0 | 0
 LdCurrentSet = 2000 : NULL : WAIT = 0.5
+NULL : AMPS_FET4 = 2000 | 1000 | 0
+NULL : MeterCurrent = 2.0 | 1 | 0
+NULL : Out_Stat4 = 2 | 0 | 0
 LdEnable = 0 : NULL : WAIT = 0.5
 OUTPUT04 = 0 : NULL : WAIT = 0.5
 LdCurrentSet = 0 : NULL : WAIT = 0.1

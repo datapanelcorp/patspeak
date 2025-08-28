@@ -1,11 +1,14 @@
 import csv
 import time
 import os
+import re
 #from playsound import playsound
 from datetime import datetime
 import support.globals as globals
 from datetime import timedelta
 
+from support.dm_rw import dm_write
+from support.dm_rw import dm_read
 
 def SaveData():
 
@@ -18,34 +21,6 @@ def SaveData():
             SignalName = tmp[1]
             DataLogTag = tmp[2]
             
-            # HeaderName = ""
-            
-            # if(DataLogTag != ""):
-                # #HeaderName = str(globals.UnitName) + "_" + SignalName + "_" + DataLogTag
-                # HeaderName =  DataLogTag + "_" + str(globals.UnitName) + "_" + SignalName 
-            # else:
-                # HeaderName = str(globals.UnitName) + "_" + SignalName
-                
-            # datafile = globals.DataPath + HeaderName + ".csv"
-            
-            # ShowStep = 1
-            
-            # if(ShowStep == 1):
-                # FullHeaderName = "Step," + HeaderName
-                # FullValue = TestStep + "," + str(value)
-            # else:
-                # FullHeaderName = HeaderName
-                # FullValue = str(value)
-
-            # if(os.path.exists(datafile)): #TODO: improve w/ header detection
-                # f = open(datafile, 'a')
-                # f.write(str(FullValue) + "\n")
-                # f.close()
-            # else:
-                # f = open(datafile, 'w')
-                # f.write(FullHeaderName + "\n")
-                # f.write(str(FullValue) + "\n")
-                # f.close()
             
     datafile = globals.DataPath + str(globals.UnitName) + ".csv"
     f = open(datafile, 'a')
@@ -103,7 +78,7 @@ def ProcessScript():
         the_prompt = globals.TestLine.split("-")
         yn = input(the_prompt[1])
         globals.TestLine = "" #clear to stop further processing
-        
+
     if(globals.TestLine == "SAVE"):
         SaveData()
         globals.TestLine = "" #clear to stop further processing
@@ -169,6 +144,13 @@ def ProcessScript():
             SignalName = s[0]
             if(s[0] == "NULL"):
                 pass
+            elif("DM_MEM_W" in SignalName):
+                params = [int(num) for num in re.findall(r'\d+', SignalName)]
+                dm_write(params[0], params[1], params[2], s[1])
+                if(TestValue != RealValue):
+                    globals.StepTime = Timeout #force exit
+                globals.TestLine = "" #clear to stop further processing
+                pass
             else:
                 if(s[1] == "DATALOG"):
                     TestTime = globals.PassTime = 0 #force pass
@@ -180,8 +162,7 @@ def ProcessScript():
                         globals.PAT_Fdbk[SignalName] = float(s[1])
                         RealValue = float(s[1])
                     except:
-                        pass
-                    #TODO: why is this called twice?    
+                        pass  
                     try:
                         globals.uut_framebox_out.signal(SignalName).phys = float(s[1])
                         globals.UUT_Fdbk[SignalName] = float(s[1])
@@ -200,6 +181,18 @@ def ProcessScript():
                 s = i.split("=")
                 SignalName = s[0]
                 if(SignalName == "NULL"):
+                    pass
+                elif("DM_MEM_R" in SignalName):
+                    params = [int(num) for num in re.findall(r'\d+', SignalName)]
+                    t = s[1].split("|")
+                    TestValue = float(t[0].rstrip())
+                    TestTol = float(t[1].rstrip())
+                    TestToStr = "+/- " + str(TestTol)
+                    TestTime = float(t[2].rstrip())
+                    RealValue = dm_read(params[0], params[1], params[2])
+                    if(TestValue != RealValue):
+                        globals.StepTime = Timeout #force exit
+                    globals.TestLine = "" #clear to stop further processing
                     pass
                 else:
                     if(s[1] == "DATALOG"):
@@ -232,6 +225,7 @@ def ProcessScript():
                         
                         if((RealValue <= (TestValue + TestTol))&(RealValue >= (TestValue - TestTol))):
                             #if(RealValue >= (TestValue - TestTol)):
+                            print(SignalName, RealValue, TestValue, TestTol)
                             globals.PassTime += time_delta
                         else:
                             globals.PassTime = 0

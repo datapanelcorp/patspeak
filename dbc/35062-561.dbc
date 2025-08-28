@@ -37,63 +37,63 @@ BU_: UUT CTRL
 
 
 BO_ 2566854140 DIGIN1: 8 UUT
- SG_ FAN_ID : 56|8@1- (1,0) [0|0] "" Vector__XXX
- SG_ REV : 48|8@1- (1,0) [0|0] "" Vector__XXX
- SG_ VER : 40|8@1- (1,0) [0|0] "" Vector__XXX
+ SG_ FAN_ID : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ REV : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ VER : 40|8@1+ (1,0) [0|0] "" Vector__XXX
  SG_ Reduced_Performance : 12|2@1- (1,0) [0|0] "" Vector__XXX
- SG_ In_Stat2 : 10|2@1- (1,0) [0|0] "" Vector__XXX
- SG_ In_Stat1 : 8|2@1- (1,0) [0|0] "" Vector__XXX
- SG_ Out_Stat4 : 6|2@1- (1,0) [0|0] "" Vector__XXX
- SG_ Out_Stat3 : 4|2@1- (1,0) [0|0] "" Vector__XXX
- SG_ Out_Stat2 : 2|2@1- (1,0) [0|0] "" Vector__XXX
- SG_ Out_Stat1 : 0|2@1- (1,0) [0|0] "" Vector__XXX
+ SG_ In_Stat2 : 10|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ In_Stat1 : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Out_Stat4 : 6|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Out_Stat3 : 4|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Out_Stat2 : 2|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Out_Stat1 : 0|2@1+ (1,0) [0|0] "" Vector__XXX
 
 BO_ 2566854396 AD2: 8 UUT
- SG_ S_PWR : 56|8@1- (1,0) [0|0] "" Vector__XXX
- SG_ OC_VREF : 48|8@1- (1,0) [0|0] "" Vector__XXX
- SG_ PCB_TEMP : 32|16@1- (1,0) [0|0] "" Vector__XXX
- SG_ AINPUT02_TEMP : 16|16@1- (1,0) [0|0] "" Vector__XXX
- SG_ AINPUT01_PSI : 0|16@1- (1,0) [0|0] "" Vector__XXX
+ SG_ S_PWR : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OC_VREF : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PCB_TEMP : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ AINPUT02_TEMP : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ AINPUT01_PSI : 0|16@1+ (1,0) [0|0] "" Vector__XXX
 
 BO_ 2566854652 AD3: 8 UUT
- SG_ AMPS_FET4 : 48|16@1- (0.001,0) [0|0] "" Vector__XXX
- SG_ AMPS_FET3 : 32|16@1- (0.001,0) [0|0] "" Vector__XXX
- SG_ AMPS_FET2 : 16|16@1- (0.001,0) [0|0] "" Vector__XXX
- SG_ AMPS_FET1 : 0|16@1- (0.001,0) [0|0] "" Vector__XXX
+ SG_ AMPS_FET4 : 48|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ AMPS_FET3 : 32|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ AMPS_FET2 : 16|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ AMPS_FET1 : 0|16@1+ (0.001,0) [0|0] "" Vector__XXX
 
 BO_ 2566907644 FAULT: 8 UUT
- SG_ FaultCode : 56|8@1- (1,0) [0|0] "" Vector__XXX
- SG_ F7Count : 48|8@1- (1,0) [0|0] "" Vector__XXX
- SG_ F6Count : 40|8@1- (1,0) [0|0] "" Vector__XXX
- SG_ F5Count : 32|8@1- (1,0) [0|0] "" Vector__XXX
- SG_ F4Count : 24|8@1- (1,0) [0|0] "" Vector__XXX
- SG_ F3Count : 16|8@1- (1,0) [0|0] "" Vector__XXX
- SG_ F2Count : 8|8@1- (1,0) [0|0] "" Vector__XXX
- SG_ F1Count : 0|8@1- (1,0) [0|0] "" Vector__XXX
+ SG_ FaultCode : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ F7Count : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ F6Count : 40|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ F5Count : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ F4Count : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ F3Count : 16|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ F2Count : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ F1Count : 0|8@1+ (1,0) [0|0] "" Vector__XXX
 
 BO_ 2565864657 CTRL1: 8 CTRL
- SG_ FREQ : 56|8@1- (1,0) [0|0] "" Vector__XXX
- SG_ RESET_COUNTS : 50|2@1- (1,0) [0|0] "" Vector__XXX
- SG_ TEST_MODE : 48|2@1- (1,0) [0|0] "" Vector__XXX
+ SG_ FREQ : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ RESET_COUNTS : 50|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ TEST_MODE : 48|2@1+ (1,0) [0|0] "" Vector__XXX
  SG_ S_PWR : 10|2@1- (1,0) [0|0] "" Vector__XXX
- SG_ OUTPUT05 : 8|2@1- (1,0) [0|0] "" Vector__XXX
- SG_ OUTPUT04 : 6|2@1- (1,0) [0|0] "" Vector__XXX
- SG_ OUTPUT03 : 4|2@1- (1,0) [0|0] "" Vector__XXX
- SG_ OUTPUT02 : 2|2@1- (1,0) [0|0] "" Vector__XXX
- SG_ OUTPUT01 : 0|2@1- (1,0) [0|0] "" Vector__XXX
+ SG_ OUTPUT05 : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OUTPUT04 : 6|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OUTPUT03 : 4|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OUTPUT02 : 2|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OUTPUT01 : 0|2@1+ (1,0) [0|0] "" Vector__XXX
 
 BO_ 2566913276 DPLF2: 8 UUT
- SG_ Spare : 48|8@1- (1,0) [0|0] "" Vector__XXX
- SG_ Module_Temperature : 32|16@1- (1,0) [0|0] "" Vector__XXX
- SG_ Battery_Voltage : 16|16@1- (1,0) [0|0] "" Vector__XXX
- SG_ CNFG2 : 8|8@1- (1,0) [0|0] "" Vector__XXX
- SG_ CNFG1 : 0|8@1- (1,0) [0|0] "" Vector__XXX
+ SG_ Spare : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Module_Temperature : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Battery_Voltage : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CNFG2 : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CNFG1 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
 
 BO_ 2560490705 AUXIO6: 8 CTRL
- SG_ PWM4 : 48|16@1- (1,0) [0|0] "" Vector__XXX
- SG_ PWM3 : 32|16@1- (1,0) [0|0] "" Vector__XXX
- SG_ PWM2 : 16|16@1- (1,0) [0|0] "" Vector__XXX
- SG_ PWM1 : 0|16@1- (1,0) [0|0] "" Vector__XXX
+ SG_ PWM4 : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PWM3 : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PWM2 : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PWM1 : 0|16@1+ (1,0) [0|0] "" Vector__XXX
 
 
 

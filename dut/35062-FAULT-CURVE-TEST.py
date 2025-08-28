@@ -76,14 +76,25 @@ while t <= MaxOutputs:
         Max_Current = 5000
         outstr += "LdCurrentSet = " + str(Max_Current) + " : NULL\n"
         outstr += "LdEnable = 1 : NULL : WAIT = 0.2\n"
+        outstr += "NULL : " + FeedbackName + " = " + str(Max_Current) + " | 1000 | 0\n" 
+        outstr += "NULL : " + OutputStatus + " = 1 | 0 | 0\n" 
         Max_Current = 3000
         outstr += "LdCurrentSet = " + str(Max_Current) + " : NULL : WAIT = 0.5\n"
+        outstr += "NULL : " + FeedbackName + " = " + str(Max_Current) + " | 1000 | 0\n" 
+        outstr += "NULL : MeterCurrent = " + str(Max_Current*0.001) + " | 1 | 0\n" 
+        outstr += "NULL : " + OutputStatus + " = 1 | 0 | 0\n" 
         Max_Current = 1000
         outstr += "LdCurrentSet = " + str(Max_Current) + " : NULL : WAIT = 0.7\n"
+        outstr += "NULL : " + FeedbackName + " = " + str(Max_Current) + " | 1000 | 0\n" 
+        outstr += "NULL : MeterCurrent = " + str(Max_Current*0.001) + " | 1 | 0\n" 
+        outstr += "NULL : " + OutputStatus + " = 1 | 0 | 0\n" 
         Max_Current = 0
         if(i > MaxRetrys):
            Max_Current = 2000
         outstr += "LdCurrentSet = " + str(Max_Current) + " : NULL : WAIT = 0.5\n"
+        outstr += "NULL : " + FeedbackName + " = " + str(Max_Current) + " | 1000 | 0\n" 
+        outstr += "NULL : MeterCurrent = " + str(Max_Current*0.001) + " | 1 | 0\n" 
+        outstr += "NULL : " + OutputStatus + " = 2 | 0 | 0\n" 
         outstr += "LdEnable = 0 : NULL : WAIT = 0.5\n"
         outstr += OutputName + " = 0 : NULL : WAIT = 0.5\n"
         i += 1
