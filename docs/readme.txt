@@ -61,9 +61,9 @@ Examples:
 
 NEW!!! 8/28/25
 
-ROI (roy) interface
+ROI (roy) "remote operation interface"
 
-	ROI is a rasberry pi with a CAN vat & Relay hat that runs roi.py.
+	ROI is a rasberry pi with a CANbus hat & Relay hat running roi.py.
 	roi.py is a python script allowing control of the relays and a replacemnent for RS-232 Ammeter UCG.
 	
 	Relay Control:
