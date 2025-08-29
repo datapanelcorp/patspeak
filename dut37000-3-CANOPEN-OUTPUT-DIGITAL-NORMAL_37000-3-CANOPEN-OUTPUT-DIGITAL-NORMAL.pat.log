@@ -1,0 +1,58 @@
+Esc - user interruption @ 2025-08-29-15:22:43
+Started on: 2025-08-29-15:22:19
+00000 #37000-3
+00000 #Verion 0.0
+00000 #digital normal test using the E-LOAD
+00000 UUT_EDS = 37000-563.eds
+00000 UUT_DATANAME = 37000-3-CANOPEN-OUTPUT-DIGITAL-NORMAL
+00000 
+00000 #cycle IGN to clean slate
+00000 RLY_K1 = 1 : NULL : WAIT = 1
+00001 RLY_K1 = 0 : NULL : WAIT = 1
+00002 PRE_OPERATIONAL
+00002 #-----setup PAT-----
+00002 #setup load
+00002 LdRemote = 1 : NULL : WAIT = 0.1
+00003 LdEnable = 1 : NULL : WAIT = 0.1
+00004 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00005 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
+00006 #cycle IGN to clean slate
+00006 RLY_K1 = 1 : NULL : WAIT = 1
+00007 RLY_K1 = 0 : NULL : WAIT = 1
+00008 NULL : sdo[0x5001][3] = 0 | 0.1 | 0.1
+00008 TEST: Status Message F1.Status_Output1-2 0.0 +/- 0.1
+00008 PASS: Status Message F1.Status_Output1-2 0.0
+00009 NULL : sdo[0x5001][4] = 0 | 0.1 | 0.1
+00009 PASS: Status Message F1.Status_Output3-4 0.0
+00010 #-----setup 34044-----
+00010 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00011 #disable global modes
+00011 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00012 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00013 sdo[0x2000][1] = 1 : NULL : WAIT = 0.2
+00014 sdo[0x2001][1] = 17 : NULL : WAIT = 0.2
+00015 #switch in load line, set current
+00015 J2_01 = 1 : NULL : WAIT = 0.5
+00016 OPERATIONAL
+00016 
+00016 #set current and turn on output and verify feedback
+00016 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00017 LdCurrentSet = 0: NULL : WAIT = 0.1
+00018 #verify reading from load
+00018 NULL : sdo[0x5003][1] = 0 | 1000 | 0.1
+00018 TEST: Status Message Amp.Port_1A 0.0 +/- 1000.0
+00018 PASS: Status Message Amp.Port_1A 0.0
+00019 NULL : sdo[0x5001][3] = 1 | 0.01 | 0.1
+00019 PASS: Status Message F1.Status_Output1-2 1.0
+00020 NULL : MeterCurrent = 0.0 | 0.1 | 0.1
+00020 PASS: MeterCurrent 0.0
+00021 
+00021 #set current and turn on output and verify feedback
+00021 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00022 LdCurrentSet = 100: NULL : WAIT = 0.1
+00023 #verify reading from load
+00023 NULL : sdo[0x5003][1] = 100 | 1000 | 0.1
+00023 TEST: Status Message Amp.Port_1A 100.0 +/- 1000.0
+00023 PASS: Status Message Amp.Port_1A 0.0
+00024 NULL : sdo[0x5001][3] = 1 | 0.01 | 0.1
+00024 PASS: Status Message F1.Status_Output1-2 1.0

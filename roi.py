@@ -17,7 +17,7 @@ K1_PIN = 26
 # Setup
 GPIO.setmode(GPIO.BCM)  # Use BCM pin numbering
 GPIO.setup(K1_PIN, GPIO.OUT)
-GPIO.output(K1_PIN, GPIO.HIGH)   # Turn LED off
+GPIO.output(K1_PIN, GPIO.LOW)   # Turn LED off
 
 RLY_CTRL_ID = 0x0CFF0500
 K1State = 0
@@ -38,9 +38,9 @@ def receive_can_messages():
             else:
                 K1State = 0
             if(K1State):
-                GPIO.output(K1_PIN, GPIO.LOW)  # Turn LED on
+                GPIO.output(K1_PIN, GPIO.HIGH)  # Turn LED on
             else:
-                GPIO.output(K1_PIN, GPIO.HIGH)   # Turn LED off
+                GPIO.output(K1_PIN, GPIO.LOW)   # Turn LED off
 
 def is_number(value):
     try:
