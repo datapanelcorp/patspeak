@@ -7,9 +7,15 @@ print(f"The name of the running script is: {script_name}")
 t = 0
 i = 0
 
-PortMode = 0
-
+#configuration
 FaultReset = 1
+Skip10A = 1
+StartCurrent = 0
+
+MaxLimit = 4400
+FaultLimit = 4300
+Increment = 200
+
 
 #global setup
 TestName = os.path.splitext(script_name)[0]
@@ -41,10 +47,7 @@ outstr += "OPERATIONAL\n"
 
 FdbkBits = 0
 FltBits = 0
-
-StartCurrent = 0
-MaxLimit = 4400
-FaultLimit = 4300
+PortMode = 0
 
 Cmd0x52 = "sdo[0x2000][1]"
 TheMode = 0x11
@@ -53,17 +56,20 @@ outstr += "sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL\n"
 outstr += "#disable global modes\n"
 outstr += "sdo[0x2000][3] = 0 : NULL\n"
 outstr += "sdo[0x2000][4] = 0 : NULL\n"
+outstr += "#-----set 1A/3A overcurrent-----\n"
+outstr += "sdo[0x2004][1] = 45 : NULL\n"
+outstr += "sdo[0x2004][2] = 45 : NULL\n"
 
-
-start_out = 2
+start_out = 0
 max_outs = 15
 t = start_out
 while t <= max_outs:
     
-    if(t == 0):#skip 1A
-        t += 1
-    if(t == 4):#skip 3A
-        t += 1
+    if(Skip10A):
+        if(t == 0):#skip 1A
+            t += 1
+        if(t == 4):#skip 3A
+            t += 1
         
     if(t == 0):
         OutputBits = 0b00000001
@@ -274,20 +280,24 @@ while t <= max_outs:
         FeedbackName = "sdo[0x5003][16]"#Port_8B
         OutputConnector = "J3_04"
 
-    TheMode = 0x11
 
+    TheMode = 0x11
+    outstr += "#-----disable load-----\n"
+    outstr += "LdEnable = 0 : NULL\n"
+    
     outstr += "#-----setup 34044-----\n"
     outstr += "sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL\n"
     outstr += PortMode + " = " + str(TheMode) + " : NULL\n"
     outstr += Cmd0x52 + " = " + str(FaultReset) + " : NULL\n"
     outstr += "#switch in load line, set current\n"
     outstr += OutputConnector + " = 1 : NULL\n"
-    outstr += "LdEnable = 1 : NULL\n"
+
 
     outstr += "\n"
     i = StartCurrent
     while i <= MaxLimit:
         outstr += "#set current and turn on output and verify feedback\n" 
+        outstr += "LdEnable = 1 : NULL\n"
         outstr += OutputName + " = " + str(OutputBits) + " : NULL\n"
         outstr += "LdCurrentSet = " + str(i) + ": NULL\n"
         if(i < FaultLimit):
@@ -302,7 +312,7 @@ while t <= max_outs:
             outstr += "NULL : " + FeedbackName + " = 0 | 0 | 0.01\n"
             outstr += "NULL : " + OutputStatus + " = " + str(FltBits) + " | 0 | 0.01\n"
             outstr += "\n"
-        i += 200
+        i += Increment
         print(i)
 
     outstr += "#switch out load line, clear current\n"
@@ -314,13 +324,24 @@ while t <= max_outs:
     outstr += "NULL : " + OutputStatus + " = 0 | 0 | 0.01\n" 
     t += 1
 
+#shut down test early
+outstr += "LdRemote = 0 : NULL\n"
+outstr += "LdEnable = 0 : NULL\n"
+outstr += "J0_08_METER_LOAD = 0 : NULL\n"
+outstr += "PRE_OPERATIONAL\n"
+outstr += "SAVE\n"
+outstr += "END\n"
+
+#*********************************************************
+
 t = start_out
 while t <= max_outs:
     
-    if(t == 0):#skip 1A
-        t += 1
-    if(t == 4):#skip 3A
-        t += 1
+    if(Skip10A):
+        if(t == 0):#skip 1A
+            t += 1
+        if(t == 4):#skip 3A
+            t += 1
         
     if(t == 0):
         OutputBits = 0b00000001
