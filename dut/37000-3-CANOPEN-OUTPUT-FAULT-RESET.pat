@@ -4,9 +4,6 @@
 UUT_EDS = 37000-563.eds
 UUT_DATANAME = 37000-3-CANOPEN-OUTPUT-FAULT-RESET
 
-#cycle IGN to clean slate
-RLY_K1 = 1 : NULL : WAIT = 1
-RLY_K1 = 0 : NULL : WAIT = 1
 PRE_OPERATIONAL
 #-----setup PAT-----
 #setup load
@@ -23,7 +20,6 @@ sdo[0x2000][4] = 0 : NULL
 #-----set 1A/3A overcurrent-----
 sdo[0x2004][1] = 45 : NULL
 sdo[0x2004][2] = 45 : NULL
-sdo[0x2000][1] = 0 : NULL
 #switch in load line, set current
 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL
 sdo[0x2001][1] = 17 : NULL

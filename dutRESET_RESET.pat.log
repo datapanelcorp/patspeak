@@ -1,4 +1,4 @@
-Started on: 2025-09-03-10:39:56
+Started on: 2025-09-03-13:24:25
 00000 UUT_EDS = 37000-563.eds
 00000 UUT_DATANAME = RESET
 00000 #cycle IGN to clean slate
@@ -6,5 +6,5 @@ Started on: 2025-09-03-10:39:56
 00001 RLY_K1 = 0 : NULL : WAIT = 1
 00002 END
 Fail count: 0
-Finished on: 2025-09-03-10:40:03
-elapsed time: 0:00:02.002818
+Finished on: 2025-09-03-13:24:30
+elapsed time: 0:00:02.004871

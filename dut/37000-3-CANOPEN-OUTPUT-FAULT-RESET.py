@@ -8,7 +8,7 @@ t = 0
 i = 0
 
 #configuration
-FaultReset = 0
+FaultReset = 1
 Skip10A = 1
 StartCurrent = 0
 
@@ -29,10 +29,6 @@ outstr += "#digital normal test using the E-LOAD\n"
 outstr += "UUT_EDS = 37000-563.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
-
-outstr += "#cycle IGN to clean slate\n"
-outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
-outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 
 outstr += "PRE_OPERATIONAL\n"
 
@@ -61,7 +57,6 @@ outstr += "#-----set 1A/3A overcurrent-----\n"
 outstr += "sdo[0x2004][1] = 45 : NULL\n"
 outstr += "sdo[0x2004][2] = 45 : NULL\n"
 
-outstr += Cmd0x52 + " = " + str(FaultReset) + " : NULL\n"
 outstr += "#switch in load line, set current\n"
     
 start_out = 0
@@ -237,7 +232,7 @@ while t <= max_outs:
         OutputConnector = "J3_04"
         OutputNameStr = "Port_8B"
 
-    FaultReset = 1 #HACK
+
     #outstr += "#-----setup 34044-----\n"
     outstr += "sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL\n"
     outstr += PortMode + " = " + str(TheMode) + " : NULL\n"
