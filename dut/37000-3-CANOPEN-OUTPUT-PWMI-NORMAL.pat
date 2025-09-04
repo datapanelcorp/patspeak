@@ -1,6 +1,7 @@
+#PWMi normal test with a 'red coil' 6.4 ohm inductive load. (2.27 amps @ 14.5 VDC)
 #37000-1
 #Verion 0.0
-#PWMi h-bridge test with a 'red coil' 6.4 ohm inductive load. (2.27 amps @ 14.5 VDC)
+#
 UUT_EDS = 37000-563.eds
 UUT_DATANAME = 37000-3-CANOPEN-OUTPUT-PWMI-NORMAL
 

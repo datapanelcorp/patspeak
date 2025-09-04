@@ -241,13 +241,13 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
         #TODO test duty at 50% and 100%
         outstr += PWMOutputName + " = " + str(Step1) + " : NULL : WAIT = 0.2\n"
         outstr += "NULL : MeterAmps = 0.8 | 0.2 | 0.5\n"
-        outstr += "NULL : " + FeedbackName + " = 800 | 200 | 0.5\n"
+        outstr += "NULL : " + FeedbackName + " = 8| 2 | 0.5\n"
         outstr += PWMOutputName + " = " + str(Step2) + " : NULL : WAIT = 0.2\n"
         outstr += "NULL : MeterAmps = 1.6 | 0.2 | 0.5\n"
-        outstr += "NULL : " + FeedbackName + " = 1600 | 200 | 0.5\n"
+        outstr += "NULL : " + FeedbackName + " = 16 | 2 | 0.5\n"
         outstr += PWMOutputName + " = " + str(Step3) + " : NULL : WAIT = 0.2\n"
         outstr += "NULL : MeterAmps = 3.3 | 0.2 | 0.5\n"
-        outstr += "NULL : " + FeedbackName + " = 3300 | 200 | 0.5\n"
+        outstr += "NULL : " + FeedbackName + " = 33 | 2 | 0.5\n"
         #verify feedback and w/ ammeter
         outstr += "#switch out load line, switch coil\n"
         outstr += PWMOutputName + " = 0 : NULL : WAIT = 0.5\n"
@@ -259,10 +259,10 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
 
 t = 0
 i = 0
-OutputMode = 0x22
+OutputMode = 0x33
 
 #global setup
-TestName = "37000-1-CANOPEN-OUTPUT-PWM-NORMAL-MODE-" + str(OutputMode)
+TestName = TestName + "-" + str(OutputMode)
 datafile = TestName + ".pat"
 
 outstr = ""
@@ -283,6 +283,10 @@ outstr += "sdo[0x2001][1] = " + str(OutputMode) + " : NULL : WAIT = 0.1\n"
 outstr += "sdo[0x2001][2] = " + str(OutputMode) + " : NULL : WAIT = 0.1\n"
 outstr += "sdo[0x2001][3] = " + str(OutputMode) + " : NULL : WAIT = 0.1\n"
 outstr += "sdo[0x2001][4] = " + str(OutputMode) + " : NULL : WAIT = 0.1\n"
+outstr += "sdo[0x2001][5] = " + str(OutputMode) + " : NULL : WAIT = 0.1\n"
+outstr += "sdo[0x2001][6] = " + str(OutputMode) + " : NULL : WAIT = 0.1\n"
+outstr += "sdo[0x2001][7] = " + str(OutputMode) + " : NULL : WAIT = 0.1\n"
+outstr += "sdo[0x2001][8] = " + str(OutputMode) + " : NULL : WAIT = 0.1\n"
 #node.sdo[0x3000].raw = 500
 
 
@@ -318,3 +322,4 @@ print(outstr)
 
 
 
+print(TestName + ".pat")
