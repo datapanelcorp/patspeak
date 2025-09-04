@@ -1,0 +1,1577 @@
+Started on: 2025-09-04-12:21:39
+00000 #37000-3
+00000 #Verion 0.0
+00000 #digital normal test using the E-LOAD
+00000 UUT_EDS = 37000-563.eds
+00000 UUT_DATANAME = 37000-3-CANOPEN-OUTPUT-10A-FAULT-RESET
+00000 
+00000 PRE_OPERATIONAL
+00000 #-----setup PAT-----
+00000 #setup load
+00000 LdRemote = 1 : NULL
+00001 LdEnable = 0 : NULL
+00002 LdCurrentSet = 0 : NULL
+00003 J0_08_METER_LOAD = 1 : NULL
+00004 OPERATIONAL
+00004 #-----setup 34044-----
+00004 sdo[0x2000][1] = 1, sdo[0x2000][2] = 0 : NULL
+00005 #disable global modes
+00005 sdo[0x2000][3] = 0 : NULL
+00006 sdo[0x2000][4] = 0 : NULL
+00007 #-----set 1A/3A overcurrent-----
+00007 sdo[0x2004][1] = 45 : NULL
+00008 sdo[0x2004][2] = 45 : NULL
+00009 #switch in load line, set current
+00009 sdo[0x2001][1] = 17 : NULL
+00010 #switch in load line, set current
+00010 J2_01 = 1 : NULL
+00011 #switch in load line, set current
+00011 J2_01 = 1 : NULL
+00012 LdCurrentSet = 5000: NULL
+00013 LdEnable = 0 : NULL
+00014 
+00014 
+00014 #verify fault clear
+00014 NULL : sdo[0x5001][3] = 0 | 0 | 0.01
+00014 PASS: Status Message F1.Status_Output1-2 0.0
+00015 #turn ON Output1A
+00015 sdo[0x6200][1] = 1 : NULL
+00016 #enable load
+00016 LdEnable = 1 : NULL
+00017 #verify fault #1
+00017 NULL : sdo[0x5001][3] = 2 | 0 | 0.01
+00017 TEST: Status Message F1.Status_Output1-2 2.0 +/- 0.0
+00017 PASS: Status Message F1.Status_Output1-2 2.0
+00018 #disable load
+00018 LdEnable = 0 : NULL
+00019 #turn OFF Output1A
+00019 sdo[0x6200][1] = 0 : NULL
+00020 
+00020 #verify fault #1 clear
+00020 NULL : sdo[0x5001][3] = 0 | 0 | 0.01
+00020 PASS: Status Message F1.Status_Output1-2 0.0
+00021 #turn ON Output1A
+00021 sdo[0x6200][1] = 1 : NULL
+00022 #enable load
+00022 LdEnable = 1 : NULL
+00023 #verify fault #2
+00023 NULL : sdo[0x5001][3] = 2 | 0 | 0.01
+00023 TEST: Status Message F1.Status_Output1-2 2.0 +/- 0.0
+00023 PASS: Status Message F1.Status_Output1-2 2.0
+00024 #disable load
+00024 LdEnable = 0 : NULL
+00025 #turn OFF Output1A
+00025 sdo[0x6200][1] = 0 : NULL
+00026 
+00026 #verify fault #2 clear
+00026 NULL : sdo[0x5001][3] = 0 | 0 | 0.01
+00026 PASS: Status Message F1.Status_Output1-2 0.0
+00027 #turn ON Output1A
+00027 sdo[0x6200][1] = 1 : NULL
+00028 #enable load
+00028 LdEnable = 1 : NULL
+00029 #verify fault #3
+00029 NULL : sdo[0x5001][3] = 2 | 0 | 0.01
+00029 TEST: Status Message F1.Status_Output1-2 2.0 +/- 0.0
+00029 PASS: Status Message F1.Status_Output1-2 2.0
+00030 #disable load
+00030 LdEnable = 0 : NULL
+00031 #turn OFF Output1A
+00031 sdo[0x6200][1] = 0 : NULL
+00032 
+00032 #verify fault #3 clear
+00032 NULL : sdo[0x5001][3] = 0 | 0 | 0.01
+00032 PASS: Status Message F1.Status_Output1-2 0.0
+00033 #turn ON Output1A
+00033 sdo[0x6200][1] = 1 : NULL
+00034 #enable load
+00034 LdEnable = 1 : NULL
+00035 #verify fault #4
+00035 NULL : sdo[0x5001][3] = 2 | 0 | 0.01
+00035 TEST: Status Message F1.Status_Output1-2 2.0 +/- 0.0
+00035 PASS: Status Message F1.Status_Output1-2 2.0
+00036 #disable load
+00036 LdEnable = 0 : NULL
+00037 #turn OFF Output1A
+00037 sdo[0x6200][1] = 0 : NULL
+00038 
+00038 #verify fault #4 clear
+00038 NULL : sdo[0x5001][3] = 0 | 0 | 0.01
+00038 PASS: Status Message F1.Status_Output1-2 0.0
+00039 #turn ON Output1A
+00039 sdo[0x6200][1] = 1 : NULL
+00040 #enable load
+00040 LdEnable = 1 : NULL
+00041 #verify fault #5
+00041 NULL : sdo[0x5001][3] = 2 | 0 | 0.01
+00041 TEST: Status Message F1.Status_Output1-2 2.0 +/- 0.0
+00041 PASS: Status Message F1.Status_Output1-2 2.0
+00042 #disable load
+00042 LdEnable = 0 : NULL
+00043 #turn OFF Output1A
+00043 sdo[0x6200][1] = 0 : NULL
+00044 
+00044 #verify fault #5 sticks
+00044 NULL : sdo[0x5001][3] = 2 | 0 | 0.01
+00044 PASS: Status Message F1.Status_Output1-2 2.0
+00045 #switch out load line, clear current
+00045 sdo[0x6200][1] = 0 : NULL
+00046 J2_01 = 0 : NULL
+00047 LdCurrentSet = 0 : NULL
+00048 sdo[0x2001][1] = 17 : NULL
+00049 #switch in load line, set current
+00049 J2_02 = 1 : NULL
+00050 #switch in load line, set current
+00050 J2_02 = 1 : NULL
+00051 LdCurrentSet = 5000: NULL
+00052 LdEnable = 0 : NULL
+00053 
+00053 
+00053 #verify fault clear
+00053 NULL : sdo[0x5001][3] = 2 | 0 | 0.01
+00053 PASS: Status Message F1.Status_Output1-2 2.0
+00054 #turn ON Output1B
+00054 sdo[0x6200][1] = 2 : NULL
+00055 #enable load
+00055 LdEnable = 1 : NULL
+00056 #verify fault #1
+00056 NULL : sdo[0x5001][3] = 10 | 0 | 0.01
+00056 TEST: Status Message F1.Status_Output1-2 10.0 +/- 0.0
+00056 PASS: Status Message F1.Status_Output1-2 10.0
+00057 #disable load
+00057 LdEnable = 0 : NULL
+00058 #turn OFF Output1B
+00058 sdo[0x6200][1] = 0 : NULL
+00059 
+00059 #verify fault #1 clear
+00059 NULL : sdo[0x5001][3] = 2 | 0 | 0.01
+00059 PASS: Status Message F1.Status_Output1-2 2.0
+00060 #turn ON Output1B
+00060 sdo[0x6200][1] = 2 : NULL
+00061 #enable load
+00061 LdEnable = 1 : NULL
+00062 #verify fault #2
+00062 NULL : sdo[0x5001][3] = 10 | 0 | 0.01
+00062 TEST: Status Message F1.Status_Output1-2 10.0 +/- 0.0
+00062 PASS: Status Message F1.Status_Output1-2 10.0
+00063 #disable load
+00063 LdEnable = 0 : NULL
+00064 #turn OFF Output1B
+00064 sdo[0x6200][1] = 0 : NULL
+00065 
+00065 #verify fault #2 clear
+00065 NULL : sdo[0x5001][3] = 2 | 0 | 0.01
+00065 PASS: Status Message F1.Status_Output1-2 2.0
+00066 #turn ON Output1B
+00066 sdo[0x6200][1] = 2 : NULL
+00067 #enable load
+00067 LdEnable = 1 : NULL
+00068 #verify fault #3
+00068 NULL : sdo[0x5001][3] = 10 | 0 | 0.01
+00068 TEST: Status Message F1.Status_Output1-2 10.0 +/- 0.0
+00068 PASS: Status Message F1.Status_Output1-2 10.0
+00069 #disable load
+00069 LdEnable = 0 : NULL
+00070 #turn OFF Output1B
+00070 sdo[0x6200][1] = 0 : NULL
+00071 
+00071 #verify fault #3 clear
+00071 NULL : sdo[0x5001][3] = 2 | 0 | 0.01
+00071 PASS: Status Message F1.Status_Output1-2 2.0
+00072 #turn ON Output1B
+00072 sdo[0x6200][1] = 2 : NULL
+00073 #enable load
+00073 LdEnable = 1 : NULL
+00074 #verify fault #4
+00074 NULL : sdo[0x5001][3] = 10 | 0 | 0.01
+00074 TEST: Status Message F1.Status_Output1-2 10.0 +/- 0.0
+00074 PASS: Status Message F1.Status_Output1-2 10.0
+00075 #disable load
+00075 LdEnable = 0 : NULL
+00076 #turn OFF Output1B
+00076 sdo[0x6200][1] = 0 : NULL
+00077 
+00077 #verify fault #4 clear
+00077 NULL : sdo[0x5001][3] = 2 | 0 | 0.01
+00077 PASS: Status Message F1.Status_Output1-2 2.0
+00078 #turn ON Output1B
+00078 sdo[0x6200][1] = 2 : NULL
+00079 #enable load
+00079 LdEnable = 1 : NULL
+00080 #verify fault #5
+00080 NULL : sdo[0x5001][3] = 10 | 0 | 0.01
+00080 TEST: Status Message F1.Status_Output1-2 10.0 +/- 0.0
+00080 PASS: Status Message F1.Status_Output1-2 10.0
+00081 #disable load
+00081 LdEnable = 0 : NULL
+00082 #turn OFF Output1B
+00082 sdo[0x6200][1] = 0 : NULL
+00083 
+00083 #verify fault #5 sticks
+00083 NULL : sdo[0x5001][3] = 10 | 0 | 0.01
+00083 PASS: Status Message F1.Status_Output1-2 10.0
+00084 #switch out load line, clear current
+00084 sdo[0x6200][1] = 0 : NULL
+00085 J2_02 = 0 : NULL
+00086 LdCurrentSet = 0 : NULL
+00087 sdo[0x2001][2] = 17 : NULL
+00088 #switch in load line, set current
+00088 J2_03 = 1 : NULL
+00089 #switch in load line, set current
+00089 J2_03 = 1 : NULL
+00090 LdCurrentSet = 5000: NULL
+00091 LdEnable = 0 : NULL
+00092 
+00092 
+00092 #verify fault clear
+00092 NULL : sdo[0x5001][3] = 10 | 0 | 0.01
+00092 PASS: Status Message F1.Status_Output1-2 10.0
+00093 #turn ON Output2A
+00093 sdo[0x6200][1] = 4 : NULL
+00094 #enable load
+00094 LdEnable = 1 : NULL
+00095 #verify fault #1
+00095 NULL : sdo[0x5001][3] = 42 | 0 | 0.01
+00095 TEST: Status Message F1.Status_Output1-2 42.0 +/- 0.0
+00095 PASS: Status Message F1.Status_Output1-2 42.0
+00096 #disable load
+00096 LdEnable = 0 : NULL
+00097 #turn OFF Output2A
+00097 sdo[0x6200][1] = 0 : NULL
+00098 
+00098 #verify fault #1 clear
+00098 NULL : sdo[0x5001][3] = 10 | 0 | 0.01
+00098 PASS: Status Message F1.Status_Output1-2 10.0
+00099 #turn ON Output2A
+00099 sdo[0x6200][1] = 4 : NULL
+00100 #enable load
+00100 LdEnable = 1 : NULL
+00101 #verify fault #2
+00101 NULL : sdo[0x5001][3] = 42 | 0 | 0.01
+00101 TEST: Status Message F1.Status_Output1-2 42.0 +/- 0.0
+00101 PASS: Status Message F1.Status_Output1-2 42.0
+00102 #disable load
+00102 LdEnable = 0 : NULL
+00103 #turn OFF Output2A
+00103 sdo[0x6200][1] = 0 : NULL
+00104 
+00104 #verify fault #2 clear
+00104 NULL : sdo[0x5001][3] = 10 | 0 | 0.01
+00104 PASS: Status Message F1.Status_Output1-2 10.0
+00105 #turn ON Output2A
+00105 sdo[0x6200][1] = 4 : NULL
+00106 #enable load
+00106 LdEnable = 1 : NULL
+00107 #verify fault #3
+00107 NULL : sdo[0x5001][3] = 42 | 0 | 0.01
+00107 TEST: Status Message F1.Status_Output1-2 42.0 +/- 0.0
+00107 PASS: Status Message F1.Status_Output1-2 42.0
+00108 #disable load
+00108 LdEnable = 0 : NULL
+00109 #turn OFF Output2A
+00109 sdo[0x6200][1] = 0 : NULL
+00110 
+00110 #verify fault #3 clear
+00110 NULL : sdo[0x5001][3] = 10 | 0 | 0.01
+00110 PASS: Status Message F1.Status_Output1-2 10.0
+00111 #turn ON Output2A
+00111 sdo[0x6200][1] = 4 : NULL
+00112 #enable load
+00112 LdEnable = 1 : NULL
+00113 #verify fault #4
+00113 NULL : sdo[0x5001][3] = 42 | 0 | 0.01
+00113 TEST: Status Message F1.Status_Output1-2 42.0 +/- 0.0
+00113 PASS: Status Message F1.Status_Output1-2 42.0
+00114 #disable load
+00114 LdEnable = 0 : NULL
+00115 #turn OFF Output2A
+00115 sdo[0x6200][1] = 0 : NULL
+00116 
+00116 #verify fault #4 clear
+00116 NULL : sdo[0x5001][3] = 10 | 0 | 0.01
+00116 PASS: Status Message F1.Status_Output1-2 10.0
+00117 #turn ON Output2A
+00117 sdo[0x6200][1] = 4 : NULL
+00118 #enable load
+00118 LdEnable = 1 : NULL
+00119 #verify fault #5
+00119 NULL : sdo[0x5001][3] = 42 | 0 | 0.01
+00119 TEST: Status Message F1.Status_Output1-2 42.0 +/- 0.0
+00119 PASS: Status Message F1.Status_Output1-2 42.0
+00120 #disable load
+00120 LdEnable = 0 : NULL
+00121 #turn OFF Output2A
+00121 sdo[0x6200][1] = 0 : NULL
+00122 
+00122 #verify fault #5 sticks
+00122 NULL : sdo[0x5001][3] = 42 | 0 | 0.01
+00122 PASS: Status Message F1.Status_Output1-2 42.0
+00123 #switch out load line, clear current
+00123 sdo[0x6200][1] = 0 : NULL
+00124 J2_03 = 0 : NULL
+00125 LdCurrentSet = 0 : NULL
+00126 sdo[0x2001][2] = 17 : NULL
+00127 #switch in load line, set current
+00127 J2_04 = 1 : NULL
+00128 #switch in load line, set current
+00128 J2_04 = 1 : NULL
+00129 LdCurrentSet = 5000: NULL
+00130 LdEnable = 0 : NULL
+00131 
+00131 
+00131 #verify fault clear
+00131 NULL : sdo[0x5001][3] = 42 | 0 | 0.01
+00131 PASS: Status Message F1.Status_Output1-2 42.0
+00132 #turn ON Output2B
+00132 sdo[0x6200][1] = 8 : NULL
+00133 #enable load
+00133 LdEnable = 1 : NULL
+00134 #verify fault #1
+00134 NULL : sdo[0x5001][3] = 170 | 0 | 0.01
+00134 TEST: Status Message F1.Status_Output1-2 170.0 +/- 0.0
+00134 PASS: Status Message F1.Status_Output1-2 170.0
+00135 #disable load
+00135 LdEnable = 0 : NULL
+00136 #turn OFF Output2B
+00136 sdo[0x6200][1] = 0 : NULL
+00137 
+00137 #verify fault #1 clear
+00137 NULL : sdo[0x5001][3] = 42 | 0 | 0.01
+00137 PASS: Status Message F1.Status_Output1-2 42.0
+00138 #turn ON Output2B
+00138 sdo[0x6200][1] = 8 : NULL
+00139 #enable load
+00139 LdEnable = 1 : NULL
+00140 #verify fault #2
+00140 NULL : sdo[0x5001][3] = 170 | 0 | 0.01
+00140 TEST: Status Message F1.Status_Output1-2 170.0 +/- 0.0
+00140 PASS: Status Message F1.Status_Output1-2 170.0
+00141 #disable load
+00141 LdEnable = 0 : NULL
+00142 #turn OFF Output2B
+00142 sdo[0x6200][1] = 0 : NULL
+00143 
+00143 #verify fault #2 clear
+00143 NULL : sdo[0x5001][3] = 42 | 0 | 0.01
+00143 PASS: Status Message F1.Status_Output1-2 42.0
+00144 #turn ON Output2B
+00144 sdo[0x6200][1] = 8 : NULL
+00145 #enable load
+00145 LdEnable = 1 : NULL
+00146 #verify fault #3
+00146 NULL : sdo[0x5001][3] = 170 | 0 | 0.01
+00146 TEST: Status Message F1.Status_Output1-2 170.0 +/- 0.0
+00146 PASS: Status Message F1.Status_Output1-2 170.0
+00147 #disable load
+00147 LdEnable = 0 : NULL
+00148 #turn OFF Output2B
+00148 sdo[0x6200][1] = 0 : NULL
+00149 
+00149 #verify fault #3 clear
+00149 NULL : sdo[0x5001][3] = 42 | 0 | 0.01
+00149 PASS: Status Message F1.Status_Output1-2 42.0
+00150 #turn ON Output2B
+00150 sdo[0x6200][1] = 8 : NULL
+00151 #enable load
+00151 LdEnable = 1 : NULL
+00152 #verify fault #4
+00152 NULL : sdo[0x5001][3] = 170 | 0 | 0.01
+00152 TEST: Status Message F1.Status_Output1-2 170.0 +/- 0.0
+00152 PASS: Status Message F1.Status_Output1-2 170.0
+00153 #disable load
+00153 LdEnable = 0 : NULL
+00154 #turn OFF Output2B
+00154 sdo[0x6200][1] = 0 : NULL
+00155 
+00155 #verify fault #4 clear
+00155 NULL : sdo[0x5001][3] = 42 | 0 | 0.01
+00155 PASS: Status Message F1.Status_Output1-2 42.0
+00156 #turn ON Output2B
+00156 sdo[0x6200][1] = 8 : NULL
+00157 #enable load
+00157 LdEnable = 1 : NULL
+00158 #verify fault #5
+00158 NULL : sdo[0x5001][3] = 170 | 0 | 0.01
+00158 TEST: Status Message F1.Status_Output1-2 170.0 +/- 0.0
+00158 PASS: Status Message F1.Status_Output1-2 170.0
+00159 #disable load
+00159 LdEnable = 0 : NULL
+00160 #turn OFF Output2B
+00160 sdo[0x6200][1] = 0 : NULL
+00161 
+00161 #verify fault #5 sticks
+00161 NULL : sdo[0x5001][3] = 170 | 0 | 0.01
+00161 PASS: Status Message F1.Status_Output1-2 170.0
+00162 #switch out load line, clear current
+00162 sdo[0x6200][1] = 0 : NULL
+00163 J2_04 = 0 : NULL
+00164 LdCurrentSet = 0 : NULL
+00165 sdo[0x2001][3] = 17 : NULL
+00166 #switch in load line, set current
+00166 J2_05 = 1 : NULL
+00167 #switch in load line, set current
+00167 J2_05 = 1 : NULL
+00168 LdCurrentSet = 5000: NULL
+00169 LdEnable = 0 : NULL
+00170 
+00170 
+00170 #verify fault clear
+00170 NULL : sdo[0x5001][4] = 0 | 0 | 0.01
+00170 PASS: Status Message F1.Status_Output3-4 0.0
+00171 #turn ON Output3A
+00171 sdo[0x6200][1] = 16 : NULL
+00172 #enable load
+00172 LdEnable = 1 : NULL
+00173 #verify fault #1
+00173 NULL : sdo[0x5001][4] = 2 | 0 | 0.01
+00173 TEST: Status Message F1.Status_Output3-4 2.0 +/- 0.0
+00173 PASS: Status Message F1.Status_Output3-4 2.0
+00174 #disable load
+00174 LdEnable = 0 : NULL
+00175 #turn OFF Output3A
+00175 sdo[0x6200][1] = 0 : NULL
+00176 
+00176 #verify fault #1 clear
+00176 NULL : sdo[0x5001][4] = 0 | 0 | 0.01
+00176 PASS: Status Message F1.Status_Output3-4 0.0
+00177 #turn ON Output3A
+00177 sdo[0x6200][1] = 16 : NULL
+00178 #enable load
+00178 LdEnable = 1 : NULL
+00179 #verify fault #2
+00179 NULL : sdo[0x5001][4] = 2 | 0 | 0.01
+00179 TEST: Status Message F1.Status_Output3-4 2.0 +/- 0.0
+00179 PASS: Status Message F1.Status_Output3-4 2.0
+00180 #disable load
+00180 LdEnable = 0 : NULL
+00181 #turn OFF Output3A
+00181 sdo[0x6200][1] = 0 : NULL
+00182 
+00182 #verify fault #2 clear
+00182 NULL : sdo[0x5001][4] = 0 | 0 | 0.01
+00182 PASS: Status Message F1.Status_Output3-4 0.0
+00183 #turn ON Output3A
+00183 sdo[0x6200][1] = 16 : NULL
+00184 #enable load
+00184 LdEnable = 1 : NULL
+00185 #verify fault #3
+00185 NULL : sdo[0x5001][4] = 2 | 0 | 0.01
+00185 TEST: Status Message F1.Status_Output3-4 2.0 +/- 0.0
+00185 PASS: Status Message F1.Status_Output3-4 2.0
+00186 #disable load
+00186 LdEnable = 0 : NULL
+00187 #turn OFF Output3A
+00187 sdo[0x6200][1] = 0 : NULL
+00188 
+00188 #verify fault #3 clear
+00188 NULL : sdo[0x5001][4] = 0 | 0 | 0.01
+00188 PASS: Status Message F1.Status_Output3-4 0.0
+00189 #turn ON Output3A
+00189 sdo[0x6200][1] = 16 : NULL
+00190 #enable load
+00190 LdEnable = 1 : NULL
+00191 #verify fault #4
+00191 NULL : sdo[0x5001][4] = 2 | 0 | 0.01
+00191 TEST: Status Message F1.Status_Output3-4 2.0 +/- 0.0
+00191 PASS: Status Message F1.Status_Output3-4 2.0
+00192 #disable load
+00192 LdEnable = 0 : NULL
+00193 #turn OFF Output3A
+00193 sdo[0x6200][1] = 0 : NULL
+00194 
+00194 #verify fault #4 clear
+00194 NULL : sdo[0x5001][4] = 0 | 0 | 0.01
+00194 PASS: Status Message F1.Status_Output3-4 0.0
+00195 #turn ON Output3A
+00195 sdo[0x6200][1] = 16 : NULL
+00196 #enable load
+00196 LdEnable = 1 : NULL
+00197 #verify fault #5
+00197 NULL : sdo[0x5001][4] = 2 | 0 | 0.01
+00197 TEST: Status Message F1.Status_Output3-4 2.0 +/- 0.0
+00197 PASS: Status Message F1.Status_Output3-4 2.0
+00198 #disable load
+00198 LdEnable = 0 : NULL
+00199 #turn OFF Output3A
+00199 sdo[0x6200][1] = 0 : NULL
+00200 
+00200 #verify fault #5 sticks
+00200 NULL : sdo[0x5001][4] = 2 | 0 | 0.01
+00200 PASS: Status Message F1.Status_Output3-4 2.0
+00201 #switch out load line, clear current
+00201 sdo[0x6200][1] = 0 : NULL
+00202 J2_05 = 0 : NULL
+00203 LdCurrentSet = 0 : NULL
+00204 sdo[0x2001][3] = 17 : NULL
+00205 #switch in load line, set current
+00205 J2_06 = 1 : NULL
+00206 #switch in load line, set current
+00206 J2_06 = 1 : NULL
+00207 LdCurrentSet = 5000: NULL
+00208 LdEnable = 0 : NULL
+00209 
+00209 
+00209 #verify fault clear
+00209 NULL : sdo[0x5001][4] = 2 | 0 | 0.01
+00209 PASS: Status Message F1.Status_Output3-4 2.0
+00210 #turn ON Output3B
+00210 sdo[0x6200][1] = 32 : NULL
+00211 #enable load
+00211 LdEnable = 1 : NULL
+00212 #verify fault #1
+00212 NULL : sdo[0x5001][4] = 10 | 0 | 0.01
+00212 TEST: Status Message F1.Status_Output3-4 10.0 +/- 0.0
+00212 PASS: Status Message F1.Status_Output3-4 10.0
+00213 #disable load
+00213 LdEnable = 0 : NULL
+00214 #turn OFF Output3B
+00214 sdo[0x6200][1] = 0 : NULL
+00215 
+00215 #verify fault #1 clear
+00215 NULL : sdo[0x5001][4] = 2 | 0 | 0.01
+00215 PASS: Status Message F1.Status_Output3-4 2.0
+00216 #turn ON Output3B
+00216 sdo[0x6200][1] = 32 : NULL
+00217 #enable load
+00217 LdEnable = 1 : NULL
+00218 #verify fault #2
+00218 NULL : sdo[0x5001][4] = 10 | 0 | 0.01
+00218 TEST: Status Message F1.Status_Output3-4 10.0 +/- 0.0
+00218 PASS: Status Message F1.Status_Output3-4 10.0
+00219 #disable load
+00219 LdEnable = 0 : NULL
+00220 #turn OFF Output3B
+00220 sdo[0x6200][1] = 0 : NULL
+00221 
+00221 #verify fault #2 clear
+00221 NULL : sdo[0x5001][4] = 2 | 0 | 0.01
+00221 PASS: Status Message F1.Status_Output3-4 2.0
+00222 #turn ON Output3B
+00222 sdo[0x6200][1] = 32 : NULL
+00223 #enable load
+00223 LdEnable = 1 : NULL
+00224 #verify fault #3
+00224 NULL : sdo[0x5001][4] = 10 | 0 | 0.01
+00224 TEST: Status Message F1.Status_Output3-4 10.0 +/- 0.0
+00224 PASS: Status Message F1.Status_Output3-4 10.0
+00225 #disable load
+00225 LdEnable = 0 : NULL
+00226 #turn OFF Output3B
+00226 sdo[0x6200][1] = 0 : NULL
+00227 
+00227 #verify fault #3 clear
+00227 NULL : sdo[0x5001][4] = 2 | 0 | 0.01
+00227 PASS: Status Message F1.Status_Output3-4 2.0
+00228 #turn ON Output3B
+00228 sdo[0x6200][1] = 32 : NULL
+00229 #enable load
+00229 LdEnable = 1 : NULL
+00230 #verify fault #4
+00230 NULL : sdo[0x5001][4] = 10 | 0 | 0.01
+00230 TEST: Status Message F1.Status_Output3-4 10.0 +/- 0.0
+00230 PASS: Status Message F1.Status_Output3-4 10.0
+00231 #disable load
+00231 LdEnable = 0 : NULL
+00232 #turn OFF Output3B
+00232 sdo[0x6200][1] = 0 : NULL
+00233 
+00233 #verify fault #4 clear
+00233 NULL : sdo[0x5001][4] = 2 | 0 | 0.01
+00233 PASS: Status Message F1.Status_Output3-4 2.0
+00234 #turn ON Output3B
+00234 sdo[0x6200][1] = 32 : NULL
+00235 #enable load
+00235 LdEnable = 1 : NULL
+00236 #verify fault #5
+00236 NULL : sdo[0x5001][4] = 10 | 0 | 0.01
+00236 TEST: Status Message F1.Status_Output3-4 10.0 +/- 0.0
+00236 PASS: Status Message F1.Status_Output3-4 10.0
+00237 #disable load
+00237 LdEnable = 0 : NULL
+00238 #turn OFF Output3B
+00238 sdo[0x6200][1] = 0 : NULL
+00239 
+00239 #verify fault #5 sticks
+00239 NULL : sdo[0x5001][4] = 10 | 0 | 0.01
+00239 PASS: Status Message F1.Status_Output3-4 10.0
+00240 #switch out load line, clear current
+00240 sdo[0x6200][1] = 0 : NULL
+00241 J2_06 = 0 : NULL
+00242 LdCurrentSet = 0 : NULL
+00243 sdo[0x2001][4] = 17 : NULL
+00244 #switch in load line, set current
+00244 J2_07 = 1 : NULL
+00245 #switch in load line, set current
+00245 J2_07 = 1 : NULL
+00246 LdCurrentSet = 5000: NULL
+00247 LdEnable = 0 : NULL
+00248 
+00248 
+00248 #verify fault clear
+00248 NULL : sdo[0x5001][4] = 10 | 0 | 0.01
+00248 PASS: Status Message F1.Status_Output3-4 10.0
+00249 #turn ON Output4A
+00249 sdo[0x6200][1] = 64 : NULL
+00250 #enable load
+00250 LdEnable = 1 : NULL
+00251 #verify fault #1
+00251 NULL : sdo[0x5001][4] = 42 | 0 | 0.01
+00251 TEST: Status Message F1.Status_Output3-4 42.0 +/- 0.0
+00251 PASS: Status Message F1.Status_Output3-4 42.0
+00252 #disable load
+00252 LdEnable = 0 : NULL
+00253 #turn OFF Output4A
+00253 sdo[0x6200][1] = 0 : NULL
+00254 
+00254 #verify fault #1 clear
+00254 NULL : sdo[0x5001][4] = 10 | 0 | 0.01
+00254 PASS: Status Message F1.Status_Output3-4 10.0
+00255 #turn ON Output4A
+00255 sdo[0x6200][1] = 64 : NULL
+00256 #enable load
+00256 LdEnable = 1 : NULL
+00257 #verify fault #2
+00257 NULL : sdo[0x5001][4] = 42 | 0 | 0.01
+00257 TEST: Status Message F1.Status_Output3-4 42.0 +/- 0.0
+00257 PASS: Status Message F1.Status_Output3-4 42.0
+00258 #disable load
+00258 LdEnable = 0 : NULL
+00259 #turn OFF Output4A
+00259 sdo[0x6200][1] = 0 : NULL
+00260 
+00260 #verify fault #2 clear
+00260 NULL : sdo[0x5001][4] = 10 | 0 | 0.01
+00260 PASS: Status Message F1.Status_Output3-4 10.0
+00261 #turn ON Output4A
+00261 sdo[0x6200][1] = 64 : NULL
+00262 #enable load
+00262 LdEnable = 1 : NULL
+00263 #verify fault #3
+00263 NULL : sdo[0x5001][4] = 42 | 0 | 0.01
+00263 TEST: Status Message F1.Status_Output3-4 42.0 +/- 0.0
+00263 PASS: Status Message F1.Status_Output3-4 42.0
+00264 #disable load
+00264 LdEnable = 0 : NULL
+00265 #turn OFF Output4A
+00265 sdo[0x6200][1] = 0 : NULL
+00266 
+00266 #verify fault #3 clear
+00266 NULL : sdo[0x5001][4] = 10 | 0 | 0.01
+00266 PASS: Status Message F1.Status_Output3-4 10.0
+00267 #turn ON Output4A
+00267 sdo[0x6200][1] = 64 : NULL
+00268 #enable load
+00268 LdEnable = 1 : NULL
+00269 #verify fault #4
+00269 NULL : sdo[0x5001][4] = 42 | 0 | 0.01
+00269 TEST: Status Message F1.Status_Output3-4 42.0 +/- 0.0
+00269 PASS: Status Message F1.Status_Output3-4 42.0
+00270 #disable load
+00270 LdEnable = 0 : NULL
+00271 #turn OFF Output4A
+00271 sdo[0x6200][1] = 0 : NULL
+00272 
+00272 #verify fault #4 clear
+00272 NULL : sdo[0x5001][4] = 10 | 0 | 0.01
+00272 PASS: Status Message F1.Status_Output3-4 10.0
+00273 #turn ON Output4A
+00273 sdo[0x6200][1] = 64 : NULL
+00274 #enable load
+00274 LdEnable = 1 : NULL
+00275 #verify fault #5
+00275 NULL : sdo[0x5001][4] = 42 | 0 | 0.01
+00275 TEST: Status Message F1.Status_Output3-4 42.0 +/- 0.0
+00275 PASS: Status Message F1.Status_Output3-4 42.0
+00276 #disable load
+00276 LdEnable = 0 : NULL
+00277 #turn OFF Output4A
+00277 sdo[0x6200][1] = 0 : NULL
+00278 
+00278 #verify fault #5 sticks
+00278 NULL : sdo[0x5001][4] = 42 | 0 | 0.01
+00278 PASS: Status Message F1.Status_Output3-4 42.0
+00279 #switch out load line, clear current
+00279 sdo[0x6200][1] = 0 : NULL
+00280 J2_07 = 0 : NULL
+00281 LdCurrentSet = 0 : NULL
+00282 sdo[0x2001][4] = 17 : NULL
+00283 #switch in load line, set current
+00283 J2_08 = 1 : NULL
+00284 #switch in load line, set current
+00284 J2_08 = 1 : NULL
+00285 LdCurrentSet = 5000: NULL
+00286 LdEnable = 0 : NULL
+00287 
+00287 
+00287 #verify fault clear
+00287 NULL : sdo[0x5001][4] = 42 | 0 | 0.01
+00287 PASS: Status Message F1.Status_Output3-4 42.0
+00288 #turn ON Output4B
+00288 sdo[0x6200][1] = 128 : NULL
+00289 #enable load
+00289 LdEnable = 1 : NULL
+00290 #verify fault #1
+00290 NULL : sdo[0x5001][4] = 170 | 0 | 0.01
+00290 TEST: Status Message F1.Status_Output3-4 170.0 +/- 0.0
+00290 PASS: Status Message F1.Status_Output3-4 170.0
+00291 #disable load
+00291 LdEnable = 0 : NULL
+00292 #turn OFF Output4B
+00292 sdo[0x6200][1] = 0 : NULL
+00293 
+00293 #verify fault #1 clear
+00293 NULL : sdo[0x5001][4] = 42 | 0 | 0.01
+00293 PASS: Status Message F1.Status_Output3-4 42.0
+00294 #turn ON Output4B
+00294 sdo[0x6200][1] = 128 : NULL
+00295 #enable load
+00295 LdEnable = 1 : NULL
+00296 #verify fault #2
+00296 NULL : sdo[0x5001][4] = 170 | 0 | 0.01
+00296 TEST: Status Message F1.Status_Output3-4 170.0 +/- 0.0
+00296 PASS: Status Message F1.Status_Output3-4 170.0
+00297 #disable load
+00297 LdEnable = 0 : NULL
+00298 #turn OFF Output4B
+00298 sdo[0x6200][1] = 0 : NULL
+00299 
+00299 #verify fault #2 clear
+00299 NULL : sdo[0x5001][4] = 42 | 0 | 0.01
+00299 PASS: Status Message F1.Status_Output3-4 42.0
+00300 #turn ON Output4B
+00300 sdo[0x6200][1] = 128 : NULL
+00301 #enable load
+00301 LdEnable = 1 : NULL
+00302 #verify fault #3
+00302 NULL : sdo[0x5001][4] = 170 | 0 | 0.01
+00302 TEST: Status Message F1.Status_Output3-4 170.0 +/- 0.0
+00302 PASS: Status Message F1.Status_Output3-4 170.0
+00303 #disable load
+00303 LdEnable = 0 : NULL
+00304 #turn OFF Output4B
+00304 sdo[0x6200][1] = 0 : NULL
+00305 
+00305 #verify fault #3 clear
+00305 NULL : sdo[0x5001][4] = 42 | 0 | 0.01
+00305 PASS: Status Message F1.Status_Output3-4 42.0
+00306 #turn ON Output4B
+00306 sdo[0x6200][1] = 128 : NULL
+00307 #enable load
+00307 LdEnable = 1 : NULL
+00308 #verify fault #4
+00308 NULL : sdo[0x5001][4] = 170 | 0 | 0.01
+00308 TEST: Status Message F1.Status_Output3-4 170.0 +/- 0.0
+00308 PASS: Status Message F1.Status_Output3-4 170.0
+00309 #disable load
+00309 LdEnable = 0 : NULL
+00310 #turn OFF Output4B
+00310 sdo[0x6200][1] = 0 : NULL
+00311 
+00311 #verify fault #4 clear
+00311 NULL : sdo[0x5001][4] = 42 | 0 | 0.01
+00311 PASS: Status Message F1.Status_Output3-4 42.0
+00312 #turn ON Output4B
+00312 sdo[0x6200][1] = 128 : NULL
+00313 #enable load
+00313 LdEnable = 1 : NULL
+00314 #verify fault #5
+00314 NULL : sdo[0x5001][4] = 170 | 0 | 0.01
+00314 TEST: Status Message F1.Status_Output3-4 170.0 +/- 0.0
+00314 PASS: Status Message F1.Status_Output3-4 170.0
+00315 #disable load
+00315 LdEnable = 0 : NULL
+00316 #turn OFF Output4B
+00316 sdo[0x6200][1] = 0 : NULL
+00317 
+00317 #verify fault #5 sticks
+00317 NULL : sdo[0x5001][4] = 170 | 0 | 0.01
+00317 PASS: Status Message F1.Status_Output3-4 170.0
+00318 #switch out load line, clear current
+00318 sdo[0x6200][1] = 0 : NULL
+00319 J2_08 = 0 : NULL
+00320 LdCurrentSet = 0 : NULL
+00321 sdo[0x2001][5] = 17 : NULL
+00322 #switch in load line, set current
+00322 J2_09 = 1 : NULL
+00323 #switch in load line, set current
+00323 J2_09 = 1 : NULL
+00324 LdCurrentSet = 5000: NULL
+00325 LdEnable = 0 : NULL
+00326 
+00326 
+00326 #verify fault clear
+00326 NULL : sdo[0x5001][5] = 0 | 0 | 0.01
+00326 PASS: Status Message F1.Status_Output5-6 0.0
+00327 #turn ON Output5A
+00327 sdo[0x6200][2] = 1 : NULL
+00328 #enable load
+00328 LdEnable = 1 : NULL
+00329 #verify fault #1
+00329 NULL : sdo[0x5001][5] = 2 | 0 | 0.01
+00329 TEST: Status Message F1.Status_Output5-6 2.0 +/- 0.0
+00329 PASS: Status Message F1.Status_Output5-6 2.0
+00330 #disable load
+00330 LdEnable = 0 : NULL
+00331 #turn OFF Output5A
+00331 sdo[0x6200][2] = 0 : NULL
+00332 
+00332 #verify fault #1 clear
+00332 NULL : sdo[0x5001][5] = 0 | 0 | 0.01
+00332 PASS: Status Message F1.Status_Output5-6 0.0
+00333 #turn ON Output5A
+00333 sdo[0x6200][2] = 1 : NULL
+00334 #enable load
+00334 LdEnable = 1 : NULL
+00335 #verify fault #2
+00335 NULL : sdo[0x5001][5] = 2 | 0 | 0.01
+00335 TEST: Status Message F1.Status_Output5-6 2.0 +/- 0.0
+00335 PASS: Status Message F1.Status_Output5-6 2.0
+00336 #disable load
+00336 LdEnable = 0 : NULL
+00337 #turn OFF Output5A
+00337 sdo[0x6200][2] = 0 : NULL
+00338 
+00338 #verify fault #2 clear
+00338 NULL : sdo[0x5001][5] = 0 | 0 | 0.01
+00338 PASS: Status Message F1.Status_Output5-6 0.0
+00339 #turn ON Output5A
+00339 sdo[0x6200][2] = 1 : NULL
+00340 #enable load
+00340 LdEnable = 1 : NULL
+00341 #verify fault #3
+00341 NULL : sdo[0x5001][5] = 2 | 0 | 0.01
+00341 TEST: Status Message F1.Status_Output5-6 2.0 +/- 0.0
+00341 PASS: Status Message F1.Status_Output5-6 2.0
+00342 #disable load
+00342 LdEnable = 0 : NULL
+00343 #turn OFF Output5A
+00343 sdo[0x6200][2] = 0 : NULL
+00344 
+00344 #verify fault #3 clear
+00344 NULL : sdo[0x5001][5] = 0 | 0 | 0.01
+00344 PASS: Status Message F1.Status_Output5-6 0.0
+00345 #turn ON Output5A
+00345 sdo[0x6200][2] = 1 : NULL
+00346 #enable load
+00346 LdEnable = 1 : NULL
+00347 #verify fault #4
+00347 NULL : sdo[0x5001][5] = 2 | 0 | 0.01
+00347 TEST: Status Message F1.Status_Output5-6 2.0 +/- 0.0
+00347 PASS: Status Message F1.Status_Output5-6 2.0
+00348 #disable load
+00348 LdEnable = 0 : NULL
+00349 #turn OFF Output5A
+00349 sdo[0x6200][2] = 0 : NULL
+00350 
+00350 #verify fault #4 clear
+00350 NULL : sdo[0x5001][5] = 0 | 0 | 0.01
+00350 PASS: Status Message F1.Status_Output5-6 0.0
+00351 #turn ON Output5A
+00351 sdo[0x6200][2] = 1 : NULL
+00352 #enable load
+00352 LdEnable = 1 : NULL
+00353 #verify fault #5
+00353 NULL : sdo[0x5001][5] = 2 | 0 | 0.01
+00353 TEST: Status Message F1.Status_Output5-6 2.0 +/- 0.0
+00353 PASS: Status Message F1.Status_Output5-6 2.0
+00354 #disable load
+00354 LdEnable = 0 : NULL
+00355 #turn OFF Output5A
+00355 sdo[0x6200][2] = 0 : NULL
+00356 
+00356 #verify fault #5 sticks
+00356 NULL : sdo[0x5001][5] = 2 | 0 | 0.01
+00356 PASS: Status Message F1.Status_Output5-6 2.0
+00357 #switch out load line, clear current
+00357 sdo[0x6200][2] = 0 : NULL
+00358 J2_09 = 0 : NULL
+00359 LdCurrentSet = 0 : NULL
+00360 sdo[0x2001][5] = 17 : NULL
+00361 #switch in load line, set current
+00361 J2_10 = 1 : NULL
+00362 #switch in load line, set current
+00362 J2_10 = 1 : NULL
+00363 LdCurrentSet = 5000: NULL
+00364 LdEnable = 0 : NULL
+00365 
+00365 
+00365 #verify fault clear
+00365 NULL : sdo[0x5001][5] = 2 | 0 | 0.01
+00365 PASS: Status Message F1.Status_Output5-6 2.0
+00366 #turn ON Output5B
+00366 sdo[0x6200][2] = 2 : NULL
+00367 #enable load
+00367 LdEnable = 1 : NULL
+00368 #verify fault #1
+00368 NULL : sdo[0x5001][5] = 10 | 0 | 0.01
+00368 TEST: Status Message F1.Status_Output5-6 10.0 +/- 0.0
+00368 PASS: Status Message F1.Status_Output5-6 10.0
+00369 #disable load
+00369 LdEnable = 0 : NULL
+00370 #turn OFF Output5B
+00370 sdo[0x6200][2] = 0 : NULL
+00371 
+00371 #verify fault #1 clear
+00371 NULL : sdo[0x5001][5] = 2 | 0 | 0.01
+00371 PASS: Status Message F1.Status_Output5-6 2.0
+00372 #turn ON Output5B
+00372 sdo[0x6200][2] = 2 : NULL
+00373 #enable load
+00373 LdEnable = 1 : NULL
+00374 #verify fault #2
+00374 NULL : sdo[0x5001][5] = 10 | 0 | 0.01
+00374 TEST: Status Message F1.Status_Output5-6 10.0 +/- 0.0
+00374 PASS: Status Message F1.Status_Output5-6 10.0
+00375 #disable load
+00375 LdEnable = 0 : NULL
+00376 #turn OFF Output5B
+00376 sdo[0x6200][2] = 0 : NULL
+00377 
+00377 #verify fault #2 clear
+00377 NULL : sdo[0x5001][5] = 2 | 0 | 0.01
+00377 PASS: Status Message F1.Status_Output5-6 2.0
+00378 #turn ON Output5B
+00378 sdo[0x6200][2] = 2 : NULL
+00379 #enable load
+00379 LdEnable = 1 : NULL
+00380 #verify fault #3
+00380 NULL : sdo[0x5001][5] = 10 | 0 | 0.01
+00380 TEST: Status Message F1.Status_Output5-6 10.0 +/- 0.0
+00380 PASS: Status Message F1.Status_Output5-6 10.0
+00381 #disable load
+00381 LdEnable = 0 : NULL
+00382 #turn OFF Output5B
+00382 sdo[0x6200][2] = 0 : NULL
+00383 
+00383 #verify fault #3 clear
+00383 NULL : sdo[0x5001][5] = 2 | 0 | 0.01
+00383 PASS: Status Message F1.Status_Output5-6 2.0
+00384 #turn ON Output5B
+00384 sdo[0x6200][2] = 2 : NULL
+00385 #enable load
+00385 LdEnable = 1 : NULL
+00386 #verify fault #4
+00386 NULL : sdo[0x5001][5] = 10 | 0 | 0.01
+00386 TEST: Status Message F1.Status_Output5-6 10.0 +/- 0.0
+00386 PASS: Status Message F1.Status_Output5-6 10.0
+00387 #disable load
+00387 LdEnable = 0 : NULL
+00388 #turn OFF Output5B
+00388 sdo[0x6200][2] = 0 : NULL
+00389 
+00389 #verify fault #4 clear
+00389 NULL : sdo[0x5001][5] = 2 | 0 | 0.01
+00389 PASS: Status Message F1.Status_Output5-6 2.0
+00390 #turn ON Output5B
+00390 sdo[0x6200][2] = 2 : NULL
+00391 #enable load
+00391 LdEnable = 1 : NULL
+00392 #verify fault #5
+00392 NULL : sdo[0x5001][5] = 10 | 0 | 0.01
+00392 TEST: Status Message F1.Status_Output5-6 10.0 +/- 0.0
+00392 PASS: Status Message F1.Status_Output5-6 10.0
+00393 #disable load
+00393 LdEnable = 0 : NULL
+00394 #turn OFF Output5B
+00394 sdo[0x6200][2] = 0 : NULL
+00395 
+00395 #verify fault #5 sticks
+00395 NULL : sdo[0x5001][5] = 10 | 0 | 0.01
+00395 PASS: Status Message F1.Status_Output5-6 10.0
+00396 #switch out load line, clear current
+00396 sdo[0x6200][2] = 0 : NULL
+00397 J2_10 = 0 : NULL
+00398 LdCurrentSet = 0 : NULL
+00399 sdo[0x2001][6] = 17 : NULL
+00400 #switch in load line, set current
+00400 J2_11 = 1 : NULL
+00401 #switch in load line, set current
+00401 J2_11 = 1 : NULL
+00402 LdCurrentSet = 5000: NULL
+00403 LdEnable = 0 : NULL
+00404 
+00404 
+00404 #verify fault clear
+00404 NULL : sdo[0x5001][5] = 10 | 0 | 0.01
+00404 PASS: Status Message F1.Status_Output5-6 10.0
+00405 #turn ON Output6A
+00405 sdo[0x6200][2] = 4 : NULL
+00406 #enable load
+00406 LdEnable = 1 : NULL
+00407 #verify fault #1
+00407 NULL : sdo[0x5001][5] = 42 | 0 | 0.01
+00407 TEST: Status Message F1.Status_Output5-6 42.0 +/- 0.0
+00407 PASS: Status Message F1.Status_Output5-6 42.0
+00408 #disable load
+00408 LdEnable = 0 : NULL
+00409 #turn OFF Output6A
+00409 sdo[0x6200][2] = 0 : NULL
+00410 
+00410 #verify fault #1 clear
+00410 NULL : sdo[0x5001][5] = 10 | 0 | 0.01
+00410 PASS: Status Message F1.Status_Output5-6 10.0
+00411 #turn ON Output6A
+00411 sdo[0x6200][2] = 4 : NULL
+00412 #enable load
+00412 LdEnable = 1 : NULL
+00413 #verify fault #2
+00413 NULL : sdo[0x5001][5] = 42 | 0 | 0.01
+00413 TEST: Status Message F1.Status_Output5-6 42.0 +/- 0.0
+00413 PASS: Status Message F1.Status_Output5-6 42.0
+00414 #disable load
+00414 LdEnable = 0 : NULL
+00415 #turn OFF Output6A
+00415 sdo[0x6200][2] = 0 : NULL
+00416 
+00416 #verify fault #2 clear
+00416 NULL : sdo[0x5001][5] = 10 | 0 | 0.01
+00416 PASS: Status Message F1.Status_Output5-6 10.0
+00417 #turn ON Output6A
+00417 sdo[0x6200][2] = 4 : NULL
+00418 #enable load
+00418 LdEnable = 1 : NULL
+00419 #verify fault #3
+00419 NULL : sdo[0x5001][5] = 42 | 0 | 0.01
+00419 TEST: Status Message F1.Status_Output5-6 42.0 +/- 0.0
+00419 PASS: Status Message F1.Status_Output5-6 42.0
+00420 #disable load
+00420 LdEnable = 0 : NULL
+00421 #turn OFF Output6A
+00421 sdo[0x6200][2] = 0 : NULL
+00422 
+00422 #verify fault #3 clear
+00422 NULL : sdo[0x5001][5] = 10 | 0 | 0.01
+00422 PASS: Status Message F1.Status_Output5-6 10.0
+00423 #turn ON Output6A
+00423 sdo[0x6200][2] = 4 : NULL
+00424 #enable load
+00424 LdEnable = 1 : NULL
+00425 #verify fault #4
+00425 NULL : sdo[0x5001][5] = 42 | 0 | 0.01
+00425 TEST: Status Message F1.Status_Output5-6 42.0 +/- 0.0
+00425 PASS: Status Message F1.Status_Output5-6 42.0
+00426 #disable load
+00426 LdEnable = 0 : NULL
+00427 #turn OFF Output6A
+00427 sdo[0x6200][2] = 0 : NULL
+00428 
+00428 #verify fault #4 clear
+00428 NULL : sdo[0x5001][5] = 10 | 0 | 0.01
+00428 PASS: Status Message F1.Status_Output5-6 10.0
+00429 #turn ON Output6A
+00429 sdo[0x6200][2] = 4 : NULL
+00430 #enable load
+00430 LdEnable = 1 : NULL
+00431 #verify fault #5
+00431 NULL : sdo[0x5001][5] = 42 | 0 | 0.01
+00431 TEST: Status Message F1.Status_Output5-6 42.0 +/- 0.0
+00431 PASS: Status Message F1.Status_Output5-6 42.0
+00432 #disable load
+00432 LdEnable = 0 : NULL
+00433 #turn OFF Output6A
+00433 sdo[0x6200][2] = 0 : NULL
+00434 
+00434 #verify fault #5 sticks
+00434 NULL : sdo[0x5001][5] = 42 | 0 | 0.01
+00434 PASS: Status Message F1.Status_Output5-6 42.0
+00435 #switch out load line, clear current
+00435 sdo[0x6200][2] = 0 : NULL
+00436 J2_11 = 0 : NULL
+00437 LdCurrentSet = 0 : NULL
+00438 sdo[0x2001][6] = 17 : NULL
+00439 #switch in load line, set current
+00439 J2_12 = 1 : NULL
+00440 #switch in load line, set current
+00440 J2_12 = 1 : NULL
+00441 LdCurrentSet = 5000: NULL
+00442 LdEnable = 0 : NULL
+00443 
+00443 
+00443 #verify fault clear
+00443 NULL : sdo[0x5001][5] = 42 | 0 | 0.01
+00443 PASS: Status Message F1.Status_Output5-6 42.0
+00444 #turn ON Output6B
+00444 sdo[0x6200][2] = 8 : NULL
+00445 #enable load
+00445 LdEnable = 1 : NULL
+00446 #verify fault #1
+00446 NULL : sdo[0x5001][5] = 170 | 0 | 0.01
+00446 TEST: Status Message F1.Status_Output5-6 170.0 +/- 0.0
+00446 PASS: Status Message F1.Status_Output5-6 170.0
+00447 #disable load
+00447 LdEnable = 0 : NULL
+00448 #turn OFF Output6B
+00448 sdo[0x6200][2] = 0 : NULL
+00449 
+00449 #verify fault #1 clear
+00449 NULL : sdo[0x5001][5] = 42 | 0 | 0.01
+00449 PASS: Status Message F1.Status_Output5-6 42.0
+00450 #turn ON Output6B
+00450 sdo[0x6200][2] = 8 : NULL
+00451 #enable load
+00451 LdEnable = 1 : NULL
+00452 #verify fault #2
+00452 NULL : sdo[0x5001][5] = 170 | 0 | 0.01
+00452 TEST: Status Message F1.Status_Output5-6 170.0 +/- 0.0
+00452 PASS: Status Message F1.Status_Output5-6 170.0
+00453 #disable load
+00453 LdEnable = 0 : NULL
+00454 #turn OFF Output6B
+00454 sdo[0x6200][2] = 0 : NULL
+00455 
+00455 #verify fault #2 clear
+00455 NULL : sdo[0x5001][5] = 42 | 0 | 0.01
+00455 PASS: Status Message F1.Status_Output5-6 42.0
+00456 #turn ON Output6B
+00456 sdo[0x6200][2] = 8 : NULL
+00457 #enable load
+00457 LdEnable = 1 : NULL
+00458 #verify fault #3
+00458 NULL : sdo[0x5001][5] = 170 | 0 | 0.01
+00458 TEST: Status Message F1.Status_Output5-6 170.0 +/- 0.0
+00458 PASS: Status Message F1.Status_Output5-6 170.0
+00459 #disable load
+00459 LdEnable = 0 : NULL
+00460 #turn OFF Output6B
+00460 sdo[0x6200][2] = 0 : NULL
+00461 
+00461 #verify fault #3 clear
+00461 NULL : sdo[0x5001][5] = 42 | 0 | 0.01
+00461 PASS: Status Message F1.Status_Output5-6 42.0
+00462 #turn ON Output6B
+00462 sdo[0x6200][2] = 8 : NULL
+00463 #enable load
+00463 LdEnable = 1 : NULL
+00464 #verify fault #4
+00464 NULL : sdo[0x5001][5] = 170 | 0 | 0.01
+00464 TEST: Status Message F1.Status_Output5-6 170.0 +/- 0.0
+00464 PASS: Status Message F1.Status_Output5-6 170.0
+00465 #disable load
+00465 LdEnable = 0 : NULL
+00466 #turn OFF Output6B
+00466 sdo[0x6200][2] = 0 : NULL
+00467 
+00467 #verify fault #4 clear
+00467 NULL : sdo[0x5001][5] = 42 | 0 | 0.01
+00467 PASS: Status Message F1.Status_Output5-6 42.0
+00468 #turn ON Output6B
+00468 sdo[0x6200][2] = 8 : NULL
+00469 #enable load
+00469 LdEnable = 1 : NULL
+00470 #verify fault #5
+00470 NULL : sdo[0x5001][5] = 170 | 0 | 0.01
+00470 TEST: Status Message F1.Status_Output5-6 170.0 +/- 0.0
+00470 PASS: Status Message F1.Status_Output5-6 170.0
+00471 #disable load
+00471 LdEnable = 0 : NULL
+00472 #turn OFF Output6B
+00472 sdo[0x6200][2] = 0 : NULL
+00473 
+00473 #verify fault #5 sticks
+00473 NULL : sdo[0x5001][5] = 170 | 0 | 0.01
+00473 PASS: Status Message F1.Status_Output5-6 170.0
+00474 #switch out load line, clear current
+00474 sdo[0x6200][2] = 0 : NULL
+00475 J2_12 = 0 : NULL
+00476 LdCurrentSet = 0 : NULL
+00477 sdo[0x2001][7] = 17 : NULL
+00478 #switch in load line, set current
+00478 J3_01 = 1 : NULL
+00479 #switch in load line, set current
+00479 J3_01 = 1 : NULL
+00480 LdCurrentSet = 5000: NULL
+00481 LdEnable = 0 : NULL
+00482 
+00482 
+00482 #verify fault clear
+00482 NULL : sdo[0x5001][6] = 0 | 0 | 0.01
+00482 PASS: Status Message F1.Status_Output7-8 0.0
+00483 #turn ON Output7A
+00483 sdo[0x6200][2] = 16 : NULL
+00484 #enable load
+00484 LdEnable = 1 : NULL
+00485 #verify fault #1
+00485 NULL : sdo[0x5001][6] = 2 | 0 | 0.01
+00485 TEST: Status Message F1.Status_Output7-8 2.0 +/- 0.0
+00485 PASS: Status Message F1.Status_Output7-8 2.0
+00486 #disable load
+00486 LdEnable = 0 : NULL
+00487 #turn OFF Output7A
+00487 sdo[0x6200][2] = 0 : NULL
+00488 
+00488 #verify fault #1 clear
+00488 NULL : sdo[0x5001][6] = 0 | 0 | 0.01
+00488 PASS: Status Message F1.Status_Output7-8 0.0
+00489 #turn ON Output7A
+00489 sdo[0x6200][2] = 16 : NULL
+00490 #enable load
+00490 LdEnable = 1 : NULL
+00491 #verify fault #2
+00491 NULL : sdo[0x5001][6] = 2 | 0 | 0.01
+00491 TEST: Status Message F1.Status_Output7-8 2.0 +/- 0.0
+00491 PASS: Status Message F1.Status_Output7-8 2.0
+00492 #disable load
+00492 LdEnable = 0 : NULL
+00493 #turn OFF Output7A
+00493 sdo[0x6200][2] = 0 : NULL
+00494 
+00494 #verify fault #2 clear
+00494 NULL : sdo[0x5001][6] = 0 | 0 | 0.01
+00494 PASS: Status Message F1.Status_Output7-8 0.0
+00495 #turn ON Output7A
+00495 sdo[0x6200][2] = 16 : NULL
+00496 #enable load
+00496 LdEnable = 1 : NULL
+00497 #verify fault #3
+00497 NULL : sdo[0x5001][6] = 2 | 0 | 0.01
+00497 TEST: Status Message F1.Status_Output7-8 2.0 +/- 0.0
+00497 PASS: Status Message F1.Status_Output7-8 2.0
+00498 #disable load
+00498 LdEnable = 0 : NULL
+00499 #turn OFF Output7A
+00499 sdo[0x6200][2] = 0 : NULL
+00500 
+00500 #verify fault #3 clear
+00500 NULL : sdo[0x5001][6] = 0 | 0 | 0.01
+00500 PASS: Status Message F1.Status_Output7-8 0.0
+00501 #turn ON Output7A
+00501 sdo[0x6200][2] = 16 : NULL
+00502 #enable load
+00502 LdEnable = 1 : NULL
+00503 #verify fault #4
+00503 NULL : sdo[0x5001][6] = 2 | 0 | 0.01
+00503 TEST: Status Message F1.Status_Output7-8 2.0 +/- 0.0
+00503 PASS: Status Message F1.Status_Output7-8 2.0
+00504 #disable load
+00504 LdEnable = 0 : NULL
+00505 #turn OFF Output7A
+00505 sdo[0x6200][2] = 0 : NULL
+00506 
+00506 #verify fault #4 clear
+00506 NULL : sdo[0x5001][6] = 0 | 0 | 0.01
+00506 PASS: Status Message F1.Status_Output7-8 0.0
+00507 #turn ON Output7A
+00507 sdo[0x6200][2] = 16 : NULL
+00508 #enable load
+00508 LdEnable = 1 : NULL
+00509 #verify fault #5
+00509 NULL : sdo[0x5001][6] = 2 | 0 | 0.01
+00509 TEST: Status Message F1.Status_Output7-8 2.0 +/- 0.0
+00509 PASS: Status Message F1.Status_Output7-8 2.0
+00510 #disable load
+00510 LdEnable = 0 : NULL
+00511 #turn OFF Output7A
+00511 sdo[0x6200][2] = 0 : NULL
+00512 
+00512 #verify fault #5 sticks
+00512 NULL : sdo[0x5001][6] = 2 | 0 | 0.01
+00512 PASS: Status Message F1.Status_Output7-8 2.0
+00513 #switch out load line, clear current
+00513 sdo[0x6200][2] = 0 : NULL
+00514 J3_01 = 0 : NULL
+00515 LdCurrentSet = 0 : NULL
+00516 sdo[0x2001][7] = 17 : NULL
+00517 #switch in load line, set current
+00517 J3_02 = 1 : NULL
+00518 #switch in load line, set current
+00518 J3_02 = 1 : NULL
+00519 LdCurrentSet = 5000: NULL
+00520 LdEnable = 0 : NULL
+00521 
+00521 
+00521 #verify fault clear
+00521 NULL : sdo[0x5001][6] = 2 | 0 | 0.01
+00521 PASS: Status Message F1.Status_Output7-8 2.0
+00522 #turn ON Output7B
+00522 sdo[0x6200][2] = 32 : NULL
+00523 #enable load
+00523 LdEnable = 1 : NULL
+00524 #verify fault #1
+00524 NULL : sdo[0x5001][6] = 10 | 0 | 0.01
+00524 TEST: Status Message F1.Status_Output7-8 10.0 +/- 0.0
+00524 PASS: Status Message F1.Status_Output7-8 10.0
+00525 #disable load
+00525 LdEnable = 0 : NULL
+00526 #turn OFF Output7B
+00526 sdo[0x6200][2] = 0 : NULL
+00527 
+00527 #verify fault #1 clear
+00527 NULL : sdo[0x5001][6] = 2 | 0 | 0.01
+00527 PASS: Status Message F1.Status_Output7-8 2.0
+00528 #turn ON Output7B
+00528 sdo[0x6200][2] = 32 : NULL
+00529 #enable load
+00529 LdEnable = 1 : NULL
+00530 #verify fault #2
+00530 NULL : sdo[0x5001][6] = 10 | 0 | 0.01
+00530 TEST: Status Message F1.Status_Output7-8 10.0 +/- 0.0
+00530 PASS: Status Message F1.Status_Output7-8 10.0
+00531 #disable load
+00531 LdEnable = 0 : NULL
+00532 #turn OFF Output7B
+00532 sdo[0x6200][2] = 0 : NULL
+00533 
+00533 #verify fault #2 clear
+00533 NULL : sdo[0x5001][6] = 2 | 0 | 0.01
+00533 PASS: Status Message F1.Status_Output7-8 2.0
+00534 #turn ON Output7B
+00534 sdo[0x6200][2] = 32 : NULL
+00535 #enable load
+00535 LdEnable = 1 : NULL
+00536 #verify fault #3
+00536 NULL : sdo[0x5001][6] = 10 | 0 | 0.01
+00536 TEST: Status Message F1.Status_Output7-8 10.0 +/- 0.0
+00536 PASS: Status Message F1.Status_Output7-8 10.0
+00537 #disable load
+00537 LdEnable = 0 : NULL
+00538 #turn OFF Output7B
+00538 sdo[0x6200][2] = 0 : NULL
+00539 
+00539 #verify fault #3 clear
+00539 NULL : sdo[0x5001][6] = 2 | 0 | 0.01
+00539 PASS: Status Message F1.Status_Output7-8 2.0
+00540 #turn ON Output7B
+00540 sdo[0x6200][2] = 32 : NULL
+00541 #enable load
+00541 LdEnable = 1 : NULL
+00542 #verify fault #4
+00542 NULL : sdo[0x5001][6] = 10 | 0 | 0.01
+00542 TEST: Status Message F1.Status_Output7-8 10.0 +/- 0.0
+00542 PASS: Status Message F1.Status_Output7-8 10.0
+00543 #disable load
+00543 LdEnable = 0 : NULL
+00544 #turn OFF Output7B
+00544 sdo[0x6200][2] = 0 : NULL
+00545 
+00545 #verify fault #4 clear
+00545 NULL : sdo[0x5001][6] = 2 | 0 | 0.01
+00545 PASS: Status Message F1.Status_Output7-8 2.0
+00546 #turn ON Output7B
+00546 sdo[0x6200][2] = 32 : NULL
+00547 #enable load
+00547 LdEnable = 1 : NULL
+00548 #verify fault #5
+00548 NULL : sdo[0x5001][6] = 10 | 0 | 0.01
+00548 TEST: Status Message F1.Status_Output7-8 10.0 +/- 0.0
+00548 PASS: Status Message F1.Status_Output7-8 10.0
+00549 #disable load
+00549 LdEnable = 0 : NULL
+00550 #turn OFF Output7B
+00550 sdo[0x6200][2] = 0 : NULL
+00551 
+00551 #verify fault #5 sticks
+00551 NULL : sdo[0x5001][6] = 10 | 0 | 0.01
+00551 PASS: Status Message F1.Status_Output7-8 10.0
+00552 #switch out load line, clear current
+00552 sdo[0x6200][2] = 0 : NULL
+00553 J3_02 = 0 : NULL
+00554 LdCurrentSet = 0 : NULL
+00555 sdo[0x2001][8] = 17 : NULL
+00556 #switch in load line, set current
+00556 J3_03 = 1 : NULL
+00557 #switch in load line, set current
+00557 J3_03 = 1 : NULL
+00558 LdCurrentSet = 5000: NULL
+00559 LdEnable = 0 : NULL
+00560 
+00560 
+00560 #verify fault clear
+00560 NULL : sdo[0x5001][6] = 10 | 0 | 0.01
+00560 PASS: Status Message F1.Status_Output7-8 10.0
+00561 #turn ON Output8A
+00561 sdo[0x6200][2] = 64 : NULL
+00562 #enable load
+00562 LdEnable = 1 : NULL
+00563 #verify fault #1
+00563 NULL : sdo[0x5001][6] = 42 | 0 | 0.01
+00563 TEST: Status Message F1.Status_Output7-8 42.0 +/- 0.0
+00563 PASS: Status Message F1.Status_Output7-8 42.0
+00564 #disable load
+00564 LdEnable = 0 : NULL
+00565 #turn OFF Output8A
+00565 sdo[0x6200][2] = 0 : NULL
+00566 
+00566 #verify fault #1 clear
+00566 NULL : sdo[0x5001][6] = 10 | 0 | 0.01
+00566 PASS: Status Message F1.Status_Output7-8 10.0
+00567 #turn ON Output8A
+00567 sdo[0x6200][2] = 64 : NULL
+00568 #enable load
+00568 LdEnable = 1 : NULL
+00569 #verify fault #2
+00569 NULL : sdo[0x5001][6] = 42 | 0 | 0.01
+00569 TEST: Status Message F1.Status_Output7-8 42.0 +/- 0.0
+00569 PASS: Status Message F1.Status_Output7-8 42.0
+00570 #disable load
+00570 LdEnable = 0 : NULL
+00571 #turn OFF Output8A
+00571 sdo[0x6200][2] = 0 : NULL
+00572 
+00572 #verify fault #2 clear
+00572 NULL : sdo[0x5001][6] = 10 | 0 | 0.01
+00572 PASS: Status Message F1.Status_Output7-8 10.0
+00573 #turn ON Output8A
+00573 sdo[0x6200][2] = 64 : NULL
+00574 #enable load
+00574 LdEnable = 1 : NULL
+00575 #verify fault #3
+00575 NULL : sdo[0x5001][6] = 42 | 0 | 0.01
+00575 TEST: Status Message F1.Status_Output7-8 42.0 +/- 0.0
+00575 PASS: Status Message F1.Status_Output7-8 42.0
+00576 #disable load
+00576 LdEnable = 0 : NULL
+00577 #turn OFF Output8A
+00577 sdo[0x6200][2] = 0 : NULL
+00578 
+00578 #verify fault #3 clear
+00578 NULL : sdo[0x5001][6] = 10 | 0 | 0.01
+00578 PASS: Status Message F1.Status_Output7-8 10.0
+00579 #turn ON Output8A
+00579 sdo[0x6200][2] = 64 : NULL
+00580 #enable load
+00580 LdEnable = 1 : NULL
+00581 #verify fault #4
+00581 NULL : sdo[0x5001][6] = 42 | 0 | 0.01
+00581 TEST: Status Message F1.Status_Output7-8 42.0 +/- 0.0
+00581 PASS: Status Message F1.Status_Output7-8 42.0
+00582 #disable load
+00582 LdEnable = 0 : NULL
+00583 #turn OFF Output8A
+00583 sdo[0x6200][2] = 0 : NULL
+00584 
+00584 #verify fault #4 clear
+00584 NULL : sdo[0x5001][6] = 10 | 0 | 0.01
+00584 PASS: Status Message F1.Status_Output7-8 10.0
+00585 #turn ON Output8A
+00585 sdo[0x6200][2] = 64 : NULL
+00586 #enable load
+00586 LdEnable = 1 : NULL
+00587 #verify fault #5
+00587 NULL : sdo[0x5001][6] = 42 | 0 | 0.01
+00587 TEST: Status Message F1.Status_Output7-8 42.0 +/- 0.0
+00587 PASS: Status Message F1.Status_Output7-8 42.0
+00588 #disable load
+00588 LdEnable = 0 : NULL
+00589 #turn OFF Output8A
+00589 sdo[0x6200][2] = 0 : NULL
+00590 
+00590 #verify fault #5 sticks
+00590 NULL : sdo[0x5001][6] = 42 | 0 | 0.01
+00590 PASS: Status Message F1.Status_Output7-8 42.0
+00591 #switch out load line, clear current
+00591 sdo[0x6200][2] = 0 : NULL
+00592 J3_03 = 0 : NULL
+00593 LdCurrentSet = 0 : NULL
+00594 sdo[0x2001][8] = 17 : NULL
+00595 #switch in load line, set current
+00595 J3_04 = 1 : NULL
+00596 #switch in load line, set current
+00596 J3_04 = 1 : NULL
+00597 LdCurrentSet = 5000: NULL
+00598 LdEnable = 0 : NULL
+00599 
+00599 
+00599 #verify fault clear
+00599 NULL : sdo[0x5001][6] = 42 | 0 | 0.01
+00599 PASS: Status Message F1.Status_Output7-8 42.0
+00600 #turn ON Output8B
+00600 sdo[0x6200][2] = 128 : NULL
+00601 #enable load
+00601 LdEnable = 1 : NULL
+00602 #verify fault #1
+00602 NULL : sdo[0x5001][6] = 170 | 0 | 0.01
+00602 TEST: Status Message F1.Status_Output7-8 170.0 +/- 0.0
+00602 PASS: Status Message F1.Status_Output7-8 170.0
+00603 #disable load
+00603 LdEnable = 0 : NULL
+00604 #turn OFF Output8B
+00604 sdo[0x6200][2] = 0 : NULL
+00605 
+00605 #verify fault #1 clear
+00605 NULL : sdo[0x5001][6] = 42 | 0 | 0.01
+00605 PASS: Status Message F1.Status_Output7-8 42.0
+00606 #turn ON Output8B
+00606 sdo[0x6200][2] = 128 : NULL
+00607 #enable load
+00607 LdEnable = 1 : NULL
+00608 #verify fault #2
+00608 NULL : sdo[0x5001][6] = 170 | 0 | 0.01
+00608 TEST: Status Message F1.Status_Output7-8 170.0 +/- 0.0
+00608 PASS: Status Message F1.Status_Output7-8 170.0
+00609 #disable load
+00609 LdEnable = 0 : NULL
+00610 #turn OFF Output8B
+00610 sdo[0x6200][2] = 0 : NULL
+00611 
+00611 #verify fault #2 clear
+00611 NULL : sdo[0x5001][6] = 42 | 0 | 0.01
+00611 PASS: Status Message F1.Status_Output7-8 42.0
+00612 #turn ON Output8B
+00612 sdo[0x6200][2] = 128 : NULL
+00613 #enable load
+00613 LdEnable = 1 : NULL
+00614 #verify fault #3
+00614 NULL : sdo[0x5001][6] = 170 | 0 | 0.01
+00614 TEST: Status Message F1.Status_Output7-8 170.0 +/- 0.0
+00614 PASS: Status Message F1.Status_Output7-8 170.0
+00615 #disable load
+00615 LdEnable = 0 : NULL
+00616 #turn OFF Output8B
+00616 sdo[0x6200][2] = 0 : NULL
+00617 
+00617 #verify fault #3 clear
+00617 NULL : sdo[0x5001][6] = 42 | 0 | 0.01
+00617 PASS: Status Message F1.Status_Output7-8 42.0
+00618 #turn ON Output8B
+00618 sdo[0x6200][2] = 128 : NULL
+00619 #enable load
+00619 LdEnable = 1 : NULL
+00620 #verify fault #4
+00620 NULL : sdo[0x5001][6] = 170 | 0 | 0.01
+00620 TEST: Status Message F1.Status_Output7-8 170.0 +/- 0.0
+00620 PASS: Status Message F1.Status_Output7-8 170.0
+00621 #disable load
+00621 LdEnable = 0 : NULL
+00622 #turn OFF Output8B
+00622 sdo[0x6200][2] = 0 : NULL
+00623 
+00623 #verify fault #4 clear
+00623 NULL : sdo[0x5001][6] = 42 | 0 | 0.01
+00623 PASS: Status Message F1.Status_Output7-8 42.0
+00624 #turn ON Output8B
+00624 sdo[0x6200][2] = 128 : NULL
+00625 #enable load
+00625 LdEnable = 1 : NULL
+00626 #verify fault #5
+00626 NULL : sdo[0x5001][6] = 170 | 0 | 0.01
+00626 TEST: Status Message F1.Status_Output7-8 170.0 +/- 0.0
+00626 PASS: Status Message F1.Status_Output7-8 170.0
+00627 #disable load
+00627 LdEnable = 0 : NULL
+00628 #turn OFF Output8B
+00628 sdo[0x6200][2] = 0 : NULL
+00629 
+00629 #verify fault #5 sticks
+00629 NULL : sdo[0x5001][6] = 170 | 0 | 0.01
+00629 PASS: Status Message F1.Status_Output7-8 170.0
+00630 #switch out load line, clear current
+00630 sdo[0x6200][2] = 0 : NULL
+00631 J3_04 = 0 : NULL
+00632 LdCurrentSet = 0 : NULL
+00633 NULL : sdo[0x5001][3] = 170 | 0 | 0.001
+00633 PASS: Status Message F1.Status_Output1-2 170.0
+00634 NULL : sdo[0x5001][4] = 170 | 0 | 0.001
+00634 PASS: Status Message F1.Status_Output3-4 170.0
+00635 NULL : sdo[0x5001][5] = 170 | 0 | 0.001
+00635 PASS: Status Message F1.Status_Output5-6 170.0
+00636 NULL : sdo[0x5001][6] = 170 | 0 | 0.001
+00636 PASS: Status Message F1.Status_Output7-8 170.0
+00637 LdRemote = 0 : NULL
+00638 LdEnable = 0 : NULL
+00639 J0_08_METER_LOAD = 0 : NULL
+00640 PRE_OPERATIONAL
+00640 SAVE
+00640 END
+Fail count: 0
+Finished on: 2025-09-04-12:26:02
+elapsed time: 0:04:19.446332

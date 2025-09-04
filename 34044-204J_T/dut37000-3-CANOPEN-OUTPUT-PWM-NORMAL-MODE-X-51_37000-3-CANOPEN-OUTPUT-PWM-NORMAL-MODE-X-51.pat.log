@@ -1,0 +1,1180 @@
+Started on: 2025-09-04-12:06:33
+00000 #37000-1
+00000 #Verion 0.0
+00000 #PWM test with 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
+00000 UUT_EDS = 37000-563.eds
+00000 UUT_DATANAME = 37000-3-CANOPEN-OUTPUT-PWM-NORMAL-MODE-X-51
+00000 
+00000 #-----setup 37000-----
+00000 #disable global modes
+00000 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00001 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00002 #configure Ports
+00002 sdo[0x2001][1] = 51 : NULL : WAIT = 0.1
+00003 sdo[0x2001][2] = 51 : NULL : WAIT = 0.1
+00004 sdo[0x2001][3] = 51 : NULL : WAIT = 0.1
+00005 sdo[0x2001][4] = 51 : NULL : WAIT = 0.1
+00006 sdo[0x2001][5] = 51 : NULL : WAIT = 0.1
+00007 sdo[0x2001][6] = 51 : NULL : WAIT = 0.1
+00008 sdo[0x2001][7] = 51 : NULL : WAIT = 0.1
+00009 sdo[0x2001][8] = 51 : NULL : WAIT = 0.1
+00010 PRE_OPERATIONAL
+00010 #test at 1000hz
+00010 sdo[0x3000] = 1000 : NULL : WAIT = 0.5
+00011 OPERATIONAL
+00011 #switch in 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
+00011 J4_01 = 1 : NULL : WAIT = 0.2
+00012 J4_03 = 1 : NULL : WAIT = 0.2
+00013 #switch in load line, set current
+00013 J2_02 = 1 : NULL : WAIT = 0.5
+00014 
+00014 sdo[0x6411][2] = 250 : NULL : WAIT = 0.2
+00015 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00015 TEST: MeterAmps 0.8 +/- 0.2
+00015 PASS: MeterAmps 0.787
+00016 NULL : sdo[0x5003][2] = 8| 2 | 0.5
+00016 TEST: Status Message Amp.Port_1B 8.0 +/- 2.0
+00016 PASS: Status Message Amp.Port_1B 7.0
+00017 sdo[0x6411][2] = 500 : NULL : WAIT = 0.2
+00018 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00018 TEST: MeterAmps 1.6 +/- 0.2
+00018 PASS: MeterAmps 1.575
+00019 NULL : sdo[0x5003][2] = 16 | 2 | 0.5
+00019 TEST: Status Message Amp.Port_1B 16.0 +/- 2.0
+00019 PASS: Status Message Amp.Port_1B 16.0
+00020 sdo[0x6411][2] = 1000 : NULL : WAIT = 0.2
+00021 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00021 TEST: MeterAmps 3.3 +/- 0.2
+00021 PASS: MeterAmps 3.224
+00022 NULL : sdo[0x5003][2] = 33 | 2 | 0.5
+00022 TEST: Status Message Amp.Port_1B 33.0 +/- 2.0
+00022 PASS: Status Message Amp.Port_1B 32.0
+00023 #switch out load line, switch coil
+00023 sdo[0x6411][2] = 0 : NULL : WAIT = 0.5
+00024 J2_02 = 0 : NULL : WAIT = 0.5
+00025 #switch in load line, set current
+00025 J2_03 = 1 : NULL : WAIT = 0.5
+00026 
+00026 sdo[0x6411][3] = 250 : NULL : WAIT = 0.2
+00027 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00027 TEST: MeterAmps 0.8 +/- 0.2
+00027 PASS: MeterAmps 0.787
+00028 NULL : sdo[0x5003][3] = 8| 2 | 0.5
+00028 TEST: Status Message Amp.Port_2A 8.0 +/- 2.0
+00028 PASS: Status Message Amp.Port_2A 7.0
+00029 sdo[0x6411][3] = 500 : NULL : WAIT = 0.2
+00030 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00030 TEST: MeterAmps 1.6 +/- 0.2
+00030 PASS: MeterAmps 1.572
+00031 NULL : sdo[0x5003][3] = 16 | 2 | 0.5
+00031 TEST: Status Message Amp.Port_2A 16.0 +/- 2.0
+00031 PASS: Status Message Amp.Port_2A 16.0
+00032 sdo[0x6411][3] = 1000 : NULL : WAIT = 0.2
+00033 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00033 TEST: MeterAmps 3.3 +/- 0.2
+00033 PASS: MeterAmps 3.216
+00034 NULL : sdo[0x5003][3] = 33 | 2 | 0.5
+00034 TEST: Status Message Amp.Port_2A 33.0 +/- 2.0
+00034 PASS: Status Message Amp.Port_2A 33.0
+00035 #switch out load line, switch coil
+00035 sdo[0x6411][3] = 0 : NULL : WAIT = 0.5
+00036 J2_03 = 0 : NULL : WAIT = 0.5
+00037 #switch in load line, set current
+00037 J2_04 = 1 : NULL : WAIT = 0.5
+00038 
+00038 sdo[0x6411][4] = 250 : NULL : WAIT = 0.2
+00039 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00039 TEST: MeterAmps 0.8 +/- 0.2
+00039 PASS: MeterAmps 0.791
+00040 NULL : sdo[0x5003][4] = 8| 2 | 0.5
+00040 TEST: Status Message Amp.Port_2B 8.0 +/- 2.0
+00040 PASS: Status Message Amp.Port_2B 7.0
+00041 sdo[0x6411][4] = 500 : NULL : WAIT = 0.2
+00042 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00042 TEST: MeterAmps 1.6 +/- 0.2
+00042 PASS: MeterAmps 1.581
+00043 NULL : sdo[0x5003][4] = 16 | 2 | 0.5
+00043 TEST: Status Message Amp.Port_2B 16.0 +/- 2.0
+00043 PASS: Status Message Amp.Port_2B 16.0
+00044 sdo[0x6411][4] = 1000 : NULL : WAIT = 0.2
+00045 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00045 TEST: MeterAmps 3.3 +/- 0.2
+00045 PASS: MeterAmps 3.234
+00046 NULL : sdo[0x5003][4] = 33 | 2 | 0.5
+00046 TEST: Status Message Amp.Port_2B 33.0 +/- 2.0
+00046 PASS: Status Message Amp.Port_2B 32.0
+00047 #switch out load line, switch coil
+00047 sdo[0x6411][4] = 0 : NULL : WAIT = 0.5
+00048 J2_04 = 0 : NULL : WAIT = 0.5
+00049 #switch in load line, set current
+00049 J2_06 = 1 : NULL : WAIT = 0.5
+00050 
+00050 sdo[0x6411][6] = 250 : NULL : WAIT = 0.2
+00051 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00051 TEST: MeterAmps 0.8 +/- 0.2
+00051 PASS: MeterAmps 0.79
+00052 NULL : sdo[0x5003][6] = 8| 2 | 0.5
+00052 TEST: Status Message Amp.Port_3B 8.0 +/- 2.0
+00052 PASS: Status Message Amp.Port_3B 7.0
+00053 sdo[0x6411][6] = 500 : NULL : WAIT = 0.2
+00054 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00054 TEST: MeterAmps 1.6 +/- 0.2
+00054 PASS: MeterAmps 1.58
+00055 NULL : sdo[0x5003][6] = 16 | 2 | 0.5
+00055 TEST: Status Message Amp.Port_3B 16.0 +/- 2.0
+00055 PASS: Status Message Amp.Port_3B 16.0
+00056 sdo[0x6411][6] = 1000 : NULL : WAIT = 0.2
+00057 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00057 TEST: MeterAmps 3.3 +/- 0.2
+00057 PASS: MeterAmps 3.234
+00058 NULL : sdo[0x5003][6] = 33 | 2 | 0.5
+00058 TEST: Status Message Amp.Port_3B 33.0 +/- 2.0
+00058 PASS: Status Message Amp.Port_3B 32.0
+00059 #switch out load line, switch coil
+00059 sdo[0x6411][6] = 0 : NULL : WAIT = 0.5
+00060 J2_06 = 0 : NULL : WAIT = 0.5
+00061 #switch in load line, set current
+00061 J2_07 = 1 : NULL : WAIT = 0.5
+00062 
+00062 sdo[0x6411][7] = 250 : NULL : WAIT = 0.2
+00063 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00063 TEST: MeterAmps 0.8 +/- 0.2
+00063 PASS: MeterAmps 0.786
+00064 NULL : sdo[0x5003][7] = 8| 2 | 0.5
+00064 TEST: Status Message Amp.Port_4A 8.0 +/- 2.0
+00064 PASS: Status Message Amp.Port_4A 8.0
+00065 sdo[0x6411][7] = 500 : NULL : WAIT = 0.2
+00066 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00066 TEST: MeterAmps 1.6 +/- 0.2
+00066 PASS: MeterAmps 1.568
+00067 NULL : sdo[0x5003][7] = 16 | 2 | 0.5
+00067 TEST: Status Message Amp.Port_4A 16.0 +/- 2.0
+00067 PASS: Status Message Amp.Port_4A 16.0
+00068 sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+00069 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00069 TEST: MeterAmps 3.3 +/- 0.2
+00069 PASS: MeterAmps 3.217
+00070 NULL : sdo[0x5003][7] = 33 | 2 | 0.5
+00070 TEST: Status Message Amp.Port_4A 33.0 +/- 2.0
+00070 PASS: Status Message Amp.Port_4A 33.0
+00071 #switch out load line, switch coil
+00071 sdo[0x6411][7] = 0 : NULL : WAIT = 0.5
+00072 J2_07 = 0 : NULL : WAIT = 0.5
+00073 #switch in load line, set current
+00073 J2_08 = 1 : NULL : WAIT = 0.5
+00074 
+00074 sdo[0x6411][8] = 250 : NULL : WAIT = 0.2
+00075 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00075 TEST: MeterAmps 0.8 +/- 0.2
+00075 PASS: MeterAmps 0.79
+00076 NULL : sdo[0x5003][8] = 8| 2 | 0.5
+00076 TEST: Status Message Amp.Port_4B 8.0 +/- 2.0
+00076 PASS: Status Message Amp.Port_4B 7.0
+00077 sdo[0x6411][8] = 500 : NULL : WAIT = 0.2
+00078 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00078 TEST: MeterAmps 1.6 +/- 0.2
+00078 PASS: MeterAmps 1.579
+00079 NULL : sdo[0x5003][8] = 16 | 2 | 0.5
+00079 TEST: Status Message Amp.Port_4B 16.0 +/- 2.0
+00079 PASS: Status Message Amp.Port_4B 16.0
+00080 sdo[0x6411][8] = 1000 : NULL : WAIT = 0.2
+00081 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00081 TEST: MeterAmps 3.3 +/- 0.2
+00081 PASS: MeterAmps 3.232
+00082 NULL : sdo[0x5003][8] = 33 | 2 | 0.5
+00082 TEST: Status Message Amp.Port_4B 33.0 +/- 2.0
+00082 PASS: Status Message Amp.Port_4B 33.0
+00083 #switch out load line, switch coil
+00083 sdo[0x6411][8] = 0 : NULL : WAIT = 0.5
+00084 J2_08 = 0 : NULL : WAIT = 0.5
+00085 #switch in load line, set current
+00085 J2_09 = 1 : NULL : WAIT = 0.5
+00086 
+00086 sdo[0x6411][9] = 250 : NULL : WAIT = 0.2
+00087 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00087 TEST: MeterAmps 0.8 +/- 0.2
+00087 PASS: MeterAmps 0.794
+00088 NULL : sdo[0x5003][9] = 8| 2 | 0.5
+00088 TEST: Status Message Amp.Port_5A 8.0 +/- 2.0
+00088 PASS: Status Message Amp.Port_5A 8.0
+00089 sdo[0x6411][9] = 500 : NULL : WAIT = 0.2
+00090 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00090 TEST: MeterAmps 1.6 +/- 0.2
+00090 PASS: MeterAmps 1.585
+00091 NULL : sdo[0x5003][9] = 16 | 2 | 0.5
+00091 TEST: Status Message Amp.Port_5A 16.0 +/- 2.0
+00091 PASS: Status Message Amp.Port_5A 16.0
+00092 sdo[0x6411][9] = 1000 : NULL : WAIT = 0.2
+00093 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00093 TEST: MeterAmps 3.3 +/- 0.2
+00093 PASS: MeterAmps 3.244
+00094 NULL : sdo[0x5003][9] = 33 | 2 | 0.5
+00094 TEST: Status Message Amp.Port_5A 33.0 +/- 2.0
+00094 PASS: Status Message Amp.Port_5A 33.0
+00095 #switch out load line, switch coil
+00095 sdo[0x6411][9] = 0 : NULL : WAIT = 0.5
+00096 J2_09 = 0 : NULL : WAIT = 0.5
+00097 #switch in load line, set current
+00097 J2_10 = 1 : NULL : WAIT = 0.5
+00098 
+00098 sdo[0x6411][10] = 250 : NULL : WAIT = 0.2
+00099 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00099 TEST: MeterAmps 0.8 +/- 0.2
+00099 PASS: MeterAmps 0.794
+00100 NULL : sdo[0x5003][10] = 8| 2 | 0.5
+00100 TEST: Status Message Amp.Port_5B 8.0 +/- 2.0
+00100 PASS: Status Message Amp.Port_5B 7.0
+00101 sdo[0x6411][10] = 500 : NULL : WAIT = 0.2
+00102 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00102 TEST: MeterAmps 1.6 +/- 0.2
+00102 PASS: MeterAmps 1.584
+00103 NULL : sdo[0x5003][10] = 16 | 2 | 0.5
+00103 TEST: Status Message Amp.Port_5B 16.0 +/- 2.0
+00103 PASS: Status Message Amp.Port_5B 16.0
+00104 sdo[0x6411][10] = 1000 : NULL : WAIT = 0.2
+00105 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00105 TEST: MeterAmps 3.3 +/- 0.2
+00105 PASS: MeterAmps 3.24
+00106 NULL : sdo[0x5003][10] = 33 | 2 | 0.5
+00106 TEST: Status Message Amp.Port_5B 33.0 +/- 2.0
+00106 PASS: Status Message Amp.Port_5B 33.0
+00107 #switch out load line, switch coil
+00107 sdo[0x6411][10] = 0 : NULL : WAIT = 0.5
+00108 J2_10 = 0 : NULL : WAIT = 0.5
+00109 #switch in load line, set current
+00109 J2_11 = 1 : NULL : WAIT = 0.5
+00110 
+00110 sdo[0x6411][11] = 250 : NULL : WAIT = 0.2
+00111 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00111 TEST: MeterAmps 0.8 +/- 0.2
+00111 PASS: MeterAmps 0.79
+00112 NULL : sdo[0x5003][11] = 8| 2 | 0.5
+00112 TEST: Status Message Amp.Port_6A 8.0 +/- 2.0
+00112 PASS: Status Message Amp.Port_6A 8.0
+00113 sdo[0x6411][11] = 500 : NULL : WAIT = 0.2
+00114 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00114 TEST: MeterAmps 1.6 +/- 0.2
+00114 PASS: MeterAmps 1.579
+00115 NULL : sdo[0x5003][11] = 16 | 2 | 0.5
+00115 TEST: Status Message Amp.Port_6A 16.0 +/- 2.0
+00115 PASS: Status Message Amp.Port_6A 16.0
+00116 sdo[0x6411][11] = 1000 : NULL : WAIT = 0.2
+00117 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00117 TEST: MeterAmps 3.3 +/- 0.2
+00117 PASS: MeterAmps 3.231
+00118 NULL : sdo[0x5003][11] = 33 | 2 | 0.5
+00118 TEST: Status Message Amp.Port_6A 33.0 +/- 2.0
+00118 PASS: Status Message Amp.Port_6A 33.0
+00119 #switch out load line, switch coil
+00119 sdo[0x6411][11] = 0 : NULL : WAIT = 0.5
+00120 J2_11 = 0 : NULL : WAIT = 0.5
+00121 #switch in load line, set current
+00121 J2_12 = 1 : NULL : WAIT = 0.5
+00122 
+00122 sdo[0x6411][12] = 250 : NULL : WAIT = 0.2
+00123 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00123 TEST: MeterAmps 0.8 +/- 0.2
+00123 PASS: MeterAmps 0.791
+00124 NULL : sdo[0x5003][12] = 8| 2 | 0.5
+00124 TEST: Status Message Amp.Port_6B 8.0 +/- 2.0
+00124 PASS: Status Message Amp.Port_6B 7.0
+00125 sdo[0x6411][12] = 500 : NULL : WAIT = 0.2
+00126 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00126 TEST: MeterAmps 1.6 +/- 0.2
+00126 PASS: MeterAmps 1.581
+00127 NULL : sdo[0x5003][12] = 16 | 2 | 0.5
+00127 TEST: Status Message Amp.Port_6B 16.0 +/- 2.0
+00127 PASS: Status Message Amp.Port_6B 16.0
+00128 sdo[0x6411][12] = 1000 : NULL : WAIT = 0.2
+00129 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00129 TEST: MeterAmps 3.3 +/- 0.2
+00129 PASS: MeterAmps 3.234
+00130 NULL : sdo[0x5003][12] = 33 | 2 | 0.5
+00130 TEST: Status Message Amp.Port_6B 33.0 +/- 2.0
+00130 PASS: Status Message Amp.Port_6B 32.0
+00131 #switch out load line, switch coil
+00131 sdo[0x6411][12] = 0 : NULL : WAIT = 0.5
+00132 J2_12 = 0 : NULL : WAIT = 0.5
+00133 #switch in load line, set current
+00133 J3_01 = 1 : NULL : WAIT = 0.5
+00134 
+00134 sdo[0x6411][13] = 250 : NULL : WAIT = 0.2
+00135 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00135 TEST: MeterAmps 0.8 +/- 0.2
+00135 PASS: MeterAmps 0.796
+00136 NULL : sdo[0x5003][13] = 8| 2 | 0.5
+00136 TEST: Status Message Amp.Port_7A 8.0 +/- 2.0
+00136 PASS: Status Message Amp.Port_7A 8.0
+00137 sdo[0x6411][13] = 500 : NULL : WAIT = 0.2
+00138 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00138 TEST: MeterAmps 1.6 +/- 0.2
+00138 PASS: MeterAmps 1.589
+00139 NULL : sdo[0x5003][13] = 16 | 2 | 0.5
+00139 TEST: Status Message Amp.Port_7A 16.0 +/- 2.0
+00139 PASS: Status Message Amp.Port_7A 17.0
+00140 sdo[0x6411][13] = 1000 : NULL : WAIT = 0.2
+00141 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00141 TEST: MeterAmps 3.3 +/- 0.2
+00141 PASS: MeterAmps 3.248
+00142 NULL : sdo[0x5003][13] = 33 | 2 | 0.5
+00142 TEST: Status Message Amp.Port_7A 33.0 +/- 2.0
+00142 PASS: Status Message Amp.Port_7A 33.0
+00143 #switch out load line, switch coil
+00143 sdo[0x6411][13] = 0 : NULL : WAIT = 0.5
+00144 J3_01 = 0 : NULL : WAIT = 0.5
+00145 #switch in load line, set current
+00145 J3_02 = 1 : NULL : WAIT = 0.5
+00146 
+00146 sdo[0x6411][14] = 250 : NULL : WAIT = 0.2
+00147 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00147 TEST: MeterAmps 0.8 +/- 0.2
+00147 PASS: MeterAmps 0.793
+00148 NULL : sdo[0x5003][14] = 8| 2 | 0.5
+00148 TEST: Status Message Amp.Port_7B 8.0 +/- 2.0
+00148 PASS: Status Message Amp.Port_7B 7.0
+00149 sdo[0x6411][14] = 500 : NULL : WAIT = 0.2
+00150 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00150 TEST: MeterAmps 1.6 +/- 0.2
+00150 PASS: MeterAmps 1.583
+00151 NULL : sdo[0x5003][14] = 16 | 2 | 0.5
+00151 TEST: Status Message Amp.Port_7B 16.0 +/- 2.0
+00151 PASS: Status Message Amp.Port_7B 16.0
+00152 sdo[0x6411][14] = 1000 : NULL : WAIT = 0.2
+00153 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00153 TEST: MeterAmps 3.3 +/- 0.2
+00153 PASS: MeterAmps 3.238
+00154 NULL : sdo[0x5003][14] = 33 | 2 | 0.5
+00154 TEST: Status Message Amp.Port_7B 33.0 +/- 2.0
+00154 PASS: Status Message Amp.Port_7B 32.0
+00155 #switch out load line, switch coil
+00155 sdo[0x6411][14] = 0 : NULL : WAIT = 0.5
+00156 J3_02 = 0 : NULL : WAIT = 0.5
+00157 #switch in load line, set current
+00157 J3_03 = 1 : NULL : WAIT = 0.5
+00158 
+00158 sdo[0x6411][15] = 250 : NULL : WAIT = 0.2
+00159 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00159 TEST: MeterAmps 0.8 +/- 0.2
+00159 PASS: MeterAmps 0.792
+00160 NULL : sdo[0x5003][15] = 8| 2 | 0.5
+00160 TEST: Status Message Amp.Port_8A 8.0 +/- 2.0
+00160 PASS: Status Message Amp.Port_8A 8.0
+00161 sdo[0x6411][15] = 500 : NULL : WAIT = 0.2
+00162 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00162 TEST: MeterAmps 1.6 +/- 0.2
+00162 PASS: MeterAmps 1.581
+00163 NULL : sdo[0x5003][15] = 16 | 2 | 0.5
+00163 TEST: Status Message Amp.Port_8A 16.0 +/- 2.0
+00163 PASS: Status Message Amp.Port_8A 16.0
+00164 sdo[0x6411][15] = 1000 : NULL : WAIT = 0.2
+00165 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00165 TEST: MeterAmps 3.3 +/- 0.2
+00165 PASS: MeterAmps 3.235
+00166 NULL : sdo[0x5003][15] = 33 | 2 | 0.5
+00166 TEST: Status Message Amp.Port_8A 33.0 +/- 2.0
+00166 PASS: Status Message Amp.Port_8A 33.0
+00167 #switch out load line, switch coil
+00167 sdo[0x6411][15] = 0 : NULL : WAIT = 0.5
+00168 J3_03 = 0 : NULL : WAIT = 0.5
+00169 #switch in load line, set current
+00169 J3_04 = 1 : NULL : WAIT = 0.5
+00170 
+00170 sdo[0x6411][16] = 250 : NULL : WAIT = 0.2
+00171 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00171 TEST: MeterAmps 0.8 +/- 0.2
+00171 PASS: MeterAmps 0.795
+00172 NULL : sdo[0x5003][16] = 8| 2 | 0.5
+00172 TEST: Status Message Amp.Port_8B 8.0 +/- 2.0
+00172 PASS: Status Message Amp.Port_8B 7.0
+00173 sdo[0x6411][16] = 500 : NULL : WAIT = 0.2
+00174 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00174 TEST: MeterAmps 1.6 +/- 0.2
+00174 PASS: MeterAmps 1.586
+00175 NULL : sdo[0x5003][16] = 16 | 2 | 0.5
+00175 TEST: Status Message Amp.Port_8B 16.0 +/- 2.0
+00175 PASS: Status Message Amp.Port_8B 16.0
+00176 sdo[0x6411][16] = 1000 : NULL : WAIT = 0.2
+00177 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00177 TEST: MeterAmps 3.3 +/- 0.2
+00177 PASS: MeterAmps 3.242
+00178 NULL : sdo[0x5003][16] = 33 | 2 | 0.5
+00178 TEST: Status Message Amp.Port_8B 33.0 +/- 2.0
+00178 PASS: Status Message Amp.Port_8B 32.0
+00179 #switch out load line, switch coil
+00179 sdo[0x6411][16] = 0 : NULL : WAIT = 0.5
+00180 J3_04 = 0 : NULL : WAIT = 0.5
+00181 PRE_OPERATIONAL
+00181 #test at 500hz
+00181 sdo[0x3000] = 500 : NULL : WAIT = 0.5
+00182 OPERATIONAL
+00182 #switch in 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
+00182 J4_01 = 1 : NULL : WAIT = 0.2
+00183 J4_03 = 1 : NULL : WAIT = 0.2
+00184 #switch in load line, set current
+00184 J2_02 = 1 : NULL : WAIT = 0.5
+00185 
+00185 sdo[0x6411][2] = 250 : NULL : WAIT = 0.2
+00186 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00186 TEST: MeterAmps 0.8 +/- 0.2
+00186 PASS: MeterAmps 0.786
+00187 NULL : sdo[0x5003][2] = 8| 2 | 0.5
+00187 TEST: Status Message Amp.Port_1B 8.0 +/- 2.0
+00187 PASS: Status Message Amp.Port_1B 7.0
+00188 sdo[0x6411][2] = 500 : NULL : WAIT = 0.2
+00189 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00189 TEST: MeterAmps 1.6 +/- 0.2
+00189 PASS: MeterAmps 1.571
+00190 NULL : sdo[0x5003][2] = 16 | 2 | 0.5
+00190 TEST: Status Message Amp.Port_1B 16.0 +/- 2.0
+00190 PASS: Status Message Amp.Port_1B 15.0
+00191 sdo[0x6411][2] = 1000 : NULL : WAIT = 0.2
+00192 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00192 TEST: MeterAmps 3.3 +/- 0.2
+00192 PASS: MeterAmps 3.218
+00193 NULL : sdo[0x5003][2] = 33 | 2 | 0.5
+00193 TEST: Status Message Amp.Port_1B 33.0 +/- 2.0
+00193 PASS: Status Message Amp.Port_1B 32.0
+00194 #switch out load line, switch coil
+00194 sdo[0x6411][2] = 0 : NULL : WAIT = 0.5
+00195 J2_02 = 0 : NULL : WAIT = 0.5
+00196 #switch in load line, set current
+00196 J2_03 = 1 : NULL : WAIT = 0.5
+00197 
+00197 sdo[0x6411][3] = 250 : NULL : WAIT = 0.2
+00198 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00198 TEST: MeterAmps 0.8 +/- 0.2
+00198 PASS: MeterAmps 0.784
+00199 NULL : sdo[0x5003][3] = 8| 2 | 0.5
+00199 TEST: Status Message Amp.Port_2A 8.0 +/- 2.0
+00199 PASS: Status Message Amp.Port_2A 8.0
+00200 sdo[0x6411][3] = 500 : NULL : WAIT = 0.2
+00201 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00201 TEST: MeterAmps 1.6 +/- 0.2
+00201 PASS: MeterAmps 1.565
+00202 NULL : sdo[0x5003][3] = 16 | 2 | 0.5
+00202 TEST: Status Message Amp.Port_2A 16.0 +/- 2.0
+00202 PASS: Status Message Amp.Port_2A 16.0
+00203 sdo[0x6411][3] = 1000 : NULL : WAIT = 0.2
+00204 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00204 TEST: MeterAmps 3.3 +/- 0.2
+00204 PASS: MeterAmps 3.203
+00205 NULL : sdo[0x5003][3] = 33 | 2 | 0.5
+00205 TEST: Status Message Amp.Port_2A 33.0 +/- 2.0
+00205 PASS: Status Message Amp.Port_2A 33.0
+00206 #switch out load line, switch coil
+00206 sdo[0x6411][3] = 0 : NULL : WAIT = 0.5
+00207 J2_03 = 0 : NULL : WAIT = 0.5
+00208 #switch in load line, set current
+00208 J2_04 = 1 : NULL : WAIT = 0.5
+00209 
+00209 sdo[0x6411][4] = 250 : NULL : WAIT = 0.2
+00210 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00210 TEST: MeterAmps 0.8 +/- 0.2
+00210 PASS: MeterAmps 0.789
+00211 NULL : sdo[0x5003][4] = 8| 2 | 0.5
+00211 TEST: Status Message Amp.Port_2B 8.0 +/- 2.0
+00211 PASS: Status Message Amp.Port_2B 7.0
+00212 sdo[0x6411][4] = 500 : NULL : WAIT = 0.2
+00213 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00213 TEST: MeterAmps 1.6 +/- 0.2
+00213 PASS: MeterAmps 1.576
+00214 NULL : sdo[0x5003][4] = 16 | 2 | 0.5
+00214 TEST: Status Message Amp.Port_2B 16.0 +/- 2.0
+00214 PASS: Status Message Amp.Port_2B 16.0
+00215 sdo[0x6411][4] = 1000 : NULL : WAIT = 0.2
+00216 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00216 TEST: MeterAmps 3.3 +/- 0.2
+00216 PASS: MeterAmps 3.226
+00217 NULL : sdo[0x5003][4] = 33 | 2 | 0.5
+00217 TEST: Status Message Amp.Port_2B 33.0 +/- 2.0
+00217 PASS: Status Message Amp.Port_2B 32.0
+00218 #switch out load line, switch coil
+00218 sdo[0x6411][4] = 0 : NULL : WAIT = 0.5
+00219 J2_04 = 0 : NULL : WAIT = 0.5
+00220 #switch in load line, set current
+00220 J2_06 = 1 : NULL : WAIT = 0.5
+00221 
+00221 sdo[0x6411][6] = 250 : NULL : WAIT = 0.2
+00222 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00222 TEST: MeterAmps 0.8 +/- 0.2
+00222 PASS: MeterAmps 0.789
+00223 NULL : sdo[0x5003][6] = 8| 2 | 0.5
+00223 TEST: Status Message Amp.Port_3B 8.0 +/- 2.0
+00223 PASS: Status Message Amp.Port_3B 7.0
+00224 sdo[0x6411][6] = 500 : NULL : WAIT = 0.2
+00225 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00225 TEST: MeterAmps 1.6 +/- 0.2
+00225 PASS: MeterAmps 1.576
+00226 NULL : sdo[0x5003][6] = 16 | 2 | 0.5
+00226 TEST: Status Message Amp.Port_3B 16.0 +/- 2.0
+00226 PASS: Status Message Amp.Port_3B 15.0
+00227 sdo[0x6411][6] = 1000 : NULL : WAIT = 0.2
+00228 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00228 TEST: MeterAmps 3.3 +/- 0.2
+00228 PASS: MeterAmps 3.226
+00229 NULL : sdo[0x5003][6] = 33 | 2 | 0.5
+00229 TEST: Status Message Amp.Port_3B 33.0 +/- 2.0
+00229 PASS: Status Message Amp.Port_3B 32.0
+00230 #switch out load line, switch coil
+00230 sdo[0x6411][6] = 0 : NULL : WAIT = 0.5
+00231 J2_06 = 0 : NULL : WAIT = 0.5
+00232 #switch in load line, set current
+00232 J2_07 = 1 : NULL : WAIT = 0.5
+00233 
+00233 sdo[0x6411][7] = 250 : NULL : WAIT = 0.2
+00234 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00234 TEST: MeterAmps 0.8 +/- 0.2
+00234 PASS: MeterAmps 0.782
+00235 NULL : sdo[0x5003][7] = 8| 2 | 0.5
+00235 TEST: Status Message Amp.Port_4A 8.0 +/- 2.0
+00235 PASS: Status Message Amp.Port_4A 8.0
+00236 sdo[0x6411][7] = 500 : NULL : WAIT = 0.2
+00237 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00237 TEST: MeterAmps 1.6 +/- 0.2
+00237 PASS: MeterAmps 1.566
+00238 NULL : sdo[0x5003][7] = 16 | 2 | 0.5
+00238 TEST: Status Message Amp.Port_4A 16.0 +/- 2.0
+00238 PASS: Status Message Amp.Port_4A 16.0
+00239 sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+00240 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00240 TEST: MeterAmps 3.3 +/- 0.2
+00240 PASS: MeterAmps 3.211
+00241 NULL : sdo[0x5003][7] = 33 | 2 | 0.5
+00241 TEST: Status Message Amp.Port_4A 33.0 +/- 2.0
+00241 PASS: Status Message Amp.Port_4A 33.0
+00242 #switch out load line, switch coil
+00242 sdo[0x6411][7] = 0 : NULL : WAIT = 0.5
+00243 J2_07 = 0 : NULL : WAIT = 0.5
+00244 #switch in load line, set current
+00244 J2_08 = 1 : NULL : WAIT = 0.5
+00245 
+00245 sdo[0x6411][8] = 250 : NULL : WAIT = 0.2
+00246 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00246 TEST: MeterAmps 0.8 +/- 0.2
+00246 PASS: MeterAmps 0.789
+00247 NULL : sdo[0x5003][8] = 8| 2 | 0.5
+00247 TEST: Status Message Amp.Port_4B 8.0 +/- 2.0
+00247 PASS: Status Message Amp.Port_4B 7.0
+00248 sdo[0x6411][8] = 500 : NULL : WAIT = 0.2
+00249 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00249 TEST: MeterAmps 1.6 +/- 0.2
+00249 PASS: MeterAmps 1.577
+00250 NULL : sdo[0x5003][8] = 16 | 2 | 0.5
+00250 TEST: Status Message Amp.Port_4B 16.0 +/- 2.0
+00250 PASS: Status Message Amp.Port_4B 16.0
+00251 sdo[0x6411][8] = 1000 : NULL : WAIT = 0.2
+00252 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00252 TEST: MeterAmps 3.3 +/- 0.2
+00252 PASS: MeterAmps 3.229
+00253 NULL : sdo[0x5003][8] = 33 | 2 | 0.5
+00253 TEST: Status Message Amp.Port_4B 33.0 +/- 2.0
+00253 PASS: Status Message Amp.Port_4B 33.0
+00254 #switch out load line, switch coil
+00254 sdo[0x6411][8] = 0 : NULL : WAIT = 0.5
+00255 J2_08 = 0 : NULL : WAIT = 0.5
+00256 #switch in load line, set current
+00256 J2_09 = 1 : NULL : WAIT = 0.5
+00257 
+00257 sdo[0x6411][9] = 250 : NULL : WAIT = 0.2
+00258 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00258 TEST: MeterAmps 0.8 +/- 0.2
+00258 PASS: MeterAmps 0.793
+00259 NULL : sdo[0x5003][9] = 8| 2 | 0.5
+00259 TEST: Status Message Amp.Port_5A 8.0 +/- 2.0
+00259 PASS: Status Message Amp.Port_5A 8.0
+00260 sdo[0x6411][9] = 500 : NULL : WAIT = 0.2
+00261 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00261 TEST: MeterAmps 1.6 +/- 0.2
+00261 PASS: MeterAmps 1.583
+00262 NULL : sdo[0x5003][9] = 16 | 2 | 0.5
+00262 TEST: Status Message Amp.Port_5A 16.0 +/- 2.0
+00262 PASS: Status Message Amp.Port_5A 16.0
+00263 sdo[0x6411][9] = 1000 : NULL : WAIT = 0.2
+00264 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00264 TEST: MeterAmps 3.3 +/- 0.2
+00264 PASS: MeterAmps 3.242
+00265 NULL : sdo[0x5003][9] = 33 | 2 | 0.5
+00265 TEST: Status Message Amp.Port_5A 33.0 +/- 2.0
+00265 PASS: Status Message Amp.Port_5A 33.0
+00266 #switch out load line, switch coil
+00266 sdo[0x6411][9] = 0 : NULL : WAIT = 0.5
+00267 J2_09 = 0 : NULL : WAIT = 0.5
+00268 #switch in load line, set current
+00268 J2_10 = 1 : NULL : WAIT = 0.5
+00269 
+00269 sdo[0x6411][10] = 250 : NULL : WAIT = 0.2
+00270 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00270 TEST: MeterAmps 0.8 +/- 0.2
+00270 PASS: MeterAmps 0.792
+00271 NULL : sdo[0x5003][10] = 8| 2 | 0.5
+00271 TEST: Status Message Amp.Port_5B 8.0 +/- 2.0
+00271 PASS: Status Message Amp.Port_5B 8.0
+00272 sdo[0x6411][10] = 500 : NULL : WAIT = 0.2
+00273 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00273 TEST: MeterAmps 1.6 +/- 0.2
+00273 PASS: MeterAmps 1.582
+00274 NULL : sdo[0x5003][10] = 16 | 2 | 0.5
+00274 TEST: Status Message Amp.Port_5B 16.0 +/- 2.0
+00274 PASS: Status Message Amp.Port_5B 16.0
+00275 sdo[0x6411][10] = 1000 : NULL : WAIT = 0.2
+00276 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00276 TEST: MeterAmps 3.3 +/- 0.2
+00276 PASS: MeterAmps 3.239
+00277 NULL : sdo[0x5003][10] = 33 | 2 | 0.5
+00277 TEST: Status Message Amp.Port_5B 33.0 +/- 2.0
+00277 PASS: Status Message Amp.Port_5B 33.0
+00278 #switch out load line, switch coil
+00278 sdo[0x6411][10] = 0 : NULL : WAIT = 0.5
+00279 J2_10 = 0 : NULL : WAIT = 0.5
+00280 #switch in load line, set current
+00280 J2_11 = 1 : NULL : WAIT = 0.5
+00281 
+00281 sdo[0x6411][11] = 250 : NULL : WAIT = 0.2
+00282 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00282 TEST: MeterAmps 0.8 +/- 0.2
+00282 PASS: MeterAmps 0.79
+00283 NULL : sdo[0x5003][11] = 8| 2 | 0.5
+00283 TEST: Status Message Amp.Port_6A 8.0 +/- 2.0
+00283 PASS: Status Message Amp.Port_6A 8.0
+00284 sdo[0x6411][11] = 500 : NULL : WAIT = 0.2
+00285 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00285 TEST: MeterAmps 1.6 +/- 0.2
+00285 PASS: MeterAmps 1.577
+00286 NULL : sdo[0x5003][11] = 16 | 2 | 0.5
+00286 TEST: Status Message Amp.Port_6A 16.0 +/- 2.0
+00286 PASS: Status Message Amp.Port_6A 16.0
+00287 sdo[0x6411][11] = 1000 : NULL : WAIT = 0.2
+00288 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00288 TEST: MeterAmps 3.3 +/- 0.2
+00288 PASS: MeterAmps 3.231
+00289 NULL : sdo[0x5003][11] = 33 | 2 | 0.5
+00289 TEST: Status Message Amp.Port_6A 33.0 +/- 2.0
+00289 PASS: Status Message Amp.Port_6A 33.0
+00290 #switch out load line, switch coil
+00290 sdo[0x6411][11] = 0 : NULL : WAIT = 0.5
+00291 J2_11 = 0 : NULL : WAIT = 0.5
+00292 #switch in load line, set current
+00292 J2_12 = 1 : NULL : WAIT = 0.5
+00293 
+00293 sdo[0x6411][12] = 250 : NULL : WAIT = 0.2
+00294 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00294 TEST: MeterAmps 0.8 +/- 0.2
+00294 PASS: MeterAmps 0.79
+00295 NULL : sdo[0x5003][12] = 8| 2 | 0.5
+00295 TEST: Status Message Amp.Port_6B 8.0 +/- 2.0
+00295 PASS: Status Message Amp.Port_6B 8.0
+00296 sdo[0x6411][12] = 500 : NULL : WAIT = 0.2
+00297 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00297 TEST: MeterAmps 1.6 +/- 0.2
+00297 PASS: MeterAmps 1.58
+00298 NULL : sdo[0x5003][12] = 16 | 2 | 0.5
+00298 TEST: Status Message Amp.Port_6B 16.0 +/- 2.0
+00298 PASS: Status Message Amp.Port_6B 16.0
+00299 sdo[0x6411][12] = 1000 : NULL : WAIT = 0.2
+00300 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00300 TEST: MeterAmps 3.3 +/- 0.2
+00300 PASS: MeterAmps 3.235
+00301 NULL : sdo[0x5003][12] = 33 | 2 | 0.5
+00301 TEST: Status Message Amp.Port_6B 33.0 +/- 2.0
+00301 PASS: Status Message Amp.Port_6B 32.0
+00302 #switch out load line, switch coil
+00302 sdo[0x6411][12] = 0 : NULL : WAIT = 0.5
+00303 J2_12 = 0 : NULL : WAIT = 0.5
+00304 #switch in load line, set current
+00304 J3_01 = 1 : NULL : WAIT = 0.5
+00305 
+00305 sdo[0x6411][13] = 250 : NULL : WAIT = 0.2
+00306 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00306 TEST: MeterAmps 0.8 +/- 0.2
+00306 PASS: MeterAmps 0.796
+00307 NULL : sdo[0x5003][13] = 8| 2 | 0.5
+00307 TEST: Status Message Amp.Port_7A 8.0 +/- 2.0
+00307 PASS: Status Message Amp.Port_7A 8.0
+00308 sdo[0x6411][13] = 500 : NULL : WAIT = 0.2
+00309 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00309 TEST: MeterAmps 1.6 +/- 0.2
+00309 PASS: MeterAmps 1.59
+00310 NULL : sdo[0x5003][13] = 16 | 2 | 0.5
+00310 TEST: Status Message Amp.Port_7A 16.0 +/- 2.0
+00310 PASS: Status Message Amp.Port_7A 16.0
+00311 sdo[0x6411][13] = 1000 : NULL : WAIT = 0.2
+00312 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00312 TEST: MeterAmps 3.3 +/- 0.2
+00312 PASS: MeterAmps 3.252
+00313 NULL : sdo[0x5003][13] = 33 | 2 | 0.5
+00313 TEST: Status Message Amp.Port_7A 33.0 +/- 2.0
+00313 PASS: Status Message Amp.Port_7A 33.0
+00314 #switch out load line, switch coil
+00314 sdo[0x6411][13] = 0 : NULL : WAIT = 0.5
+00315 J3_01 = 0 : NULL : WAIT = 0.5
+00316 #switch in load line, set current
+00316 J3_02 = 1 : NULL : WAIT = 0.5
+00317 
+00317 sdo[0x6411][14] = 250 : NULL : WAIT = 0.2
+00318 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00318 TEST: MeterAmps 0.8 +/- 0.2
+00318 PASS: MeterAmps 0.791
+00319 NULL : sdo[0x5003][14] = 8| 2 | 0.5
+00319 TEST: Status Message Amp.Port_7B 8.0 +/- 2.0
+00319 PASS: Status Message Amp.Port_7B 7.0
+00320 sdo[0x6411][14] = 500 : NULL : WAIT = 0.2
+00321 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00321 TEST: MeterAmps 1.6 +/- 0.2
+00321 PASS: MeterAmps 1.581
+00322 NULL : sdo[0x5003][14] = 16 | 2 | 0.5
+00322 TEST: Status Message Amp.Port_7B 16.0 +/- 2.0
+00322 PASS: Status Message Amp.Port_7B 16.0
+00323 sdo[0x6411][14] = 1000 : NULL : WAIT = 0.2
+00324 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00324 TEST: MeterAmps 3.3 +/- 0.2
+00324 PASS: MeterAmps 3.24
+00325 NULL : sdo[0x5003][14] = 33 | 2 | 0.5
+00325 TEST: Status Message Amp.Port_7B 33.0 +/- 2.0
+00325 PASS: Status Message Amp.Port_7B 32.0
+00326 #switch out load line, switch coil
+00326 sdo[0x6411][14] = 0 : NULL : WAIT = 0.5
+00327 J3_02 = 0 : NULL : WAIT = 0.5
+00328 #switch in load line, set current
+00328 J3_03 = 1 : NULL : WAIT = 0.5
+00329 
+00329 sdo[0x6411][15] = 250 : NULL : WAIT = 0.2
+00330 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00330 TEST: MeterAmps 0.8 +/- 0.2
+00330 PASS: MeterAmps 0.793
+00331 NULL : sdo[0x5003][15] = 8| 2 | 0.5
+00331 TEST: Status Message Amp.Port_8A 8.0 +/- 2.0
+00331 PASS: Status Message Amp.Port_8A 8.0
+00332 sdo[0x6411][15] = 500 : NULL : WAIT = 0.2
+00333 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00333 TEST: MeterAmps 1.6 +/- 0.2
+00333 PASS: MeterAmps 1.584
+00334 NULL : sdo[0x5003][15] = 16 | 2 | 0.5
+00334 TEST: Status Message Amp.Port_8A 16.0 +/- 2.0
+00334 PASS: Status Message Amp.Port_8A 16.0
+00335 sdo[0x6411][15] = 1000 : NULL : WAIT = 0.2
+00336 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00336 TEST: MeterAmps 3.3 +/- 0.2
+00336 PASS: MeterAmps 3.243
+00337 NULL : sdo[0x5003][15] = 33 | 2 | 0.5
+00337 TEST: Status Message Amp.Port_8A 33.0 +/- 2.0
+00337 PASS: Status Message Amp.Port_8A 33.0
+00338 #switch out load line, switch coil
+00338 sdo[0x6411][15] = 0 : NULL : WAIT = 0.5
+00339 J3_03 = 0 : NULL : WAIT = 0.5
+00340 #switch in load line, set current
+00340 J3_04 = 1 : NULL : WAIT = 0.5
+00341 
+00341 sdo[0x6411][16] = 250 : NULL : WAIT = 0.2
+00342 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00342 TEST: MeterAmps 0.8 +/- 0.2
+00342 PASS: MeterAmps 0.796
+00343 NULL : sdo[0x5003][16] = 8| 2 | 0.5
+00343 TEST: Status Message Amp.Port_8B 8.0 +/- 2.0
+00343 PASS: Status Message Amp.Port_8B 7.0
+00344 sdo[0x6411][16] = 500 : NULL : WAIT = 0.2
+00345 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00345 TEST: MeterAmps 1.6 +/- 0.2
+00345 PASS: MeterAmps 1.589
+00346 NULL : sdo[0x5003][16] = 16 | 2 | 0.5
+00346 TEST: Status Message Amp.Port_8B 16.0 +/- 2.0
+00346 PASS: Status Message Amp.Port_8B 16.0
+00347 sdo[0x6411][16] = 1000 : NULL : WAIT = 0.2
+00348 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00348 TEST: MeterAmps 3.3 +/- 0.2
+00348 PASS: MeterAmps 3.251
+00349 NULL : sdo[0x5003][16] = 33 | 2 | 0.5
+00349 TEST: Status Message Amp.Port_8B 33.0 +/- 2.0
+00349 PASS: Status Message Amp.Port_8B 32.0
+00350 #switch out load line, switch coil
+00350 sdo[0x6411][16] = 0 : NULL : WAIT = 0.5
+00351 J3_04 = 0 : NULL : WAIT = 0.5
+00352 PRE_OPERATIONAL
+00352 #test at 64hz
+00352 sdo[0x3000] = 64 : NULL : WAIT = 0.5
+00353 OPERATIONAL
+00353 #switch in 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
+00353 J4_01 = 1 : NULL : WAIT = 0.2
+00354 J4_03 = 1 : NULL : WAIT = 0.2
+00355 #switch in load line, set current
+00355 J2_02 = 1 : NULL : WAIT = 0.5
+00356 
+00356 sdo[0x6411][2] = 250 : NULL : WAIT = 0.2
+00357 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00357 TEST: MeterAmps 0.8 +/- 0.2
+00357 PASS: MeterAmps 0.785
+00358 NULL : sdo[0x5003][2] = 8| 2 | 0.5
+00358 TEST: Status Message Amp.Port_1B 8.0 +/- 2.0
+00358 PASS: Status Message Amp.Port_1B 7.0
+00359 sdo[0x6411][2] = 500 : NULL : WAIT = 0.2
+00360 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00360 TEST: MeterAmps 1.6 +/- 0.2
+00360 PASS: MeterAmps 1.574
+00361 NULL : sdo[0x5003][2] = 16 | 2 | 0.5
+00361 TEST: Status Message Amp.Port_1B 16.0 +/- 2.0
+00361 PASS: Status Message Amp.Port_1B 15.0
+00362 sdo[0x6411][2] = 1000 : NULL : WAIT = 0.2
+00363 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00363 TEST: MeterAmps 3.3 +/- 0.2
+00363 PASS: MeterAmps 3.225
+00364 NULL : sdo[0x5003][2] = 33 | 2 | 0.5
+00364 TEST: Status Message Amp.Port_1B 33.0 +/- 2.0
+00364 PASS: Status Message Amp.Port_1B 32.0
+00365 #switch out load line, switch coil
+00365 sdo[0x6411][2] = 0 : NULL : WAIT = 0.5
+00366 J2_02 = 0 : NULL : WAIT = 0.5
+00367 #switch in load line, set current
+00367 J2_03 = 1 : NULL : WAIT = 0.5
+00368 
+00368 sdo[0x6411][3] = 250 : NULL : WAIT = 0.2
+00369 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00369 TEST: MeterAmps 0.8 +/- 0.2
+00369 PASS: MeterAmps 0.783
+00370 NULL : sdo[0x5003][3] = 8| 2 | 0.5
+00370 TEST: Status Message Amp.Port_2A 8.0 +/- 2.0
+00370 PASS: Status Message Amp.Port_2A 7.0
+00371 sdo[0x6411][3] = 500 : NULL : WAIT = 0.2
+00372 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00372 TEST: MeterAmps 1.6 +/- 0.2
+00372 PASS: MeterAmps 1.57
+00373 NULL : sdo[0x5003][3] = 16 | 2 | 0.5
+00373 TEST: Status Message Amp.Port_2A 16.0 +/- 2.0
+00373 PASS: Status Message Amp.Port_2A 15.0
+00374 sdo[0x6411][3] = 1000 : NULL : WAIT = 0.2
+00375 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00375 TEST: MeterAmps 3.3 +/- 0.2
+00375 PASS: MeterAmps 3.213
+00376 NULL : sdo[0x5003][3] = 33 | 2 | 0.5
+00376 TEST: Status Message Amp.Port_2A 33.0 +/- 2.0
+00376 PASS: Status Message Amp.Port_2A 33.0
+00377 #switch out load line, switch coil
+00377 sdo[0x6411][3] = 0 : NULL : WAIT = 0.5
+00378 J2_03 = 0 : NULL : WAIT = 0.5
+00379 #switch in load line, set current
+00379 J2_04 = 1 : NULL : WAIT = 0.5
+00380 
+00380 sdo[0x6411][4] = 250 : NULL : WAIT = 0.2
+00381 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00381 TEST: MeterAmps 0.8 +/- 0.2
+00381 PASS: MeterAmps 0.793
+00382 NULL : sdo[0x5003][4] = 8| 2 | 0.5
+00382 TEST: Status Message Amp.Port_2B 8.0 +/- 2.0
+00382 PASS: Status Message Amp.Port_2B 7.0
+00383 sdo[0x6411][4] = 500 : NULL : WAIT = 0.2
+00384 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00384 TEST: MeterAmps 1.6 +/- 0.2
+00384 PASS: MeterAmps 1.581
+00385 NULL : sdo[0x5003][4] = 16 | 2 | 0.5
+00385 TEST: Status Message Amp.Port_2B 16.0 +/- 2.0
+00385 PASS: Status Message Amp.Port_2B 15.0
+00386 sdo[0x6411][4] = 1000 : NULL : WAIT = 0.2
+00387 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00387 TEST: MeterAmps 3.3 +/- 0.2
+00387 PASS: MeterAmps 3.237
+00388 NULL : sdo[0x5003][4] = 33 | 2 | 0.5
+00388 TEST: Status Message Amp.Port_2B 33.0 +/- 2.0
+00388 PASS: Status Message Amp.Port_2B 32.0
+00389 #switch out load line, switch coil
+00389 sdo[0x6411][4] = 0 : NULL : WAIT = 0.5
+00390 J2_04 = 0 : NULL : WAIT = 0.5
+00391 #switch in load line, set current
+00391 J2_06 = 1 : NULL : WAIT = 0.5
+00392 
+00392 sdo[0x6411][6] = 250 : NULL : WAIT = 0.2
+00393 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00393 TEST: MeterAmps 0.8 +/- 0.2
+00393 PASS: MeterAmps 0.792
+00394 NULL : sdo[0x5003][6] = 8| 2 | 0.5
+00394 TEST: Status Message Amp.Port_3B 8.0 +/- 2.0
+00394 PASS: Status Message Amp.Port_3B 7.0
+00395 sdo[0x6411][6] = 500 : NULL : WAIT = 0.2
+00396 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00396 TEST: MeterAmps 1.6 +/- 0.2
+00396 PASS: MeterAmps 1.585
+00397 NULL : sdo[0x5003][6] = 16 | 2 | 0.5
+00397 TEST: Status Message Amp.Port_3B 16.0 +/- 2.0
+00397 PASS: Status Message Amp.Port_3B 15.0
+00398 sdo[0x6411][6] = 1000 : NULL : WAIT = 0.2
+00399 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00399 TEST: MeterAmps 3.3 +/- 0.2
+00399 PASS: MeterAmps 3.237
+00400 NULL : sdo[0x5003][6] = 33 | 2 | 0.5
+00400 TEST: Status Message Amp.Port_3B 33.0 +/- 2.0
+00400 PASS: Status Message Amp.Port_3B 32.0
+00401 #switch out load line, switch coil
+00401 sdo[0x6411][6] = 0 : NULL : WAIT = 0.5
+00402 J2_06 = 0 : NULL : WAIT = 0.5
+00403 #switch in load line, set current
+00403 J2_07 = 1 : NULL : WAIT = 0.5
+00404 
+00404 sdo[0x6411][7] = 250 : NULL : WAIT = 0.2
+00405 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00405 TEST: MeterAmps 0.8 +/- 0.2
+00405 PASS: MeterAmps 0.786
+00406 NULL : sdo[0x5003][7] = 8| 2 | 0.5
+00406 TEST: Status Message Amp.Port_4A 8.0 +/- 2.0
+00406 PASS: Status Message Amp.Port_4A 7.0
+00407 sdo[0x6411][7] = 500 : NULL : WAIT = 0.2
+00408 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00408 TEST: MeterAmps 1.6 +/- 0.2
+00408 PASS: MeterAmps 1.569
+00409 NULL : sdo[0x5003][7] = 16 | 2 | 0.5
+00409 TEST: Status Message Amp.Port_4A 16.0 +/- 2.0
+00409 PASS: Status Message Amp.Port_4A 16.0
+00410 sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+00411 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00411 TEST: MeterAmps 3.3 +/- 0.2
+00411 PASS: MeterAmps 3.218
+00412 NULL : sdo[0x5003][7] = 33 | 2 | 0.5
+00412 TEST: Status Message Amp.Port_4A 33.0 +/- 2.0
+00412 PASS: Status Message Amp.Port_4A 33.0
+00413 #switch out load line, switch coil
+00413 sdo[0x6411][7] = 0 : NULL : WAIT = 0.5
+00414 J2_07 = 0 : NULL : WAIT = 0.5
+00415 #switch in load line, set current
+00415 J2_08 = 1 : NULL : WAIT = 0.5
+00416 
+00416 sdo[0x6411][8] = 250 : NULL : WAIT = 0.2
+00417 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00417 TEST: MeterAmps 0.8 +/- 0.2
+00417 PASS: MeterAmps 0.789
+00418 NULL : sdo[0x5003][8] = 8| 2 | 0.5
+00418 TEST: Status Message Amp.Port_4B 8.0 +/- 2.0
+00418 PASS: Status Message Amp.Port_4B 7.0
+00419 sdo[0x6411][8] = 500 : NULL : WAIT = 0.2
+00420 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00420 TEST: MeterAmps 1.6 +/- 0.2
+00420 PASS: MeterAmps 1.582
+00421 NULL : sdo[0x5003][8] = 16 | 2 | 0.5
+00421 TEST: Status Message Amp.Port_4B 16.0 +/- 2.0
+00421 PASS: Status Message Amp.Port_4B 15.0
+00422 sdo[0x6411][8] = 1000 : NULL : WAIT = 0.2
+00423 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00423 TEST: MeterAmps 3.3 +/- 0.2
+00423 PASS: MeterAmps 3.237
+00424 NULL : sdo[0x5003][8] = 33 | 2 | 0.5
+00424 TEST: Status Message Amp.Port_4B 33.0 +/- 2.0
+00424 PASS: Status Message Amp.Port_4B 32.0
+00425 #switch out load line, switch coil
+00425 sdo[0x6411][8] = 0 : NULL : WAIT = 0.5
+00426 J2_08 = 0 : NULL : WAIT = 0.5
+00427 #switch in load line, set current
+00427 J2_09 = 1 : NULL : WAIT = 0.5
+00428 
+00428 sdo[0x6411][9] = 250 : NULL : WAIT = 0.2
+00429 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00429 TEST: MeterAmps 0.8 +/- 0.2
+00429 PASS: MeterAmps 0.796
+00430 NULL : sdo[0x5003][9] = 8| 2 | 0.5
+00430 TEST: Status Message Amp.Port_5A 8.0 +/- 2.0
+00430 PASS: Status Message Amp.Port_5A 8.0
+00431 sdo[0x6411][9] = 500 : NULL : WAIT = 0.2
+00432 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00432 TEST: MeterAmps 1.6 +/- 0.2
+00432 PASS: MeterAmps 1.59
+00433 NULL : sdo[0x5003][9] = 16 | 2 | 0.5
+00433 TEST: Status Message Amp.Port_5A 16.0 +/- 2.0
+00433 PASS: Status Message Amp.Port_5A 16.0
+00434 sdo[0x6411][9] = 1000 : NULL : WAIT = 0.2
+00435 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00435 TEST: MeterAmps 3.3 +/- 0.2
+00435 PASS: MeterAmps 3.249
+00436 NULL : sdo[0x5003][9] = 33 | 2 | 0.5
+00436 TEST: Status Message Amp.Port_5A 33.0 +/- 2.0
+00436 PASS: Status Message Amp.Port_5A 33.0
+00437 #switch out load line, switch coil
+00437 sdo[0x6411][9] = 0 : NULL : WAIT = 0.5
+00438 J2_09 = 0 : NULL : WAIT = 0.5
+00439 #switch in load line, set current
+00439 J2_10 = 1 : NULL : WAIT = 0.5
+00440 
+00440 sdo[0x6411][10] = 250 : NULL : WAIT = 0.2
+00441 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00441 TEST: MeterAmps 0.8 +/- 0.2
+00441 PASS: MeterAmps 0.794
+00442 NULL : sdo[0x5003][10] = 8| 2 | 0.5
+00442 TEST: Status Message Amp.Port_5B 8.0 +/- 2.0
+00442 PASS: Status Message Amp.Port_5B 7.0
+00443 sdo[0x6411][10] = 500 : NULL : WAIT = 0.2
+00444 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00444 TEST: MeterAmps 1.6 +/- 0.2
+00444 PASS: MeterAmps 1.585
+00445 NULL : sdo[0x5003][10] = 16 | 2 | 0.5
+00445 TEST: Status Message Amp.Port_5B 16.0 +/- 2.0
+00445 PASS: Status Message Amp.Port_5B 16.0
+00446 sdo[0x6411][10] = 1000 : NULL : WAIT = 0.2
+00447 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00447 TEST: MeterAmps 3.3 +/- 0.2
+00447 PASS: MeterAmps 3.244
+00448 NULL : sdo[0x5003][10] = 33 | 2 | 0.5
+00448 TEST: Status Message Amp.Port_5B 33.0 +/- 2.0
+00448 PASS: Status Message Amp.Port_5B 33.0
+00449 #switch out load line, switch coil
+00449 sdo[0x6411][10] = 0 : NULL : WAIT = 0.5
+00450 J2_10 = 0 : NULL : WAIT = 0.5
+00451 #switch in load line, set current
+00451 J2_11 = 1 : NULL : WAIT = 0.5
+00452 
+00452 sdo[0x6411][11] = 250 : NULL : WAIT = 0.2
+00453 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00453 TEST: MeterAmps 0.8 +/- 0.2
+00453 PASS: MeterAmps 0.791
+00454 NULL : sdo[0x5003][11] = 8| 2 | 0.5
+00454 TEST: Status Message Amp.Port_6A 8.0 +/- 2.0
+00454 PASS: Status Message Amp.Port_6A 7.0
+00455 sdo[0x6411][11] = 500 : NULL : WAIT = 0.2
+00456 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00456 TEST: MeterAmps 1.6 +/- 0.2
+00456 PASS: MeterAmps 1.577
+00457 NULL : sdo[0x5003][11] = 16 | 2 | 0.5
+00457 TEST: Status Message Amp.Port_6A 16.0 +/- 2.0
+00457 PASS: Status Message Amp.Port_6A 16.0
+00458 sdo[0x6411][11] = 1000 : NULL : WAIT = 0.2
+00459 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00459 TEST: MeterAmps 3.3 +/- 0.2
+00459 PASS: MeterAmps 3.239
+00460 NULL : sdo[0x5003][11] = 33 | 2 | 0.5
+00460 TEST: Status Message Amp.Port_6A 33.0 +/- 2.0
+00460 PASS: Status Message Amp.Port_6A 33.0
+00461 #switch out load line, switch coil
+00461 sdo[0x6411][11] = 0 : NULL : WAIT = 0.5
+00462 J2_11 = 0 : NULL : WAIT = 0.5
+00463 #switch in load line, set current
+00463 J2_12 = 1 : NULL : WAIT = 0.5
+00464 
+00464 sdo[0x6411][12] = 250 : NULL : WAIT = 0.2
+00465 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00465 TEST: MeterAmps 0.8 +/- 0.2
+00465 PASS: MeterAmps 0.793
+00466 NULL : sdo[0x5003][12] = 8| 2 | 0.5
+00466 TEST: Status Message Amp.Port_6B 8.0 +/- 2.0
+00466 PASS: Status Message Amp.Port_6B 7.0
+00467 sdo[0x6411][12] = 500 : NULL : WAIT = 0.2
+00468 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00468 TEST: MeterAmps 1.6 +/- 0.2
+00468 PASS: MeterAmps 1.58
+00469 NULL : sdo[0x5003][12] = 16 | 2 | 0.5
+00469 TEST: Status Message Amp.Port_6B 16.0 +/- 2.0
+00469 PASS: Status Message Amp.Port_6B 15.0
+00470 sdo[0x6411][12] = 1000 : NULL : WAIT = 0.2
+00471 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00471 TEST: MeterAmps 3.3 +/- 0.2
+00471 PASS: MeterAmps 3.239
+00472 NULL : sdo[0x5003][12] = 33 | 2 | 0.5
+00472 TEST: Status Message Amp.Port_6B 33.0 +/- 2.0
+00472 PASS: Status Message Amp.Port_6B 32.0
+00473 #switch out load line, switch coil
+00473 sdo[0x6411][12] = 0 : NULL : WAIT = 0.5
+00474 J2_12 = 0 : NULL : WAIT = 0.5
+00475 #switch in load line, set current
+00475 J3_01 = 1 : NULL : WAIT = 0.5
+00476 
+00476 sdo[0x6411][13] = 250 : NULL : WAIT = 0.2
+00477 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00477 TEST: MeterAmps 0.8 +/- 0.2
+00477 PASS: MeterAmps 0.798
+00478 NULL : sdo[0x5003][13] = 8| 2 | 0.5
+00478 TEST: Status Message Amp.Port_7A 8.0 +/- 2.0
+00478 PASS: Status Message Amp.Port_7A 8.0
+00479 sdo[0x6411][13] = 500 : NULL : WAIT = 0.2
+00480 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00480 TEST: MeterAmps 1.6 +/- 0.2
+00480 PASS: MeterAmps 1.594
+00481 NULL : sdo[0x5003][13] = 16 | 2 | 0.5
+00481 TEST: Status Message Amp.Port_7A 16.0 +/- 2.0
+00481 PASS: Status Message Amp.Port_7A 16.0
+00482 sdo[0x6411][13] = 1000 : NULL : WAIT = 0.2
+00483 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00483 TEST: MeterAmps 3.3 +/- 0.2
+00483 PASS: MeterAmps 3.256
+00484 NULL : sdo[0x5003][13] = 33 | 2 | 0.5
+00484 TEST: Status Message Amp.Port_7A 33.0 +/- 2.0
+00484 PASS: Status Message Amp.Port_7A 33.0
+00485 #switch out load line, switch coil
+00485 sdo[0x6411][13] = 0 : NULL : WAIT = 0.5
+00486 J3_01 = 0 : NULL : WAIT = 0.5
+00487 #switch in load line, set current
+00487 J3_02 = 1 : NULL : WAIT = 0.5
+00488 
+00488 sdo[0x6411][14] = 250 : NULL : WAIT = 0.2
+00489 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00489 TEST: MeterAmps 0.8 +/- 0.2
+00489 PASS: MeterAmps 0.794
+00490 NULL : sdo[0x5003][14] = 8| 2 | 0.5
+00490 TEST: Status Message Amp.Port_7B 8.0 +/- 2.0
+00490 PASS: Status Message Amp.Port_7B 7.0
+00491 sdo[0x6411][14] = 500 : NULL : WAIT = 0.2
+00492 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00492 TEST: MeterAmps 1.6 +/- 0.2
+00492 PASS: MeterAmps 1.583
+00493 NULL : sdo[0x5003][14] = 16 | 2 | 0.5
+00493 TEST: Status Message Amp.Port_7B 16.0 +/- 2.0
+00493 PASS: Status Message Amp.Port_7B 15.0
+00494 sdo[0x6411][14] = 1000 : NULL : WAIT = 0.2
+00495 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00495 TEST: MeterAmps 3.3 +/- 0.2
+00495 PASS: MeterAmps 3.244
+00496 NULL : sdo[0x5003][14] = 33 | 2 | 0.5
+00496 TEST: Status Message Amp.Port_7B 33.0 +/- 2.0
+00496 PASS: Status Message Amp.Port_7B 32.0
+00497 #switch out load line, switch coil
+00497 sdo[0x6411][14] = 0 : NULL : WAIT = 0.5
+00498 J3_02 = 0 : NULL : WAIT = 0.5
+00499 #switch in load line, set current
+00499 J3_03 = 1 : NULL : WAIT = 0.5
+00500 
+00500 sdo[0x6411][15] = 250 : NULL : WAIT = 0.2
+00501 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00501 TEST: MeterAmps 0.8 +/- 0.2
+00501 PASS: MeterAmps 0.791
+00502 NULL : sdo[0x5003][15] = 8| 2 | 0.5
+00502 TEST: Status Message Amp.Port_8A 8.0 +/- 2.0
+00502 PASS: Status Message Amp.Port_8A 8.0
+00503 sdo[0x6411][15] = 500 : NULL : WAIT = 0.2
+00504 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00504 TEST: MeterAmps 1.6 +/- 0.2
+00504 PASS: MeterAmps 1.583
+00505 NULL : sdo[0x5003][15] = 16 | 2 | 0.5
+00505 TEST: Status Message Amp.Port_8A 16.0 +/- 2.0
+00505 PASS: Status Message Amp.Port_8A 16.0
+00506 sdo[0x6411][15] = 1000 : NULL : WAIT = 0.2
+00507 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00507 TEST: MeterAmps 3.3 +/- 0.2
+00507 PASS: MeterAmps 3.247
+00508 NULL : sdo[0x5003][15] = 33 | 2 | 0.5
+00508 TEST: Status Message Amp.Port_8A 33.0 +/- 2.0
+00508 PASS: Status Message Amp.Port_8A 33.0
+00509 #switch out load line, switch coil
+00509 sdo[0x6411][15] = 0 : NULL : WAIT = 0.5
+00510 J3_03 = 0 : NULL : WAIT = 0.5
+00511 #switch in load line, set current
+00511 J3_04 = 1 : NULL : WAIT = 0.5
+00512 
+00512 sdo[0x6411][16] = 250 : NULL : WAIT = 0.2
+00513 NULL : MeterAmps = 0.8 | 0.2 | 0.5
+00513 TEST: MeterAmps 0.8 +/- 0.2
+00513 PASS: MeterAmps 0.798
+00514 NULL : sdo[0x5003][16] = 8| 2 | 0.5
+00514 TEST: Status Message Amp.Port_8B 8.0 +/- 2.0
+00514 PASS: Status Message Amp.Port_8B 7.0
+00515 sdo[0x6411][16] = 500 : NULL : WAIT = 0.2
+00516 NULL : MeterAmps = 1.6 | 0.2 | 0.5
+00516 TEST: MeterAmps 1.6 +/- 0.2
+00516 PASS: MeterAmps 1.592
+00517 NULL : sdo[0x5003][16] = 16 | 2 | 0.5
+00517 TEST: Status Message Amp.Port_8B 16.0 +/- 2.0
+00517 PASS: Status Message Amp.Port_8B 15.0
+00518 sdo[0x6411][16] = 1000 : NULL : WAIT = 0.2
+00519 NULL : MeterAmps = 3.3 | 0.2 | 0.5
+00519 TEST: MeterAmps 3.3 +/- 0.2
+00519 PASS: MeterAmps 3.256
+00520 NULL : sdo[0x5003][16] = 33 | 2 | 0.5
+00520 TEST: Status Message Amp.Port_8B 33.0 +/- 2.0
+00520 PASS: Status Message Amp.Port_8B 32.0
+00521 #switch out load line, switch coil
+00521 sdo[0x6411][16] = 0 : NULL : WAIT = 0.5
+00522 J3_04 = 0 : NULL : WAIT = 0.5
+00523 SAVE
+00523 END
+Fail count: 0
+Finished on: 2025-09-04-12:12:58
+elapsed time: 0:06:22.255465
