@@ -4,9 +4,6 @@
 UUT_EDS = 37000-561.eds
 UUT_DATANAME = 37000-1-CANOPEN-INPUT-ENCODER
 
-#cycle IGN to clean slate
-RLY_K1 = 1 : NULL : WAIT = 1
-RLY_K1 = 0 : NULL : WAIT = 1
 #-----setup 37000-----
 #setup meter
 LdRemote = 1 : NULL : WAIT = 0.1

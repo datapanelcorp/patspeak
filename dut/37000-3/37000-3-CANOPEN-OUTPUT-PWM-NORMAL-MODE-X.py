@@ -17,9 +17,7 @@ FaultLimit = 4300
 Increment = 200
 
 
-#global setup
-TestName = os.path.splitext(script_name)[0]
-datafile = TestName + ".pat"
+
 
 def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
     t = 0
@@ -259,11 +257,14 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
 
 t = 0
 i = 0
-OutputMode = 0x33
+OutputMode = 0x22
 
 #global setup
-TestName = TestName + "-" + str(OutputMode)
+#TestName = os.path.splitext(script_name)[0]
+TestName = os.path.splitext(script_name)[0].replace('X',  str(OutputMode))
 datafile = TestName + ".pat"
+
+
 
 outstr = ""
 outstr += "#37000-1\n"

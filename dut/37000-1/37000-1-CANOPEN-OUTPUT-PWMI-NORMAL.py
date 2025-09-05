@@ -1,3 +1,5 @@
+import os
+
 t = 0
 i = 0
 Frequancy = 200
@@ -16,7 +18,9 @@ Kp = Kp * 100
 Ki = Ki * 100
 
 #global setup
-TestName = "37000-1-CANOPEN-OUTPUT-PWMI-NORMAL"
+script_name = os.path.basename(__file__)
+print(f"The name of the running script is: {script_name}")
+TestName = os.path.splitext(script_name)[0]
 datafile = TestName + ".pat"
 
 outstr = ""
@@ -27,9 +31,6 @@ outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
 
-outstr += "#cycle IGN to clean slate\n"
-outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
-outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 
 outstr += "PRE_OPERATIONAL\n"
 
@@ -188,3 +189,4 @@ print(outstr)
 
 
 
+print(TestName + ".pat")

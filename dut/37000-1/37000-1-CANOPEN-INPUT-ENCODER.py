@@ -1,12 +1,12 @@
-#from input_count_write import WriteCountTest
-#from input_count_write import WriteMaxCountTest
+import os
+
+script_name = os.path.basename(__file__)
+print(f"The name of the running script is: {script_name}")
+TestName = os.path.splitext(script_name)[0]
+datafile = TestName + ".pat"
 
 PortIndex = 0
 ModeIndex = 0
-
-#global setup
-TestName = "37000-1-CANOPEN-INPUT-ENCODER"
-datafile = TestName + ".pat"
 
 outstr = ""
 outstr += "#37000-1\n"
@@ -15,10 +15,6 @@ outstr += "#input test\n"
 outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
-
-outstr += "#cycle IGN to clean slate\n"
-outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
-outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 
 outstr += "#-----setup 37000-----\n"
 
@@ -197,3 +193,4 @@ print(outstr)
 
 
 
+print(TestName + ".pat")

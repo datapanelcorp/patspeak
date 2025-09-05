@@ -1,3 +1,4 @@
+import os
 t = 0
 i = 0
 
@@ -6,7 +7,9 @@ PortMode = 0
 FaultReset = 1
 
 #global setup
-TestName = "37000-1-CANOPEN-OUTPUT-DIGITAL-NORMAL"
+script_name = os.path.basename(__file__)
+print(f"The name of the running script is: {script_name}")
+TestName = os.path.splitext(script_name)[0]
 datafile = TestName + ".pat"
 
 outstr = ""
@@ -17,10 +20,6 @@ outstr += "#digital normal test using the E-LOAD\n"
 outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
-
-outstr += "#cycle IGN to clean slate\n"
-outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
-outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 
 outstr += "PRE_OPERATIONAL\n"
 
@@ -45,7 +44,8 @@ FltBits = 0
 #FaultLimit = 4400
 
 MaxLimit = 4500
-FaultLimit = 4300
+FaultLimit = 4500
+Increment = 500
 
 t = 0
 while t <= 7:
@@ -68,6 +68,7 @@ while t <= 7:
             FltBits = 0b00001010
         PortMode = "sdo[0x2001][1]"#Port1Mode
         OutputName = "sdo[0x6200][1]"#Output
+        OutputStatus = "sdo[0x5001][3]"#OutStat
         FeedbackName = "sdo[0x5003][2]"#Feedback1B
         OutputConnector = "J2_02"
     if(t == 2):
@@ -168,19 +169,19 @@ while t <= 7:
         outstr += "#set current and turn on output and verify feedback\n" 
         outstr += OutputName + " = " + str(OutputBits) + " : NULL : WAIT = 0.1\n"
         outstr += "LdCurrentSet = " + str(i) + ": NULL : WAIT = 0.1\n"
-        if(i <= FaultLimit):
+        if(i < FaultLimit):
             outstr += "#verify reading from load\n" 
-            outstr += "NULL : " + FeedbackName + " = " + str(i) + " | 1000 | 0.1\n" 
-            outstr += "NULL : " + OutputStatus + " = " + str(FdbkBits) + " | 0.01 | 0.1\n" 
+            outstr += "NULL : " + FeedbackName + " = " + str(i) + " | 200 | 0.1\n" 
+            outstr += "NULL : " + OutputStatus + " = " + str(FdbkBits) + " | 0 | 0.1\n" 
             outstr += "NULL : MeterCurrent = " + str(i*0.001) + " | 0.1 | 0.1\n" 
             outstr += "\n"
         else:
             outstr += "#verify fault #1\n" 
-            outstr += "NULL : " + FeedbackName + " = 0 | 0.1 | 0.1\n" 
-            outstr += "NULL : " + OutputStatus + " = " + str(FltBits) + " | 0.1 | 0.1\n" 
+            outstr += "NULL : " + FeedbackName + " = 0 | 0 | 0.1\n" 
+            outstr += "NULL : " + OutputStatus + " = " + str(FltBits) + " | 0 | 0.1\n" 
             outstr += "NULL : MeterCurrent = 0  | 0.01 | 0.1\n" 
             outstr += "\n"
-        i += 100
+        i += Increment
 
     outstr += "#switch out load line, clear current\n"
     outstr += OutputName + " = 0 : NULL : WAIT = 0.1\n"
@@ -372,3 +373,5 @@ f = open(datafile, 'w')
 f.write(outstr)
 f.close()    
 print(outstr)
+
+print(TestName + ".pat")

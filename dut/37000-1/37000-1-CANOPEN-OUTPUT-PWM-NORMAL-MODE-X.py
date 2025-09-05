@@ -1,3 +1,5 @@
+import os
+
 FaultReset = 0
 
 def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
@@ -146,10 +148,13 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
 
 t = 0
 i = 0
-OutputMode = 0x22
+OutputMode = 0x33
 
 #global setup
-TestName = "37000-1-CANOPEN-OUTPUT-PWM-NORMAL-MODE-" + str(OutputMode)
+
+script_name = os.path.basename(__file__)
+print(f"The name of the running script is: {script_name}")
+TestName = os.path.splitext(script_name)[0].replace('X',  str(OutputMode))
 datafile = TestName + ".pat"
 
 outstr = ""
@@ -159,10 +164,6 @@ outstr += "#PWM test with 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)\n"
 outstr += "UUT_EDS = 37000-561.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
-
-outstr += "#cycle IGN to clean slate\n"
-outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
-outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
         
 outstr += "#-----setup 37000-----\n"
 outstr += "#disable global modes\n"
@@ -209,3 +210,4 @@ print(outstr)
 
 
 
+print(TestName + ".pat")
