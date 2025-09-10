@@ -1,0 +1,237 @@
+Started on: 2025-09-10-14:30:54
+00000 #37000-4
+00000 #Verion 0.0
+00000 #PWMi overcurrent test with a 2.1 Ohm resistive load. (6.9 amps @ 14.5 VDC)
+00000 UUT_EDS = 37000-564.eds
+00000 UUT_DATANAME = 37000-4-CANOPEN-OUTPUT-PWMI-OVERCURRENT
+00000 
+00000 PRE_OPERATIONAL
+00000 #-----configure PWMi-----
+00000 sdo[0x2002][1] = 80.0, sdo[0x2002][2] = 50.0, sdo[0x2002][3] = 80.0, sdo[0x2002][4] = 50.0, sdo[0x2002][5] = 80.0, sdo[0x2002][6] = 50.0 : NULL : WAIT = 0.1
+00001 sdo[0x2002][7] = 80.0, sdo[0x2002][8] = 50.0, sdo[0x2002][9] = 80.0, sdo[0x2002][10] = 50.0, sdo[0x2002][11] = 80.0, sdo[0x2002][12] = 50.0 : NULL : WAIT = 0.1
+00002 sdo[0x2002][13] = 80.0, sdo[0x2002][14] = 50.0, sdo[0x2002][15] = 80.0, sdo[0x2002][16] = 50.0 : NULL
+00003 #-----set freq-----
+00003 sdo[0x3000] = 200 : NULL : WAIT = 0.2
+00004 #-----no fault reset-----
+00004 sdo[0x2000][1] = 0 : NULL
+00005 #-----setup 37000-----
+00005 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
+00006 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
+00007 sdo[0x2001][2] = 68 : NULL : WAIT = 0.2
+00008 #switch in load line, set current
+00008 J2_03 = 1 : NULL : WAIT = 0.5
+00009 J4_03 = 1 : NULL : WAIT = 0.5
+00010 J4_01 = 1 : NULL : WAIT = 0.5
+00011 OPERATIONAL
+00011 
+00011 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+00012 
+00012 sdo[0x6411][2] = 4000 : sdo[0x5001][3] = 32 | 0.1 | 1
+00012 TEST: Status Message F1.Status_Output1-2 32.0 +/- 0.1
+00012 PASS: Status Message F1.Status_Output1-2 32.0
+00013 #switch out load line, switch coil
+00013 sdo[0x6411][2] = 0 : NULL : WAIT = 1
+00014 J2_03 = 0 : NULL : WAIT = 1
+00015 #-----setup 37000-----
+00015 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
+00016 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
+00017 sdo[0x2001][2] = 68 : NULL : WAIT = 0.2
+00018 #switch in load line, set current
+00018 J2_04 = 1 : NULL : WAIT = 0.5
+00019 J4_03 = 1 : NULL : WAIT = 0.5
+00020 J4_01 = 1 : NULL : WAIT = 0.5
+00021 OPERATIONAL
+00021 
+00021 sdo[0x2005][1] = 2 : NULL : WAIT = 0.1
+00022 
+00022 sdo[0x6411][2] = 4000 : sdo[0x5001][3] = 160 | 0.1 | 1
+00022 TEST: Status Message F1.Status_Output1-2 160.0 +/- 0.1
+00022 PASS: Status Message F1.Status_Output1-2 160.0
+00023 #switch out load line, switch coil
+00023 sdo[0x6411][2] = 0 : NULL : WAIT = 1
+00024 J2_04 = 0 : NULL : WAIT = 1
+00025 #-----setup 37000-----
+00025 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
+00026 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
+00027 sdo[0x2001][4] = 68 : NULL : WAIT = 0.2
+00028 #switch in load line, set current
+00028 J2_07 = 1 : NULL : WAIT = 0.5
+00029 J4_03 = 1 : NULL : WAIT = 0.5
+00030 J4_01 = 1 : NULL : WAIT = 0.5
+00031 OPERATIONAL
+00031 
+00031 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+00032 
+00032 sdo[0x6411][4] = 4000 : sdo[0x5001][4] = 32 | 0.1 | 1
+00032 TEST: Status Message F1.Status_Output3-4 32.0 +/- 0.1
+00032 PASS: Status Message F1.Status_Output3-4 32.0
+00033 #switch out load line, switch coil
+00033 sdo[0x6411][4] = 0 : NULL : WAIT = 1
+00034 J2_07 = 0 : NULL : WAIT = 1
+00035 #-----setup 37000-----
+00035 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
+00036 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
+00037 sdo[0x2001][4] = 68 : NULL : WAIT = 0.2
+00038 #switch in load line, set current
+00038 J2_08 = 1 : NULL : WAIT = 0.5
+00039 J4_03 = 1 : NULL : WAIT = 0.5
+00040 J4_01 = 1 : NULL : WAIT = 0.5
+00041 OPERATIONAL
+00041 
+00041 sdo[0x2005][1] = 8 : NULL : WAIT = 0.1
+00042 
+00042 sdo[0x6411][4] = 4000 : sdo[0x5001][4] = 160 | 0.1 | 1
+00042 TEST: Status Message F1.Status_Output3-4 160.0 +/- 0.1
+00042 PASS: Status Message F1.Status_Output3-4 160.0
+00043 #switch out load line, switch coil
+00043 sdo[0x6411][4] = 0 : NULL : WAIT = 1
+00044 J2_08 = 0 : NULL : WAIT = 1
+00045 #-----setup 37000-----
+00045 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
+00046 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
+00047 sdo[0x2001][5] = 68 : NULL : WAIT = 0.2
+00048 #switch in load line, set current
+00048 J2_09 = 1 : NULL : WAIT = 0.5
+00049 J4_03 = 1 : NULL : WAIT = 0.5
+00050 J4_01 = 1 : NULL : WAIT = 0.5
+00051 OPERATIONAL
+00051 
+00051 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+00052 
+00052 sdo[0x6411][5] = 4000 : sdo[0x5001][5] = 2 | 0.1 | 1
+00052 TEST: Status Message F1.Status_Output5-6 2.0 +/- 0.1
+00052 PASS: Status Message F1.Status_Output5-6 2.0
+00053 #switch out load line, switch coil
+00053 sdo[0x6411][5] = 0 : NULL : WAIT = 1
+00054 J2_09 = 0 : NULL : WAIT = 1
+00055 #-----setup 37000-----
+00055 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
+00056 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
+00057 sdo[0x2001][5] = 68 : NULL : WAIT = 0.2
+00058 #switch in load line, set current
+00058 J2_10 = 1 : NULL : WAIT = 0.5
+00059 J4_03 = 1 : NULL : WAIT = 0.5
+00060 J4_01 = 1 : NULL : WAIT = 0.5
+00061 OPERATIONAL
+00061 
+00061 sdo[0x2005][1] = 16 : NULL : WAIT = 0.1
+00062 
+00062 sdo[0x6411][5] = 4000 : sdo[0x5001][5] = 10 | 0.1 | 1
+00062 TEST: Status Message F1.Status_Output5-6 10.0 +/- 0.1
+00062 PASS: Status Message F1.Status_Output5-6 10.0
+00063 #switch out load line, switch coil
+00063 sdo[0x6411][5] = 0 : NULL : WAIT = 1
+00064 J2_10 = 0 : NULL : WAIT = 1
+00065 #-----setup 37000-----
+00065 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
+00066 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
+00067 sdo[0x2001][6] = 68 : NULL : WAIT = 0.2
+00068 #switch in load line, set current
+00068 J2_11 = 1 : NULL : WAIT = 0.5
+00069 J4_03 = 1 : NULL : WAIT = 0.5
+00070 J4_01 = 1 : NULL : WAIT = 0.5
+00071 OPERATIONAL
+00071 
+00071 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+00072 
+00072 sdo[0x6411][6] = 4000 : sdo[0x5001][5] = 42 | 0.1 | 1
+00072 TEST: Status Message F1.Status_Output5-6 42.0 +/- 0.1
+00072 PASS: Status Message F1.Status_Output5-6 42.0
+00073 #switch out load line, switch coil
+00073 sdo[0x6411][6] = 0 : NULL : WAIT = 1
+00074 J2_11 = 0 : NULL : WAIT = 1
+00075 #-----setup 37000-----
+00075 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
+00076 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
+00077 sdo[0x2001][6] = 68 : NULL : WAIT = 0.2
+00078 #switch in load line, set current
+00078 J2_12 = 1 : NULL : WAIT = 0.5
+00079 J4_03 = 1 : NULL : WAIT = 0.5
+00080 J4_01 = 1 : NULL : WAIT = 0.5
+00081 OPERATIONAL
+00081 
+00081 sdo[0x2005][1] = 32 : NULL : WAIT = 0.1
+00082 
+00082 sdo[0x6411][6] = 4000 : sdo[0x5001][5] = 170 | 0.1 | 1
+00082 TEST: Status Message F1.Status_Output5-6 170.0 +/- 0.1
+00082 PASS: Status Message F1.Status_Output5-6 170.0
+00083 #switch out load line, switch coil
+00083 sdo[0x6411][6] = 0 : NULL : WAIT = 1
+00084 J2_12 = 0 : NULL : WAIT = 1
+00085 #-----setup 37000-----
+00085 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
+00086 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
+00087 sdo[0x2001][7] = 68 : NULL : WAIT = 0.2
+00088 #switch in load line, set current
+00088 J3_01 = 1 : NULL : WAIT = 0.5
+00089 J4_03 = 1 : NULL : WAIT = 0.5
+00090 J4_01 = 1 : NULL : WAIT = 0.5
+00091 OPERATIONAL
+00091 
+00091 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+00092 
+00092 sdo[0x6411][7] = 4000 : sdo[0x5001][6] = 2 | 0.1 | 1
+00092 TEST: Status Message F1.Status_Output7-8 2.0 +/- 0.1
+00092 PASS: Status Message F1.Status_Output7-8 2.0
+00093 #switch out load line, switch coil
+00093 sdo[0x6411][7] = 0 : NULL : WAIT = 1
+00094 J3_01 = 0 : NULL : WAIT = 1
+00095 #-----setup 37000-----
+00095 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
+00096 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
+00097 sdo[0x2001][7] = 68 : NULL : WAIT = 0.2
+00098 #switch in load line, set current
+00098 J3_02 = 1 : NULL : WAIT = 0.5
+00099 J4_03 = 1 : NULL : WAIT = 0.5
+00100 J4_01 = 1 : NULL : WAIT = 0.5
+00101 OPERATIONAL
+00101 
+00101 sdo[0x2005][1] = 64 : NULL : WAIT = 0.1
+00102 
+00102 sdo[0x6411][7] = 4000 : sdo[0x5001][6] = 10 | 0.1 | 1
+00102 TEST: Status Message F1.Status_Output7-8 10.0 +/- 0.1
+00102 PASS: Status Message F1.Status_Output7-8 10.0
+00103 #switch out load line, switch coil
+00103 sdo[0x6411][7] = 0 : NULL : WAIT = 1
+00104 J3_02 = 0 : NULL : WAIT = 1
+00105 #-----setup 37000-----
+00105 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
+00106 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
+00107 sdo[0x2001][8] = 68 : NULL : WAIT = 0.2
+00108 #switch in load line, set current
+00108 J3_03 = 1 : NULL : WAIT = 0.5
+00109 J4_03 = 1 : NULL : WAIT = 0.5
+00110 J4_01 = 1 : NULL : WAIT = 0.5
+00111 OPERATIONAL
+00111 
+00111 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+00112 
+00112 sdo[0x6411][8] = 4000 : sdo[0x5001][6] = 42 | 0.1 | 1
+00112 TEST: Status Message F1.Status_Output7-8 42.0 +/- 0.1
+00112 PASS: Status Message F1.Status_Output7-8 42.0
+00113 #switch out load line, switch coil
+00113 sdo[0x6411][8] = 0 : NULL : WAIT = 1
+00114 J3_03 = 0 : NULL : WAIT = 1
+00115 #-----setup 37000-----
+00115 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
+00116 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2
+00117 sdo[0x2001][8] = 68 : NULL : WAIT = 0.2
+00118 #switch in load line, set current
+00118 J3_04 = 1 : NULL : WAIT = 0.5
+00119 J4_03 = 1 : NULL : WAIT = 0.5
+00120 J4_01 = 1 : NULL : WAIT = 0.5
+00121 OPERATIONAL
+00121 
+00121 sdo[0x2005][1] = 128 : NULL : WAIT = 0.1
+00122 
+00122 sdo[0x6411][8] = 4000 : sdo[0x5001][6] = 170 | 0.1 | 1
+00122 TEST: Status Message F1.Status_Output7-8 170.0 +/- 0.1
+00122 PASS: Status Message F1.Status_Output7-8 170.0
+00123 #switch out load line, switch coil
+00123 sdo[0x6411][8] = 0 : NULL : WAIT = 1
+00124 J3_04 = 0 : NULL : WAIT = 1
+00125 SAVE
+00125 END
+Fail count: 0
+Finished on: 2025-09-10-14:32:15
+elapsed time: 0:01:17.742802

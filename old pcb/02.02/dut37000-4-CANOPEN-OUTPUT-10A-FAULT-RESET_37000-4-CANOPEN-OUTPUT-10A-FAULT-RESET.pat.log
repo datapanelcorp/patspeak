@@ -1,4 +1,4 @@
-Started on: 2025-09-08-15:16:29
+Started on: 2025-09-10-15:22:15
 00000 #37000-4
 00000 #Verion 0.0
 00000 #digital normal test using the E-LOAD
@@ -1557,5 +1557,5 @@ Started on: 2025-09-08-15:16:29
 00640 SAVE
 00640 END
 Fail count: 0
-Finished on: 2025-09-08-15:19:50
-elapsed time: 0:03:17.332320
+Finished on: 2025-09-10-15:25:27
+elapsed time: 0:03:09.222979

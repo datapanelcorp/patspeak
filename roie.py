@@ -342,11 +342,11 @@ def main() -> None:
 
             # Prepare new strings
             new_line0 = "*" * 60
-            new_line1 = "* ELOAD ENABLE: " + load_stat_imp
-            new_line2 = "* ELOAD MODE: " + load_stat_func
-            new_line3 = "* ELOAD CURRENT SETTING: " + load_stat_curr 
-            new_line4 = "* ELOAD RESISTANCE SETTING: " + load_stat_res
-            new_line5 = "* ELOAD SHORT ENABLED: " + load_stat_short
+            new_line1 = "* ELOAD - ENABLE: " + load_stat_imp
+            new_line2 = "* ELOAD - MODE: " + load_stat_func
+            new_line3 = "* ELOAD - CURRENT SETTING: " + load_stat_curr 
+            new_line4 = "* ELOAD - RESISTANCE SETTING: " + load_stat_res
+            new_line5 = "* ELOAD - SHORT ENABLED: " + load_stat_short
             new_line6 = f"* ELOAD - VOLTS: {load_volts/1000:.3f} V"
             new_line7 = f"* ELOAD - CURRENT: {load_current/1000:.3f} A"
             new_line8 = f"* METER - CURRENT: {meter_current/1000:.3f} A"

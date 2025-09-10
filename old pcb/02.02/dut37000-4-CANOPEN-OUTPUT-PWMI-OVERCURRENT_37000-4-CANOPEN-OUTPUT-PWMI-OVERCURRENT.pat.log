@@ -1,4 +1,4 @@
-Started on: 2025-09-09-08:23:49
+Started on: 2025-09-10-15:08:18
 00000 #37000-4
 00000 #Verion 0.0
 00000 #PWMi overcurrent test with a 2.1 Ohm resistive load. (6.9 amps @ 14.5 VDC)
@@ -233,5 +233,5 @@ Started on: 2025-09-09-08:23:49
 00125 SAVE
 00125 END
 Fail count: 0
-Finished on: 2025-09-09-08:25:10
-elapsed time: 0:01:17.821907
+Finished on: 2025-09-10-15:09:38
+elapsed time: 0:01:17.842931

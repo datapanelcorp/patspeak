@@ -1,4 +1,4 @@
-Started on: 2025-09-08-15:31:46
+Started on: 2025-09-10-14:39:09
 00000 #PWMi normal test with a 'red coil' 6.4 ohm inductive load. (2.27 amps @ 14.5 VDC)
 00000 #37000-4
 00000 #Verion 0.0
@@ -25,60 +25,60 @@ Started on: 2025-09-08-15:31:46
 00009 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
 00010 sdo[0x6411][2] = 0 : MeterAmps = 0.0 | 0.155 | 0.5
 00010 TEST: MeterAmps 0.0 +/- 0.155
-00010 PASS: MeterAmps 0.001
+00010 PASS: MeterAmps 0.0
 00011 sdo[0x6411][2] = 0 : sdo[0x5003][2] = 0 | 155 | 0.5
 00011 TEST: Status Message Amp.Port_2 0.0 +/- 155.0
 00011 PASS: Status Message Amp.Port_2 0.0
 00012 sdo[0x6411][2] = 100 : MeterAmps = 0.1 | 0.155 | 0.5
-00012 PASS: MeterAmps 0.001
+00012 PASS: MeterAmps 0.0
 00013 sdo[0x6411][2] = 100 : sdo[0x5003][2] = 100 | 155 | 0.5
 00013 TEST: Status Message Amp.Port_2 100.0 +/- 155.0
 00013 PASS: Status Message Amp.Port_2 83.0
 00014 sdo[0x6411][2] = 200 : MeterAmps = 0.2 | 0.155 | 0.5
-00014 PASS: MeterAmps 0.133
+00014 PASS: MeterAmps 0.131
 00015 sdo[0x6411][2] = 200 : sdo[0x5003][2] = 200 | 155 | 0.5
 00015 TEST: Status Message Amp.Port_2 200.0 +/- 155.0
 00015 PASS: Status Message Amp.Port_2 171.0
 00016 sdo[0x6411][2] = 300 : MeterAmps = 0.3 | 0.155 | 0.5
-00016 PASS: MeterAmps 0.226
+00016 PASS: MeterAmps 0.224
 00017 sdo[0x6411][2] = 300 : sdo[0x5003][2] = 300 | 155 | 0.5
 00017 TEST: Status Message Amp.Port_2 300.0 +/- 155.0
-00017 PASS: Status Message Amp.Port_2 274.0
+00017 PASS: Status Message Amp.Port_2 278.0
 00018 sdo[0x6411][2] = 400 : MeterAmps = 0.4 | 0.155 | 0.5
-00018 PASS: MeterAmps 0.321
+00018 PASS: MeterAmps 0.319
 00019 sdo[0x6411][2] = 400 : sdo[0x5003][2] = 400 | 155 | 0.5
 00019 TEST: Status Message Amp.Port_2 400.0 +/- 155.0
-00019 PASS: Status Message Amp.Port_2 374.0
+00019 PASS: Status Message Amp.Port_2 378.0
 00020 sdo[0x6411][2] = 500 : MeterAmps = 0.5 | 0.155 | 0.5
-00020 PASS: MeterAmps 0.415
+00020 PASS: MeterAmps 0.414
 00021 sdo[0x6411][2] = 500 : sdo[0x5003][2] = 500 | 155 | 0.5
 00021 TEST: Status Message Amp.Port_2 500.0 +/- 155.0
 00021 PASS: Status Message Amp.Port_2 473.0
 00022 sdo[0x6411][2] = 600 : MeterAmps = 0.6 | 0.155 | 0.5
-00022 PASS: MeterAmps 0.506
+00022 PASS: MeterAmps 0.507
 00023 sdo[0x6411][2] = 600 : sdo[0x5003][2] = 600 | 155 | 0.5
 00023 TEST: Status Message Amp.Port_2 600.0 +/- 155.0
-00023 PASS: Status Message Amp.Port_2 573.0
+00023 PASS: Status Message Amp.Port_2 577.0
 00024 sdo[0x6411][2] = 700 : MeterAmps = 0.7 | 0.155 | 0.5
 00024 PASS: MeterAmps 0.6
 00025 sdo[0x6411][2] = 700 : sdo[0x5003][2] = 700 | 155 | 0.5
 00025 TEST: Status Message Amp.Port_2 700.0 +/- 155.0
 00025 PASS: Status Message Amp.Port_2 672.0
 00026 sdo[0x6411][2] = 800 : MeterAmps = 0.8 | 0.155 | 0.5
-00026 PASS: MeterAmps 0.694
+00026 PASS: MeterAmps 0.696
 00027 sdo[0x6411][2] = 800 : sdo[0x5003][2] = 800 | 155 | 0.5
 00027 TEST: Status Message Amp.Port_2 800.0 +/- 155.0
 00027 PASS: Status Message Amp.Port_2 772.0
 00028 sdo[0x6411][2] = 900 : MeterAmps = 0.9 | 0.155 | 0.5
-00028 PASS: MeterAmps 0.79
+00028 PASS: MeterAmps 0.789
 00029 sdo[0x6411][2] = 900 : sdo[0x5003][2] = 900 | 155 | 0.5
 00029 TEST: Status Message Amp.Port_2 900.0 +/- 155.0
-00029 PASS: Status Message Amp.Port_2 872.0
+00029 PASS: Status Message Amp.Port_2 876.0
 00030 sdo[0x6411][2] = 1000 : MeterAmps = 1.0 | 0.155 | 0.5
 00030 PASS: MeterAmps 0.886
 00031 sdo[0x6411][2] = 1000 : sdo[0x5003][2] = 1000 | 155 | 0.5
 00031 TEST: Status Message Amp.Port_2 1000.0 +/- 155.0
-00031 PASS: Status Message Amp.Port_2 975.0
+00031 PASS: Status Message Amp.Port_2 979.0
 00032 sdo[0x6411][2] = 1100 : MeterAmps = 1.1 | 0.155 | 0.5
 00032 PASS: MeterAmps 0.98
 00033 sdo[0x6411][2] = 1100 : sdo[0x5003][2] = 1100 | 155 | 0.5
@@ -93,14 +93,14 @@ Started on: 2025-09-08-15:31:46
 00036 PASS: MeterAmps 1.167
 00037 sdo[0x6411][2] = 1300 : sdo[0x5003][2] = 1300 | 155 | 0.5
 00037 TEST: Status Message Amp.Port_2 1300.0 +/- 155.0
-00037 PASS: Status Message Amp.Port_2 1274.0
+00037 PASS: Status Message Amp.Port_2 1278.0
 00038 sdo[0x6411][2] = 1400 : MeterAmps = 1.4 | 0.155 | 0.5
-00038 PASS: MeterAmps 1.259
+00038 PASS: MeterAmps 1.26
 00039 sdo[0x6411][2] = 1400 : sdo[0x5003][2] = 1400 | 155 | 0.5
 00039 TEST: Status Message Amp.Port_2 1400.0 +/- 155.0
 00039 PASS: Status Message Amp.Port_2 1373.0
 00040 sdo[0x6411][2] = 1500 : MeterAmps = 1.5 | 0.155 | 0.5
-00040 PASS: MeterAmps 1.351
+00040 PASS: MeterAmps 1.353
 00041 sdo[0x6411][2] = 1500 : sdo[0x5003][2] = 1500 | 155 | 0.5
 00041 TEST: Status Message Amp.Port_2 1500.0 +/- 155.0
 00041 PASS: Status Message Amp.Port_2 1473.0
@@ -124,72 +124,72 @@ Started on: 2025-09-08-15:31:46
 00051 sdo[0x2005][1] = 2 : NULL : WAIT = 0.1
 00052 sdo[0x6411][2] = 0 : MeterAmps = 0.0 | 0.155 | 0.5
 00052 TEST: MeterAmps 0.0 +/- 0.155
-00052 PASS: MeterAmps 0.001
+00052 PASS: MeterAmps 0.0
 00053 sdo[0x6411][2] = 0 : sdo[0x5003][2] = 0 | 155 | 0.5
 00053 TEST: Status Message Amp.Port_2 0.0 +/- 155.0
 00053 PASS: Status Message Amp.Port_2 0.0
 00054 sdo[0x6411][2] = 100 : MeterAmps = 0.1 | 0.155 | 0.5
-00054 PASS: MeterAmps 0.001
+00054 PASS: MeterAmps 0.0
 00055 sdo[0x6411][2] = 100 : sdo[0x5003][2] = 100 | 155 | 0.5
 00055 TEST: Status Message Amp.Port_2 100.0 +/- 155.0
 00055 PASS: Status Message Amp.Port_2 79.0
 00056 sdo[0x6411][2] = 200 : MeterAmps = 0.2 | 0.155 | 0.5
-00056 PASS: MeterAmps 0.134
+00056 PASS: MeterAmps 0.133
 00057 sdo[0x6411][2] = 200 : sdo[0x5003][2] = 200 | 155 | 0.5
 00057 TEST: Status Message Amp.Port_2 200.0 +/- 155.0
 00057 PASS: Status Message Amp.Port_2 171.0
 00058 sdo[0x6411][2] = 300 : MeterAmps = 0.3 | 0.155 | 0.5
-00058 PASS: MeterAmps 0.229
+00058 PASS: MeterAmps 0.227
 00059 sdo[0x6411][2] = 300 : sdo[0x5003][2] = 300 | 155 | 0.5
 00059 TEST: Status Message Amp.Port_2 300.0 +/- 155.0
 00059 PASS: Status Message Amp.Port_2 274.0
 00060 sdo[0x6411][2] = 400 : MeterAmps = 0.4 | 0.155 | 0.5
-00060 PASS: MeterAmps 0.326
+00060 PASS: MeterAmps 0.325
 00061 sdo[0x6411][2] = 400 : sdo[0x5003][2] = 400 | 155 | 0.5
 00061 TEST: Status Message Amp.Port_2 400.0 +/- 155.0
 00061 PASS: Status Message Amp.Port_2 374.0
 00062 sdo[0x6411][2] = 500 : MeterAmps = 0.5 | 0.155 | 0.5
-00062 PASS: MeterAmps 0.42
+00062 PASS: MeterAmps 0.421
 00063 sdo[0x6411][2] = 500 : sdo[0x5003][2] = 500 | 155 | 0.5
 00063 TEST: Status Message Amp.Port_2 500.0 +/- 155.0
-00063 PASS: Status Message Amp.Port_2 473.0
+00063 PASS: Status Message Amp.Port_2 469.0
 00064 sdo[0x6411][2] = 600 : MeterAmps = 0.6 | 0.155 | 0.5
 00064 PASS: MeterAmps 0.516
 00065 sdo[0x6411][2] = 600 : sdo[0x5003][2] = 600 | 155 | 0.5
 00065 TEST: Status Message Amp.Port_2 600.0 +/- 155.0
-00065 PASS: Status Message Amp.Port_2 569.0
+00065 PASS: Status Message Amp.Port_2 573.0
 00066 sdo[0x6411][2] = 700 : MeterAmps = 0.7 | 0.155 | 0.5
 00066 PASS: MeterAmps 0.611
 00067 sdo[0x6411][2] = 700 : sdo[0x5003][2] = 700 | 155 | 0.5
 00067 TEST: Status Message Amp.Port_2 700.0 +/- 155.0
 00067 PASS: Status Message Amp.Port_2 672.0
 00068 sdo[0x6411][2] = 800 : MeterAmps = 0.8 | 0.155 | 0.5
-00068 PASS: MeterAmps 0.708
+00068 PASS: MeterAmps 0.71
 00069 sdo[0x6411][2] = 800 : sdo[0x5003][2] = 800 | 155 | 0.5
 00069 TEST: Status Message Amp.Port_2 800.0 +/- 155.0
-00069 PASS: Status Message Amp.Port_2 768.0
+00069 PASS: Status Message Amp.Port_2 772.0
 00070 sdo[0x6411][2] = 900 : MeterAmps = 0.9 | 0.155 | 0.5
-00070 PASS: MeterAmps 0.805
+00070 PASS: MeterAmps 0.806
 00071 sdo[0x6411][2] = 900 : sdo[0x5003][2] = 900 | 155 | 0.5
 00071 TEST: Status Message Amp.Port_2 900.0 +/- 155.0
-00071 PASS: Status Message Amp.Port_2 868.0
+00071 PASS: Status Message Amp.Port_2 876.0
 00072 sdo[0x6411][2] = 1000 : MeterAmps = 1.0 | 0.155 | 0.5
-00072 PASS: MeterAmps 0.904
+00072 PASS: MeterAmps 0.905
 00073 sdo[0x6411][2] = 1000 : sdo[0x5003][2] = 1000 | 155 | 0.5
 00073 TEST: Status Message Amp.Port_2 1000.0 +/- 155.0
 00073 PASS: Status Message Amp.Port_2 975.0
 00074 sdo[0x6411][2] = 1100 : MeterAmps = 1.1 | 0.155 | 0.5
-00074 PASS: MeterAmps 0.999
+00074 PASS: MeterAmps 1.0
 00075 sdo[0x6411][2] = 1100 : sdo[0x5003][2] = 1100 | 155 | 0.5
 00075 TEST: Status Message Amp.Port_2 1100.0 +/- 155.0
 00075 PASS: Status Message Amp.Port_2 1075.0
 00076 sdo[0x6411][2] = 1200 : MeterAmps = 1.2 | 0.155 | 0.5
-00076 PASS: MeterAmps 1.095
+00076 PASS: MeterAmps 1.096
 00077 sdo[0x6411][2] = 1200 : sdo[0x5003][2] = 1200 | 155 | 0.5
 00077 TEST: Status Message Amp.Port_2 1200.0 +/- 155.0
 00077 PASS: Status Message Amp.Port_2 1174.0
 00078 sdo[0x6411][2] = 1300 : MeterAmps = 1.3 | 0.155 | 0.5
-00078 PASS: MeterAmps 1.19
+00078 PASS: MeterAmps 1.192
 00079 sdo[0x6411][2] = 1300 : sdo[0x5003][2] = 1300 | 155 | 0.5
 00079 TEST: Status Message Amp.Port_2 1300.0 +/- 155.0
 00079 PASS: Status Message Amp.Port_2 1270.0
@@ -199,7 +199,7 @@ Started on: 2025-09-08-15:31:46
 00081 TEST: Status Message Amp.Port_2 1400.0 +/- 155.0
 00081 PASS: Status Message Amp.Port_2 1369.0
 00082 sdo[0x6411][2] = 1500 : MeterAmps = 1.5 | 0.155 | 0.5
-00082 PASS: MeterAmps 1.379
+00082 PASS: MeterAmps 1.382
 00083 sdo[0x6411][2] = 1500 : sdo[0x5003][2] = 1500 | 155 | 0.5
 00083 TEST: Status Message Amp.Port_2 1500.0 +/- 155.0
 00083 PASS: Status Message Amp.Port_2 1469.0
@@ -223,17 +223,17 @@ Started on: 2025-09-08-15:31:46
 00093 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
 00094 sdo[0x6411][4] = 0 : MeterAmps = 0.0 | 0.155 | 0.5
 00094 TEST: MeterAmps 0.0 +/- 0.155
-00094 PASS: MeterAmps 0.001
+00094 PASS: MeterAmps 0.0
 00095 sdo[0x6411][4] = 0 : sdo[0x5003][4] = 0 | 155 | 0.5
 00095 TEST: Status Message Amp.Port_4 0.0 +/- 155.0
 00095 PASS: Status Message Amp.Port_4 0.0
 00096 sdo[0x6411][4] = 100 : MeterAmps = 0.1 | 0.155 | 0.5
-00096 PASS: MeterAmps 0.001
+00096 PASS: MeterAmps 0.0
 00097 sdo[0x6411][4] = 100 : sdo[0x5003][4] = 100 | 155 | 0.5
 00097 TEST: Status Message Amp.Port_4 100.0 +/- 155.0
-00097 PASS: Status Message Amp.Port_4 83.0
+00097 PASS: Status Message Amp.Port_4 79.0
 00098 sdo[0x6411][4] = 200 : MeterAmps = 0.2 | 0.155 | 0.5
-00098 PASS: MeterAmps 0.133
+00098 PASS: MeterAmps 0.134
 00099 sdo[0x6411][4] = 200 : sdo[0x5003][4] = 200 | 155 | 0.5
 00099 TEST: Status Message Amp.Port_4 200.0 +/- 155.0
 00099 PASS: Status Message Amp.Port_4 171.0
@@ -243,7 +243,7 @@ Started on: 2025-09-08-15:31:46
 00101 TEST: Status Message Amp.Port_4 300.0 +/- 155.0
 00101 PASS: Status Message Amp.Port_4 274.0
 00102 sdo[0x6411][4] = 400 : MeterAmps = 0.4 | 0.155 | 0.5
-00102 PASS: MeterAmps 0.321
+00102 PASS: MeterAmps 0.322
 00103 sdo[0x6411][4] = 400 : sdo[0x5003][4] = 400 | 155 | 0.5
 00103 TEST: Status Message Amp.Port_4 400.0 +/- 155.0
 00103 PASS: Status Message Amp.Port_4 378.0
@@ -253,17 +253,17 @@ Started on: 2025-09-08-15:31:46
 00105 TEST: Status Message Amp.Port_4 500.0 +/- 155.0
 00105 PASS: Status Message Amp.Port_4 473.0
 00106 sdo[0x6411][4] = 600 : MeterAmps = 0.6 | 0.155 | 0.5
-00106 PASS: MeterAmps 0.51
+00106 PASS: MeterAmps 0.509
 00107 sdo[0x6411][4] = 600 : sdo[0x5003][4] = 600 | 155 | 0.5
 00107 TEST: Status Message Amp.Port_4 600.0 +/- 155.0
-00107 PASS: Status Message Amp.Port_4 577.0
+00107 PASS: Status Message Amp.Port_4 573.0
 00108 sdo[0x6411][4] = 700 : MeterAmps = 0.7 | 0.155 | 0.5
 00108 PASS: MeterAmps 0.602
 00109 sdo[0x6411][4] = 700 : sdo[0x5003][4] = 700 | 155 | 0.5
 00109 TEST: Status Message Amp.Port_4 700.0 +/- 155.0
 00109 PASS: Status Message Amp.Port_4 672.0
 00110 sdo[0x6411][4] = 800 : MeterAmps = 0.8 | 0.155 | 0.5
-00110 PASS: MeterAmps 0.696
+00110 PASS: MeterAmps 0.697
 00111 sdo[0x6411][4] = 800 : sdo[0x5003][4] = 800 | 155 | 0.5
 00111 TEST: Status Message Amp.Port_4 800.0 +/- 155.0
 00111 PASS: Status Message Amp.Port_4 772.0
@@ -271,37 +271,37 @@ Started on: 2025-09-08-15:31:46
 00112 PASS: MeterAmps 0.792
 00113 sdo[0x6411][4] = 900 : sdo[0x5003][4] = 900 | 155 | 0.5
 00113 TEST: Status Message Amp.Port_4 900.0 +/- 155.0
-00113 PASS: Status Message Amp.Port_4 876.0
+00113 PASS: Status Message Amp.Port_4 880.0
 00114 sdo[0x6411][4] = 1000 : MeterAmps = 1.0 | 0.155 | 0.5
-00114 PASS: MeterAmps 0.888
+00114 PASS: MeterAmps 0.889
 00115 sdo[0x6411][4] = 1000 : sdo[0x5003][4] = 1000 | 155 | 0.5
 00115 TEST: Status Message Amp.Port_4 1000.0 +/- 155.0
 00115 PASS: Status Message Amp.Port_4 975.0
 00116 sdo[0x6411][4] = 1100 : MeterAmps = 1.1 | 0.155 | 0.5
-00116 PASS: MeterAmps 0.982
+00116 PASS: MeterAmps 0.983
 00117 sdo[0x6411][4] = 1100 : sdo[0x5003][4] = 1100 | 155 | 0.5
 00117 TEST: Status Message Amp.Port_4 1100.0 +/- 155.0
 00117 PASS: Status Message Amp.Port_4 1075.0
 00118 sdo[0x6411][4] = 1200 : MeterAmps = 1.2 | 0.155 | 0.5
-00118 PASS: MeterAmps 1.075
+00118 PASS: MeterAmps 1.077
 00119 sdo[0x6411][4] = 1200 : sdo[0x5003][4] = 1200 | 155 | 0.5
 00119 TEST: Status Message Amp.Port_4 1200.0 +/- 155.0
 00119 PASS: Status Message Amp.Port_4 1174.0
 00120 sdo[0x6411][4] = 1300 : MeterAmps = 1.3 | 0.155 | 0.5
-00120 PASS: MeterAmps 1.165
+00120 PASS: MeterAmps 1.169
 00121 sdo[0x6411][4] = 1300 : sdo[0x5003][4] = 1300 | 155 | 0.5
 00121 TEST: Status Message Amp.Port_4 1300.0 +/- 155.0
-00121 PASS: Status Message Amp.Port_4 1274.0
+00121 PASS: Status Message Amp.Port_4 1278.0
 00122 sdo[0x6411][4] = 1400 : MeterAmps = 1.4 | 0.155 | 0.5
-00122 PASS: MeterAmps 1.26
+00122 PASS: MeterAmps 1.263
 00123 sdo[0x6411][4] = 1400 : sdo[0x5003][4] = 1400 | 155 | 0.5
 00123 TEST: Status Message Amp.Port_4 1400.0 +/- 155.0
 00123 PASS: Status Message Amp.Port_4 1369.0
 00124 sdo[0x6411][4] = 1500 : MeterAmps = 1.5 | 0.155 | 0.5
-00124 PASS: MeterAmps 1.353
+00124 PASS: MeterAmps 1.357
 00125 sdo[0x6411][4] = 1500 : sdo[0x5003][4] = 1500 | 155 | 0.5
 00125 TEST: Status Message Amp.Port_4 1500.0 +/- 155.0
-00125 PASS: Status Message Amp.Port_4 1469.0
+00125 PASS: Status Message Amp.Port_4 1473.0
 00126 #switch out load line, switch coil
 00126 sdo[0x6411][4] = 0 : NULL : WAIT = 1
 00127 J2_07 = 0 : NULL : WAIT = 1
@@ -322,17 +322,17 @@ Started on: 2025-09-08-15:31:46
 00135 sdo[0x2005][1] = 8 : NULL : WAIT = 0.1
 00136 sdo[0x6411][4] = 0 : MeterAmps = 0.0 | 0.155 | 0.5
 00136 TEST: MeterAmps 0.0 +/- 0.155
-00136 PASS: MeterAmps 0.001
+00136 PASS: MeterAmps 0.0
 00137 sdo[0x6411][4] = 0 : sdo[0x5003][4] = 0 | 155 | 0.5
 00137 TEST: Status Message Amp.Port_4 0.0 +/- 155.0
 00137 PASS: Status Message Amp.Port_4 0.0
 00138 sdo[0x6411][4] = 100 : MeterAmps = 0.1 | 0.155 | 0.5
-00138 PASS: MeterAmps 0.001
+00138 PASS: MeterAmps 0.0
 00139 sdo[0x6411][4] = 100 : sdo[0x5003][4] = 100 | 155 | 0.5
 00139 TEST: Status Message Amp.Port_4 100.0 +/- 155.0
 00139 PASS: Status Message Amp.Port_4 75.0
 00140 sdo[0x6411][4] = 200 : MeterAmps = 0.2 | 0.155 | 0.5
-00140 PASS: MeterAmps 0.143
+00140 PASS: MeterAmps 0.141
 00141 sdo[0x6411][4] = 200 : sdo[0x5003][4] = 200 | 155 | 0.5
 00141 TEST: Status Message Amp.Port_4 200.0 +/- 155.0
 00141 PASS: Status Message Amp.Port_4 171.0
@@ -352,7 +352,7 @@ Started on: 2025-09-08-15:31:46
 00147 TEST: Status Message Amp.Port_4 500.0 +/- 155.0
 00147 PASS: Status Message Amp.Port_4 469.0
 00148 sdo[0x6411][4] = 600 : MeterAmps = 0.6 | 0.155 | 0.5
-00148 PASS: MeterAmps 0.525
+00148 PASS: MeterAmps 0.524
 00149 sdo[0x6411][4] = 600 : sdo[0x5003][4] = 600 | 155 | 0.5
 00149 TEST: Status Message Amp.Port_4 600.0 +/- 155.0
 00149 PASS: Status Message Amp.Port_4 569.0
@@ -360,44 +360,44 @@ Started on: 2025-09-08-15:31:46
 00150 PASS: MeterAmps 0.62
 00151 sdo[0x6411][4] = 700 : sdo[0x5003][4] = 700 | 155 | 0.5
 00151 TEST: Status Message Amp.Port_4 700.0 +/- 155.0
-00151 PASS: Status Message Amp.Port_4 668.0
+00151 PASS: Status Message Amp.Port_4 672.0
 00152 sdo[0x6411][4] = 800 : MeterAmps = 0.8 | 0.155 | 0.5
 00152 PASS: MeterAmps 0.717
 00153 sdo[0x6411][4] = 800 : sdo[0x5003][4] = 800 | 155 | 0.5
 00153 TEST: Status Message Amp.Port_4 800.0 +/- 155.0
 00153 PASS: Status Message Amp.Port_4 768.0
 00154 sdo[0x6411][4] = 900 : MeterAmps = 0.9 | 0.155 | 0.5
-00154 PASS: MeterAmps 0.814
+00154 PASS: MeterAmps 0.813
 00155 sdo[0x6411][4] = 900 : sdo[0x5003][4] = 900 | 155 | 0.5
 00155 TEST: Status Message Amp.Port_4 900.0 +/- 155.0
-00155 PASS: Status Message Amp.Port_4 872.0
+00155 PASS: Status Message Amp.Port_4 876.0
 00156 sdo[0x6411][4] = 1000 : MeterAmps = 1.0 | 0.155 | 0.5
-00156 PASS: MeterAmps 0.912
+00156 PASS: MeterAmps 0.914
 00157 sdo[0x6411][4] = 1000 : sdo[0x5003][4] = 1000 | 155 | 0.5
 00157 TEST: Status Message Amp.Port_4 1000.0 +/- 155.0
 00157 PASS: Status Message Amp.Port_4 975.0
 00158 sdo[0x6411][4] = 1100 : MeterAmps = 1.1 | 0.155 | 0.5
-00158 PASS: MeterAmps 1.008
+00158 PASS: MeterAmps 1.007
 00159 sdo[0x6411][4] = 1100 : sdo[0x5003][4] = 1100 | 155 | 0.5
 00159 TEST: Status Message Amp.Port_4 1100.0 +/- 155.0
 00159 PASS: Status Message Amp.Port_4 1075.0
 00160 sdo[0x6411][4] = 1200 : MeterAmps = 1.2 | 0.155 | 0.5
-00160 PASS: MeterAmps 1.103
+00160 PASS: MeterAmps 1.104
 00161 sdo[0x6411][4] = 1200 : sdo[0x5003][4] = 1200 | 155 | 0.5
 00161 TEST: Status Message Amp.Port_4 1200.0 +/- 155.0
 00161 PASS: Status Message Amp.Port_4 1170.0
 00162 sdo[0x6411][4] = 1300 : MeterAmps = 1.3 | 0.155 | 0.5
-00162 PASS: MeterAmps 1.2
+00162 PASS: MeterAmps 1.199
 00163 sdo[0x6411][4] = 1300 : sdo[0x5003][4] = 1300 | 155 | 0.5
 00163 TEST: Status Message Amp.Port_4 1300.0 +/- 155.0
 00163 PASS: Status Message Amp.Port_4 1270.0
 00164 sdo[0x6411][4] = 1400 : MeterAmps = 1.4 | 0.155 | 0.5
-00164 PASS: MeterAmps 1.29
+00164 PASS: MeterAmps 1.293
 00165 sdo[0x6411][4] = 1400 : sdo[0x5003][4] = 1400 | 155 | 0.5
 00165 TEST: Status Message Amp.Port_4 1400.0 +/- 155.0
 00165 PASS: Status Message Amp.Port_4 1365.0
 00166 sdo[0x6411][4] = 1500 : MeterAmps = 1.5 | 0.155 | 0.5
-00166 PASS: MeterAmps 1.388
+00166 PASS: MeterAmps 1.39
 00167 sdo[0x6411][4] = 1500 : sdo[0x5003][4] = 1500 | 155 | 0.5
 00167 TEST: Status Message Amp.Port_4 1500.0 +/- 155.0
 00167 PASS: Status Message Amp.Port_4 1469.0
@@ -421,32 +421,32 @@ Started on: 2025-09-08-15:31:46
 00177 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
 00178 sdo[0x6411][5] = 0 : MeterAmps = 0.0 | 0.155 | 0.5
 00178 TEST: MeterAmps 0.0 +/- 0.155
-00178 PASS: MeterAmps 0.001
+00178 PASS: MeterAmps 0.0
 00179 sdo[0x6411][5] = 0 : sdo[0x5003][5] = 0 | 155 | 0.5
 00179 TEST: Status Message Amp.Port_5 0.0 +/- 155.0
 00179 PASS: Status Message Amp.Port_5 0.0
 00180 sdo[0x6411][5] = 100 : MeterAmps = 0.1 | 0.155 | 0.5
-00180 PASS: MeterAmps 0.001
+00180 PASS: MeterAmps 0.0
 00181 sdo[0x6411][5] = 100 : sdo[0x5003][5] = 100 | 155 | 0.5
 00181 TEST: Status Message Amp.Port_5 100.0 +/- 155.0
 00181 PASS: Status Message Amp.Port_5 83.0
 00182 sdo[0x6411][5] = 200 : MeterAmps = 0.2 | 0.155 | 0.5
-00182 PASS: MeterAmps 0.133
+00182 PASS: MeterAmps 0.131
 00183 sdo[0x6411][5] = 200 : sdo[0x5003][5] = 200 | 155 | 0.5
 00183 TEST: Status Message Amp.Port_5 200.0 +/- 155.0
 00183 PASS: Status Message Amp.Port_5 171.0
 00184 sdo[0x6411][5] = 300 : MeterAmps = 0.3 | 0.155 | 0.5
-00184 PASS: MeterAmps 0.224
+00184 PASS: MeterAmps 0.223
 00185 sdo[0x6411][5] = 300 : sdo[0x5003][5] = 300 | 155 | 0.5
 00185 TEST: Status Message Amp.Port_5 300.0 +/- 155.0
-00185 PASS: Status Message Amp.Port_5 274.0
+00185 PASS: Status Message Amp.Port_5 278.0
 00186 sdo[0x6411][5] = 400 : MeterAmps = 0.4 | 0.155 | 0.5
-00186 PASS: MeterAmps 0.319
+00186 PASS: MeterAmps 0.318
 00187 sdo[0x6411][5] = 400 : sdo[0x5003][5] = 400 | 155 | 0.5
 00187 TEST: Status Message Amp.Port_5 400.0 +/- 155.0
-00187 PASS: Status Message Amp.Port_5 374.0
+00187 PASS: Status Message Amp.Port_5 378.0
 00188 sdo[0x6411][5] = 500 : MeterAmps = 0.5 | 0.155 | 0.5
-00188 PASS: MeterAmps 0.412
+00188 PASS: MeterAmps 0.411
 00189 sdo[0x6411][5] = 500 : sdo[0x5003][5] = 500 | 155 | 0.5
 00189 TEST: Status Message Amp.Port_5 500.0 +/- 155.0
 00189 PASS: Status Message Amp.Port_5 473.0
@@ -454,29 +454,29 @@ Started on: 2025-09-08-15:31:46
 00190 PASS: MeterAmps 0.503
 00191 sdo[0x6411][5] = 600 : sdo[0x5003][5] = 600 | 155 | 0.5
 00191 TEST: Status Message Amp.Port_5 600.0 +/- 155.0
-00191 PASS: Status Message Amp.Port_5 573.0
+00191 PASS: Status Message Amp.Port_5 577.0
 00192 sdo[0x6411][5] = 700 : MeterAmps = 0.7 | 0.155 | 0.5
 00192 PASS: MeterAmps 0.596
 00193 sdo[0x6411][5] = 700 : sdo[0x5003][5] = 700 | 155 | 0.5
 00193 TEST: Status Message Amp.Port_5 700.0 +/- 155.0
 00193 PASS: Status Message Amp.Port_5 672.0
 00194 sdo[0x6411][5] = 800 : MeterAmps = 0.8 | 0.155 | 0.5
-00194 PASS: MeterAmps 0.691
+00194 PASS: MeterAmps 0.69
 00195 sdo[0x6411][5] = 800 : sdo[0x5003][5] = 800 | 155 | 0.5
 00195 TEST: Status Message Amp.Port_5 800.0 +/- 155.0
-00195 PASS: Status Message Amp.Port_5 768.0
+00195 PASS: Status Message Amp.Port_5 772.0
 00196 sdo[0x6411][5] = 900 : MeterAmps = 0.9 | 0.155 | 0.5
 00196 PASS: MeterAmps 0.786
 00197 sdo[0x6411][5] = 900 : sdo[0x5003][5] = 900 | 155 | 0.5
 00197 TEST: Status Message Amp.Port_5 900.0 +/- 155.0
 00197 PASS: Status Message Amp.Port_5 876.0
 00198 sdo[0x6411][5] = 1000 : MeterAmps = 1.0 | 0.155 | 0.5
-00198 PASS: MeterAmps 0.882
+00198 PASS: MeterAmps 0.883
 00199 sdo[0x6411][5] = 1000 : sdo[0x5003][5] = 1000 | 155 | 0.5
 00199 TEST: Status Message Amp.Port_5 1000.0 +/- 155.0
 00199 PASS: Status Message Amp.Port_5 975.0
 00200 sdo[0x6411][5] = 1100 : MeterAmps = 1.1 | 0.155 | 0.5
-00200 PASS: MeterAmps 0.975
+00200 PASS: MeterAmps 0.976
 00201 sdo[0x6411][5] = 1100 : sdo[0x5003][5] = 1100 | 155 | 0.5
 00201 TEST: Status Message Amp.Port_5 1100.0 +/- 155.0
 00201 PASS: Status Message Amp.Port_5 1075.0
@@ -484,23 +484,22 @@ Started on: 2025-09-08-15:31:46
 00202 PASS: MeterAmps 1.068
 00203 sdo[0x6411][5] = 1200 : sdo[0x5003][5] = 1200 | 155 | 0.5
 00203 TEST: Status Message Amp.Port_5 1200.0 +/- 155.0
-00203 PASS: Status Message Amp.Port_5 1170.0
+00203 PASS: Status Message Amp.Port_5 1174.0
 00204 sdo[0x6411][5] = 1300 : MeterAmps = 1.3 | 0.155 | 0.5
 00204 PASS: MeterAmps 1.158
 00205 sdo[0x6411][5] = 1300 : sdo[0x5003][5] = 1300 | 155 | 0.5
 00205 TEST: Status Message Amp.Port_5 1300.0 +/- 155.0
-00205 PASS: Status Message Amp.Port_5 1270.0
+00205 PASS: Status Message Amp.Port_5 1274.0
 00206 sdo[0x6411][5] = 1400 : MeterAmps = 1.4 | 0.155 | 0.5
-00206 PASS: MeterAmps 1.25
+00206 PASS: MeterAmps 1.253
 00207 sdo[0x6411][5] = 1400 : sdo[0x5003][5] = 1400 | 155 | 0.5
 00207 TEST: Status Message Amp.Port_5 1400.0 +/- 155.0
 00207 PASS: Status Message Amp.Port_5 1369.0
 00208 sdo[0x6411][5] = 1500 : MeterAmps = 1.5 | 0.155 | 0.5
-00208 TEST: MeterAmps 1.5 +/- 0.155
-00208 PASS: MeterAmps 1.403
+00208 PASS: MeterAmps 1.345
 00209 sdo[0x6411][5] = 1500 : sdo[0x5003][5] = 1500 | 155 | 0.5
 00209 TEST: Status Message Amp.Port_5 1500.0 +/- 155.0
-00209 PASS: Status Message Amp.Port_5 1493.0
+00209 PASS: Status Message Amp.Port_5 1477.0
 00210 #switch out load line, switch coil
 00210 sdo[0x6411][5] = 0 : NULL : WAIT = 1
 00211 J2_09 = 0 : NULL : WAIT = 1
@@ -521,22 +520,22 @@ Started on: 2025-09-08-15:31:46
 00219 sdo[0x2005][1] = 16 : NULL : WAIT = 0.1
 00220 sdo[0x6411][5] = 0 : MeterAmps = 0.0 | 0.155 | 0.5
 00220 TEST: MeterAmps 0.0 +/- 0.155
-00220 PASS: MeterAmps 0.001
+00220 PASS: MeterAmps 0.0
 00221 sdo[0x6411][5] = 0 : sdo[0x5003][5] = 0 | 155 | 0.5
 00221 TEST: Status Message Amp.Port_5 0.0 +/- 155.0
 00221 PASS: Status Message Amp.Port_5 0.0
 00222 sdo[0x6411][5] = 100 : MeterAmps = 0.1 | 0.155 | 0.5
-00222 PASS: MeterAmps 0.001
+00222 PASS: MeterAmps 0.0
 00223 sdo[0x6411][5] = 100 : sdo[0x5003][5] = 100 | 155 | 0.5
 00223 TEST: Status Message Amp.Port_5 100.0 +/- 155.0
-00223 PASS: Status Message Amp.Port_5 79.0
+00223 PASS: Status Message Amp.Port_5 83.0
 00224 sdo[0x6411][5] = 200 : MeterAmps = 0.2 | 0.155 | 0.5
-00224 PASS: MeterAmps 0.136
+00224 PASS: MeterAmps 0.134
 00225 sdo[0x6411][5] = 200 : sdo[0x5003][5] = 200 | 155 | 0.5
 00225 TEST: Status Message Amp.Port_5 200.0 +/- 155.0
 00225 PASS: Status Message Amp.Port_5 171.0
 00226 sdo[0x6411][5] = 300 : MeterAmps = 0.3 | 0.155 | 0.5
-00226 PASS: MeterAmps 0.231
+00226 PASS: MeterAmps 0.229
 00227 sdo[0x6411][5] = 300 : sdo[0x5003][5] = 300 | 155 | 0.5
 00227 TEST: Status Message Amp.Port_5 300.0 +/- 155.0
 00227 PASS: Status Message Amp.Port_5 274.0
@@ -546,22 +545,22 @@ Started on: 2025-09-08-15:31:46
 00229 TEST: Status Message Amp.Port_5 400.0 +/- 155.0
 00229 PASS: Status Message Amp.Port_5 374.0
 00230 sdo[0x6411][5] = 500 : MeterAmps = 0.5 | 0.155 | 0.5
-00230 PASS: MeterAmps 0.422
+00230 PASS: MeterAmps 0.423
 00231 sdo[0x6411][5] = 500 : sdo[0x5003][5] = 500 | 155 | 0.5
 00231 TEST: Status Message Amp.Port_5 500.0 +/- 155.0
-00231 PASS: Status Message Amp.Port_5 473.0
+00231 PASS: Status Message Amp.Port_5 469.0
 00232 sdo[0x6411][5] = 600 : MeterAmps = 0.6 | 0.155 | 0.5
-00232 PASS: MeterAmps 0.515
+00232 PASS: MeterAmps 0.516
 00233 sdo[0x6411][5] = 600 : sdo[0x5003][5] = 600 | 155 | 0.5
 00233 TEST: Status Message Amp.Port_5 600.0 +/- 155.0
-00233 PASS: Status Message Amp.Port_5 573.0
+00233 PASS: Status Message Amp.Port_5 569.0
 00234 sdo[0x6411][5] = 700 : MeterAmps = 0.7 | 0.155 | 0.5
 00234 PASS: MeterAmps 0.611
 00235 sdo[0x6411][5] = 700 : sdo[0x5003][5] = 700 | 155 | 0.5
 00235 TEST: Status Message Amp.Port_5 700.0 +/- 155.0
-00235 PASS: Status Message Amp.Port_5 668.0
+00235 PASS: Status Message Amp.Port_5 672.0
 00236 sdo[0x6411][5] = 800 : MeterAmps = 0.8 | 0.155 | 0.5
-00236 PASS: MeterAmps 0.707
+00236 PASS: MeterAmps 0.706
 00237 sdo[0x6411][5] = 800 : sdo[0x5003][5] = 800 | 155 | 0.5
 00237 TEST: Status Message Amp.Port_5 800.0 +/- 155.0
 00237 PASS: Status Message Amp.Port_5 768.0
@@ -574,24 +573,24 @@ Started on: 2025-09-08-15:31:46
 00240 PASS: MeterAmps 0.902
 00241 sdo[0x6411][5] = 1000 : sdo[0x5003][5] = 1000 | 155 | 0.5
 00241 TEST: Status Message Amp.Port_5 1000.0 +/- 155.0
-00241 PASS: Status Message Amp.Port_5 971.0
+00241 PASS: Status Message Amp.Port_5 975.0
 00242 sdo[0x6411][5] = 1100 : MeterAmps = 1.1 | 0.155 | 0.5
-00242 PASS: MeterAmps 0.996
+00242 PASS: MeterAmps 0.997
 00243 sdo[0x6411][5] = 1100 : sdo[0x5003][5] = 1100 | 155 | 0.5
 00243 TEST: Status Message Amp.Port_5 1100.0 +/- 155.0
-00243 PASS: Status Message Amp.Port_5 1071.0
+00243 PASS: Status Message Amp.Port_5 1075.0
 00244 sdo[0x6411][5] = 1200 : MeterAmps = 1.2 | 0.155 | 0.5
-00244 PASS: MeterAmps 1.09
+00244 PASS: MeterAmps 1.093
 00245 sdo[0x6411][5] = 1200 : sdo[0x5003][5] = 1200 | 155 | 0.5
 00245 TEST: Status Message Amp.Port_5 1200.0 +/- 155.0
-00245 PASS: Status Message Amp.Port_5 1174.0
+00245 PASS: Status Message Amp.Port_5 1170.0
 00246 sdo[0x6411][5] = 1300 : MeterAmps = 1.3 | 0.155 | 0.5
-00246 PASS: MeterAmps 1.186
+00246 PASS: MeterAmps 1.188
 00247 sdo[0x6411][5] = 1300 : sdo[0x5003][5] = 1300 | 155 | 0.5
 00247 TEST: Status Message Amp.Port_5 1300.0 +/- 155.0
 00247 PASS: Status Message Amp.Port_5 1270.0
 00248 sdo[0x6411][5] = 1400 : MeterAmps = 1.4 | 0.155 | 0.5
-00248 PASS: MeterAmps 1.279
+00248 PASS: MeterAmps 1.283
 00249 sdo[0x6411][5] = 1400 : sdo[0x5003][5] = 1400 | 155 | 0.5
 00249 TEST: Status Message Amp.Port_5 1400.0 +/- 155.0
 00249 PASS: Status Message Amp.Port_5 1369.0
@@ -599,7 +598,7 @@ Started on: 2025-09-08-15:31:46
 00250 PASS: MeterAmps 1.376
 00251 sdo[0x6411][5] = 1500 : sdo[0x5003][5] = 1500 | 155 | 0.5
 00251 TEST: Status Message Amp.Port_5 1500.0 +/- 155.0
-00251 PASS: Status Message Amp.Port_5 1465.0
+00251 PASS: Status Message Amp.Port_5 1469.0
 00252 #switch out load line, switch coil
 00252 sdo[0x6411][5] = 0 : NULL : WAIT = 1
 00253 J2_10 = 0 : NULL : WAIT = 1
@@ -620,22 +619,22 @@ Started on: 2025-09-08-15:31:46
 00261 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
 00262 sdo[0x6411][6] = 0 : MeterAmps = 0.0 | 0.155 | 0.5
 00262 TEST: MeterAmps 0.0 +/- 0.155
-00262 PASS: MeterAmps 0.001
+00262 PASS: MeterAmps 0.0
 00263 sdo[0x6411][6] = 0 : sdo[0x5003][6] = 0 | 155 | 0.5
 00263 TEST: Status Message Amp.Port_6 0.0 +/- 155.0
 00263 PASS: Status Message Amp.Port_6 0.0
 00264 sdo[0x6411][6] = 100 : MeterAmps = 0.1 | 0.155 | 0.5
-00264 PASS: MeterAmps 0.001
+00264 PASS: MeterAmps 0.0
 00265 sdo[0x6411][6] = 100 : sdo[0x5003][6] = 100 | 155 | 0.5
 00265 TEST: Status Message Amp.Port_6 100.0 +/- 155.0
-00265 PASS: Status Message Amp.Port_6 83.0
+00265 PASS: Status Message Amp.Port_6 79.0
 00266 sdo[0x6411][6] = 200 : MeterAmps = 0.2 | 0.155 | 0.5
 00266 PASS: MeterAmps 0.133
 00267 sdo[0x6411][6] = 200 : sdo[0x5003][6] = 200 | 155 | 0.5
 00267 TEST: Status Message Amp.Port_6 200.0 +/- 155.0
 00267 PASS: Status Message Amp.Port_6 171.0
 00268 sdo[0x6411][6] = 300 : MeterAmps = 0.3 | 0.155 | 0.5
-00268 PASS: MeterAmps 0.226
+00268 PASS: MeterAmps 0.225
 00269 sdo[0x6411][6] = 300 : sdo[0x5003][6] = 300 | 155 | 0.5
 00269 TEST: Status Message Amp.Port_6 300.0 +/- 155.0
 00269 PASS: Status Message Amp.Port_6 274.0
@@ -643,9 +642,9 @@ Started on: 2025-09-08-15:31:46
 00270 PASS: MeterAmps 0.32
 00271 sdo[0x6411][6] = 400 : sdo[0x5003][6] = 400 | 155 | 0.5
 00271 TEST: Status Message Amp.Port_6 400.0 +/- 155.0
-00271 PASS: Status Message Amp.Port_6 374.0
+00271 PASS: Status Message Amp.Port_6 378.0
 00272 sdo[0x6411][6] = 500 : MeterAmps = 0.5 | 0.155 | 0.5
-00272 PASS: MeterAmps 0.414
+00272 PASS: MeterAmps 0.415
 00273 sdo[0x6411][6] = 500 : sdo[0x5003][6] = 500 | 155 | 0.5
 00273 TEST: Status Message Amp.Port_6 500.0 +/- 155.0
 00273 PASS: Status Message Amp.Port_6 473.0
@@ -653,12 +652,12 @@ Started on: 2025-09-08-15:31:46
 00274 PASS: MeterAmps 0.507
 00275 sdo[0x6411][6] = 600 : sdo[0x5003][6] = 600 | 155 | 0.5
 00275 TEST: Status Message Amp.Port_6 600.0 +/- 155.0
-00275 PASS: Status Message Amp.Port_6 573.0
+00275 PASS: Status Message Amp.Port_6 577.0
 00276 sdo[0x6411][6] = 700 : MeterAmps = 0.7 | 0.155 | 0.5
-00276 PASS: MeterAmps 0.599
+00276 PASS: MeterAmps 0.598
 00277 sdo[0x6411][6] = 700 : sdo[0x5003][6] = 700 | 155 | 0.5
 00277 TEST: Status Message Amp.Port_6 700.0 +/- 155.0
-00277 PASS: Status Message Amp.Port_6 672.0
+00277 PASS: Status Message Amp.Port_6 676.0
 00278 sdo[0x6411][6] = 800 : MeterAmps = 0.8 | 0.155 | 0.5
 00278 PASS: MeterAmps 0.693
 00279 sdo[0x6411][6] = 800 : sdo[0x5003][6] = 800 | 155 | 0.5
@@ -668,34 +667,34 @@ Started on: 2025-09-08-15:31:46
 00280 PASS: MeterAmps 0.788
 00281 sdo[0x6411][6] = 900 : sdo[0x5003][6] = 900 | 155 | 0.5
 00281 TEST: Status Message Amp.Port_6 900.0 +/- 155.0
-00281 PASS: Status Message Amp.Port_6 880.0
+00281 PASS: Status Message Amp.Port_6 876.0
 00282 sdo[0x6411][6] = 1000 : MeterAmps = 1.0 | 0.155 | 0.5
 00282 PASS: MeterAmps 0.885
 00283 sdo[0x6411][6] = 1000 : sdo[0x5003][6] = 1000 | 155 | 0.5
 00283 TEST: Status Message Amp.Port_6 1000.0 +/- 155.0
-00283 PASS: Status Message Amp.Port_6 971.0
+00283 PASS: Status Message Amp.Port_6 975.0
 00284 sdo[0x6411][6] = 1100 : MeterAmps = 1.1 | 0.155 | 0.5
-00284 PASS: MeterAmps 0.978
+00284 PASS: MeterAmps 0.979
 00285 sdo[0x6411][6] = 1100 : sdo[0x5003][6] = 1100 | 155 | 0.5
 00285 TEST: Status Message Amp.Port_6 1100.0 +/- 155.0
 00285 PASS: Status Message Amp.Port_6 1075.0
 00286 sdo[0x6411][6] = 1200 : MeterAmps = 1.2 | 0.155 | 0.5
-00286 PASS: MeterAmps 1.069
+00286 PASS: MeterAmps 1.072
 00287 sdo[0x6411][6] = 1200 : sdo[0x5003][6] = 1200 | 155 | 0.5
 00287 TEST: Status Message Amp.Port_6 1200.0 +/- 155.0
 00287 PASS: Status Message Amp.Port_6 1174.0
 00288 sdo[0x6411][6] = 1300 : MeterAmps = 1.3 | 0.155 | 0.5
-00288 PASS: MeterAmps 1.163
+00288 PASS: MeterAmps 1.164
 00289 sdo[0x6411][6] = 1300 : sdo[0x5003][6] = 1300 | 155 | 0.5
 00289 TEST: Status Message Amp.Port_6 1300.0 +/- 155.0
-00289 PASS: Status Message Amp.Port_6 1270.0
+00289 PASS: Status Message Amp.Port_6 1274.0
 00290 sdo[0x6411][6] = 1400 : MeterAmps = 1.4 | 0.155 | 0.5
-00290 PASS: MeterAmps 1.255
+00290 PASS: MeterAmps 1.257
 00291 sdo[0x6411][6] = 1400 : sdo[0x5003][6] = 1400 | 155 | 0.5
 00291 TEST: Status Message Amp.Port_6 1400.0 +/- 155.0
 00291 PASS: Status Message Amp.Port_6 1373.0
 00292 sdo[0x6411][6] = 1500 : MeterAmps = 1.5 | 0.155 | 0.5
-00292 PASS: MeterAmps 1.347
+00292 PASS: MeterAmps 1.35
 00293 sdo[0x6411][6] = 1500 : sdo[0x5003][6] = 1500 | 155 | 0.5
 00293 TEST: Status Message Amp.Port_6 1500.0 +/- 155.0
 00293 PASS: Status Message Amp.Port_6 1469.0
@@ -719,32 +718,32 @@ Started on: 2025-09-08-15:31:46
 00303 sdo[0x2005][1] = 32 : NULL : WAIT = 0.1
 00304 sdo[0x6411][6] = 0 : MeterAmps = 0.0 | 0.155 | 0.5
 00304 TEST: MeterAmps 0.0 +/- 0.155
-00304 PASS: MeterAmps 0.001
+00304 PASS: MeterAmps 0.0
 00305 sdo[0x6411][6] = 0 : sdo[0x5003][6] = 0 | 155 | 0.5
 00305 TEST: Status Message Amp.Port_6 0.0 +/- 155.0
 00305 PASS: Status Message Amp.Port_6 0.0
 00306 sdo[0x6411][6] = 100 : MeterAmps = 0.1 | 0.155 | 0.5
-00306 PASS: MeterAmps 0.001
+00306 PASS: MeterAmps 0.0
 00307 sdo[0x6411][6] = 100 : sdo[0x5003][6] = 100 | 155 | 0.5
 00307 TEST: Status Message Amp.Port_6 100.0 +/- 155.0
 00307 PASS: Status Message Amp.Port_6 83.0
 00308 sdo[0x6411][6] = 200 : MeterAmps = 0.2 | 0.155 | 0.5
-00308 PASS: MeterAmps 0.127
+00308 PASS: MeterAmps 0.126
 00309 sdo[0x6411][6] = 200 : sdo[0x5003][6] = 200 | 155 | 0.5
 00309 TEST: Status Message Amp.Port_6 200.0 +/- 155.0
 00309 PASS: Status Message Amp.Port_6 171.0
 00310 sdo[0x6411][6] = 300 : MeterAmps = 0.3 | 0.155 | 0.5
-00310 PASS: MeterAmps 0.221
+00310 PASS: MeterAmps 0.22
 00311 sdo[0x6411][6] = 300 : sdo[0x5003][6] = 300 | 155 | 0.5
 00311 TEST: Status Message Amp.Port_6 300.0 +/- 155.0
 00311 PASS: Status Message Amp.Port_6 274.0
 00312 sdo[0x6411][6] = 400 : MeterAmps = 0.4 | 0.155 | 0.5
-00312 PASS: MeterAmps 0.317
+00312 PASS: MeterAmps 0.316
 00313 sdo[0x6411][6] = 400 : sdo[0x5003][6] = 400 | 155 | 0.5
 00313 TEST: Status Message Amp.Port_6 400.0 +/- 155.0
 00313 PASS: Status Message Amp.Port_6 374.0
 00314 sdo[0x6411][6] = 500 : MeterAmps = 0.5 | 0.155 | 0.5
-00314 PASS: MeterAmps 0.411
+00314 PASS: MeterAmps 0.41
 00315 sdo[0x6411][6] = 500 : sdo[0x5003][6] = 500 | 155 | 0.5
 00315 TEST: Status Message Amp.Port_6 500.0 +/- 155.0
 00315 PASS: Status Message Amp.Port_6 469.0
@@ -754,12 +753,12 @@ Started on: 2025-09-08-15:31:46
 00317 TEST: Status Message Amp.Port_6 600.0 +/- 155.0
 00317 PASS: Status Message Amp.Port_6 569.0
 00318 sdo[0x6411][6] = 700 : MeterAmps = 0.7 | 0.155 | 0.5
-00318 PASS: MeterAmps 0.598
+00318 PASS: MeterAmps 0.599
 00319 sdo[0x6411][6] = 700 : sdo[0x5003][6] = 700 | 155 | 0.5
 00319 TEST: Status Message Amp.Port_6 700.0 +/- 155.0
-00319 PASS: Status Message Amp.Port_6 668.0
+00319 PASS: Status Message Amp.Port_6 672.0
 00320 sdo[0x6411][6] = 800 : MeterAmps = 0.8 | 0.155 | 0.5
-00320 PASS: MeterAmps 0.695
+00320 PASS: MeterAmps 0.694
 00321 sdo[0x6411][6] = 800 : sdo[0x5003][6] = 800 | 155 | 0.5
 00321 TEST: Status Message Amp.Port_6 800.0 +/- 155.0
 00321 PASS: Status Message Amp.Port_6 768.0
@@ -769,27 +768,27 @@ Started on: 2025-09-08-15:31:46
 00323 TEST: Status Message Amp.Port_6 900.0 +/- 155.0
 00323 PASS: Status Message Amp.Port_6 872.0
 00324 sdo[0x6411][6] = 1000 : MeterAmps = 1.0 | 0.155 | 0.5
-00324 PASS: MeterAmps 0.889
+00324 PASS: MeterAmps 0.89
 00325 sdo[0x6411][6] = 1000 : sdo[0x5003][6] = 1000 | 155 | 0.5
 00325 TEST: Status Message Amp.Port_6 1000.0 +/- 155.0
-00325 PASS: Status Message Amp.Port_6 975.0
+00325 PASS: Status Message Amp.Port_6 971.0
 00326 sdo[0x6411][6] = 1100 : MeterAmps = 1.1 | 0.155 | 0.5
-00326 PASS: MeterAmps 0.984
+00326 PASS: MeterAmps 0.986
 00327 sdo[0x6411][6] = 1100 : sdo[0x5003][6] = 1100 | 155 | 0.5
 00327 TEST: Status Message Amp.Port_6 1100.0 +/- 155.0
 00327 PASS: Status Message Amp.Port_6 1075.0
 00328 sdo[0x6411][6] = 1200 : MeterAmps = 1.2 | 0.155 | 0.5
-00328 PASS: MeterAmps 1.077
+00328 PASS: MeterAmps 1.078
 00329 sdo[0x6411][6] = 1200 : sdo[0x5003][6] = 1200 | 155 | 0.5
 00329 TEST: Status Message Amp.Port_6 1200.0 +/- 155.0
 00329 PASS: Status Message Amp.Port_6 1170.0
 00330 sdo[0x6411][6] = 1300 : MeterAmps = 1.3 | 0.155 | 0.5
-00330 PASS: MeterAmps 1.171
+00330 PASS: MeterAmps 1.174
 00331 sdo[0x6411][6] = 1300 : sdo[0x5003][6] = 1300 | 155 | 0.5
 00331 TEST: Status Message Amp.Port_6 1300.0 +/- 155.0
 00331 PASS: Status Message Amp.Port_6 1270.0
 00332 sdo[0x6411][6] = 1400 : MeterAmps = 1.4 | 0.155 | 0.5
-00332 PASS: MeterAmps 1.264
+00332 PASS: MeterAmps 1.266
 00333 sdo[0x6411][6] = 1400 : sdo[0x5003][6] = 1400 | 155 | 0.5
 00333 TEST: Status Message Amp.Port_6 1400.0 +/- 155.0
 00333 PASS: Status Message Amp.Port_6 1365.0
@@ -818,17 +817,17 @@ Started on: 2025-09-08-15:31:46
 00345 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
 00346 sdo[0x6411][7] = 0 : MeterAmps = 0.0 | 0.155 | 0.5
 00346 TEST: MeterAmps 0.0 +/- 0.155
-00346 PASS: MeterAmps 0.001
+00346 PASS: MeterAmps 0.0
 00347 sdo[0x6411][7] = 0 : sdo[0x5003][7] = 0 | 155 | 0.5
 00347 TEST: Status Message Amp.Port_7 0.0 +/- 155.0
 00347 PASS: Status Message Amp.Port_7 0.0
 00348 sdo[0x6411][7] = 100 : MeterAmps = 0.1 | 0.155 | 0.5
-00348 PASS: MeterAmps 0.001
+00348 PASS: MeterAmps 0.0
 00349 sdo[0x6411][7] = 100 : sdo[0x5003][7] = 100 | 155 | 0.5
 00349 TEST: Status Message Amp.Port_7 100.0 +/- 155.0
 00349 PASS: Status Message Amp.Port_7 83.0
 00350 sdo[0x6411][7] = 200 : MeterAmps = 0.2 | 0.155 | 0.5
-00350 PASS: MeterAmps 0.133
+00350 PASS: MeterAmps 0.131
 00351 sdo[0x6411][7] = 200 : sdo[0x5003][7] = 200 | 155 | 0.5
 00351 TEST: Status Message Amp.Port_7 200.0 +/- 155.0
 00351 PASS: Status Message Amp.Port_7 171.0
@@ -848,12 +847,12 @@ Started on: 2025-09-08-15:31:46
 00357 TEST: Status Message Amp.Port_7 500.0 +/- 155.0
 00357 PASS: Status Message Amp.Port_7 473.0
 00358 sdo[0x6411][7] = 600 : MeterAmps = 0.6 | 0.155 | 0.5
-00358 PASS: MeterAmps 0.506
+00358 PASS: MeterAmps 0.507
 00359 sdo[0x6411][7] = 600 : sdo[0x5003][7] = 600 | 155 | 0.5
 00359 TEST: Status Message Amp.Port_7 600.0 +/- 155.0
 00359 PASS: Status Message Amp.Port_7 573.0
 00360 sdo[0x6411][7] = 700 : MeterAmps = 0.7 | 0.155 | 0.5
-00360 PASS: MeterAmps 0.6
+00360 PASS: MeterAmps 0.601
 00361 sdo[0x6411][7] = 700 : sdo[0x5003][7] = 700 | 155 | 0.5
 00361 TEST: Status Message Amp.Port_7 700.0 +/- 155.0
 00361 PASS: Status Message Amp.Port_7 672.0
@@ -861,42 +860,42 @@ Started on: 2025-09-08-15:31:46
 00362 PASS: MeterAmps 0.694
 00363 sdo[0x6411][7] = 800 : sdo[0x5003][7] = 800 | 155 | 0.5
 00363 TEST: Status Message Amp.Port_7 800.0 +/- 155.0
-00363 PASS: Status Message Amp.Port_7 768.0
+00363 PASS: Status Message Amp.Port_7 772.0
 00364 sdo[0x6411][7] = 900 : MeterAmps = 0.9 | 0.155 | 0.5
-00364 PASS: MeterAmps 0.79
+00364 PASS: MeterAmps 0.789
 00365 sdo[0x6411][7] = 900 : sdo[0x5003][7] = 900 | 155 | 0.5
 00365 TEST: Status Message Amp.Port_7 900.0 +/- 155.0
-00365 PASS: Status Message Amp.Port_7 872.0
+00365 PASS: Status Message Amp.Port_7 876.0
 00366 sdo[0x6411][7] = 1000 : MeterAmps = 1.0 | 0.155 | 0.5
 00366 PASS: MeterAmps 0.886
 00367 sdo[0x6411][7] = 1000 : sdo[0x5003][7] = 1000 | 155 | 0.5
 00367 TEST: Status Message Amp.Port_7 1000.0 +/- 155.0
 00367 PASS: Status Message Amp.Port_7 975.0
 00368 sdo[0x6411][7] = 1100 : MeterAmps = 1.1 | 0.155 | 0.5
-00368 PASS: MeterAmps 0.979
+00368 PASS: MeterAmps 0.98
 00369 sdo[0x6411][7] = 1100 : sdo[0x5003][7] = 1100 | 155 | 0.5
 00369 TEST: Status Message Amp.Port_7 1100.0 +/- 155.0
 00369 PASS: Status Message Amp.Port_7 1075.0
 00370 sdo[0x6411][7] = 1200 : MeterAmps = 1.2 | 0.155 | 0.5
-00370 PASS: MeterAmps 1.072
+00370 PASS: MeterAmps 1.074
 00371 sdo[0x6411][7] = 1200 : sdo[0x5003][7] = 1200 | 155 | 0.5
 00371 TEST: Status Message Amp.Port_7 1200.0 +/- 155.0
 00371 PASS: Status Message Amp.Port_7 1174.0
 00372 sdo[0x6411][7] = 1300 : MeterAmps = 1.3 | 0.155 | 0.5
-00372 PASS: MeterAmps 1.165
+00372 PASS: MeterAmps 1.167
 00373 sdo[0x6411][7] = 1300 : sdo[0x5003][7] = 1300 | 155 | 0.5
 00373 TEST: Status Message Amp.Port_7 1300.0 +/- 155.0
-00373 PASS: Status Message Amp.Port_7 1270.0
+00373 PASS: Status Message Amp.Port_7 1274.0
 00374 sdo[0x6411][7] = 1400 : MeterAmps = 1.4 | 0.155 | 0.5
-00374 PASS: MeterAmps 1.258
+00374 PASS: MeterAmps 1.261
 00375 sdo[0x6411][7] = 1400 : sdo[0x5003][7] = 1400 | 155 | 0.5
 00375 TEST: Status Message Amp.Port_7 1400.0 +/- 155.0
-00375 PASS: Status Message Amp.Port_7 1365.0
+00375 PASS: Status Message Amp.Port_7 1369.0
 00376 sdo[0x6411][7] = 1500 : MeterAmps = 1.5 | 0.155 | 0.5
-00376 PASS: MeterAmps 1.351
+00376 PASS: MeterAmps 1.355
 00377 sdo[0x6411][7] = 1500 : sdo[0x5003][7] = 1500 | 155 | 0.5
 00377 TEST: Status Message Amp.Port_7 1500.0 +/- 155.0
-00377 PASS: Status Message Amp.Port_7 1469.0
+00377 PASS: Status Message Amp.Port_7 1473.0
 00378 #switch out load line, switch coil
 00378 sdo[0x6411][7] = 0 : NULL : WAIT = 1
 00379 J3_01 = 0 : NULL : WAIT = 1
@@ -917,35 +916,35 @@ Started on: 2025-09-08-15:31:46
 00387 sdo[0x2005][1] = 64 : NULL : WAIT = 0.1
 00388 sdo[0x6411][7] = 0 : MeterAmps = 0.0 | 0.155 | 0.5
 00388 TEST: MeterAmps 0.0 +/- 0.155
-00388 PASS: MeterAmps 0.001
+00388 PASS: MeterAmps 0.0
 00389 sdo[0x6411][7] = 0 : sdo[0x5003][7] = 0 | 155 | 0.5
 00389 TEST: Status Message Amp.Port_7 0.0 +/- 155.0
 00389 PASS: Status Message Amp.Port_7 0.0
 00390 sdo[0x6411][7] = 100 : MeterAmps = 0.1 | 0.155 | 0.5
-00390 PASS: MeterAmps 0.001
+00390 PASS: MeterAmps 0.0
 00391 sdo[0x6411][7] = 100 : sdo[0x5003][7] = 100 | 155 | 0.5
 00391 TEST: Status Message Amp.Port_7 100.0 +/- 155.0
 00391 PASS: Status Message Amp.Port_7 79.0
 00392 sdo[0x6411][7] = 200 : MeterAmps = 0.2 | 0.155 | 0.5
-00392 PASS: MeterAmps 0.138
+00392 PASS: MeterAmps 0.135
 00393 sdo[0x6411][7] = 200 : sdo[0x5003][7] = 200 | 155 | 0.5
 00393 TEST: Status Message Amp.Port_7 200.0 +/- 155.0
 00393 PASS: Status Message Amp.Port_7 171.0
 00394 sdo[0x6411][7] = 300 : MeterAmps = 0.3 | 0.155 | 0.5
-00394 PASS: MeterAmps 0.232
+00394 PASS: MeterAmps 0.23
 00395 sdo[0x6411][7] = 300 : sdo[0x5003][7] = 300 | 155 | 0.5
 00395 TEST: Status Message Amp.Port_7 300.0 +/- 155.0
 00395 PASS: Status Message Amp.Port_7 274.0
 00396 sdo[0x6411][7] = 400 : MeterAmps = 0.4 | 0.155 | 0.5
-00396 PASS: MeterAmps 0.328
+00396 PASS: MeterAmps 0.327
 00397 sdo[0x6411][7] = 400 : sdo[0x5003][7] = 400 | 155 | 0.5
 00397 TEST: Status Message Amp.Port_7 400.0 +/- 155.0
 00397 PASS: Status Message Amp.Port_7 374.0
 00398 sdo[0x6411][7] = 500 : MeterAmps = 0.5 | 0.155 | 0.5
-00398 PASS: MeterAmps 0.424
+00398 PASS: MeterAmps 0.422
 00399 sdo[0x6411][7] = 500 : sdo[0x5003][7] = 500 | 155 | 0.5
 00399 TEST: Status Message Amp.Port_7 500.0 +/- 155.0
-00399 PASS: Status Message Amp.Port_7 473.0
+00399 PASS: Status Message Amp.Port_7 469.0
 00400 sdo[0x6411][7] = 600 : MeterAmps = 0.6 | 0.155 | 0.5
 00400 PASS: MeterAmps 0.517
 00401 sdo[0x6411][7] = 600 : sdo[0x5003][7] = 600 | 155 | 0.5
@@ -957,7 +956,7 @@ Started on: 2025-09-08-15:31:46
 00403 TEST: Status Message Amp.Port_7 700.0 +/- 155.0
 00403 PASS: Status Message Amp.Port_7 672.0
 00404 sdo[0x6411][7] = 800 : MeterAmps = 0.8 | 0.155 | 0.5
-00404 PASS: MeterAmps 0.708
+00404 PASS: MeterAmps 0.709
 00405 sdo[0x6411][7] = 800 : sdo[0x5003][7] = 800 | 155 | 0.5
 00405 TEST: Status Message Amp.Port_7 800.0 +/- 155.0
 00405 PASS: Status Message Amp.Port_7 768.0
@@ -967,32 +966,32 @@ Started on: 2025-09-08-15:31:46
 00407 TEST: Status Message Amp.Port_7 900.0 +/- 155.0
 00407 PASS: Status Message Amp.Port_7 872.0
 00408 sdo[0x6411][7] = 1000 : MeterAmps = 1.0 | 0.155 | 0.5
-00408 PASS: MeterAmps 0.902
+00408 PASS: MeterAmps 0.903
 00409 sdo[0x6411][7] = 1000 : sdo[0x5003][7] = 1000 | 155 | 0.5
 00409 TEST: Status Message Amp.Port_7 1000.0 +/- 155.0
-00409 PASS: Status Message Amp.Port_7 971.0
+00409 PASS: Status Message Amp.Port_7 975.0
 00410 sdo[0x6411][7] = 1100 : MeterAmps = 1.1 | 0.155 | 0.5
 00410 PASS: MeterAmps 0.998
 00411 sdo[0x6411][7] = 1100 : sdo[0x5003][7] = 1100 | 155 | 0.5
 00411 TEST: Status Message Amp.Port_7 1100.0 +/- 155.0
 00411 PASS: Status Message Amp.Port_7 1071.0
 00412 sdo[0x6411][7] = 1200 : MeterAmps = 1.2 | 0.155 | 0.5
-00412 PASS: MeterAmps 1.094
+00412 PASS: MeterAmps 1.093
 00413 sdo[0x6411][7] = 1200 : sdo[0x5003][7] = 1200 | 155 | 0.5
 00413 TEST: Status Message Amp.Port_7 1200.0 +/- 155.0
 00413 PASS: Status Message Amp.Port_7 1170.0
 00414 sdo[0x6411][7] = 1300 : MeterAmps = 1.3 | 0.155 | 0.5
-00414 PASS: MeterAmps 1.188
+00414 PASS: MeterAmps 1.189
 00415 sdo[0x6411][7] = 1300 : sdo[0x5003][7] = 1300 | 155 | 0.5
 00415 TEST: Status Message Amp.Port_7 1300.0 +/- 155.0
-00415 PASS: Status Message Amp.Port_7 1266.0
+00415 PASS: Status Message Amp.Port_7 1274.0
 00416 sdo[0x6411][7] = 1400 : MeterAmps = 1.4 | 0.155 | 0.5
 00416 PASS: MeterAmps 1.282
 00417 sdo[0x6411][7] = 1400 : sdo[0x5003][7] = 1400 | 155 | 0.5
 00417 TEST: Status Message Amp.Port_7 1400.0 +/- 155.0
-00417 PASS: Status Message Amp.Port_7 1365.0
+00417 PASS: Status Message Amp.Port_7 1369.0
 00418 sdo[0x6411][7] = 1500 : MeterAmps = 1.5 | 0.155 | 0.5
-00418 PASS: MeterAmps 1.377
+00418 PASS: MeterAmps 1.379
 00419 sdo[0x6411][7] = 1500 : sdo[0x5003][7] = 1500 | 155 | 0.5
 00419 TEST: Status Message Amp.Port_7 1500.0 +/- 155.0
 00419 PASS: Status Message Amp.Port_7 1469.0
@@ -1016,42 +1015,42 @@ Started on: 2025-09-08-15:31:46
 00429 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
 00430 sdo[0x6411][8] = 0 : MeterAmps = 0.0 | 0.155 | 0.5
 00430 TEST: MeterAmps 0.0 +/- 0.155
-00430 PASS: MeterAmps 0.001
+00430 PASS: MeterAmps 0.0
 00431 sdo[0x6411][8] = 0 : sdo[0x5003][8] = 0 | 155 | 0.5
 00431 TEST: Status Message Amp.Port_8 0.0 +/- 155.0
 00431 PASS: Status Message Amp.Port_8 0.0
 00432 sdo[0x6411][8] = 100 : MeterAmps = 0.1 | 0.155 | 0.5
-00432 PASS: MeterAmps 0.001
+00432 PASS: MeterAmps 0.0
 00433 sdo[0x6411][8] = 100 : sdo[0x5003][8] = 100 | 155 | 0.5
 00433 TEST: Status Message Amp.Port_8 100.0 +/- 155.0
 00433 PASS: Status Message Amp.Port_8 83.0
 00434 sdo[0x6411][8] = 200 : MeterAmps = 0.2 | 0.155 | 0.5
-00434 PASS: MeterAmps 0.13
+00434 PASS: MeterAmps 0.129
 00435 sdo[0x6411][8] = 200 : sdo[0x5003][8] = 200 | 155 | 0.5
 00435 TEST: Status Message Amp.Port_8 200.0 +/- 155.0
 00435 PASS: Status Message Amp.Port_8 171.0
 00436 sdo[0x6411][8] = 300 : MeterAmps = 0.3 | 0.155 | 0.5
-00436 PASS: MeterAmps 0.222
+00436 PASS: MeterAmps 0.221
 00437 sdo[0x6411][8] = 300 : sdo[0x5003][8] = 300 | 155 | 0.5
 00437 TEST: Status Message Amp.Port_8 300.0 +/- 155.0
 00437 PASS: Status Message Amp.Port_8 274.0
 00438 sdo[0x6411][8] = 400 : MeterAmps = 0.4 | 0.155 | 0.5
-00438 PASS: MeterAmps 0.317
+00438 PASS: MeterAmps 0.316
 00439 sdo[0x6411][8] = 400 : sdo[0x5003][8] = 400 | 155 | 0.5
 00439 TEST: Status Message Amp.Port_8 400.0 +/- 155.0
 00439 PASS: Status Message Amp.Port_8 374.0
 00440 sdo[0x6411][8] = 500 : MeterAmps = 0.5 | 0.155 | 0.5
-00440 PASS: MeterAmps 0.41
+00440 PASS: MeterAmps 0.409
 00441 sdo[0x6411][8] = 500 : sdo[0x5003][8] = 500 | 155 | 0.5
 00441 TEST: Status Message Amp.Port_8 500.0 +/- 155.0
 00441 PASS: Status Message Amp.Port_8 473.0
 00442 sdo[0x6411][8] = 600 : MeterAmps = 0.6 | 0.155 | 0.5
-00442 PASS: MeterAmps 0.503
+00442 PASS: MeterAmps 0.502
 00443 sdo[0x6411][8] = 600 : sdo[0x5003][8] = 600 | 155 | 0.5
 00443 TEST: Status Message Amp.Port_8 600.0 +/- 155.0
 00443 PASS: Status Message Amp.Port_8 573.0
 00444 sdo[0x6411][8] = 700 : MeterAmps = 0.7 | 0.155 | 0.5
-00444 PASS: MeterAmps 0.596
+00444 PASS: MeterAmps 0.594
 00445 sdo[0x6411][8] = 700 : sdo[0x5003][8] = 700 | 155 | 0.5
 00445 TEST: Status Message Amp.Port_8 700.0 +/- 155.0
 00445 PASS: Status Message Amp.Port_8 672.0
@@ -1059,40 +1058,40 @@ Started on: 2025-09-08-15:31:46
 00446 PASS: MeterAmps 0.69
 00447 sdo[0x6411][8] = 800 : sdo[0x5003][8] = 800 | 155 | 0.5
 00447 TEST: Status Message Amp.Port_8 800.0 +/- 155.0
-00447 PASS: Status Message Amp.Port_8 768.0
+00447 PASS: Status Message Amp.Port_8 772.0
 00448 sdo[0x6411][8] = 900 : MeterAmps = 0.9 | 0.155 | 0.5
 00448 PASS: MeterAmps 0.784
 00449 sdo[0x6411][8] = 900 : sdo[0x5003][8] = 900 | 155 | 0.5
 00449 TEST: Status Message Amp.Port_8 900.0 +/- 155.0
 00449 PASS: Status Message Amp.Port_8 876.0
 00450 sdo[0x6411][8] = 1000 : MeterAmps = 1.0 | 0.155 | 0.5
-00450 PASS: MeterAmps 0.879
+00450 PASS: MeterAmps 0.88
 00451 sdo[0x6411][8] = 1000 : sdo[0x5003][8] = 1000 | 155 | 0.5
 00451 TEST: Status Message Amp.Port_8 1000.0 +/- 155.0
 00451 PASS: Status Message Amp.Port_8 975.0
 00452 sdo[0x6411][8] = 1100 : MeterAmps = 1.1 | 0.155 | 0.5
-00452 PASS: MeterAmps 0.972
+00452 PASS: MeterAmps 0.974
 00453 sdo[0x6411][8] = 1100 : sdo[0x5003][8] = 1100 | 155 | 0.5
 00453 TEST: Status Message Amp.Port_8 1100.0 +/- 155.0
 00453 PASS: Status Message Amp.Port_8 1075.0
 00454 sdo[0x6411][8] = 1200 : MeterAmps = 1.2 | 0.155 | 0.5
-00454 PASS: MeterAmps 1.065
+00454 PASS: MeterAmps 1.066
 00455 sdo[0x6411][8] = 1200 : sdo[0x5003][8] = 1200 | 155 | 0.5
 00455 TEST: Status Message Amp.Port_8 1200.0 +/- 155.0
 00455 PASS: Status Message Amp.Port_8 1170.0
 00456 sdo[0x6411][8] = 1300 : MeterAmps = 1.3 | 0.155 | 0.5
-00456 PASS: MeterAmps 1.158
+00456 PASS: MeterAmps 1.159
 00457 sdo[0x6411][8] = 1300 : sdo[0x5003][8] = 1300 | 155 | 0.5
 00457 TEST: Status Message Amp.Port_8 1300.0 +/- 155.0
-00457 PASS: Status Message Amp.Port_8 1270.0
+00457 PASS: Status Message Amp.Port_8 1274.0
 00458 sdo[0x6411][8] = 1400 : MeterAmps = 1.4 | 0.155 | 0.5
-00458 PASS: MeterAmps 1.249
+00458 PASS: MeterAmps 1.252
 00459 sdo[0x6411][8] = 1400 : sdo[0x5003][8] = 1400 | 155 | 0.5
 00459 TEST: Status Message Amp.Port_8 1400.0 +/- 155.0
 00459 PASS: Status Message Amp.Port_8 1369.0
 00460 sdo[0x6411][8] = 1500 : MeterAmps = 1.5 | 0.155 | 0.5
 00460 TEST: MeterAmps 1.5 +/- 0.155
-00460 PASS: MeterAmps 1.407
+00460 PASS: MeterAmps 1.42
 00461 sdo[0x6411][8] = 1500 : sdo[0x5003][8] = 1500 | 155 | 0.5
 00461 TEST: Status Message Amp.Port_8 1500.0 +/- 155.0
 00461 PASS: Status Message Amp.Port_8 1493.0
@@ -1116,32 +1115,32 @@ Started on: 2025-09-08-15:31:46
 00471 sdo[0x2005][1] = 128 : NULL : WAIT = 0.1
 00472 sdo[0x6411][8] = 0 : MeterAmps = 0.0 | 0.155 | 0.5
 00472 TEST: MeterAmps 0.0 +/- 0.155
-00472 PASS: MeterAmps 0.001
+00472 PASS: MeterAmps 0.0
 00473 sdo[0x6411][8] = 0 : sdo[0x5003][8] = 0 | 155 | 0.5
 00473 TEST: Status Message Amp.Port_8 0.0 +/- 155.0
 00473 PASS: Status Message Amp.Port_8 0.0
 00474 sdo[0x6411][8] = 100 : MeterAmps = 0.1 | 0.155 | 0.5
-00474 PASS: MeterAmps 0.001
+00474 PASS: MeterAmps 0.0
 00475 sdo[0x6411][8] = 100 : sdo[0x5003][8] = 100 | 155 | 0.5
 00475 TEST: Status Message Amp.Port_8 100.0 +/- 155.0
 00475 PASS: Status Message Amp.Port_8 83.0
 00476 sdo[0x6411][8] = 200 : MeterAmps = 0.2 | 0.155 | 0.5
-00476 PASS: MeterAmps 0.126
+00476 PASS: MeterAmps 0.124
 00477 sdo[0x6411][8] = 200 : sdo[0x5003][8] = 200 | 155 | 0.5
 00477 TEST: Status Message Amp.Port_8 200.0 +/- 155.0
 00477 PASS: Status Message Amp.Port_8 171.0
 00478 sdo[0x6411][8] = 300 : MeterAmps = 0.3 | 0.155 | 0.5
-00478 PASS: MeterAmps 0.221
+00478 PASS: MeterAmps 0.218
 00479 sdo[0x6411][8] = 300 : sdo[0x5003][8] = 300 | 155 | 0.5
 00479 TEST: Status Message Amp.Port_8 300.0 +/- 155.0
 00479 PASS: Status Message Amp.Port_8 274.0
 00480 sdo[0x6411][8] = 400 : MeterAmps = 0.4 | 0.155 | 0.5
-00480 PASS: MeterAmps 0.318
+00480 PASS: MeterAmps 0.316
 00481 sdo[0x6411][8] = 400 : sdo[0x5003][8] = 400 | 155 | 0.5
 00481 TEST: Status Message Amp.Port_8 400.0 +/- 155.0
-00481 PASS: Status Message Amp.Port_8 374.0
+00481 PASS: Status Message Amp.Port_8 370.0
 00482 sdo[0x6411][8] = 500 : MeterAmps = 0.5 | 0.155 | 0.5
-00482 PASS: MeterAmps 0.413
+00482 PASS: MeterAmps 0.411
 00483 sdo[0x6411][8] = 500 : sdo[0x5003][8] = 500 | 155 | 0.5
 00483 TEST: Status Message Amp.Port_8 500.0 +/- 155.0
 00483 PASS: Status Message Amp.Port_8 469.0
@@ -1166,30 +1165,30 @@ Started on: 2025-09-08-15:31:46
 00491 TEST: Status Message Amp.Port_8 900.0 +/- 155.0
 00491 PASS: Status Message Amp.Port_8 868.0
 00492 sdo[0x6411][8] = 1000 : MeterAmps = 1.0 | 0.155 | 0.5
-00492 PASS: MeterAmps 0.894
+00492 PASS: MeterAmps 0.896
 00493 sdo[0x6411][8] = 1000 : sdo[0x5003][8] = 1000 | 155 | 0.5
 00493 TEST: Status Message Amp.Port_8 1000.0 +/- 155.0
-00493 PASS: Status Message Amp.Port_8 975.0
+00493 PASS: Status Message Amp.Port_8 971.0
 00494 sdo[0x6411][8] = 1100 : MeterAmps = 1.1 | 0.155 | 0.5
-00494 PASS: MeterAmps 0.99
+00494 PASS: MeterAmps 0.993
 00495 sdo[0x6411][8] = 1100 : sdo[0x5003][8] = 1100 | 155 | 0.5
 00495 TEST: Status Message Amp.Port_8 1100.0 +/- 155.0
 00495 PASS: Status Message Amp.Port_8 1071.0
 00496 sdo[0x6411][8] = 1200 : MeterAmps = 1.2 | 0.155 | 0.5
-00496 PASS: MeterAmps 1.086
+00496 PASS: MeterAmps 1.087
 00497 sdo[0x6411][8] = 1200 : sdo[0x5003][8] = 1200 | 155 | 0.5
 00497 TEST: Status Message Amp.Port_8 1200.0 +/- 155.0
 00497 PASS: Status Message Amp.Port_8 1170.0
 00498 sdo[0x6411][8] = 1300 : MeterAmps = 1.3 | 0.155 | 0.5
-00498 PASS: MeterAmps 1.181
+00498 PASS: MeterAmps 1.182
 00499 sdo[0x6411][8] = 1300 : sdo[0x5003][8] = 1300 | 155 | 0.5
 00499 TEST: Status Message Amp.Port_8 1300.0 +/- 155.0
-00499 PASS: Status Message Amp.Port_8 1266.0
+00499 PASS: Status Message Amp.Port_8 1270.0
 00500 sdo[0x6411][8] = 1400 : MeterAmps = 1.4 | 0.155 | 0.5
 00500 PASS: MeterAmps 1.277
 00501 sdo[0x6411][8] = 1400 : sdo[0x5003][8] = 1400 | 155 | 0.5
 00501 TEST: Status Message Amp.Port_8 1400.0 +/- 155.0
-00501 PASS: Status Message Amp.Port_8 1365.0
+00501 PASS: Status Message Amp.Port_8 1361.0
 00502 sdo[0x6411][8] = 1500 : MeterAmps = 1.5 | 0.155 | 0.5
 00502 PASS: MeterAmps 1.372
 00503 sdo[0x6411][8] = 1500 : sdo[0x5003][8] = 1500 | 155 | 0.5
@@ -1207,5 +1206,5 @@ Started on: 2025-09-08-15:31:46
 00508 SAVE
 00508 END
 Fail count: 0
-Finished on: 2025-09-08-15:37:36
-elapsed time: 0:05:47.587616
+Finished on: 2025-09-10-14:44:59
+elapsed time: 0:05:46.734430

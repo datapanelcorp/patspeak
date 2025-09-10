@@ -1,4 +1,4 @@
-Started on: 2025-09-08-11:23:59
+Started on: 2025-09-10-14:48:24
 00000 #37000-4
 00000 #Verion 0.0
 00000 #digital normal test using the E-LOAD
@@ -54,7 +54,7 @@ Started on: 2025-09-08-11:23:59
 00024 #verify reading  Output1B
 00024 NULL : sdo[0x5003][1] = 500 | 200 | 0.5
 00024 TEST: Status Message Amp.Port_1 500.0 +/- 200.0
-00024 PASS: Status Message Amp.Port_1 481.0
+00024 PASS: Status Message Amp.Port_1 485.0
 00025 NULL : sdo[0x5001][3] = 4 | 0.01 | 0.1
 00025 PASS: Status Message F1.Status_Output1-2 4.0
 00026 #verify reading from load
@@ -105,7 +105,7 @@ Started on: 2025-09-08-11:23:59
 00045 #verify reading  Output1B
 00045 NULL : sdo[0x5003][1] = 2000 | 200 | 0.5
 00045 TEST: Status Message Amp.Port_1 2000.0 +/- 200.0
-00045 PASS: Status Message Amp.Port_1 2042.0
+00045 PASS: Status Message Amp.Port_1 2046.0
 00046 NULL : sdo[0x5001][3] = 4 | 0.01 | 0.1
 00046 PASS: Status Message F1.Status_Output1-2 4.0
 00047 #verify reading from load
@@ -162,7 +162,7 @@ Started on: 2025-09-08-11:23:59
 00068 #verify reading from load
 00068 NULL : MeterCurrent = 3.5 | 0.1 | 0.1
 00068 TEST: MeterCurrent 3.5 +/- 0.1
-00068 PASS: MeterCurrent 3.498
+00068 PASS: MeterCurrent 3.499
 00069 
 00069 #set current and turn on output and verify feedback
 00069 LdCurrentSet = 4000: NULL : WAIT = 0.1
@@ -173,13 +173,13 @@ Started on: 2025-09-08-11:23:59
 00073 #verify reading  Output1B
 00073 NULL : sdo[0x5003][1] = 4000 | 200 | 0.5
 00073 TEST: Status Message Amp.Port_1 4000.0 +/- 200.0
-00073 PASS: Status Message Amp.Port_1 4145.0
+00073 PASS: Status Message Amp.Port_1 4141.0
 00074 NULL : sdo[0x5001][3] = 4 | 0.01 | 0.1
 00074 PASS: Status Message F1.Status_Output1-2 4.0
 00075 #verify reading from load
 00075 NULL : MeterCurrent = 4.0 | 0.1 | 0.1
 00075 TEST: MeterCurrent 4.0 +/- 0.1
-00075 PASS: MeterCurrent 4.0
+00075 PASS: MeterCurrent 4.001
 00076 
 00076 #set current and turn on output and verify feedback
 00076 LdCurrentSet = 4500: NULL : WAIT = 0.1
@@ -240,7 +240,7 @@ Started on: 2025-09-08-11:23:59
 00102 #verify reading  Output2A
 00102 NULL : sdo[0x5003][2] = 500 | 200 | 0.5
 00102 TEST: Status Message Amp.Port_2 500.0 +/- 200.0
-00102 PASS: Status Message Amp.Port_2 497.0
+00102 PASS: Status Message Amp.Port_2 501.0
 00103 NULL : sdo[0x5001][3] = 24 | 0.01 | 0.1
 00103 PASS: Status Message F1.Status_Output1-2 24.0
 00104 #verify reading from load
@@ -274,7 +274,7 @@ Started on: 2025-09-08-11:23:59
 00116 #verify reading  Output2A
 00116 NULL : sdo[0x5003][2] = 1500 | 200 | 0.5
 00116 TEST: Status Message Amp.Port_2 1500.0 +/- 200.0
-00116 PASS: Status Message Amp.Port_2 1552.0
+00116 PASS: Status Message Amp.Port_2 1556.0
 00117 NULL : sdo[0x5001][3] = 24 | 0.01 | 0.1
 00117 PASS: Status Message F1.Status_Output1-2 24.0
 00118 #verify reading from load
@@ -291,7 +291,7 @@ Started on: 2025-09-08-11:23:59
 00123 #verify reading  Output2A
 00123 NULL : sdo[0x5003][2] = 2000 | 200 | 0.5
 00123 TEST: Status Message Amp.Port_2 2000.0 +/- 200.0
-00123 PASS: Status Message Amp.Port_2 2082.0
+00123 PASS: Status Message Amp.Port_2 2090.0
 00124 NULL : sdo[0x5001][3] = 24 | 0.01 | 0.1
 00124 PASS: Status Message F1.Status_Output1-2 24.0
 00125 #verify reading from load
@@ -308,7 +308,7 @@ Started on: 2025-09-08-11:23:59
 00130 #verify reading  Output2A
 00130 NULL : sdo[0x5003][2] = 2500 | 200 | 0.5
 00130 TEST: Status Message Amp.Port_2 2500.0 +/- 200.0
-00130 PASS: Status Message Amp.Port_2 2620.0
+00130 PASS: Status Message Amp.Port_2 2624.0
 00131 NULL : sdo[0x5001][3] = 24 | 0.01 | 0.1
 00131 PASS: Status Message F1.Status_Output1-2 24.0
 00132 #verify reading from load
@@ -325,7 +325,7 @@ Started on: 2025-09-08-11:23:59
 00137 #verify reading  Output2A
 00137 NULL : sdo[0x5003][2] = 3000 | 200 | 0.5
 00137 TEST: Status Message Amp.Port_2 3000.0 +/- 200.0
-00137 PASS: Status Message Amp.Port_2 3149.0
+00137 PASS: Status Message Amp.Port_2 3153.0
 00138 NULL : sdo[0x5001][3] = 24 | 0.01 | 0.1
 00138 PASS: Status Message F1.Status_Output1-2 24.0
 00139 #verify reading from load
@@ -342,13 +342,13 @@ Started on: 2025-09-08-11:23:59
 00144 #verify reading  Output2A
 00144 NULL : sdo[0x5003][2] = 3500 | 200 | 0.5
 00144 TEST: Status Message Amp.Port_2 3500.0 +/- 200.0
-00144 PASS: Status Message Amp.Port_2 3683.0
+00144 PASS: Status Message Amp.Port_2 3687.0
 00145 NULL : sdo[0x5001][3] = 24 | 0.01 | 0.1
 00145 PASS: Status Message F1.Status_Output1-2 24.0
 00146 #verify reading from load
 00146 NULL : MeterCurrent = 3.5 | 0.1 | 0.1
 00146 TEST: MeterCurrent 3.5 +/- 0.1
-00146 PASS: MeterCurrent 3.498
+00146 PASS: MeterCurrent 3.499
 00147 
 00147 #set current and turn on output and verify feedback
 00147 LdCurrentSet = 4000: NULL : WAIT = 0.1
@@ -359,13 +359,13 @@ Started on: 2025-09-08-11:23:59
 00151 #verify reading  Output2A
 00151 NULL : sdo[0x5003][2] = 4000 | 200 | 0.5
 00151 TEST: Status Message Amp.Port_2 4000.0 +/- 200.0
-00151 FAIL: Status Message Amp.Port_2 4216.0
+00151 FAIL: Status Message Amp.Port_2 4220.0
 00152 NULL : sdo[0x5001][3] = 24 | 0.01 | 0.1
 00152 PASS: Status Message F1.Status_Output1-2 24.0
 00153 #verify reading from load
 00153 NULL : MeterCurrent = 4.0 | 0.1 | 0.1
 00153 TEST: MeterCurrent 4.0 +/- 0.1
-00153 PASS: MeterCurrent 3.999
+00153 PASS: MeterCurrent 4.001
 00154 
 00154 #set current and turn on output and verify feedback
 00154 LdCurrentSet = 4500: NULL : WAIT = 0.1
@@ -426,7 +426,7 @@ Started on: 2025-09-08-11:23:59
 00180 #verify reading  Output2B
 00180 NULL : sdo[0x5003][2] = 500 | 200 | 0.5
 00180 TEST: Status Message Amp.Port_2 500.0 +/- 200.0
-00180 PASS: Status Message Amp.Port_2 485.0
+00180 PASS: Status Message Amp.Port_2 489.0
 00181 NULL : sdo[0x5001][3] = 104 | 0.01 | 0.1
 00181 PASS: Status Message F1.Status_Output1-2 104.0
 00182 #verify reading from load
@@ -443,7 +443,7 @@ Started on: 2025-09-08-11:23:59
 00187 #verify reading  Output2B
 00187 NULL : sdo[0x5003][2] = 1000 | 200 | 0.5
 00187 TEST: Status Message Amp.Port_2 1000.0 +/- 200.0
-00187 PASS: Status Message Amp.Port_2 1007.0
+00187 PASS: Status Message Amp.Port_2 1003.0
 00188 NULL : sdo[0x5001][3] = 104 | 0.01 | 0.1
 00188 PASS: Status Message F1.Status_Output1-2 104.0
 00189 #verify reading from load
@@ -494,7 +494,7 @@ Started on: 2025-09-08-11:23:59
 00208 #verify reading  Output2B
 00208 NULL : sdo[0x5003][2] = 2500 | 200 | 0.5
 00208 TEST: Status Message Amp.Port_2 2500.0 +/- 200.0
-00208 PASS: Status Message Amp.Port_2 2568.0
+00208 PASS: Status Message Amp.Port_2 2564.0
 00209 NULL : sdo[0x5001][3] = 104 | 0.01 | 0.1
 00209 PASS: Status Message F1.Status_Output1-2 104.0
 00210 #verify reading from load
@@ -528,13 +528,13 @@ Started on: 2025-09-08-11:23:59
 00222 #verify reading  Output2B
 00222 NULL : sdo[0x5003][2] = 3500 | 200 | 0.5
 00222 TEST: Status Message Amp.Port_2 3500.0 +/- 200.0
-00222 PASS: Status Message Amp.Port_2 3603.0
+00222 PASS: Status Message Amp.Port_2 3607.0
 00223 NULL : sdo[0x5001][3] = 104 | 0.01 | 0.1
 00223 PASS: Status Message F1.Status_Output1-2 104.0
 00224 #verify reading from load
 00224 NULL : MeterCurrent = 3.5 | 0.1 | 0.1
 00224 TEST: MeterCurrent 3.5 +/- 0.1
-00224 PASS: MeterCurrent 3.498
+00224 PASS: MeterCurrent 3.499
 00225 
 00225 #set current and turn on output and verify feedback
 00225 LdCurrentSet = 4000: NULL : WAIT = 0.1
@@ -551,7 +551,7 @@ Started on: 2025-09-08-11:23:59
 00231 #verify reading from load
 00231 NULL : MeterCurrent = 4.0 | 0.1 | 0.1
 00231 TEST: MeterCurrent 4.0 +/- 0.1
-00231 PASS: MeterCurrent 3.999
+00231 PASS: MeterCurrent 4.0
 00232 
 00232 #set current and turn on output and verify feedback
 00232 LdCurrentSet = 4500: NULL : WAIT = 0.1
@@ -629,7 +629,7 @@ Started on: 2025-09-08-11:23:59
 00265 #verify reading  Output3B
 00265 NULL : sdo[0x5003][3] = 1000 | 200 | 0.5
 00265 TEST: Status Message Amp.Port_3 1000.0 +/- 200.0
-00265 PASS: Status Message Amp.Port_3 1011.0
+00265 PASS: Status Message Amp.Port_3 1007.0
 00266 NULL : sdo[0x5001][4] = 4 | 0.01 | 0.1
 00266 PASS: Status Message F1.Status_Output3-4 4.0
 00267 #verify reading from load
@@ -646,7 +646,7 @@ Started on: 2025-09-08-11:23:59
 00272 #verify reading  Output3B
 00272 NULL : sdo[0x5003][3] = 1500 | 200 | 0.5
 00272 TEST: Status Message Amp.Port_3 1500.0 +/- 200.0
-00272 PASS: Status Message Amp.Port_3 1529.0
+00272 PASS: Status Message Amp.Port_3 1533.0
 00273 NULL : sdo[0x5001][4] = 4 | 0.01 | 0.1
 00273 PASS: Status Message F1.Status_Output3-4 4.0
 00274 #verify reading from load
@@ -663,7 +663,7 @@ Started on: 2025-09-08-11:23:59
 00279 #verify reading  Output3B
 00279 NULL : sdo[0x5003][3] = 2000 | 200 | 0.5
 00279 TEST: Status Message Amp.Port_3 2000.0 +/- 200.0
-00279 PASS: Status Message Amp.Port_3 2058.0
+00279 PASS: Status Message Amp.Port_3 2054.0
 00280 NULL : sdo[0x5001][4] = 4 | 0.01 | 0.1
 00280 PASS: Status Message F1.Status_Output3-4 4.0
 00281 #verify reading from load
@@ -697,7 +697,7 @@ Started on: 2025-09-08-11:23:59
 00293 #verify reading  Output3B
 00293 NULL : sdo[0x5003][3] = 3000 | 200 | 0.5
 00293 TEST: Status Message Amp.Port_3 3000.0 +/- 200.0
-00293 PASS: Status Message Amp.Port_3 3105.0
+00293 PASS: Status Message Amp.Port_3 3101.0
 00294 NULL : sdo[0x5001][4] = 4 | 0.01 | 0.1
 00294 PASS: Status Message F1.Status_Output3-4 4.0
 00295 #verify reading from load
@@ -714,13 +714,13 @@ Started on: 2025-09-08-11:23:59
 00300 #verify reading  Output3B
 00300 NULL : sdo[0x5003][3] = 3500 | 200 | 0.5
 00300 TEST: Status Message Amp.Port_3 3500.0 +/- 200.0
-00300 PASS: Status Message Amp.Port_3 3631.0
+00300 PASS: Status Message Amp.Port_3 3627.0
 00301 NULL : sdo[0x5001][4] = 4 | 0.01 | 0.1
 00301 PASS: Status Message F1.Status_Output3-4 4.0
 00302 #verify reading from load
 00302 NULL : MeterCurrent = 3.5 | 0.1 | 0.1
 00302 TEST: MeterCurrent 3.5 +/- 0.1
-00302 PASS: MeterCurrent 3.498
+00302 PASS: MeterCurrent 3.499
 00303 
 00303 #set current and turn on output and verify feedback
 00303 LdCurrentSet = 4000: NULL : WAIT = 0.1
@@ -731,13 +731,13 @@ Started on: 2025-09-08-11:23:59
 00307 #verify reading  Output3B
 00307 NULL : sdo[0x5003][3] = 4000 | 200 | 0.5
 00307 TEST: Status Message Amp.Port_3 4000.0 +/- 200.0
-00307 PASS: Status Message Amp.Port_3 4157.0
+00307 PASS: Status Message Amp.Port_3 4153.0
 00308 NULL : sdo[0x5001][4] = 4 | 0.01 | 0.1
 00308 PASS: Status Message F1.Status_Output3-4 4.0
 00309 #verify reading from load
 00309 NULL : MeterCurrent = 4.0 | 0.1 | 0.1
 00309 TEST: MeterCurrent 4.0 +/- 0.1
-00309 PASS: MeterCurrent 4.0
+00309 PASS: MeterCurrent 4.001
 00310 
 00310 #set current and turn on output and verify feedback
 00310 LdCurrentSet = 4500: NULL : WAIT = 0.1
@@ -798,7 +798,7 @@ Started on: 2025-09-08-11:23:59
 00336 #verify reading  Output4A
 00336 NULL : sdo[0x5003][4] = 500 | 200 | 0.5
 00336 TEST: Status Message Amp.Port_4 500.0 +/- 200.0
-00336 PASS: Status Message Amp.Port_4 489.0
+00336 PASS: Status Message Amp.Port_4 497.0
 00337 NULL : sdo[0x5001][4] = 24 | 0.01 | 0.1
 00337 PASS: Status Message F1.Status_Output3-4 24.0
 00338 #verify reading from load
@@ -906,7 +906,7 @@ Started on: 2025-09-08-11:23:59
 00380 #verify reading from load
 00380 NULL : MeterCurrent = 3.5 | 0.1 | 0.1
 00380 TEST: MeterCurrent 3.5 +/- 0.1
-00380 PASS: MeterCurrent 3.498
+00380 PASS: MeterCurrent 3.499
 00381 
 00381 #set current and turn on output and verify feedback
 00381 LdCurrentSet = 4000: NULL : WAIT = 0.1
@@ -923,7 +923,7 @@ Started on: 2025-09-08-11:23:59
 00387 #verify reading from load
 00387 NULL : MeterCurrent = 4.0 | 0.1 | 0.1
 00387 TEST: MeterCurrent 4.0 +/- 0.1
-00387 PASS: MeterCurrent 3.999
+00387 PASS: MeterCurrent 4.001
 00388 
 00388 #set current and turn on output and verify feedback
 00388 LdCurrentSet = 4500: NULL : WAIT = 0.1
@@ -984,7 +984,7 @@ Started on: 2025-09-08-11:23:59
 00414 #verify reading  Output4B
 00414 NULL : sdo[0x5003][4] = 500 | 200 | 0.5
 00414 TEST: Status Message Amp.Port_4 500.0 +/- 200.0
-00414 PASS: Status Message Amp.Port_4 473.0
+00414 PASS: Status Message Amp.Port_4 481.0
 00415 NULL : sdo[0x5001][4] = 104 | 0.01 | 0.1
 00415 PASS: Status Message F1.Status_Output3-4 104.0
 00416 #verify reading from load
@@ -1018,7 +1018,7 @@ Started on: 2025-09-08-11:23:59
 00428 #verify reading  Output4B
 00428 NULL : sdo[0x5003][4] = 1500 | 200 | 0.5
 00428 TEST: Status Message Amp.Port_4 1500.0 +/- 200.0
-00428 PASS: Status Message Amp.Port_4 1509.0
+00428 PASS: Status Message Amp.Port_4 1513.0
 00429 NULL : sdo[0x5001][4] = 104 | 0.01 | 0.1
 00429 PASS: Status Message F1.Status_Output3-4 104.0
 00430 #verify reading from load
@@ -1035,7 +1035,7 @@ Started on: 2025-09-08-11:23:59
 00435 #verify reading  Output4B
 00435 NULL : sdo[0x5003][4] = 2000 | 200 | 0.5
 00435 TEST: Status Message Amp.Port_4 2000.0 +/- 200.0
-00435 PASS: Status Message Amp.Port_4 2030.0
+00435 PASS: Status Message Amp.Port_4 2034.0
 00436 NULL : sdo[0x5001][4] = 104 | 0.01 | 0.1
 00436 PASS: Status Message F1.Status_Output3-4 104.0
 00437 #verify reading from load
@@ -1069,7 +1069,7 @@ Started on: 2025-09-08-11:23:59
 00449 #verify reading  Output4B
 00449 NULL : sdo[0x5003][4] = 3000 | 200 | 0.5
 00449 TEST: Status Message Amp.Port_4 3000.0 +/- 200.0
-00449 PASS: Status Message Amp.Port_4 3074.0
+00449 PASS: Status Message Amp.Port_4 3078.0
 00450 NULL : sdo[0x5001][4] = 104 | 0.01 | 0.1
 00450 PASS: Status Message F1.Status_Output3-4 104.0
 00451 #verify reading from load
@@ -1092,7 +1092,7 @@ Started on: 2025-09-08-11:23:59
 00458 #verify reading from load
 00458 NULL : MeterCurrent = 3.5 | 0.1 | 0.1
 00458 TEST: MeterCurrent 3.5 +/- 0.1
-00458 PASS: MeterCurrent 3.498
+00458 PASS: MeterCurrent 3.499
 00459 
 00459 #set current and turn on output and verify feedback
 00459 LdCurrentSet = 4000: NULL : WAIT = 0.1
@@ -1103,7 +1103,7 @@ Started on: 2025-09-08-11:23:59
 00463 #verify reading  Output4B
 00463 NULL : sdo[0x5003][4] = 4000 | 200 | 0.5
 00463 TEST: Status Message Amp.Port_4 4000.0 +/- 200.0
-00463 PASS: Status Message Amp.Port_4 4117.0
+00463 PASS: Status Message Amp.Port_4 4121.0
 00464 NULL : sdo[0x5001][4] = 104 | 0.01 | 0.1
 00464 PASS: Status Message F1.Status_Output3-4 104.0
 00465 #verify reading from load
@@ -1187,7 +1187,7 @@ Started on: 2025-09-08-11:23:59
 00499 #verify reading  Output5A
 00499 NULL : sdo[0x5003][5] = 1000 | 200 | 0.5
 00499 TEST: Status Message Amp.Port_5 1000.0 +/- 200.0
-00499 PASS: Status Message Amp.Port_5 1027.0
+00499 PASS: Status Message Amp.Port_5 1031.0
 00500 NULL : sdo[0x5001][5] = 1 | 0.01 | 0.1
 00500 PASS: Status Message F1.Status_Output5-6 1.0
 00501 #verify reading from load
@@ -1204,7 +1204,7 @@ Started on: 2025-09-08-11:23:59
 00506 #verify reading  Output5A
 00506 NULL : sdo[0x5003][5] = 1500 | 200 | 0.5
 00506 TEST: Status Message Amp.Port_5 1500.0 +/- 200.0
-00506 PASS: Status Message Amp.Port_5 1560.0
+00506 PASS: Status Message Amp.Port_5 1564.0
 00507 NULL : sdo[0x5001][5] = 1 | 0.01 | 0.1
 00507 PASS: Status Message F1.Status_Output5-6 1.0
 00508 #verify reading from load
@@ -1238,7 +1238,7 @@ Started on: 2025-09-08-11:23:59
 00520 #verify reading  Output5A
 00520 NULL : sdo[0x5003][5] = 2500 | 200 | 0.5
 00520 TEST: Status Message Amp.Port_5 2500.0 +/- 200.0
-00520 PASS: Status Message Amp.Port_5 2636.0
+00520 PASS: Status Message Amp.Port_5 2640.0
 00521 NULL : sdo[0x5001][5] = 1 | 0.01 | 0.1
 00521 PASS: Status Message F1.Status_Output5-6 1.0
 00522 #verify reading from load
@@ -1272,13 +1272,13 @@ Started on: 2025-09-08-11:23:59
 00534 #verify reading  Output5A
 00534 NULL : sdo[0x5003][5] = 3500 | 200 | 0.5
 00534 TEST: Status Message Amp.Port_5 3500.0 +/- 200.0
-00534 FAIL: Status Message Amp.Port_5 3707.0
+00534 FAIL: Status Message Amp.Port_5 3711.0
 00535 NULL : sdo[0x5001][5] = 1 | 0.01 | 0.1
 00535 PASS: Status Message F1.Status_Output5-6 1.0
 00536 #verify reading from load
 00536 NULL : MeterCurrent = 3.5 | 0.1 | 0.1
 00536 TEST: MeterCurrent 3.5 +/- 0.1
-00536 PASS: MeterCurrent 3.498
+00536 PASS: MeterCurrent 3.499
 00537 
 00537 #set current and turn on output and verify feedback
 00537 LdCurrentSet = 4000: NULL : WAIT = 0.1
@@ -1295,7 +1295,7 @@ Started on: 2025-09-08-11:23:59
 00543 #verify reading from load
 00543 NULL : MeterCurrent = 4.0 | 0.1 | 0.1
 00543 TEST: MeterCurrent 4.0 +/- 0.1
-00543 PASS: MeterCurrent 4.0
+00543 PASS: MeterCurrent 4.001
 00544 
 00544 #set current and turn on output and verify feedback
 00544 LdCurrentSet = 4500: NULL : WAIT = 0.1
@@ -1390,7 +1390,7 @@ Started on: 2025-09-08-11:23:59
 00584 #verify reading  Output5B
 00584 NULL : sdo[0x5003][5] = 1500 | 200 | 0.5
 00584 TEST: Status Message Amp.Port_5 1500.0 +/- 200.0
-00584 PASS: Status Message Amp.Port_5 1525.0
+00584 PASS: Status Message Amp.Port_5 1529.0
 00585 NULL : sdo[0x5001][5] = 6 | 0.01 | 0.1
 00585 PASS: Status Message F1.Status_Output5-6 6.0
 00586 #verify reading from load
@@ -1407,7 +1407,7 @@ Started on: 2025-09-08-11:23:59
 00591 #verify reading  Output5B
 00591 NULL : sdo[0x5003][5] = 2000 | 200 | 0.5
 00591 TEST: Status Message Amp.Port_5 2000.0 +/- 200.0
-00591 PASS: Status Message Amp.Port_5 2046.0
+00591 PASS: Status Message Amp.Port_5 2050.0
 00592 NULL : sdo[0x5001][5] = 6 | 0.01 | 0.1
 00592 PASS: Status Message F1.Status_Output5-6 6.0
 00593 #verify reading from load
@@ -1424,7 +1424,7 @@ Started on: 2025-09-08-11:23:59
 00598 #verify reading  Output5B
 00598 NULL : sdo[0x5003][5] = 2500 | 200 | 0.5
 00598 TEST: Status Message Amp.Port_5 2500.0 +/- 200.0
-00598 PASS: Status Message Amp.Port_5 2576.0
+00598 PASS: Status Message Amp.Port_5 2580.0
 00599 NULL : sdo[0x5001][5] = 6 | 0.01 | 0.1
 00599 PASS: Status Message F1.Status_Output5-6 6.0
 00600 #verify reading from load
@@ -1441,7 +1441,7 @@ Started on: 2025-09-08-11:23:59
 00605 #verify reading  Output5B
 00605 NULL : sdo[0x5003][5] = 3000 | 200 | 0.5
 00605 TEST: Status Message Amp.Port_5 3000.0 +/- 200.0
-00605 PASS: Status Message Amp.Port_5 3097.0
+00605 PASS: Status Message Amp.Port_5 3101.0
 00606 NULL : sdo[0x5001][5] = 6 | 0.01 | 0.1
 00606 PASS: Status Message F1.Status_Output5-6 6.0
 00607 #verify reading from load
@@ -1464,7 +1464,7 @@ Started on: 2025-09-08-11:23:59
 00614 #verify reading from load
 00614 NULL : MeterCurrent = 3.5 | 0.1 | 0.1
 00614 TEST: MeterCurrent 3.5 +/- 0.1
-00614 PASS: MeterCurrent 3.498
+00614 PASS: MeterCurrent 3.499
 00615 
 00615 #set current and turn on output and verify feedback
 00615 LdCurrentSet = 4000: NULL : WAIT = 0.1
@@ -1481,7 +1481,7 @@ Started on: 2025-09-08-11:23:59
 00621 #verify reading from load
 00621 NULL : MeterCurrent = 4.0 | 0.1 | 0.1
 00621 TEST: MeterCurrent 4.0 +/- 0.1
-00621 PASS: MeterCurrent 3.999
+00621 PASS: MeterCurrent 4.001
 00622 
 00622 #set current and turn on output and verify feedback
 00622 LdCurrentSet = 4500: NULL : WAIT = 0.1
@@ -1542,7 +1542,7 @@ Started on: 2025-09-08-11:23:59
 00648 #verify reading  Output6A
 00648 NULL : sdo[0x5003][6] = 500 | 200 | 0.5
 00648 TEST: Status Message Amp.Port_6 500.0 +/- 200.0
-00648 PASS: Status Message Amp.Port_6 497.0
+00648 PASS: Status Message Amp.Port_6 501.0
 00649 NULL : sdo[0x5001][5] = 26 | 0.01 | 0.1
 00649 PASS: Status Message F1.Status_Output5-6 26.0
 00650 #verify reading from load
@@ -1593,7 +1593,7 @@ Started on: 2025-09-08-11:23:59
 00669 #verify reading  Output6A
 00669 NULL : sdo[0x5003][6] = 2000 | 200 | 0.5
 00669 TEST: Status Message Amp.Port_6 2000.0 +/- 200.0
-00669 PASS: Status Message Amp.Port_6 2094.0
+00669 PASS: Status Message Amp.Port_6 2098.0
 00670 NULL : sdo[0x5001][5] = 26 | 0.01 | 0.1
 00670 PASS: Status Message F1.Status_Output5-6 26.0
 00671 #verify reading from load
@@ -1667,7 +1667,7 @@ Started on: 2025-09-08-11:23:59
 00699 #verify reading from load
 00699 NULL : MeterCurrent = 4.0 | 0.1 | 0.1
 00699 TEST: MeterCurrent 4.0 +/- 0.1
-00699 PASS: MeterCurrent 4.0
+00699 PASS: MeterCurrent 4.003
 00700 
 00700 #set current and turn on output and verify feedback
 00700 LdCurrentSet = 4500: NULL : WAIT = 0.1
@@ -1728,7 +1728,7 @@ Started on: 2025-09-08-11:23:59
 00726 #verify reading  Output6B
 00726 NULL : sdo[0x5003][6] = 500 | 200 | 0.5
 00726 TEST: Status Message Amp.Port_6 500.0 +/- 200.0
-00726 PASS: Status Message Amp.Port_6 497.0
+00726 PASS: Status Message Amp.Port_6 501.0
 00727 NULL : sdo[0x5001][5] = 106 | 0.01 | 0.1
 00727 PASS: Status Message F1.Status_Output5-6 106.0
 00728 #verify reading from load
@@ -1802,7 +1802,7 @@ Started on: 2025-09-08-11:23:59
 00756 #verify reading from load
 00756 NULL : MeterCurrent = 2.5 | 0.1 | 0.1
 00756 TEST: MeterCurrent 2.5 +/- 0.1
-00756 PASS: MeterCurrent 2.499
+00756 PASS: MeterCurrent 2.5
 00757 
 00757 #set current and turn on output and verify feedback
 00757 LdCurrentSet = 3000: NULL : WAIT = 0.1
@@ -1830,13 +1830,13 @@ Started on: 2025-09-08-11:23:59
 00768 #verify reading  Output6B
 00768 NULL : sdo[0x5003][6] = 3500 | 200 | 0.5
 00768 TEST: Status Message Amp.Port_6 3500.0 +/- 200.0
-00768 PASS: Status Message Amp.Port_6 3651.0
+00768 PASS: Status Message Amp.Port_6 3647.0
 00769 NULL : sdo[0x5001][5] = 106 | 0.01 | 0.1
 00769 PASS: Status Message F1.Status_Output5-6 106.0
 00770 #verify reading from load
 00770 NULL : MeterCurrent = 3.5 | 0.1 | 0.1
 00770 TEST: MeterCurrent 3.5 +/- 0.1
-00770 PASS: MeterCurrent 3.498
+00770 PASS: MeterCurrent 3.499
 00771 
 00771 #set current and turn on output and verify feedback
 00771 LdCurrentSet = 4000: NULL : WAIT = 0.1
@@ -1853,7 +1853,7 @@ Started on: 2025-09-08-11:23:59
 00777 #verify reading from load
 00777 NULL : MeterCurrent = 4.0 | 0.1 | 0.1
 00777 TEST: MeterCurrent 4.0 +/- 0.1
-00777 PASS: MeterCurrent 4.0
+00777 PASS: MeterCurrent 4.001
 00778 
 00778 #set current and turn on output and verify feedback
 00778 LdCurrentSet = 4500: NULL : WAIT = 0.1
@@ -1914,7 +1914,7 @@ Started on: 2025-09-08-11:23:59
 00804 #verify reading  Output7A
 00804 NULL : sdo[0x5003][7] = 500 | 200 | 0.5
 00804 TEST: Status Message Amp.Port_7 500.0 +/- 200.0
-00804 PASS: Status Message Amp.Port_7 497.0
+00804 PASS: Status Message Amp.Port_7 501.0
 00805 NULL : sdo[0x5001][6] = 1 | 0.01 | 0.1
 00805 PASS: Status Message F1.Status_Output7-8 1.0
 00806 #verify reading from load
@@ -1982,13 +1982,13 @@ Started on: 2025-09-08-11:23:59
 00832 #verify reading  Output7A
 00832 NULL : sdo[0x5003][7] = 2500 | 200 | 0.5
 00832 TEST: Status Message Amp.Port_7 2500.0 +/- 200.0
-00832 PASS: Status Message Amp.Port_7 2620.0
+00832 PASS: Status Message Amp.Port_7 2624.0
 00833 NULL : sdo[0x5001][6] = 1 | 0.01 | 0.1
 00833 PASS: Status Message F1.Status_Output7-8 1.0
 00834 #verify reading from load
 00834 NULL : MeterCurrent = 2.5 | 0.1 | 0.1
 00834 TEST: MeterCurrent 2.5 +/- 0.1
-00834 PASS: MeterCurrent 2.499
+00834 PASS: MeterCurrent 2.5
 00835 
 00835 #set current and turn on output and verify feedback
 00835 LdCurrentSet = 3000: NULL : WAIT = 0.1
@@ -2022,7 +2022,7 @@ Started on: 2025-09-08-11:23:59
 00848 #verify reading from load
 00848 NULL : MeterCurrent = 3.5 | 0.1 | 0.1
 00848 TEST: MeterCurrent 3.5 +/- 0.1
-00848 PASS: MeterCurrent 3.498
+00848 PASS: MeterCurrent 3.499
 00849 
 00849 #set current and turn on output and verify feedback
 00849 LdCurrentSet = 4000: NULL : WAIT = 0.1
@@ -2039,7 +2039,7 @@ Started on: 2025-09-08-11:23:59
 00855 #verify reading from load
 00855 NULL : MeterCurrent = 4.0 | 0.1 | 0.1
 00855 TEST: MeterCurrent 4.0 +/- 0.1
-00855 PASS: MeterCurrent 3.999
+00855 PASS: MeterCurrent 4.002
 00856 
 00856 #set current and turn on output and verify feedback
 00856 LdCurrentSet = 4500: NULL : WAIT = 0.1
@@ -2100,7 +2100,7 @@ Started on: 2025-09-08-11:23:59
 00882 #verify reading  Output7B
 00882 NULL : sdo[0x5003][7] = 500 | 200 | 0.5
 00882 TEST: Status Message Amp.Port_7 500.0 +/- 200.0
-00882 PASS: Status Message Amp.Port_7 481.0
+00882 PASS: Status Message Amp.Port_7 485.0
 00883 NULL : sdo[0x5001][6] = 6 | 0.01 | 0.1
 00883 PASS: Status Message F1.Status_Output7-8 6.0
 00884 #verify reading from load
@@ -2117,7 +2117,7 @@ Started on: 2025-09-08-11:23:59
 00889 #verify reading  Output7B
 00889 NULL : sdo[0x5003][7] = 1000 | 200 | 0.5
 00889 TEST: Status Message Amp.Port_7 1000.0 +/- 200.0
-00889 PASS: Status Message Amp.Port_7 999.0
+00889 PASS: Status Message Amp.Port_7 1003.0
 00890 NULL : sdo[0x5001][6] = 6 | 0.01 | 0.1
 00890 PASS: Status Message F1.Status_Output7-8 6.0
 00891 #verify reading from load
@@ -2134,7 +2134,7 @@ Started on: 2025-09-08-11:23:59
 00896 #verify reading  Output7B
 00896 NULL : sdo[0x5003][7] = 1500 | 200 | 0.5
 00896 TEST: Status Message Amp.Port_7 1500.0 +/- 200.0
-00896 PASS: Status Message Amp.Port_7 1521.0
+00896 PASS: Status Message Amp.Port_7 1525.0
 00897 NULL : sdo[0x5001][6] = 6 | 0.01 | 0.1
 00897 PASS: Status Message F1.Status_Output7-8 6.0
 00898 #verify reading from load
@@ -2151,7 +2151,7 @@ Started on: 2025-09-08-11:23:59
 00903 #verify reading  Output7B
 00903 NULL : sdo[0x5003][7] = 2000 | 200 | 0.5
 00903 TEST: Status Message Amp.Port_7 2000.0 +/- 200.0
-00903 PASS: Status Message Amp.Port_7 2046.0
+00903 PASS: Status Message Amp.Port_7 2050.0
 00904 NULL : sdo[0x5001][6] = 6 | 0.01 | 0.1
 00904 PASS: Status Message F1.Status_Output7-8 6.0
 00905 #verify reading from load
@@ -2168,7 +2168,7 @@ Started on: 2025-09-08-11:23:59
 00910 #verify reading  Output7B
 00910 NULL : sdo[0x5003][7] = 2500 | 200 | 0.5
 00910 TEST: Status Message Amp.Port_7 2500.0 +/- 200.0
-00910 PASS: Status Message Amp.Port_7 2568.0
+00910 PASS: Status Message Amp.Port_7 2572.0
 00911 NULL : sdo[0x5001][6] = 6 | 0.01 | 0.1
 00911 PASS: Status Message F1.Status_Output7-8 6.0
 00912 #verify reading from load
@@ -2202,7 +2202,7 @@ Started on: 2025-09-08-11:23:59
 00924 #verify reading  Output7B
 00924 NULL : sdo[0x5003][7] = 3500 | 200 | 0.5
 00924 TEST: Status Message Amp.Port_7 3500.0 +/- 200.0
-00924 PASS: Status Message Amp.Port_7 3611.0
+00924 PASS: Status Message Amp.Port_7 3619.0
 00925 NULL : sdo[0x5001][6] = 6 | 0.01 | 0.1
 00925 PASS: Status Message F1.Status_Output7-8 6.0
 00926 #verify reading from load
@@ -2219,13 +2219,13 @@ Started on: 2025-09-08-11:23:59
 00931 #verify reading  Output7B
 00931 NULL : sdo[0x5003][7] = 4000 | 200 | 0.5
 00931 TEST: Status Message Amp.Port_7 4000.0 +/- 200.0
-00931 PASS: Status Message Amp.Port_7 4141.0
+00931 PASS: Status Message Amp.Port_7 4145.0
 00932 NULL : sdo[0x5001][6] = 6 | 0.01 | 0.1
 00932 PASS: Status Message F1.Status_Output7-8 6.0
 00933 #verify reading from load
 00933 NULL : MeterCurrent = 4.0 | 0.1 | 0.1
 00933 TEST: MeterCurrent 4.0 +/- 0.1
-00933 PASS: MeterCurrent 3.999
+00933 PASS: MeterCurrent 4.002
 00934 
 00934 #set current and turn on output and verify feedback
 00934 LdCurrentSet = 4500: NULL : WAIT = 0.1
@@ -2337,7 +2337,7 @@ Started on: 2025-09-08-11:23:59
 00981 #verify reading  Output8A
 00981 NULL : sdo[0x5003][8] = 2000 | 200 | 0.5
 00981 TEST: Status Message Amp.Port_8 2000.0 +/- 200.0
-00981 PASS: Status Message Amp.Port_8 2098.0
+00981 PASS: Status Message Amp.Port_8 2102.0
 00982 NULL : sdo[0x5001][6] = 26 | 0.01 | 0.1
 00982 PASS: Status Message F1.Status_Output7-8 26.0
 00983 #verify reading from load
@@ -2354,13 +2354,13 @@ Started on: 2025-09-08-11:23:59
 00988 #verify reading  Output8A
 00988 NULL : sdo[0x5003][8] = 2500 | 200 | 0.5
 00988 TEST: Status Message Amp.Port_8 2500.0 +/- 200.0
-00988 PASS: Status Message Amp.Port_8 2636.0
+00988 PASS: Status Message Amp.Port_8 2640.0
 00989 NULL : sdo[0x5001][6] = 26 | 0.01 | 0.1
 00989 PASS: Status Message F1.Status_Output7-8 26.0
 00990 #verify reading from load
 00990 NULL : MeterCurrent = 2.5 | 0.1 | 0.1
 00990 TEST: MeterCurrent 2.5 +/- 0.1
-00990 PASS: MeterCurrent 2.499
+00990 PASS: MeterCurrent 2.5
 00991 
 00991 #set current and turn on output and verify feedback
 00991 LdCurrentSet = 3000: NULL : WAIT = 0.1
@@ -2394,7 +2394,7 @@ Started on: 2025-09-08-11:23:59
 01004 #verify reading from load
 01004 NULL : MeterCurrent = 3.5 | 0.1 | 0.1
 01004 TEST: MeterCurrent 3.5 +/- 0.1
-01004 PASS: MeterCurrent 3.498
+01004 PASS: MeterCurrent 3.499
 01005 
 01005 #set current and turn on output and verify feedback
 01005 LdCurrentSet = 4000: NULL : WAIT = 0.1
@@ -2405,13 +2405,13 @@ Started on: 2025-09-08-11:23:59
 01009 #verify reading  Output8A
 01009 NULL : sdo[0x5003][8] = 4000 | 200 | 0.5
 01009 TEST: Status Message Amp.Port_8 4000.0 +/- 200.0
-01009 FAIL: Status Message Amp.Port_8 4244.0
+01009 FAIL: Status Message Amp.Port_8 4248.0
 01010 NULL : sdo[0x5001][6] = 26 | 0.01 | 0.1
 01010 PASS: Status Message F1.Status_Output7-8 26.0
 01011 #verify reading from load
 01011 NULL : MeterCurrent = 4.0 | 0.1 | 0.1
 01011 TEST: MeterCurrent 4.0 +/- 0.1
-01011 PASS: MeterCurrent 3.998
+01011 PASS: MeterCurrent 4.0
 01012 
 01012 #set current and turn on output and verify feedback
 01012 LdCurrentSet = 4500: NULL : WAIT = 0.1
@@ -2472,7 +2472,7 @@ Started on: 2025-09-08-11:23:59
 01038 #verify reading  Output8B
 01038 NULL : sdo[0x5003][8] = 500 | 200 | 0.5
 01038 TEST: Status Message Amp.Port_8 500.0 +/- 200.0
-01038 PASS: Status Message Amp.Port_8 489.0
+01038 PASS: Status Message Amp.Port_8 497.0
 01039 NULL : sdo[0x5001][6] = 106 | 0.01 | 0.1
 01039 PASS: Status Message F1.Status_Output7-8 106.0
 01040 #verify reading from load
@@ -2546,7 +2546,7 @@ Started on: 2025-09-08-11:23:59
 01068 #verify reading from load
 01068 NULL : MeterCurrent = 2.5 | 0.1 | 0.1
 01068 TEST: MeterCurrent 2.5 +/- 0.1
-01068 PASS: MeterCurrent 2.499
+01068 PASS: MeterCurrent 2.5
 01069 
 01069 #set current and turn on output and verify feedback
 01069 LdCurrentSet = 3000: NULL : WAIT = 0.1
@@ -2580,7 +2580,7 @@ Started on: 2025-09-08-11:23:59
 01082 #verify reading from load
 01082 NULL : MeterCurrent = 3.5 | 0.1 | 0.1
 01082 TEST: MeterCurrent 3.5 +/- 0.1
-01082 PASS: MeterCurrent 3.498
+01082 PASS: MeterCurrent 3.499
 01083 
 01083 #set current and turn on output and verify feedback
 01083 LdCurrentSet = 4000: NULL : WAIT = 0.1
@@ -2591,13 +2591,13 @@ Started on: 2025-09-08-11:23:59
 01087 #verify reading  Output8B
 01087 NULL : sdo[0x5003][8] = 4000 | 200 | 0.5
 01087 TEST: Status Message Amp.Port_8 4000.0 +/- 200.0
-01087 PASS: Status Message Amp.Port_8 4133.0
+01087 PASS: Status Message Amp.Port_8 4137.0
 01088 NULL : sdo[0x5001][6] = 106 | 0.01 | 0.1
 01088 PASS: Status Message F1.Status_Output7-8 106.0
 01089 #verify reading from load
 01089 NULL : MeterCurrent = 4.0 | 0.1 | 0.1
 01089 TEST: MeterCurrent 4.0 +/- 0.1
-01089 PASS: MeterCurrent 3.999
+01089 PASS: MeterCurrent 4.0
 01090 
 01090 #set current and turn on output and verify feedback
 01090 LdCurrentSet = 4500: NULL : WAIT = 0.1
@@ -2642,5 +2642,5 @@ Started on: 2025-09-08-11:23:59
 01109 SAVE
 01109 END
 Fail count: 8
-Finished on: 2025-09-08-11:31:51
-elapsed time: 0:07:49.684401
+Finished on: 2025-09-10-14:56:16
+elapsed time: 0:07:48.609711
