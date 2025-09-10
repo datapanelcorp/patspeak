@@ -14,10 +14,18 @@ outstr += "\n"
 
 outstr += "#setup load\n"
 outstr += "LdRemote = 1 : NULL\n"
-outstr += "LdEnable = 0 : NULL\n"
 outstr += "LdCurrentSet = 0 : NULL : WAIT = 1\n"
+outstr += "LdResistSet = 0 : NULL : WAIT = 1\n"
+outstr += "LdMode = 0 : NULL : WAIT = 5\n"
+outstr += "LdEnable = 0 : NULL\n"
 outstr += "J0_08_METER_LOAD = 1 : NULL\n"
-outstr += "LdCurrentSet = 1 : NULL : WAIT = 1\n"
+outstr += "LdCurrentSet = 1500 : NULL : WAIT = 1\n"
+outstr += "LdShort = 1 : NULL : WAIT = 1\n"
+outstr += "LdShort = 0 : NULL : WAIT = 1\n"
+outstr += "LdMode = 1 : NULL : WAIT = 5\n"
+outstr += "LdResistSet = 1 : NULL : WAIT = 1\n"
+
+
 outstr += "END\n"
     
 f = open(datafile, 'w')

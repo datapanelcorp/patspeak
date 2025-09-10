@@ -1,4 +1,4 @@
-Started on: 2025-09-09-22:31:49
+Started on: 2025-09-10-13:23:58
 00000 UUT_EDS = 37000-563.eds
 00000 UUT_DATANAME = RESET
 00000 #Restore all Default Parameters
@@ -8,5 +8,5 @@ Started on: 2025-09-09-22:31:49
 00002 RLY_K1 = 0 : NULL : WAIT = 1
 00003 END
 Fail count: 0
-Finished on: 2025-09-09-22:31:54
-elapsed time: 0:00:02.173547
+Finished on: 2025-09-10-13:24:03
+elapsed time: 0:00:02.170424

@@ -5,12 +5,12 @@ UUT_EDS = 37000-564.eds
 UUT_DATANAME = 37000-4-CANOPEN-OUTPUT-SHORT
 
 PRE_OPERATIONAL
-PAUSE-MANUALLY ACTIVATE SHORT ON E_LOAD
 #-----setup PAT-----
 #setup load
 LdRemote = 0 : NULL : WAIT = 0.1
-LdEnable = 0 : NULL : WAIT = 0.1
 LdCurrentSet = 0 : NULL : WAIT = 0.1
+LdShort = 1 : NULL : WAIT = 1
+LdEnable = 1 : NULL : WAIT = 0.1
 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
 NULL : sdo[0x5001][3] = 0 | 0.1 | 0.1
 NULL : sdo[0x5001][4] = 0 | 0.1 | 0.1

@@ -81,7 +81,7 @@ def receive_can_messages():
                     e_load_enabled = 0
                     eload.write("INP OFF")
                     
-            in_value = ((message.data[3]*256) + message.data[2]) & 0xFFF;
+            in_value = ((message.data[3]*256) + message.data[2]);
             if(e_load_setting != in_value):
                 e_load_setting = in_value
                 print(f"CURR {e_load_setting / 1000}")

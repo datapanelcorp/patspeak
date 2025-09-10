@@ -31,15 +31,13 @@ outstr += "\n"
 
 outstr += "PRE_OPERATIONAL\n"
 
-outstr += "PAUSE-MANUALLY ACTIVATE SHORT ON E_LOAD\n"
-
 outstr += "#-----setup PAT-----\n"
 outstr += "#setup load\n"
 outstr += "LdRemote = 0 : NULL : WAIT = 0.1\n"
-outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
 outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
+outstr += "LdShort = 1 : NULL : WAIT = 1\n"
+outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
 outstr += "J0_08_METER_LOAD = 1 : NULL : WAIT = 1\n"
-
 
 #verify faults clear
 outstr += "NULL : sdo[0x5001][3] = 0 | 0.1 | 0.1\n"
