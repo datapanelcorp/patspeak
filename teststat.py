@@ -16,7 +16,7 @@ log_files = glob.glob('*.log')
 for filename in log_files:
     #print(f"Processing file: {filename}")
     start_time = None
-    
+    finish_time = None #added finish_time to stop crash
     with open(filename, 'r') as f:
         for line in f:
             if line.startswith("Started on:"):
@@ -37,7 +37,7 @@ for filename in log_files:
                 PassCount += 1
 
         # If a start time was found, calculate the duration and add it
-        if start_time:
+        if start_time and finish_time: #added finish_time to stop crash
             duration = finish_time - start_time
             total_runtime += duration
             

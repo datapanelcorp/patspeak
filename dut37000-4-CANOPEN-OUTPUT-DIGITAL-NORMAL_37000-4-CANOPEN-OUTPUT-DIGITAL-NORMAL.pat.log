@@ -1,0 +1,284 @@
+Esc - user interruption @ 2025-09-09-22:33:06
+Started on: 2025-09-09-22:31:54
+00000 #37000-4
+00000 #Verion 0.0
+00000 #digital normal test using the E-LOAD
+00000 UUT_EDS = 37000-564.eds
+00000 UUT_DATANAME = 37000-4-CANOPEN-OUTPUT-DIGITAL-NORMAL
+00000 
+00000 PRE_OPERATIONAL
+00000 #-----setup PAT-----
+00000 #setup load
+00000 LdRemote = 1 : NULL
+00001 LdEnable = 0 : NULL
+00002 LdCurrentSet = 0 : NULL
+00003 J0_08_METER_LOAD = 1 : NULL
+00004 OPERATIONAL
+00004 #-----setup 34044-----
+00004 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL
+00005 #disable global modes
+00005 sdo[0x2000][3] = 0 : NULL
+00006 sdo[0x2000][4] = 0 : NULL
+00007 #-----set 1A/3A overcurrent-----
+00007 sdo[0x2004][1] = 45 : NULL
+00008 sdo[0x2004][2] = 45 : NULL
+00009 sdo[0x2000][1] = 0 : NULL
+00010 #switch in load line, set current
+00010 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL
+00011 sdo[0x2001][1] = 17 : NULL
+00012 #switch in load line, set current
+00012 J2_02 = 1 : NULL
+00013 
+00013 #set current and turn on output and verify feedback
+00013 LdCurrentSet = 0: NULL : WAIT = 0.1
+00014 LdEnable = 1 : NULL
+00015 #TESING Output1B
+00015 sdo[0x2005][1] = 1 : NULL : WAIT = 0.1
+00016 sdo[0x6200][1] = 2 : NULL : WAIT = 0.1
+00017 #verify reading  Output1B
+00017 NULL : sdo[0x5003][1] = 0 | 200 | 0.5
+00017 TEST: Status Message Amp.Port_1 0.0 +/- 200.0
+00017 PASS: Status Message Amp.Port_1 0.0
+00018 NULL : sdo[0x5001][3] = 4 | 0.01 | 0.1
+00018 PASS: Status Message F1.Status_Output1-2 4.0
+00019 #verify reading from load
+00019 NULL : MeterCurrent = 0.0 | 0.1 | 0.1
+00019 TEST: MeterCurrent 0.0 +/- 0.1
+00019 PASS: MeterCurrent 0.0
+00020 
+00020 #set current and turn on output and verify feedback
+00020 LdCurrentSet = 500: NULL : WAIT = 0.1
+00021 LdEnable = 1 : NULL
+00022 #TESING Output1B
+00022 sdo[0x2005][1] = 1 : NULL : WAIT = 0.1
+00023 sdo[0x6200][1] = 2 : NULL : WAIT = 0.1
+00024 #verify reading  Output1B
+00024 NULL : sdo[0x5003][1] = 500 | 200 | 0.5
+00024 TEST: Status Message Amp.Port_1 500.0 +/- 200.0
+00024 PASS: Status Message Amp.Port_1 461.0
+00025 NULL : sdo[0x5001][3] = 4 | 0.01 | 0.1
+00025 PASS: Status Message F1.Status_Output1-2 4.0
+00026 #verify reading from load
+00026 NULL : MeterCurrent = 0.5 | 0.1 | 0.1
+00026 TEST: MeterCurrent 0.5 +/- 0.1
+00026 PASS: MeterCurrent 0.499
+00027 
+00027 #set current and turn on output and verify feedback
+00027 LdCurrentSet = 1000: NULL : WAIT = 0.1
+00028 LdEnable = 1 : NULL
+00029 #TESING Output1B
+00029 sdo[0x2005][1] = 1 : NULL : WAIT = 0.1
+00030 sdo[0x6200][1] = 2 : NULL : WAIT = 0.1
+00031 #verify reading  Output1B
+00031 NULL : sdo[0x5003][1] = 1000 | 200 | 0.5
+00031 TEST: Status Message Amp.Port_1 1000.0 +/- 200.0
+00031 PASS: Status Message Amp.Port_1 975.0
+00032 NULL : sdo[0x5001][3] = 4 | 0.01 | 0.1
+00032 PASS: Status Message F1.Status_Output1-2 4.0
+00033 #verify reading from load
+00033 NULL : MeterCurrent = 1.0 | 0.1 | 0.1
+00033 TEST: MeterCurrent 1.0 +/- 0.1
+00033 PASS: MeterCurrent 0.999
+00034 
+00034 #set current and turn on output and verify feedback
+00034 LdCurrentSet = 1500: NULL : WAIT = 0.1
+00035 LdEnable = 1 : NULL
+00036 #TESING Output1B
+00036 sdo[0x2005][1] = 1 : NULL : WAIT = 0.1
+00037 sdo[0x6200][1] = 2 : NULL : WAIT = 0.1
+00038 #verify reading  Output1B
+00038 NULL : sdo[0x5003][1] = 1500 | 200 | 0.5
+00038 TEST: Status Message Amp.Port_1 1500.0 +/- 200.0
+00038 PASS: Status Message Amp.Port_1 1485.0
+00039 NULL : sdo[0x5001][3] = 4 | 0.01 | 0.1
+00039 PASS: Status Message F1.Status_Output1-2 4.0
+00040 #verify reading from load
+00040 NULL : MeterCurrent = 1.5 | 0.1 | 0.1
+00040 TEST: MeterCurrent 1.5 +/- 0.1
+00040 PASS: MeterCurrent 1.499
+00041 
+00041 #set current and turn on output and verify feedback
+00041 LdCurrentSet = 2000: NULL : WAIT = 0.1
+00042 LdEnable = 1 : NULL
+00043 #TESING Output1B
+00043 sdo[0x2005][1] = 1 : NULL : WAIT = 0.1
+00044 sdo[0x6200][1] = 2 : NULL : WAIT = 0.1
+00045 #verify reading  Output1B
+00045 NULL : sdo[0x5003][1] = 2000 | 200 | 0.5
+00045 TEST: Status Message Amp.Port_1 2000.0 +/- 200.0
+00045 PASS: Status Message Amp.Port_1 1998.0
+00046 NULL : sdo[0x5001][3] = 4 | 0.01 | 0.1
+00046 PASS: Status Message F1.Status_Output1-2 4.0
+00047 #verify reading from load
+00047 NULL : MeterCurrent = 2.0 | 0.1 | 0.1
+00047 TEST: MeterCurrent 2.0 +/- 0.1
+00047 PASS: MeterCurrent 1.999
+00048 
+00048 #set current and turn on output and verify feedback
+00048 LdCurrentSet = 2500: NULL : WAIT = 0.1
+00049 LdEnable = 1 : NULL
+00050 #TESING Output1B
+00050 sdo[0x2005][1] = 1 : NULL : WAIT = 0.1
+00051 sdo[0x6200][1] = 2 : NULL : WAIT = 0.1
+00052 #verify reading  Output1B
+00052 NULL : sdo[0x5003][1] = 2500 | 200 | 0.5
+00052 TEST: Status Message Amp.Port_1 2500.0 +/- 200.0
+00052 PASS: Status Message Amp.Port_1 2512.0
+00053 NULL : sdo[0x5001][3] = 4 | 0.01 | 0.1
+00053 PASS: Status Message F1.Status_Output1-2 4.0
+00054 #verify reading from load
+00054 NULL : MeterCurrent = 2.5 | 0.1 | 0.1
+00054 TEST: MeterCurrent 2.5 +/- 0.1
+00054 PASS: MeterCurrent 2.499
+00055 
+00055 #set current and turn on output and verify feedback
+00055 LdCurrentSet = 3000: NULL : WAIT = 0.1
+00056 LdEnable = 1 : NULL
+00057 #TESING Output1B
+00057 sdo[0x2005][1] = 1 : NULL : WAIT = 0.1
+00058 sdo[0x6200][1] = 2 : NULL : WAIT = 0.1
+00059 #verify reading  Output1B
+00059 NULL : sdo[0x5003][1] = 3000 | 200 | 0.5
+00059 TEST: Status Message Amp.Port_1 3000.0 +/- 200.0
+00059 PASS: Status Message Amp.Port_1 3026.0
+00060 NULL : sdo[0x5001][3] = 4 | 0.01 | 0.1
+00060 PASS: Status Message F1.Status_Output1-2 4.0
+00061 #verify reading from load
+00061 NULL : MeterCurrent = 3.0 | 0.1 | 0.1
+00061 TEST: MeterCurrent 3.0 +/- 0.1
+00061 PASS: MeterCurrent 2.999
+00062 
+00062 #set current and turn on output and verify feedback
+00062 LdCurrentSet = 3500: NULL : WAIT = 0.1
+00063 LdEnable = 1 : NULL
+00064 #TESING Output1B
+00064 sdo[0x2005][1] = 1 : NULL : WAIT = 0.1
+00065 sdo[0x6200][1] = 2 : NULL : WAIT = 0.1
+00066 #verify reading  Output1B
+00066 NULL : sdo[0x5003][1] = 3500 | 200 | 0.5
+00066 TEST: Status Message Amp.Port_1 3500.0 +/- 200.0
+00066 PASS: Status Message Amp.Port_1 3536.0
+00067 NULL : sdo[0x5001][3] = 4 | 0.01 | 0.1
+00067 PASS: Status Message F1.Status_Output1-2 4.0
+00068 #verify reading from load
+00068 NULL : MeterCurrent = 3.5 | 0.1 | 0.1
+00068 TEST: MeterCurrent 3.5 +/- 0.1
+00068 PASS: MeterCurrent 3.499
+00069 
+00069 #set current and turn on output and verify feedback
+00069 LdCurrentSet = 4000: NULL : WAIT = 0.1
+00070 LdEnable = 1 : NULL
+00071 #TESING Output1B
+00071 sdo[0x2005][1] = 1 : NULL : WAIT = 0.1
+00072 sdo[0x6200][1] = 2 : NULL : WAIT = 0.1
+00073 #verify reading  Output1B
+00073 NULL : sdo[0x5003][1] = 4000 | 200 | 0.5
+00073 TEST: Status Message Amp.Port_1 4000.0 +/- 200.0
+00073 PASS: Status Message Amp.Port_1 4049.0
+00074 NULL : sdo[0x5001][3] = 4 | 0.01 | 0.1
+00074 PASS: Status Message F1.Status_Output1-2 4.0
+00075 #verify reading from load
+00075 NULL : MeterCurrent = 4.0 | 0.1 | 0.1
+00075 TEST: MeterCurrent 4.0 +/- 0.1
+00075 PASS: MeterCurrent 3.999
+00076 
+00076 #set current and turn on output and verify feedback
+00076 LdCurrentSet = 4500: NULL : WAIT = 0.1
+00077 LdEnable = 1 : NULL
+00078 #TESING Output1B
+00078 sdo[0x2005][1] = 1 : NULL : WAIT = 0.1
+00079 sdo[0x6200][1] = 2 : NULL : WAIT = 0.1
+00080 #verify fault Output1B
+00080 NULL : sdo[0x5003][1] = 0 | 0.1 | 0.1
+00080 TEST: Status Message Amp.Port_1 0.0 +/- 0.1
+00080 FAIL: Status Message Amp.Port_1 358.0
+00081 NULL : sdo[0x5001][3] = 8 | 0 | 0.1
+00081 TEST: Status Message F1.Status_Output1-2 8.0 +/- 0.0
+00081 FAIL: Status Message F1.Status_Output1-2 4.0
+00082 #verify reading from load
+00082 NULL : MeterCurrent = 0  | 0.01 | 0.1
+00082 TEST: MeterCurrent 0.0 +/- 0.01
+00082 PASS: MeterCurrent 0.0
+00083 
+00083 #switch out load line, clear current
+00083 sdo[0x6200][1] = 0 : NULL : WAIT = 0.1
+00084 J2_02 = 0 : NULL : WAIT = 0.5
+00085 #read signal value to update
+00085 NULL : sdo[0x5003][1] = 0 | 155 | 0.5
+00085 TEST: Status Message Amp.Port_1 0.0 +/- 155.0
+00085 PASS: Status Message Amp.Port_1 0.0
+00086 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00087 NULL : sdo[0x5001][3] = 8 | 0 | 0.1
+00087 TEST: Status Message F1.Status_Output1-2 8.0 +/- 0.0
+00087 FAIL: Status Message F1.Status_Output1-2 0.0
+00088 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL
+00089 sdo[0x2001][2] = 17 : NULL
+00090 #switch in load line, set current
+00090 J2_03 = 1 : NULL
+00091 
+00091 #set current and turn on output and verify feedback
+00091 LdCurrentSet = 0: NULL : WAIT = 0.1
+00092 LdEnable = 1 : NULL
+00093 #TESING Output2A
+00093 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+00094 sdo[0x6200][1] = 4 : NULL : WAIT = 0.1
+00095 #verify reading  Output2A
+00095 NULL : sdo[0x5003][2] = 0 | 200 | 0.5
+00095 TEST: Status Message Amp.Port_2 0.0 +/- 200.0
+00095 PASS: Status Message Amp.Port_2 0.0
+00096 NULL : sdo[0x5001][3] = 24 | 0.01 | 0.1
+00096 TEST: Status Message F1.Status_Output1-2 24.0 +/- 0.01
+00096 FAIL: Status Message F1.Status_Output1-2 16.0
+00097 #verify reading from load
+00097 NULL : MeterCurrent = 0.0 | 0.1 | 0.1
+00097 TEST: MeterCurrent 0.0 +/- 0.1
+00097 PASS: MeterCurrent 0.0
+00098 
+00098 #set current and turn on output and verify feedback
+00098 LdCurrentSet = 500: NULL : WAIT = 0.1
+00099 LdEnable = 1 : NULL
+00100 #TESING Output2A
+00100 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+00101 sdo[0x6200][1] = 4 : NULL : WAIT = 0.1
+00102 #verify reading  Output2A
+00102 NULL : sdo[0x5003][2] = 500 | 200 | 0.5
+00102 TEST: Status Message Amp.Port_2 500.0 +/- 200.0
+00102 PASS: Status Message Amp.Port_2 477.0
+00103 NULL : sdo[0x5001][3] = 24 | 0.01 | 0.1
+00103 TEST: Status Message F1.Status_Output1-2 24.0 +/- 0.01
+00103 FAIL: Status Message F1.Status_Output1-2 16.0
+00104 #verify reading from load
+00104 NULL : MeterCurrent = 0.5 | 0.1 | 0.1
+00104 TEST: MeterCurrent 0.5 +/- 0.1
+00104 PASS: MeterCurrent 0.499
+00105 
+00105 #set current and turn on output and verify feedback
+00105 LdCurrentSet = 1000: NULL : WAIT = 0.1
+00106 LdEnable = 1 : NULL
+00107 #TESING Output2A
+00107 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+00108 sdo[0x6200][1] = 4 : NULL : WAIT = 0.1
+00109 #verify reading  Output2A
+00109 NULL : sdo[0x5003][2] = 1000 | 200 | 0.5
+00109 TEST: Status Message Amp.Port_2 1000.0 +/- 200.0
+00109 PASS: Status Message Amp.Port_2 1003.0
+00110 NULL : sdo[0x5001][3] = 24 | 0.01 | 0.1
+00110 TEST: Status Message F1.Status_Output1-2 24.0 +/- 0.01
+00110 FAIL: Status Message F1.Status_Output1-2 16.0
+00111 #verify reading from load
+00111 NULL : MeterCurrent = 1.0 | 0.1 | 0.1
+00111 TEST: MeterCurrent 1.0 +/- 0.1
+00111 PASS: MeterCurrent 0.999
+00112 
+00112 #set current and turn on output and verify feedback
+00112 LdCurrentSet = 1500: NULL : WAIT = 0.1
+00113 LdEnable = 1 : NULL
+00114 #TESING Output2A
+00114 sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+00115 sdo[0x6200][1] = 4 : NULL : WAIT = 0.1
+00116 #verify reading  Output2A
+00116 NULL : sdo[0x5003][2] = 1500 | 200 | 0.5
+00116 TEST: Status Message Amp.Port_2 1500.0 +/- 200.0
+00116 PASS: Status Message Amp.Port_2 1529.0
+00117 NULL : sdo[0x5001][3] = 24 | 0.01 | 0.1
+00117 TEST: Status Message F1.Status_Output1-2 24.0 +/- 0.01

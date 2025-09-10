@@ -1,0 +1,14 @@
+Started on: 2025-09-09-20:40:42
+00000 UUT_EDS = 37000-564.eds
+00000 UUT_DATANAME = E-LOAD
+00000 
+00000 #setup load
+00000 LdRemote = 1 : NULL
+00001 LdEnable = 0 : NULL
+00002 LdCurrentSet = 0 : NULL : WAIT = 1
+00003 J0_08_METER_LOAD = 1 : NULL
+00004 LdCurrentSet = 1 : NULL : WAIT = 1
+00005 END
+Fail count: 0
+Finished on: 2025-09-09-20:40:47
+elapsed time: 0:00:02.049523

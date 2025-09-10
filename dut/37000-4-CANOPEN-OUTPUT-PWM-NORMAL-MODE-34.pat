@@ -1,0 +1,654 @@
+#37000-4
+#Verion 0.0
+#PWM test with 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
+UUT_EDS = 37000-564.eds
+UUT_DATANAME = 37000-4-CANOPEN-OUTPUT-PWM-NORMAL-MODE-34
+
+#-----setup 37000-----
+#disable global modes
+sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+#configure Ports
+sdo[0x2001][1] = 34 : NULL : WAIT = 0.1
+sdo[0x2001][2] = 34 : NULL : WAIT = 0.1
+sdo[0x2001][3] = 34 : NULL : WAIT = 0.1
+sdo[0x2001][4] = 34 : NULL : WAIT = 0.1
+sdo[0x2001][5] = 34 : NULL : WAIT = 0.1
+sdo[0x2001][6] = 34 : NULL : WAIT = 0.1
+sdo[0x2001][7] = 34 : NULL : WAIT = 0.1
+sdo[0x2001][8] = 34 : NULL : WAIT = 0.1
+PRE_OPERATIONAL
+#test at 1000hz
+sdo[0x3000] = 1000 : NULL : WAIT = 0.5
+OPERATIONAL
+#switch in 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
+J4_01 = 1 : NULL : WAIT = 0.2
+J4_03 = 1 : NULL : WAIT = 0.2
+#switch in load line, set current
+J2_03 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output2A
+sdo[0x6411][2] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 800 | 200 | 0.5
+sdo[0x6411][2] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 1600 | 200 | 0.5
+sdo[0x6411][2] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][2] = 0 : NULL : WAIT = 0.5
+J2_03 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_04 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 2 : NULL : WAIT = 0.1
+# Testing Output2B
+sdo[0x6411][2] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 800 | 200 | 0.5
+sdo[0x6411][2] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 1600 | 200 | 0.5
+sdo[0x6411][2] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][2] = 0 : NULL : WAIT = 0.5
+J2_04 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_07 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output4A
+sdo[0x6411][4] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 800 | 200 | 0.5
+sdo[0x6411][4] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 1600 | 200 | 0.5
+sdo[0x6411][4] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][4] = 0 : NULL : WAIT = 0.5
+J2_07 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_08 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 8 : NULL : WAIT = 0.1
+# Testing Output4B
+sdo[0x6411][4] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 800 | 200 | 0.5
+sdo[0x6411][4] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 1600 | 200 | 0.5
+sdo[0x6411][4] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][4] = 0 : NULL : WAIT = 0.5
+J2_08 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_09 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output5A
+sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 800 | 200 | 0.5
+sdo[0x6411][5] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 1600 | 200 | 0.5
+sdo[0x6411][5] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][5] = 0 : NULL : WAIT = 0.5
+J2_09 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_10 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 16 : NULL : WAIT = 0.1
+# Testing Output5B
+sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 800 | 200 | 0.5
+sdo[0x6411][5] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 1600 | 200 | 0.5
+sdo[0x6411][5] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][5] = 0 : NULL : WAIT = 0.5
+J2_10 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_11 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output6A
+sdo[0x6411][6] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 800 | 200 | 0.5
+sdo[0x6411][6] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 1600 | 200 | 0.5
+sdo[0x6411][6] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][6] = 0 : NULL : WAIT = 0.5
+J2_11 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_12 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 32 : NULL : WAIT = 0.1
+# Testing Output6B
+sdo[0x6411][6] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 800 | 200 | 0.5
+sdo[0x6411][6] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 1600 | 200 | 0.5
+sdo[0x6411][6] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][6] = 0 : NULL : WAIT = 0.5
+J2_12 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J3_01 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output7A
+sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 800 | 200 | 0.5
+sdo[0x6411][7] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 1600 | 200 | 0.5
+sdo[0x6411][7] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][7] = 0 : NULL : WAIT = 0.5
+J3_01 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J3_02 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 64 : NULL : WAIT = 0.1
+# Testing Output7B
+sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 800 | 200 | 0.5
+sdo[0x6411][7] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 1600 | 200 | 0.5
+sdo[0x6411][7] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][7] = 0 : NULL : WAIT = 0.5
+J3_02 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J3_03 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output8A
+sdo[0x6411][8] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 800 | 200 | 0.5
+sdo[0x6411][8] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 1600 | 200 | 0.5
+sdo[0x6411][8] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][8] = 0 : NULL : WAIT = 0.5
+J3_03 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J3_04 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 128 : NULL : WAIT = 0.1
+# Testing Output8B
+sdo[0x6411][8] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 800 | 200 | 0.5
+sdo[0x6411][8] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 1600 | 200 | 0.5
+sdo[0x6411][8] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][8] = 0 : NULL : WAIT = 0.5
+J3_04 = 0 : NULL : WAIT = 0.5
+PRE_OPERATIONAL
+#test at 500hz
+sdo[0x3000] = 500 : NULL : WAIT = 0.5
+OPERATIONAL
+#switch in 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
+J4_01 = 1 : NULL : WAIT = 0.2
+J4_03 = 1 : NULL : WAIT = 0.2
+#switch in load line, set current
+J2_03 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output2A
+sdo[0x6411][2] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 800 | 200 | 0.5
+sdo[0x6411][2] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 1600 | 200 | 0.5
+sdo[0x6411][2] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][2] = 0 : NULL : WAIT = 0.5
+J2_03 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_04 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 2 : NULL : WAIT = 0.1
+# Testing Output2B
+sdo[0x6411][2] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 800 | 200 | 0.5
+sdo[0x6411][2] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 1600 | 200 | 0.5
+sdo[0x6411][2] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][2] = 0 : NULL : WAIT = 0.5
+J2_04 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_07 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output4A
+sdo[0x6411][4] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 800 | 200 | 0.5
+sdo[0x6411][4] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 1600 | 200 | 0.5
+sdo[0x6411][4] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][4] = 0 : NULL : WAIT = 0.5
+J2_07 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_08 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 8 : NULL : WAIT = 0.1
+# Testing Output4B
+sdo[0x6411][4] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 800 | 200 | 0.5
+sdo[0x6411][4] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 1600 | 200 | 0.5
+sdo[0x6411][4] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][4] = 0 : NULL : WAIT = 0.5
+J2_08 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_09 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output5A
+sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 800 | 200 | 0.5
+sdo[0x6411][5] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 1600 | 200 | 0.5
+sdo[0x6411][5] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][5] = 0 : NULL : WAIT = 0.5
+J2_09 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_10 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 16 : NULL : WAIT = 0.1
+# Testing Output5B
+sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 800 | 200 | 0.5
+sdo[0x6411][5] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 1600 | 200 | 0.5
+sdo[0x6411][5] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][5] = 0 : NULL : WAIT = 0.5
+J2_10 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_11 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output6A
+sdo[0x6411][6] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 800 | 200 | 0.5
+sdo[0x6411][6] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 1600 | 200 | 0.5
+sdo[0x6411][6] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][6] = 0 : NULL : WAIT = 0.5
+J2_11 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_12 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 32 : NULL : WAIT = 0.1
+# Testing Output6B
+sdo[0x6411][6] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 800 | 200 | 0.5
+sdo[0x6411][6] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 1600 | 200 | 0.5
+sdo[0x6411][6] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][6] = 0 : NULL : WAIT = 0.5
+J2_12 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J3_01 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output7A
+sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 800 | 200 | 0.5
+sdo[0x6411][7] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 1600 | 200 | 0.5
+sdo[0x6411][7] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][7] = 0 : NULL : WAIT = 0.5
+J3_01 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J3_02 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 64 : NULL : WAIT = 0.1
+# Testing Output7B
+sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 800 | 200 | 0.5
+sdo[0x6411][7] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 1600 | 200 | 0.5
+sdo[0x6411][7] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][7] = 0 : NULL : WAIT = 0.5
+J3_02 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J3_03 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output8A
+sdo[0x6411][8] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 800 | 200 | 0.5
+sdo[0x6411][8] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 1600 | 200 | 0.5
+sdo[0x6411][8] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][8] = 0 : NULL : WAIT = 0.5
+J3_03 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J3_04 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 128 : NULL : WAIT = 0.1
+# Testing Output8B
+sdo[0x6411][8] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 800 | 200 | 0.5
+sdo[0x6411][8] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 1600 | 200 | 0.5
+sdo[0x6411][8] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][8] = 0 : NULL : WAIT = 0.5
+J3_04 = 0 : NULL : WAIT = 0.5
+PRE_OPERATIONAL
+#test at 64hz
+sdo[0x3000] = 64 : NULL : WAIT = 0.5
+OPERATIONAL
+#switch in 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
+J4_01 = 1 : NULL : WAIT = 0.2
+J4_03 = 1 : NULL : WAIT = 0.2
+#switch in load line, set current
+J2_03 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output2A
+sdo[0x6411][2] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 800 | 200 | 0.5
+sdo[0x6411][2] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 1600 | 200 | 0.5
+sdo[0x6411][2] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][2] = 0 : NULL : WAIT = 0.5
+J2_03 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_04 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 2 : NULL : WAIT = 0.1
+# Testing Output2B
+sdo[0x6411][2] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 800 | 200 | 0.5
+sdo[0x6411][2] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 1600 | 200 | 0.5
+sdo[0x6411][2] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][2] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][2] = 0 : NULL : WAIT = 0.5
+J2_04 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_07 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output4A
+sdo[0x6411][4] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 800 | 200 | 0.5
+sdo[0x6411][4] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 1600 | 200 | 0.5
+sdo[0x6411][4] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][4] = 0 : NULL : WAIT = 0.5
+J2_07 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_08 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 8 : NULL : WAIT = 0.1
+# Testing Output4B
+sdo[0x6411][4] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 800 | 200 | 0.5
+sdo[0x6411][4] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 1600 | 200 | 0.5
+sdo[0x6411][4] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][4] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][4] = 0 : NULL : WAIT = 0.5
+J2_08 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_09 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output5A
+sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 800 | 200 | 0.5
+sdo[0x6411][5] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 1600 | 200 | 0.5
+sdo[0x6411][5] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][5] = 0 : NULL : WAIT = 0.5
+J2_09 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_10 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 16 : NULL : WAIT = 0.1
+# Testing Output5B
+sdo[0x6411][5] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 800 | 200 | 0.5
+sdo[0x6411][5] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 1600 | 200 | 0.5
+sdo[0x6411][5] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][5] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][5] = 0 : NULL : WAIT = 0.5
+J2_10 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_11 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output6A
+sdo[0x6411][6] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 800 | 200 | 0.5
+sdo[0x6411][6] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 1600 | 200 | 0.5
+sdo[0x6411][6] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][6] = 0 : NULL : WAIT = 0.5
+J2_11 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J2_12 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 32 : NULL : WAIT = 0.1
+# Testing Output6B
+sdo[0x6411][6] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 800 | 200 | 0.5
+sdo[0x6411][6] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 1600 | 200 | 0.5
+sdo[0x6411][6] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][6] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][6] = 0 : NULL : WAIT = 0.5
+J2_12 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J3_01 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output7A
+sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 800 | 200 | 0.5
+sdo[0x6411][7] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 1600 | 200 | 0.5
+sdo[0x6411][7] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][7] = 0 : NULL : WAIT = 0.5
+J3_01 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J3_02 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 64 : NULL : WAIT = 0.1
+# Testing Output7B
+sdo[0x6411][7] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 800 | 200 | 0.5
+sdo[0x6411][7] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 1600 | 200 | 0.5
+sdo[0x6411][7] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][7] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][7] = 0 : NULL : WAIT = 0.5
+J3_02 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J3_03 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 0 : NULL : WAIT = 0.1
+# Testing Output8A
+sdo[0x6411][8] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 800 | 200 | 0.5
+sdo[0x6411][8] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 1600 | 200 | 0.5
+sdo[0x6411][8] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][8] = 0 : NULL : WAIT = 0.5
+J3_03 = 0 : NULL : WAIT = 0.5
+#switch in load line, set current
+J3_04 = 1 : NULL : WAIT = 0.5
+
+sdo[0x2005][1] = 128 : NULL : WAIT = 0.1
+# Testing Output8B
+sdo[0x6411][8] = 1000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 0.8 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 800 | 200 | 0.5
+sdo[0x6411][8] = 2000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 1.6 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 1600 | 200 | 0.5
+sdo[0x6411][8] = 4000 : NULL : WAIT = 0.2
+NULL : MeterAmps = 3.3 | 0.2 | 0.5
+NULL : sdo[0x5003][8] = 3300 | 200 | 0.5
+#switch out load line, switch coil
+sdo[0x6411][8] = 0 : NULL : WAIT = 0.5
+J3_04 = 0 : NULL : WAIT = 0.5
+SAVE
+END
