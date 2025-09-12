@@ -24,7 +24,7 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
     outstr += "#switch in 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)\n"
     outstr += Load1 + " = 1 : NULL : WAIT = 0.2\n"
     outstr += Scope + " = 1 : NULL : WAIT = 0.2\n"
-    
+    outstr += "METER_MODE = 1 : NULL : WAIT = 0.2\n"
     while t <= 15:
         if(Skip10A):
             if(t == 0):#skip 1A
@@ -292,7 +292,7 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
 
 t = 0
 i = 0
-OutputMode = 0x33
+OutputMode = 0x22
 
 #global setup
 #TestName = os.path.splitext(script_name)[0]
@@ -350,7 +350,7 @@ outstr = WriteOutputTest(outstr, Frequancy, 7, OutputMode)
 #shut down test
 outstr += "SAVE\n"
 outstr += "END\n"
-    
+
 f = open(datafile, 'w')
 f.write(outstr)
 f.close()    

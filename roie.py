@@ -1,4 +1,5 @@
 #!/home/j/roi/bin/python
+#pscp .\roie.py j@picando:/home/j
 import can
 import serial
 import subprocess
@@ -173,11 +174,20 @@ def receive_can_messages(cbus: can.BusABC, hardware: HardwareManager, stop_event
             meter_mode = message.data[0]
             meter_range = message.data[1]
             if(hardware.multi_meter_mode != meter_mode):
-                meter_mode = hardware.multi_meter_mode
-                if hardware.meter:
+                hardware.multi_meter_mode = meter_mode
+                if hardware.multi_meter:
                     with hardware.mmeter_lock:
-                        hardware.multi_meter.write(b'FETC?\n')
-                        response = hardware.multi_meter.readline().decode().strip()
+                        if(meter_mode == 0):
+                            hardware.multi_meter.write(b'FUNC VOLT:DC\n')
+                            response = hardware.multi_meter.readline().decode().strip()
+                        elif(meter_mode == 1):
+                            hardware.multi_meter.write(b'FUNC CURR:DC\n')
+                            response = hardware.multi_meter.readline().decode().strip()  
+                            hardware.multi_meter.write(b'CURR:DC:RANG 5\n')
+                            response = hardware.multi_meter.readline().decode().strip()  
+            if(hardware.multi_meter_range != meter_range):
+                hardware.multi_meter_range = meter_range
+
             continue
             
         if message.arbitration_id == LOAD_CTRL_ID:
@@ -264,7 +274,10 @@ def main() -> None:
     load_stat_imp = ""
     load_stat_res = ""
     load_stat_short = ""
-
+    
+    meter_mode_str = ""
+    meter_range_str = ""
+    
     try:
         hardware.initialize_devices()
         cbus = setup_can_interface(CAN_CHANNEL, CAN_BITRATE)
@@ -304,6 +317,11 @@ def main() -> None:
                         #print(f"MMeter current: {meter_current:.3f} A", end='\r', flush=True)
                     except can.CanError:
                         print("Message NOT sent")
+                # with hardware.mmeter_lock:
+                    # hardware.multi_meter.write(b'FUNC?\n')
+                    # meter_mode_str = hardware.multi_meter.readline().decode().strip()
+                    # hardware.multi_meter.write(b'CURR:DC:RANG?\n')
+                    # meter_range_str = hardware.multi_meter.readline().decode().strip()
 
             # Read from e-load and send to CAN
             if hardware.e_load:
@@ -350,8 +368,9 @@ def main() -> None:
             new_line6 = f"* ELOAD - VOLTS: {load_volts/1000:.3f} V"
             new_line7 = f"* ELOAD - CURRENT: {load_current/1000:.3f} A"
             new_line8 = f"* METER - CURRENT: {meter_current/1000:.3f} A"
-            new_line9 = "*" * 60
-            dis_lines = [new_line0,new_line1,new_line2,new_line3,new_line4,new_line5,new_line6,new_line7,new_line8,new_line9]
+            new_line9 = f"* METER - MODE: {meter_mode_str} {meter_range_str}"
+            new_line10 = "*" * 60
+            dis_lines = [new_line0,new_line1,new_line2,new_line3,new_line4,new_line5,new_line6,new_line7,new_line8,new_line9,new_line10]
             update_display(dis_lines)
             # Call the update function
             #update_display(new_line1, new_line2, new_line3, new_line4, new_line5)      

@@ -13,6 +13,7 @@ sdo[0x2002][13] = 80.0, sdo[0x2002][14] = 50.0, sdo[0x2002][15] = 80.0, sdo[0x20
 sdo[0x3000] = 200 : NULL : WAIT = 0.2
 #-----no fault reset-----
 sdo[0x2000][1] = 0 : NULL
+METER_MODE = 1 : NULL : WAIT = 0.2
 #-----setup 37000-----
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2
 sdo[0x2000][4] = 0 : NULL : WAIT = 0.2

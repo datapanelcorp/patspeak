@@ -9,14 +9,15 @@ datafile = TestName + ".pat"
 t = 0
 i = 0
 Frequancy = 200
-Kp = 0.8
-Ki = 0.5
+Kp = 0.3
+Ki = 0.2
 Skip10A = 1
 #PortMode = 0
 
 FaultReset = 0
 
-Load1 = "J4_01"
+Coil1 = "J4_01"
+Coil2 = "J4_02"
 Scope = "J4_03"
 
 Kp = Kp * 100
@@ -27,9 +28,10 @@ TestName = os.path.splitext(script_name)[0]
 datafile = TestName + ".pat"
 
 outstr = ""
+outstr += "#PWMi normal test with a 'red coil' 6.4 ohm inductive load. (2.27 amps @ 14.5 VDC)\n"
 outstr += "#37000-4\n"
 outstr += "#Verion 0.0\n"
-outstr += "#PWMi overcurrent test with a 2.1 Ohm resistive load. (6.9 amps @ 14.5 VDC)\n"
+outstr += "#\n"
 outstr += "UUT_EDS = 37000-564.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
@@ -47,10 +49,7 @@ outstr += "sdo[0x2002][13] = " + f"{Kp}" + ", sdo[0x2002][14] = " + f"{Ki}" + ",
 
 outstr += "#-----set freq-----\n"
 outstr += "sdo[0x3000] = " + str(Frequancy) + " : NULL : WAIT = 0.2\n"
-outstr += "#-----no fault reset-----\n"
-outstr += "sdo[0x2000][1] = 0 : NULL\n"
-
-
+outstr += "METER_MODE = 1 : NULL : WAIT = 0.2\n"
 t = 0
 while t <= 15:
     
@@ -63,6 +62,10 @@ while t <= 15:
             t += 1
         if(t == 5):#skip 3B
             t += 1
+    if t % 2 == 0:
+        outstr += Coil1 + " = 1, " + Scope + " = 1 : NULL : WAIT = 1\n"
+    else:
+        outstr += Coil2 + " = 1, " + Scope + " = 1 : NULL : WAIT = 1\n"
         
     if(t == 0):
         OutputBits = 0b00000001
@@ -257,13 +260,7 @@ while t <= 15:
         OutDesc = "Output8B"
         OutputConnector = "J3_04"
 
-    if(Skip10A): #if skip 10A
-        if PortMode == "sdo[0x2001][1]" or PortMode == "sdo[0x2001][2]" or PortMode == "sdo[0x2001][3]" or PortMode == "sdo[0x2001][4]" : #if port 1, 2, 3 or 4
-            #keep 1A & 3A clear
-            FdbkBits &= 0b11110000
-            FltBits &= 0b11110000
-                
-                
+    
     TheGlobalOutputMode = "sdo[0x2000][3]"
     TheGlobalInputMode = "sdo[0x2000][4]"
     Direction = "sdo[0x2005][1]"
@@ -276,32 +273,28 @@ while t <= 15:
     outstr += PortMode + " = " + str(TheMode) + " : NULL : WAIT = 0.2\n"
     outstr += "#switch in load line, set current\n"
     outstr += OutputConnector + " = 1 : NULL : WAIT = 0.5\n"
-    outstr += Scope + " = 1 : NULL : WAIT = 0.5\n"
-    outstr += Load1 + " = 1 : NULL : WAIT = 0.5\n"
     outstr += "OPERATIONAL\n"
     outstr += "\n"
     outstr += Direction + " = " + str(DirBits) + " : NULL : WAIT = 0.1\n"
-
-    
-    outstr += "\n"
-    i = 4000
-    while i <= 4000:
-        outstr += PWMOutputName + " = " + str(i) + " : " + OutputStatus + " = " + str(FltBits) + " | 0.1 | 1\n"
-        i += 1000
-        
-    #outstr += "NULL : " + OutputStatus + " = " + str(FltBits) + " | 0.1 | 0.1\n" 
+    i = 0
+    while i <= 1500:
+        outstr += PWMOutputName + " = " + str(i) + " : MeterAmps = " + str(i/1000) + " | 0.155 | 0.5\n"
+        outstr += PWMOutputName + " = " + str(i) + " : " + FeedbackName + " = " + str(i) + " | 155 | 0.5\n"
+        i += 100
+            
     outstr += "#switch out load line, switch coil\n"
     outstr += PWMOutputName + " = 0 : NULL : WAIT = 1\n"
     outstr += OutputConnector + " = 0 : NULL : WAIT = 1\n"
-    #outstr += "SAVE\n"
-    # if t % 2 == 0:
-        # outstr += Coil1 + " = 0, " + Scope + " = 1 : NULL : WAIT = 0.5\n"
-    # else:
-        # outstr += Coil2 + " = 0, " + Scope + " = 1 : NULL : WAIT = 0.5\n"
+    outstr += "#read signal value to update\n"
+    outstr += "NULL : " + FeedbackName + " = 0 | 155 | 0.5\n"
+    if t % 2 == 0:
+        outstr += Coil1 + " = 0, " + Scope + " = 1 : NULL : WAIT = 0.5\n"
+    else:
+        outstr += Coil2 + " = 0, " + Scope + " = 1 : NULL : WAIT = 0.5\n"
     t += 1
-    #outstr += "SAVE\n"
+    
+outstr += "PRE_OPERATIONAL\n"
 #shut down test
-
 outstr += "SAVE\n"
 outstr += "END\n"
     
@@ -312,4 +305,3 @@ print(outstr)
 
 
 
-print(TestName + ".pat")
