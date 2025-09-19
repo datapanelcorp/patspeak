@@ -57,7 +57,9 @@ outstr += "sdo[0x2004][2] = 45 : NULL\n"
 
 outstr += Cmd0x52 + " = " + str(FaultReset) + " : NULL\n"
 outstr += "#switch in load line, set current\n"
-    
+
+outstr += "METER_MODE = 1 : NULL : WAIT = 0.2\n"
+
 start_out = 0
 max_outs = 15
 t = start_out

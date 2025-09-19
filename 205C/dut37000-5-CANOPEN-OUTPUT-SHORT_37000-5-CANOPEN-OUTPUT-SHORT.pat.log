@@ -1,0 +1,599 @@
+Started on: 2025-09-19-15:17:06
+00000 #37000-3
+00000 #Verion 0.0
+00000 #digital normal test using the E-LOAD
+00000 UUT_EDS = 37000-565.eds
+00000 UUT_DATANAME = 37000-5-CANOPEN-OUTPUT-SHORT
+00000 
+00000 PRE_OPERATIONAL
+00000 #-----setup PAT-----
+00000 #setup load
+00000 LdRemote = 0 : NULL : WAIT = 0.1
+00001 LdEnable = 0 : NULL : WAIT = 0.1
+00002 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00003 LdShort = 1 : NULL : WAIT = 1
+00004 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
+00005 NULL : sdo[0x5001][3] = 0 | 0.1 | 0.1
+00005 TEST: Status Message F1.Status_Output1-2 0.0 +/- 0.1
+00005 PASS: Status Message F1.Status_Output1-2 0.0
+00006 NULL : sdo[0x5001][4] = 0 | 0.1 | 0.1
+00006 PASS: Status Message F1.Status_Output3-4 0.0
+00007 OPERATIONAL
+00007 #-----setup 34044-----
+00007 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00008 #disable global modes
+00008 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00009 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00010 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00011 sdo[0x2001][1] = 17 : NULL : WAIT = 0.2
+00012 #switch in load line, set current
+00012 J2_01 = 1 : NULL : WAIT = 0.5
+00013 
+00013 #set current and turn on output and verify feedback
+00013 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
+00014 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00014 TEST: MeterVolts 14.5 +/- 0.1
+00014 PASS: MeterVolts 14.483
+00015 LdEnable = 1 : NULL : WAIT = 0.2
+00016 LdEnable = 0 : NULL : WAIT = 0.1
+00017 NULL : MeterVolts = 0 | 0.1 | 0.1
+00017 TEST: MeterVolts 0.0 +/- 0.1
+00017 PASS: MeterVolts 0.0
+00018 #check feedback is 0
+00018 NULL : sdo[0x5003][1] = 0 | 0 | 0.1
+00018 TEST: Status Message Amp.Port_1A 0.0 +/- 0.0
+00018 PASS: Status Message Amp.Port_1A 0.0
+00019 #check fault is set
+00019 NULL : sdo[0x5001][3] = 2 | 0 | 0.1
+00019 TEST: Status Message F1.Status_Output1-2 2.0 +/- 0.0
+00019 PASS: Status Message F1.Status_Output1-2 2.0
+00020 #check fault code
+00020 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00020 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00020 PASS: Response Message.Active_Fault_Code 1.0
+00021 #switch out load line
+00021 sdo[0x6200][1] = 0 : NULL : WAIT = 0.1
+00022 J2_01 = 0 : NULL : WAIT = 0.5
+00023 #-----setup 34044-----
+00023 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00024 #disable global modes
+00024 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00025 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00026 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00027 sdo[0x2001][1] = 17 : NULL : WAIT = 0.2
+00028 #switch in load line, set current
+00028 J2_02 = 1 : NULL : WAIT = 0.5
+00029 
+00029 #set current and turn on output and verify feedback
+00029 sdo[0x6200][1] = 2 : NULL : WAIT = 0.1
+00030 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00030 TEST: MeterVolts 14.5 +/- 0.1
+00030 PASS: MeterVolts 14.484
+00031 LdEnable = 1 : NULL : WAIT = 0.2
+00032 LdEnable = 0 : NULL : WAIT = 0.1
+00033 NULL : MeterVolts = 0 | 0.1 | 0.1
+00033 TEST: MeterVolts 0.0 +/- 0.1
+00033 PASS: MeterVolts 0.0
+00034 #check feedback is 0
+00034 NULL : sdo[0x5003][2] = 0 | 0 | 0.1
+00034 TEST: Status Message Amp.Port_1B 0.0 +/- 0.0
+00034 PASS: Status Message Amp.Port_1B 0.0
+00035 #check fault is set
+00035 NULL : sdo[0x5001][3] = 10 | 0 | 0.1
+00035 TEST: Status Message F1.Status_Output1-2 10.0 +/- 0.0
+00035 PASS: Status Message F1.Status_Output1-2 10.0
+00036 #check fault code
+00036 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00036 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00036 PASS: Response Message.Active_Fault_Code 1.0
+00037 #switch out load line
+00037 sdo[0x6200][1] = 0 : NULL : WAIT = 0.1
+00038 J2_02 = 0 : NULL : WAIT = 0.5
+00039 #-----setup 34044-----
+00039 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00040 #disable global modes
+00040 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00041 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00042 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00043 sdo[0x2001][2] = 17 : NULL : WAIT = 0.2
+00044 #switch in load line, set current
+00044 J2_03 = 1 : NULL : WAIT = 0.5
+00045 
+00045 #set current and turn on output and verify feedback
+00045 sdo[0x6200][1] = 4 : NULL : WAIT = 0.1
+00046 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00046 TEST: MeterVolts 14.5 +/- 0.1
+00046 PASS: MeterVolts 14.484
+00047 LdEnable = 1 : NULL : WAIT = 0.2
+00048 LdEnable = 0 : NULL : WAIT = 0.1
+00049 NULL : MeterVolts = 0 | 0.1 | 0.1
+00049 TEST: MeterVolts 0.0 +/- 0.1
+00049 PASS: MeterVolts 0.082
+00050 #check feedback is 0
+00050 NULL : sdo[0x5003][3] = 0 | 0 | 0.1
+00050 TEST: Status Message Amp.Port_2A 0.0 +/- 0.0
+00050 PASS: Status Message Amp.Port_2A 0.0
+00051 #check fault is set
+00051 NULL : sdo[0x5001][3] = 42 | 0 | 0.1
+00051 TEST: Status Message F1.Status_Output1-2 42.0 +/- 0.0
+00051 PASS: Status Message F1.Status_Output1-2 42.0
+00052 #check fault code
+00052 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00052 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00052 PASS: Response Message.Active_Fault_Code 1.0
+00053 #switch out load line
+00053 sdo[0x6200][1] = 0 : NULL : WAIT = 0.1
+00054 J2_03 = 0 : NULL : WAIT = 0.5
+00055 #-----setup 34044-----
+00055 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00056 #disable global modes
+00056 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00057 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00058 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00059 sdo[0x2001][2] = 17 : NULL : WAIT = 0.2
+00060 #switch in load line, set current
+00060 J2_04 = 1 : NULL : WAIT = 0.5
+00061 
+00061 #set current and turn on output and verify feedback
+00061 sdo[0x6200][1] = 8 : NULL : WAIT = 0.1
+00062 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00062 TEST: MeterVolts 14.5 +/- 0.1
+00062 PASS: MeterVolts 14.483
+00063 LdEnable = 1 : NULL : WAIT = 0.2
+00064 LdEnable = 0 : NULL : WAIT = 0.1
+00065 NULL : MeterVolts = 0 | 0.1 | 0.1
+00065 TEST: MeterVolts 0.0 +/- 0.1
+00065 PASS: MeterVolts 0.035
+00066 #check feedback is 0
+00066 NULL : sdo[0x5003][4] = 0 | 0 | 0.1
+00066 TEST: Status Message Amp.Port_2B 0.0 +/- 0.0
+00066 PASS: Status Message Amp.Port_2B 0.0
+00067 #check fault is set
+00067 NULL : sdo[0x5001][3] = 170 | 0 | 0.1
+00067 TEST: Status Message F1.Status_Output1-2 170.0 +/- 0.0
+00067 PASS: Status Message F1.Status_Output1-2 170.0
+00068 #check fault code
+00068 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00068 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00068 PASS: Response Message.Active_Fault_Code 1.0
+00069 #switch out load line
+00069 sdo[0x6200][1] = 0 : NULL : WAIT = 0.1
+00070 J2_04 = 0 : NULL : WAIT = 0.5
+00071 #-----setup 34044-----
+00071 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00072 #disable global modes
+00072 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00073 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00074 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00075 sdo[0x2001][3] = 17 : NULL : WAIT = 0.2
+00076 #switch in load line, set current
+00076 J2_05 = 1 : NULL : WAIT = 0.5
+00077 
+00077 #set current and turn on output and verify feedback
+00077 sdo[0x6200][1] = 16 : NULL : WAIT = 0.1
+00078 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00078 TEST: MeterVolts 14.5 +/- 0.1
+00078 PASS: MeterVolts 14.483
+00079 LdEnable = 1 : NULL : WAIT = 0.2
+00080 LdEnable = 0 : NULL : WAIT = 0.1
+00081 NULL : MeterVolts = 0 | 0.1 | 0.1
+00081 TEST: MeterVolts 0.0 +/- 0.1
+00081 PASS: MeterVolts 0.0
+00082 #check feedback is 0
+00082 NULL : sdo[0x5003][5] = 0 | 0 | 0.1
+00082 TEST: Status Message Amp.Port_3A 0.0 +/- 0.0
+00082 PASS: Status Message Amp.Port_3A 0.0
+00083 #check fault is set
+00083 NULL : sdo[0x5001][4] = 2 | 0 | 0.1
+00083 TEST: Status Message F1.Status_Output3-4 2.0 +/- 0.0
+00083 PASS: Status Message F1.Status_Output3-4 2.0
+00084 #check fault code
+00084 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00084 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00084 PASS: Response Message.Active_Fault_Code 1.0
+00085 #switch out load line
+00085 sdo[0x6200][1] = 0 : NULL : WAIT = 0.1
+00086 J2_05 = 0 : NULL : WAIT = 0.5
+00087 #-----setup 34044-----
+00087 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00088 #disable global modes
+00088 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00089 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00090 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00091 sdo[0x2001][3] = 17 : NULL : WAIT = 0.2
+00092 #switch in load line, set current
+00092 J2_06 = 1 : NULL : WAIT = 0.5
+00093 
+00093 #set current and turn on output and verify feedback
+00093 sdo[0x6200][1] = 32 : NULL : WAIT = 0.1
+00094 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00094 TEST: MeterVolts 14.5 +/- 0.1
+00094 PASS: MeterVolts 14.482
+00095 LdEnable = 1 : NULL : WAIT = 0.2
+00096 LdEnable = 0 : NULL : WAIT = 0.1
+00097 NULL : MeterVolts = 0 | 0.1 | 0.1
+00097 TEST: MeterVolts 0.0 +/- 0.1
+00097 PASS: MeterVolts 0.0
+00098 #check feedback is 0
+00098 NULL : sdo[0x5003][6] = 0 | 0 | 0.1
+00098 TEST: Status Message Amp.Port_3B 0.0 +/- 0.0
+00098 PASS: Status Message Amp.Port_3B 0.0
+00099 #check fault is set
+00099 NULL : sdo[0x5001][4] = 10 | 0 | 0.1
+00099 TEST: Status Message F1.Status_Output3-4 10.0 +/- 0.0
+00099 PASS: Status Message F1.Status_Output3-4 10.0
+00100 #check fault code
+00100 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00100 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00100 PASS: Response Message.Active_Fault_Code 1.0
+00101 #switch out load line
+00101 sdo[0x6200][1] = 0 : NULL : WAIT = 0.1
+00102 J2_06 = 0 : NULL : WAIT = 0.5
+00103 #-----setup 34044-----
+00103 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00104 #disable global modes
+00104 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00105 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00106 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00107 sdo[0x2001][4] = 17 : NULL : WAIT = 0.2
+00108 #switch in load line, set current
+00108 J2_07 = 1 : NULL : WAIT = 0.5
+00109 
+00109 #set current and turn on output and verify feedback
+00109 sdo[0x6200][1] = 64 : NULL : WAIT = 0.1
+00110 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00110 TEST: MeterVolts 14.5 +/- 0.1
+00110 PASS: MeterVolts 14.483
+00111 LdEnable = 1 : NULL : WAIT = 0.2
+00112 LdEnable = 0 : NULL : WAIT = 0.1
+00113 NULL : MeterVolts = 0 | 0.1 | 0.1
+00113 TEST: MeterVolts 0.0 +/- 0.1
+00113 PASS: MeterVolts 0.0
+00114 #check feedback is 0
+00114 NULL : sdo[0x5003][7] = 0 | 0 | 0.1
+00114 TEST: Status Message Amp.Port_4A 0.0 +/- 0.0
+00114 PASS: Status Message Amp.Port_4A 0.0
+00115 #check fault is set
+00115 NULL : sdo[0x5001][4] = 42 | 0 | 0.1
+00115 TEST: Status Message F1.Status_Output3-4 42.0 +/- 0.0
+00115 PASS: Status Message F1.Status_Output3-4 42.0
+00116 #check fault code
+00116 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00116 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00116 PASS: Response Message.Active_Fault_Code 1.0
+00117 #switch out load line
+00117 sdo[0x6200][1] = 0 : NULL : WAIT = 0.1
+00118 J2_07 = 0 : NULL : WAIT = 0.5
+00119 #-----setup 34044-----
+00119 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00120 #disable global modes
+00120 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00121 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00122 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00123 sdo[0x2001][4] = 17 : NULL : WAIT = 0.2
+00124 #switch in load line, set current
+00124 J2_08 = 1 : NULL : WAIT = 0.5
+00125 
+00125 #set current and turn on output and verify feedback
+00125 sdo[0x6200][1] = 128 : NULL : WAIT = 0.1
+00126 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00126 TEST: MeterVolts 14.5 +/- 0.1
+00126 PASS: MeterVolts 14.484
+00127 LdEnable = 1 : NULL : WAIT = 0.2
+00128 LdEnable = 0 : NULL : WAIT = 0.1
+00129 NULL : MeterVolts = 0 | 0.1 | 0.1
+00129 TEST: MeterVolts 0.0 +/- 0.1
+00129 PASS: MeterVolts 0.0
+00130 #check feedback is 0
+00130 NULL : sdo[0x5003][8] = 0 | 0 | 0.1
+00130 TEST: Status Message Amp.Port_4B 0.0 +/- 0.0
+00130 PASS: Status Message Amp.Port_4B 0.0
+00131 #check fault is set
+00131 NULL : sdo[0x5001][4] = 170 | 0 | 0.1
+00131 TEST: Status Message F1.Status_Output3-4 170.0 +/- 0.0
+00131 PASS: Status Message F1.Status_Output3-4 170.0
+00132 #check fault code
+00132 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00132 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00132 PASS: Response Message.Active_Fault_Code 1.0
+00133 #switch out load line
+00133 sdo[0x6200][1] = 0 : NULL : WAIT = 0.1
+00134 J2_08 = 0 : NULL : WAIT = 0.5
+00135 #-----setup 34044-----
+00135 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00136 #disable global modes
+00136 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00137 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00138 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00139 sdo[0x2001][5] = 17 : NULL : WAIT = 0.2
+00140 #switch in load line, set current
+00140 J2_09 = 1 : NULL : WAIT = 0.5
+00141 
+00141 #set current and turn on output and verify feedback
+00141 sdo[0x6200][2] = 1 : NULL : WAIT = 0.1
+00142 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00142 TEST: MeterVolts 14.5 +/- 0.1
+00142 PASS: MeterVolts 14.484
+00143 LdEnable = 1 : NULL : WAIT = 0.2
+00144 LdEnable = 0 : NULL : WAIT = 0.1
+00145 NULL : MeterVolts = 0 | 0.1 | 0.1
+00145 TEST: MeterVolts 0.0 +/- 0.1
+00145 PASS: MeterVolts 0.0
+00146 #check feedback is 0
+00146 NULL : sdo[0x5003][9] = 0 | 0 | 0.1
+00146 TEST: Status Message Amp.Port_5A 0.0 +/- 0.0
+00146 PASS: Status Message Amp.Port_5A 0.0
+00147 #check fault is set
+00147 NULL : sdo[0x5001][5] = 2 | 0 | 0.1
+00147 TEST: Status Message F1.Status_Output5-6 2.0 +/- 0.0
+00147 PASS: Status Message F1.Status_Output5-6 2.0
+00148 #check fault code
+00148 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00148 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00148 PASS: Response Message.Active_Fault_Code 1.0
+00149 #switch out load line
+00149 sdo[0x6200][2] = 0 : NULL : WAIT = 0.1
+00150 J2_09 = 0 : NULL : WAIT = 0.5
+00151 #-----setup 34044-----
+00151 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00152 #disable global modes
+00152 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00153 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00154 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00155 sdo[0x2001][5] = 17 : NULL : WAIT = 0.2
+00156 #switch in load line, set current
+00156 J2_10 = 1 : NULL : WAIT = 0.5
+00157 
+00157 #set current and turn on output and verify feedback
+00157 sdo[0x6200][2] = 2 : NULL : WAIT = 0.1
+00158 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00158 TEST: MeterVolts 14.5 +/- 0.1
+00158 PASS: MeterVolts 14.484
+00159 LdEnable = 1 : NULL : WAIT = 0.2
+00160 LdEnable = 0 : NULL : WAIT = 0.1
+00161 NULL : MeterVolts = 0 | 0.1 | 0.1
+00161 TEST: MeterVolts 0.0 +/- 0.1
+00161 PASS: MeterVolts 0.056
+00162 #check feedback is 0
+00162 NULL : sdo[0x5003][10] = 0 | 0 | 0.1
+00162 TEST: Status Message Amp.Port_5B 0.0 +/- 0.0
+00162 PASS: Status Message Amp.Port_5B 0.0
+00163 #check fault is set
+00163 NULL : sdo[0x5001][5] = 10 | 0 | 0.1
+00163 TEST: Status Message F1.Status_Output5-6 10.0 +/- 0.0
+00163 PASS: Status Message F1.Status_Output5-6 10.0
+00164 #check fault code
+00164 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00164 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00164 PASS: Response Message.Active_Fault_Code 1.0
+00165 #switch out load line
+00165 sdo[0x6200][2] = 0 : NULL : WAIT = 0.1
+00166 J2_10 = 0 : NULL : WAIT = 0.5
+00167 #-----setup 34044-----
+00167 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00168 #disable global modes
+00168 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00169 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00170 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00171 sdo[0x2001][6] = 17 : NULL : WAIT = 0.2
+00172 #switch in load line, set current
+00172 J2_11 = 1 : NULL : WAIT = 0.5
+00173 
+00173 #set current and turn on output and verify feedback
+00173 sdo[0x6200][2] = 4 : NULL : WAIT = 0.1
+00174 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00174 TEST: MeterVolts 14.5 +/- 0.1
+00174 PASS: MeterVolts 14.483
+00175 LdEnable = 1 : NULL : WAIT = 0.2
+00176 LdEnable = 0 : NULL : WAIT = 0.1
+00177 NULL : MeterVolts = 0 | 0.1 | 0.1
+00177 TEST: MeterVolts 0.0 +/- 0.1
+00177 PASS: MeterVolts 0.0
+00178 #check feedback is 0
+00178 NULL : sdo[0x5003][11] = 0 | 0 | 0.1
+00178 TEST: Status Message Amp.Port_6A 0.0 +/- 0.0
+00178 PASS: Status Message Amp.Port_6A 0.0
+00179 #check fault is set
+00179 NULL : sdo[0x5001][5] = 42 | 0 | 0.1
+00179 TEST: Status Message F1.Status_Output5-6 42.0 +/- 0.0
+00179 PASS: Status Message F1.Status_Output5-6 42.0
+00180 #check fault code
+00180 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00180 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00180 PASS: Response Message.Active_Fault_Code 1.0
+00181 #switch out load line
+00181 sdo[0x6200][2] = 0 : NULL : WAIT = 0.1
+00182 J2_11 = 0 : NULL : WAIT = 0.5
+00183 #-----setup 34044-----
+00183 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00184 #disable global modes
+00184 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00185 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00186 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00187 sdo[0x2001][6] = 17 : NULL : WAIT = 0.2
+00188 #switch in load line, set current
+00188 J2_12 = 1 : NULL : WAIT = 0.5
+00189 
+00189 #set current and turn on output and verify feedback
+00189 sdo[0x6200][2] = 8 : NULL : WAIT = 0.1
+00190 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00190 TEST: MeterVolts 14.5 +/- 0.1
+00190 PASS: MeterVolts 14.483
+00191 LdEnable = 1 : NULL : WAIT = 0.2
+00192 LdEnable = 0 : NULL : WAIT = 0.1
+00193 NULL : MeterVolts = 0 | 0.1 | 0.1
+00193 TEST: MeterVolts 0.0 +/- 0.1
+00193 PASS: MeterVolts 0.0
+00194 #check feedback is 0
+00194 NULL : sdo[0x5003][12] = 0 | 0 | 0.1
+00194 TEST: Status Message Amp.Port_6B 0.0 +/- 0.0
+00194 PASS: Status Message Amp.Port_6B 0.0
+00195 #check fault is set
+00195 NULL : sdo[0x5001][5] = 170 | 0 | 0.1
+00195 TEST: Status Message F1.Status_Output5-6 170.0 +/- 0.0
+00195 PASS: Status Message F1.Status_Output5-6 170.0
+00196 #check fault code
+00196 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00196 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00196 PASS: Response Message.Active_Fault_Code 1.0
+00197 #switch out load line
+00197 sdo[0x6200][2] = 0 : NULL : WAIT = 0.1
+00198 J2_12 = 0 : NULL : WAIT = 0.5
+00199 #-----setup 34044-----
+00199 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00200 #disable global modes
+00200 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00201 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00202 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00203 sdo[0x2001][7] = 17 : NULL : WAIT = 0.2
+00204 #switch in load line, set current
+00204 J3_01 = 1 : NULL : WAIT = 0.5
+00205 
+00205 #set current and turn on output and verify feedback
+00205 sdo[0x6200][2] = 16 : NULL : WAIT = 0.1
+00206 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00206 TEST: MeterVolts 14.5 +/- 0.1
+00206 PASS: MeterVolts 14.482
+00207 LdEnable = 1 : NULL : WAIT = 0.2
+00208 LdEnable = 0 : NULL : WAIT = 0.1
+00209 NULL : MeterVolts = 0 | 0.1 | 0.1
+00209 TEST: MeterVolts 0.0 +/- 0.1
+00209 PASS: MeterVolts 0.0
+00210 #check feedback is 0
+00210 NULL : sdo[0x5003][13] = 0 | 0 | 0.1
+00210 TEST: Status Message Amp.Port_7A 0.0 +/- 0.0
+00210 PASS: Status Message Amp.Port_7A 0.0
+00211 #check fault is set
+00211 NULL : sdo[0x5001][6] = 2 | 0 | 0.1
+00211 TEST: Status Message F1.Status_Output7-8 2.0 +/- 0.0
+00211 PASS: Status Message F1.Status_Output7-8 2.0
+00212 #check fault code
+00212 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00212 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00212 PASS: Response Message.Active_Fault_Code 1.0
+00213 #switch out load line
+00213 sdo[0x6200][2] = 0 : NULL : WAIT = 0.1
+00214 J3_01 = 0 : NULL : WAIT = 0.5
+00215 #-----setup 34044-----
+00215 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00216 #disable global modes
+00216 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00217 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00218 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00219 sdo[0x2001][7] = 17 : NULL : WAIT = 0.2
+00220 #switch in load line, set current
+00220 J3_02 = 1 : NULL : WAIT = 0.5
+00221 
+00221 #set current and turn on output and verify feedback
+00221 sdo[0x6200][2] = 32 : NULL : WAIT = 0.1
+00222 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00222 TEST: MeterVolts 14.5 +/- 0.1
+00222 PASS: MeterVolts 14.484
+00223 LdEnable = 1 : NULL : WAIT = 0.2
+00224 LdEnable = 0 : NULL : WAIT = 0.1
+00225 NULL : MeterVolts = 0 | 0.1 | 0.1
+00225 TEST: MeterVolts 0.0 +/- 0.1
+00225 PASS: MeterVolts 0.0
+00226 #check feedback is 0
+00226 NULL : sdo[0x5003][14] = 0 | 0 | 0.1
+00226 TEST: Status Message Amp.Port_7B 0.0 +/- 0.0
+00226 PASS: Status Message Amp.Port_7B 0.0
+00227 #check fault is set
+00227 NULL : sdo[0x5001][6] = 10 | 0 | 0.1
+00227 TEST: Status Message F1.Status_Output7-8 10.0 +/- 0.0
+00227 PASS: Status Message F1.Status_Output7-8 10.0
+00228 #check fault code
+00228 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00228 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00228 PASS: Response Message.Active_Fault_Code 1.0
+00229 #switch out load line
+00229 sdo[0x6200][2] = 0 : NULL : WAIT = 0.1
+00230 J3_02 = 0 : NULL : WAIT = 0.5
+00231 #-----setup 34044-----
+00231 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00232 #disable global modes
+00232 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00233 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00234 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00235 sdo[0x2001][8] = 17 : NULL : WAIT = 0.2
+00236 #switch in load line, set current
+00236 J3_03 = 1 : NULL : WAIT = 0.5
+00237 
+00237 #set current and turn on output and verify feedback
+00237 sdo[0x6200][2] = 64 : NULL : WAIT = 0.1
+00238 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00238 TEST: MeterVolts 14.5 +/- 0.1
+00238 PASS: MeterVolts 14.483
+00239 LdEnable = 1 : NULL : WAIT = 0.2
+00240 LdEnable = 0 : NULL : WAIT = 0.1
+00241 NULL : MeterVolts = 0 | 0.1 | 0.1
+00241 TEST: MeterVolts 0.0 +/- 0.1
+00241 PASS: MeterVolts 0.0
+00242 #check feedback is 0
+00242 NULL : sdo[0x5003][15] = 0 | 0 | 0.1
+00242 TEST: Status Message Amp.Port_8A 0.0 +/- 0.0
+00242 PASS: Status Message Amp.Port_8A 0.0
+00243 #check fault is set
+00243 NULL : sdo[0x5001][6] = 42 | 0 | 0.1
+00243 TEST: Status Message F1.Status_Output7-8 42.0 +/- 0.0
+00243 PASS: Status Message F1.Status_Output7-8 42.0
+00244 #check fault code
+00244 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00244 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00244 PASS: Response Message.Active_Fault_Code 1.0
+00245 #switch out load line
+00245 sdo[0x6200][2] = 0 : NULL : WAIT = 0.1
+00246 J3_03 = 0 : NULL : WAIT = 0.5
+00247 #-----setup 34044-----
+00247 sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1
+00248 #disable global modes
+00248 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1
+00249 sdo[0x2000][4] = 0 : NULL : WAIT = 0.1
+00250 sdo[0x2000][1] = 0 : NULL : WAIT = 0.2
+00251 sdo[0x2001][8] = 17 : NULL : WAIT = 0.2
+00252 #switch in load line, set current
+00252 J3_04 = 1 : NULL : WAIT = 0.5
+00253 
+00253 #set current and turn on output and verify feedback
+00253 sdo[0x6200][2] = 128 : NULL : WAIT = 0.1
+00254 NULL : MeterVolts = 14.5 | 0.1 | 0.1
+00254 TEST: MeterVolts 14.5 +/- 0.1
+00254 PASS: MeterVolts 14.484
+00255 LdEnable = 1 : NULL : WAIT = 0.2
+00256 LdEnable = 0 : NULL : WAIT = 0.1
+00257 NULL : MeterVolts = 0 | 0.1 | 0.1
+00257 TEST: MeterVolts 0.0 +/- 0.1
+00257 PASS: MeterVolts 0.0
+00258 #check feedback is 0
+00258 NULL : sdo[0x5003][16] = 0 | 0 | 0.1
+00258 TEST: Status Message Amp.Port_8B 0.0 +/- 0.0
+00258 PASS: Status Message Amp.Port_8B 0.0
+00259 #check fault is set
+00259 NULL : sdo[0x5001][6] = 170 | 0 | 0.1
+00259 TEST: Status Message F1.Status_Output7-8 170.0 +/- 0.0
+00259 PASS: Status Message F1.Status_Output7-8 170.0
+00260 #check fault code
+00260 NULL : sdo[0x5000][3] = 1 | 0 | 0.1
+00260 TEST: Response Message.Active_Fault_Code 1.0 +/- 0.0
+00260 PASS: Response Message.Active_Fault_Code 1.0
+00261 #switch out load line
+00261 sdo[0x6200][2] = 0 : NULL : WAIT = 0.1
+00262 J3_04 = 0 : NULL : WAIT = 0.5
+00263 NULL : sdo[0x5001][3] = 170 | 0 | 0.1
+00263 TEST: Status Message F1.Status_Output1-2 170.0 +/- 0.0
+00263 PASS: Status Message F1.Status_Output1-2 170.0
+00264 NULL : sdo[0x5001][4] = 170 | 0 | 0.1
+00264 PASS: Status Message F1.Status_Output3-4 170.0
+00265 NULL : sdo[0x5001][5] = 170 | 0 | 0.1
+00265 PASS: Status Message F1.Status_Output5-6 170.0
+00266 NULL : sdo[0x5001][6] = 170 | 0 | 0.1
+00266 PASS: Status Message F1.Status_Output7-8 170.0
+00267 LdRemote = 0 : NULL : WAIT = 0.1
+00268 LdEnable = 0 : NULL : WAIT = 0.1
+00269 J0_08_METER_LOAD = 0 : NULL : WAIT = 1
+00270 PRE_OPERATIONAL
+00270 SAVE
+00270 END
+Fail count: 0
+Finished on: 2025-09-19-15:18:38
+elapsed time: 0:01:29.472289

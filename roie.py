@@ -14,7 +14,10 @@ import os
 # Hardware identifiers
 MULTI_METER_PATH = '/dev/ttyUSB0'
 MULTI_METER_BAUD = 38400
-ELOAD_VISA_ID = "USB0::11975::34816::802197042747610014::0::INSTR"
+#ELOAD_VISA_ID = "USB0::11975::34816::802197042747610014::0::INSTR"
+ELOAD_VISA_ID = "USB0::11975::34816::802197042787270012::0::INSTR"
+#Data Panel E-Load has BOID v1.10
+#MULTI-METER ID: 5491B  Multimeter,Ver1.1.11.11.23,124E12115
 
 # CAN bus configuration
 CAN_CHANNEL = "can1"
@@ -72,6 +75,17 @@ class HardwareManager:
         """Initializes the e-load via pyvisa."""
         try:
             self.resource_manager = pyvisa.ResourceManager()
+            # Get a list of all detected VISA resources
+            available_resources = self.resource_manager.list_resources()
+            
+            if not available_resources:
+                print("No VISA resources found.")
+                return
+
+            print("Available VISA resource IDs:")
+            for resource_id in available_resources:
+                print(f"- {resource_id}")
+                
             eload = self.resource_manager.open_resource(ELOAD_VISA_ID)
             print(f"E-LOAD ID: {eload.query('*IDN?')}")
             print(f"Resetting {ELOAD_VISA_ID}")
@@ -189,8 +203,8 @@ def receive_can_messages(cbus: can.BusABC, hardware: HardwareManager, stop_event
                 hardware.multi_meter_range = meter_range
 
             continue
-            
-        if message.arbitration_id == LOAD_CTRL_ID:
+
+        if message.arbitration_id == LOAD_CTRL_ID and hardware.e_load:
             first_byte = message.data[0]
 
             # Update remote control state
@@ -280,6 +294,7 @@ def main() -> None:
     
     try:
         hardware.initialize_devices()
+        #quit()
         cbus = setup_can_interface(CAN_CHANNEL, CAN_BITRATE)
         if not cbus:
             print("Exiting due to CAN interface setup failure.")
@@ -360,17 +375,25 @@ def main() -> None:
 
             # Prepare new strings
             new_line0 = "*" * 60
-            new_line1 = "* ELOAD - ENABLE: " + load_stat_imp
-            new_line2 = "* ELOAD - MODE: " + load_stat_func
-            new_line3 = "* ELOAD - CURRENT SETTING: " + load_stat_curr 
-            new_line4 = "* ELOAD - RESISTANCE SETTING: " + load_stat_res
-            new_line5 = "* ELOAD - SHORT ENABLED: " + load_stat_short
-            new_line6 = f"* ELOAD - VOLTS: {load_volts/1000:.3f} V"
-            new_line7 = f"* ELOAD - CURRENT: {load_current/1000:.3f} A"
-            new_line8 = f"* METER - CURRENT: {meter_current/1000:.3f} A"
-            new_line9 = f"* METER - MODE: {meter_mode_str} {meter_range_str}"
-            new_line10 = "*" * 60
-            dis_lines = [new_line0,new_line1,new_line2,new_line3,new_line4,new_line5,new_line6,new_line7,new_line8,new_line9,new_line10]
+            new_line1 = f"* ELOAD - NOT DETECTED"
+            new_line2 = f"* METER - CURRENT: {meter_current/1000:.3f} A"
+            new_line3 = f"* METER - MODE: {meter_mode_str} {meter_range_str}"
+            new_line4 = "*" * 60
+            dis_lines = [new_line0,new_line1,new_line2,new_line3,new_line4]
+            # change if e_load is connected
+            if hardware.e_load:
+                new_line0 = "*" * 60
+                new_line1 = "* ELOAD - ENABLE: " + load_stat_imp
+                new_line2 = "* ELOAD - MODE: " + load_stat_func
+                new_line3 = "* ELOAD - CURRENT SETTING: " + load_stat_curr 
+                new_line4 = "* ELOAD - RESISTANCE SETTING: " + load_stat_res
+                new_line5 = "* ELOAD - SHORT ENABLED: " + load_stat_short
+                new_line6 = f"* ELOAD - VOLTS: {load_volts/1000:.3f} V"
+                new_line7 = f"* ELOAD - CURRENT: {load_current/1000:.3f} A"
+                new_line8 = f"* METER - CURRENT: {meter_current/1000:.3f} A"
+                new_line9 = f"* METER - MODE: {meter_mode_str} {meter_range_str}"
+                new_line10 = "*" * 60
+                dis_lines = [new_line0,new_line1,new_line2,new_line3,new_line4,new_line5,new_line6,new_line7,new_line8,new_line9,new_line10]
             update_display(dis_lines)
             # Call the update function
             #update_display(new_line1, new_line2, new_line3, new_line4, new_line5)      
