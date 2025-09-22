@@ -1,4 +1,4 @@
-Started on: 2025-09-19-16:22:31
+Started on: 2025-09-22-08:56:13
 00000 UUT_EDS = 37000-563.eds
 00000 UUT_DATANAME = RESET
 00000 LdRemote = 1 : NULL : WAIT = 0.2
@@ -11,5 +11,5 @@ Started on: 2025-09-19-16:22:31
 00005 RLY_K1 = 0 : NULL : WAIT = 1
 00006 END
 Fail count: 0
-Finished on: 2025-09-19-16:22:37
-elapsed time: 0:00:02.732066
+Finished on: 2025-09-22-08:56:19
+elapsed time: 0:00:02.725129

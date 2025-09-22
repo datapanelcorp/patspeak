@@ -10,18 +10,12 @@ import sys
 from gpiozero import LED
 import shutil
 import os
-import fnmatch
-
-#sudo nano /etc/udev/rules.d/99-usbtmc.rules
-#SUBSYSTEM=="usb", ATTR{idVendor}=="2ec7", ATTR{idProduct}=="8800", MODE="0666", GROUP="j"
-
 # --- Constants ---
 # Hardware identifiers
 MULTI_METER_PATH = '/dev/ttyUSB0'
 MULTI_METER_BAUD = 38400
 #ELOAD_VISA_ID = "USB0::11975::34816::802197042747610014::0::INSTR"
-#ELOAD_VISA_ID = "USB0::11975::34816::802197042787270012::0::INSTR"
-ELOAD_VISA_ID = "USB0::11975::34816::*::0::INSTR"
+ELOAD_VISA_ID = "USB0::11975::34816::802197042787270012::0::INSTR"
 #Data Panel E-Load has BOID v1.10
 #MULTI-METER ID: 5491B  Multimeter,Ver1.1.11.11.23,124E12115
 
@@ -36,8 +30,7 @@ MMETER_READ_ID = 0x0CFF0004
 
 # Pin configuration
 K1_PIN_BCM = 26
-#GPIO_K1 = LED(K1_PIN_BCM)
-GPIO_K1 = LED(K1_PIN_BCM, initial_value=True)
+GPIO_K1 = LED(K1_PIN_BCM)
 
 # --- Class for Hardware Management ---
 class HardwareManager:
@@ -55,7 +48,6 @@ class HardwareManager:
         self.multi_meter = None
         self.multi_meter_mode: int = 0
         self.multi_meter_range: int = 0
-        self.mmeter_id = None
         self.e_load = None
         self.resource_manager = None
         self.eload_lock = threading.Lock()
@@ -72,8 +64,8 @@ class HardwareManager:
         try:
             mmeter = serial.Serial(MULTI_METER_PATH, MULTI_METER_BAUD, timeout=1)
             mmeter.write(b'*IDN?\n')
-            self.mmeter_id = mmeter.readline().decode().strip()
-            print(f"MULTI-METER ID: {self.mmeter_id}")
+            response = mmeter.readline().decode().strip()
+            print(f"MULTI-METER ID: {response}")
             self.multi_meter = mmeter
         except (serial.SerialException, IOError) as e:
             print(f"Failed to communicate with multi-meter: {e}")
@@ -93,8 +85,8 @@ class HardwareManager:
             print("Available VISA resource IDs:")
             for resource_id in available_resources:
                 print(f"- {resource_id}")
-                if fnmatch.fnmatch(resource_id, ELOAD_VISA_ID):
-                    eload = self.resource_manager.open_resource(resource_id)
+                
+            eload = self.resource_manager.open_resource(ELOAD_VISA_ID)
             print(f"E-LOAD ID: {eload.query('*IDN?')}")
             print(f"Resetting {ELOAD_VISA_ID}")
             eload.write('*RST')
@@ -189,7 +181,7 @@ def receive_can_messages(cbus: can.BusABC, hardware: HardwareManager, stop_event
             continue
 
         if message.arbitration_id == RLY_CTRL_ID:
-            GPIO_K1.off() if message.data[0] & 0x03 == 0x01 else GPIO_K1.on()
+            GPIO_K1.on() if message.data[0] & 0x03 == 0x01 else GPIO_K1.off()
             continue
             
         if message.arbitration_id == MMETER_CTRL_ID:
@@ -302,7 +294,7 @@ def main() -> None:
     
     try:
         hardware.initialize_devices()
-        #quit()
+        quit()
         cbus = setup_can_interface(CAN_CHANNEL, CAN_BITRATE)
         if not cbus:
             print("Exiting due to CAN interface setup failure.")
@@ -391,21 +383,17 @@ def main() -> None:
             # change if e_load is connected
             if hardware.e_load:
                 new_line0 = "*" * 60
-                visa_id = hardware.e_load.resource_name
-                new_lineEL = "* ELOAD ID - " +visa_id
-                new_line1 = "* ENABLE: " + load_stat_imp
-                new_line2 = "* MODE: " + load_stat_func
-                new_line3 = "* CURRENT SETTING: " + load_stat_curr 
-                new_line4 = "* RESISTANCE SETTING: " + load_stat_res
-                new_line5 = "* SHORT ENABLED: " + load_stat_short
-                new_line6 = f"* VOLTS: {load_volts/1000:.3f} V"
-                new_line7 = f"* CURRENT: {load_current/1000:.3f} A"
-                new_lineMM = "* METER ID - " + hardware.mmeter_id
-                new_line8 = f"* CURRENT: {meter_current/1000:.3f} A"
-                #new_line9 = f"* MODE: {meter_mode_str} {meter_range_str}"
-                new_line9 = f"* K1: {GPIO_K1}"
+                new_line1 = "* ELOAD - ENABLE: " + load_stat_imp
+                new_line2 = "* ELOAD - MODE: " + load_stat_func
+                new_line3 = "* ELOAD - CURRENT SETTING: " + load_stat_curr 
+                new_line4 = "* ELOAD - RESISTANCE SETTING: " + load_stat_res
+                new_line5 = "* ELOAD - SHORT ENABLED: " + load_stat_short
+                new_line6 = f"* ELOAD - VOLTS: {load_volts/1000:.3f} V"
+                new_line7 = f"* ELOAD - CURRENT: {load_current/1000:.3f} A"
+                new_line8 = f"* METER - CURRENT: {meter_current/1000:.3f} A"
+                new_line9 = f"* METER - MODE: {meter_mode_str} {meter_range_str}"
                 new_line10 = "*" * 60
-                dis_lines = [new_line0,new_lineEL,new_line1,new_line2,new_line3,new_line4,new_line5,new_line6,new_line7,new_lineMM,new_line8,new_line9,new_line10]
+                dis_lines = [new_line0,new_line1,new_line2,new_line3,new_line4,new_line5,new_line6,new_line7,new_line8,new_line9,new_line10]
             update_display(dis_lines)
             # Call the update function
             #update_display(new_line1, new_line2, new_line3, new_line4, new_line5)      
