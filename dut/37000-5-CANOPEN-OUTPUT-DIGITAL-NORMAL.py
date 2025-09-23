@@ -13,7 +13,7 @@ Skip10A = 1
 StartCurrent = 0
 
 MaxLimit = 5500
-FaultLimit = 5000
+FaultLimit = 5000 + 100 #bump
 Increment = 500
 
 
@@ -273,18 +273,20 @@ while t <= 15:
 
         if(i < FaultLimit):
             outstr += "#verify reading  " + OutDesc + "\n" 
+            outstr += "#verify MeterCurrent\n" 
+            outstr += "NULL : MeterCurrent = " + str(i*0.001) + " | 0.1 | 0.1\n" 
             #outstr += "NULL : " + FeedbackName + " = " + str(i/100) + " | 1.55 | 0.5\n"
             outstr += "NULL : " + FeedbackName + " = " + str(i/100) + " | 2 | 0.5\n"
             outstr += "NULL : " + OutputStatus + " = " + str(FdbkBits) + " | 0.01 | 0.1\n" 
-            outstr += "#verify reading from load\n" 
-            outstr += "NULL : MeterCurrent = " + str(i*0.001) + " | 0.1 | 0.1\n" 
             outstr += "\n"
         else:
+            outstr += "#verify fault  " + OutDesc + "\n" 
+            outstr += "#verify MeterCurrent\n" 
+            outstr += "NULL : MeterCurrent = 0  | 0.01 | 0.1\n" 
             outstr += "#verify fault " + OutDesc + "\n" 
             outstr += "NULL : " + FeedbackName + " = 0 | 0.1 | 0.1\n" 
             outstr += "NULL : " + OutputStatus + " = " + str(FltBits) + " | 0 | 0.1\n" 
-            outstr += "#verify reading from load\n" 
-            outstr += "NULL : MeterCurrent = 0  | 0.01 | 0.1\n" 
+
             outstr += "\n"
         i += Increment
 
