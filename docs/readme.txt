@@ -1,5 +1,6 @@
 PATSpeak is a collection of scripts allowing the automation of the PAT test fixture
-Updated 05/02/25
+
+Updated 08/28/25 w/ ROI interface
 
 Setup Requirements:
 	Run prerequisite_setup.py to install necessary python libraries and CAN drivers
@@ -55,9 +56,29 @@ Examples:
 	
 	wait for voltmeter to read 1.0v +/- 0.5 for 500ms
 		NULL : MeterVolts = 1.0 | 0.5 | 0.5
-		
-		
 
-Ideas:
-	setup a command called before a test to look at additial items during a test. (like shorted inputs / outputs)
 
+
+NEW!!! 8/28/25
+
+ROI (roy) "remote operation interface"
+
+	ROI is a rasberry pi with a CANbus hat & Relay hat running roi.py.
+	roi.py is a python script allowing control of the relays and a replacemnent for RS-232 Ammeter UCG.
+	
+	Relay Control:
+		Message CTRL_RLY (0x0Cff0500) was added to PAT.db containing signals RLY_K1, RLY_K2, RLY_K3.
+		
+		These signals activate the Relay hat allowing switching outside of PAT's "load line", like toggeling the ignition signal.
+		
+		Example to open / close the K1 relay:
+		
+			#cycle IGN to clean slate
+			RLY_K1 = 1 : NULL : WAIT = 1
+			RLY_K1 = 0 : NULL : WAIT = 1
+	
+	Ammeter Interface:
+		The BK5491B baud rate must be set to 38,400 or the script needs to be adjusted.
+		ROY.py will fetch data from BK5491B and send it via STAT_AMPS (0x0Cff0004) as quickly as possible.
+		
+		No addital modifcations are needed to exsiting test.
