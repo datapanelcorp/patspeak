@@ -11,9 +11,9 @@ outstr = ""
 outstr += "UUT_EDS = 37000-563.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 
-outstr += "LdRemote = 1 : NULL\n"
-outstr += "LdEnable = 0 : NULL\n"
-outstr += "LdShort = 0 : NULL : WAIT = 1\n"
+outstr += "LdRemote = 1 : NULL : WAIT = 0.2\n"
+outstr += "LdEnable = 0 : NULL : WAIT = 0.2\n"
+outstr += "LdShort = 0 : NULL : WAIT = 0.2\n"
 
 outstr += "#Restore all Default Parameters\n"
 outstr += "sdo[0x1011][1] = 1684107116 : NULL\n"

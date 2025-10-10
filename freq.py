@@ -1,5 +1,5 @@
 #!/home/j/roi/bin/python
-#pscp .\roie.py j@picando:/home/j
+#pscp .\freq.py j@pitester:/home/j
 import can
 import serial
 import subprocess
@@ -24,6 +24,9 @@ MULTI_METER_BAUD = 38400
 ELOAD_VISA_ID = "USB0::11975::34816::*::0::INSTR"
 #Data Panel E-Load has BOID v1.10
 #MULTI-METER ID: 5491B  Multimeter,Ver1.1.11.11.23,124E12115
+
+FREQ_GEN_VISA_ID = "ASRL/dev/ttyACM0::INSTR"
+
 
 # CAN bus configuration
 CAN_CHANNEL = "can1"
@@ -61,11 +64,14 @@ class HardwareManager:
         self.eload_lock = threading.Lock()
         self.can_lock = threading.Lock()
         self.mmeter_lock = threading.Lock()
+        self.freq_lock = threading.Lock()
+        self.freq_gen = None
+        self.freq_gen_mode: int = 0
         
     def initialize_devices(self) -> None:
-        """Initializes the multi-meter and e-load."""
+        """Initializes the multi-meter and VISA devices"""
         self._initialize_multimeter()
-        self._initialize_eload()
+        self._initialize_VISA()
 
     def _initialize_multimeter(self) -> None:
         """Initializes the multimeter via serial connection."""
@@ -79,7 +85,7 @@ class HardwareManager:
             print(f"Failed to communicate with multi-meter: {e}")
             self.multi_meter = None
 
-    def _initialize_eload(self) -> None:
+    def _initialize_VISA(self) -> None:
         """Initializes the e-load via pyvisa."""
         try:
             self.resource_manager = pyvisa.ResourceManager()
@@ -91,19 +97,39 @@ class HardwareManager:
                 return
 
             print("Available VISA resource IDs:")
+            eload = None
+            freqgen = None
             for resource_id in available_resources:
                 print(f"- {resource_id}")
+                
                 if fnmatch.fnmatch(resource_id, ELOAD_VISA_ID):
                     eload = self.resource_manager.open_resource(resource_id)
-            print(f"E-LOAD ID: {eload.query('*IDN?')}")
-            print(f"Resetting {ELOAD_VISA_ID}")
-            eload.write('*RST')
-            eload.write('SYST:CLE')
-            self.e_load = eload
-        except Exception as e:
-            print(f"An error occurred with the e-load via Resource Manager: {e}")
-            self.e_load = None
+                    
+                if fnmatch.fnmatch(resource_id, FREQ_GEN_VISA_ID):
+                    freqgen = self.resource_manager.open_resource(resource_id)
 
+            if(eload):        
+                print(f"E-LOAD ID: {eload.query('*IDN?')}")
+                print(f"Resetting {ELOAD_VISA_ID}")
+                eload.write('*RST')
+                eload.write('SYST:CLE')
+                self.e_load = eload
+                
+            if(freqgen):       
+                print(f"FREQ ID: {freqgen.query('*IDN?')}")
+                freqgen.baud_rate = 115200
+                #print(f"Resetting {FREQ_GEN_VISA_ID}")
+                #freqgen.write('*RST')
+                #freqgen.write('SYST:CLE')
+                self.freq_gen = freqgen
+                
+        except Exception as e:
+            print(f"An error occurred with the VISA Resource Manager: {e}")
+            if self.e_load:
+                self.e_load = None
+            if self.freq_gen:
+                self.freq_gen = None
+                
     def close_devices(self) -> None:
         """Closes connections to all hardware devices."""
         if self.multi_meter:
@@ -112,6 +138,9 @@ class HardwareManager:
         if self.e_load:
             print("Closing e-load connection...")
             self.e_load.close()
+        if self.freq_gen:
+            print("Closing freq connection...")
+            self.freq_gen.close()
         if self.resource_manager:
             print("Closing resource manager...")
             self.resource_manager.close()
@@ -303,6 +332,7 @@ def main() -> None:
     try:
         hardware.initialize_devices()
         #quit()
+        
         cbus = setup_can_interface(CAN_CHANNEL, CAN_BITRATE)
         if not cbus:
             print("Exiting due to CAN interface setup failure.")
@@ -381,31 +411,44 @@ def main() -> None:
                 else:
                     print("Recevied NAN")
 
+            if hardware.freq_gen:
+                try:
+                    with hardware.freq_lock:
+                        load_stat_imp = hardware.freq_gen.query("OUTPut?").strip()
+                except pyvisa.VisaIOError as e:
+                    print(f"PyVISA communication error: {e}", file=sys.stderr)
+                    time.sleep(1)
+                    continue
+                    
             # Prepare new strings
             new_line0 = "*" * 60
-            new_line1 = f"* ELOAD - NOT DETECTED"
-            new_line2 = f"* METER - CURRENT: {meter_current/1000:.3f} A"
-            new_line3 = f"* METER - MODE: {meter_mode_str} {meter_range_str}"
-            new_line4 = "*" * 60
-            dis_lines = [new_line0,new_line1,new_line2,new_line3,new_line4]
+            dis_lines = [new_line0]
+            dis_lines.append(f"* K1: {GPIO_K1}")
             # change if e_load is connected
+            if hardware.multi_meter:
+                dis_lines.append(new_line0)
+                visa_id = hardware.mmeter_id 
+                dis_lines.append("* METER ID - " + visa_id)
+                dis_lines.append(f"* METER - CURRENT: {meter_current/1000:.3f} A")
+                dis_lines.append(f"* METER - MODE: {meter_mode_str} {meter_range_str}")
             if hardware.e_load:
-                new_line0 = "*" * 60
+                dis_lines.append(new_line0)
                 visa_id = hardware.e_load.resource_name
-                new_lineEL = "* ELOAD ID - " +visa_id
-                new_line1 = "* ENABLE: " + load_stat_imp
-                new_line2 = "* MODE: " + load_stat_func
-                new_line3 = "* CURRENT SETTING: " + load_stat_curr 
-                new_line4 = "* RESISTANCE SETTING: " + load_stat_res
-                new_line5 = "* SHORT ENABLED: " + load_stat_short
-                new_line6 = f"* VOLTS: {load_volts/1000:.3f} V"
-                new_line7 = f"* CURRENT: {load_current/1000:.3f} A"
-                new_lineMM = "* METER ID - " + hardware.mmeter_id
-                new_line8 = f"* CURRENT: {meter_current/1000:.3f} A"
-                #new_line9 = f"* MODE: {meter_mode_str} {meter_range_str}"
-                new_line9 = f"* K1: {GPIO_K1}"
-                new_line10 = "*" * 60
-                dis_lines = [new_line0,new_lineEL,new_line1,new_line2,new_line3,new_line4,new_line5,new_line6,new_line7,new_lineMM,new_line8,new_line9,new_line10]
+                dis_lines.append("* ELOAD ID - " + visa_id)
+                dis_lines.append("* ENABLE: " + load_stat_imp)
+                dis_lines.append("* MODE: " + load_stat_func)
+                dis_lines.append("* CURRENT SETTING: " + load_stat_curr)
+                dis_lines.append("* RESISTANCE SETTING: " + load_stat_res)
+                dis_lines.append("* SHORT ENABLED: " + load_stat_short)
+                dis_lines.append(f"* VOLTS: {load_volts/1000:.3f} V")
+                dis_lines.append(f"* CURRENT: {load_current/1000:.3f} A")
+            if hardware.freq_gen:
+                dis_lines.append(new_line0)
+                visa_id = hardware.freq_gen.resource_name
+                dis_lines.append("* FREQ ID - " + visa_id)
+                dis_lines.append("* ENABLE: " + load_stat_imp)
+                
+            dis_lines.append(new_line0)
             update_display(dis_lines)
             # Call the update function
             #update_display(new_line1, new_line2, new_line3, new_line4, new_line5)      
@@ -413,6 +456,7 @@ def main() -> None:
 
     except KeyboardInterrupt:
         print("\nInterrupted by user. Starting graceful shutdown...")
+        
     finally:
         stop_event.set()
         if receiver_thread:
@@ -420,9 +464,9 @@ def main() -> None:
             print("Receiver thread stopped.")
         if cbus:
             cbus.shutdown()
+            shutdown_can_interface(CAN_CHANNEL)
             print("CAN bus shut down.")
         hardware.close_devices()
-        shutdown_can_interface(CAN_CHANNEL)
         print("Shutdown complete. Exiting.")
 
 if __name__ == "__main__":

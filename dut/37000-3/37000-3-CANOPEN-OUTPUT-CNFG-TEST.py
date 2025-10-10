@@ -7,14 +7,17 @@ print(f"The name of the running script is: {script_name}")
 t = 0
 i = 0
 
-PortMode = 0
-
 #configuration
+FaultReset = 0
+Skip10A = 1
+StartCurrent = 0
+
 MaxLimit = 4500
 FaultLimit = 4500
-Increment = 500
-FaultReset = 0
-Skip10A = 0
+Increment = 100
+
+Load1 = "J4_01"
+Scope = "J4_03"
 
 #global setup
 TestName = os.path.splitext(script_name)[0]
@@ -33,25 +36,24 @@ outstr += "PRE_OPERATIONAL\n"
 
 outstr += "#-----setup PAT-----\n"
 outstr += "#setup load\n"
-outstr += "LdRemote = 0 : NULL : WAIT = 0.1\n"
-outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
-outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
-outstr += "LdShort = 1 : NULL : WAIT = 1\n"
-outstr += "J0_08_METER_LOAD = 1 : NULL : WAIT = 1\n"
-
-
-#verify faults clear
-outstr += "NULL : sdo[0x5001][3] = 0 | 0.1 | 0.1\n"
-outstr += "NULL : sdo[0x5001][4] = 0 | 0.1 | 0.1\n"
-
+outstr += Load1 + " = 1 : NULL : WAIT = 0.2\n"
+outstr += Scope + " = 1 : NULL : WAIT = 0.2\n"
 
 outstr += "OPERATIONAL\n"
-    
+
 FdbkBits = 0
 FltBits = 0
+Cmd0x52 = "sdo[0x2000][1]"
+TheMode = 0x00
+outstr += "#-----setup 34044-----\n"
+outstr += "sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL\n"
+outstr += "#disable global modes\n"
+outstr += "sdo[0x2000][3] = 0 : NULL\n"
+outstr += "sdo[0x2000][4] = 0 : NULL\n"
 
-#MaxLimit = 4500
-#FaultLimit = 4400
+outstr += Cmd0x52 + " = " + str(FaultReset) + " : NULL\n"
+outstr += "#switch in load line, set current\n"
+    
 start_out = 0
 max_outs = 15
 t = start_out
@@ -245,52 +247,33 @@ while t <= 15:
             FdbkBits &= 0b11111100
             FltBits &= 0b11111100
         
-    Cmd0x52 = "sdo[0x2000][1]"
-    
-    TheMode = 0x11
-
-    outstr += "#-----setup 34044-----\n"
-    outstr += "sdo[0x2000][1] = 0, sdo[0x2000][2] = 0 : NULL : WAIT = 0.1\n"
-    outstr += "#disable global modes\n"
-    outstr += "sdo[0x2000][3] = 0 : NULL : WAIT = 0.1\n"
-    outstr += "sdo[0x2000][4] = 0 : NULL : WAIT = 0.1\n"
-    outstr += Cmd0x52 + " = " + str(FaultReset) + " : NULL : WAIT = 0.2\n"
-    outstr += PortMode + " = " + str(TheMode) + " : NULL : WAIT = 0.2\n"
-
+    TheGlobalMode = 0
+    ThePortMode = 0x44
+    #outstr += "#-----setup 34044-----\n"
+    outstr += "sdo[0x2000][1] = 0, sdo[0x2000][2] = 0, sdo[0x2000][3] = " + str(TheGlobalMode) + " : NULL\n"
+    outstr += PortMode + " = " + str(ThePortMode) + " : NULL\n"
     outstr += "#switch in load line, set current\n"
-    outstr += OutputConnector + " = 1 : NULL : WAIT = 0.5\n"
-    
-
+    outstr += OutputConnector + " = 1 : NULL\n"
     outstr += "\n"
-    outstr += "#set current and turn on output and verify feedback\n" 
-    outstr += OutputName + " = " + str(OutputBits) + " : NULL : WAIT = 0.1\n"
-    outstr += "NULL : MeterVolts = 14.5 | 0.1 | 0.1\n"
-    outstr += "LdEnable = 1 : NULL : WAIT = 0.2\n"
-    outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
-    outstr += "NULL : MeterVolts = 0 | 0.1 | 0.1\n"
-    outstr += "#check feedback is 0\n"
-    outstr += "NULL : " + FeedbackName + " = 0 | 0 | 0.1\n" 
-    outstr += "#check fault is set\n"
-    outstr += "NULL : " + OutputStatus + " = " + str(FltBits) + " | 0 | 0.1\n"
-    outstr += "#check fault code\n"
-    outstr += "NULL : sdo[0x5000][3] = 1 | 0 | 0.1\n"
     
-    outstr += "#switch out load line\n"
-    outstr += OutputName + " = 0 : NULL : WAIT = 0.1\n"
+    
+    i = 0
+    while i <= 1500:
+        outstr += "#TESING " + OutDesc + "\n" 
+        outstr += PWMOutputName + " = " + str(i) + " : " + FeedbackName + " = " + str(i/100) + " | 1 | 0.5 : WAIT = 0.5\n"
+        outstr += "#verify reading  " + OutDesc + "\n" 
+        outstr += "#verify reading from load\n" 
+        outstr += "\n"
+        i += Increment
+    outstr += "#switch out load line, clear current\n"
+    outstr += PWMOutputName + " = 0 : NULL : WAIT = 0.1\n"
     outstr += OutputConnector + " = 0 : NULL : WAIT = 0.5\n"
     t += 1
 
 
-#verify faults clear
-outstr += "NULL : sdo[0x5001][3] = 170 | 0 | 0.1\n"
-outstr += "NULL : sdo[0x5001][4] = 170 | 0 | 0.1\n"
-outstr += "NULL : sdo[0x5001][5] = 170 | 0 | 0.1\n"
-outstr += "NULL : sdo[0x5001][6] = 170 | 0 | 0.1\n"
-
 #shut down test
-outstr += "LdRemote = 0 : NULL : WAIT = 0.1\n"
-outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
-outstr += "J0_08_METER_LOAD = 0 : NULL : WAIT = 1\n"
+outstr += Load1 + " = 0 : NULL : WAIT = 0.2\n"
+outstr += Scope + " = 0 : NULL : WAIT = 0.2\n"
 outstr += "PRE_OPERATIONAL\n"
 outstr += "SAVE\n"
 outstr += "END\n"
