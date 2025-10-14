@@ -95,11 +95,11 @@ class HardwareManager:
                 print(f"- {resource_id}")
                 if fnmatch.fnmatch(resource_id, ELOAD_VISA_ID):
                     eload = self.resource_manager.open_resource(resource_id)
-            print(f"E-LOAD ID: {eload.query('*IDN?')}")
-            print(f"Resetting {ELOAD_VISA_ID}")
-            eload.write('*RST')
-            eload.write('SYST:CLE')
-            self.e_load = eload
+                    print(f"E-LOAD ID: {eload.query('*IDN?')}")
+                    print(f"Resetting {ELOAD_VISA_ID}")
+                    eload.write('*RST')
+                    eload.write('SYST:CLE')
+                    self.e_load = eload
         except Exception as e:
             print(f"An error occurred with the e-load via Resource Manager: {e}")
             self.e_load = None
@@ -302,7 +302,7 @@ def main() -> None:
     
     try:
         hardware.initialize_devices()
-        #quit()
+        quit()
         cbus = setup_can_interface(CAN_CHANNEL, CAN_BITRATE)
         if not cbus:
             print("Exiting due to CAN interface setup failure.")

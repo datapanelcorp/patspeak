@@ -150,7 +150,7 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
 
 t = 0
 i = 0
-OutputMode = 0x33
+OutputMode = 0x22
 
 #global setup
 
