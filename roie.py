@@ -12,6 +12,7 @@ import shutil
 import os
 import fnmatch
 
+#pip install pyvisa-py pyusb
 #sudo nano /etc/udev/rules.d/99-usbtmc.rules
 #SUBSYSTEM=="usb", ATTR{idVendor}=="2ec7", ATTR{idProduct}=="8800", MODE="0666", GROUP="j"
 
@@ -37,7 +38,8 @@ MMETER_READ_ID = 0x0CFF0004
 # Pin configuration
 K1_PIN_BCM = 26
 #GPIO_K1 = LED(K1_PIN_BCM)
-GPIO_K1 = LED(K1_PIN_BCM, initial_value=False)
+#GPIO_K1 = LED(K1_PIN_BCM, initial_value=False)
+GPIO_K1 = LED(K1_PIN_BCM, initial_value=True)
 
 # --- Class for Hardware Management ---
 class HardwareManager:
@@ -189,7 +191,8 @@ def receive_can_messages(cbus: can.BusABC, hardware: HardwareManager, stop_event
             continue
 
         if message.arbitration_id == RLY_CTRL_ID:
-            GPIO_K1.on() if message.data[0] & 0x03 == 0x01 else GPIO_K1.off()
+            #GPIO_K1.on() if message.data[0] & 0x03 == 0x01 else GPIO_K1.off()
+            GPIO_K1.off() if message.data[0] & 0x03 == 0x01 else GPIO_K1.on()
             continue
             
         if message.arbitration_id == MMETER_CTRL_ID:
@@ -302,7 +305,7 @@ def main() -> None:
     
     try:
         hardware.initialize_devices()
-        quit()
+        #quit()
         cbus = setup_can_interface(CAN_CHANNEL, CAN_BITRATE)
         if not cbus:
             print("Exiting due to CAN interface setup failure.")
