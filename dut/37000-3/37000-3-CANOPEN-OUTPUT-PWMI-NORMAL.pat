@@ -15,6 +15,7 @@ sdo[0x2002][23] = 30.0, sdo[0x2002][24] = 20.0, sdo[0x2002][25] = 30.0, sdo[0x20
 sdo[0x2002][29] = 30.0, sdo[0x2002][30] = 20.0, sdo[0x2002][31] = 30.0, sdo[0x2002][32] = 20.0 : NULL
 #-----set freq-----
 sdo[0x3000] = 200 : NULL : WAIT = 0.2
+METER_MODE = 1 : NULL : WAIT = 0.2
 J4_02 = 1, J4_03 = 1 : NULL : WAIT = 1
 #-----setup 37000-----
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.2

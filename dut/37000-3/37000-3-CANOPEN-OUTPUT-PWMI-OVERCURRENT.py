@@ -34,6 +34,8 @@ outstr += "UUT_EDS = 37000-563.eds\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
 
+outstr += "METER_MODE = 1 : NULL : WAIT = 0.2\n"
+
 outstr += "PRE_OPERATIONAL\n"
 
 outstr += "#-----configure PWMi-----\n"

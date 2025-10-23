@@ -4,6 +4,7 @@
 UUT_EDS = 37000-563.eds
 UUT_DATANAME = 37000-3-CANOPEN-OUTPUT-PWMI-OVERCURRENT
 
+METER_MODE = 1 : NULL : WAIT = 0.2
 PRE_OPERATIONAL
 #-----configure PWMi-----
 sdo[0x2002][1] = 80.0, sdo[0x2002][2] = 50.0, sdo[0x2002][3] = 80.0, sdo[0x2002][4] = 50.0, sdo[0x2002][5] = 80.0, sdo[0x2002][6] = 50.0 : NULL : WAIT = 0.1

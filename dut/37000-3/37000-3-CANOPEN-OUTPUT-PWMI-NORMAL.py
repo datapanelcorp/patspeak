@@ -50,6 +50,8 @@ outstr += "sdo[0x2002][29] = " + f"{Kp}" + ", sdo[0x2002][30] = " + f"{Ki}" + ",
 outstr += "#-----set freq-----\n"
 outstr += "sdo[0x3000] = " + str(Frequancy) + " : NULL : WAIT = 0.2\n"
 
+outstr += "METER_MODE = 1 : NULL : WAIT = 0.2\n"
+
 t = 0
 while t <= 15:
     

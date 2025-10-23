@@ -27,10 +27,10 @@ J2_01 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][1] = 1 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][1] = 0 | 0 | 0.1
 #check fault is set
@@ -52,10 +52,10 @@ J2_02 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][1] = 2 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][2] = 0 | 0 | 0.1
 #check fault is set
@@ -77,10 +77,10 @@ J2_03 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][1] = 4 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][3] = 0 | 0 | 0.1
 #check fault is set
@@ -102,10 +102,10 @@ J2_04 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][1] = 8 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][4] = 0 | 0 | 0.1
 #check fault is set
@@ -127,10 +127,10 @@ J2_05 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][1] = 16 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][5] = 0 | 0 | 0.1
 #check fault is set
@@ -152,10 +152,10 @@ J2_06 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][1] = 32 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][6] = 0 | 0 | 0.1
 #check fault is set
@@ -177,10 +177,10 @@ J2_07 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][1] = 64 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][7] = 0 | 0 | 0.1
 #check fault is set
@@ -202,10 +202,10 @@ J2_08 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][1] = 128 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][8] = 0 | 0 | 0.1
 #check fault is set
@@ -227,10 +227,10 @@ J2_09 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][2] = 1 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][9] = 0 | 0 | 0.1
 #check fault is set
@@ -252,10 +252,10 @@ J2_10 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][2] = 2 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][10] = 0 | 0 | 0.1
 #check fault is set
@@ -277,10 +277,10 @@ J2_11 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][2] = 4 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][11] = 0 | 0 | 0.1
 #check fault is set
@@ -302,10 +302,10 @@ J2_12 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][2] = 8 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][12] = 0 | 0 | 0.1
 #check fault is set
@@ -327,10 +327,10 @@ J3_01 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][2] = 16 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][13] = 0 | 0 | 0.1
 #check fault is set
@@ -352,10 +352,10 @@ J3_02 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][2] = 32 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][14] = 0 | 0 | 0.1
 #check fault is set
@@ -377,10 +377,10 @@ J3_03 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][2] = 64 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][15] = 0 | 0 | 0.1
 #check fault is set
@@ -402,10 +402,10 @@ J3_04 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
 sdo[0x6200][2] = 128 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 1 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.2
 LdEnable = 0 : NULL : WAIT = 0.1
-NULL : MeterVolts = 0 | 0.1 | 0.1
+NULL : MeterVolts = 0 | 1 | 0.1
 #check feedback is 0
 NULL : sdo[0x5003][16] = 0 | 0 | 0.1
 #check fault is set

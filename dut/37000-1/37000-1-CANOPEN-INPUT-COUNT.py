@@ -386,6 +386,11 @@ outstr += "PwrEnable = 1 : NULL : WAIT = 0.1\n"
 outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1\n"
 outstr += "\n"
 
+outstr += "#setup e-load as pulldown\n"
+outstr += "LdRemote = 1 : NULL : WAIT = 0.1\n"
+outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
+outstr += "LdCurrentSet = 100 : NULL : WAIT = 0.1\n"
+
 outstr += "OPERATIONAL\n"
 
 MaxCount = 5
@@ -415,6 +420,11 @@ RolloverMode = 1
 InterlockMode = 0
 outstr += "#****** OVERFLOW, SET POINT = 0, MAX COUNT = 5, NO OUTPUT INTERLOCK\n"
 outstr = WriteCountTest(outstr, SetPoint, MaxCount, RolloverMode, InterlockMode)
+
+outstr += "#disable e-load as pulldown\n"
+outstr += "LdRemote = 1 : NULL : WAIT = 0.1\n"
+outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
+outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
 
 MaxCount = 65535
 SetPoint = 65535

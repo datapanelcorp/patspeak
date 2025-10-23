@@ -18,6 +18,10 @@ PwrSetVoltage = 0 : NULL : WAIT = 0.1
 PwrEnable = 1 : NULL : WAIT = 0.1
 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1
 
+#setup e-load as pulldown
+LdRemote = 1 : NULL : WAIT = 0.1
+LdEnable = 1 : NULL : WAIT = 0.1
+LdCurrentSet = 100 : NULL : WAIT = 0.1
 OPERATIONAL
 #****** NO OVERFLOW, SET POINT = 5, MAX COUNT = 5, OUTPUT INTERLOCK
 #7A/3A
@@ -769,6 +773,10 @@ NULL : sdo[0x6401][11] = 0 | 0 | 0.1
 sdo[0x3001][2] = 0 : NULL : WAIT = 0.1
 #switch out load line
 J3_03 = 0 : NULL : WAIT = 0.1
+#disable e-load as pulldown
+LdRemote = 1 : NULL : WAIT = 0.1
+LdEnable = 0 : NULL : WAIT = 0.1
+LdCurrentSet = 0 : NULL : WAIT = 0.1
 #****** MAX COUNT
 #disable global modes
 sdo[0x2000][3] = 0 : NULL : WAIT = 0.1

@@ -20,6 +20,7 @@ OPERATIONAL
 #switch in 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
 J4_01 = 1 : NULL : WAIT = 0.2
 J4_03 = 1 : NULL : WAIT = 0.2
+METER_MODE = 1 : NULL : WAIT = 0.2
 #switch in load line, set current
 J2_01 = 1 : NULL : WAIT = 0.5
 
@@ -147,6 +148,7 @@ OPERATIONAL
 #switch in 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
 J4_01 = 1 : NULL : WAIT = 0.2
 J4_03 = 1 : NULL : WAIT = 0.2
+METER_MODE = 1 : NULL : WAIT = 0.2
 #switch in load line, set current
 J2_01 = 1 : NULL : WAIT = 0.5
 
@@ -274,6 +276,7 @@ OPERATIONAL
 #switch in 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
 J4_01 = 1 : NULL : WAIT = 0.2
 J4_03 = 1 : NULL : WAIT = 0.2
+METER_MODE = 1 : NULL : WAIT = 0.2
 #switch in load line, set current
 J2_01 = 1 : NULL : WAIT = 0.5
 
