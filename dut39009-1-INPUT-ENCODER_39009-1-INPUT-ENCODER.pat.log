@@ -1,0 +1,186 @@
+Esc - user interruption @ 2025-12-11-15:36:41
+Started on: 2025-12-11-15:35:59
+00000 #39009-1
+00000 #Verion 0.0
+00000 #input test
+00000 UUT_DBC = 39009-561.dbc
+00000 UUT_DATANAME = 39009-1-INPUT-ENCODER
+00000 
+00000 #setup meter
+00000 LdRemote = 1 : NULL : WAIT = 0.1
+00001 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00002 LdEnable = 0 : NULL : WAIT = 0.1
+00003 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
+00004 
+00004 #setup PS1
+00004 PwrRemote = 1 : NULL : WAIT = 0.1
+00005 PwrSetCurrent = 20 : NULL : WAIT = 0.1
+00006 PwrSetVoltage = 0 : NULL : WAIT = 0.1
+00007 PwrEnable = 1 : NULL : WAIT = 0.1
+00008 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1
+00009 
+00009 #-----setup 39009-----
+00009 #configure as Output Digital ON/OFF
+00009 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00010 Command = 83, MODE1A = 10, MODE1B = 10, MODE2A = 1, MODE2B = 1, MODE3A = 10, MODE3B = 10, MODE4A = 1, MODE4B = 1, MODE5A = 0, MODE5B = 0, MODE6A = 1, MODE6B = 1, MODE7A = 0, MODE7B = 0 : NULL : WAIT = 0.5
+00011 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00012 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 0, MODE9B = 0, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00013 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00014 
+00014 Command = 87, Counter_1A_Reset = 1, Counter_3A_Reset = 1, Counter_1A_ON_OFF = 1, Counter_3A_ON_OFF = 1, LowBYTE_Counter_1A_Setpoint = 0, LowBYTE_Counter_3A_Setpoint = 0 : NULL : WAIT = 0.2
+00015 #clear multiplex
+00015 Command = 0, Counter_1A_Reset = 0, Counter_3A_Reset = 0, Counter_1A_ON_OFF = 0, Counter_3A_ON_OFF = 0, LowBYTE_Counter_1A_Setpoint = 0, LowBYTE_Counter_3A_Setpoint = 0 : NULL
+00016 
+00016 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00017 #clear multiplex
+00017 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00018 #switch in test supply
+00018 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00019 
+00019 PwrSetVoltage = 140 : NULL
+00020 #testing encoder foward
+00020 J2_04 = 1 : NULL : WAIT = 0.2
+00021 NULL : EncoderValue3 = 1 | 0 | 0.1
+00021 TEST: EncoderValue3 1.0 +/- 0.0
+00021 PASS: EncoderValue3 1.0
+00022 J2_03 = 1 : NULL : WAIT = 0.2
+00023 NULL : EncoderValue3 = 2 | 0 | 0.1
+00023 TEST: EncoderValue3 2.0 +/- 0.0
+00023 PASS: EncoderValue3 2.0
+00024 J2_04 = 0 : NULL : WAIT = 0.2
+00025 NULL : EncoderValue3 = 3 | 0 | 0.1
+00025 TEST: EncoderValue3 3.0 +/- 0.0
+00025 PASS: EncoderValue3 3.0
+00026 J2_03 = 0 : NULL : WAIT = 0.2
+00027 NULL : EncoderValue3 = 4 | 0 | 0.1
+00027 TEST: EncoderValue3 4.0 +/- 0.0
+00027 PASS: EncoderValue3 4.0
+00028 
+00028 J2_04 = 1 : NULL : WAIT = 0.2
+00029 NULL : EncoderValue3 = 5 | 0 | 0.1
+00029 TEST: EncoderValue3 5.0 +/- 0.0
+00029 PASS: EncoderValue3 5.0
+00030 J2_03 = 1 : NULL : WAIT = 0.2
+00031 NULL : EncoderValue3 = 6 | 0 | 0.1
+00031 TEST: EncoderValue3 6.0 +/- 0.0
+00031 PASS: EncoderValue3 6.0
+00032 J2_04 = 0 : NULL : WAIT = 0.2
+00033 NULL : EncoderValue3 = 7 | 0 | 0.1
+00033 TEST: EncoderValue3 7.0 +/- 0.0
+00033 PASS: EncoderValue3 7.0
+00034 J2_03 = 0 : NULL : WAIT = 0.2
+00035 NULL : EncoderValue3 = 8 | 0 | 0.1
+00035 TEST: EncoderValue3 8.0 +/- 0.0
+00035 PASS: EncoderValue3 8.0
+00036 
+00036 #testing encoder reverse
+00036 J2_03 = 1 : NULL : WAIT = 0.2
+00037 NULL : EncoderValue3 = 7 | 0 | 0.1
+00037 TEST: EncoderValue3 7.0 +/- 0.0
+00037 PASS: EncoderValue3 7.0
+00038 J2_04 = 1 : NULL : WAIT = 0.2
+00039 NULL : EncoderValue3 = 6 | 0 | 0.1
+00039 TEST: EncoderValue3 6.0 +/- 0.0
+00039 PASS: EncoderValue3 6.0
+00040 J2_03 = 0 : NULL : WAIT = 0.2
+00041 NULL : EncoderValue3 = 5 | 0 | 0.1
+00041 TEST: EncoderValue3 5.0 +/- 0.0
+00041 PASS: EncoderValue3 5.0
+00042 J2_04 = 0 : NULL : WAIT = 0.2
+00043 NULL : EncoderValue3 = 4 | 0 | 0.1
+00043 TEST: EncoderValue3 4.0 +/- 0.0
+00043 PASS: EncoderValue3 4.0
+00044 
+00044 J2_03 = 1 : NULL : WAIT = 0.2
+00045 NULL : EncoderValue3 = 3 | 0 | 0.1
+00045 TEST: EncoderValue3 3.0 +/- 0.0
+00045 PASS: EncoderValue3 3.0
+00046 J2_04 = 1 : NULL : WAIT = 0.2
+00047 NULL : EncoderValue3 = 2 | 0 | 0.1
+00047 TEST: EncoderValue3 2.0 +/- 0.0
+00047 PASS: EncoderValue3 2.0
+00048 J2_03 = 0 : NULL : WAIT = 0.2
+00049 NULL : EncoderValue3 = 1 | 0 | 0.1
+00049 TEST: EncoderValue3 1.0 +/- 0.0
+00049 PASS: EncoderValue3 1.0
+00050 J2_04 = 0 : NULL : WAIT = 0.2
+00051 NULL : EncoderValue3 = 0 | 0 | 0.1
+00051 TEST: EncoderValue3 0.0 +/- 0.0
+00051 PASS: EncoderValue3 0.0
+00052 
+00052 #testing encoder reverse rollover
+00052 J2_03 = 1 : NULL : WAIT = 0.2
+00053 NULL : EncoderValue3 = 4294967295 | 0 | 0.1
+00053 TEST: EncoderValue3 4294967295.0 +/- 0.0
+00053 PASS: EncoderValue3 4294967295.0
+00054 J2_04 = 1 : NULL : WAIT = 0.2
+00055 NULL : EncoderValue3 = 4294967294 | 0 | 0.1
+00055 TEST: EncoderValue3 4294967294.0 +/- 0.0
+00055 PASS: EncoderValue3 4294967294.0
+00056 J2_03 = 0 : NULL : WAIT = 0.2
+00057 NULL : EncoderValue3 = 4294967293 | 0 | 0.1
+00057 TEST: EncoderValue3 4294967293.0 +/- 0.0
+00057 PASS: EncoderValue3 4294967293.0
+00058 J2_04 = 0 : NULL : WAIT = 0.2
+00059 NULL : EncoderValue3 = 4294967292 | 0 | 0.1
+00059 TEST: EncoderValue3 4294967292.0 +/- 0.0
+00059 PASS: EncoderValue3 4294967292.0
+00060 
+00060 J2_03 = 1 : NULL : WAIT = 0.2
+00061 NULL : EncoderValue3 = 4294967291 | 0 | 0.1
+00061 TEST: EncoderValue3 4294967291.0 +/- 0.0
+00061 PASS: EncoderValue3 4294967291.0
+00062 J2_04 = 1 : NULL : WAIT = 0.2
+00063 NULL : EncoderValue3 = 4294967290 | 0 | 0.1
+00063 TEST: EncoderValue3 4294967290.0 +/- 0.0
+00063 PASS: EncoderValue3 4294967290.0
+00064 J2_03 = 0 : NULL : WAIT = 0.2
+00065 NULL : EncoderValue3 = 4294967289 | 0 | 0.1
+00065 TEST: EncoderValue3 4294967289.0 +/- 0.0
+00065 PASS: EncoderValue3 4294967289.0
+00066 J2_04 = 0 : NULL : WAIT = 0.2
+00067 NULL : EncoderValue3 = 4294967288 | 0 | 0.1
+00067 TEST: EncoderValue3 4294967288.0 +/- 0.0
+00067 PASS: EncoderValue3 4294967288.0
+00068 
+00068 #switch out input
+00068 J2_04 = 0 : NULL : WAIT = 0.2
+00069 J2_03 = 0 : NULL : WAIT = 0.2
+00070 #disable counter
+00070 Command = 87, Counter_3A_ON_OFF = 1 : NULL : WAIT = 0.2
+00071 Command = 0, Counter_3A_ON_OFF = 0 : NULL
+00072 #verify count
+00072 NULL : EncoderValue3 = 4294967288 | 0 | 0.1
+00072 TEST: EncoderValue3 4294967288.0 +/- 0.0
+00072 PASS: EncoderValue3 4294967288.0
+00073 #send counter reset
+00073 Command = 87, Counter_3A_Reset = 1 : NULL : WAIT = 0.2
+00074 Command = 0, Counter_3A_Reset = 0 : NULL
+00075 #verify count reset
+00075 NULL : EncoderValue3 = 0 | 0 | 0.1
+00075 TEST: EncoderValue3 0.0 +/- 0.0
+00075 PASS: EncoderValue3 0.0
+00076 Command = 87, Counter_3A_Reset = 0 : NULL : WAIT = 0.2
+00077 Command = 87, Counter_3A_ON_OFF = 0 : NULL : WAIT = 0.2
+00078 
+00078 #testing encoder foward
+00078 J2_02 = 1 : NULL : WAIT = 0.2
+00079 NULL : EncoderValue1 = 1 | 0 | 0.1
+00079 TEST: EncoderValue1 1.0 +/- 0.0
+00079 FAIL: EncoderValue1 0.0
+00080 J2_01 = 1 : NULL : WAIT = 0.2
+00081 NULL : EncoderValue1 = 2 | 0 | 0.1
+00081 TEST: EncoderValue1 2.0 +/- 0.0
+00081 FAIL: EncoderValue1 0.0
+00082 J2_02 = 0 : NULL : WAIT = 0.2
+00083 NULL : EncoderValue1 = 3 | 0 | 0.1
+00083 TEST: EncoderValue1 3.0 +/- 0.0
+00083 FAIL: EncoderValue1 0.0
+00084 J2_01 = 0 : NULL : WAIT = 0.2
+00085 NULL : EncoderValue1 = 4 | 0 | 0.1
+00085 TEST: EncoderValue1 4.0 +/- 0.0
+00085 FAIL: EncoderValue1 0.0
+00086 
+00086 J2_02 = 1 : NULL : WAIT = 0.2
+00087 NULL : EncoderValue1 = 5 | 0 | 0.1
+00087 TEST: EncoderValue1 5.0 +/- 0.0

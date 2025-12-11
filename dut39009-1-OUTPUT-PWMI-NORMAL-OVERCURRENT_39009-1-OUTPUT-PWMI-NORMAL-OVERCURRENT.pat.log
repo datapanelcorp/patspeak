@@ -1,0 +1,125 @@
+Started on: 2025-12-11-08:20:36
+00000 #39009-1
+00000 #Verion 0.0
+00000 #PWMi normal test with a 2.1 Ohm resistive load. (6.9 amps @ 14.5 VDC)
+00000 #PWMi overshoot should cause the output to overcurrent
+00000 UUT_DBC = 39009-561.dbc
+00000 UUT_DATANAME = 39009-1-OUTPUT-PWMI-NORMAL-OVERCURRENT
+00000 
+00000 #-----setup 39009-----
+00000 #disable global modes
+00000 #-----setup 39009-----
+00000 #configure as Output Digital ON/OFF
+00000 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00001 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 4, MODE2B = 4, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4, MODE5A = 4, MODE5B = 4, MODE6A = 4, MODE6B = 4, MODE7A = 4, MODE7B = 4 : NULL : WAIT = 0.5
+00002 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00003 Command = 84, MODE8A = 4, MODE8B = 4, MODE9A = 4, MODE9B = 4, MODE10A = 4, MODE10B = 4, GLOBAL_KP = 80.0, GLOBAL_KI =  50.0 : NULL : WAIT = 0.5
+00004 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00005 Command = 82, FREQ1 = 100, SaveSettings = 1, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00006 Command = 0, FREQ1 = 0, SaveSettings = 0, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00007 METER_MODE = 1 : NULL : WAIT = 0.2
+00008 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
+00009 #switch in load line, set current
+00009 J3_01 = 1 : NULL : WAIT = 0.5
+00010 
+00010 PWM_CTRL_2A = 4000 : OutStat2A = 2 | 1 | 1
+00010 TEST: OutStat2A 2.0 +/- 1.0
+00010 PASS: OutStat2A 1.0
+00011 #switch out load line, switch coil
+00011 PWM_CTRL_2A = 0 : NULL : WAIT = 1
+00012 J3_01 = 0 : NULL : WAIT = 1
+00013 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
+00014 #switch in load line, set current
+00014 J3_02 = 1 : NULL : WAIT = 0.5
+00015 
+00015 PWM_CTRL_2B = 4000 : OutStat2B = 2 | 1 | 1
+00015 TEST: OutStat2B 2.0 +/- 1.0
+00015 PASS: OutStat2B 1.0
+00016 #switch out load line, switch coil
+00016 PWM_CTRL_2B = 0 : NULL : WAIT = 1
+00017 J3_02 = 0 : NULL : WAIT = 1
+00018 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
+00019 #switch in load line, set current
+00019 J3_03 = 1 : NULL : WAIT = 0.5
+00020 
+00020 PWM_CTRL_4A = 4000 : OutStat4A = 2 | 1 | 1
+00020 TEST: OutStat4A 2.0 +/- 1.0
+00020 PASS: OutStat4A 1.0
+00021 #switch out load line, switch coil
+00021 PWM_CTRL_4A = 0 : NULL : WAIT = 1
+00022 J3_03 = 0 : NULL : WAIT = 1
+00023 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
+00024 #switch in load line, set current
+00024 J3_04 = 1 : NULL : WAIT = 0.5
+00025 
+00025 PWM_CTRL_4B = 4000 : OutStat4B = 2 | 1 | 1
+00025 TEST: OutStat4B 2.0 +/- 1.0
+00025 PASS: OutStat4B 1.0
+00026 #switch out load line, switch coil
+00026 PWM_CTRL_4B = 0 : NULL : WAIT = 1
+00027 J3_04 = 0 : NULL : WAIT = 1
+00028 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
+00029 #switch in load line, set current
+00029 J3_05 = 1 : NULL : WAIT = 0.5
+00030 
+00030 PWM_CTRL_6A = 4000 : OutStat6A = 2 | 1 | 1
+00030 TEST: OutStat6A 2.0 +/- 1.0
+00030 PASS: OutStat6A 1.0
+00031 #switch out load line, switch coil
+00031 PWM_CTRL_6A = 0 : NULL : WAIT = 1
+00032 J3_05 = 0 : NULL : WAIT = 1
+00033 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
+00034 #switch in load line, set current
+00034 J3_06 = 1 : NULL : WAIT = 0.5
+00035 
+00035 PWM_CTRL_6B = 4000 : OutStat6B = 2 | 1 | 1
+00035 TEST: OutStat6B 2.0 +/- 1.0
+00035 PASS: OutStat6B 1.0
+00036 #switch out load line, switch coil
+00036 PWM_CTRL_6B = 0 : NULL : WAIT = 1
+00037 J3_06 = 0 : NULL : WAIT = 1
+00038 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
+00039 #switch in load line, set current
+00039 J3_07 = 1 : NULL : WAIT = 0.5
+00040 
+00040 PWM_CTRL_8A = 4000 : OutStat8A = 2 | 1 | 1
+00040 TEST: OutStat8A 2.0 +/- 1.0
+00040 PASS: OutStat8A 1.0
+00041 #switch out load line, switch coil
+00041 PWM_CTRL_8A = 0 : NULL : WAIT = 1
+00042 J3_07 = 0 : NULL : WAIT = 1
+00043 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
+00044 #switch in load line, set current
+00044 J3_08 = 1 : NULL : WAIT = 0.5
+00045 
+00045 PWM_CTRL_8B = 4000 : OutStat8B = 2 | 1 | 1
+00045 TEST: OutStat8B 2.0 +/- 1.0
+00045 PASS: OutStat8B 1.0
+00046 #switch out load line, switch coil
+00046 PWM_CTRL_8B = 0 : NULL : WAIT = 1
+00047 J3_08 = 0 : NULL : WAIT = 1
+00048 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
+00049 #switch in load line, set current
+00049 J3_09 = 1 : NULL : WAIT = 0.5
+00050 
+00050 PWM_CTRL_10A = 4000 : OutStat10A = 2 | 1 | 1
+00050 TEST: OutStat10A 2.0 +/- 1.0
+00050 PASS: OutStat10A 1.0
+00051 #switch out load line, switch coil
+00051 PWM_CTRL_10A = 0 : NULL : WAIT = 1
+00052 J3_09 = 0 : NULL : WAIT = 1
+00053 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
+00054 #switch in load line, set current
+00054 J3_10 = 1 : NULL : WAIT = 0.5
+00055 
+00055 PWM_CTRL_10B = 4000 : OutStat10B = 2 | 1 | 1
+00055 TEST: OutStat10B 2.0 +/- 1.0
+00055 PASS: OutStat10B 1.0
+00056 #switch out load line, switch coil
+00056 PWM_CTRL_10B = 0 : NULL : WAIT = 1
+00057 J3_10 = 0 : NULL : WAIT = 1
+00058 SAVE
+00058 END
+Fail count: 0
+Finished on: 2025-12-11-08:21:27
+elapsed time: 0:00:48.261905
