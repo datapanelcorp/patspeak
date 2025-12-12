@@ -1,5 +1,4 @@
-Esc - user interruption @ 2025-12-12-10:46:16
-Started on: 2025-12-12-10:45:53
+Started on: 2025-12-12-13:29:52
 00000 #39009-1
 00000 #Verion 0.0
 00000 #input test
@@ -52,7 +51,7 @@ Started on: 2025-12-12-10:45:53
 00023 #verify count
 00023 NULL : Hertz_Count_Input1A = 2 | 0 | 0.1
 00023 TEST: Hertz_Count_Input1A 2.0 +/- 0.0
-00023 FAIL: Hertz_Count_Input1A 5.0
+00023 PASS: Hertz_Count_Input1A 2.0
 00024 J2_01 = 1 : NULL : WAIT = 1
 00025 NULL : Input_1A = 1 | 0 | 0.1
 00025 TEST: Input_1A 1.0 +/- 0.0
@@ -65,9 +64,121 @@ Started on: 2025-12-12-10:45:53
 00028 #verify count
 00028 NULL : Hertz_Count_Input1A = 4 | 0 | 0.1
 00028 TEST: Hertz_Count_Input1A 4.0 +/- 0.0
-00028 FAIL: Hertz_Count_Input1A 7.0
+00028 FAIL: Hertz_Count_Input1A 5.0
 00029 J2_01 = 1 : NULL : WAIT = 1
 00030 NULL : Input_1A = 1 | 0 | 0.1
 00030 TEST: Input_1A 1.0 +/- 0.0
 00030 PASS: Input_1A 1.0
 00031 J2_01 = 0 : NULL : WAIT = 1
+00032 NULL : Input_1A = 0 | 0 | 0.1
+00032 TEST: Input_1A 0.0 +/- 0.0
+00032 PASS: Input_1A 0.0
+00033 
+00033 #switch out input
+00033 J2_01 = 0 : NULL : WAIT = 0.2
+00034 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00035 #disable counter
+00035 Command = 87, Counter_1A_ON_OFF = 1 : NULL : WAIT = 0.2
+00036 Command = 0, Counter_1A_ON_OFF = 0 : NULL
+00037 #verify count
+00037 NULL : Hertz_Count_Input1A = 6 | 0 | 0.1
+00037 TEST: Hertz_Count_Input1A 6.0 +/- 0.0
+00037 PASS: Hertz_Count_Input1A 6.0
+00038 #send counter reset
+00038 Command = 87, Counter_1A_Reset = 1 : NULL : WAIT = 0.2
+00039 Command = 0, Counter_1A_Reset = 0 : NULL
+00040 #verify count reset
+00040 NULL : Hertz_Count_Input1A = 0 | 0 | 0.1
+00040 TEST: Hertz_Count_Input1A 0.0 +/- 0.0
+00040 PASS: Hertz_Count_Input1A 0.0
+00041 
+00041 #-----setup 39009-----
+00041 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00042 Command = 83, MODE1A = 8, MODE1B = 8, MODE2A = 1, MODE2B = 1, MODE3A = 8, MODE3B = 8, MODE4A = 1, MODE4B = 1, MODE5A = 1, MODE5B = 1, MODE6A = 1, MODE6B = 1, MODE7A = 1, MODE7B = 1 : NULL : WAIT = 0.5
+00043 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00044 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 1, MODE9B = 1, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00045 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00046 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00047 #clear multiplex
+00047 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00048 
+00048 #switch in test supply
+00048 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00049 #switch in input
+00049 J2_02 = 0 : NULL : WAIT = 0.2
+00050 
+00050 PwrSetVoltage = 140 : NULL
+00051 #testing count events
+00051 Command = 87, Counter_1A_Reset = 1, Counter_1B_Reset = 1, Counter_1A_ON_OFF = 1, Counter_1B_ON_OFF = 1 : NULL : WAIT = 0.2
+00052 #clear multiplex
+00052 Command = 0, Counter_1A_Reset = 0, Counter_1B_Reset = 0, Counter_1A_ON_OFF = 0, Counter_1B_ON_OFF = 0 : NULL
+00053 
+00053 #verify count
+00053 NULL : Hertz_Count_Input1B = 0 | 0 | 0.1
+00053 TEST: Hertz_Count_Input1B 0.0 +/- 0.0
+00053 PASS: Hertz_Count_Input1B 0.0
+00054 J2_02 = 1 : NULL : WAIT = 1
+00055 NULL : Input_1B = 1 | 0 | 0.1
+00055 TEST: Input_1B 1.0 +/- 0.0
+00055 PASS: Input_1B 1.0
+00056 J2_02 = 0 : NULL : WAIT = 1
+00057 NULL : Input_1B = 0 | 0 | 0.1
+00057 TEST: Input_1B 0.0 +/- 0.0
+00057 PASS: Input_1B 0.0
+00058 
+00058 #verify count
+00058 NULL : Hertz_Count_Input1B = 2 | 0 | 0.1
+00058 TEST: Hertz_Count_Input1B 2.0 +/- 0.0
+00058 PASS: Hertz_Count_Input1B 2.0
+00059 J2_02 = 1 : NULL : WAIT = 1
+00060 NULL : Input_1B = 1 | 0 | 0.1
+00060 TEST: Input_1B 1.0 +/- 0.0
+00060 PASS: Input_1B 1.0
+00061 J2_02 = 0 : NULL : WAIT = 1
+00062 NULL : Input_1B = 0 | 0 | 0.1
+00062 TEST: Input_1B 0.0 +/- 0.0
+00062 PASS: Input_1B 0.0
+00063 
+00063 #verify count
+00063 NULL : Hertz_Count_Input1B = 4 | 0 | 0.1
+00063 TEST: Hertz_Count_Input1B 4.0 +/- 0.0
+00063 FAIL: Hertz_Count_Input1B 6.0
+00064 J2_02 = 1 : NULL : WAIT = 1
+00065 NULL : Input_1B = 1 | 0 | 0.1
+00065 TEST: Input_1B 1.0 +/- 0.0
+00065 PASS: Input_1B 1.0
+00066 J2_02 = 0 : NULL : WAIT = 1
+00067 NULL : Input_1B = 0 | 0 | 0.1
+00067 TEST: Input_1B 0.0 +/- 0.0
+00067 PASS: Input_1B 0.0
+00068 
+00068 #switch out input
+00068 J2_02 = 0 : NULL : WAIT = 0.2
+00069 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00070 #disable counter
+00070 Command = 87, Counter_1B_ON_OFF = 1 : NULL : WAIT = 0.2
+00071 Command = 0, Counter_1B_ON_OFF = 0 : NULL
+00072 #verify count
+00072 NULL : Hertz_Count_Input1B = 6 | 0 | 0.1
+00072 TEST: Hertz_Count_Input1B 6.0 +/- 0.0
+00072 FAIL: Hertz_Count_Input1B 8.0
+00073 #send counter reset
+00073 Command = 87, Counter_1B_Reset = 1 : NULL : WAIT = 0.2
+00074 Command = 0, Counter_1B_Reset = 0 : NULL
+00075 #verify count reset
+00075 NULL : Hertz_Count_Input1B = 0 | 0 | 0.1
+00075 TEST: Hertz_Count_Input1B 0.0 +/- 0.0
+00075 PASS: Hertz_Count_Input1B 0.0
+00076 
+00076 #switch out load line
+00076 J2_02 = 0 : NULL : WAIT = 0.1
+00077 #switch out power supply
+00077 LdRemote = 0 : NULL : WAIT = 0.1
+00078 LdEnable = 0 : NULL : WAIT = 0.1
+00079 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00080 J0_08_METER_LOAD = 0 : NULL : WAIT = 0.1
+00081 SAVE
+00081 END
+Fail count: 3
+Finished on: 2025-12-12-13:30:33
+elapsed time: 0:00:38.755664
