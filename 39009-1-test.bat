@@ -1,10 +1,22 @@
 @echo off
 
 ::**********************
-echo prepare for 39009-1-INPUT-ENCODER.pat
+echo prepare for 39009-1-INPUT-420MA.pat
 pause
 python pat.py RESET.pat
-python pat.py 39009-1-INPUT-ENCODER.pat
+python pat.py 39009-1-INPUT-420MA.pat
+::**********************
+::**********************
+@REM echo prepare for 39009-1-INPUT-COUNT.pat
+@REM pause
+@REM python pat.py RESET.pat
+@REM python pat.py 39009-1-INPUT-COUNT.pat
+::**********************
+::**********************
+@REM echo prepare for 39009-1-INPUT-ENCODER.pat
+@REM pause
+@REM python pat.py RESET.pat
+@REM python pat.py 39009-1-INPUT-ENCODER.pat
 ::**********************
 ::**********************
 @REM echo prepare for 39009-1-INPUT-ADC.pat

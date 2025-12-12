@@ -1,4 +1,4 @@
-Started on: 2025-12-11-15:35:54
+Started on: 2025-12-12-12:14:23
 00000 UUT_DBC = 39009-561.dbc
 00000 UUT_DATANAME = RESET
 00000 LdRemote = 1 : NULL : WAIT = 0.2
@@ -11,5 +11,5 @@ Started on: 2025-12-11-15:35:54
 00005 RLY_K1 = 0 : NULL : WAIT = 1
 00006 END
 Fail count: 0
-Finished on: 2025-12-11-15:35:59
-elapsed time: 0:00:02.665127
+Finished on: 2025-12-12-12:14:28
+elapsed time: 0:00:02.663297

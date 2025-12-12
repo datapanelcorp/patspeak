@@ -41,6 +41,8 @@ BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
  SG_ DutyCycle_SP_Input1B : 48|16@1+ (1,0) [0|0] "" Vector__XXX
  SG_ DutyCycle_SP_Input3A : 16|16@1+ (1,0) [0|0] "" Vector__XXX
  SG_ DutyCycle_SP_Input3B : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ LowBYTE_Counter_1A_Setpoint m87 : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ LowBYTE_Counter_3A_Setpoint m87 : 48|16@1+ (1,0) [0|0] "" Vector__XXX
 
 BO_ 2565857489 CTRL1: 8 CTRL
  SG_ Command M : 0|8@1+ (1,0) [0|0] "" Vector__XXX
@@ -114,14 +116,12 @@ BO_ 2565857489 CTRL1: 8 CTRL
  SG_ Port8A_Ki m86 : 56|8@1+ (1,0) [0|0] "" Vector__XXX
  SG_ Counter_1A_ON_OFF m87 : 8|2@1+ (1,0) [0|0] "" Vector__XXX
  SG_ Counter_1A_Reset m87 : 10|2@1+ (1,0) [0|0] "" Vector__XXX
- SG_ Counter_1A_Enable_Overflow m87 : 12|2@1+ (1,0) [0|0] "" Vector__XXX
- SG_ Counter_1A_Enable_OUT3A m87 : 14|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Counter_1B_ON_OFF m87 : 12|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Counter_1B_Reset m87 : 14|2@1+ (1,0) [0|0] "" Vector__XXX
  SG_ Counter_3A_ON_OFF m87 : 16|2@1+ (1,0) [0|0] "" Vector__XXX
  SG_ Counter_3A_Reset m87 : 18|2@1+ (1,0) [0|0] "" Vector__XXX
- SG_ Counter_3A_Enable_Overflow m87 : 20|2@1+ (1,0) [0|0] "" Vector__XXX
- SG_ Counter_3A_Enable_OUT4A m87 : 22|2@1+ (1,0) [0|0] "" Vector__XXX
- SG_ LowBYTE_Counter_1A_Setpoint m87 : 32|16@1+ (1,0) [0|0] "" Vector__XXX
- SG_ LowBYTE_Counter_3A_Setpoint m87 : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Counter_3B_ON_OFF m87 : 20|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Counter_3B_Reset m87 : 22|2@1+ (1,0) [0|0] "" Vector__XXX
  SG_ Port8B_Kp m88 : 8|8@1+ (1,0) [0|0] "" Vector__XXX
  SG_ Port8B_Ki m88 : 16|8@1+ (1,0) [0|0] "" Vector__XXX
  SG_ Port10A_Kp m88 : 24|8@1+ (1,0) [0|0] "" Vector__XXX

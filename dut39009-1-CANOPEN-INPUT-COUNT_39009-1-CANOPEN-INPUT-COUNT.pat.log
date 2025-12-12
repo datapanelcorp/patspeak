@@ -1,0 +1,205 @@
+Started on: 2025-12-12-09:05:39
+00000 #34044-1
+00000 #Verion 0.0
+00000 #input test
+00000 UUT_DBC = 34044-561.dbc
+00000 UUT_DATANAME = 39009-1-CANOPEN-INPUT-COUNT
+00000 
+00000 #-----setup 34044-----
+00000 Command = 93, PORT1_MODE = 0, PORT2_MODE = 0, PORT3_MODE = 0, PORT4_MODE = 0 : NULL : WAIT = 0.2
+00001 #clear multiplex
+00001 Command = 0, PORT1_MODE = 0, PORT2_MODE = 0, PORT3_MODE = 0, PORT4_MODE = 0 : NULL
+00002 #setup meter
+00002 LdRemote = 1 : NULL : WAIT = 0.1
+00003 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00004 LdEnable = 0 : NULL : WAIT = 0.1
+00005 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
+00006 
+00006 #setup PS1
+00006 PwrRemote = 1 : NULL : WAIT = 0.1
+00007 PwrSetCurrent = 20 : NULL : WAIT = 0.1
+00008 PwrSetVoltage = 0 : NULL : WAIT = 0.1
+00009 PwrEnable = 1 : NULL : WAIT = 0.1
+00010 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1
+00011 
+00011 #******MAX COUNT = 5
+00011 #-----setup 39009-----
+00011 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00012 Command = 83, MODE1A = 8, MODE1B = 8, MODE2A = 1, MODE2B = 1, MODE3A = 8, MODE3B = 8, MODE4A = 1, MODE4B = 1, MODE5A = 1, MODE5B = 1, MODE6A = 1, MODE6B = 1, MODE7A = 1, MODE7B = 1 : NULL : WAIT = 0.5
+00013 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00014 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 1, MODE9B = 1, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00015 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00016 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00017 #clear multiplex
+00017 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00018 
+00018 Command = 87, Counter_1A_Reset = 1, Counter_1B_Reset = 1, Counter_1A_ON_OFF = 1, Counter_1B_ON_OFF = 1 : NULL : WAIT = 0.2
+00019 #clear multiplex
+00019 Command = 0, Counter_1A_Reset = 0, Counter_1B_Reset = 0, Counter_1A_ON_OFF = 0, Counter_1B_ON_OFF = 0 : NULL
+00020 
+00020 #switch in test supply
+00020 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00021 #switch in input
+00021 J2_01 = 1 : NULL : WAIT = 0.2
+00022 
+00022 #testing count events
+00022 PwrSetVoltage = 140 : NULL
+00023 #verify count
+00023 NULL : Hertz_Count_Input1A = 1 | 0 | 0.1
+00023 FAIL: Hertz_Count_Input1A 0
+00024 PwrSetVoltage = 0 : NULL
+00025 NULL : Input_1A = 0 | 0 | 0.1
+00025 FAIL: Input_1A 0
+00026 
+00026 PwrSetVoltage = 140 : NULL
+00027 #verify count
+00027 NULL : Hertz_Count_Input1A = 2 | 0 | 0.1
+00027 FAIL: Hertz_Count_Input1A 0
+00028 PwrSetVoltage = 0 : NULL
+00029 NULL : Input_1A = 0 | 0 | 0.1
+00029 FAIL: Input_1A 0
+00030 
+00030 PwrSetVoltage = 140 : NULL
+00031 #verify count
+00031 NULL : Hertz_Count_Input1A = 3 | 0 | 0.1
+00031 FAIL: Hertz_Count_Input1A 0
+00032 PwrSetVoltage = 0 : NULL
+00033 NULL : Input_1A = 0 | 0 | 0.1
+00033 FAIL: Input_1A 0
+00034 
+00034 PwrSetVoltage = 140 : NULL
+00035 #verify count
+00035 NULL : Hertz_Count_Input1A = 4 | 0 | 0.1
+00035 FAIL: Hertz_Count_Input1A 0
+00036 PwrSetVoltage = 0 : NULL
+00037 NULL : Input_1A = 0 | 0 | 0.1
+00037 FAIL: Input_1A 0
+00038 
+00038 PwrSetVoltage = 140 : NULL
+00039 #verify count
+00039 NULL : Hertz_Count_Input1A = 5 | 0 | 0.1
+00039 FAIL: Hertz_Count_Input1A 0
+00040 PwrSetVoltage = 0 : NULL
+00041 NULL : Input_1A = 0 | 0 | 0.1
+00041 FAIL: Input_1A 0
+00042 
+00042 PwrSetVoltage = 140 : NULL
+00043 #verify count
+00043 NULL : Hertz_Count_Input1A = 6 | 0 | 0.1
+00043 FAIL: Hertz_Count_Input1A 0
+00044 PwrSetVoltage = 0 : NULL
+00045 NULL : Input_1A = 0 | 0 | 0.1
+00045 FAIL: Input_1A 0
+00046 
+00046 #switch out input
+00046 J2_01 = 0 : NULL : WAIT = 0.2
+00047 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00048 #disable counter
+00048 Command = 87, Counter_1A_ON_OFF = 1 : NULL : WAIT = 0.2
+00049 Command = 0, Counter_1A_ON_OFF = 0 : NULL
+00050 #verify count
+00050 NULL : Hertz_Count_Input1A = 6 | 0 | 0.1
+00050 FAIL: Hertz_Count_Input1A 0
+00051 #send counter reset
+00051 Command = 87, Counter_1A_Reset = 1 : NULL : WAIT = 0.2
+00052 Command = 0, Counter_1A_Reset = 0 : NULL
+00053 #verify count reset
+00053 NULL : Hertz_Count_Input1A = 0 | 0 | 0.1
+00053 FAIL: Hertz_Count_Input1A 0
+00054 
+00054 #-----setup 39009-----
+00054 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00055 Command = 83, MODE1A = 8, MODE1B = 8, MODE2A = 1, MODE2B = 1, MODE3A = 8, MODE3B = 8, MODE4A = 1, MODE4B = 1, MODE5A = 1, MODE5B = 1, MODE6A = 1, MODE6B = 1, MODE7A = 1, MODE7B = 1 : NULL : WAIT = 0.5
+00056 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00057 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 1, MODE9B = 1, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00058 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00059 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00060 #clear multiplex
+00060 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00061 
+00061 Command = 87, Counter_1A_Reset = 1, Counter_1B_Reset = 1, Counter_1A_ON_OFF = 1, Counter_1B_ON_OFF = 1 : NULL : WAIT = 0.2
+00062 #clear multiplex
+00062 Command = 0, Counter_1A_Reset = 0, Counter_1B_Reset = 0, Counter_1A_ON_OFF = 0, Counter_1B_ON_OFF = 0 : NULL
+00063 
+00063 #switch in test supply
+00063 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00064 #switch in input
+00064 J2_02 = 1 : NULL : WAIT = 0.2
+00065 
+00065 #testing count events
+00065 PwrSetVoltage = 140 : NULL
+00066 #verify count
+00066 NULL : Hertz_Count_Input1B = 1 | 0 | 0.1
+00066 FAIL: Hertz_Count_Input1B 0
+00067 PwrSetVoltage = 0 : NULL
+00068 NULL : Input_1B = 0 | 0 | 0.1
+00068 FAIL: Input_1B 0
+00069 
+00069 PwrSetVoltage = 140 : NULL
+00070 #verify count
+00070 NULL : Hertz_Count_Input1B = 2 | 0 | 0.1
+00070 FAIL: Hertz_Count_Input1B 0
+00071 PwrSetVoltage = 0 : NULL
+00072 NULL : Input_1B = 0 | 0 | 0.1
+00072 FAIL: Input_1B 0
+00073 
+00073 PwrSetVoltage = 140 : NULL
+00074 #verify count
+00074 NULL : Hertz_Count_Input1B = 3 | 0 | 0.1
+00074 FAIL: Hertz_Count_Input1B 0
+00075 PwrSetVoltage = 0 : NULL
+00076 NULL : Input_1B = 0 | 0 | 0.1
+00076 FAIL: Input_1B 0
+00077 
+00077 PwrSetVoltage = 140 : NULL
+00078 #verify count
+00078 NULL : Hertz_Count_Input1B = 4 | 0 | 0.1
+00078 FAIL: Hertz_Count_Input1B 0
+00079 PwrSetVoltage = 0 : NULL
+00080 NULL : Input_1B = 0 | 0 | 0.1
+00080 FAIL: Input_1B 0
+00081 
+00081 PwrSetVoltage = 140 : NULL
+00082 #verify count
+00082 NULL : Hertz_Count_Input1B = 5 | 0 | 0.1
+00082 FAIL: Hertz_Count_Input1B 0
+00083 PwrSetVoltage = 0 : NULL
+00084 NULL : Input_1B = 0 | 0 | 0.1
+00084 FAIL: Input_1B 0
+00085 
+00085 PwrSetVoltage = 140 : NULL
+00086 #verify count
+00086 NULL : Hertz_Count_Input1B = 6 | 0 | 0.1
+00086 FAIL: Hertz_Count_Input1B 0
+00087 PwrSetVoltage = 0 : NULL
+00088 NULL : Input_1B = 0 | 0 | 0.1
+00088 FAIL: Input_1B 0
+00089 
+00089 #switch out input
+00089 J2_02 = 0 : NULL : WAIT = 0.2
+00090 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00091 #disable counter
+00091 Command = 87, Counter_1B_ON_OFF = 1 : NULL : WAIT = 0.2
+00092 Command = 0, Counter_1B_ON_OFF = 0 : NULL
+00093 #verify count
+00093 NULL : Hertz_Count_Input1B = 6 | 0 | 0.1
+00093 FAIL: Hertz_Count_Input1B 0
+00094 #send counter reset
+00094 Command = 87, Counter_1B_Reset = 1 : NULL : WAIT = 0.2
+00095 Command = 0, Counter_1B_Reset = 0 : NULL
+00096 #verify count reset
+00096 NULL : Hertz_Count_Input1B = 0 | 0 | 0.1
+00096 FAIL: Hertz_Count_Input1B 0
+00097 
+00097 #switch out load line
+00097 J2_02 = 0 : NULL : WAIT = 0.1
+00098 #switch out power supply
+00098 LdRemote = 0 : NULL : WAIT = 0.1
+00099 LdEnable = 0 : NULL : WAIT = 0.1
+00100 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00101 J0_08_METER_LOAD = 0 : NULL : WAIT = 0.1
+00102 SAVE
+00102 END
+Fail count: 28
+Finished on: 2025-12-12-09:05:53
+elapsed time: 0:00:11.755643
