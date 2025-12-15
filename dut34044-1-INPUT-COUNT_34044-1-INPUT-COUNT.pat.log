@@ -1,0 +1,647 @@
+Started on: 2025-12-15-14:06:51
+00000 #34044-1
+00000 #Verion 0.0
+00000 #input test
+00000 UUT_DBC = 34044-561.dbc
+00000 UUT_DATANAME = 34044-1-INPUT-COUNT
+00000 
+00000 #-----setup 34044-----
+00000 Command = 93, PORT1_MODE = 0, PORT2_MODE = 0, PORT3_MODE = 0, PORT4_MODE = 0 : NULL : WAIT = 0.2
+00001 #clear multiplex
+00001 Command = 0, PORT1_MODE = 0, PORT2_MODE = 0, PORT3_MODE = 0, PORT4_MODE = 0 : NULL
+00002 #setup meter
+00002 LdRemote = 1 : NULL : WAIT = 0.1
+00003 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00004 LdEnable = 0 : NULL : WAIT = 0.1
+00005 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
+00006 
+00006 #setup PS1
+00006 PwrRemote = 1 : NULL : WAIT = 0.1
+00007 PwrSetCurrent = 20 : NULL : WAIT = 0.1
+00008 PwrSetVoltage = 0 : NULL : WAIT = 0.1
+00009 PwrEnable = 1 : NULL : WAIT = 0.1
+00010 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1
+00011 
+00011 #switch in scope
+00011 J4_03 = 1 : NULL : WAIT = 0.2
+00012 #****** OVERFLOW, SET POINT = 0, MAX COUNT = 5, NO OUTPUT INTERLOCK
+00012 #-----setup 34044-----
+00012 #configure Port Modes
+00012 Command = 83, MODE1A = 3, MODE1B = 3, MODE2A = 3, MODE2B = 3, MODE3A = 3, MODE3B = 3, MODE4A = 3, MODE4B = 3 : NULL : WAIT = 0.2
+00013 Command = 83, MODE5A = 8, MODE5B = 0, MODE6A = 8, MODE6B = 0, MODE7A = 8, MODE7B = 0 : NULL : WAIT = 0.2
+00014 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL : WAIT = 0.2
+00015 Command = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL : WAIT = 0.2
+00016 
+00016 Command = 84, MODE8A = 8, MODE8B = 0 : NULL : WAIT = 0.2
+00017 Command = 0, MODE8A = 0, MODE8B = 0 : NULL
+00018 
+00018 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0, Enable_Fault_Reset = 0 : NULL : WAIT = 0.2
+00019 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+00020 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00021 
+00021 Command = 87, Counter_7A_Reset = 1, Counter_8A_Reset = 1, Counter_7A_ON_OFF = 1, Counter_8A_ON_OFF = 1, LowBYTE_Counter_7A_Setpoint = 0, LowBYTE_Counter_8A_Setpoint = 0 : NULL : WAIT = 0.2
+00022 Command = 87, Counter_7A_Enable_Overflow = 1, Counter_8A_Enable_Overflow = 0 : NULL : WAIT = 0.2
+00023 Command = 87, Counter_7A_Enable_OUT3A = 0, Counter_8A_Enable_OUT4A = 0 : NULL : WAIT = 0.2
+00024 #clear multiplex
+00024 Command = 0, Counter_7A_Reset = 0, Counter_8A_Reset = 0, Counter_7A_ON_OFF = 0, Counter_8A_ON_OFF = 0, LowBYTE_Counter_7A_Setpoint = 0, LowBYTE_Counter_8A_Setpoint = 0 : NULL
+00025 Command = 0, Counter_7A_Enable_OUT3A = 0, Counter_8A_Enable_OUT4A = 0, Counter_7A_Enable_Overflow = 0, Counter_8A_Enable_Overflow = 0 : NULL
+00026 
+00026 #verify setpoint
+00026 NULL : DutyCycle_SP_Input7A = 0 | 0 | 0.1
+00026 TEST: DutyCycle_SP_Input7A 0.0 +/- 0.0
+00026 PASS: DutyCycle_SP_Input7A 0.0
+00027 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00028 PwrSetVoltage = 140 : NULL : WAIT = 1
+00029 #switch in input
+00029 J3_01 = 1 : NULL : WAIT = 0.2
+00030 
+00030 #testing count events
+00030 PwrSetVoltage = 140 : NULL
+00031 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00032 #verify count
+00032 NULL : Hertz_Count_Input7A = 1 | 0 | 0.1
+00032 TEST: Hertz_Count_Input7A 1.0 +/- 0.0
+00032 PASS: Hertz_Count_Input7A 1.0
+00033 PwrSetVoltage = 140 : NULL
+00034 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00035 NULL : Input_7A = 0 | 0 | 0.1
+00035 TEST: Input_7A 0.0 +/- 0.0
+00035 PASS: Input_7A 0.0
+00036 
+00036 PwrSetVoltage = 140 : NULL
+00037 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00038 #verify count
+00038 NULL : Hertz_Count_Input7A = 2 | 0 | 0.1
+00038 TEST: Hertz_Count_Input7A 2.0 +/- 0.0
+00038 PASS: Hertz_Count_Input7A 2.0
+00039 PwrSetVoltage = 140 : NULL
+00040 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00041 NULL : Input_7A = 0 | 0 | 0.1
+00041 TEST: Input_7A 0.0 +/- 0.0
+00041 PASS: Input_7A 0.0
+00042 
+00042 PwrSetVoltage = 140 : NULL
+00043 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00044 #verify count
+00044 NULL : Hertz_Count_Input7A = 3 | 0 | 0.1
+00044 TEST: Hertz_Count_Input7A 3.0 +/- 0.0
+00044 PASS: Hertz_Count_Input7A 3.0
+00045 PwrSetVoltage = 140 : NULL
+00046 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00047 NULL : Input_7A = 0 | 0 | 0.1
+00047 TEST: Input_7A 0.0 +/- 0.0
+00047 PASS: Input_7A 0.0
+00048 
+00048 PwrSetVoltage = 140 : NULL
+00049 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00050 #verify count
+00050 NULL : Hertz_Count_Input7A = 4 | 0 | 0.1
+00050 TEST: Hertz_Count_Input7A 4.0 +/- 0.0
+00050 PASS: Hertz_Count_Input7A 4.0
+00051 PwrSetVoltage = 140 : NULL
+00052 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00053 NULL : Input_7A = 0 | 0 | 0.1
+00053 TEST: Input_7A 0.0 +/- 0.0
+00053 PASS: Input_7A 0.0
+00054 
+00054 PwrSetVoltage = 140 : NULL
+00055 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00056 #verify count
+00056 NULL : Hertz_Count_Input7A = 5 | 0 | 0.1
+00056 TEST: Hertz_Count_Input7A 5.0 +/- 0.0
+00056 PASS: Hertz_Count_Input7A 5.0
+00057 PwrSetVoltage = 140 : NULL
+00058 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00059 NULL : Input_7A = 0 | 0 | 0.1
+00059 TEST: Input_7A 0.0 +/- 0.0
+00059 PASS: Input_7A 0.0
+00060 
+00060 PwrSetVoltage = 140 : NULL
+00061 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00062 #verify count
+00062 NULL : Hertz_Count_Input7A = 6 | 0 | 0.1
+00062 TEST: Hertz_Count_Input7A 6.0 +/- 0.0
+00062 PASS: Hertz_Count_Input7A 6.0
+00063 PwrSetVoltage = 140 : NULL
+00064 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00065 NULL : Input_7A = 0 | 0 | 0.1
+00065 TEST: Input_7A 0.0 +/- 0.0
+00065 PASS: Input_7A 0.0
+00066 
+00066 PwrSetVoltage = 140 : NULL
+00067 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00068 #verify count
+00068 NULL : Hertz_Count_Input7A = 7 | 0 | 0.1
+00068 TEST: Hertz_Count_Input7A 7.0 +/- 0.0
+00068 PASS: Hertz_Count_Input7A 7.0
+00069 PwrSetVoltage = 140 : NULL
+00070 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00071 NULL : Input_7A = 0 | 0 | 0.1
+00071 TEST: Input_7A 0.0 +/- 0.0
+00071 PASS: Input_7A 0.0
+00072 
+00072 PwrSetVoltage = 140 : NULL
+00073 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00074 #verify count
+00074 NULL : Hertz_Count_Input7A = 8 | 0 | 0.1
+00074 TEST: Hertz_Count_Input7A 8.0 +/- 0.0
+00074 PASS: Hertz_Count_Input7A 8.0
+00075 PwrSetVoltage = 140 : NULL
+00076 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00077 NULL : Input_7A = 0 | 0 | 0.1
+00077 TEST: Input_7A 0.0 +/- 0.0
+00077 PASS: Input_7A 0.0
+00078 
+00078 PwrSetVoltage = 140 : NULL
+00079 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00080 #verify count
+00080 NULL : Hertz_Count_Input7A = 9 | 0 | 0.1
+00080 TEST: Hertz_Count_Input7A 9.0 +/- 0.0
+00080 PASS: Hertz_Count_Input7A 9.0
+00081 PwrSetVoltage = 140 : NULL
+00082 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00083 NULL : Input_7A = 0 | 0 | 0.1
+00083 TEST: Input_7A 0.0 +/- 0.0
+00083 PASS: Input_7A 0.0
+00084 
+00084 PwrSetVoltage = 140 : NULL
+00085 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00086 #verify count
+00086 NULL : Hertz_Count_Input7A = 10 | 0 | 0.1
+00086 TEST: Hertz_Count_Input7A 10.0 +/- 0.0
+00086 PASS: Hertz_Count_Input7A 10.0
+00087 PwrSetVoltage = 140 : NULL
+00088 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00089 NULL : Input_7A = 0 | 0 | 0.1
+00089 TEST: Input_7A 0.0 +/- 0.0
+00089 PASS: Input_7A 0.0
+00090 
+00090 PwrSetVoltage = 140 : NULL
+00091 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00092 #verify count
+00092 NULL : Hertz_Count_Input7A = 11 | 0 | 0.1
+00092 TEST: Hertz_Count_Input7A 11.0 +/- 0.0
+00092 PASS: Hertz_Count_Input7A 11.0
+00093 PwrSetVoltage = 140 : NULL
+00094 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00095 NULL : Input_7A = 0 | 0 | 0.1
+00095 TEST: Input_7A 0.0 +/- 0.0
+00095 PASS: Input_7A 0.0
+00096 
+00096 PwrSetVoltage = 140 : NULL
+00097 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00098 #verify count
+00098 NULL : Hertz_Count_Input7A = 12 | 0 | 0.1
+00098 TEST: Hertz_Count_Input7A 12.0 +/- 0.0
+00098 PASS: Hertz_Count_Input7A 12.0
+00099 PwrSetVoltage = 140 : NULL
+00100 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00101 NULL : Input_7A = 0 | 0 | 0.1
+00101 TEST: Input_7A 0.0 +/- 0.0
+00101 PASS: Input_7A 0.0
+00102 
+00102 PwrSetVoltage = 140 : NULL
+00103 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00104 #verify count
+00104 NULL : Hertz_Count_Input7A = 13 | 0 | 0.1
+00104 TEST: Hertz_Count_Input7A 13.0 +/- 0.0
+00104 PASS: Hertz_Count_Input7A 13.0
+00105 PwrSetVoltage = 140 : NULL
+00106 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00107 NULL : Input_7A = 0 | 0 | 0.1
+00107 TEST: Input_7A 0.0 +/- 0.0
+00107 PASS: Input_7A 0.0
+00108 
+00108 PwrSetVoltage = 140 : NULL
+00109 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00110 #verify count
+00110 NULL : Hertz_Count_Input7A = 14 | 0 | 0.1
+00110 TEST: Hertz_Count_Input7A 14.0 +/- 0.0
+00110 PASS: Hertz_Count_Input7A 14.0
+00111 PwrSetVoltage = 140 : NULL
+00112 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00113 NULL : Input_7A = 0 | 0 | 0.1
+00113 TEST: Input_7A 0.0 +/- 0.0
+00113 PASS: Input_7A 0.0
+00114 
+00114 PwrSetVoltage = 140 : NULL
+00115 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00116 #verify count
+00116 NULL : Hertz_Count_Input7A = 15 | 0 | 0.1
+00116 TEST: Hertz_Count_Input7A 15.0 +/- 0.0
+00116 PASS: Hertz_Count_Input7A 15.0
+00117 PwrSetVoltage = 140 : NULL
+00118 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00119 NULL : Input_7A = 0 | 0 | 0.1
+00119 TEST: Input_7A 0.0 +/- 0.0
+00119 PASS: Input_7A 0.0
+00120 
+00120 PwrSetVoltage = 140 : NULL
+00121 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00122 #verify count
+00122 NULL : Hertz_Count_Input7A = 16 | 0 | 0.1
+00122 TEST: Hertz_Count_Input7A 16.0 +/- 0.0
+00122 PASS: Hertz_Count_Input7A 16.0
+00123 PwrSetVoltage = 140 : NULL
+00124 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00125 NULL : Input_7A = 0 | 0 | 0.1
+00125 TEST: Input_7A 0.0 +/- 0.0
+00125 PASS: Input_7A 0.0
+00126 
+00126 PwrSetVoltage = 140 : NULL
+00127 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00128 #verify count
+00128 NULL : Hertz_Count_Input7A = 17 | 0 | 0.1
+00128 TEST: Hertz_Count_Input7A 17.0 +/- 0.0
+00128 PASS: Hertz_Count_Input7A 17.0
+00129 PwrSetVoltage = 140 : NULL
+00130 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00131 NULL : Input_7A = 0 | 0 | 0.1
+00131 TEST: Input_7A 0.0 +/- 0.0
+00131 PASS: Input_7A 0.0
+00132 
+00132 PwrSetVoltage = 140 : NULL
+00133 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00134 #verify count
+00134 NULL : Hertz_Count_Input7A = 18 | 0 | 0.1
+00134 TEST: Hertz_Count_Input7A 18.0 +/- 0.0
+00134 PASS: Hertz_Count_Input7A 18.0
+00135 PwrSetVoltage = 140 : NULL
+00136 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00137 NULL : Input_7A = 0 | 0 | 0.1
+00137 TEST: Input_7A 0.0 +/- 0.0
+00137 PASS: Input_7A 0.0
+00138 
+00138 PwrSetVoltage = 140 : NULL
+00139 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00140 #verify count
+00140 NULL : Hertz_Count_Input7A = 19 | 0 | 0.1
+00140 TEST: Hertz_Count_Input7A 19.0 +/- 0.0
+00140 PASS: Hertz_Count_Input7A 19.0
+00141 PwrSetVoltage = 140 : NULL
+00142 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00143 NULL : Input_7A = 0 | 0 | 0.1
+00143 TEST: Input_7A 0.0 +/- 0.0
+00143 PASS: Input_7A 0.0
+00144 
+00144 PwrSetVoltage = 140 : NULL
+00145 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00146 #verify count
+00146 NULL : Hertz_Count_Input7A = 20 | 0 | 0.1
+00146 TEST: Hertz_Count_Input7A 20.0 +/- 0.0
+00146 PASS: Hertz_Count_Input7A 20.0
+00147 PwrSetVoltage = 140 : NULL
+00148 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00149 NULL : Input_7A = 0 | 0 | 0.1
+00149 TEST: Input_7A 0.0 +/- 0.0
+00149 PASS: Input_7A 0.0
+00150 
+00150 PwrSetVoltage = 140 : NULL
+00151 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00152 #verify count
+00152 NULL : Hertz_Count_Input7A = 21 | 0 | 0.1
+00152 TEST: Hertz_Count_Input7A 21.0 +/- 0.0
+00152 PASS: Hertz_Count_Input7A 21.0
+00153 PwrSetVoltage = 140 : NULL
+00154 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00155 NULL : Input_7A = 0 | 0 | 0.1
+00155 TEST: Input_7A 0.0 +/- 0.0
+00155 PASS: Input_7A 0.0
+00156 
+00156 #switch out input
+00156 J3_01 = 0 : NULL : WAIT = 0.2
+00157 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00158 #turn off output and switch out is off
+00158 PWM_CTRL_3A = 0 : NULL : WAIT = 0.2
+00159 #disable counter
+00159 Command = 87, Counter_7A_ON_OFF = 1 : NULL : WAIT = 0.2
+00160 Command = 0, Counter_7A_ON_OFF = 0 : NULL
+00161 #verify count
+00161 NULL : Hertz_Count_Input7A = 21 | 0 | 0.1
+00161 TEST: Hertz_Count_Input7A 21.0 +/- 0.0
+00161 PASS: Hertz_Count_Input7A 21.0
+00162 #send counter reset
+00162 Command = 87, Counter_7A_Reset = 1 : NULL : WAIT = 0.2
+00163 Command = 0, Counter_7A_Reset = 0 : NULL
+00164 #verify count reset
+00164 NULL : Hertz_Count_Input7A = 0 | 0 | 0.1
+00164 TEST: Hertz_Count_Input7A 0.0 +/- 0.0
+00164 PASS: Hertz_Count_Input7A 0.0
+00165 
+00165 #-----setup 34044-----
+00165 #configure Port Modes
+00165 Command = 83, MODE1A = 3, MODE1B = 3, MODE2A = 3, MODE2B = 3, MODE3A = 3, MODE3B = 3, MODE4A = 3, MODE4B = 3 : NULL : WAIT = 0.2
+00166 Command = 83, MODE5A = 8, MODE5B = 0, MODE6A = 8, MODE6B = 0, MODE7A = 8, MODE7B = 0 : NULL : WAIT = 0.2
+00167 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL : WAIT = 0.2
+00168 Command = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL : WAIT = 0.2
+00169 
+00169 Command = 84, MODE8A = 8, MODE8B = 0 : NULL : WAIT = 0.2
+00170 Command = 0, MODE8A = 0, MODE8B = 0 : NULL
+00171 
+00171 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0, Enable_Fault_Reset = 0 : NULL : WAIT = 0.2
+00172 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+00173 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00174 
+00174 Command = 87, Counter_7A_Reset = 1, Counter_8A_Reset = 1, Counter_7A_ON_OFF = 1, Counter_8A_ON_OFF = 1, LowBYTE_Counter_7A_Setpoint = 0, LowBYTE_Counter_8A_Setpoint = 0 : NULL : WAIT = 0.2
+00175 Command = 87, Counter_7A_Enable_Overflow = 0, Counter_8A_Enable_Overflow = 1 : NULL : WAIT = 0.2
+00176 Command = 87, Counter_7A_Enable_OUT3A = 0, Counter_8A_Enable_OUT4A = 0 : NULL : WAIT = 0.2
+00177 #clear multiplex
+00177 Command = 0, Counter_7A_Reset = 0, Counter_8A_Reset = 0, Counter_7A_ON_OFF = 0, Counter_8A_ON_OFF = 0, LowBYTE_Counter_7A_Setpoint = 0, LowBYTE_Counter_8A_Setpoint = 0 : NULL
+00178 Command = 0, Counter_7A_Enable_OUT3A = 0, Counter_8A_Enable_OUT4A = 0, Counter_7A_Enable_Overflow = 0, Counter_8A_Enable_Overflow = 0 : NULL
+00179 
+00179 #verify setpoint
+00179 NULL : DutyCycle_SP_Input8A = 0 | 0 | 0.1
+00179 TEST: DutyCycle_SP_Input8A 0.0 +/- 0.0
+00179 PASS: DutyCycle_SP_Input8A 0.0
+00180 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00181 PwrSetVoltage = 140 : NULL : WAIT = 1
+00182 #switch in input
+00182 J3_03 = 1 : NULL : WAIT = 0.2
+00183 
+00183 #testing count events
+00183 PwrSetVoltage = 140 : NULL
+00184 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00185 #verify count
+00185 NULL : Hertz_Count_Input8A = 1 | 0 | 0.1
+00185 TEST: Hertz_Count_Input8A 1.0 +/- 0.0
+00185 PASS: Hertz_Count_Input8A 1.0
+00186 PwrSetVoltage = 140 : NULL
+00187 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00188 NULL : Input_8A = 0 | 0 | 0.1
+00188 TEST: Input_8A 0.0 +/- 0.0
+00188 PASS: Input_8A 0.0
+00189 
+00189 PwrSetVoltage = 140 : NULL
+00190 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00191 #verify count
+00191 NULL : Hertz_Count_Input8A = 2 | 0 | 0.1
+00191 TEST: Hertz_Count_Input8A 2.0 +/- 0.0
+00191 PASS: Hertz_Count_Input8A 2.0
+00192 PwrSetVoltage = 140 : NULL
+00193 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00194 NULL : Input_8A = 0 | 0 | 0.1
+00194 TEST: Input_8A 0.0 +/- 0.0
+00194 PASS: Input_8A 0.0
+00195 
+00195 PwrSetVoltage = 140 : NULL
+00196 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00197 #verify count
+00197 NULL : Hertz_Count_Input8A = 3 | 0 | 0.1
+00197 TEST: Hertz_Count_Input8A 3.0 +/- 0.0
+00197 PASS: Hertz_Count_Input8A 3.0
+00198 PwrSetVoltage = 140 : NULL
+00199 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00200 NULL : Input_8A = 0 | 0 | 0.1
+00200 TEST: Input_8A 0.0 +/- 0.0
+00200 PASS: Input_8A 0.0
+00201 
+00201 PwrSetVoltage = 140 : NULL
+00202 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00203 #verify count
+00203 NULL : Hertz_Count_Input8A = 4 | 0 | 0.1
+00203 TEST: Hertz_Count_Input8A 4.0 +/- 0.0
+00203 PASS: Hertz_Count_Input8A 4.0
+00204 PwrSetVoltage = 140 : NULL
+00205 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00206 NULL : Input_8A = 0 | 0 | 0.1
+00206 TEST: Input_8A 0.0 +/- 0.0
+00206 PASS: Input_8A 0.0
+00207 
+00207 PwrSetVoltage = 140 : NULL
+00208 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00209 #verify count
+00209 NULL : Hertz_Count_Input8A = 5 | 0 | 0.1
+00209 TEST: Hertz_Count_Input8A 5.0 +/- 0.0
+00209 PASS: Hertz_Count_Input8A 5.0
+00210 PwrSetVoltage = 140 : NULL
+00211 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00212 NULL : Input_8A = 0 | 0 | 0.1
+00212 TEST: Input_8A 0.0 +/- 0.0
+00212 PASS: Input_8A 0.0
+00213 
+00213 PwrSetVoltage = 140 : NULL
+00214 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00215 #verify count
+00215 NULL : Hertz_Count_Input8A = 6 | 0 | 0.1
+00215 TEST: Hertz_Count_Input8A 6.0 +/- 0.0
+00215 PASS: Hertz_Count_Input8A 6.0
+00216 PwrSetVoltage = 140 : NULL
+00217 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00218 NULL : Input_8A = 0 | 0 | 0.1
+00218 TEST: Input_8A 0.0 +/- 0.0
+00218 PASS: Input_8A 0.0
+00219 
+00219 PwrSetVoltage = 140 : NULL
+00220 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00221 #verify count
+00221 NULL : Hertz_Count_Input8A = 7 | 0 | 0.1
+00221 TEST: Hertz_Count_Input8A 7.0 +/- 0.0
+00221 PASS: Hertz_Count_Input8A 7.0
+00222 PwrSetVoltage = 140 : NULL
+00223 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00224 NULL : Input_8A = 0 | 0 | 0.1
+00224 TEST: Input_8A 0.0 +/- 0.0
+00224 PASS: Input_8A 0.0
+00225 
+00225 PwrSetVoltage = 140 : NULL
+00226 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00227 #verify count
+00227 NULL : Hertz_Count_Input8A = 8 | 0 | 0.1
+00227 TEST: Hertz_Count_Input8A 8.0 +/- 0.0
+00227 PASS: Hertz_Count_Input8A 8.0
+00228 PwrSetVoltage = 140 : NULL
+00229 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00230 NULL : Input_8A = 0 | 0 | 0.1
+00230 TEST: Input_8A 0.0 +/- 0.0
+00230 PASS: Input_8A 0.0
+00231 
+00231 PwrSetVoltage = 140 : NULL
+00232 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00233 #verify count
+00233 NULL : Hertz_Count_Input8A = 9 | 0 | 0.1
+00233 TEST: Hertz_Count_Input8A 9.0 +/- 0.0
+00233 PASS: Hertz_Count_Input8A 9.0
+00234 PwrSetVoltage = 140 : NULL
+00235 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00236 NULL : Input_8A = 0 | 0 | 0.1
+00236 TEST: Input_8A 0.0 +/- 0.0
+00236 PASS: Input_8A 0.0
+00237 
+00237 PwrSetVoltage = 140 : NULL
+00238 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00239 #verify count
+00239 NULL : Hertz_Count_Input8A = 10 | 0 | 0.1
+00239 TEST: Hertz_Count_Input8A 10.0 +/- 0.0
+00239 PASS: Hertz_Count_Input8A 10.0
+00240 PwrSetVoltage = 140 : NULL
+00241 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00242 NULL : Input_8A = 0 | 0 | 0.1
+00242 TEST: Input_8A 0.0 +/- 0.0
+00242 PASS: Input_8A 0.0
+00243 
+00243 PwrSetVoltage = 140 : NULL
+00244 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00245 #verify count
+00245 NULL : Hertz_Count_Input8A = 11 | 0 | 0.1
+00245 TEST: Hertz_Count_Input8A 11.0 +/- 0.0
+00245 PASS: Hertz_Count_Input8A 11.0
+00246 PwrSetVoltage = 140 : NULL
+00247 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00248 NULL : Input_8A = 0 | 0 | 0.1
+00248 TEST: Input_8A 0.0 +/- 0.0
+00248 PASS: Input_8A 0.0
+00249 
+00249 PwrSetVoltage = 140 : NULL
+00250 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00251 #verify count
+00251 NULL : Hertz_Count_Input8A = 12 | 0 | 0.1
+00251 TEST: Hertz_Count_Input8A 12.0 +/- 0.0
+00251 PASS: Hertz_Count_Input8A 12.0
+00252 PwrSetVoltage = 140 : NULL
+00253 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00254 NULL : Input_8A = 0 | 0 | 0.1
+00254 TEST: Input_8A 0.0 +/- 0.0
+00254 PASS: Input_8A 0.0
+00255 
+00255 PwrSetVoltage = 140 : NULL
+00256 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00257 #verify count
+00257 NULL : Hertz_Count_Input8A = 13 | 0 | 0.1
+00257 TEST: Hertz_Count_Input8A 13.0 +/- 0.0
+00257 PASS: Hertz_Count_Input8A 13.0
+00258 PwrSetVoltage = 140 : NULL
+00259 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00260 NULL : Input_8A = 0 | 0 | 0.1
+00260 TEST: Input_8A 0.0 +/- 0.0
+00260 PASS: Input_8A 0.0
+00261 
+00261 PwrSetVoltage = 140 : NULL
+00262 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00263 #verify count
+00263 NULL : Hertz_Count_Input8A = 14 | 0 | 0.1
+00263 TEST: Hertz_Count_Input8A 14.0 +/- 0.0
+00263 PASS: Hertz_Count_Input8A 14.0
+00264 PwrSetVoltage = 140 : NULL
+00265 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00266 NULL : Input_8A = 0 | 0 | 0.1
+00266 TEST: Input_8A 0.0 +/- 0.0
+00266 PASS: Input_8A 0.0
+00267 
+00267 PwrSetVoltage = 140 : NULL
+00268 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00269 #verify count
+00269 NULL : Hertz_Count_Input8A = 15 | 0 | 0.1
+00269 TEST: Hertz_Count_Input8A 15.0 +/- 0.0
+00269 PASS: Hertz_Count_Input8A 15.0
+00270 PwrSetVoltage = 140 : NULL
+00271 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00272 NULL : Input_8A = 0 | 0 | 0.1
+00272 TEST: Input_8A 0.0 +/- 0.0
+00272 PASS: Input_8A 0.0
+00273 
+00273 PwrSetVoltage = 140 : NULL
+00274 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00275 #verify count
+00275 NULL : Hertz_Count_Input8A = 16 | 0 | 0.1
+00275 TEST: Hertz_Count_Input8A 16.0 +/- 0.0
+00275 PASS: Hertz_Count_Input8A 16.0
+00276 PwrSetVoltage = 140 : NULL
+00277 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00278 NULL : Input_8A = 0 | 0 | 0.1
+00278 TEST: Input_8A 0.0 +/- 0.0
+00278 PASS: Input_8A 0.0
+00279 
+00279 PwrSetVoltage = 140 : NULL
+00280 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00281 #verify count
+00281 NULL : Hertz_Count_Input8A = 17 | 0 | 0.1
+00281 TEST: Hertz_Count_Input8A 17.0 +/- 0.0
+00281 PASS: Hertz_Count_Input8A 17.0
+00282 PwrSetVoltage = 140 : NULL
+00283 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00284 NULL : Input_8A = 0 | 0 | 0.1
+00284 TEST: Input_8A 0.0 +/- 0.0
+00284 PASS: Input_8A 0.0
+00285 
+00285 PwrSetVoltage = 140 : NULL
+00286 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00287 #verify count
+00287 NULL : Hertz_Count_Input8A = 18 | 0 | 0.1
+00287 TEST: Hertz_Count_Input8A 18.0 +/- 0.0
+00287 PASS: Hertz_Count_Input8A 18.0
+00288 PwrSetVoltage = 140 : NULL
+00289 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00290 NULL : Input_8A = 0 | 0 | 0.1
+00290 TEST: Input_8A 0.0 +/- 0.0
+00290 PASS: Input_8A 0.0
+00291 
+00291 PwrSetVoltage = 140 : NULL
+00292 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00293 #verify count
+00293 NULL : Hertz_Count_Input8A = 19 | 0 | 0.1
+00293 TEST: Hertz_Count_Input8A 19.0 +/- 0.0
+00293 PASS: Hertz_Count_Input8A 19.0
+00294 PwrSetVoltage = 140 : NULL
+00295 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00296 NULL : Input_8A = 0 | 0 | 0.1
+00296 TEST: Input_8A 0.0 +/- 0.0
+00296 PASS: Input_8A 0.0
+00297 
+00297 PwrSetVoltage = 140 : NULL
+00298 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00299 #verify count
+00299 NULL : Hertz_Count_Input8A = 20 | 0 | 0.1
+00299 TEST: Hertz_Count_Input8A 20.0 +/- 0.0
+00299 PASS: Hertz_Count_Input8A 20.0
+00300 PwrSetVoltage = 140 : NULL
+00301 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00302 NULL : Input_8A = 0 | 0 | 0.1
+00302 TEST: Input_8A 0.0 +/- 0.0
+00302 PASS: Input_8A 0.0
+00303 
+00303 PwrSetVoltage = 140 : NULL
+00304 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2
+00305 #verify count
+00305 NULL : Hertz_Count_Input8A = 21 | 0 | 0.1
+00305 TEST: Hertz_Count_Input8A 21.0 +/- 0.0
+00305 PASS: Hertz_Count_Input8A 21.0
+00306 PwrSetVoltage = 140 : NULL
+00307 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00308 NULL : Input_8A = 0 | 0 | 0.1
+00308 TEST: Input_8A 0.0 +/- 0.0
+00308 PASS: Input_8A 0.0
+00309 
+00309 #switch out input
+00309 J3_03 = 0 : NULL : WAIT = 0.2
+00310 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
+00311 #turn off output and switch out is off
+00311 PWM_CTRL_4A = 0 : NULL : WAIT = 0.2
+00312 #disable counter
+00312 Command = 87, Counter_8A_ON_OFF = 1 : NULL : WAIT = 0.2
+00313 Command = 0, Counter_8A_ON_OFF = 0 : NULL
+00314 #verify count
+00314 NULL : Hertz_Count_Input8A = 21 | 0 | 0.1
+00314 TEST: Hertz_Count_Input8A 21.0 +/- 0.0
+00314 PASS: Hertz_Count_Input8A 21.0
+00315 #send counter reset
+00315 Command = 87, Counter_8A_Reset = 1 : NULL : WAIT = 0.2
+00316 Command = 0, Counter_8A_Reset = 0 : NULL
+00317 #verify count reset
+00317 NULL : Hertz_Count_Input8A = 0 | 0 | 0.1
+00317 TEST: Hertz_Count_Input8A 0.0 +/- 0.0
+00317 PASS: Hertz_Count_Input8A 0.0
+00318 
+00318 #switch out load line
+00318 J3_03 = 0 : NULL : WAIT = 0.1
+00319 #switch out power supply
+00319 LdRemote = 0 : NULL : WAIT = 0.1
+00320 LdEnable = 0 : NULL : WAIT = 0.1
+00321 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00322 J0_08_METER_LOAD = 0 : NULL : WAIT = 0.1
+00323 #switch out scope
+00323 J4_03 = 1 : NULL : WAIT = 0.2
+00324 SAVE
+00324 END
+Fail count: 0
+Finished on: 2025-12-15-14:07:36
+elapsed time: 0:00:42.261118

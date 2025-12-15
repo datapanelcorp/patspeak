@@ -8,16 +8,16 @@
 ::**********************
 
 ::**********************
-echo prepare for 39009-1-INPUT-ENCODER.pat
-pause
-python pat.py RESET.pat -v 
-python pat.py 39009-1-INPUT-ENCODER.pat -v 
-::**********************
-::**********************
-@REM echo prepare for 39009-1-INPUT-COUNT.pat -v 
+@REM echo prepare for 39009-1-INPUT-ENCODER.pat
 @REM pause
 @REM python pat.py RESET.pat -v 
-@REM python pat.py 39009-1-INPUT-COUNT.pat -v 
+@REM python pat.py 39009-1-INPUT-ENCODER.pat -v 
+::**********************
+::**********************
+echo prepare for 39009-1-INPUT-COUNT.pat -v 
+pause
+python pat.py RESET.pat -v 
+python pat.py 39009-1-INPUT-COUNT.pat -v 
 ::**********************
 ::**********************
 @REM echo prepare for 39009-1-INPUT-420MA.pat -v 
