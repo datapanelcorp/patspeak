@@ -1,64 +1,42 @@
 import os
 
-#global setup
-script_name = os.path.basename(__file__)
-print(f"The name of the running script is: {script_name}")
-TestName = os.path.splitext(script_name)[0]
-datafile = TestName + ".pat"
-
-PortIndex = 0
-ModeIndex = 0
-PortMode = 0
 
 
-outstr = ""
-outstr += "#39009-1\n"
-outstr += "#Verion 0.0\n"
-outstr += "#input test\n"
-outstr += "UUT_DBC = 39009-561.dbc\n"
-outstr += "UUT_DATANAME = " + TestName + "\n"
-outstr += "\n"
 
+def WriteEncoderTest(outstr, TheChannel):
+    InPortAMode = "10"
+    InPortBMode = "0"
+    OutPortAMode = "0"
+    OutPortBMode = "0"
 
-outstr += "#setup meter\n"
-outstr += "LdRemote = 1 : NULL : WAIT = 0.1\n"
-outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
-outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
-outstr += "J0_08_METER_LOAD = 1 : NULL : WAIT = 1\n"
-outstr += "\n"
+    if(TheChannel == 0):
+        InputConnectorA = "J2_02"
+        InputConnectorB = "J2_01"
+        Reset = "Counter_1A_Reset"
+        Enable = "Counter_1A_ON_OFF"
+        EncoderValue = "EncoderValue1"
+        
+    if(TheChannel == 1):
+        InputConnectorA = "J2_04"
+        InputConnectorB = "J2_03"
+        Reset = "Counter_3A_Reset"
+        Enable = "Counter_3A_ON_OFF"
+        EncoderValue = "EncoderValue3"
+        
+    outstr += "#setup meter\n"
+    outstr += "LdRemote = 1 : NULL : WAIT = 0.1\n"
+    outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
+    outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
+    outstr += "J0_08_METER_LOAD = 1 : NULL : WAIT = 1\n"
+    outstr += "\n"
 
-outstr += "#setup PS1\n"
-outstr += "PwrRemote = 1 : NULL : WAIT = 0.1\n"
-outstr += "PwrSetCurrent = 20 : NULL : WAIT = 0.1\n"
-outstr += "PwrSetVoltage = 0 : NULL : WAIT = 0.1\n"
-outstr += "PwrEnable = 1 : NULL : WAIT = 0.1\n"
-outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1\n"
-outstr += "\n"
-
-InPortAMode = "10"
-InPortBMode = "0"
-
-
-Input1ConnectorA = "J2_02"
-Input1ConnectorB = "J2_01"
-Reset1 = "Counter_1A_Reset"
-Enable1 = "Counter_1A_ON_OFF"
-EncoderValue1 = "EncoderValue1"
-
-Input2ConnectorA = "J2_04"
-Input2ConnectorB = "J2_03"
-Reset2 = "Counter_3A_Reset"
-Enable2 = "Counter_3A_ON_OFF"
-EncoderValue2 = "EncoderValue3"
-
-
-PortIndex = 0
-MaxPort = 0
-
-TheCount = 0
-MaxCount = 5
-
-while PortIndex <= MaxPort:
+    outstr += "#setup PS1\n"
+    outstr += "PwrRemote = 1 : NULL : WAIT = 0.1\n"
+    outstr += "PwrSetCurrent = 20 : NULL : WAIT = 0.1\n"
+    outstr += "PwrSetVoltage = 0 : NULL : WAIT = 0.1\n"
+    outstr += "PwrEnable = 1 : NULL : WAIT = 0.1\n"
+    outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1\n"
+    outstr += "\n"
 
     outstr += "#-----setup 39009-----\n"
     outstr += "#configure as Output Digital ON/OFF\n"
@@ -85,174 +63,116 @@ while PortIndex <= MaxPort:
 
     outstr += "PwrSetVoltage = 140 : NULL\n"
 
-    xInputConnectorA = Input1ConnectorA
-    xInputConnectorB = Input1ConnectorB
-    xReset = Reset1
-    xEnable = Enable1
-    xEncoderValue = EncoderValue1
+
+    TheCount = 0
+    MaxCount = 20
 
     outstr += "#testing encoder foward\n"
     while TheCount <= MaxCount:
-        outstr += xInputConnectorA + " = 1 : NULL : WAIT = 0.2\n"
+        outstr += InputConnectorA + " = 1 : NULL : WAIT = 0.2\n"
         TheCount += 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorB + " = 1 : NULL : WAIT = 0.2\n"
+        outstr += "NULL : " + EncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
+        outstr += InputConnectorB + " = 1 : NULL : WAIT = 0.2\n"
         TheCount += 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
+        outstr += "NULL : " + EncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
+        outstr += InputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
         TheCount += 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
+        outstr += "NULL : " + EncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
+        outstr += InputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
         TheCount += 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
+        outstr += "NULL : " + EncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
         outstr += "\n"
         
     outstr += "#testing encoder reverse\n"
     while TheCount > 0:
-        outstr += xInputConnectorB + " = 1 : NULL : WAIT = 0.2\n"
+        outstr += InputConnectorB + " = 1 : NULL : WAIT = 0.2\n"
         TheCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorA + " = 1 : NULL : WAIT = 0.2\n"
+        outstr += "NULL : " + EncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
+        outstr += InputConnectorA + " = 1 : NULL : WAIT = 0.2\n"
         TheCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
+        outstr += "NULL : " + EncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
+        outstr += InputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
         TheCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
+        outstr += "NULL : " + EncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
+        outstr += InputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
         TheCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
+        outstr += "NULL : " + EncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
         outstr += "\n"
         
     outstr += "#testing encoder reverse rollover\n"
     TheRevCount = 4294967295 + 1
     while TheCount <= MaxCount:
-        outstr += xInputConnectorB + " = 1 : NULL : WAIT = 0.2\n"
+        outstr += InputConnectorB + " = 1 : NULL : WAIT = 0.2\n"
         TheCount += 1
         TheRevCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorA + " = 1 : NULL : WAIT = 0.2\n"
+        outstr += "NULL : " + EncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n"
+        outstr += InputConnectorA + " = 1 : NULL : WAIT = 0.2\n"
         TheCount += 1
         TheRevCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
+        outstr += "NULL : " + EncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n"
+        outstr += InputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
         TheCount += 1
         TheRevCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
+        outstr += "NULL : " + EncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n"
+        outstr += InputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
         TheCount += 1
         TheRevCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n"
+        outstr += "NULL : " + EncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n"
         outstr += "\n"
         
     outstr += "#switch out input\n"
-    outstr += xInputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
-    outstr += xInputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
-
+    outstr += InputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
+    outstr += InputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
+    outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2\n"
     outstr += "#disable counter\n"
-    outstr += "Command = 87, Counter_1A_Reset = 0, Counter_3A_Reset = 0, Counter_1A_ON_OFF = 0, Counter_3A_ON_OFF = 0 : NULL : WAIT = 0.2\n"
+    outstr += "Command = 87, " + Enable + " = 1 : NULL : WAIT = 0.2\n"
+    outstr += "Command = 0, " + Enable + " = 0 : NULL\n"
     outstr += "#verify count\n"
-    outstr += "NULL : " + xEncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n" 
+    outstr += "NULL : " + EncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n" 
     outstr += "#send counter reset\n"
-    outstr += "Command = 87, Counter_1A_Reset = 1, Counter_3A_Reset = 1, Counter_1A_ON_OFF = 1, Counter_3A_ON_OFF = 1 : NULL : WAIT = 0.2\n"
+    outstr += "Command = 87, " + Reset + " = 1 : NULL : WAIT = 0.2\n"
+    outstr += "Command = 0, " + Reset + " = 0 : NULL\n"
     outstr += "#verify count reset\n"
-    outstr += "NULL : " + xEncoderValue + " = 0 | 0 | 0.1\n" 
-
+    outstr += "NULL : " + EncoderValue + " = 0 | 0 | 0.1\n" 
     outstr += "\n"
 
-    outstr += "Command = 87, Counter_1A_Reset = 1, Counter_3A_Reset = 1, Counter_1A_ON_OFF = 1, Counter_3A_ON_OFF = 1 : NULL : WAIT = 0.2\n"
-    outstr += "#clear multiplex\n"
-    outstr += "Command = 0, Counter_1A_Reset = 0, Counter_3A_Reset = 0, Counter_1A_ON_OFF = 0, Counter_3A_ON_OFF = 0 : NULL\n"
+    outstr += "#switch out load line\n"
+    outstr += InputConnectorA + " = 0, " + InputConnectorB + " = 0 : NULL : WAIT = 0.1\n"
     
+    outstr += "#switch out power supply\n"
+    outstr += "LdRemote = 0 : NULL : WAIT = 0.1\n"
+    outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
+    outstr += "J0_08_METER_LOAD = 0 : NULL : WAIT = 0.1\n"
+    return outstr
 
+#global setup
+script_name = os.path.basename(__file__)
+print(f"The name of the running script is: {script_name}")
+TestName = os.path.splitext(script_name)[0]
+datafile = TestName + ".pat"
 
-    xInputConnectorA = Input2ConnectorA
-    xInputConnectorB = Input2ConnectorB
-    xReset = Reset2
-    xEnable = Enable2
-    xEncoderValue = EncoderValue2
+PortIndex = 0
+ModeIndex = 0
+PortMode = 0
 
-    TheCount = -1 #WHY IS THIS NEEDED ONLY THE SECOND SWEEP?!?!
+outstr = ""
+outstr += "#39009-1\n"
+outstr += "#Verion 0.0\n"
+outstr += "#input test\n"
+outstr += "UUT_DBC = 39009-561.dbc\n"
+outstr += "UUT_DATANAME = " + TestName + "\n"
+outstr += "\n"
 
-    outstr += "#testing encoder foward\n"
-    while TheCount <= MaxCount:
-        outstr += xInputConnectorA + " = 1 : NULL : WAIT = 0.2\n"
-        TheCount += 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorB + " = 1 : NULL : WAIT = 0.2\n"
-        TheCount += 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
-        TheCount += 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
-        TheCount += 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
-        outstr += "\n"
-        
-    outstr += "#testing encoder reverse\n"
-    while TheCount > 0:
-        outstr += xInputConnectorB + " = 1 : NULL : WAIT = 0.2\n"
-        TheCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorA + " = 1 : NULL : WAIT = 0.2\n"
-        TheCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
-        TheCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
-        TheCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheCount) + " | 0 | 0.1\n"
-        outstr += "\n"
-        
-    outstr += "#testing encoder reverse rollover\n"
-    TheRevCount = 4294967295 + 1 
-    while TheCount <= MaxCount:
-        outstr += xInputConnectorB + " = 1 : NULL : WAIT = 0.2\n"
-        TheCount += 1
-        TheRevCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorA + " = 1 : NULL : WAIT = 0.2\n"
-        TheCount += 1
-        TheRevCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
-        TheCount += 1
-        TheRevCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n"
-        outstr += xInputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
-        TheCount += 1
-        TheRevCount -= 1
-        outstr += "NULL : " + xEncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n"
-        outstr += "\n"
-        
-    outstr += "#switch out input\n"
-    outstr += xInputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
-    outstr += xInputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
+Channel = 0
+outstr = WriteEncoderTest(outstr, Channel)
 
-    outstr += "#disable counter\n"
-    outstr += "Command = 87, Counter_1A_Reset = 0, Counter_3A_Reset = 0, Counter_1A_ON_OFF = 0, Counter_3A_ON_OFF = 0 : NULL : WAIT = 0.2\n"
-    outstr += "#verify count\n"
-    outstr += "NULL : " + xEncoderValue + " = " + str(TheRevCount) + " | 0 | 0.1\n" 
-    outstr += "#send counter reset\n"
-    outstr += "Command = 87, Counter_1A_Reset = 1, Counter_3A_Reset = 1, Counter_1A_ON_OFF = 1, Counter_3A_ON_OFF = 1 : NULL : WAIT = 0.2\n"
-    outstr += "#verify count reset\n"
-    outstr += "NULL : " + xEncoderValue + " = 0 | 0 | 0.1\n" 
+outstr += "#cycle IGN to clean slate\n"
+outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
+outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 
-    outstr += "\n"
+Channel = 1
+outstr = WriteEncoderTest(outstr, Channel)
 
-
-    TheCount = 0 #why does the very first edge act weird?
-    PortIndex += 1
-    # outstr += "#cycle IGN to clean slate\n"
-    # outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
-    # outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
-
-outstr += "#switch out power supply\n"
-outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2\n"
-outstr += "LdRemote = 0 : NULL : WAIT = 0.1\n"
-outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
-outstr += "J0_08_METER_LOAD = 0 : NULL : WAIT = 0.1\n"
 
 outstr += "SAVE\n"
 outstr += "END\n"
@@ -261,8 +181,5 @@ f = open(datafile, 'w')
 f.write(outstr)
 f.close()    
 print(outstr)
-
-
-
 
 print(TestName + ".pat")

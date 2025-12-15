@@ -53,7 +53,7 @@ MMETER_READ_ID = 0x0CFF0004
 
 # Pin configuration
 K1_PIN_BCM = 26
-Initial_Value = False
+Initial_Value = True
 GPIO_K1 = LED(K1_PIN_BCM, initial_value=Initial_Value)
 
 # --- Class for Hardware Management ---
