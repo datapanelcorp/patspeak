@@ -151,6 +151,25 @@ BO_ 2365523456 CTRL_METER: 8 CTRL
  SG_ METER_MODE : 0|8@1+ (1,0) [0|0] "" Vector__XXX
  SG_ METER_RANGE : 8|8@1+ (1,0) [0|0] "" Vector__XXX
 
+BO_ 2365523712 CTRL_AFG: 8 CTRL
+ SG_ AfgEnable : 0|8@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ AfgShape : 8|8@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ AfgFreqSet : 16|32@1+ (1,0) [0|0] "Hz" Vector__XXX
+ SG_ AfgAmplSet : 48|16@1+ (1,0) [0|0] "mV" Vector__XXX
+
+BO_ 2365521925 STAT_AFG: 8 PAT
+ SG_ AfgOutputSts : 0|8@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ AfgShapeSts : 8|8@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ AfgFreqRead : 16|32@1+ (1,0) [0|0] "Hz" Vector__XXX
+ SG_ AfgAmplRead : 48|16@1+ (1,0) [0|0] "mV" Vector__XXX
+
+BO_ 2365523713 CTRL_AFG_EXT: 8 CTRL
+ SG_ AfgOffsetSet : 0|16@1- (1,0) [-5000|5000] "mV" Vector__XXX
+ SG_ AfgDutySet : 16|8@1+ (1,0) [1|99] "%" Vector__XXX
+
+BO_ 2365521926 STAT_AFG_EXT: 8 PAT
+ SG_ AfgOffsetRead : 0|16@1- (1,0) [-5000|5000] "mV" Vector__XXX
+ SG_ AfgDutyRead : 16|8@1+ (1,0) [1|99] "%" Vector__XXX
 
 
 
