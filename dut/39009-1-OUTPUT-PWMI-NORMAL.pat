@@ -16,7 +16,6 @@ Command = 84, MODE8A = 4, MODE8B = 4, MODE9A = 4, MODE9B = 4, MODE10A = 4, MODE1
 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
 Command = 82, FREQ1 = 100, SaveSettings = 1, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
 Command = 0, FREQ1 = 0, SaveSettings = 0, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
-#-----set freq-----
 METER_MODE = 1 : NULL : WAIT = 0.2
 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
 #switch in load line, set current

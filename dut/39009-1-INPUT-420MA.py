@@ -42,6 +42,18 @@ AmpsStart = AmpsInc
 AmpsMax = 20000
 AmpsValue = AmpsStart
 
+outstr += "#-----setup 39009-----\n"
+outstr += "#configure as Output Digital ON/OFF\n"
+outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5\n"
+outstr += "Command = 83, MODE1A = " + PortBMode + ", MODE1B = " + PortBMode + ", MODE2A = 1, MODE2B = 1, MODE3A = " + PortBMode + ", MODE3B = " + PortBMode + ", MODE4A = 1, MODE4B = 1, MODE5A = " + PortBMode + ", MODE5B = " + PortBMode + ", MODE6A = 1, MODE6B = 1, MODE7A = " + PortBMode + ", MODE7B = " + PortBMode + " : NULL : WAIT = 0.5\n"
+outstr += "Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL\n"
+outstr += "Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = " + PortBMode + ", MODE9B = " + PortBMode + ", MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5\n"
+outstr += "Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL\n"
+
+outstr += "Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
+outstr += "#clear multiplex\n"
+outstr += "Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
+        
 while AmpsValue <= AmpsMax:
     outstr += "#promp user\n"
     outstr += "PAUSE- SET GEN TO " + str(AmpsValue) + "ma\n"
@@ -94,30 +106,8 @@ while AmpsValue <= AmpsMax:
 
         outstr += "METER_MODE = 1 : NULL : WAIT = 0.2\n"
         
-        # outstr += "#-----setup 34044-----\n"
-        # outstr += "#disable global modes\n"
-        # outstr += "#configure Port Modes\n"
-        # outstr += "Command = 83, MODE5A = " + PortAMode + ", MODE5B = " + PortBMode + ", MODE6A = " + PortAMode + ", MODE6B = " + PortBMode + ", MODE7A = " + PortAMode + ", MODE7B = " + PortBMode + " : NULL : WAIT = 0.2\n"
-        # outstr += "#clear multiplex\n"
-        # outstr += "Command = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL\n"
-        # outstr += "Command = 84, MODE8A = " + PortAMode + ", MODE8B = " + PortBMode + " : NULL : WAIT = 0.5\n"
-        # outstr += "#clear multiplex\n"
-        # outstr += "Command = 0, MODE8A = 0, MODE8B = 0 : NULL\n"
-        # outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0, Enable_Fault_Reset = 0 : NULL : WAIT = 0.5\n"
-        # outstr += "Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
-        # outstr += "#clear multiplex\n"
-        # outstr += "Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
-        outstr += "#-----setup 39009-----\n"
-        outstr += "#configure as Output Digital ON/OFF\n"
-        outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5\n"
-        outstr += "Command = 83, MODE1A = " + PortBMode + ", MODE1B = " + PortBMode + ", MODE2A = 1, MODE2B = 1, MODE3A = " + PortBMode + ", MODE3B = " + PortBMode + ", MODE4A = 1, MODE4B = 1, MODE5A = " + PortBMode + ", MODE5B = " + PortBMode + ", MODE6A = 1, MODE6B = 1, MODE7A = " + PortBMode + ", MODE7B = " + PortBMode + " : NULL : WAIT = 0.5\n"
-        outstr += "Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL\n"
-        outstr += "Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = " + PortBMode + ", MODE9B = " + PortBMode + ", MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5\n"
-        outstr += "Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL\n"
 
-        outstr += "Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
-        outstr += "#clear multiplex\n"
-        outstr += "Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
+
         
         outstr += "#switch input to load line\n"
         outstr += OutputConnector + " = 1 : NULL : WAIT = 0.1\n"

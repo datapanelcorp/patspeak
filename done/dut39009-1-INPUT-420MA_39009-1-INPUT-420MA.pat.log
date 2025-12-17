@@ -1,0 +1,748 @@
+Started on: 2025-12-17-14:09:47
+00000 #39009-1
+00000 #Verion 0.0
+00000 #input test
+00000 UUT_DBC = 39009-561.dbc
+00000 UUT_DATANAME = 39009-1-INPUT-420MA
+00000 
+00000 #switch in 420ma gen
+00000 J4_05 = 1 : NULL : WAIT = 0.2
+00001 NULL : Input_1A = 0 | 0.1 | 0.1
+00001 TEST: Input_1A 0.0 +/- 0.1
+00001 PASS: Input_1A 0.0
+00002 NULL : Input_1B = 0 | 0.1 | 0.1
+00002 TEST: Input_1B 0.0 +/- 0.1
+00002 PASS: Input_1B 0.0
+00003 NULL : Input_3A = 0 | 0.1 | 0.1
+00003 TEST: Input_3A 0.0 +/- 0.1
+00003 PASS: Input_3A 0.0
+00004 NULL : Input_3B = 0 | 0.1 | 0.1
+00004 TEST: Input_3B 0.0 +/- 0.1
+00004 PASS: Input_3B 0.0
+00005 NULL : Input_5A = 0 | 0.1 | 0.1
+00005 TEST: Input_5A 0.0 +/- 0.1
+00005 PASS: Input_5A 0.0
+00006 NULL : Input_5B = 0 | 0.1 | 0.1
+00006 TEST: Input_5B 0.0 +/- 0.1
+00006 PASS: Input_5B 0.0
+00007 NULL : Input_7A = 0 | 0.1 | 0.1
+00007 TEST: Input_7A 0.0 +/- 0.1
+00007 PASS: Input_7A 0.0
+00008 NULL : Input_7B = 0 | 0.1 | 0.1
+00008 TEST: Input_7B 0.0 +/- 0.1
+00008 PASS: Input_7B 0.0
+00009 NULL : Input_9A = 0 | 0.1 | 0.1
+00009 TEST: Input_9A 0.0 +/- 0.1
+00009 PASS: Input_9A 0.0
+00010 NULL : Input_9B = 0 | 0.1 | 0.1
+00010 TEST: Input_9B 0.0 +/- 0.1
+00010 PASS: Input_9B 0.0
+00011 #-----setup 39009-----
+00011 #configure as Output Digital ON/OFF
+00011 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00012 Command = 83, MODE1A = 3, MODE1B = 3, MODE2A = 1, MODE2B = 1, MODE3A = 3, MODE3B = 3, MODE4A = 1, MODE4B = 1, MODE5A = 3, MODE5B = 3, MODE6A = 1, MODE6B = 1, MODE7A = 3, MODE7B = 3 : NULL : WAIT = 0.5
+00013 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00014 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 3, MODE9B = 3, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00015 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00016 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00017 #clear multiplex
+00017 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00018 #promp user
+00018 PAUSE- SET GEN TO 5000ma
+00018 METER_MODE = 1 : NULL : WAIT = 0.2
+00019 #switch input to load line
+00019 J2_01 = 1 : NULL : WAIT = 0.1
+00020 
+00020 
+00020 #Sweep of Port_1A from 5000 to 20000 in 5000 increments
+00020 
+00020 #test ammmeter
+00020 #test feedback
+00020 NULL : Port_1A = 5.0 | 0.155 | 0.1
+00020 TEST: Port_1A 5.0 +/- 0.155
+00020 PASS: Port_1A 4.987
+00021 
+00021 #Finished with port
+00021 #switch out input
+00021 J2_01 = 0 : NULL : WAIT = 0.2
+00022 
+00022 METER_MODE = 1 : NULL : WAIT = 0.2
+00023 #switch input to load line
+00023 J2_02 = 1 : NULL : WAIT = 0.1
+00024 
+00024 
+00024 #Sweep of Port_1B from 5000 to 20000 in 5000 increments
+00024 
+00024 #test ammmeter
+00024 #test feedback
+00024 NULL : Port_1B = 5.0 | 0.155 | 0.1
+00024 TEST: Port_1B 5.0 +/- 0.155
+00024 PASS: Port_1B 4.981
+00025 
+00025 #Finished with port
+00025 #switch out input
+00025 J2_02 = 0 : NULL : WAIT = 0.2
+00026 
+00026 METER_MODE = 1 : NULL : WAIT = 0.2
+00027 #switch input to load line
+00027 J2_03 = 1 : NULL : WAIT = 0.1
+00028 
+00028 
+00028 #Sweep of Port_3A from 5000 to 20000 in 5000 increments
+00028 
+00028 #test ammmeter
+00028 #test feedback
+00028 NULL : Port_3A = 5.0 | 0.155 | 0.1
+00028 TEST: Port_3A 5.0 +/- 0.155
+00028 PASS: Port_3A 4.993
+00029 
+00029 #Finished with port
+00029 #switch out input
+00029 J2_03 = 0 : NULL : WAIT = 0.2
+00030 
+00030 METER_MODE = 1 : NULL : WAIT = 0.2
+00031 #switch input to load line
+00031 J2_04 = 1 : NULL : WAIT = 0.1
+00032 
+00032 
+00032 #Sweep of Port_3B from 5000 to 20000 in 5000 increments
+00032 
+00032 #test ammmeter
+00032 #test feedback
+00032 NULL : Port_3B = 5.0 | 0.155 | 0.1
+00032 TEST: Port_3B 5.0 +/- 0.155
+00032 PASS: Port_3B 4.987
+00033 
+00033 #Finished with port
+00033 #switch out input
+00033 J2_04 = 0 : NULL : WAIT = 0.2
+00034 
+00034 METER_MODE = 1 : NULL : WAIT = 0.2
+00035 #switch input to load line
+00035 J2_05 = 1 : NULL : WAIT = 0.1
+00036 
+00036 
+00036 #Sweep of Port_5A from 5000 to 20000 in 5000 increments
+00036 
+00036 #test ammmeter
+00036 #test feedback
+00036 NULL : Port_5A = 5.0 | 0.155 | 0.1
+00036 TEST: Port_5A 5.0 +/- 0.155
+00036 PASS: Port_5A 4.987
+00037 
+00037 #Finished with port
+00037 #switch out input
+00037 J2_05 = 0 : NULL : WAIT = 0.2
+00038 
+00038 METER_MODE = 1 : NULL : WAIT = 0.2
+00039 #switch input to load line
+00039 J2_06 = 1 : NULL : WAIT = 0.1
+00040 
+00040 
+00040 #Sweep of Port_5B from 5000 to 20000 in 5000 increments
+00040 
+00040 #test ammmeter
+00040 #test feedback
+00040 NULL : Port_5B = 5.0 | 0.155 | 0.1
+00040 TEST: Port_5B 5.0 +/- 0.155
+00040 PASS: Port_5B 4.993
+00041 
+00041 #Finished with port
+00041 #switch out input
+00041 J2_06 = 0 : NULL : WAIT = 0.2
+00042 
+00042 METER_MODE = 1 : NULL : WAIT = 0.2
+00043 #switch input to load line
+00043 J2_07 = 1 : NULL : WAIT = 0.1
+00044 
+00044 
+00044 #Sweep of Port_7A from 5000 to 20000 in 5000 increments
+00044 
+00044 #test ammmeter
+00044 #test feedback
+00044 NULL : Port_7A = 5.0 | 0.155 | 0.1
+00044 TEST: Port_7A 5.0 +/- 0.155
+00044 PASS: Port_7A 4.987
+00045 
+00045 #Finished with port
+00045 #switch out input
+00045 J2_07 = 0 : NULL : WAIT = 0.2
+00046 
+00046 METER_MODE = 1 : NULL : WAIT = 0.2
+00047 #switch input to load line
+00047 J2_08 = 1 : NULL : WAIT = 0.1
+00048 
+00048 
+00048 #Sweep of Port_7B from 5000 to 20000 in 5000 increments
+00048 
+00048 #test ammmeter
+00048 #test feedback
+00048 NULL : Port_7B = 5.0 | 0.155 | 0.1
+00048 TEST: Port_7B 5.0 +/- 0.155
+00048 PASS: Port_7B 4.993
+00049 
+00049 #Finished with port
+00049 #switch out input
+00049 J2_08 = 0 : NULL : WAIT = 0.2
+00050 
+00050 METER_MODE = 1 : NULL : WAIT = 0.2
+00051 #switch input to load line
+00051 J2_09 = 1 : NULL : WAIT = 0.1
+00052 
+00052 
+00052 #Sweep of Port_9A from 5000 to 20000 in 5000 increments
+00052 
+00052 #test ammmeter
+00052 #test feedback
+00052 NULL : Port_9A = 5.0 | 0.155 | 0.1
+00052 TEST: Port_9A 5.0 +/- 0.155
+00052 PASS: Port_9A 4.993
+00053 
+00053 #Finished with port
+00053 #switch out input
+00053 J2_09 = 0 : NULL : WAIT = 0.2
+00054 
+00054 METER_MODE = 1 : NULL : WAIT = 0.2
+00055 #switch input to load line
+00055 J2_10 = 1 : NULL : WAIT = 0.1
+00056 
+00056 
+00056 #Sweep of Port_9B from 5000 to 20000 in 5000 increments
+00056 
+00056 #test ammmeter
+00056 #test feedback
+00056 NULL : Port_9B = 5.0 | 0.155 | 0.1
+00056 TEST: Port_9B 5.0 +/- 0.155
+00056 PASS: Port_9B 4.993
+00057 
+00057 #Finished with port
+00057 #switch out input
+00057 J2_10 = 0 : NULL : WAIT = 0.2
+00058 
+00058 #promp user
+00058 PAUSE- SET GEN TO 10000ma
+00058 METER_MODE = 1 : NULL : WAIT = 0.2
+00059 #switch input to load line
+00059 J2_01 = 1 : NULL : WAIT = 0.1
+00060 
+00060 
+00060 #Sweep of Port_1A from 5000 to 20000 in 5000 increments
+00060 
+00060 #test ammmeter
+00060 #test feedback
+00060 NULL : Port_1A = 10.0 | 0.155 | 0.1
+00060 TEST: Port_1A 10.0 +/- 0.155
+00060 PASS: Port_1A 9.962
+00061 
+00061 #Finished with port
+00061 #switch out input
+00061 J2_01 = 0 : NULL : WAIT = 0.2
+00062 
+00062 METER_MODE = 1 : NULL : WAIT = 0.2
+00063 #switch input to load line
+00063 J2_02 = 1 : NULL : WAIT = 0.1
+00064 
+00064 
+00064 #Sweep of Port_1B from 5000 to 20000 in 5000 increments
+00064 
+00064 #test ammmeter
+00064 #test feedback
+00064 NULL : Port_1B = 10.0 | 0.155 | 0.1
+00064 TEST: Port_1B 10.0 +/- 0.155
+00064 PASS: Port_1B 9.969
+00065 
+00065 #Finished with port
+00065 #switch out input
+00065 J2_02 = 0 : NULL : WAIT = 0.2
+00066 
+00066 METER_MODE = 1 : NULL : WAIT = 0.2
+00067 #switch input to load line
+00067 J2_03 = 1 : NULL : WAIT = 0.1
+00068 
+00068 
+00068 #Sweep of Port_3A from 5000 to 20000 in 5000 increments
+00068 
+00068 #test ammmeter
+00068 #test feedback
+00068 NULL : Port_3A = 10.0 | 0.155 | 0.1
+00068 TEST: Port_3A 10.0 +/- 0.155
+00068 PASS: Port_3A 9.981
+00069 
+00069 #Finished with port
+00069 #switch out input
+00069 J2_03 = 0 : NULL : WAIT = 0.2
+00070 
+00070 METER_MODE = 1 : NULL : WAIT = 0.2
+00071 #switch input to load line
+00071 J2_04 = 1 : NULL : WAIT = 0.1
+00072 
+00072 
+00072 #Sweep of Port_3B from 5000 to 20000 in 5000 increments
+00072 
+00072 #test ammmeter
+00072 #test feedback
+00072 NULL : Port_3B = 10.0 | 0.155 | 0.1
+00072 TEST: Port_3B 10.0 +/- 0.155
+00072 PASS: Port_3B 9.969
+00073 
+00073 #Finished with port
+00073 #switch out input
+00073 J2_04 = 0 : NULL : WAIT = 0.2
+00074 
+00074 METER_MODE = 1 : NULL : WAIT = 0.2
+00075 #switch input to load line
+00075 J2_05 = 1 : NULL : WAIT = 0.1
+00076 
+00076 
+00076 #Sweep of Port_5A from 5000 to 20000 in 5000 increments
+00076 
+00076 #test ammmeter
+00076 #test feedback
+00076 NULL : Port_5A = 10.0 | 0.155 | 0.1
+00076 TEST: Port_5A 10.0 +/- 0.155
+00076 PASS: Port_5A 9.993
+00077 
+00077 #Finished with port
+00077 #switch out input
+00077 J2_05 = 0 : NULL : WAIT = 0.2
+00078 
+00078 METER_MODE = 1 : NULL : WAIT = 0.2
+00079 #switch input to load line
+00079 J2_06 = 1 : NULL : WAIT = 0.1
+00080 
+00080 
+00080 #Sweep of Port_5B from 5000 to 20000 in 5000 increments
+00080 
+00080 #test ammmeter
+00080 #test feedback
+00080 NULL : Port_5B = 10.0 | 0.155 | 0.1
+00080 TEST: Port_5B 10.0 +/- 0.155
+00080 PASS: Port_5B 9.993
+00081 
+00081 #Finished with port
+00081 #switch out input
+00081 J2_06 = 0 : NULL : WAIT = 0.2
+00082 
+00082 METER_MODE = 1 : NULL : WAIT = 0.2
+00083 #switch input to load line
+00083 J2_07 = 1 : NULL : WAIT = 0.1
+00084 
+00084 
+00084 #Sweep of Port_7A from 5000 to 20000 in 5000 increments
+00084 
+00084 #test ammmeter
+00084 #test feedback
+00084 NULL : Port_7A = 10.0 | 0.155 | 0.1
+00084 TEST: Port_7A 10.0 +/- 0.155
+00084 PASS: Port_7A 9.987
+00085 
+00085 #Finished with port
+00085 #switch out input
+00085 J2_07 = 0 : NULL : WAIT = 0.2
+00086 
+00086 METER_MODE = 1 : NULL : WAIT = 0.2
+00087 #switch input to load line
+00087 J2_08 = 1 : NULL : WAIT = 0.1
+00088 
+00088 
+00088 #Sweep of Port_7B from 5000 to 20000 in 5000 increments
+00088 
+00088 #test ammmeter
+00088 #test feedback
+00088 NULL : Port_7B = 10.0 | 0.155 | 0.1
+00088 TEST: Port_7B 10.0 +/- 0.155
+00088 PASS: Port_7B 9.993
+00089 
+00089 #Finished with port
+00089 #switch out input
+00089 J2_08 = 0 : NULL : WAIT = 0.2
+00090 
+00090 METER_MODE = 1 : NULL : WAIT = 0.2
+00091 #switch input to load line
+00091 J2_09 = 1 : NULL : WAIT = 0.1
+00092 
+00092 
+00092 #Sweep of Port_9A from 5000 to 20000 in 5000 increments
+00092 
+00092 #test ammmeter
+00092 #test feedback
+00092 NULL : Port_9A = 10.0 | 0.155 | 0.1
+00092 TEST: Port_9A 10.0 +/- 0.155
+00092 PASS: Port_9A 9.993
+00093 
+00093 #Finished with port
+00093 #switch out input
+00093 J2_09 = 0 : NULL : WAIT = 0.2
+00094 
+00094 METER_MODE = 1 : NULL : WAIT = 0.2
+00095 #switch input to load line
+00095 J2_10 = 1 : NULL : WAIT = 0.1
+00096 
+00096 
+00096 #Sweep of Port_9B from 5000 to 20000 in 5000 increments
+00096 
+00096 #test ammmeter
+00096 #test feedback
+00096 NULL : Port_9B = 10.0 | 0.155 | 0.1
+00096 TEST: Port_9B 10.0 +/- 0.155
+00096 PASS: Port_9B 9.993
+00097 
+00097 #Finished with port
+00097 #switch out input
+00097 J2_10 = 0 : NULL : WAIT = 0.2
+00098 
+00098 #promp user
+00098 PAUSE- SET GEN TO 15000ma
+00098 METER_MODE = 1 : NULL : WAIT = 0.2
+00099 #switch input to load line
+00099 J2_01 = 1 : NULL : WAIT = 0.1
+00100 
+00100 
+00100 #Sweep of Port_1A from 5000 to 20000 in 5000 increments
+00100 
+00100 #test ammmeter
+00100 #test feedback
+00100 NULL : Port_1A = 15.0 | 0.155 | 0.1
+00100 TEST: Port_1A 15.0 +/- 0.155
+00100 PASS: Port_1A 14.95
+00101 
+00101 #Finished with port
+00101 #switch out input
+00101 J2_01 = 0 : NULL : WAIT = 0.2
+00102 
+00102 METER_MODE = 1 : NULL : WAIT = 0.2
+00103 #switch input to load line
+00103 J2_02 = 1 : NULL : WAIT = 0.1
+00104 
+00104 
+00104 #Sweep of Port_1B from 5000 to 20000 in 5000 increments
+00104 
+00104 #test ammmeter
+00104 #test feedback
+00104 NULL : Port_1B = 15.0 | 0.155 | 0.1
+00104 TEST: Port_1B 15.0 +/- 0.155
+00104 PASS: Port_1B 14.962
+00105 
+00105 #Finished with port
+00105 #switch out input
+00105 J2_02 = 0 : NULL : WAIT = 0.2
+00106 
+00106 METER_MODE = 1 : NULL : WAIT = 0.2
+00107 #switch input to load line
+00107 J2_03 = 1 : NULL : WAIT = 0.1
+00108 
+00108 
+00108 #Sweep of Port_3A from 5000 to 20000 in 5000 increments
+00108 
+00108 #test ammmeter
+00108 #test feedback
+00108 NULL : Port_3A = 15.0 | 0.155 | 0.1
+00108 TEST: Port_3A 15.0 +/- 0.155
+00108 PASS: Port_3A 14.975
+00109 
+00109 #Finished with port
+00109 #switch out input
+00109 J2_03 = 0 : NULL : WAIT = 0.2
+00110 
+00110 METER_MODE = 1 : NULL : WAIT = 0.2
+00111 #switch input to load line
+00111 J2_04 = 1 : NULL : WAIT = 0.1
+00112 
+00112 
+00112 #Sweep of Port_3B from 5000 to 20000 in 5000 increments
+00112 
+00112 #test ammmeter
+00112 #test feedback
+00112 NULL : Port_3B = 15.0 | 0.155 | 0.1
+00112 TEST: Port_3B 15.0 +/- 0.155
+00112 PASS: Port_3B 14.962
+00113 
+00113 #Finished with port
+00113 #switch out input
+00113 J2_04 = 0 : NULL : WAIT = 0.2
+00114 
+00114 METER_MODE = 1 : NULL : WAIT = 0.2
+00115 #switch input to load line
+00115 J2_05 = 1 : NULL : WAIT = 0.1
+00116 
+00116 
+00116 #Sweep of Port_5A from 5000 to 20000 in 5000 increments
+00116 
+00116 #test ammmeter
+00116 #test feedback
+00116 NULL : Port_5A = 15.0 | 0.155 | 0.1
+00116 TEST: Port_5A 15.0 +/- 0.155
+00116 PASS: Port_5A 14.987
+00117 
+00117 #Finished with port
+00117 #switch out input
+00117 J2_05 = 0 : NULL : WAIT = 0.2
+00118 
+00118 METER_MODE = 1 : NULL : WAIT = 0.2
+00119 #switch input to load line
+00119 J2_06 = 1 : NULL : WAIT = 0.1
+00120 
+00120 
+00120 #Sweep of Port_5B from 5000 to 20000 in 5000 increments
+00120 
+00120 #test ammmeter
+00120 #test feedback
+00120 NULL : Port_5B = 15.0 | 0.155 | 0.1
+00120 TEST: Port_5B 15.0 +/- 0.155
+00120 PASS: Port_5B 14.987
+00121 
+00121 #Finished with port
+00121 #switch out input
+00121 J2_06 = 0 : NULL : WAIT = 0.2
+00122 
+00122 METER_MODE = 1 : NULL : WAIT = 0.2
+00123 #switch input to load line
+00123 J2_07 = 1 : NULL : WAIT = 0.1
+00124 
+00124 
+00124 #Sweep of Port_7A from 5000 to 20000 in 5000 increments
+00124 
+00124 #test ammmeter
+00124 #test feedback
+00124 NULL : Port_7A = 15.0 | 0.155 | 0.1
+00124 TEST: Port_7A 15.0 +/- 0.155
+00124 PASS: Port_7A 14.993
+00125 
+00125 #Finished with port
+00125 #switch out input
+00125 J2_07 = 0 : NULL : WAIT = 0.2
+00126 
+00126 METER_MODE = 1 : NULL : WAIT = 0.2
+00127 #switch input to load line
+00127 J2_08 = 1 : NULL : WAIT = 0.1
+00128 
+00128 
+00128 #Sweep of Port_7B from 5000 to 20000 in 5000 increments
+00128 
+00128 #test ammmeter
+00128 #test feedback
+00128 NULL : Port_7B = 15.0 | 0.155 | 0.1
+00128 TEST: Port_7B 15.0 +/- 0.155
+00128 PASS: Port_7B 15.0
+00129 
+00129 #Finished with port
+00129 #switch out input
+00129 J2_08 = 0 : NULL : WAIT = 0.2
+00130 
+00130 METER_MODE = 1 : NULL : WAIT = 0.2
+00131 #switch input to load line
+00131 J2_09 = 1 : NULL : WAIT = 0.1
+00132 
+00132 
+00132 #Sweep of Port_9A from 5000 to 20000 in 5000 increments
+00132 
+00132 #test ammmeter
+00132 #test feedback
+00132 NULL : Port_9A = 15.0 | 0.155 | 0.1
+00132 TEST: Port_9A 15.0 +/- 0.155
+00132 PASS: Port_9A 14.987
+00133 
+00133 #Finished with port
+00133 #switch out input
+00133 J2_09 = 0 : NULL : WAIT = 0.2
+00134 
+00134 METER_MODE = 1 : NULL : WAIT = 0.2
+00135 #switch input to load line
+00135 J2_10 = 1 : NULL : WAIT = 0.1
+00136 
+00136 
+00136 #Sweep of Port_9B from 5000 to 20000 in 5000 increments
+00136 
+00136 #test ammmeter
+00136 #test feedback
+00136 NULL : Port_9B = 15.0 | 0.155 | 0.1
+00136 TEST: Port_9B 15.0 +/- 0.155
+00136 PASS: Port_9B 14.987
+00137 
+00137 #Finished with port
+00137 #switch out input
+00137 J2_10 = 0 : NULL : WAIT = 0.2
+00138 
+00138 #promp user
+00138 PAUSE- SET GEN TO 20000ma
+00138 METER_MODE = 1 : NULL : WAIT = 0.2
+00139 #switch input to load line
+00139 J2_01 = 1 : NULL : WAIT = 0.1
+00140 
+00140 
+00140 #Sweep of Port_1A from 5000 to 20000 in 5000 increments
+00140 
+00140 #test ammmeter
+00140 #test feedback
+00140 NULL : Port_1A = 20.0 | 0.155 | 0.1
+00140 TEST: Port_1A 20.0 +/- 0.155
+00140 PASS: Port_1A 19.938
+00141 
+00141 #Finished with port
+00141 #switch out input
+00141 J2_01 = 0 : NULL : WAIT = 0.2
+00142 
+00142 METER_MODE = 1 : NULL : WAIT = 0.2
+00143 #switch input to load line
+00143 J2_02 = 1 : NULL : WAIT = 0.1
+00144 
+00144 
+00144 #Sweep of Port_1B from 5000 to 20000 in 5000 increments
+00144 
+00144 #test ammmeter
+00144 #test feedback
+00144 NULL : Port_1B = 20.0 | 0.155 | 0.1
+00144 TEST: Port_1B 20.0 +/- 0.155
+00144 PASS: Port_1B 19.95
+00145 
+00145 #Finished with port
+00145 #switch out input
+00145 J2_02 = 0 : NULL : WAIT = 0.2
+00146 
+00146 METER_MODE = 1 : NULL : WAIT = 0.2
+00147 #switch input to load line
+00147 J2_03 = 1 : NULL : WAIT = 0.1
+00148 
+00148 
+00148 #Sweep of Port_3A from 5000 to 20000 in 5000 increments
+00148 
+00148 #test ammmeter
+00148 #test feedback
+00148 NULL : Port_3A = 20.0 | 0.155 | 0.1
+00148 TEST: Port_3A 20.0 +/- 0.155
+00148 PASS: Port_3A 19.956
+00149 
+00149 #Finished with port
+00149 #switch out input
+00149 J2_03 = 0 : NULL : WAIT = 0.2
+00150 
+00150 METER_MODE = 1 : NULL : WAIT = 0.2
+00151 #switch input to load line
+00151 J2_04 = 1 : NULL : WAIT = 0.1
+00152 
+00152 
+00152 #Sweep of Port_3B from 5000 to 20000 in 5000 increments
+00152 
+00152 #test ammmeter
+00152 #test feedback
+00152 NULL : Port_3B = 20.0 | 0.155 | 0.1
+00152 TEST: Port_3B 20.0 +/- 0.155
+00152 PASS: Port_3B 19.944
+00153 
+00153 #Finished with port
+00153 #switch out input
+00153 J2_04 = 0 : NULL : WAIT = 0.2
+00154 
+00154 METER_MODE = 1 : NULL : WAIT = 0.2
+00155 #switch input to load line
+00155 J2_05 = 1 : NULL : WAIT = 0.1
+00156 
+00156 
+00156 #Sweep of Port_5A from 5000 to 20000 in 5000 increments
+00156 
+00156 #test ammmeter
+00156 #test feedback
+00156 NULL : Port_5A = 20.0 | 0.155 | 0.1
+00156 TEST: Port_5A 20.0 +/- 0.155
+00156 PASS: Port_5A 19.987
+00157 
+00157 #Finished with port
+00157 #switch out input
+00157 J2_05 = 0 : NULL : WAIT = 0.2
+00158 
+00158 METER_MODE = 1 : NULL : WAIT = 0.2
+00159 #switch input to load line
+00159 J2_06 = 1 : NULL : WAIT = 0.1
+00160 
+00160 
+00160 #Sweep of Port_5B from 5000 to 20000 in 5000 increments
+00160 
+00160 #test ammmeter
+00160 #test feedback
+00160 NULL : Port_5B = 20.0 | 0.155 | 0.1
+00160 TEST: Port_5B 20.0 +/- 0.155
+00160 PASS: Port_5B 19.987
+00161 
+00161 #Finished with port
+00161 #switch out input
+00161 J2_06 = 0 : NULL : WAIT = 0.2
+00162 
+00162 METER_MODE = 1 : NULL : WAIT = 0.2
+00163 #switch input to load line
+00163 J2_07 = 1 : NULL : WAIT = 0.1
+00164 
+00164 
+00164 #Sweep of Port_7A from 5000 to 20000 in 5000 increments
+00164 
+00164 #test ammmeter
+00164 #test feedback
+00164 NULL : Port_7A = 20.0 | 0.155 | 0.1
+00164 TEST: Port_7A 20.0 +/- 0.155
+00164 PASS: Port_7A 19.987
+00165 
+00165 #Finished with port
+00165 #switch out input
+00165 J2_07 = 0 : NULL : WAIT = 0.2
+00166 
+00166 METER_MODE = 1 : NULL : WAIT = 0.2
+00167 #switch input to load line
+00167 J2_08 = 1 : NULL : WAIT = 0.1
+00168 
+00168 
+00168 #Sweep of Port_7B from 5000 to 20000 in 5000 increments
+00168 
+00168 #test ammmeter
+00168 #test feedback
+00168 NULL : Port_7B = 20.0 | 0.155 | 0.1
+00168 TEST: Port_7B 20.0 +/- 0.155
+00168 PASS: Port_7B 19.987
+00169 
+00169 #Finished with port
+00169 #switch out input
+00169 J2_08 = 0 : NULL : WAIT = 0.2
+00170 
+00170 METER_MODE = 1 : NULL : WAIT = 0.2
+00171 #switch input to load line
+00171 J2_09 = 1 : NULL : WAIT = 0.1
+00172 
+00172 
+00172 #Sweep of Port_9A from 5000 to 20000 in 5000 increments
+00172 
+00172 #test ammmeter
+00172 #test feedback
+00172 NULL : Port_9A = 20.0 | 0.155 | 0.1
+00172 TEST: Port_9A 20.0 +/- 0.155
+00172 PASS: Port_9A 19.975
+00173 
+00173 #Finished with port
+00173 #switch out input
+00173 J2_09 = 0 : NULL : WAIT = 0.2
+00174 
+00174 METER_MODE = 1 : NULL : WAIT = 0.2
+00175 #switch input to load line
+00175 J2_10 = 1 : NULL : WAIT = 0.1
+00176 
+00176 
+00176 #Sweep of Port_9B from 5000 to 20000 in 5000 increments
+00176 
+00176 #test ammmeter
+00176 #test feedback
+00176 NULL : Port_9B = 20.0 | 0.155 | 0.1
+00176 TEST: Port_9B 20.0 +/- 0.155
+00176 PASS: Port_9B 19.987
+00177 
+00177 #Finished with port
+00177 #switch out input
+00177 J2_10 = 0 : NULL : WAIT = 0.2
+00178 
+00178 
+00178 #Finished with mode
+00178 #switch out load line
+00178 J2_10 = 0 : NULL : WAIT = 0.1
+00179 #switch out 420ma gen
+00179 J4_05 = 0 : NULL : WAIT = 0.2
+00180 SAVE
+00180 END
+Fail count: 0
+Finished on: 2025-12-17-14:10:45
+elapsed time: 0:00:55.529257

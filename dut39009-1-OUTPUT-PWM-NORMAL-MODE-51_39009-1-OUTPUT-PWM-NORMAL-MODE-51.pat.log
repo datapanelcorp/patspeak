@@ -1,0 +1,71 @@
+Esc - user interruption @ 2025-12-17-16:32:13
+Started on: 2025-12-17-16:31:24
+00000 #39009-1
+00000 #Verion 0.0
+00000 #PWM test with 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
+00000 UUT_DBC = 39009-561.dbc
+00000 UUT_DATANAME = 39009-1-OUTPUT-PWM-NORMAL-MODE-51
+00000 
+00000 #-----setup 39009-----
+00000 #configure as Output Digital ON/OFF
+00000 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00001 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 51, MODE2B = 51, MODE3A = 4, MODE3B = 4, MODE4A = 51, MODE4B = 51, MODE5A = 4, MODE5B = 4, MODE6A = 51, MODE6B = 51, MODE7A = 4, MODE7B = 4 : NULL : WAIT = 0.5
+00002 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00003 Command = 84, MODE8A = 51, MODE8B = 51, MODE9A = 4, MODE9B = 4, MODE10A = 51, MODE10B = 51, GLOBAL_KP = 255, GLOBAL_KI =  255 : NULL : WAIT = 0.5
+00004 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00005 Command = 82, FREQ1 = 1000, SaveSettings = 1, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00006 Command = 0, FREQ1 = 0, SaveSettings = 0, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00007 METER_MODE = 1 : NULL : WAIT = 0.2
+00008 #test at 1000hz
+00008 Command = 82, FREQ1 = 1000 : NULL : WAIT = 0.5
+00009 #switch in 3.9 Ohm resistive load. (3.72 amps @ 14.5 VDC)
+00009 J4_01 = 1 : NULL : WAIT = 0.2
+00010 J4_03 = 1 : NULL : WAIT = 0.2
+00011 METER_MODE = 1 : NULL : WAIT = 0.2
+00012 #switch in load line, set current
+00012 J3_01 = 1 : NULL : WAIT = 0.5
+00013 
+00013 PWM_CTRL_2A = 250 : NULL : WAIT = 0.2
+00014 NULL : MeterAmps = 0.7 | 0.25 | 0.5
+00014 TEST: MeterAmps 0.7 +/- 0.25
+00014 PASS: MeterAmps 0.684
+00015 NULL : Feedback2A = 0.7 | 0.25 | 0.5
+00015 TEST: Feedback2A 0.7 +/- 0.25
+00015 FAIL: Feedback2A 0.0
+00016 PWM_CTRL_2A = 500 : NULL : WAIT = 0.2
+00017 NULL : MeterAmps = 1.4 | 0.25 | 0.5
+00017 TEST: MeterAmps 1.4 +/- 0.25
+00017 PASS: MeterAmps 1.305
+00018 NULL : Feedback2A = 1.4 | 0.25 | 0.5
+00018 TEST: Feedback2A 1.4 +/- 0.25
+00018 FAIL: Feedback2A 0.0
+00019 PWM_CTRL_2A = 1000 : NULL : WAIT = 0.2
+00020 NULL : MeterAmps = 2.8 | 0.25 | 0.5
+00020 TEST: MeterAmps 2.8 +/- 0.25
+00020 FAIL: MeterAmps 2.547
+00021 NULL : Feedback2A = 2.8 | 0.25 | 0.5
+00021 TEST: Feedback2A 2.8 +/- 0.25
+00021 FAIL: Feedback2A 0.0
+00022 #switch out load line, switch coil
+00022 PWM_CTRL_2A = 0 : NULL : WAIT = 0.5
+00023 J3_01 = 0 : NULL : WAIT = 0.5
+00024 #switch in load line, set current
+00024 J3_02 = 1 : NULL : WAIT = 0.5
+00025 
+00025 PWM_CTRL_2B = 250 : NULL : WAIT = 0.2
+00026 NULL : MeterAmps = 0.7 | 0.25 | 0.5
+00026 TEST: MeterAmps 0.7 +/- 0.25
+00026 PASS: MeterAmps 0.68
+00027 NULL : Feedback2B = 0.7 | 0.25 | 0.5
+00027 TEST: Feedback2B 0.7 +/- 0.25
+00027 FAIL: Feedback2B 0.0
+00028 PWM_CTRL_2B = 500 : NULL : WAIT = 0.2
+00029 NULL : MeterAmps = 1.4 | 0.25 | 0.5
+00029 TEST: MeterAmps 1.4 +/- 0.25
+00029 PASS: MeterAmps 1.302
+00030 NULL : Feedback2B = 1.4 | 0.25 | 0.5
+00030 TEST: Feedback2B 1.4 +/- 0.25
+00030 FAIL: Feedback2B 0.0
+00031 PWM_CTRL_2B = 1000 : NULL : WAIT = 0.2
+00032 NULL : MeterAmps = 2.8 | 0.25 | 0.5
+00032 TEST: MeterAmps 2.8 +/- 0.25
