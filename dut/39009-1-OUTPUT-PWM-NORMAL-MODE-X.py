@@ -99,14 +99,14 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
             Step3 = 1000
             
         outstr += OutputName + " = " + str(Step1) + " : NULL : WAIT = 0.2\n"
-        outstr += "NULL : MeterAmps = 0.7 | 0.15 | 0.5\n"
-        outstr += "NULL : " + FeedbackName + " = 0.7 | 0.15 | 0.5\n"
+        outstr += "NULL : MeterAmps = 0.6 | 0.2 | 0.5\n"
+        outstr += "NULL : " + FeedbackName + " = 0.7 | 0.2 | 0.5\n"
         outstr += OutputName + " = " + str(Step2) + " : NULL : WAIT = 0.2\n"
-        outstr += "NULL : MeterAmps = 1.4 | 0.15 | 0.5\n"
-        outstr += "NULL : " + FeedbackName + " = 1.4 | 0.15 | 0.5\n"
+        outstr += "NULL : MeterAmps = 1.2 | 0.2 | 0.5\n"
+        outstr += "NULL : " + FeedbackName + " = 1.4 | 0.2 | 0.5\n"
         outstr += OutputName + " = " + str(Step3) + " : NULL : WAIT = 0.2\n"
-        outstr += "NULL : MeterAmps = 2.8 | 0.15 | 0.5\n"
-        outstr += "NULL : " + FeedbackName + " = 2.8 | 0.15 | 0.5\n"
+        outstr += "NULL : MeterAmps = 2.4 | 0.2 | 0.5\n"
+        outstr += "NULL : " + FeedbackName + " = 2.8 | 0.2 | 0.5\n"
         #verify feedback and w/ ammeter
         outstr += "#switch out load line, switch coil\n"
         outstr += OutputName + " = 0 : NULL : WAIT = 0.5\n"
@@ -185,7 +185,7 @@ Frequancy = 1000
 outstr += "#test at 1000hz\n"
 #outstr += "sdo[0x3000] = " + str(Frequancy) + " : NULL : WAIT = 0.5\n"
 #outstr += "OPERATIONAL\n"
-outstr += "Command = 82, FREQ1 = " + str(Frequancy) + " : NULL : WAIT = 0.5\n"
+outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", SaveSettings = 1, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
 outstr = WriteOutputTest(outstr, Frequancy, 7, OutputMode)
 
 Frequancy = 500
@@ -193,7 +193,7 @@ Frequancy = 500
 outstr += "#test at 500hz\n"
 #outstr += "sdo[0x3000] = " + str(Frequancy) + " : NULL : WAIT = 0.5\n"
 #outstr += "OPERATIONAL\n"
-outstr += "Command = 82, FREQ1 = " + str(Frequancy) + " : NULL : WAIT = 0.5\n"
+outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", SaveSettings = 1, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
 outstr = WriteOutputTest(outstr, Frequancy, 7, OutputMode)
 
 Frequancy = 64
@@ -201,7 +201,7 @@ Frequancy = 64
 outstr += "#test at 64hz\n"
 #outstr += "sdo[0x3000] = " + str(Frequancy) + " : NULL : WAIT = 0.5\n"
 #outstr += "OPERATIONAL\n"
-outstr += "Command = 82, FREQ1 = " + str(Frequancy) + " : NULL : WAIT = 0.5\n"
+outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", SaveSettings = 1, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
 outstr = WriteOutputTest(outstr, Frequancy, 7, OutputMode)
 
 #shut down test

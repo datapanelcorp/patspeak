@@ -21,6 +21,8 @@ outstr += "sdo[0x1011][1] = 1684107116 : NULL\n"
 outstr += "#cycle IGN to clean slate\n"
 outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
 outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
+outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
+outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 outstr += "END\n"
     
 f = open(datafile, 'w')
