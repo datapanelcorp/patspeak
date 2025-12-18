@@ -31,6 +31,7 @@ NULL : OutStat8B = 0 | 0.1 | 0.1
 NULL : OutStat10A = 0 | 0.1 | 0.1
 NULL : OutStat10B = 0 | 0.1 | 0.1
 #switch in load line, set current
+LdEnable = 1 : NULL : WAIT = 0.1
 J3_01 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
@@ -322,11 +323,13 @@ NULL : OutStat2A = 2 | 0.1 | 0.1
 NULL : MeterCurrent = 0  | 0.01 | 0.1
 
 #switch out load line, clear current
+LdEnable = 0 : NULL : WAIT = 0.1
+LdCurrentSet = 0 : NULL : WAIT = 0.5
 Output2A = 0 : NULL : WAIT = 0.1
 J3_01 = 0 : NULL : WAIT = 0.5
-LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : OutStat2A = 0 | 0.1 | 0.1
 #switch in load line, set current
+LdEnable = 1 : NULL : WAIT = 0.1
 J3_02 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
@@ -618,11 +621,13 @@ NULL : OutStat2B = 2 | 0.1 | 0.1
 NULL : MeterCurrent = 0  | 0.01 | 0.1
 
 #switch out load line, clear current
+LdEnable = 0 : NULL : WAIT = 0.1
+LdCurrentSet = 0 : NULL : WAIT = 0.5
 Output2B = 0 : NULL : WAIT = 0.1
 J3_02 = 0 : NULL : WAIT = 0.5
-LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : OutStat2B = 0 | 0.1 | 0.1
 #switch in load line, set current
+LdEnable = 1 : NULL : WAIT = 0.1
 J3_03 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
@@ -914,11 +919,13 @@ NULL : OutStat4A = 2 | 0.1 | 0.1
 NULL : MeterCurrent = 0  | 0.01 | 0.1
 
 #switch out load line, clear current
+LdEnable = 0 : NULL : WAIT = 0.1
+LdCurrentSet = 0 : NULL : WAIT = 0.5
 Output4A = 0 : NULL : WAIT = 0.1
 J3_03 = 0 : NULL : WAIT = 0.5
-LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : OutStat4A = 0 | 0.1 | 0.1
 #switch in load line, set current
+LdEnable = 1 : NULL : WAIT = 0.1
 J3_04 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
@@ -1210,11 +1217,13 @@ NULL : OutStat4B = 2 | 0.1 | 0.1
 NULL : MeterCurrent = 0  | 0.01 | 0.1
 
 #switch out load line, clear current
+LdEnable = 0 : NULL : WAIT = 0.1
+LdCurrentSet = 0 : NULL : WAIT = 0.5
 Output4B = 0 : NULL : WAIT = 0.1
 J3_04 = 0 : NULL : WAIT = 0.5
-LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : OutStat4B = 0 | 0.1 | 0.1
 #switch in load line, set current
+LdEnable = 1 : NULL : WAIT = 0.1
 J3_05 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
@@ -1506,11 +1515,13 @@ NULL : OutStat6A = 2 | 0.1 | 0.1
 NULL : MeterCurrent = 0  | 0.01 | 0.1
 
 #switch out load line, clear current
+LdEnable = 0 : NULL : WAIT = 0.1
+LdCurrentSet = 0 : NULL : WAIT = 0.5
 Output6A = 0 : NULL : WAIT = 0.1
 J3_05 = 0 : NULL : WAIT = 0.5
-LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : OutStat6A = 0 | 0.1 | 0.1
 #switch in load line, set current
+LdEnable = 1 : NULL : WAIT = 0.1
 J3_06 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
@@ -1802,11 +1813,13 @@ NULL : OutStat6B = 2 | 0.1 | 0.1
 NULL : MeterCurrent = 0  | 0.01 | 0.1
 
 #switch out load line, clear current
+LdEnable = 0 : NULL : WAIT = 0.1
+LdCurrentSet = 0 : NULL : WAIT = 0.5
 Output6B = 0 : NULL : WAIT = 0.1
 J3_06 = 0 : NULL : WAIT = 0.5
-LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : OutStat6B = 0 | 0.1 | 0.1
 #switch in load line, set current
+LdEnable = 1 : NULL : WAIT = 0.1
 J3_07 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
@@ -2098,11 +2111,13 @@ NULL : OutStat8A = 2 | 0.1 | 0.1
 NULL : MeterCurrent = 0  | 0.01 | 0.1
 
 #switch out load line, clear current
+LdEnable = 0 : NULL : WAIT = 0.1
+LdCurrentSet = 0 : NULL : WAIT = 0.5
 Output8A = 0 : NULL : WAIT = 0.1
 J3_07 = 0 : NULL : WAIT = 0.5
-LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : OutStat8A = 0 | 0.1 | 0.1
 #switch in load line, set current
+LdEnable = 1 : NULL : WAIT = 0.1
 J3_08 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
@@ -2394,11 +2409,13 @@ NULL : OutStat8B = 2 | 0.1 | 0.1
 NULL : MeterCurrent = 0  | 0.01 | 0.1
 
 #switch out load line, clear current
+LdEnable = 0 : NULL : WAIT = 0.1
+LdCurrentSet = 0 : NULL : WAIT = 0.5
 Output8B = 0 : NULL : WAIT = 0.1
 J3_08 = 0 : NULL : WAIT = 0.5
-LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : OutStat8B = 0 | 0.1 | 0.1
 #switch in load line, set current
+LdEnable = 1 : NULL : WAIT = 0.1
 J3_09 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
@@ -2690,11 +2707,13 @@ NULL : OutStat10A = 2 | 0.1 | 0.1
 NULL : MeterCurrent = 0  | 0.01 | 0.1
 
 #switch out load line, clear current
+LdEnable = 0 : NULL : WAIT = 0.1
+LdCurrentSet = 0 : NULL : WAIT = 0.5
 Output10A = 0 : NULL : WAIT = 0.1
 J3_09 = 0 : NULL : WAIT = 0.5
-LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : OutStat10A = 0 | 0.1 | 0.1
 #switch in load line, set current
+LdEnable = 1 : NULL : WAIT = 0.1
 J3_10 = 1 : NULL : WAIT = 0.5
 
 #set current and turn on output and verify feedback
@@ -2986,9 +3005,10 @@ NULL : OutStat10B = 2 | 0.1 | 0.1
 NULL : MeterCurrent = 0  | 0.01 | 0.1
 
 #switch out load line, clear current
+LdEnable = 0 : NULL : WAIT = 0.1
+LdCurrentSet = 0 : NULL : WAIT = 0.5
 Output10B = 0 : NULL : WAIT = 0.1
 J3_10 = 0 : NULL : WAIT = 0.5
-LdCurrentSet = 0 : NULL : WAIT = 0.1
 NULL : OutStat10B = 0 | 0.1 | 0.1
 #verify fault #1 cleared
 NULL : OutStat2A = 0 | 0.1 | 0.1

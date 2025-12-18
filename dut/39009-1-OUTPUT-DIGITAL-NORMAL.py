@@ -1,6 +1,7 @@
 import os
 t = 0
 i = 0
+Increment = 100#100
 
 #global setup
 script_name = os.path.basename(__file__)
@@ -102,6 +103,7 @@ while t <= 9:
         OutputStatus = "OutStat10B"
 
     outstr += "#switch in load line, set current\n"
+    outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
     outstr += OutputConnector + " = 1 : NULL : WAIT = 0.5\n"
 
     outstr += "\n"
@@ -122,12 +124,14 @@ while t <= 9:
             outstr += "NULL : " + OutputStatus + " = 2 | 0.1 | 0.1\n" 
             outstr += "NULL : MeterCurrent = 0  | 0.01 | 0.1\n" 
             outstr += "\n"
-        i += 100
+        i += Increment
             
     outstr += "#switch out load line, clear current\n"
+    outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
+    outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.5\n"
+
     outstr += OutputName + " = 0 : NULL : WAIT = 0.1\n"
     outstr += OutputConnector + " = 0 : NULL : WAIT = 0.5\n"
-    outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
     outstr += "NULL : " + OutputStatus + " = 0 | 0.1 | 0.1\n" 
     t += 1
 
