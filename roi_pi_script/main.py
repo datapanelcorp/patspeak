@@ -39,8 +39,17 @@ def receive_can_messages(cbus, hardware: HardwareManager, stop_event: threading.
         # Relay control
         if message.arbitration_id == config.RLY_CTRL_ID:
             should_be_on = (message.data[0] & 0x01) == 0x01
+            
+            # OPTION 1: Standard Switch (Keep this if you just want On/Off control)
             if should_be_on: hardware.relay.on()
             else: hardware.relay.off()
+
+            # OPTION 2: Force Reset (Use this if '1' should always reboot the device)
+            # if should_be_on:
+            #     hardware.relay.off()
+            #     time.sleep(1.0) # Wait 1 second for power to drain
+            #     hardware.relay.on()
+            
             continue
 
         # AFG Control (Primary)

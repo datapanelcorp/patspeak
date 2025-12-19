@@ -10,7 +10,7 @@ AFG_VISA_ID   = "ASRL/dev/ttyACM0::INSTR"
 
 # --- GPIO Configuration ---
 K1_PIN_BCM = 26
-RELAY_ACTIVE_LOW = False 
+RELAY_ACTIVE_LOW = False
 
 # --- CAN Bus Configuration ---
 CAN_CHANNEL = "can1"

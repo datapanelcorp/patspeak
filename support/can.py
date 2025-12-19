@@ -54,13 +54,25 @@ def CANThread(i):
             ErrorTrap(0)
 
         #transmit control messages
-        if(TxTime >= 0.01):
+        if(TxTime >= 0.01): 
             TxTime = 0        
-            if(channel_number == 0):    
-                for frame in globals.uut_framebox_out.frames():
-                    ch.write(frame)                 
-            else:
-                if globals.SuppressPatSupport == 'False': # skip if suppressed
-                    for frame in globals.pat_framebox_out.frames():
-                        ch.write(frame)
+            
+            try:
+                if(channel_number == 0):    
+                    for frame in globals.uut_framebox_out.frames():
+                        ch.write(frame)                 
+                else:
+                    if globals.SuppressPatSupport == 'False': 
+                        for frame in globals.pat_framebox_out.frames():
+                            ch.write(frame)
+                            
+            except Exception:
+                # FIX 2: FLUSH THE TOILET
+                # The bus is dead. Clear the stuck messages immediately.
+                try:
+                    if hasattr(ch, 'flush_tx_buffer'):
+                        ch.flush_tx_buffer()
+                except:
+                    pass
+                pass
     close_channel(ch)

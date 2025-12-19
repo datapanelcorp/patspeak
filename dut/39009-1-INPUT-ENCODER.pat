@@ -4,6 +4,9 @@
 UUT_DBC = 39009-561.dbc
 UUT_DATANAME = 39009-1-INPUT-ENCODER
 
+RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 1
 #setup meter
 LdRemote = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 0 : NULL : WAIT = 0.1
@@ -55,79 +58,7 @@ NULL : EncoderValue1 = 7 | 0 | 0.1
 J2_01 = 0 : NULL : WAIT = 0.2
 NULL : EncoderValue1 = 8 | 0 | 0.1
 
-J2_02 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 9 | 0 | 0.1
-J2_01 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 10 | 0 | 0.1
-J2_02 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 11 | 0 | 0.1
-J2_01 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 12 | 0 | 0.1
-
-J2_02 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 13 | 0 | 0.1
-J2_01 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 14 | 0 | 0.1
-J2_02 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 15 | 0 | 0.1
-J2_01 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 16 | 0 | 0.1
-
-J2_02 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 17 | 0 | 0.1
-J2_01 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 18 | 0 | 0.1
-J2_02 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 19 | 0 | 0.1
-J2_01 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 20 | 0 | 0.1
-
-J2_02 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 21 | 0 | 0.1
-J2_01 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 22 | 0 | 0.1
-J2_02 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 23 | 0 | 0.1
-J2_01 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 24 | 0 | 0.1
-
 #testing encoder reverse
-J2_01 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 23 | 0 | 0.1
-J2_02 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 22 | 0 | 0.1
-J2_01 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 21 | 0 | 0.1
-J2_02 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 20 | 0 | 0.1
-
-J2_01 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 19 | 0 | 0.1
-J2_02 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 18 | 0 | 0.1
-J2_01 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 17 | 0 | 0.1
-J2_02 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 16 | 0 | 0.1
-
-J2_01 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 15 | 0 | 0.1
-J2_02 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 14 | 0 | 0.1
-J2_01 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 13 | 0 | 0.1
-J2_02 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 12 | 0 | 0.1
-
-J2_01 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 11 | 0 | 0.1
-J2_02 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 10 | 0 | 0.1
-J2_01 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 9 | 0 | 0.1
-J2_02 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 8 | 0 | 0.1
-
 J2_01 = 1 : NULL : WAIT = 0.2
 NULL : EncoderValue1 = 7 | 0 | 0.1
 J2_02 = 1 : NULL : WAIT = 0.2
@@ -165,42 +96,6 @@ NULL : EncoderValue1 = 4294967289 | 0 | 0.1
 J2_02 = 0 : NULL : WAIT = 0.2
 NULL : EncoderValue1 = 4294967288 | 0 | 0.1
 
-J2_01 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967287 | 0 | 0.1
-J2_02 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967286 | 0 | 0.1
-J2_01 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967285 | 0 | 0.1
-J2_02 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967284 | 0 | 0.1
-
-J2_01 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967283 | 0 | 0.1
-J2_02 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967282 | 0 | 0.1
-J2_01 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967281 | 0 | 0.1
-J2_02 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967280 | 0 | 0.1
-
-J2_01 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967279 | 0 | 0.1
-J2_02 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967278 | 0 | 0.1
-J2_01 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967277 | 0 | 0.1
-J2_02 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967276 | 0 | 0.1
-
-J2_01 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967275 | 0 | 0.1
-J2_02 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967274 | 0 | 0.1
-J2_01 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967273 | 0 | 0.1
-J2_02 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue1 = 4294967272 | 0 | 0.1
-
 #switch out input
 J2_02 = 0 : NULL : WAIT = 0.2
 J2_01 = 0 : NULL : WAIT = 0.2
@@ -209,7 +104,7 @@ J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
 Command = 87, Counter_1A_ON_OFF = 1 : NULL : WAIT = 0.2
 Command = 0, Counter_1A_ON_OFF = 0 : NULL
 #verify count
-NULL : EncoderValue1 = 4294967272 | 0 | 0.1
+NULL : EncoderValue1 = 4294967288 | 0 | 0.1
 #send counter reset
 Command = 87, Counter_1A_Reset = 1 : NULL : WAIT = 0.2
 Command = 0, Counter_1A_Reset = 0 : NULL
@@ -223,6 +118,8 @@ LdRemote = 0 : NULL : WAIT = 0.1
 LdCurrentSet = 0 : NULL : WAIT = 0.1
 J0_08_METER_LOAD = 0 : NULL : WAIT = 0.1
 #cycle IGN to clean slate
+J2_04 = 1 : NULL : WAIT = 0.2
+RLY_K1 = 0 : NULL : WAIT = 1
 RLY_K1 = 1 : NULL : WAIT = 1
 RLY_K1 = 0 : NULL : WAIT = 1
 #setup meter
@@ -276,79 +173,7 @@ NULL : EncoderValue3 = 7 | 0 | 0.1
 J2_03 = 0 : NULL : WAIT = 0.2
 NULL : EncoderValue3 = 8 | 0 | 0.1
 
-J2_04 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 9 | 0 | 0.1
-J2_03 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 10 | 0 | 0.1
-J2_04 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 11 | 0 | 0.1
-J2_03 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 12 | 0 | 0.1
-
-J2_04 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 13 | 0 | 0.1
-J2_03 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 14 | 0 | 0.1
-J2_04 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 15 | 0 | 0.1
-J2_03 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 16 | 0 | 0.1
-
-J2_04 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 17 | 0 | 0.1
-J2_03 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 18 | 0 | 0.1
-J2_04 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 19 | 0 | 0.1
-J2_03 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 20 | 0 | 0.1
-
-J2_04 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 21 | 0 | 0.1
-J2_03 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 22 | 0 | 0.1
-J2_04 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 23 | 0 | 0.1
-J2_03 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 24 | 0 | 0.1
-
 #testing encoder reverse
-J2_03 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 23 | 0 | 0.1
-J2_04 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 22 | 0 | 0.1
-J2_03 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 21 | 0 | 0.1
-J2_04 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 20 | 0 | 0.1
-
-J2_03 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 19 | 0 | 0.1
-J2_04 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 18 | 0 | 0.1
-J2_03 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 17 | 0 | 0.1
-J2_04 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 16 | 0 | 0.1
-
-J2_03 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 15 | 0 | 0.1
-J2_04 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 14 | 0 | 0.1
-J2_03 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 13 | 0 | 0.1
-J2_04 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 12 | 0 | 0.1
-
-J2_03 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 11 | 0 | 0.1
-J2_04 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 10 | 0 | 0.1
-J2_03 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 9 | 0 | 0.1
-J2_04 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 8 | 0 | 0.1
-
 J2_03 = 1 : NULL : WAIT = 0.2
 NULL : EncoderValue3 = 7 | 0 | 0.1
 J2_04 = 1 : NULL : WAIT = 0.2
@@ -386,42 +211,6 @@ NULL : EncoderValue3 = 4294967289 | 0 | 0.1
 J2_04 = 0 : NULL : WAIT = 0.2
 NULL : EncoderValue3 = 4294967288 | 0 | 0.1
 
-J2_03 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967287 | 0 | 0.1
-J2_04 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967286 | 0 | 0.1
-J2_03 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967285 | 0 | 0.1
-J2_04 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967284 | 0 | 0.1
-
-J2_03 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967283 | 0 | 0.1
-J2_04 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967282 | 0 | 0.1
-J2_03 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967281 | 0 | 0.1
-J2_04 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967280 | 0 | 0.1
-
-J2_03 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967279 | 0 | 0.1
-J2_04 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967278 | 0 | 0.1
-J2_03 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967277 | 0 | 0.1
-J2_04 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967276 | 0 | 0.1
-
-J2_03 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967275 | 0 | 0.1
-J2_04 = 1 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967274 | 0 | 0.1
-J2_03 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967273 | 0 | 0.1
-J2_04 = 0 : NULL : WAIT = 0.2
-NULL : EncoderValue3 = 4294967272 | 0 | 0.1
-
 #switch out input
 J2_04 = 0 : NULL : WAIT = 0.2
 J2_03 = 0 : NULL : WAIT = 0.2
@@ -430,7 +219,7 @@ J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
 Command = 87, Counter_3A_ON_OFF = 1 : NULL : WAIT = 0.2
 Command = 0, Counter_3A_ON_OFF = 0 : NULL
 #verify count
-NULL : EncoderValue3 = 4294967272 | 0 | 0.1
+NULL : EncoderValue3 = 4294967288 | 0 | 0.1
 #send counter reset
 Command = 87, Counter_3A_Reset = 1 : NULL : WAIT = 0.2
 Command = 0, Counter_3A_Reset = 0 : NULL
@@ -443,5 +232,6 @@ J2_04 = 0, J2_03 = 0 : NULL : WAIT = 0.1
 LdRemote = 0 : NULL : WAIT = 0.1
 LdCurrentSet = 0 : NULL : WAIT = 0.1
 J0_08_METER_LOAD = 0 : NULL : WAIT = 0.1
+#cycle IGN to clean slate
 SAVE
 END

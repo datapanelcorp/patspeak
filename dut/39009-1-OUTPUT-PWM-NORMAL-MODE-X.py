@@ -99,13 +99,13 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
             Step3 = 1000
             
         outstr += OutputName + " = " + str(Step1) + " : NULL : WAIT = 0.2\n"
-        outstr += "NULL : MeterAmps = 0.6 | 0.2 | 0.5\n"
+        outstr += "NULL : MeterAmps = 0.6 | 0.3 | 0.5\n"
         outstr += "NULL : " + FeedbackName + " = 0.7 | 0.2 | 0.5\n"
         outstr += OutputName + " = " + str(Step2) + " : NULL : WAIT = 0.2\n"
-        outstr += "NULL : MeterAmps = 1.2 | 0.2 | 0.5\n"
+        outstr += "NULL : MeterAmps = 1.2 | 0.3 | 0.5\n"
         outstr += "NULL : " + FeedbackName + " = 1.4 | 0.2 | 0.5\n"
         outstr += OutputName + " = " + str(Step3) + " : NULL : WAIT = 0.2\n"
-        outstr += "NULL : MeterAmps = 2.4 | 0.2 | 0.5\n"
+        outstr += "NULL : MeterAmps = 2.4 | 0.3 | 0.5\n"
         outstr += "NULL : " + FeedbackName + " = 2.8 | 0.2 | 0.5\n"
         #verify feedback and w/ ammeter
         outstr += "#switch out load line, switch coil\n"
@@ -134,7 +134,7 @@ def WriteOutputTest(outstr, Frequancy, MaxOutput, OutputMode):
 
 t = 0
 i = 0
-OutputMode = 0x33
+OutputMode = 0x22
 
 #global setup
 #TestName = os.path.splitext(script_name)[0]

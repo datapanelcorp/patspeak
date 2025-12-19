@@ -48,8 +48,8 @@ class HardwareManager:
 
         # GPIO Relay
         self.relay = LED(config.K1_PIN_BCM, 
-                         active_high=not config.RELAY_ACTIVE_LOW, 
-                         initial_value=False)
+                        active_high=True,  # Default behavior
+                        initial_value=False) # Start at 0V (Relay Closed/ON)
 
     def initialize_devices(self) -> None:
         """Initializes the multi-meter, e-load, and AFG."""

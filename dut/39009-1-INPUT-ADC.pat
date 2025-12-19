@@ -1053,7 +1053,8 @@ J2_10 = 0 : NULL : WAIT = 0.1
 
 #Finished with mode
 #cycle IGN to clean slate
-RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
 RLY_K1 = 0 : NULL : WAIT = 1
 #-----setup 39009-----
 #configure as Output Digital ON/OFF
@@ -5998,7 +5999,8 @@ J2_10 = 0 : NULL : WAIT = 0.1
 
 #Finished with mode
 #cycle IGN to clean slate
-RLY_K1 = 1 : NULL : WAIT = 1
+RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
 RLY_K1 = 0 : NULL : WAIT = 1
 #switch out load line, set current
 J2_10 = 0 : NULL : WAIT = 0.1
@@ -6012,16 +6014,6 @@ PwrSetVoltage = 0 : NULL : WAIT = 0.1
 PwrEnable = 0 : NULL : WAIT = 0.1
 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1
 PwrRemote = 0 : NULL : WAIT = 0.1
-NULL : Input_1A = 2 | 0.1 | 0.1
-NULL : Input_1B = 2 | 0.1 | 0.1
-NULL : Input_3A = 2 | 0.1 | 0.1
-NULL : Input_3B = 2 | 0.1 | 0.1
-NULL : Input_5A = 2 | 0.1 | 0.1
-NULL : Input_5B = 2 | 0.1 | 0.1
-NULL : Input_7A = 2 | 0.1 | 0.1
-NULL : Input_7B = 2 | 0.1 | 0.1
-NULL : Input_9A = 2 | 0.1 | 0.1
-NULL : Input_9B = 2 | 0.1 | 0.1
 J4_03 = 0 : NULL : WAIT = 0.2
 SAVE
 END

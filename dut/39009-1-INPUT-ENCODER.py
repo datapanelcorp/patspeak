@@ -1,14 +1,8 @@
 import os
 
-
-
-
-def WriteEncoderTest(outstr, TheChannel):
+def WriteEncoderTest(outstr, TheChannel, StartValue):
     InPortAMode = "10"
-    InPortBMode = "0"
-    OutPortAMode = "0"
-    OutPortBMode = "0"
-
+ 
     if(TheChannel == 0):
         InputConnectorA = "J2_02"
         InputConnectorB = "J2_01"
@@ -64,8 +58,8 @@ def WriteEncoderTest(outstr, TheChannel):
     outstr += "PwrSetVoltage = 140 : NULL\n"
 
 
-    TheCount = 0
-    MaxCount = 20
+    TheCount = StartValue
+    MaxCount = 5
 
     outstr += "#testing encoder foward\n"
     while TheCount <= MaxCount:
@@ -143,36 +137,26 @@ def WriteEncoderTest(outstr, TheChannel):
     outstr += "LdRemote = 0 : NULL : WAIT = 0.1\n"
     outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
     outstr += "J0_08_METER_LOAD = 0 : NULL : WAIT = 0.1\n"
+    outstr += "#cycle IGN to clean slate\n"
     return outstr
 
+#write file #1
+Channel = 0
 #global setup
 script_name = os.path.basename(__file__)
 print(f"The name of the running script is: {script_name}")
-TestName = os.path.splitext(script_name)[0]
-datafile = TestName + ".pat"
-
-PortIndex = 0
-ModeIndex = 0
-PortMode = 0
+Test1Name = os.path.splitext(script_name)[0] + "_" +  str(Channel)
+datafile = Test1Name + ".pat"
 
 outstr = ""
 outstr += "#39009-1\n"
 outstr += "#Verion 0.0\n"
 outstr += "#input test\n"
 outstr += "UUT_DBC = 39009-561.dbc\n"
-outstr += "UUT_DATANAME = " + TestName + "\n"
+outstr += "UUT_DATANAME = " + Test1Name + "\n"
 outstr += "\n"
 
-Channel = 0
-outstr = WriteEncoderTest(outstr, Channel)
-
-outstr += "#cycle IGN to clean slate\n"
-outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
-outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
-
-Channel = 1
-outstr = WriteEncoderTest(outstr, Channel)
-
+outstr = WriteEncoderTest(outstr, Channel, 0)
 
 outstr += "SAVE\n"
 outstr += "END\n"
@@ -182,4 +166,36 @@ f.write(outstr)
 f.close()    
 print(outstr)
 
-print(TestName + ".pat")
+
+#write file #1
+Channel = 1
+#global setup
+script_name = os.path.basename(__file__)
+print(f"The name of the running script is: {script_name}")
+Test2Name = os.path.splitext(script_name)[0] + "_" +  str(Channel)
+datafile = Test2Name + ".pat"
+
+outstr = ""
+outstr += "#39009-1\n"
+outstr += "#Verion 0.0\n"
+outstr += "#input test\n"
+outstr += "UUT_DBC = 39009-561.dbc\n"
+outstr += "UUT_DATANAME = " + Test2Name + "\n"
+outstr += "\n"
+
+outstr = WriteEncoderTest(outstr, Channel, 0)
+
+outstr += "SAVE\n"
+outstr += "END\n"
+
+f = open(datafile, 'w')
+f.write(outstr)
+f.close()    
+print(outstr)
+
+
+print(Test1Name + ".pat")
+print(Test2Name + ".pat")
+
+
+
