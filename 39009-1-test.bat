@@ -1,9 +1,38 @@
-echo off
+@echo off
 ::**********************
-@REM echo Please connect the 4-20ma simulator to J4-5
-@REM pause
-@REM python pat.py RESET.pat -v 
-@REM python pat.py 39009-1-INPUT-420MA.pat -v 
+python pat.py RESET.pat -v 
+python pat.py 39009-1-SENSOR-POWER.pat -v 
+exit /b 0
+
+::**********************
+python pat.py RESET.pat -v 
+python pat.py 39009-1-INPUT-FREQ.pat -v 
+
+::**********************
+python pat.py RESET.pat -v 
+python pat.py 39009-1-OUTPUT-DIGITAL-NORMAL.pat -v 
+
+::**********************
+python pat.py RESET.pat -v 
+python pat.py 39009-1-INPUT-ENCODER_0.pat -v 
+
+::**********************
+python pat.py RESET.pat -v 
+python pat.py 39009-1-INPUT-ENCODER_1.pat -v 
+
+::**********************
+python pat.py RESET.pat -v 
+python pat.py 39009-1-INPUT-ADC.pat -v 
+
+python pat.py RESET.pat -v 
+python pat.py 39009-1-OUTPUT-SHORT.pat -v 
+exit /b 0
+
+::**********************
+echo Please connect the 4-20ma simulator to J4-5
+pause
+python pat.py RESET.pat -v 
+python pat.py 39009-1-INPUT-420MA.pat -v 
 
 ::**********************
 echo Connect 'red coil' 6.4 ohm inductive load
@@ -39,6 +68,10 @@ python pat.py 39009-1-INPUT-FREQ.pat -v
 ::**********************
 python pat.py RESET.pat -v 
 python pat.py 39009-1-OUTPUT-DIGITAL-NORMAL.pat -v 
+
+::**********************
+python pat.py RESET.pat -v 
+python pat.py 39009-1-OUTPUT-SHORT.pat -v 
 
 ::**********************
 python pat.py RESET.pat -v 
