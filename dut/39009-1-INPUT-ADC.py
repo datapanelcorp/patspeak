@@ -58,7 +58,7 @@ while ModeIndex <= MaxMode:
         StartVolts = 1
         MaxVolts = 5
         FaultLimit = 5.5
-        BVoltInc = 0.5
+        BVoltInc = 0.1
         SVoltInc = 0.1
         
     # if(ModeIndex==1):#10VDC

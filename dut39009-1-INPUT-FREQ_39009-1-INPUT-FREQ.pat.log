@@ -1,0 +1,488 @@
+Started on: 2026-01-20-11:45:40
+00000 #39009-1
+00000 #Verion 0.0
+00000 #input test
+00000 UUT_DBC = 39009-561.dbc
+00000 UUT_DATANAME = 39009-1-INPUT-FREQ
+00000 
+00000 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00001 Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 7, MODE3B = 7, MODE4A = 1, MODE4B = 1, MODE5A = 1, MODE5B = 1, MODE6A = 1, MODE6B = 1, MODE7A = 1, MODE7B = 1 : NULL : WAIT = 0.5
+00002 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00003 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 1, MODE9B = 1, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00004 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00005 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00006 #clear multiplex
+00006 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00007 
+00007 #-----setup pat-----
+00007 #setup freq
+00007 AfgEnable = 0 : NULL : WAIT = 0.1
+00008 AfgShape = 1 : NULL : WAIT = 0.1
+00009 AfgFreqSet = 500 : NULL : WAIT = 0.1
+00010 AfgDutySet = 50 : NULL : WAIT = 0.1
+00011 AfgAmplSet = 4000 : NULL : WAIT = 0.1
+00012 AfgOffsetSet = 4000 : NULL : WAIT = 0.1
+00013 AfgEnable = 1 : NULL : WAIT = 0.1
+00014 J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+00015 
+00015 J4_03 = 1 : NULL : WAIT = 0.2
+00016 AfgFreqSet = 100 : NULL : WAIT = 0.1
+00017 #switch input to load line
+00017 J2_01 = 1 : NULL : WAIT = 0.5
+00018 NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+00018 TEST: Hertz_Count_Input1A 100.0 +/- 30.0
+00018 PASS: Hertz_Count_Input1A 99.0
+00019 J2_01 = 0 : NULL : WAIT = 0.5
+00020 
+00020 #switch input to load line
+00020 J2_02 = 1 : NULL : WAIT = 0.5
+00021 NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+00021 TEST: Hertz_Count_Input1B 100.0 +/- 30.0
+00021 PASS: Hertz_Count_Input1B 99.0
+00022 J2_02 = 0 : NULL : WAIT = 0.5
+00023 
+00023 AfgFreqSet = 200 : NULL : WAIT = 0.1
+00024 #switch input to load line
+00024 J2_01 = 1 : NULL : WAIT = 0.5
+00025 NULL : Hertz_Count_Input1A = 200 | 30 | 0.1
+00025 TEST: Hertz_Count_Input1A 200.0 +/- 30.0
+00025 PASS: Hertz_Count_Input1A 199.0
+00026 J2_01 = 0 : NULL : WAIT = 0.5
+00027 
+00027 #switch input to load line
+00027 J2_02 = 1 : NULL : WAIT = 0.5
+00028 NULL : Hertz_Count_Input1B = 200 | 30 | 0.1
+00028 TEST: Hertz_Count_Input1B 200.0 +/- 30.0
+00028 PASS: Hertz_Count_Input1B 199.0
+00029 J2_02 = 0 : NULL : WAIT = 0.5
+00030 
+00030 AfgFreqSet = 300 : NULL : WAIT = 0.1
+00031 #switch input to load line
+00031 J2_01 = 1 : NULL : WAIT = 0.5
+00032 NULL : Hertz_Count_Input1A = 300 | 30 | 0.1
+00032 TEST: Hertz_Count_Input1A 300.0 +/- 30.0
+00032 PASS: Hertz_Count_Input1A 299.0
+00033 J2_01 = 0 : NULL : WAIT = 0.5
+00034 
+00034 #switch input to load line
+00034 J2_02 = 1 : NULL : WAIT = 0.5
+00035 NULL : Hertz_Count_Input1B = 300 | 30 | 0.1
+00035 TEST: Hertz_Count_Input1B 300.0 +/- 30.0
+00035 PASS: Hertz_Count_Input1B 299.0
+00036 J2_02 = 0 : NULL : WAIT = 0.5
+00037 
+00037 AfgFreqSet = 400 : NULL : WAIT = 0.1
+00038 #switch input to load line
+00038 J2_01 = 1 : NULL : WAIT = 0.5
+00039 NULL : Hertz_Count_Input1A = 400 | 30 | 0.1
+00039 TEST: Hertz_Count_Input1A 400.0 +/- 30.0
+00039 PASS: Hertz_Count_Input1A 399.0
+00040 J2_01 = 0 : NULL : WAIT = 0.5
+00041 
+00041 #switch input to load line
+00041 J2_02 = 1 : NULL : WAIT = 0.5
+00042 NULL : Hertz_Count_Input1B = 400 | 30 | 0.1
+00042 TEST: Hertz_Count_Input1B 400.0 +/- 30.0
+00042 PASS: Hertz_Count_Input1B 399.0
+00043 J2_02 = 0 : NULL : WAIT = 0.5
+00044 
+00044 AfgFreqSet = 500 : NULL : WAIT = 0.1
+00045 #switch input to load line
+00045 J2_01 = 1 : NULL : WAIT = 0.5
+00046 NULL : Hertz_Count_Input1A = 500 | 30 | 0.1
+00046 TEST: Hertz_Count_Input1A 500.0 +/- 30.0
+00046 PASS: Hertz_Count_Input1A 499.0
+00047 J2_01 = 0 : NULL : WAIT = 0.5
+00048 
+00048 #switch input to load line
+00048 J2_02 = 1 : NULL : WAIT = 0.5
+00049 NULL : Hertz_Count_Input1B = 500 | 30 | 0.1
+00049 TEST: Hertz_Count_Input1B 500.0 +/- 30.0
+00049 PASS: Hertz_Count_Input1B 499.0
+00050 J2_02 = 0 : NULL : WAIT = 0.5
+00051 
+00051 AfgFreqSet = 600 : NULL : WAIT = 0.1
+00052 #switch input to load line
+00052 J2_01 = 1 : NULL : WAIT = 0.5
+00053 NULL : Hertz_Count_Input1A = 600 | 30 | 0.1
+00053 TEST: Hertz_Count_Input1A 600.0 +/- 30.0
+00053 PASS: Hertz_Count_Input1A 598.0
+00054 J2_01 = 0 : NULL : WAIT = 0.5
+00055 
+00055 #switch input to load line
+00055 J2_02 = 1 : NULL : WAIT = 0.5
+00056 NULL : Hertz_Count_Input1B = 600 | 30 | 0.1
+00056 TEST: Hertz_Count_Input1B 600.0 +/- 30.0
+00056 PASS: Hertz_Count_Input1B 598.0
+00057 J2_02 = 0 : NULL : WAIT = 0.5
+00058 
+00058 AfgFreqSet = 700 : NULL : WAIT = 0.1
+00059 #switch input to load line
+00059 J2_01 = 1 : NULL : WAIT = 0.5
+00060 NULL : Hertz_Count_Input1A = 700 | 30 | 0.1
+00060 TEST: Hertz_Count_Input1A 700.0 +/- 30.0
+00060 PASS: Hertz_Count_Input1A 699.0
+00061 J2_01 = 0 : NULL : WAIT = 0.5
+00062 
+00062 #switch input to load line
+00062 J2_02 = 1 : NULL : WAIT = 0.5
+00063 NULL : Hertz_Count_Input1B = 700 | 30 | 0.1
+00063 TEST: Hertz_Count_Input1B 700.0 +/- 30.0
+00063 PASS: Hertz_Count_Input1B 699.0
+00064 J2_02 = 0 : NULL : WAIT = 0.5
+00065 
+00065 AfgFreqSet = 800 : NULL : WAIT = 0.1
+00066 #switch input to load line
+00066 J2_01 = 1 : NULL : WAIT = 0.5
+00067 NULL : Hertz_Count_Input1A = 800 | 30 | 0.1
+00067 TEST: Hertz_Count_Input1A 800.0 +/- 30.0
+00067 PASS: Hertz_Count_Input1A 800.0
+00068 J2_01 = 0 : NULL : WAIT = 0.5
+00069 
+00069 #switch input to load line
+00069 J2_02 = 1 : NULL : WAIT = 0.5
+00070 NULL : Hertz_Count_Input1B = 800 | 30 | 0.1
+00070 TEST: Hertz_Count_Input1B 800.0 +/- 30.0
+00070 PASS: Hertz_Count_Input1B 800.0
+00071 J2_02 = 0 : NULL : WAIT = 0.5
+00072 
+00072 AfgFreqSet = 900 : NULL : WAIT = 0.1
+00073 #switch input to load line
+00073 J2_01 = 1 : NULL : WAIT = 0.5
+00074 NULL : Hertz_Count_Input1A = 900 | 30 | 0.1
+00074 TEST: Hertz_Count_Input1A 900.0 +/- 30.0
+00074 PASS: Hertz_Count_Input1A 899.0
+00075 J2_01 = 0 : NULL : WAIT = 0.5
+00076 
+00076 #switch input to load line
+00076 J2_02 = 1 : NULL : WAIT = 0.5
+00077 NULL : Hertz_Count_Input1B = 900 | 30 | 0.1
+00077 TEST: Hertz_Count_Input1B 900.0 +/- 30.0
+00077 PASS: Hertz_Count_Input1B 899.0
+00078 J2_02 = 0 : NULL : WAIT = 0.5
+00079 
+00079 AfgFreqSet = 1000 : NULL : WAIT = 0.1
+00080 #switch input to load line
+00080 J2_01 = 1 : NULL : WAIT = 0.5
+00081 NULL : Hertz_Count_Input1A = 1000 | 30 | 0.1
+00081 TEST: Hertz_Count_Input1A 1000.0 +/- 30.0
+00081 PASS: Hertz_Count_Input1A 1000.0
+00082 J2_01 = 0 : NULL : WAIT = 0.5
+00083 
+00083 #switch input to load line
+00083 J2_02 = 1 : NULL : WAIT = 0.5
+00084 NULL : Hertz_Count_Input1B = 1000 | 30 | 0.1
+00084 TEST: Hertz_Count_Input1B 1000.0 +/- 30.0
+00084 PASS: Hertz_Count_Input1B 1000.0
+00085 J2_02 = 0 : NULL : WAIT = 0.5
+00086 
+00086 AfgFreqSet = 1100 : NULL : WAIT = 0.1
+00087 #switch input to load line
+00087 J2_01 = 1 : NULL : WAIT = 0.5
+00088 NULL : Hertz_Count_Input1A = 1100 | 30 | 0.1
+00088 TEST: Hertz_Count_Input1A 1100.0 +/- 30.0
+00088 PASS: Hertz_Count_Input1A 1098.0
+00089 J2_01 = 0 : NULL : WAIT = 0.5
+00090 
+00090 #switch input to load line
+00090 J2_02 = 1 : NULL : WAIT = 0.5
+00091 NULL : Hertz_Count_Input1B = 1100 | 30 | 0.1
+00091 TEST: Hertz_Count_Input1B 1100.0 +/- 30.0
+00091 PASS: Hertz_Count_Input1B 1098.0
+00092 J2_02 = 0 : NULL : WAIT = 0.5
+00093 
+00093 AfgFreqSet = 1200 : NULL : WAIT = 0.1
+00094 #switch input to load line
+00094 J2_01 = 1 : NULL : WAIT = 0.5
+00095 NULL : Hertz_Count_Input1A = 1200 | 30 | 0.1
+00095 TEST: Hertz_Count_Input1A 1200.0 +/- 30.0
+00095 PASS: Hertz_Count_Input1A 1200.0
+00096 J2_01 = 0 : NULL : WAIT = 0.5
+00097 
+00097 #switch input to load line
+00097 J2_02 = 1 : NULL : WAIT = 0.5
+00098 NULL : Hertz_Count_Input1B = 1200 | 30 | 0.1
+00098 TEST: Hertz_Count_Input1B 1200.0 +/- 30.0
+00098 PASS: Hertz_Count_Input1B 1200.0
+00099 J2_02 = 0 : NULL : WAIT = 0.5
+00100 
+00100 AfgFreqSet = 1300 : NULL : WAIT = 0.1
+00101 #switch input to load line
+00101 J2_01 = 1 : NULL : WAIT = 0.5
+00102 NULL : Hertz_Count_Input1A = 1300 | 30 | 0.1
+00102 TEST: Hertz_Count_Input1A 1300.0 +/- 30.0
+00102 PASS: Hertz_Count_Input1A 1300.0
+00103 J2_01 = 0 : NULL : WAIT = 0.5
+00104 
+00104 #switch input to load line
+00104 J2_02 = 1 : NULL : WAIT = 0.5
+00105 NULL : Hertz_Count_Input1B = 1300 | 30 | 0.1
+00105 TEST: Hertz_Count_Input1B 1300.0 +/- 30.0
+00105 PASS: Hertz_Count_Input1B 1300.0
+00106 J2_02 = 0 : NULL : WAIT = 0.5
+00107 
+00107 AfgFreqSet = 1400 : NULL : WAIT = 0.1
+00108 #switch input to load line
+00108 J2_01 = 1 : NULL : WAIT = 0.5
+00109 NULL : Hertz_Count_Input1A = 1400 | 30 | 0.1
+00109 TEST: Hertz_Count_Input1A 1400.0 +/- 30.0
+00109 PASS: Hertz_Count_Input1A 1399.0
+00110 J2_01 = 0 : NULL : WAIT = 0.5
+00111 
+00111 #switch input to load line
+00111 J2_02 = 1 : NULL : WAIT = 0.5
+00112 NULL : Hertz_Count_Input1B = 1400 | 30 | 0.1
+00112 TEST: Hertz_Count_Input1B 1400.0 +/- 30.0
+00112 PASS: Hertz_Count_Input1B 1399.0
+00113 J2_02 = 0 : NULL : WAIT = 0.5
+00114 
+00114 AfgFreqSet = 1500 : NULL : WAIT = 0.1
+00115 #switch input to load line
+00115 J2_01 = 1 : NULL : WAIT = 0.5
+00116 NULL : Hertz_Count_Input1A = 1500 | 30 | 0.1
+00116 TEST: Hertz_Count_Input1A 1500.0 +/- 30.0
+00116 PASS: Hertz_Count_Input1A 1500.0
+00117 J2_01 = 0 : NULL : WAIT = 0.5
+00118 
+00118 #switch input to load line
+00118 J2_02 = 1 : NULL : WAIT = 0.5
+00119 NULL : Hertz_Count_Input1B = 1500 | 30 | 0.1
+00119 TEST: Hertz_Count_Input1B 1500.0 +/- 30.0
+00119 PASS: Hertz_Count_Input1B 1500.0
+00120 J2_02 = 0 : NULL : WAIT = 0.5
+00121 
+00121 AfgFreqSet = 1600 : NULL : WAIT = 0.1
+00122 #switch input to load line
+00122 J2_01 = 1 : NULL : WAIT = 0.5
+00123 NULL : Hertz_Count_Input1A = 1600 | 30 | 0.1
+00123 TEST: Hertz_Count_Input1A 1600.0 +/- 30.0
+00123 PASS: Hertz_Count_Input1A 1600.0
+00124 J2_01 = 0 : NULL : WAIT = 0.5
+00125 
+00125 #switch input to load line
+00125 J2_02 = 1 : NULL : WAIT = 0.5
+00126 NULL : Hertz_Count_Input1B = 1600 | 30 | 0.1
+00126 TEST: Hertz_Count_Input1B 1600.0 +/- 30.0
+00126 PASS: Hertz_Count_Input1B 1600.0
+00127 J2_02 = 0 : NULL : WAIT = 0.5
+00128 
+00128 AfgFreqSet = 1700 : NULL : WAIT = 0.1
+00129 #switch input to load line
+00129 J2_01 = 1 : NULL : WAIT = 0.5
+00130 NULL : Hertz_Count_Input1A = 1700 | 30 | 0.1
+00130 TEST: Hertz_Count_Input1A 1700.0 +/- 30.0
+00130 PASS: Hertz_Count_Input1A 1695.0
+00131 J2_01 = 0 : NULL : WAIT = 0.5
+00132 
+00132 #switch input to load line
+00132 J2_02 = 1 : NULL : WAIT = 0.5
+00133 NULL : Hertz_Count_Input1B = 1700 | 30 | 0.1
+00133 TEST: Hertz_Count_Input1B 1700.0 +/- 30.0
+00133 PASS: Hertz_Count_Input1B 1695.0
+00134 J2_02 = 0 : NULL : WAIT = 0.5
+00135 
+00135 AfgFreqSet = 1800 : NULL : WAIT = 0.1
+00136 #switch input to load line
+00136 J2_01 = 1 : NULL : WAIT = 0.5
+00137 NULL : Hertz_Count_Input1A = 1800 | 30 | 0.1
+00137 TEST: Hertz_Count_Input1A 1800.0 +/- 30.0
+00137 PASS: Hertz_Count_Input1A 1793.0
+00138 J2_01 = 0 : NULL : WAIT = 0.5
+00139 
+00139 #switch input to load line
+00139 J2_02 = 1 : NULL : WAIT = 0.5
+00140 NULL : Hertz_Count_Input1B = 1800 | 30 | 0.1
+00140 TEST: Hertz_Count_Input1B 1800.0 +/- 30.0
+00140 PASS: Hertz_Count_Input1B 1793.0
+00141 J2_02 = 0 : NULL : WAIT = 0.5
+00142 
+00142 AfgFreqSet = 1900 : NULL : WAIT = 0.1
+00143 #switch input to load line
+00143 J2_01 = 1 : NULL : WAIT = 0.5
+00144 NULL : Hertz_Count_Input1A = 1900 | 30 | 0.1
+00144 TEST: Hertz_Count_Input1A 1900.0 +/- 30.0
+00144 PASS: Hertz_Count_Input1A 1902.0
+00145 J2_01 = 0 : NULL : WAIT = 0.5
+00146 
+00146 #switch input to load line
+00146 J2_02 = 1 : NULL : WAIT = 0.5
+00147 NULL : Hertz_Count_Input1B = 1900 | 30 | 0.1
+00147 TEST: Hertz_Count_Input1B 1900.0 +/- 30.0
+00147 PASS: Hertz_Count_Input1B 1902.0
+00148 J2_02 = 0 : NULL : WAIT = 0.5
+00149 
+00149 AfgFreqSet = 2000 : NULL : WAIT = 0.1
+00150 #switch input to load line
+00150 J2_01 = 1 : NULL : WAIT = 0.5
+00151 NULL : Hertz_Count_Input1A = 2000 | 30 | 0.1
+00151 TEST: Hertz_Count_Input1A 2000.0 +/- 30.0
+00151 PASS: Hertz_Count_Input1A 2000.0
+00152 J2_01 = 0 : NULL : WAIT = 0.5
+00153 
+00153 #switch input to load line
+00153 J2_02 = 1 : NULL : WAIT = 0.5
+00154 NULL : Hertz_Count_Input1B = 2000 | 30 | 0.1
+00154 TEST: Hertz_Count_Input1B 2000.0 +/- 30.0
+00154 PASS: Hertz_Count_Input1B 2000.0
+00155 J2_02 = 0 : NULL : WAIT = 0.5
+00156 
+00156 AfgFreqSet = 2100 : NULL : WAIT = 0.1
+00157 #switch input to load line
+00157 J2_01 = 1 : NULL : WAIT = 0.5
+00158 NULL : Hertz_Count_Input1A = 2100 | 30 | 0.1
+00158 TEST: Hertz_Count_Input1A 2100.0 +/- 30.0
+00158 PASS: Hertz_Count_Input1A 2093.0
+00159 J2_01 = 0 : NULL : WAIT = 0.5
+00160 
+00160 #switch input to load line
+00160 J2_02 = 1 : NULL : WAIT = 0.5
+00161 NULL : Hertz_Count_Input1B = 2100 | 30 | 0.1
+00161 TEST: Hertz_Count_Input1B 2100.0 +/- 30.0
+00161 PASS: Hertz_Count_Input1B 2093.0
+00162 J2_02 = 0 : NULL : WAIT = 0.5
+00163 
+00163 AfgFreqSet = 2200 : NULL : WAIT = 0.1
+00164 #switch input to load line
+00164 J2_01 = 1 : NULL : WAIT = 0.5
+00165 NULL : Hertz_Count_Input1A = 2200 | 30 | 0.1
+00165 TEST: Hertz_Count_Input1A 2200.0 +/- 30.0
+00165 PASS: Hertz_Count_Input1A 2181.0
+00166 J2_01 = 0 : NULL : WAIT = 0.5
+00167 
+00167 #switch input to load line
+00167 J2_02 = 1 : NULL : WAIT = 0.5
+00168 NULL : Hertz_Count_Input1B = 2200 | 30 | 0.1
+00168 TEST: Hertz_Count_Input1B 2200.0 +/- 30.0
+00168 PASS: Hertz_Count_Input1B 2197.0
+00169 J2_02 = 0 : NULL : WAIT = 0.5
+00170 
+00170 AfgFreqSet = 2300 : NULL : WAIT = 0.1
+00171 #switch input to load line
+00171 J2_01 = 1 : NULL : WAIT = 0.5
+00172 NULL : Hertz_Count_Input1A = 2300 | 30 | 0.1
+00172 TEST: Hertz_Count_Input1A 2300.0 +/- 30.0
+00172 PASS: Hertz_Count_Input1A 2294.0
+00173 J2_01 = 0 : NULL : WAIT = 0.5
+00174 
+00174 #switch input to load line
+00174 J2_02 = 1 : NULL : WAIT = 0.5
+00175 NULL : Hertz_Count_Input1B = 2300 | 30 | 0.1
+00175 TEST: Hertz_Count_Input1B 2300.0 +/- 30.0
+00175 PASS: Hertz_Count_Input1B 2294.0
+00176 J2_02 = 0 : NULL : WAIT = 0.5
+00177 
+00177 AfgFreqSet = 2400 : NULL : WAIT = 0.1
+00178 #switch input to load line
+00178 J2_01 = 1 : NULL : WAIT = 0.5
+00179 NULL : Hertz_Count_Input1A = 2400 | 30 | 0.1
+00179 TEST: Hertz_Count_Input1A 2400.0 +/- 30.0
+00179 PASS: Hertz_Count_Input1A 2400.0
+00180 J2_01 = 0 : NULL : WAIT = 0.5
+00181 
+00181 #switch input to load line
+00181 J2_02 = 1 : NULL : WAIT = 0.5
+00182 NULL : Hertz_Count_Input1B = 2400 | 30 | 0.1
+00182 TEST: Hertz_Count_Input1B 2400.0 +/- 30.0
+00182 PASS: Hertz_Count_Input1B 2400.0
+00183 J2_02 = 0 : NULL : WAIT = 0.5
+00184 
+00184 AfgFreqSet = 2500 : NULL : WAIT = 0.1
+00185 #switch input to load line
+00185 J2_01 = 1 : NULL : WAIT = 0.5
+00186 NULL : Hertz_Count_Input1A = 2500 | 30 | 0.1
+00186 TEST: Hertz_Count_Input1A 2500.0 +/- 30.0
+00186 PASS: Hertz_Count_Input1A 2496.0
+00187 J2_01 = 0 : NULL : WAIT = 0.5
+00188 
+00188 #switch input to load line
+00188 J2_02 = 1 : NULL : WAIT = 0.5
+00189 NULL : Hertz_Count_Input1B = 2500 | 30 | 0.1
+00189 TEST: Hertz_Count_Input1B 2500.0 +/- 30.0
+00189 PASS: Hertz_Count_Input1B 2496.0
+00190 J2_02 = 0 : NULL : WAIT = 0.5
+00191 
+00191 AfgFreqSet = 2600 : NULL : WAIT = 0.1
+00192 #switch input to load line
+00192 J2_01 = 1 : NULL : WAIT = 0.5
+00193 NULL : Hertz_Count_Input1A = 2600 | 30 | 0.1
+00193 TEST: Hertz_Count_Input1A 2600.0 +/- 30.0
+00193 PASS: Hertz_Count_Input1A 2600.0
+00194 J2_01 = 0 : NULL : WAIT = 0.5
+00195 
+00195 #switch input to load line
+00195 J2_02 = 1 : NULL : WAIT = 0.5
+00196 NULL : Hertz_Count_Input1B = 2600 | 30 | 0.1
+00196 TEST: Hertz_Count_Input1B 2600.0 +/- 30.0
+00196 PASS: Hertz_Count_Input1B 2600.0
+00197 J2_02 = 0 : NULL : WAIT = 0.5
+00198 
+00198 AfgFreqSet = 2700 : NULL : WAIT = 0.1
+00199 #switch input to load line
+00199 J2_01 = 1 : NULL : WAIT = 0.5
+00200 NULL : Hertz_Count_Input1A = 2700 | 30 | 0.1
+00200 TEST: Hertz_Count_Input1A 2700.0 +/- 30.0
+00200 PASS: Hertz_Count_Input1A 2689.0
+00201 J2_01 = 0 : NULL : WAIT = 0.5
+00202 
+00202 #switch input to load line
+00202 J2_02 = 1 : NULL : WAIT = 0.5
+00203 NULL : Hertz_Count_Input1B = 2700 | 30 | 0.1
+00203 TEST: Hertz_Count_Input1B 2700.0 +/- 30.0
+00203 PASS: Hertz_Count_Input1B 2689.0
+00204 J2_02 = 0 : NULL : WAIT = 0.5
+00205 
+00205 AfgFreqSet = 2800 : NULL : WAIT = 0.1
+00206 #switch input to load line
+00206 J2_01 = 1 : NULL : WAIT = 0.5
+00207 NULL : Hertz_Count_Input1A = 2800 | 30 | 0.1
+00207 TEST: Hertz_Count_Input1A 2800.0 +/- 30.0
+00207 PASS: Hertz_Count_Input1A 2785.0
+00208 J2_01 = 0 : NULL : WAIT = 0.5
+00209 
+00209 #switch input to load line
+00209 J2_02 = 1 : NULL : WAIT = 0.5
+00210 NULL : Hertz_Count_Input1B = 2800 | 30 | 0.1
+00210 TEST: Hertz_Count_Input1B 2800.0 +/- 30.0
+00210 PASS: Hertz_Count_Input1B 2785.0
+00211 J2_02 = 0 : NULL : WAIT = 0.5
+00212 
+00212 AfgFreqSet = 2900 : NULL : WAIT = 0.1
+00213 #switch input to load line
+00213 J2_01 = 1 : NULL : WAIT = 0.5
+00214 NULL : Hertz_Count_Input1A = 2900 | 30 | 0.1
+00214 TEST: Hertz_Count_Input1A 2900.0 +/- 30.0
+00214 PASS: Hertz_Count_Input1A 2888.0
+00215 J2_01 = 0 : NULL : WAIT = 0.5
+00216 
+00216 #switch input to load line
+00216 J2_02 = 1 : NULL : WAIT = 0.5
+00217 NULL : Hertz_Count_Input1B = 2900 | 30 | 0.1
+00217 TEST: Hertz_Count_Input1B 2900.0 +/- 30.0
+00217 PASS: Hertz_Count_Input1B 2888.0
+00218 J2_02 = 0 : NULL : WAIT = 0.5
+00219 
+00219 AfgFreqSet = 3000 : NULL : WAIT = 0.1
+00220 #switch input to load line
+00220 J2_01 = 1 : NULL : WAIT = 0.5
+00221 NULL : Hertz_Count_Input1A = 3000 | 30 | 0.1
+00221 TEST: Hertz_Count_Input1A 3000.0 +/- 30.0
+00221 PASS: Hertz_Count_Input1A 3000.0
+00222 J2_01 = 0 : NULL : WAIT = 0.5
+00223 
+00223 #switch input to load line
+00223 J2_02 = 1 : NULL : WAIT = 0.5
+00224 NULL : Hertz_Count_Input1B = 3000 | 30 | 0.1
+00224 TEST: Hertz_Count_Input1B 3000.0 +/- 30.0
+00224 PASS: Hertz_Count_Input1B 3000.0
+00225 J2_02 = 0 : NULL : WAIT = 0.5
+00226 
+00226 AfgEnable = 0 : NULL : WAIT = 0.1
+00227 #switch out load line
+00227 J2_02 = 0 : NULL : WAIT = 0.1
+00228 J0_11_FREQ_GEN = 0 : NULL : WAIT = 1
+00229 J4_03 = 0 : NULL : WAIT = 0.2
+00230 SAVE
+00230 END
+Fail count: 0
+Finished on: 2026-01-20-11:47:23
+elapsed time: 0:01:39.499809

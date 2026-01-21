@@ -48,7 +48,7 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 J2_01 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Port_1A from 1 to 5 in 0.5 increments
+#Sweep of Port_1A from 1 to 5 in 0.1 increments
 
 #set power supply
 PwrSetVoltage = 10 : NULL : WAIT = 0.1
@@ -58,72 +58,324 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 NULL : Port_1A = 1 | 0.155 | 0.1
 NULL : Input_1A = 0 | 0.1 | 0.1
 #set power supply
+PwrSetVoltage = 11 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.1 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 1.1 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 12 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.2000000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 1.2000000000000002 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 13 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.3000000000000003 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 1.3000000000000003 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 14 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.4000000000000004 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 1.4000000000000004 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
 PwrSetVoltage = 15 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 1.5 | 0.155 | 0.1
+NULL : MeterVolts = 1.5000000000000004 | 0.155 | 0.1
 #test feedback
-NULL : Port_1A = 1.5 | 0.155 | 0.1
+NULL : Port_1A = 1.5000000000000004 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 16 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 1.6000000000000005 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 17 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.7000000000000006 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 1.7000000000000006 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 18 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.8000000000000007 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 1.8000000000000007 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 19 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.9000000000000008 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 1.9000000000000008 | 0.155 | 0.1
 NULL : Input_1A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 20 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.0 | 0.155 | 0.1
+NULL : MeterVolts = 2.000000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_1A = 2.0 | 0.155 | 0.1
+NULL : Port_1A = 2.000000000000001 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 21 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.100000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 2.100000000000001 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 22 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.200000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 2.200000000000001 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 23 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.300000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 2.300000000000001 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 24 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.4000000000000012 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 2.4000000000000012 | 0.155 | 0.1
 NULL : Input_1A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 25 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.5 | 0.155 | 0.1
+NULL : MeterVolts = 2.5000000000000013 | 0.155 | 0.1
 #test feedback
-NULL : Port_1A = 2.5 | 0.155 | 0.1
+NULL : Port_1A = 2.5000000000000013 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 26 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.6000000000000014 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 2.6000000000000014 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 27 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.7000000000000015 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 2.7000000000000015 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 28 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.8000000000000016 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 2.8000000000000016 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 29 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.9000000000000017 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 2.9000000000000017 | 0.155 | 0.1
 NULL : Input_1A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 30 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.0 | 0.155 | 0.1
+NULL : MeterVolts = 3.0000000000000018 | 0.155 | 0.1
 #test feedback
-NULL : Port_1A = 3.0 | 0.155 | 0.1
+NULL : Port_1A = 3.0000000000000018 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 31 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 3.100000000000002 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 32 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 3.200000000000002 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 33 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 3.300000000000002 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 34 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.400000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 3.400000000000002 | 0.155 | 0.1
 NULL : Input_1A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 35 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.5 | 0.155 | 0.1
+NULL : MeterVolts = 3.500000000000002 | 0.155 | 0.1
 #test feedback
-NULL : Port_1A = 3.5 | 0.155 | 0.1
+NULL : Port_1A = 3.500000000000002 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 36 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.6000000000000023 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 3.6000000000000023 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 37 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.7000000000000024 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 3.7000000000000024 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 38 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.8000000000000025 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 3.8000000000000025 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 39 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.9000000000000026 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 3.9000000000000026 | 0.155 | 0.1
 NULL : Input_1A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 40 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.0 | 0.155 | 0.1
+NULL : MeterVolts = 4.000000000000003 | 0.155 | 0.1
 #test feedback
-NULL : Port_1A = 4.0 | 0.155 | 0.1
+NULL : Port_1A = 4.000000000000003 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 41 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 4.100000000000002 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 42 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 4.200000000000002 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 43 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 4.300000000000002 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 44 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.400000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 4.400000000000001 | 0.155 | 0.1
 NULL : Input_1A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 45 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.5 | 0.155 | 0.1
+NULL : MeterVolts = 4.500000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_1A = 4.5 | 0.155 | 0.1
+NULL : Port_1A = 4.500000000000001 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 46 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 4.6000000000000005 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 47 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.7 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 4.7 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 4.8 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8999999999999995 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 4.8999999999999995 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 49 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.999999999999999 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 4.999999999999999 | 0.155 | 0.1
 NULL : Input_1A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 50 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.0 | 0.155 | 0.1
+NULL : MeterVolts = 5.099999999999999 | 0.155 | 0.1
 #test feedback
-NULL : Port_1A = 5.0 | 0.155 | 0.1
+NULL : Port_1A = 5.099999999999999 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 51 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.199999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 5.199999999999998 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 52 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.299999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 5.299999999999998 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 53 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.399999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 5.399999999999998 | 0.155 | 0.1
+NULL : Input_1A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 54 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.499999999999997 | 0.155 | 0.1
+#test feedback
+NULL : Port_1A = 5.499999999999997 | 0.155 | 0.1
 NULL : Input_1A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 55 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.5 | 0.155 | 0.1
-#test feedback
-NULL : Port_1A = 0 | 0.1 | 0.1
-NULL : Input_1A = 2 | 0.1 | 0.1
-#set power supply
-PwrSetVoltage = 56 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 5.6 | 0.155 | 0.1
+NULL : MeterVolts = 5.599999999999997 | 0.155 | 0.1
 #test feedback
 NULL : Port_1A = 0 | 0.1 | 0.1
 NULL : Input_1A = 2 | 0.1 | 0.1
@@ -150,7 +402,7 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 J2_02 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Port_1B from 1 to 5 in 0.5 increments
+#Sweep of Port_1B from 1 to 5 in 0.1 increments
 
 #set power supply
 PwrSetVoltage = 10 : NULL : WAIT = 0.1
@@ -160,72 +412,324 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 NULL : Port_1B = 1 | 0.155 | 0.1
 NULL : Input_1B = 0 | 0.1 | 0.1
 #set power supply
+PwrSetVoltage = 11 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.1 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 1.1 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 12 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.2000000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 1.2000000000000002 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 13 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.3000000000000003 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 1.3000000000000003 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 14 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.4000000000000004 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 1.4000000000000004 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
 PwrSetVoltage = 15 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 1.5 | 0.155 | 0.1
+NULL : MeterVolts = 1.5000000000000004 | 0.155 | 0.1
 #test feedback
-NULL : Port_1B = 1.5 | 0.155 | 0.1
+NULL : Port_1B = 1.5000000000000004 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 16 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 1.6000000000000005 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 17 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.7000000000000006 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 1.7000000000000006 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 18 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.8000000000000007 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 1.8000000000000007 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 19 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.9000000000000008 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 1.9000000000000008 | 0.155 | 0.1
 NULL : Input_1B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 20 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.0 | 0.155 | 0.1
+NULL : MeterVolts = 2.000000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_1B = 2.0 | 0.155 | 0.1
+NULL : Port_1B = 2.000000000000001 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 21 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.100000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 2.100000000000001 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 22 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.200000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 2.200000000000001 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 23 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.300000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 2.300000000000001 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 24 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.4000000000000012 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 2.4000000000000012 | 0.155 | 0.1
 NULL : Input_1B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 25 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.5 | 0.155 | 0.1
+NULL : MeterVolts = 2.5000000000000013 | 0.155 | 0.1
 #test feedback
-NULL : Port_1B = 2.5 | 0.155 | 0.1
+NULL : Port_1B = 2.5000000000000013 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 26 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.6000000000000014 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 2.6000000000000014 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 27 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.7000000000000015 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 2.7000000000000015 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 28 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.8000000000000016 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 2.8000000000000016 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 29 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.9000000000000017 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 2.9000000000000017 | 0.155 | 0.1
 NULL : Input_1B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 30 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.0 | 0.155 | 0.1
+NULL : MeterVolts = 3.0000000000000018 | 0.155 | 0.1
 #test feedback
-NULL : Port_1B = 3.0 | 0.155 | 0.1
+NULL : Port_1B = 3.0000000000000018 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 31 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 3.100000000000002 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 32 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 3.200000000000002 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 33 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 3.300000000000002 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 34 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.400000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 3.400000000000002 | 0.155 | 0.1
 NULL : Input_1B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 35 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.5 | 0.155 | 0.1
+NULL : MeterVolts = 3.500000000000002 | 0.155 | 0.1
 #test feedback
-NULL : Port_1B = 3.5 | 0.155 | 0.1
+NULL : Port_1B = 3.500000000000002 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 36 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.6000000000000023 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 3.6000000000000023 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 37 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.7000000000000024 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 3.7000000000000024 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 38 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.8000000000000025 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 3.8000000000000025 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 39 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.9000000000000026 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 3.9000000000000026 | 0.155 | 0.1
 NULL : Input_1B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 40 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.0 | 0.155 | 0.1
+NULL : MeterVolts = 4.000000000000003 | 0.155 | 0.1
 #test feedback
-NULL : Port_1B = 4.0 | 0.155 | 0.1
+NULL : Port_1B = 4.000000000000003 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 41 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 4.100000000000002 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 42 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 4.200000000000002 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 43 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 4.300000000000002 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 44 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.400000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 4.400000000000001 | 0.155 | 0.1
 NULL : Input_1B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 45 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.5 | 0.155 | 0.1
+NULL : MeterVolts = 4.500000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_1B = 4.5 | 0.155 | 0.1
+NULL : Port_1B = 4.500000000000001 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 46 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 4.6000000000000005 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 47 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.7 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 4.7 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 4.8 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8999999999999995 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 4.8999999999999995 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 49 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.999999999999999 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 4.999999999999999 | 0.155 | 0.1
 NULL : Input_1B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 50 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.0 | 0.155 | 0.1
+NULL : MeterVolts = 5.099999999999999 | 0.155 | 0.1
 #test feedback
-NULL : Port_1B = 5.0 | 0.155 | 0.1
+NULL : Port_1B = 5.099999999999999 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 51 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.199999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 5.199999999999998 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 52 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.299999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 5.299999999999998 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 53 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.399999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 5.399999999999998 | 0.155 | 0.1
+NULL : Input_1B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 54 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.499999999999997 | 0.155 | 0.1
+#test feedback
+NULL : Port_1B = 5.499999999999997 | 0.155 | 0.1
 NULL : Input_1B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 55 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.5 | 0.155 | 0.1
-#test feedback
-NULL : Port_1B = 0 | 0.1 | 0.1
-NULL : Input_1B = 2 | 0.1 | 0.1
-#set power supply
-PwrSetVoltage = 56 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 5.6 | 0.155 | 0.1
+NULL : MeterVolts = 5.599999999999997 | 0.155 | 0.1
 #test feedback
 NULL : Port_1B = 0 | 0.1 | 0.1
 NULL : Input_1B = 2 | 0.1 | 0.1
@@ -252,7 +756,7 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 J2_03 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Port_3A from 1 to 5 in 0.5 increments
+#Sweep of Port_3A from 1 to 5 in 0.1 increments
 
 #set power supply
 PwrSetVoltage = 10 : NULL : WAIT = 0.1
@@ -262,72 +766,324 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 NULL : Port_3A = 1 | 0.155 | 0.1
 NULL : Input_3A = 0 | 0.1 | 0.1
 #set power supply
+PwrSetVoltage = 11 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.1 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 1.1 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 12 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.2000000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 1.2000000000000002 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 13 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.3000000000000003 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 1.3000000000000003 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 14 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.4000000000000004 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 1.4000000000000004 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
 PwrSetVoltage = 15 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 1.5 | 0.155 | 0.1
+NULL : MeterVolts = 1.5000000000000004 | 0.155 | 0.1
 #test feedback
-NULL : Port_3A = 1.5 | 0.155 | 0.1
+NULL : Port_3A = 1.5000000000000004 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 16 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 1.6000000000000005 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 17 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.7000000000000006 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 1.7000000000000006 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 18 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.8000000000000007 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 1.8000000000000007 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 19 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.9000000000000008 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 1.9000000000000008 | 0.155 | 0.1
 NULL : Input_3A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 20 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.0 | 0.155 | 0.1
+NULL : MeterVolts = 2.000000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_3A = 2.0 | 0.155 | 0.1
+NULL : Port_3A = 2.000000000000001 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 21 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.100000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 2.100000000000001 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 22 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.200000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 2.200000000000001 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 23 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.300000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 2.300000000000001 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 24 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.4000000000000012 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 2.4000000000000012 | 0.155 | 0.1
 NULL : Input_3A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 25 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.5 | 0.155 | 0.1
+NULL : MeterVolts = 2.5000000000000013 | 0.155 | 0.1
 #test feedback
-NULL : Port_3A = 2.5 | 0.155 | 0.1
+NULL : Port_3A = 2.5000000000000013 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 26 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.6000000000000014 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 2.6000000000000014 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 27 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.7000000000000015 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 2.7000000000000015 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 28 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.8000000000000016 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 2.8000000000000016 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 29 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.9000000000000017 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 2.9000000000000017 | 0.155 | 0.1
 NULL : Input_3A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 30 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.0 | 0.155 | 0.1
+NULL : MeterVolts = 3.0000000000000018 | 0.155 | 0.1
 #test feedback
-NULL : Port_3A = 3.0 | 0.155 | 0.1
+NULL : Port_3A = 3.0000000000000018 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 31 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 3.100000000000002 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 32 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 3.200000000000002 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 33 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 3.300000000000002 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 34 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.400000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 3.400000000000002 | 0.155 | 0.1
 NULL : Input_3A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 35 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.5 | 0.155 | 0.1
+NULL : MeterVolts = 3.500000000000002 | 0.155 | 0.1
 #test feedback
-NULL : Port_3A = 3.5 | 0.155 | 0.1
+NULL : Port_3A = 3.500000000000002 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 36 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.6000000000000023 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 3.6000000000000023 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 37 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.7000000000000024 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 3.7000000000000024 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 38 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.8000000000000025 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 3.8000000000000025 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 39 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.9000000000000026 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 3.9000000000000026 | 0.155 | 0.1
 NULL : Input_3A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 40 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.0 | 0.155 | 0.1
+NULL : MeterVolts = 4.000000000000003 | 0.155 | 0.1
 #test feedback
-NULL : Port_3A = 4.0 | 0.155 | 0.1
+NULL : Port_3A = 4.000000000000003 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 41 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 4.100000000000002 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 42 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 4.200000000000002 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 43 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 4.300000000000002 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 44 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.400000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 4.400000000000001 | 0.155 | 0.1
 NULL : Input_3A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 45 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.5 | 0.155 | 0.1
+NULL : MeterVolts = 4.500000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_3A = 4.5 | 0.155 | 0.1
+NULL : Port_3A = 4.500000000000001 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 46 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 4.6000000000000005 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 47 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.7 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 4.7 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 4.8 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8999999999999995 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 4.8999999999999995 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 49 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.999999999999999 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 4.999999999999999 | 0.155 | 0.1
 NULL : Input_3A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 50 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.0 | 0.155 | 0.1
+NULL : MeterVolts = 5.099999999999999 | 0.155 | 0.1
 #test feedback
-NULL : Port_3A = 5.0 | 0.155 | 0.1
+NULL : Port_3A = 5.099999999999999 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 51 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.199999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 5.199999999999998 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 52 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.299999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 5.299999999999998 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 53 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.399999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 5.399999999999998 | 0.155 | 0.1
+NULL : Input_3A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 54 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.499999999999997 | 0.155 | 0.1
+#test feedback
+NULL : Port_3A = 5.499999999999997 | 0.155 | 0.1
 NULL : Input_3A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 55 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.5 | 0.155 | 0.1
-#test feedback
-NULL : Port_3A = 0 | 0.1 | 0.1
-NULL : Input_3A = 2 | 0.1 | 0.1
-#set power supply
-PwrSetVoltage = 56 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 5.6 | 0.155 | 0.1
+NULL : MeterVolts = 5.599999999999997 | 0.155 | 0.1
 #test feedback
 NULL : Port_3A = 0 | 0.1 | 0.1
 NULL : Input_3A = 2 | 0.1 | 0.1
@@ -354,7 +1110,7 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 J2_04 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Port_3B from 1 to 5 in 0.5 increments
+#Sweep of Port_3B from 1 to 5 in 0.1 increments
 
 #set power supply
 PwrSetVoltage = 10 : NULL : WAIT = 0.1
@@ -364,72 +1120,324 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 NULL : Port_3B = 1 | 0.155 | 0.1
 NULL : Input_3B = 0 | 0.1 | 0.1
 #set power supply
+PwrSetVoltage = 11 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.1 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 1.1 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 12 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.2000000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 1.2000000000000002 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 13 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.3000000000000003 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 1.3000000000000003 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 14 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.4000000000000004 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 1.4000000000000004 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
 PwrSetVoltage = 15 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 1.5 | 0.155 | 0.1
+NULL : MeterVolts = 1.5000000000000004 | 0.155 | 0.1
 #test feedback
-NULL : Port_3B = 1.5 | 0.155 | 0.1
+NULL : Port_3B = 1.5000000000000004 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 16 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 1.6000000000000005 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 17 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.7000000000000006 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 1.7000000000000006 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 18 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.8000000000000007 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 1.8000000000000007 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 19 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.9000000000000008 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 1.9000000000000008 | 0.155 | 0.1
 NULL : Input_3B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 20 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.0 | 0.155 | 0.1
+NULL : MeterVolts = 2.000000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_3B = 2.0 | 0.155 | 0.1
+NULL : Port_3B = 2.000000000000001 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 21 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.100000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 2.100000000000001 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 22 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.200000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 2.200000000000001 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 23 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.300000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 2.300000000000001 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 24 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.4000000000000012 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 2.4000000000000012 | 0.155 | 0.1
 NULL : Input_3B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 25 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.5 | 0.155 | 0.1
+NULL : MeterVolts = 2.5000000000000013 | 0.155 | 0.1
 #test feedback
-NULL : Port_3B = 2.5 | 0.155 | 0.1
+NULL : Port_3B = 2.5000000000000013 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 26 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.6000000000000014 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 2.6000000000000014 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 27 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.7000000000000015 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 2.7000000000000015 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 28 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.8000000000000016 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 2.8000000000000016 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 29 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.9000000000000017 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 2.9000000000000017 | 0.155 | 0.1
 NULL : Input_3B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 30 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.0 | 0.155 | 0.1
+NULL : MeterVolts = 3.0000000000000018 | 0.155 | 0.1
 #test feedback
-NULL : Port_3B = 3.0 | 0.155 | 0.1
+NULL : Port_3B = 3.0000000000000018 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 31 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 3.100000000000002 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 32 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 3.200000000000002 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 33 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 3.300000000000002 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 34 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.400000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 3.400000000000002 | 0.155 | 0.1
 NULL : Input_3B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 35 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.5 | 0.155 | 0.1
+NULL : MeterVolts = 3.500000000000002 | 0.155 | 0.1
 #test feedback
-NULL : Port_3B = 3.5 | 0.155 | 0.1
+NULL : Port_3B = 3.500000000000002 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 36 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.6000000000000023 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 3.6000000000000023 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 37 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.7000000000000024 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 3.7000000000000024 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 38 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.8000000000000025 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 3.8000000000000025 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 39 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.9000000000000026 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 3.9000000000000026 | 0.155 | 0.1
 NULL : Input_3B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 40 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.0 | 0.155 | 0.1
+NULL : MeterVolts = 4.000000000000003 | 0.155 | 0.1
 #test feedback
-NULL : Port_3B = 4.0 | 0.155 | 0.1
+NULL : Port_3B = 4.000000000000003 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 41 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 4.100000000000002 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 42 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 4.200000000000002 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 43 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 4.300000000000002 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 44 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.400000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 4.400000000000001 | 0.155 | 0.1
 NULL : Input_3B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 45 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.5 | 0.155 | 0.1
+NULL : MeterVolts = 4.500000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_3B = 4.5 | 0.155 | 0.1
+NULL : Port_3B = 4.500000000000001 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 46 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 4.6000000000000005 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 47 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.7 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 4.7 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 4.8 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8999999999999995 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 4.8999999999999995 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 49 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.999999999999999 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 4.999999999999999 | 0.155 | 0.1
 NULL : Input_3B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 50 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.0 | 0.155 | 0.1
+NULL : MeterVolts = 5.099999999999999 | 0.155 | 0.1
 #test feedback
-NULL : Port_3B = 5.0 | 0.155 | 0.1
+NULL : Port_3B = 5.099999999999999 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 51 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.199999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 5.199999999999998 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 52 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.299999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 5.299999999999998 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 53 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.399999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 5.399999999999998 | 0.155 | 0.1
+NULL : Input_3B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 54 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.499999999999997 | 0.155 | 0.1
+#test feedback
+NULL : Port_3B = 5.499999999999997 | 0.155 | 0.1
 NULL : Input_3B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 55 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.5 | 0.155 | 0.1
-#test feedback
-NULL : Port_3B = 0 | 0.1 | 0.1
-NULL : Input_3B = 2 | 0.1 | 0.1
-#set power supply
-PwrSetVoltage = 56 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 5.6 | 0.155 | 0.1
+NULL : MeterVolts = 5.599999999999997 | 0.155 | 0.1
 #test feedback
 NULL : Port_3B = 0 | 0.1 | 0.1
 NULL : Input_3B = 2 | 0.1 | 0.1
@@ -456,7 +1464,7 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 J2_05 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Port_5A from 1 to 5 in 0.5 increments
+#Sweep of Port_5A from 1 to 5 in 0.1 increments
 
 #set power supply
 PwrSetVoltage = 10 : NULL : WAIT = 0.1
@@ -466,72 +1474,324 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 NULL : Port_5A = 1 | 0.155 | 0.1
 NULL : Input_5A = 0 | 0.1 | 0.1
 #set power supply
+PwrSetVoltage = 11 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.1 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 1.1 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 12 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.2000000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 1.2000000000000002 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 13 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.3000000000000003 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 1.3000000000000003 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 14 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.4000000000000004 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 1.4000000000000004 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
 PwrSetVoltage = 15 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 1.5 | 0.155 | 0.1
+NULL : MeterVolts = 1.5000000000000004 | 0.155 | 0.1
 #test feedback
-NULL : Port_5A = 1.5 | 0.155 | 0.1
+NULL : Port_5A = 1.5000000000000004 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 16 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 1.6000000000000005 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 17 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.7000000000000006 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 1.7000000000000006 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 18 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.8000000000000007 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 1.8000000000000007 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 19 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.9000000000000008 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 1.9000000000000008 | 0.155 | 0.1
 NULL : Input_5A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 20 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.0 | 0.155 | 0.1
+NULL : MeterVolts = 2.000000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_5A = 2.0 | 0.155 | 0.1
+NULL : Port_5A = 2.000000000000001 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 21 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.100000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 2.100000000000001 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 22 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.200000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 2.200000000000001 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 23 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.300000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 2.300000000000001 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 24 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.4000000000000012 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 2.4000000000000012 | 0.155 | 0.1
 NULL : Input_5A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 25 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.5 | 0.155 | 0.1
+NULL : MeterVolts = 2.5000000000000013 | 0.155 | 0.1
 #test feedback
-NULL : Port_5A = 2.5 | 0.155 | 0.1
+NULL : Port_5A = 2.5000000000000013 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 26 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.6000000000000014 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 2.6000000000000014 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 27 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.7000000000000015 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 2.7000000000000015 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 28 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.8000000000000016 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 2.8000000000000016 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 29 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.9000000000000017 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 2.9000000000000017 | 0.155 | 0.1
 NULL : Input_5A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 30 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.0 | 0.155 | 0.1
+NULL : MeterVolts = 3.0000000000000018 | 0.155 | 0.1
 #test feedback
-NULL : Port_5A = 3.0 | 0.155 | 0.1
+NULL : Port_5A = 3.0000000000000018 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 31 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 3.100000000000002 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 32 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 3.200000000000002 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 33 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 3.300000000000002 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 34 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.400000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 3.400000000000002 | 0.155 | 0.1
 NULL : Input_5A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 35 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.5 | 0.155 | 0.1
+NULL : MeterVolts = 3.500000000000002 | 0.155 | 0.1
 #test feedback
-NULL : Port_5A = 3.5 | 0.155 | 0.1
+NULL : Port_5A = 3.500000000000002 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 36 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.6000000000000023 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 3.6000000000000023 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 37 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.7000000000000024 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 3.7000000000000024 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 38 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.8000000000000025 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 3.8000000000000025 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 39 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.9000000000000026 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 3.9000000000000026 | 0.155 | 0.1
 NULL : Input_5A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 40 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.0 | 0.155 | 0.1
+NULL : MeterVolts = 4.000000000000003 | 0.155 | 0.1
 #test feedback
-NULL : Port_5A = 4.0 | 0.155 | 0.1
+NULL : Port_5A = 4.000000000000003 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 41 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 4.100000000000002 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 42 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 4.200000000000002 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 43 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 4.300000000000002 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 44 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.400000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 4.400000000000001 | 0.155 | 0.1
 NULL : Input_5A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 45 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.5 | 0.155 | 0.1
+NULL : MeterVolts = 4.500000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_5A = 4.5 | 0.155 | 0.1
+NULL : Port_5A = 4.500000000000001 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 46 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 4.6000000000000005 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 47 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.7 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 4.7 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 4.8 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8999999999999995 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 4.8999999999999995 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 49 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.999999999999999 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 4.999999999999999 | 0.155 | 0.1
 NULL : Input_5A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 50 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.0 | 0.155 | 0.1
+NULL : MeterVolts = 5.099999999999999 | 0.155 | 0.1
 #test feedback
-NULL : Port_5A = 5.0 | 0.155 | 0.1
+NULL : Port_5A = 5.099999999999999 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 51 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.199999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 5.199999999999998 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 52 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.299999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 5.299999999999998 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 53 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.399999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 5.399999999999998 | 0.155 | 0.1
+NULL : Input_5A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 54 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.499999999999997 | 0.155 | 0.1
+#test feedback
+NULL : Port_5A = 5.499999999999997 | 0.155 | 0.1
 NULL : Input_5A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 55 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.5 | 0.155 | 0.1
-#test feedback
-NULL : Port_5A = 0 | 0.1 | 0.1
-NULL : Input_5A = 2 | 0.1 | 0.1
-#set power supply
-PwrSetVoltage = 56 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 5.6 | 0.155 | 0.1
+NULL : MeterVolts = 5.599999999999997 | 0.155 | 0.1
 #test feedback
 NULL : Port_5A = 0 | 0.1 | 0.1
 NULL : Input_5A = 2 | 0.1 | 0.1
@@ -558,7 +1818,7 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 J2_06 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Port_5B from 1 to 5 in 0.5 increments
+#Sweep of Port_5B from 1 to 5 in 0.1 increments
 
 #set power supply
 PwrSetVoltage = 10 : NULL : WAIT = 0.1
@@ -568,72 +1828,324 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 NULL : Port_5B = 1 | 0.155 | 0.1
 NULL : Input_5B = 0 | 0.1 | 0.1
 #set power supply
+PwrSetVoltage = 11 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.1 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 1.1 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 12 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.2000000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 1.2000000000000002 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 13 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.3000000000000003 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 1.3000000000000003 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 14 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.4000000000000004 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 1.4000000000000004 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
 PwrSetVoltage = 15 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 1.5 | 0.155 | 0.1
+NULL : MeterVolts = 1.5000000000000004 | 0.155 | 0.1
 #test feedback
-NULL : Port_5B = 1.5 | 0.155 | 0.1
+NULL : Port_5B = 1.5000000000000004 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 16 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 1.6000000000000005 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 17 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.7000000000000006 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 1.7000000000000006 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 18 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.8000000000000007 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 1.8000000000000007 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 19 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.9000000000000008 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 1.9000000000000008 | 0.155 | 0.1
 NULL : Input_5B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 20 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.0 | 0.155 | 0.1
+NULL : MeterVolts = 2.000000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_5B = 2.0 | 0.155 | 0.1
+NULL : Port_5B = 2.000000000000001 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 21 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.100000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 2.100000000000001 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 22 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.200000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 2.200000000000001 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 23 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.300000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 2.300000000000001 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 24 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.4000000000000012 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 2.4000000000000012 | 0.155 | 0.1
 NULL : Input_5B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 25 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.5 | 0.155 | 0.1
+NULL : MeterVolts = 2.5000000000000013 | 0.155 | 0.1
 #test feedback
-NULL : Port_5B = 2.5 | 0.155 | 0.1
+NULL : Port_5B = 2.5000000000000013 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 26 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.6000000000000014 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 2.6000000000000014 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 27 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.7000000000000015 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 2.7000000000000015 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 28 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.8000000000000016 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 2.8000000000000016 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 29 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.9000000000000017 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 2.9000000000000017 | 0.155 | 0.1
 NULL : Input_5B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 30 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.0 | 0.155 | 0.1
+NULL : MeterVolts = 3.0000000000000018 | 0.155 | 0.1
 #test feedback
-NULL : Port_5B = 3.0 | 0.155 | 0.1
+NULL : Port_5B = 3.0000000000000018 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 31 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 3.100000000000002 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 32 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 3.200000000000002 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 33 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 3.300000000000002 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 34 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.400000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 3.400000000000002 | 0.155 | 0.1
 NULL : Input_5B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 35 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.5 | 0.155 | 0.1
+NULL : MeterVolts = 3.500000000000002 | 0.155 | 0.1
 #test feedback
-NULL : Port_5B = 3.5 | 0.155 | 0.1
+NULL : Port_5B = 3.500000000000002 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 36 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.6000000000000023 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 3.6000000000000023 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 37 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.7000000000000024 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 3.7000000000000024 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 38 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.8000000000000025 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 3.8000000000000025 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 39 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.9000000000000026 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 3.9000000000000026 | 0.155 | 0.1
 NULL : Input_5B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 40 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.0 | 0.155 | 0.1
+NULL : MeterVolts = 4.000000000000003 | 0.155 | 0.1
 #test feedback
-NULL : Port_5B = 4.0 | 0.155 | 0.1
+NULL : Port_5B = 4.000000000000003 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 41 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 4.100000000000002 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 42 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 4.200000000000002 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 43 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 4.300000000000002 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 44 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.400000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 4.400000000000001 | 0.155 | 0.1
 NULL : Input_5B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 45 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.5 | 0.155 | 0.1
+NULL : MeterVolts = 4.500000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_5B = 4.5 | 0.155 | 0.1
+NULL : Port_5B = 4.500000000000001 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 46 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 4.6000000000000005 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 47 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.7 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 4.7 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 4.8 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8999999999999995 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 4.8999999999999995 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 49 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.999999999999999 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 4.999999999999999 | 0.155 | 0.1
 NULL : Input_5B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 50 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.0 | 0.155 | 0.1
+NULL : MeterVolts = 5.099999999999999 | 0.155 | 0.1
 #test feedback
-NULL : Port_5B = 5.0 | 0.155 | 0.1
+NULL : Port_5B = 5.099999999999999 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 51 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.199999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 5.199999999999998 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 52 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.299999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 5.299999999999998 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 53 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.399999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 5.399999999999998 | 0.155 | 0.1
+NULL : Input_5B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 54 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.499999999999997 | 0.155 | 0.1
+#test feedback
+NULL : Port_5B = 5.499999999999997 | 0.155 | 0.1
 NULL : Input_5B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 55 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.5 | 0.155 | 0.1
-#test feedback
-NULL : Port_5B = 0 | 0.1 | 0.1
-NULL : Input_5B = 2 | 0.1 | 0.1
-#set power supply
-PwrSetVoltage = 56 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 5.6 | 0.155 | 0.1
+NULL : MeterVolts = 5.599999999999997 | 0.155 | 0.1
 #test feedback
 NULL : Port_5B = 0 | 0.1 | 0.1
 NULL : Input_5B = 2 | 0.1 | 0.1
@@ -660,7 +2172,7 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 J2_07 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Port_7A from 1 to 5 in 0.5 increments
+#Sweep of Port_7A from 1 to 5 in 0.1 increments
 
 #set power supply
 PwrSetVoltage = 10 : NULL : WAIT = 0.1
@@ -670,72 +2182,324 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 NULL : Port_7A = 1 | 0.155 | 0.1
 NULL : Input_7A = 0 | 0.1 | 0.1
 #set power supply
+PwrSetVoltage = 11 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.1 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 1.1 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 12 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.2000000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 1.2000000000000002 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 13 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.3000000000000003 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 1.3000000000000003 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 14 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.4000000000000004 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 1.4000000000000004 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
 PwrSetVoltage = 15 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 1.5 | 0.155 | 0.1
+NULL : MeterVolts = 1.5000000000000004 | 0.155 | 0.1
 #test feedback
-NULL : Port_7A = 1.5 | 0.155 | 0.1
+NULL : Port_7A = 1.5000000000000004 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 16 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 1.6000000000000005 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 17 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.7000000000000006 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 1.7000000000000006 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 18 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.8000000000000007 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 1.8000000000000007 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 19 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.9000000000000008 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 1.9000000000000008 | 0.155 | 0.1
 NULL : Input_7A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 20 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.0 | 0.155 | 0.1
+NULL : MeterVolts = 2.000000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_7A = 2.0 | 0.155 | 0.1
+NULL : Port_7A = 2.000000000000001 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 21 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.100000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 2.100000000000001 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 22 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.200000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 2.200000000000001 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 23 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.300000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 2.300000000000001 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 24 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.4000000000000012 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 2.4000000000000012 | 0.155 | 0.1
 NULL : Input_7A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 25 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.5 | 0.155 | 0.1
+NULL : MeterVolts = 2.5000000000000013 | 0.155 | 0.1
 #test feedback
-NULL : Port_7A = 2.5 | 0.155 | 0.1
+NULL : Port_7A = 2.5000000000000013 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 26 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.6000000000000014 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 2.6000000000000014 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 27 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.7000000000000015 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 2.7000000000000015 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 28 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.8000000000000016 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 2.8000000000000016 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 29 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.9000000000000017 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 2.9000000000000017 | 0.155 | 0.1
 NULL : Input_7A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 30 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.0 | 0.155 | 0.1
+NULL : MeterVolts = 3.0000000000000018 | 0.155 | 0.1
 #test feedback
-NULL : Port_7A = 3.0 | 0.155 | 0.1
+NULL : Port_7A = 3.0000000000000018 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 31 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 3.100000000000002 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 32 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 3.200000000000002 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 33 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 3.300000000000002 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 34 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.400000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 3.400000000000002 | 0.155 | 0.1
 NULL : Input_7A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 35 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.5 | 0.155 | 0.1
+NULL : MeterVolts = 3.500000000000002 | 0.155 | 0.1
 #test feedback
-NULL : Port_7A = 3.5 | 0.155 | 0.1
+NULL : Port_7A = 3.500000000000002 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 36 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.6000000000000023 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 3.6000000000000023 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 37 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.7000000000000024 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 3.7000000000000024 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 38 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.8000000000000025 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 3.8000000000000025 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 39 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.9000000000000026 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 3.9000000000000026 | 0.155 | 0.1
 NULL : Input_7A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 40 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.0 | 0.155 | 0.1
+NULL : MeterVolts = 4.000000000000003 | 0.155 | 0.1
 #test feedback
-NULL : Port_7A = 4.0 | 0.155 | 0.1
+NULL : Port_7A = 4.000000000000003 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 41 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 4.100000000000002 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 42 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 4.200000000000002 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 43 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 4.300000000000002 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 44 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.400000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 4.400000000000001 | 0.155 | 0.1
 NULL : Input_7A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 45 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.5 | 0.155 | 0.1
+NULL : MeterVolts = 4.500000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_7A = 4.5 | 0.155 | 0.1
+NULL : Port_7A = 4.500000000000001 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 46 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 4.6000000000000005 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 47 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.7 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 4.7 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 4.8 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8999999999999995 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 4.8999999999999995 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 49 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.999999999999999 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 4.999999999999999 | 0.155 | 0.1
 NULL : Input_7A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 50 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.0 | 0.155 | 0.1
+NULL : MeterVolts = 5.099999999999999 | 0.155 | 0.1
 #test feedback
-NULL : Port_7A = 5.0 | 0.155 | 0.1
+NULL : Port_7A = 5.099999999999999 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 51 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.199999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 5.199999999999998 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 52 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.299999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 5.299999999999998 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 53 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.399999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 5.399999999999998 | 0.155 | 0.1
+NULL : Input_7A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 54 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.499999999999997 | 0.155 | 0.1
+#test feedback
+NULL : Port_7A = 5.499999999999997 | 0.155 | 0.1
 NULL : Input_7A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 55 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.5 | 0.155 | 0.1
-#test feedback
-NULL : Port_7A = 0 | 0.1 | 0.1
-NULL : Input_7A = 2 | 0.1 | 0.1
-#set power supply
-PwrSetVoltage = 56 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 5.6 | 0.155 | 0.1
+NULL : MeterVolts = 5.599999999999997 | 0.155 | 0.1
 #test feedback
 NULL : Port_7A = 0 | 0.1 | 0.1
 NULL : Input_7A = 2 | 0.1 | 0.1
@@ -762,7 +2526,7 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 J2_08 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Port_7B from 1 to 5 in 0.5 increments
+#Sweep of Port_7B from 1 to 5 in 0.1 increments
 
 #set power supply
 PwrSetVoltage = 10 : NULL : WAIT = 0.1
@@ -772,72 +2536,324 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 NULL : Port_7B = 1 | 0.155 | 0.1
 NULL : Input_7B = 0 | 0.1 | 0.1
 #set power supply
+PwrSetVoltage = 11 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.1 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 1.1 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 12 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.2000000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 1.2000000000000002 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 13 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.3000000000000003 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 1.3000000000000003 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 14 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.4000000000000004 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 1.4000000000000004 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
 PwrSetVoltage = 15 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 1.5 | 0.155 | 0.1
+NULL : MeterVolts = 1.5000000000000004 | 0.155 | 0.1
 #test feedback
-NULL : Port_7B = 1.5 | 0.155 | 0.1
+NULL : Port_7B = 1.5000000000000004 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 16 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 1.6000000000000005 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 17 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.7000000000000006 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 1.7000000000000006 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 18 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.8000000000000007 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 1.8000000000000007 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 19 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.9000000000000008 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 1.9000000000000008 | 0.155 | 0.1
 NULL : Input_7B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 20 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.0 | 0.155 | 0.1
+NULL : MeterVolts = 2.000000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_7B = 2.0 | 0.155 | 0.1
+NULL : Port_7B = 2.000000000000001 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 21 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.100000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 2.100000000000001 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 22 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.200000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 2.200000000000001 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 23 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.300000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 2.300000000000001 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 24 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.4000000000000012 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 2.4000000000000012 | 0.155 | 0.1
 NULL : Input_7B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 25 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.5 | 0.155 | 0.1
+NULL : MeterVolts = 2.5000000000000013 | 0.155 | 0.1
 #test feedback
-NULL : Port_7B = 2.5 | 0.155 | 0.1
+NULL : Port_7B = 2.5000000000000013 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 26 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.6000000000000014 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 2.6000000000000014 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 27 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.7000000000000015 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 2.7000000000000015 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 28 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.8000000000000016 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 2.8000000000000016 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 29 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.9000000000000017 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 2.9000000000000017 | 0.155 | 0.1
 NULL : Input_7B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 30 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.0 | 0.155 | 0.1
+NULL : MeterVolts = 3.0000000000000018 | 0.155 | 0.1
 #test feedback
-NULL : Port_7B = 3.0 | 0.155 | 0.1
+NULL : Port_7B = 3.0000000000000018 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 31 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 3.100000000000002 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 32 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 3.200000000000002 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 33 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 3.300000000000002 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 34 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.400000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 3.400000000000002 | 0.155 | 0.1
 NULL : Input_7B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 35 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.5 | 0.155 | 0.1
+NULL : MeterVolts = 3.500000000000002 | 0.155 | 0.1
 #test feedback
-NULL : Port_7B = 3.5 | 0.155 | 0.1
+NULL : Port_7B = 3.500000000000002 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 36 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.6000000000000023 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 3.6000000000000023 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 37 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.7000000000000024 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 3.7000000000000024 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 38 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.8000000000000025 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 3.8000000000000025 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 39 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.9000000000000026 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 3.9000000000000026 | 0.155 | 0.1
 NULL : Input_7B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 40 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.0 | 0.155 | 0.1
+NULL : MeterVolts = 4.000000000000003 | 0.155 | 0.1
 #test feedback
-NULL : Port_7B = 4.0 | 0.155 | 0.1
+NULL : Port_7B = 4.000000000000003 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 41 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 4.100000000000002 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 42 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 4.200000000000002 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 43 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 4.300000000000002 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 44 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.400000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 4.400000000000001 | 0.155 | 0.1
 NULL : Input_7B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 45 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.5 | 0.155 | 0.1
+NULL : MeterVolts = 4.500000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_7B = 4.5 | 0.155 | 0.1
+NULL : Port_7B = 4.500000000000001 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 46 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 4.6000000000000005 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 47 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.7 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 4.7 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 4.8 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8999999999999995 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 4.8999999999999995 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 49 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.999999999999999 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 4.999999999999999 | 0.155 | 0.1
 NULL : Input_7B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 50 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.0 | 0.155 | 0.1
+NULL : MeterVolts = 5.099999999999999 | 0.155 | 0.1
 #test feedback
-NULL : Port_7B = 5.0 | 0.155 | 0.1
+NULL : Port_7B = 5.099999999999999 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 51 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.199999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 5.199999999999998 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 52 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.299999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 5.299999999999998 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 53 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.399999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 5.399999999999998 | 0.155 | 0.1
+NULL : Input_7B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 54 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.499999999999997 | 0.155 | 0.1
+#test feedback
+NULL : Port_7B = 5.499999999999997 | 0.155 | 0.1
 NULL : Input_7B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 55 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.5 | 0.155 | 0.1
-#test feedback
-NULL : Port_7B = 0 | 0.1 | 0.1
-NULL : Input_7B = 2 | 0.1 | 0.1
-#set power supply
-PwrSetVoltage = 56 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 5.6 | 0.155 | 0.1
+NULL : MeterVolts = 5.599999999999997 | 0.155 | 0.1
 #test feedback
 NULL : Port_7B = 0 | 0.1 | 0.1
 NULL : Input_7B = 2 | 0.1 | 0.1
@@ -864,7 +2880,7 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 J2_09 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Port_9A from 1 to 5 in 0.5 increments
+#Sweep of Port_9A from 1 to 5 in 0.1 increments
 
 #set power supply
 PwrSetVoltage = 10 : NULL : WAIT = 0.1
@@ -874,72 +2890,324 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 NULL : Port_9A = 1 | 0.155 | 0.1
 NULL : Input_9A = 0 | 0.1 | 0.1
 #set power supply
+PwrSetVoltage = 11 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.1 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 1.1 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 12 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.2000000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 1.2000000000000002 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 13 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.3000000000000003 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 1.3000000000000003 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 14 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.4000000000000004 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 1.4000000000000004 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
 PwrSetVoltage = 15 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 1.5 | 0.155 | 0.1
+NULL : MeterVolts = 1.5000000000000004 | 0.155 | 0.1
 #test feedback
-NULL : Port_9A = 1.5 | 0.155 | 0.1
+NULL : Port_9A = 1.5000000000000004 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 16 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 1.6000000000000005 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 17 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.7000000000000006 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 1.7000000000000006 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 18 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.8000000000000007 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 1.8000000000000007 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 19 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.9000000000000008 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 1.9000000000000008 | 0.155 | 0.1
 NULL : Input_9A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 20 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.0 | 0.155 | 0.1
+NULL : MeterVolts = 2.000000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_9A = 2.0 | 0.155 | 0.1
+NULL : Port_9A = 2.000000000000001 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 21 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.100000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 2.100000000000001 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 22 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.200000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 2.200000000000001 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 23 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.300000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 2.300000000000001 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 24 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.4000000000000012 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 2.4000000000000012 | 0.155 | 0.1
 NULL : Input_9A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 25 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.5 | 0.155 | 0.1
+NULL : MeterVolts = 2.5000000000000013 | 0.155 | 0.1
 #test feedback
-NULL : Port_9A = 2.5 | 0.155 | 0.1
+NULL : Port_9A = 2.5000000000000013 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 26 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.6000000000000014 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 2.6000000000000014 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 27 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.7000000000000015 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 2.7000000000000015 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 28 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.8000000000000016 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 2.8000000000000016 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 29 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.9000000000000017 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 2.9000000000000017 | 0.155 | 0.1
 NULL : Input_9A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 30 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.0 | 0.155 | 0.1
+NULL : MeterVolts = 3.0000000000000018 | 0.155 | 0.1
 #test feedback
-NULL : Port_9A = 3.0 | 0.155 | 0.1
+NULL : Port_9A = 3.0000000000000018 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 31 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 3.100000000000002 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 32 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 3.200000000000002 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 33 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 3.300000000000002 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 34 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.400000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 3.400000000000002 | 0.155 | 0.1
 NULL : Input_9A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 35 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.5 | 0.155 | 0.1
+NULL : MeterVolts = 3.500000000000002 | 0.155 | 0.1
 #test feedback
-NULL : Port_9A = 3.5 | 0.155 | 0.1
+NULL : Port_9A = 3.500000000000002 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 36 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.6000000000000023 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 3.6000000000000023 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 37 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.7000000000000024 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 3.7000000000000024 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 38 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.8000000000000025 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 3.8000000000000025 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 39 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.9000000000000026 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 3.9000000000000026 | 0.155 | 0.1
 NULL : Input_9A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 40 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.0 | 0.155 | 0.1
+NULL : MeterVolts = 4.000000000000003 | 0.155 | 0.1
 #test feedback
-NULL : Port_9A = 4.0 | 0.155 | 0.1
+NULL : Port_9A = 4.000000000000003 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 41 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 4.100000000000002 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 42 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 4.200000000000002 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 43 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 4.300000000000002 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 44 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.400000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 4.400000000000001 | 0.155 | 0.1
 NULL : Input_9A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 45 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.5 | 0.155 | 0.1
+NULL : MeterVolts = 4.500000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_9A = 4.5 | 0.155 | 0.1
+NULL : Port_9A = 4.500000000000001 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 46 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 4.6000000000000005 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 47 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.7 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 4.7 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 4.8 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8999999999999995 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 4.8999999999999995 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 49 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.999999999999999 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 4.999999999999999 | 0.155 | 0.1
 NULL : Input_9A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 50 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.0 | 0.155 | 0.1
+NULL : MeterVolts = 5.099999999999999 | 0.155 | 0.1
 #test feedback
-NULL : Port_9A = 5.0 | 0.155 | 0.1
+NULL : Port_9A = 5.099999999999999 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 51 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.199999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 5.199999999999998 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 52 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.299999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 5.299999999999998 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 53 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.399999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 5.399999999999998 | 0.155 | 0.1
+NULL : Input_9A = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 54 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.499999999999997 | 0.155 | 0.1
+#test feedback
+NULL : Port_9A = 5.499999999999997 | 0.155 | 0.1
 NULL : Input_9A = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 55 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.5 | 0.155 | 0.1
-#test feedback
-NULL : Port_9A = 0 | 0.1 | 0.1
-NULL : Input_9A = 2 | 0.1 | 0.1
-#set power supply
-PwrSetVoltage = 56 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 5.6 | 0.155 | 0.1
+NULL : MeterVolts = 5.599999999999997 | 0.155 | 0.1
 #test feedback
 NULL : Port_9A = 0 | 0.1 | 0.1
 NULL : Input_9A = 2 | 0.1 | 0.1
@@ -966,7 +3234,7 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 J2_10 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Port_9B from 1 to 5 in 0.5 increments
+#Sweep of Port_9B from 1 to 5 in 0.1 increments
 
 #set power supply
 PwrSetVoltage = 10 : NULL : WAIT = 0.1
@@ -976,72 +3244,324 @@ NULL : MeterVolts = 1 | 0.155 | 0.1
 NULL : Port_9B = 1 | 0.155 | 0.1
 NULL : Input_9B = 0 | 0.1 | 0.1
 #set power supply
+PwrSetVoltage = 11 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.1 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 1.1 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 12 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.2000000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 1.2000000000000002 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 13 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.3000000000000003 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 1.3000000000000003 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 14 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.4000000000000004 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 1.4000000000000004 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
 PwrSetVoltage = 15 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 1.5 | 0.155 | 0.1
+NULL : MeterVolts = 1.5000000000000004 | 0.155 | 0.1
 #test feedback
-NULL : Port_9B = 1.5 | 0.155 | 0.1
+NULL : Port_9B = 1.5000000000000004 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 16 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 1.6000000000000005 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 17 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.7000000000000006 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 1.7000000000000006 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 18 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.8000000000000007 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 1.8000000000000007 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 19 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 1.9000000000000008 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 1.9000000000000008 | 0.155 | 0.1
 NULL : Input_9B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 20 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.0 | 0.155 | 0.1
+NULL : MeterVolts = 2.000000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_9B = 2.0 | 0.155 | 0.1
+NULL : Port_9B = 2.000000000000001 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 21 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.100000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 2.100000000000001 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 22 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.200000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 2.200000000000001 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 23 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.300000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 2.300000000000001 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 24 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.4000000000000012 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 2.4000000000000012 | 0.155 | 0.1
 NULL : Input_9B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 25 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 2.5 | 0.155 | 0.1
+NULL : MeterVolts = 2.5000000000000013 | 0.155 | 0.1
 #test feedback
-NULL : Port_9B = 2.5 | 0.155 | 0.1
+NULL : Port_9B = 2.5000000000000013 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 26 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.6000000000000014 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 2.6000000000000014 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 27 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.7000000000000015 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 2.7000000000000015 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 28 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.8000000000000016 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 2.8000000000000016 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 29 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 2.9000000000000017 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 2.9000000000000017 | 0.155 | 0.1
 NULL : Input_9B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 30 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.0 | 0.155 | 0.1
+NULL : MeterVolts = 3.0000000000000018 | 0.155 | 0.1
 #test feedback
-NULL : Port_9B = 3.0 | 0.155 | 0.1
+NULL : Port_9B = 3.0000000000000018 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 31 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 3.100000000000002 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 32 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 3.200000000000002 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 33 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 3.300000000000002 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 34 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.400000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 3.400000000000002 | 0.155 | 0.1
 NULL : Input_9B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 35 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 3.5 | 0.155 | 0.1
+NULL : MeterVolts = 3.500000000000002 | 0.155 | 0.1
 #test feedback
-NULL : Port_9B = 3.5 | 0.155 | 0.1
+NULL : Port_9B = 3.500000000000002 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 36 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.6000000000000023 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 3.6000000000000023 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 37 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.7000000000000024 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 3.7000000000000024 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 38 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.8000000000000025 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 3.8000000000000025 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 39 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 3.9000000000000026 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 3.9000000000000026 | 0.155 | 0.1
 NULL : Input_9B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 40 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.0 | 0.155 | 0.1
+NULL : MeterVolts = 4.000000000000003 | 0.155 | 0.1
 #test feedback
-NULL : Port_9B = 4.0 | 0.155 | 0.1
+NULL : Port_9B = 4.000000000000003 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 41 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.100000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 4.100000000000002 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 42 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.200000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 4.200000000000002 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 43 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.300000000000002 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 4.300000000000002 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 44 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.400000000000001 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 4.400000000000001 | 0.155 | 0.1
 NULL : Input_9B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 45 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 4.5 | 0.155 | 0.1
+NULL : MeterVolts = 4.500000000000001 | 0.155 | 0.1
 #test feedback
-NULL : Port_9B = 4.5 | 0.155 | 0.1
+NULL : Port_9B = 4.500000000000001 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 46 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.6000000000000005 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 4.6000000000000005 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 47 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.7 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 4.7 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 4.8 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 48 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.8999999999999995 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 4.8999999999999995 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 49 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 4.999999999999999 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 4.999999999999999 | 0.155 | 0.1
 NULL : Input_9B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 50 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.0 | 0.155 | 0.1
+NULL : MeterVolts = 5.099999999999999 | 0.155 | 0.1
 #test feedback
-NULL : Port_9B = 5.0 | 0.155 | 0.1
+NULL : Port_9B = 5.099999999999999 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 51 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.199999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 5.199999999999998 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 52 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.299999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 5.299999999999998 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 53 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.399999999999998 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 5.399999999999998 | 0.155 | 0.1
+NULL : Input_9B = 0 | 0.1 | 0.1
+#set power supply
+PwrSetVoltage = 54 : NULL : WAIT = 0.1
+#test power supply
+NULL : MeterVolts = 5.499999999999997 | 0.155 | 0.1
+#test feedback
+NULL : Port_9B = 5.499999999999997 | 0.155 | 0.1
 NULL : Input_9B = 0 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 55 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 5.5 | 0.155 | 0.1
-#test feedback
-NULL : Port_9B = 0 | 0.1 | 0.1
-NULL : Input_9B = 2 | 0.1 | 0.1
-#set power supply
-PwrSetVoltage = 56 : NULL : WAIT = 0.1
-#test power supply
-NULL : MeterVolts = 5.6 | 0.155 | 0.1
+NULL : MeterVolts = 5.599999999999997 | 0.155 | 0.1
 #test feedback
 NULL : Port_9B = 0 | 0.1 | 0.1
 NULL : Input_9B = 2 | 0.1 | 0.1

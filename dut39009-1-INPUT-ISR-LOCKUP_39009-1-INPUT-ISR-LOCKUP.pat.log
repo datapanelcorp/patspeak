@@ -1,0 +1,79 @@
+Esc - user interruption @ 2026-01-21-11:44:51
+Started on: 2026-01-21-11:44:04
+00000 #39009-1
+00000 #Verion 0.0
+00000 #input test
+00000 UUT_DBC = 39009-561.dbc
+00000 UUT_DATANAME = 39009-1-INPUT-ISR-LOCKUP
+00000 
+00000 
+00000 #-----setup pat-----
+00000 #setup meter
+00000 LdRemote = 1 : NULL : WAIT = 0.1
+00001 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00002 LdEnable = 0 : NULL : WAIT = 0.1
+00003 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
+00004 
+00004 #setup PS1
+00004 PwrRemote = 0 : NULL : WAIT = 0.1
+00005 PwrSetCurrent = 0 : NULL : WAIT = 0.1
+00006 PwrSetVoltage = 0 : NULL : WAIT = 0.1
+00007 PwrEnable = 0 : NULL : WAIT = 0.1
+00008 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1
+00009 
+00009 J4_03 = 1 : NULL : WAIT = 0.2
+00010 #-----setup 39009-----
+00010 #configure as Output Digital ON/OFF
+00010 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00011 Command = 83, MODE1A = 4, MODE1B = 0, MODE2A = 1, MODE2B = 1, MODE3A = 0, MODE3B = 0, MODE4A = 1, MODE4B = 1, MODE5A = 4, MODE5B = 4, MODE6A = 1, MODE6B = 1, MODE7A = 4, MODE7B = 4 : NULL : WAIT = 0.5
+00012 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00013 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 4, MODE9B = 4, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00014 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00015 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00016 #clear multiplex
+00016 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00017 #switch input to load line
+00017 J2_01 = 1 : NULL : WAIT = 0.1
+00018 
+00018 J4_01 = 1 : NULL : WAIT = 0.1
+00019 SWEEP-RUNNING DEATHSWEEP!
+00019 
+00019 #Finished with port
+00019 #switch out input
+00019 J2_01 = 0 : NULL : WAIT = 0.1
+00020 
+00020 #-----setup 39009-----
+00020 #configure as Output Digital ON/OFF
+00020 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00021 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 0, MODE3B = 0, MODE4A = 1, MODE4B = 1, MODE5A = 4, MODE5B = 4, MODE6A = 1, MODE6B = 1, MODE7A = 4, MODE7B = 4 : NULL : WAIT = 0.5
+00022 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00023 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 4, MODE9B = 4, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00024 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00025 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00026 #clear multiplex
+00026 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00027 #switch input to load line
+00027 J2_02 = 1 : NULL : WAIT = 0.1
+00028 
+00028 J4_01 = 1 : NULL : WAIT = 0.1
+00029 SWEEP-RUNNING DEATHSWEEP!
+00029 
+00029 #Finished with port
+00029 #switch out input
+00029 J2_02 = 0 : NULL : WAIT = 0.1
+00030 
+00030 #-----setup 39009-----
+00030 #configure as Output Digital ON/OFF
+00030 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00031 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 0, MODE4A = 1, MODE4B = 1, MODE5A = 4, MODE5B = 4, MODE6A = 1, MODE6B = 1, MODE7A = 4, MODE7B = 4 : NULL : WAIT = 0.5
+00032 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00033 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 4, MODE9B = 4, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00034 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00035 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00036 #clear multiplex
+00036 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00037 #switch input to load line
+00037 J2_03 = 1 : NULL : WAIT = 0.1
+00038 
+00038 J4_01 = 1 : NULL : WAIT = 0.1
+00039 SWEEP-RUNNING DEATHSWEEP!

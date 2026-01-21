@@ -5,6 +5,33 @@ import os
 from datetime import datetime
 import support.globals as globals
 from datetime import timedelta
+import subprocess
+
+def DeathSpeep():
+
+    cmd = [
+        "python",
+        r"DP800\rigol_dp800_sweep_ch2.py",
+        "--resource", "USB0::0x1AB1::0x0E11::DP8C180100022::INSTR",
+        "--channel", "2",
+        "--start", "4.32",
+        "--stop", "4.43",
+        "--step", "0.001",
+        "--mode", "updown",
+        "--dwell", "0.045",
+        "--opc-every", "15",
+        "--output-off-at-end",
+    ]
+
+    result = subprocess.run(
+        cmd,
+        capture_output=True,
+        text=True,
+        check=True
+    )
+
+    print(result.stdout)
+    print(result.stderr)
 
 
 def SaveData():
@@ -103,7 +130,11 @@ def ProcessScript():
         the_prompt = globals.TestLine.split("-")
         yn = input(the_prompt[1])
         globals.TestLine = "" #clear to stop further processing
-        
+
+    if(globals.TestLine.startswith("SWEEP")):
+        DeathSpeep()
+        globals.TestLine = "" #clear to stop further processing
+
     if(globals.TestLine == "SAVE"):
         SaveData()
         globals.TestLine = "" #clear to stop further processing
