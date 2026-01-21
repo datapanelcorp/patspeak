@@ -18,8 +18,8 @@ def DeathSpeep():
         "--stop", "4.43",
         "--step", "0.001",
         "--mode", "updown",
-        "--dwell", "0.045",
-        "--opc-every", "15",
+        "--dwell", "0.020",
+        "--opc-every", "25",
         "--output-off-at-end",
     ]
 
@@ -32,8 +32,8 @@ def DeathSpeep():
 
     print(result.stdout)
     print(result.stderr)
-
-
+    globals.UUT_TestLog += result.stdout + "\n"
+    globals.UUT_TestLog += result.stderr + "\n"
 def SaveData():
 
     print("Writing Data Collected.")

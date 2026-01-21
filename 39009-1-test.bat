@@ -3,6 +3,9 @@ python pat.py RESET.pat -v
 python pat.py 39009-1-INPUT-ISR-LOCKUP.pat -v 
 exit /b 0
 
+python pat.py RESET.pat -v 
+python pat.py 39009-1-INPUT-FREQ.pat -v 
+exit /b 0
 ::**********************
 python pat.py RESET.pat -v 
 python pat.py 39009-1-INPUT-FREQ.pat -v 

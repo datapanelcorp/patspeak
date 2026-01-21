@@ -53,7 +53,6 @@ MaxFreq = 3000
 ExpFreq = 0
 FreqInc = 100
 
-
 ExpFreq = FreqInc
 
 while ExpFreq <= MaxFreq:

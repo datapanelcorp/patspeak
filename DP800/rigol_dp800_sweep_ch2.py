@@ -30,6 +30,20 @@ from typing import Iterable, Optional, Tuple, List
 import pyvisa
 
 
+def fmt_duration(seconds: float) -> str:
+    """Format a duration in a compact, human-friendly way."""
+    if seconds < 0:
+        seconds = 0.0
+    if seconds < 60.0:
+        return f"{seconds:0.3f}s"
+    total = int(seconds)
+    h, rem = divmod(total, 3600)
+    m, s = divmod(rem, 60)
+    if h:
+        return f"{h:d}:{m:02d}:{s:02d}"
+    return f"{m:02d}:{s:02d}"
+
+
 def list_resources(backend: Optional[str]) -> Tuple[str, ...]:
     rm = pyvisa.ResourceManager(backend) if backend else pyvisa.ResourceManager()
     return tuple(rm.list_resources())
@@ -219,6 +233,7 @@ def main() -> int:
 
     inst = None
     ch = args.channel
+    sweep_t0 = None  # set once the sweep actually starts
     try:
         inst = open_instrument(resource, args.backend)
         idn = inst.query("*IDN?").strip()
@@ -248,6 +263,8 @@ def main() -> int:
             f"({len(points)} points)"
         )
 
+        sweep_t0 = time.monotonic()
+
         for idx, v in enumerate(points):
             inst.write(f":VOLT {v:.6f}")
 
@@ -258,10 +275,22 @@ def main() -> int:
                 inst.query("*OPC?")
 
             if cfg.print_every > 0 and (idx % cfg.print_every == 0):
-                print(f"  {idx:6d}/{len(points)-1} set={v:.6f} V")
+                elapsed_s = time.monotonic() - sweep_t0
+                done = idx + 1
+                total = len(points)
+                rate = (done / elapsed_s) if elapsed_s > 0 else 0.0
+                eta_s = ((total - done) / rate) if rate > 0 and done > 1 else None
+                eta_txt = f" eta={fmt_duration(eta_s)}" if eta_s is not None else ""
+                print(
+                    f"  {idx:6d}/{len(points)-1} set={v:.6f} V"
+                    f" elapsed={fmt_duration(elapsed_s)}"
+                    f" rate={rate:0.2f} steps/s"
+                    f"{eta_txt}"
+                )
 
         inst.query("*OPC?")
-        print("Sweep complete.")
+        elapsed_total_s = time.monotonic() - sweep_t0
+        print(f"Sweep complete. Elapsed: {fmt_duration(elapsed_total_s)}")
 
         if cfg.output_off_at_end:
             kill_power_best_effort(inst, ch)
@@ -272,6 +301,8 @@ def main() -> int:
 
     except KeyboardInterrupt:
         print("\nInterrupted (Ctrl+C).", file=sys.stderr)
+        if sweep_t0 is not None:
+            print(f"Elapsed so far: {fmt_duration(time.monotonic() - sweep_t0)}", file=sys.stderr)
         if inst is not None and cfg.kill_on_interrupt:
             kill_power_best_effort(inst, ch)
             print("Killed power (output OFF).", file=sys.stderr)
@@ -279,6 +310,8 @@ def main() -> int:
 
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
+        if sweep_t0 is not None:
+            print(f"Elapsed so far: {fmt_duration(time.monotonic() - sweep_t0)}", file=sys.stderr)
         if inst is not None and cfg.kill_on_interrupt:
             kill_power_best_effort(inst, ch)
             print("Killed power (output OFF) due to error.", file=sys.stderr)
