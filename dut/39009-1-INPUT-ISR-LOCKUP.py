@@ -71,9 +71,10 @@ ExpFreq = FreqInc
 PortMode = IN_MODE_A32V
 PortUnderTest = PortMode
 
-PortIndex = 0
+PortIndex = 1
+
 ModeIndex = 0
-MaxMode = 0
+MaxMode = 1
 
 while ModeIndex <= MaxMode:
 
@@ -82,54 +83,230 @@ while ModeIndex <= MaxMode:
         Port1BMode = IN_MODE_OFF
         Port3AMode = IN_MODE_OFF
         Port3BMode = IN_MODE_OFF
+        
+        if (ModeIndex == 0):
+            # Port1AMode = IN_MODE_A05V
+            # Port1BMode = IN_MODE_FREQ
+            Port1AMode = IN_MODE_FREQ
+            Port1BMode = IN_MODE_A05V
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_A05V
 
-        if(ModeIndex==0):
+        elif (ModeIndex == 1):
+            # Port1AMode = IN_MODE_FREQ
+            # Port1BMode = IN_MODE_A05V
+            Port1AMode = IN_MODE_A05V
+            Port1BMode = IN_MODE_FREQ
+            Port3AMode = IN_MODE_A05V
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 2):
+            Port1AMode = IN_MODE_A05V
+            Port1BMode = IN_MODE_A05V
+            Port3AMode = IN_MODE_A05V
+            Port3BMode = IN_MODE_A05V
+
+        elif (ModeIndex == 3):
+            Port1AMode = IN_MODE_A05V
+            Port1BMode = IN_MODE_A05V
+            Port3AMode = IN_MODE_A05V
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 4):
+            Port1AMode = IN_MODE_A05V
+            Port1BMode = IN_MODE_A05V
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_A05V
+
+        elif (ModeIndex == 5):
+            Port1AMode = IN_MODE_A05V
+            Port1BMode = IN_MODE_A05V
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 6):
+            Port1AMode = IN_MODE_A05V
+            Port1BMode = IN_MODE_FREQ
+            Port3AMode = IN_MODE_A05V
+            Port3BMode = IN_MODE_A05V
+
+        elif (ModeIndex == 7):
+            Port1AMode = IN_MODE_A05V
+            Port1BMode = IN_MODE_FREQ
+            Port3AMode = IN_MODE_A05V
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 8):
             Port1AMode = IN_MODE_A05V
             Port1BMode = IN_MODE_FREQ
             Port3AMode = IN_MODE_DPOS
-            Port3BMode = IN_MODE_A32V
+            Port3BMode = IN_MODE_DPOS
 
-        if(ModeIndex==1):
+        elif (ModeIndex == 9):
+            Port1AMode = IN_MODE_A05V
+            Port1BMode = IN_MODE_DPOS
+            Port3AMode = IN_MODE_A05V
+            Port3BMode = IN_MODE_A05V
+
+        elif (ModeIndex == 10):
+            Port1AMode = IN_MODE_A05V
+            Port1BMode = IN_MODE_DPOS
+            Port3AMode = IN_MODE_A05V
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 11):
+            Port1AMode = IN_MODE_A05V
+            Port1BMode = IN_MODE_DPOS
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_A05V
+
+        elif (ModeIndex == 12):
+            Port1AMode = IN_MODE_A05V
+            Port1BMode = IN_MODE_DPOS
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 13):
+            Port1AMode = IN_MODE_FREQ
+            Port1BMode = IN_MODE_FREQ
+            Port3AMode = IN_MODE_A05V
+            Port3BMode = IN_MODE_A05V
+
+        elif (ModeIndex == 14):
+            Port1AMode = IN_MODE_FREQ
+            Port1BMode = IN_MODE_FREQ
+            Port3AMode = IN_MODE_A05V
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 15):
+            Port1AMode = IN_MODE_FREQ
+            Port1BMode = IN_MODE_FREQ
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_A05V
+
+        elif (ModeIndex == 16):
+            Port1AMode = IN_MODE_FREQ
+            Port1BMode = IN_MODE_FREQ
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 17):
+            Port1AMode = IN_MODE_FREQ
+            Port1BMode = IN_MODE_DPOS
+            Port3AMode = IN_MODE_A05V
+            Port3BMode = IN_MODE_A05V
+
+        elif (ModeIndex == 18):
+            Port1AMode = IN_MODE_FREQ
+            Port1BMode = IN_MODE_DPOS
+            Port3AMode = IN_MODE_A05V
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 19):
+            Port1AMode = IN_MODE_FREQ
+            Port1BMode = IN_MODE_DPOS
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_A05V
+
+        elif (ModeIndex == 20):
+            Port1AMode = IN_MODE_FREQ
+            Port1BMode = IN_MODE_DPOS
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 21):
             Port1AMode = IN_MODE_FREQ
             Port1BMode = IN_MODE_A05V
             Port3AMode = IN_MODE_A05V
             Port3BMode = IN_MODE_A05V
 
-        if(ModeIndex==2):
-            Port1AMode = IN_MODE_A05V
-            Port1BMode = IN_MODE_FREQ
-            Port3AMode = IN_MODE_A05V
+        elif (ModeIndex == 22):
+            Port1AMode = IN_MODE_FREQ
+            Port1BMode = IN_MODE_A05V
+            Port3AMode = IN_MODE_DPOS
             Port3BMode = IN_MODE_A05V
 
-        if(ModeIndex==3):
+        elif (ModeIndex == 23):
             Port1AMode = IN_MODE_FREQ
-            Port1BMode = IN_MODE_FREQ
-            Port3AMode = IN_MODE_A05V
-            Port3BMode = IN_MODE_A05V            
+            Port1BMode = IN_MODE_A05V
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_DPOS
 
-        if(ModeIndex==4):
+        elif (ModeIndex == 24):
             Port1AMode = IN_MODE_A05V
+            Port1BMode = IN_MODE_FREQ
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_A05V
+
+        elif (ModeIndex == 25):
+            Port1AMode = IN_MODE_DPOS
             Port1BMode = IN_MODE_A05V
             Port3AMode = IN_MODE_A05V
             Port3BMode = IN_MODE_A05V
 
-        if(ModeIndex==5):
-            Port1AMode = IN_MODE_FREQ
+        elif (ModeIndex == 26):
+            Port1AMode = IN_MODE_DPOS
             Port1BMode = IN_MODE_A05V
             Port3AMode = IN_MODE_A05V
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 27):
+            Port1AMode = IN_MODE_DPOS
+            Port1BMode = IN_MODE_A05V
+            Port3AMode = IN_MODE_DPOS
             Port3BMode = IN_MODE_A05V
 
-        if(ModeIndex==6):
-            Port1AMode = IN_MODE_A05V
+        elif (ModeIndex == 28):
+            Port1AMode = IN_MODE_DPOS
+            Port1BMode = IN_MODE_A05V
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 29):
+            Port1AMode = IN_MODE_DPOS
             Port1BMode = IN_MODE_FREQ
             Port3AMode = IN_MODE_A05V
             Port3BMode = IN_MODE_A05V
 
-        if(ModeIndex==7):
-            Port1AMode = IN_MODE_FREQ
+        elif (ModeIndex == 30):
+            Port1AMode = IN_MODE_DPOS
             Port1BMode = IN_MODE_FREQ
             Port3AMode = IN_MODE_A05V
-            Port3BMode = IN_MODE_A05V         
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 31):
+            Port1AMode = IN_MODE_DPOS
+            Port1BMode = IN_MODE_FREQ
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_A05V
+
+        elif (ModeIndex == 32):
+            Port1AMode = IN_MODE_DPOS
+            Port1BMode = IN_MODE_FREQ
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 33):
+            Port1AMode = IN_MODE_DPOS
+            Port1BMode = IN_MODE_DPOS
+            Port3AMode = IN_MODE_A05V
+            Port3BMode = IN_MODE_A05V
+
+        elif (ModeIndex == 34):
+            Port1AMode = IN_MODE_DPOS
+            Port1BMode = IN_MODE_DPOS
+            Port3AMode = IN_MODE_A05V
+            Port3BMode = IN_MODE_DPOS
+
+        elif (ModeIndex == 35):
+            Port1AMode = IN_MODE_DPOS
+            Port1BMode = IN_MODE_DPOS
+            Port3AMode = IN_MODE_DPOS
+            Port3BMode = IN_MODE_A05V
+
+        else:
+            raise ValueError(f"Invalid ModeIndex: {ModeIndex} (expected 0..35)")
+
 
         if(PortIndex == 0):
             Feedback = "Port_1A"
@@ -164,7 +341,7 @@ while ModeIndex <= MaxMode:
         outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 
         outstr += "#-----setup 39009-----\n"
-        outstr += "#configure as Output Digital ON/OFF\n"
+        outstr += "#configure\n"
         outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.5\n"
         outstr += "Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.5\n"
         outstr += "Command = 83, MODE1A = " + Port1AMode + ", MODE1B = " + Port1BMode + ", MODE2A = 1, MODE2B = 1, MODE3A = " + Port3AMode + ", MODE3B = " + Port3BMode + ", MODE4A = 1, MODE4B = 1, MODE5A = " + PortMode + ", MODE5B = " + PortMode + ", MODE6A = 1, MODE6B = 1, MODE7A = " + PortMode + ", MODE7B = " + PortMode + " : NULL : WAIT = 0.5\n"
@@ -180,7 +357,9 @@ while ModeIndex <= MaxMode:
         outstr += OutputConnector + " = 1 : NULL : WAIT = 0.1\n"
 
         outstr += "\n"
-        
+
+        outstr += "#TESTING - ModeIndex " + str(ModeIndex) +  " PortIndex " + str(PortIndex) + "\n"
+
         if((PortUnderTest==IN_MODE_A05V)|(PortUnderTest==IN_MODE_A32V)):
             TEST_VOLTS = 5.0
             outstr += "PwrSetVoltage = " + str(TEST_VOLTS*10) + " : NULL : WAIT = 0.1\n"
