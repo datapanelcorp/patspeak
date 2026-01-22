@@ -159,31 +159,29 @@ while ModeIndex <= MaxMode:
 
         InputName = Feedback
 
-        outstr += "#cycle IGN to reset lockup\n"
-        outstr += "RLY_K1 = 1 : NULL : WAIT = 2\n"
-        outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
+        # outstr += "#cycle IGN to reset lockup\n"
+        # outstr += "RLY_K1 = 1 : NULL : WAIT = 2\n"
+        # outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 
         outstr += "#-----setup 39009-----\n"
         outstr += "#configure as Output Digital ON/OFF\n"
-        outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.5\n"
-        outstr += "Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.5\n"
+        outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5\n"
+        outstr += "Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5\n"
         outstr += "Command = 83, MODE1A = " + Port1AMode + ", MODE1B = " + Port1BMode + ", MODE2A = 1, MODE2B = 1, MODE3A = " + Port3AMode + ", MODE3B = " + Port3BMode + ", MODE4A = 1, MODE4B = 1, MODE5A = " + PortMode + ", MODE5B = " + PortMode + ", MODE6A = 1, MODE6B = 1, MODE7A = " + PortMode + ", MODE7B = " + PortMode + " : NULL : WAIT = 0.5\n"
         outstr += "Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL\n"
         outstr += "Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = " + PortMode + ", MODE9B = " + PortMode + ", MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5\n"
         outstr += "Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL\n"
 
-        outstr += "Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
+        outstr += "Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
         outstr += "#clear multiplex\n"
-        outstr += "Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
+        outstr += "Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
 
         outstr += "#switch input to load line\n"
         outstr += OutputConnector + " = 1 : NULL : WAIT = 0.1\n"
 
         outstr += "\n"
-        
+
         if((PortUnderTest==IN_MODE_A05V)|(PortUnderTest==IN_MODE_A32V)):
-            TEST_VOLTS = 5.0
-            outstr += "PwrSetVoltage = " + str(TEST_VOLTS*10) + " : NULL : WAIT = 0.1\n"
             outstr += DeathSweep + " = 1 : NULL : WAIT = 0.1\n"
             outstr += "SWEEP-RUNNING DEATHSWEEP!\n"
             outstr += DeathSweep + " = 0 : NULL : WAIT = 0.1\n"
@@ -195,9 +193,7 @@ while ModeIndex <= MaxMode:
             outstr += "NULL : " + Feedback + " = 0 | 0.1 | 0.1\n"
             outstr += "\n"
 
-        if(PortUnderTest==IN_MODE_DPOS):
-            TEST_VOLTS = 5.0
-            outstr += "PwrSetVoltage = " + str(TEST_VOLTS*10) + " : NULL : WAIT = 0.1\n"
+        if(IN_MODE_DPOS):
             outstr += DeathSweep + " = 1 : NULL : WAIT = 0.1\n"
             outstr += "SWEEP-RUNNING DEATHSWEEP!\n"
             outstr += DeathSweep + " = 0 : NULL : WAIT = 0.1\n"

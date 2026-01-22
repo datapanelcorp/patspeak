@@ -1,0 +1,1566 @@
+Started on: 2026-01-22-09:33:45
+00000 #39009-1
+00000 #Verion 0.0
+00000 #input test
+00000 UUT_DBC = 39009-561.dbc
+00000 UUT_DATANAME = 39009-1-INPUT-ISR-LOCKUP
+00000 
+00000 
+00000 #-----setup pat-----
+00000 #setup meter
+00000 LdRemote = 1 : NULL : WAIT = 0.1
+00001 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00002 LdEnable = 0 : NULL : WAIT = 0.1
+00003 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
+00004 #setup PS1
+00004 PwrRemote = 1 : NULL : WAIT = 0.1
+00005 PwrSetCurrent = 20 : NULL : WAIT = 0.1
+00006 PwrSetVoltage = 50.0 : NULL : WAIT = 0.1
+00007 PwrEnable = 1 : NULL : WAIT = 0.1
+00008 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1
+00009 #setup freq
+00009 AfgEnable = 0 : NULL : WAIT = 0.1
+00010 AfgShape = 1 : NULL : WAIT = 0.1
+00011 AfgFreqSet = 500 : NULL : WAIT = 0.1
+00012 AfgDutySet = 50 : NULL : WAIT = 0.1
+00013 AfgAmplSet = 4000 : NULL : WAIT = 0.1
+00014 AfgOffsetSet = 4000 : NULL : WAIT = 0.1
+00015 AfgEnable = 1 : NULL : WAIT = 0.1
+00016 J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+00017 J4_03 = 1 : NULL : WAIT = 0.2
+00018 #cycle IGN to reset lockup
+00018 RLY_K1 = 1 : NULL : WAIT = 2
+00019 RLY_K1 = 0 : NULL : WAIT = 1
+00020 #-----setup 39009-----
+00020 #configure as Output Digital ON/OFF
+00020 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00021 Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00022 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00023 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00024 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00025 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00026 #clear multiplex
+00026 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00027 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00028 #clear multiplex
+00028 Command = 0, SaveSettings = 0 : NULL
+00029 #switch input to load line
+00029 J2_01 = 1 : NULL : WAIT = 0.1
+00030 
+00030 AfgFreqSet = 100 : NULL : WAIT = 0.1
+00031 #test for lockup
+00031 NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+00031 TEST: Hertz_Count_Input1A 0.0 +/- 0.1
+00031 PASS: Hertz_Count_Input1A 0.0
+00032 J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+00033 NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+00033 TEST: Hertz_Count_Input1A 100.0 +/- 30.0
+00033 PASS: Hertz_Count_Input1A 99.0
+00034 J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+00035 NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+00035 TEST: Hertz_Count_Input1A 0.0 +/- 0.1
+00035 PASS: Hertz_Count_Input1A 0.0
+00036 
+00036 #Finished with port
+00036 #switch out input
+00036 J2_01 = 0 : NULL : WAIT = 0.1
+00037 
+00037 #cycle IGN to reset lockup
+00037 RLY_K1 = 1 : NULL : WAIT = 2
+00038 RLY_K1 = 0 : NULL : WAIT = 1
+00039 #-----setup 39009-----
+00039 #configure as Output Digital ON/OFF
+00039 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00040 Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00041 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00042 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00043 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00044 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00045 #clear multiplex
+00045 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00046 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00047 #clear multiplex
+00047 Command = 0, SaveSettings = 0 : NULL
+00048 #switch input to load line
+00048 J2_02 = 1 : NULL : WAIT = 0.1
+00049 
+00049 J4_01 = 1 : NULL : WAIT = 0.1
+00050 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.016s rate=62.50 steps/s
+      50/220 set=4.370000 V elapsed=1.125s rate=45.33 steps/s eta=3.750s
+     100/220 set=4.420000 V elapsed=2.266s rate=44.57 steps/s eta=2.692s
+     150/220 set=4.390000 V elapsed=3.359s rate=44.95 steps/s eta=1.557s
+     200/220 set=4.340000 V elapsed=4.469s rate=44.98 steps/s eta=0.445s
+Sweep complete. Elapsed: 4.906s
+Output turned OFF.
+
+
+00050 J4_01 = 0 : NULL : WAIT = 0.1
+00051 #test for lockup
+00051 NULL : Port_1B = 0 | 0.1 | 0.1
+00051 TEST: Port_1B 0.0 +/- 0.1
+00051 PASS: Port_1B 0.0
+00052 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00053 NULL : Port_1B = 5.0 | 0.1 | 0.1
+00053 TEST: Port_1B 5.0 +/- 0.1
+00053 FAIL: Port_1B 0.0
+00054 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00055 NULL : Port_1B = 0 | 0.1 | 0.1
+00055 TEST: Port_1B 0.0 +/- 0.1
+00055 PASS: Port_1B 0.0
+00056 
+00056 #Finished with port
+00056 #switch out input
+00056 J2_02 = 0 : NULL : WAIT = 0.1
+00057 
+00057 #cycle IGN to reset lockup
+00057 RLY_K1 = 1 : NULL : WAIT = 2
+00058 RLY_K1 = 0 : NULL : WAIT = 1
+00059 #-----setup 39009-----
+00059 #configure as Output Digital ON/OFF
+00059 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00060 Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00061 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00062 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00063 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00064 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00065 #clear multiplex
+00065 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00066 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00067 #clear multiplex
+00067 Command = 0, SaveSettings = 0 : NULL
+00068 #switch input to load line
+00068 J2_03 = 1 : NULL : WAIT = 0.1
+00069 
+00069 J4_01 = 1 : NULL : WAIT = 0.1
+00070 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.015s rate=66.67 steps/s
+      50/220 set=4.370000 V elapsed=1.125s rate=45.33 steps/s eta=3.750s
+     100/220 set=4.420000 V elapsed=2.218s rate=45.54 steps/s eta=2.635s
+     150/220 set=4.390000 V elapsed=3.281s rate=46.02 steps/s eta=1.521s
+     200/220 set=4.340000 V elapsed=4.406s rate=45.62 steps/s eta=0.438s
+Sweep complete. Elapsed: 4.828s
+Output turned OFF.
+
+
+00070 J4_01 = 0 : NULL : WAIT = 0.1
+00071 #test for lockup
+00071 NULL : Port_3A = 0 | 0.1 | 0.1
+00071 TEST: Port_3A 0.0 +/- 0.1
+00071 PASS: Port_3A 0.0
+00072 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00073 NULL : Port_3A = 5.0 | 0.1 | 0.1
+00073 TEST: Port_3A 5.0 +/- 0.1
+00073 FAIL: Port_3A 0.0
+00074 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00075 NULL : Port_3A = 0 | 0.1 | 0.1
+00075 TEST: Port_3A 0.0 +/- 0.1
+00075 PASS: Port_3A 0.0
+00076 
+00076 #Finished with port
+00076 #switch out input
+00076 J2_03 = 0 : NULL : WAIT = 0.1
+00077 
+00077 #cycle IGN to reset lockup
+00077 RLY_K1 = 1 : NULL : WAIT = 2
+00078 RLY_K1 = 0 : NULL : WAIT = 1
+00079 #-----setup 39009-----
+00079 #configure as Output Digital ON/OFF
+00079 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00080 Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00081 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00082 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00083 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00084 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00085 #clear multiplex
+00085 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00086 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00087 #clear multiplex
+00087 Command = 0, SaveSettings = 0 : NULL
+00088 #switch input to load line
+00088 J2_04 = 1 : NULL : WAIT = 0.1
+00089 
+00089 J4_01 = 1 : NULL : WAIT = 0.1
+00090 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.016s rate=62.50 steps/s
+      50/220 set=4.370000 V elapsed=1.109s rate=45.99 steps/s eta=3.697s
+     100/220 set=4.420000 V elapsed=2.203s rate=45.85 steps/s eta=2.617s
+     150/220 set=4.390000 V elapsed=3.266s rate=46.23 steps/s eta=1.514s
+     200/220 set=4.340000 V elapsed=4.328s rate=46.44 steps/s eta=0.431s
+Sweep complete. Elapsed: 4.797s
+Output turned OFF.
+
+
+00090 J4_01 = 0 : NULL : WAIT = 0.1
+00091 #test for lockup
+00091 NULL : Port_3B = 0 | 0.1 | 0.1
+00091 TEST: Port_3B 0.0 +/- 0.1
+00091 PASS: Port_3B 0.0
+00092 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00093 NULL : Port_3B = 5.0 | 0.1 | 0.1
+00093 TEST: Port_3B 5.0 +/- 0.1
+00093 PASS: Port_3B 4.98
+00094 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00095 NULL : Port_3B = 0 | 0.1 | 0.1
+00095 TEST: Port_3B 0.0 +/- 0.1
+00095 PASS: Port_3B 0.0
+00096 
+00096 #Finished with port
+00096 #switch out input
+00096 J2_04 = 0 : NULL : WAIT = 0.1
+00097 
+00097 
+00097 #Finished with mode
+00097 #cycle IGN to reset lockup
+00097 RLY_K1 = 1 : NULL : WAIT = 2
+00098 RLY_K1 = 0 : NULL : WAIT = 1
+00099 #-----setup 39009-----
+00099 #configure as Output Digital ON/OFF
+00099 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00100 Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00101 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00102 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00103 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00104 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00105 #clear multiplex
+00105 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00106 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00107 #clear multiplex
+00107 Command = 0, SaveSettings = 0 : NULL
+00108 #switch input to load line
+00108 J2_01 = 1 : NULL : WAIT = 0.1
+00109 
+00109 J4_01 = 1 : NULL : WAIT = 0.1
+00110 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.031s rate=32.26 steps/s
+      50/220 set=4.370000 V elapsed=1.125s rate=45.33 steps/s eta=3.750s
+     100/220 set=4.420000 V elapsed=2.219s rate=45.52 steps/s eta=2.636s
+     150/220 set=4.390000 V elapsed=3.297s rate=45.80 steps/s eta=1.528s
+     200/220 set=4.340000 V elapsed=4.375s rate=45.94 steps/s eta=0.435s
+Sweep complete. Elapsed: 4.813s
+Output turned OFF.
+
+
+00110 J4_01 = 0 : NULL : WAIT = 0.1
+00111 #test for lockup
+00111 NULL : Port_1A = 0 | 0.1 | 0.1
+00111 TEST: Port_1A 0.0 +/- 0.1
+00111 PASS: Port_1A 0.0
+00112 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00113 NULL : Port_1A = 5.0 | 0.1 | 0.1
+00113 TEST: Port_1A 5.0 +/- 0.1
+00113 PASS: Port_1A 4.968
+00114 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00115 NULL : Port_1A = 0 | 0.1 | 0.1
+00115 TEST: Port_1A 0.0 +/- 0.1
+00115 PASS: Port_1A 0.077
+00116 
+00116 #Finished with port
+00116 #switch out input
+00116 J2_01 = 0 : NULL : WAIT = 0.1
+00117 
+00117 #cycle IGN to reset lockup
+00117 RLY_K1 = 1 : NULL : WAIT = 2
+00118 RLY_K1 = 0 : NULL : WAIT = 1
+00119 #-----setup 39009-----
+00119 #configure as Output Digital ON/OFF
+00119 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00120 Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00121 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00122 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00123 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00124 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00125 #clear multiplex
+00125 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00126 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00127 #clear multiplex
+00127 Command = 0, SaveSettings = 0 : NULL
+00128 #switch input to load line
+00128 J2_02 = 1 : NULL : WAIT = 0.1
+00129 
+00129 AfgFreqSet = 100 : NULL : WAIT = 0.1
+00130 #test for lockup
+00130 NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+00130 TEST: Hertz_Count_Input1B 0.0 +/- 0.1
+00130 PASS: Hertz_Count_Input1B 0.0
+00131 J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+00132 NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+00132 TEST: Hertz_Count_Input1B 100.0 +/- 30.0
+00132 PASS: Hertz_Count_Input1B 99.0
+00133 J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+00134 NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+00134 TEST: Hertz_Count_Input1B 0.0 +/- 0.1
+00134 PASS: Hertz_Count_Input1B 0.0
+00135 
+00135 #Finished with port
+00135 #switch out input
+00135 J2_02 = 0 : NULL : WAIT = 0.1
+00136 
+00136 #cycle IGN to reset lockup
+00136 RLY_K1 = 1 : NULL : WAIT = 2
+00137 RLY_K1 = 0 : NULL : WAIT = 1
+00138 #-----setup 39009-----
+00138 #configure as Output Digital ON/OFF
+00138 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00139 Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00140 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00141 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00142 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00143 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00144 #clear multiplex
+00144 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00145 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00146 #clear multiplex
+00146 Command = 0, SaveSettings = 0 : NULL
+00147 #switch input to load line
+00147 J2_03 = 1 : NULL : WAIT = 0.1
+00148 
+00148 J4_01 = 1 : NULL : WAIT = 0.1
+00149 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.016s rate=62.50 steps/s
+      50/220 set=4.370000 V elapsed=1.141s rate=44.70 steps/s eta=3.803s
+     100/220 set=4.420000 V elapsed=2.235s rate=45.19 steps/s eta=2.655s
+     150/220 set=4.390000 V elapsed=3.297s rate=45.80 steps/s eta=1.528s
+     200/220 set=4.340000 V elapsed=4.375s rate=45.94 steps/s eta=0.435s
+Sweep complete. Elapsed: 4.797s
+Output turned OFF.
+
+
+00149 J4_01 = 0 : NULL : WAIT = 0.1
+00150 #test for lockup
+00150 NULL : Port_3A = 0 | 0.1 | 0.1
+00150 TEST: Port_3A 0.0 +/- 0.1
+00150 PASS: Port_3A 0.0
+00151 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00152 NULL : Port_3A = 5.0 | 0.1 | 0.1
+00152 TEST: Port_3A 5.0 +/- 0.1
+00152 PASS: Port_3A 4.976
+00153 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00154 NULL : Port_3A = 0 | 0.1 | 0.1
+00154 TEST: Port_3A 0.0 +/- 0.1
+00154 PASS: Port_3A 0.073
+00155 
+00155 #Finished with port
+00155 #switch out input
+00155 J2_03 = 0 : NULL : WAIT = 0.1
+00156 
+00156 #cycle IGN to reset lockup
+00156 RLY_K1 = 1 : NULL : WAIT = 2
+00157 RLY_K1 = 0 : NULL : WAIT = 1
+00158 #-----setup 39009-----
+00158 #configure as Output Digital ON/OFF
+00158 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00159 Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00160 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00161 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00162 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00163 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00164 #clear multiplex
+00164 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00165 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00166 #clear multiplex
+00166 Command = 0, SaveSettings = 0 : NULL
+00167 #switch input to load line
+00167 J2_04 = 1 : NULL : WAIT = 0.1
+00168 
+00168 J4_01 = 1 : NULL : WAIT = 0.1
+00169 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.016s rate=62.50 steps/s
+      50/220 set=4.370000 V elapsed=1.156s rate=44.12 steps/s eta=3.853s
+     100/220 set=4.420000 V elapsed=2.203s rate=45.85 steps/s eta=2.617s
+     150/220 set=4.390000 V elapsed=3.281s rate=46.02 steps/s eta=1.521s
+     200/220 set=4.340000 V elapsed=4.359s rate=46.11 steps/s eta=0.434s
+Sweep complete. Elapsed: 4.797s
+Output turned OFF.
+
+
+00169 J4_01 = 0 : NULL : WAIT = 0.1
+00170 #test for lockup
+00170 NULL : Port_3B = 0 | 0.1 | 0.1
+00170 TEST: Port_3B 0.0 +/- 0.1
+00170 PASS: Port_3B 0.0
+00171 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00172 NULL : Port_3B = 5.0 | 0.1 | 0.1
+00172 TEST: Port_3B 5.0 +/- 0.1
+00172 PASS: Port_3B 4.98
+00173 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00174 NULL : Port_3B = 0 | 0.1 | 0.1
+00174 TEST: Port_3B 0.0 +/- 0.1
+00174 PASS: Port_3B 0.0
+00175 
+00175 #Finished with port
+00175 #switch out input
+00175 J2_04 = 0 : NULL : WAIT = 0.1
+00176 
+00176 
+00176 #Finished with mode
+00176 #cycle IGN to reset lockup
+00176 RLY_K1 = 1 : NULL : WAIT = 2
+00177 RLY_K1 = 0 : NULL : WAIT = 1
+00178 #-----setup 39009-----
+00178 #configure as Output Digital ON/OFF
+00178 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00179 Command = 83, MODE1A = 6, MODE1B = 6, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00180 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00181 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00182 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00183 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00184 #clear multiplex
+00184 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00185 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00186 #clear multiplex
+00186 Command = 0, SaveSettings = 0 : NULL
+00187 #switch input to load line
+00187 J2_01 = 1 : NULL : WAIT = 0.1
+00188 
+00188 J4_01 = 1 : NULL : WAIT = 0.1
+00189 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.015s rate=66.67 steps/s
+      50/220 set=4.370000 V elapsed=1.078s rate=47.31 steps/s eta=3.593s
+     100/220 set=4.420000 V elapsed=2.125s rate=47.53 steps/s eta=2.525s
+     150/220 set=4.390000 V elapsed=3.250s rate=46.46 steps/s eta=1.507s
+     200/220 set=4.340000 V elapsed=4.312s rate=46.61 steps/s eta=0.429s
+Sweep complete. Elapsed: 4.750s
+Output turned OFF.
+
+
+00189 J4_01 = 0 : NULL : WAIT = 0.1
+00190 #test for lockup
+00190 NULL : Port_1A = 0 | 0.1 | 0.1
+00190 TEST: Port_1A 0.0 +/- 0.1
+00190 PASS: Port_1A 0.0
+00191 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00192 NULL : Port_1A = 5.0 | 0.1 | 0.1
+00192 TEST: Port_1A 5.0 +/- 0.1
+00192 PASS: Port_1A 4.956
+00193 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00194 NULL : Port_1A = 0 | 0.1 | 0.1
+00194 TEST: Port_1A 0.0 +/- 0.1
+00194 PASS: Port_1A 0.0
+00195 
+00195 #Finished with port
+00195 #switch out input
+00195 J2_01 = 0 : NULL : WAIT = 0.1
+00196 
+00196 #cycle IGN to reset lockup
+00196 RLY_K1 = 1 : NULL : WAIT = 2
+00197 RLY_K1 = 0 : NULL : WAIT = 1
+00198 #-----setup 39009-----
+00198 #configure as Output Digital ON/OFF
+00198 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00199 Command = 83, MODE1A = 6, MODE1B = 6, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00200 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00201 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00202 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00203 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00204 #clear multiplex
+00204 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00205 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00206 #clear multiplex
+00206 Command = 0, SaveSettings = 0 : NULL
+00207 #switch input to load line
+00207 J2_02 = 1 : NULL : WAIT = 0.1
+00208 
+00208 J4_01 = 1 : NULL : WAIT = 0.1
+00209 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.015s rate=66.67 steps/s
+      50/220 set=4.370000 V elapsed=1.078s rate=47.31 steps/s eta=3.593s
+     100/220 set=4.420000 V elapsed=2.140s rate=47.20 steps/s eta=2.543s
+     150/220 set=4.390000 V elapsed=3.250s rate=46.46 steps/s eta=1.507s
+     200/220 set=4.340000 V elapsed=4.312s rate=46.61 steps/s eta=0.429s
+Sweep complete. Elapsed: 4.734s
+Output turned OFF.
+
+
+00209 J4_01 = 0 : NULL : WAIT = 0.1
+00210 #test for lockup
+00210 NULL : Port_1B = 0 | 0.1 | 0.1
+00210 TEST: Port_1B 0.0 +/- 0.1
+00210 PASS: Port_1B 0.0
+00211 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00212 NULL : Port_1B = 5.0 | 0.1 | 0.1
+00212 TEST: Port_1B 5.0 +/- 0.1
+00212 PASS: Port_1B 4.956
+00213 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00214 NULL : Port_1B = 0 | 0.1 | 0.1
+00214 TEST: Port_1B 0.0 +/- 0.1
+00214 PASS: Port_1B 0.0
+00215 
+00215 #Finished with port
+00215 #switch out input
+00215 J2_02 = 0 : NULL : WAIT = 0.1
+00216 
+00216 #cycle IGN to reset lockup
+00216 RLY_K1 = 1 : NULL : WAIT = 2
+00217 RLY_K1 = 0 : NULL : WAIT = 1
+00218 #-----setup 39009-----
+00218 #configure as Output Digital ON/OFF
+00218 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00219 Command = 83, MODE1A = 6, MODE1B = 6, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00220 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00221 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00222 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00223 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00224 #clear multiplex
+00224 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00225 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00226 #clear multiplex
+00226 Command = 0, SaveSettings = 0 : NULL
+00227 #switch input to load line
+00227 J2_03 = 1 : NULL : WAIT = 0.1
+00228 
+00228 J4_01 = 1 : NULL : WAIT = 0.1
+00229 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.047s rate=21.28 steps/s
+      50/220 set=4.370000 V elapsed=1.110s rate=45.95 steps/s eta=3.700s
+     100/220 set=4.420000 V elapsed=2.172s rate=46.50 steps/s eta=2.581s
+     150/220 set=4.390000 V elapsed=3.266s rate=46.23 steps/s eta=1.514s
+     200/220 set=4.340000 V elapsed=4.360s rate=46.10 steps/s eta=0.434s
+Sweep complete. Elapsed: 4.782s
+Output turned OFF.
+
+
+00229 J4_01 = 0 : NULL : WAIT = 0.1
+00230 #test for lockup
+00230 NULL : Port_3A = 0 | 0.1 | 0.1
+00230 TEST: Port_3A 0.0 +/- 0.1
+00230 PASS: Port_3A 0.0
+00231 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00232 NULL : Port_3A = 5.0 | 0.1 | 0.1
+00232 TEST: Port_3A 5.0 +/- 0.1
+00232 PASS: Port_3A 4.971
+00233 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00234 NULL : Port_3A = 0 | 0.1 | 0.1
+00234 TEST: Port_3A 0.0 +/- 0.1
+00234 PASS: Port_3A 0.087
+00235 
+00235 #Finished with port
+00235 #switch out input
+00235 J2_03 = 0 : NULL : WAIT = 0.1
+00236 
+00236 #cycle IGN to reset lockup
+00236 RLY_K1 = 1 : NULL : WAIT = 2
+00237 RLY_K1 = 0 : NULL : WAIT = 1
+00238 #-----setup 39009-----
+00238 #configure as Output Digital ON/OFF
+00238 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00239 Command = 83, MODE1A = 6, MODE1B = 6, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00240 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00241 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00242 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00243 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00244 #clear multiplex
+00244 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00245 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00246 #clear multiplex
+00246 Command = 0, SaveSettings = 0 : NULL
+00247 #switch input to load line
+00247 J2_04 = 1 : NULL : WAIT = 0.1
+00248 
+00248 J4_01 = 1 : NULL : WAIT = 0.1
+00249 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.047s rate=21.28 steps/s
+      50/220 set=4.370000 V elapsed=1.141s rate=44.70 steps/s eta=3.803s
+     100/220 set=4.420000 V elapsed=2.203s rate=45.85 steps/s eta=2.617s
+     150/220 set=4.390000 V elapsed=3.297s rate=45.80 steps/s eta=1.528s
+     200/220 set=4.340000 V elapsed=4.391s rate=45.78 steps/s eta=0.437s
+Sweep complete. Elapsed: 4.844s
+Output turned OFF.
+
+
+00249 J4_01 = 0 : NULL : WAIT = 0.1
+00250 #test for lockup
+00250 NULL : Port_3B = 0 | 0.1 | 0.1
+00250 TEST: Port_3B 0.0 +/- 0.1
+00250 PASS: Port_3B 0.0
+00251 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00252 NULL : Port_3B = 5.0 | 0.1 | 0.1
+00252 TEST: Port_3B 5.0 +/- 0.1
+00252 PASS: Port_3B 4.98
+00253 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00254 NULL : Port_3B = 0 | 0.1 | 0.1
+00254 TEST: Port_3B 0.0 +/- 0.1
+00254 PASS: Port_3B 0.0
+00255 
+00255 #Finished with port
+00255 #switch out input
+00255 J2_04 = 0 : NULL : WAIT = 0.1
+00256 
+00256 
+00256 #Finished with mode
+00256 #cycle IGN to reset lockup
+00256 RLY_K1 = 1 : NULL : WAIT = 2
+00257 RLY_K1 = 0 : NULL : WAIT = 1
+00258 #-----setup 39009-----
+00258 #configure as Output Digital ON/OFF
+00258 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00259 Command = 83, MODE1A = 0, MODE1B = 6, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00260 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00261 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00262 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00263 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00264 #clear multiplex
+00264 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00265 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00266 #clear multiplex
+00266 Command = 0, SaveSettings = 0 : NULL
+00267 #switch input to load line
+00267 J2_01 = 1 : NULL : WAIT = 0.1
+00268 
+00268 #Finished with port
+00268 #switch out input
+00268 J2_01 = 0 : NULL : WAIT = 0.1
+00269 
+00269 #cycle IGN to reset lockup
+00269 RLY_K1 = 1 : NULL : WAIT = 2
+00270 RLY_K1 = 0 : NULL : WAIT = 1
+00271 #-----setup 39009-----
+00271 #configure as Output Digital ON/OFF
+00271 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00272 Command = 83, MODE1A = 0, MODE1B = 6, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00273 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00274 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00275 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00276 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00277 #clear multiplex
+00277 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00278 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00279 #clear multiplex
+00279 Command = 0, SaveSettings = 0 : NULL
+00280 #switch input to load line
+00280 J2_02 = 1 : NULL : WAIT = 0.1
+00281 
+00281 J4_01 = 1 : NULL : WAIT = 0.1
+00282 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.031s rate=32.26 steps/s
+      50/220 set=4.370000 V elapsed=1.125s rate=45.33 steps/s eta=3.750s
+     100/220 set=4.420000 V elapsed=2.219s rate=45.52 steps/s eta=2.636s
+     150/220 set=4.390000 V elapsed=3.297s rate=45.80 steps/s eta=1.528s
+     200/220 set=4.340000 V elapsed=4.360s rate=46.10 steps/s eta=0.434s
+Sweep complete. Elapsed: 4.828s
+Output turned OFF.
+
+
+00282 J4_01 = 0 : NULL : WAIT = 0.1
+00283 #test for lockup
+00283 NULL : Port_1B = 0 | 0.1 | 0.1
+00283 TEST: Port_1B 0.0 +/- 0.1
+00283 PASS: Port_1B 0.0
+00284 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00285 NULL : Port_1B = 5.0 | 0.1 | 0.1
+00285 TEST: Port_1B 5.0 +/- 0.1
+00285 FAIL: Port_1B 0.0
+00286 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00287 NULL : Port_1B = 0 | 0.1 | 0.1
+00287 TEST: Port_1B 0.0 +/- 0.1
+00287 PASS: Port_1B 0.0
+00288 
+00288 #Finished with port
+00288 #switch out input
+00288 J2_02 = 0 : NULL : WAIT = 0.1
+00289 
+00289 #cycle IGN to reset lockup
+00289 RLY_K1 = 1 : NULL : WAIT = 2
+00290 RLY_K1 = 0 : NULL : WAIT = 1
+00291 #-----setup 39009-----
+00291 #configure as Output Digital ON/OFF
+00291 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00292 Command = 83, MODE1A = 0, MODE1B = 6, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00293 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00294 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00295 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00296 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00297 #clear multiplex
+00297 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00298 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00299 #clear multiplex
+00299 Command = 0, SaveSettings = 0 : NULL
+00300 #switch input to load line
+00300 J2_03 = 1 : NULL : WAIT = 0.1
+00301 
+00301 J4_01 = 1 : NULL : WAIT = 0.1
+00302 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.016s rate=62.50 steps/s
+      50/220 set=4.370000 V elapsed=1.094s rate=46.62 steps/s eta=3.647s
+     100/220 set=4.420000 V elapsed=2.156s rate=46.85 steps/s eta=2.562s
+     150/220 set=4.390000 V elapsed=3.250s rate=46.46 steps/s eta=1.507s
+     200/220 set=4.340000 V elapsed=4.297s rate=46.78 steps/s eta=0.428s
+Sweep complete. Elapsed: 4.719s
+Output turned OFF.
+
+
+00302 J4_01 = 0 : NULL : WAIT = 0.1
+00303 #test for lockup
+00303 NULL : Port_3A = 0 | 0.1 | 0.1
+00303 TEST: Port_3A 0.0 +/- 0.1
+00303 PASS: Port_3A 0.0
+00304 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00305 NULL : Port_3A = 5.0 | 0.1 | 0.1
+00305 TEST: Port_3A 5.0 +/- 0.1
+00305 FAIL: Port_3A 0.0
+00306 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00307 NULL : Port_3A = 0 | 0.1 | 0.1
+00307 TEST: Port_3A 0.0 +/- 0.1
+00307 PASS: Port_3A 0.0
+00308 
+00308 #Finished with port
+00308 #switch out input
+00308 J2_03 = 0 : NULL : WAIT = 0.1
+00309 
+00309 #cycle IGN to reset lockup
+00309 RLY_K1 = 1 : NULL : WAIT = 2
+00310 RLY_K1 = 0 : NULL : WAIT = 1
+00311 #-----setup 39009-----
+00311 #configure as Output Digital ON/OFF
+00311 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00312 Command = 83, MODE1A = 0, MODE1B = 6, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00313 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00314 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00315 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00316 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00317 #clear multiplex
+00317 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00318 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00319 #clear multiplex
+00319 Command = 0, SaveSettings = 0 : NULL
+00320 #switch input to load line
+00320 J2_04 = 1 : NULL : WAIT = 0.1
+00321 
+00321 J4_01 = 1 : NULL : WAIT = 0.1
+00322 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.062s rate=16.13 steps/s
+      50/220 set=4.370000 V elapsed=1.109s rate=45.99 steps/s eta=3.697s
+     100/220 set=4.420000 V elapsed=2.187s rate=46.18 steps/s eta=2.598s
+     150/220 set=4.390000 V elapsed=3.281s rate=46.02 steps/s eta=1.521s
+     200/220 set=4.340000 V elapsed=4.344s rate=46.27 steps/s eta=0.432s
+Sweep complete. Elapsed: 4.797s
+Output turned OFF.
+
+
+00322 J4_01 = 0 : NULL : WAIT = 0.1
+00323 #test for lockup
+00323 NULL : Port_3B = 0 | 0.1 | 0.1
+00323 TEST: Port_3B 0.0 +/- 0.1
+00323 PASS: Port_3B 0.0
+00324 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00325 NULL : Port_3B = 5.0 | 0.1 | 0.1
+00325 TEST: Port_3B 5.0 +/- 0.1
+00325 FAIL: Port_3B 0.0
+00326 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00327 NULL : Port_3B = 0 | 0.1 | 0.1
+00327 TEST: Port_3B 0.0 +/- 0.1
+00327 PASS: Port_3B 0.0
+00328 
+00328 #Finished with port
+00328 #switch out input
+00328 J2_04 = 0 : NULL : WAIT = 0.1
+00329 
+00329 
+00329 #Finished with mode
+00329 #cycle IGN to reset lockup
+00329 RLY_K1 = 1 : NULL : WAIT = 2
+00330 RLY_K1 = 0 : NULL : WAIT = 1
+00331 #-----setup 39009-----
+00331 #configure as Output Digital ON/OFF
+00331 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00332 Command = 83, MODE1A = 6, MODE1B = 0, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00333 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00334 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00335 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00336 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00337 #clear multiplex
+00337 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00338 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00339 #clear multiplex
+00339 Command = 0, SaveSettings = 0 : NULL
+00340 #switch input to load line
+00340 J2_01 = 1 : NULL : WAIT = 0.1
+00341 
+00341 J4_01 = 1 : NULL : WAIT = 0.1
+00342 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.016s rate=62.50 steps/s
+      50/220 set=4.370000 V elapsed=1.125s rate=45.33 steps/s eta=3.750s
+     100/220 set=4.420000 V elapsed=2.172s rate=46.50 steps/s eta=2.581s
+     150/220 set=4.390000 V elapsed=3.250s rate=46.46 steps/s eta=1.507s
+     200/220 set=4.340000 V elapsed=4.313s rate=46.60 steps/s eta=0.429s
+Sweep complete. Elapsed: 4.766s
+Output turned OFF.
+
+
+00342 J4_01 = 0 : NULL : WAIT = 0.1
+00343 #test for lockup
+00343 NULL : Port_1A = 0 | 0.1 | 0.1
+00343 TEST: Port_1A 0.0 +/- 0.1
+00343 PASS: Port_1A 0.0
+00344 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00345 NULL : Port_1A = 5.0 | 0.1 | 0.1
+00345 TEST: Port_1A 5.0 +/- 0.1
+00345 FAIL: Port_1A 0.0
+00346 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00347 NULL : Port_1A = 0 | 0.1 | 0.1
+00347 TEST: Port_1A 0.0 +/- 0.1
+00347 PASS: Port_1A 0.0
+00348 
+00348 #Finished with port
+00348 #switch out input
+00348 J2_01 = 0 : NULL : WAIT = 0.1
+00349 
+00349 #cycle IGN to reset lockup
+00349 RLY_K1 = 1 : NULL : WAIT = 2
+00350 RLY_K1 = 0 : NULL : WAIT = 1
+00351 #-----setup 39009-----
+00351 #configure as Output Digital ON/OFF
+00351 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00352 Command = 83, MODE1A = 6, MODE1B = 0, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00353 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00354 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00355 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00356 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00357 #clear multiplex
+00357 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00358 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00359 #clear multiplex
+00359 Command = 0, SaveSettings = 0 : NULL
+00360 #switch input to load line
+00360 J2_02 = 1 : NULL : WAIT = 0.1
+00361 
+00361 #Finished with port
+00361 #switch out input
+00361 J2_02 = 0 : NULL : WAIT = 0.1
+00362 
+00362 #cycle IGN to reset lockup
+00362 RLY_K1 = 1 : NULL : WAIT = 2
+00363 RLY_K1 = 0 : NULL : WAIT = 1
+00364 #-----setup 39009-----
+00364 #configure as Output Digital ON/OFF
+00364 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00365 Command = 83, MODE1A = 6, MODE1B = 0, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00366 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00367 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00368 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00369 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00370 #clear multiplex
+00370 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00371 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00372 #clear multiplex
+00372 Command = 0, SaveSettings = 0 : NULL
+00373 #switch input to load line
+00373 J2_03 = 1 : NULL : WAIT = 0.1
+00374 
+00374 J4_01 = 1 : NULL : WAIT = 0.1
+00375 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.047s rate=21.28 steps/s
+      50/220 set=4.370000 V elapsed=1.093s rate=46.66 steps/s eta=3.643s
+     100/220 set=4.420000 V elapsed=2.187s rate=46.18 steps/s eta=2.598s
+     150/220 set=4.390000 V elapsed=3.297s rate=45.80 steps/s eta=1.528s
+     200/220 set=4.340000 V elapsed=4.390s rate=45.79 steps/s eta=0.437s
+Sweep complete. Elapsed: 4.812s
+Output turned OFF.
+
+
+00375 J4_01 = 0 : NULL : WAIT = 0.1
+00376 #test for lockup
+00376 NULL : Port_3A = 0 | 0.1 | 0.1
+00376 TEST: Port_3A 0.0 +/- 0.1
+00376 PASS: Port_3A 0.0
+00377 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00378 NULL : Port_3A = 5.0 | 0.1 | 0.1
+00378 TEST: Port_3A 5.0 +/- 0.1
+00378 PASS: Port_3A 4.972
+00379 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00380 NULL : Port_3A = 0 | 0.1 | 0.1
+00380 TEST: Port_3A 0.0 +/- 0.1
+00380 PASS: Port_3A 0.083
+00381 
+00381 #Finished with port
+00381 #switch out input
+00381 J2_03 = 0 : NULL : WAIT = 0.1
+00382 
+00382 #cycle IGN to reset lockup
+00382 RLY_K1 = 1 : NULL : WAIT = 2
+00383 RLY_K1 = 0 : NULL : WAIT = 1
+00384 #-----setup 39009-----
+00384 #configure as Output Digital ON/OFF
+00384 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00385 Command = 83, MODE1A = 6, MODE1B = 0, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00386 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00387 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00388 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00389 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00390 #clear multiplex
+00390 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00391 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00392 #clear multiplex
+00392 Command = 0, SaveSettings = 0 : NULL
+00393 #switch input to load line
+00393 J2_04 = 1 : NULL : WAIT = 0.1
+00394 
+00394 J4_01 = 1 : NULL : WAIT = 0.1
+00395 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.047s rate=21.28 steps/s
+      50/220 set=4.370000 V elapsed=1.109s rate=45.99 steps/s eta=3.697s
+     100/220 set=4.420000 V elapsed=2.187s rate=46.18 steps/s eta=2.598s
+     150/220 set=4.390000 V elapsed=3.297s rate=45.80 steps/s eta=1.528s
+     200/220 set=4.340000 V elapsed=4.344s rate=46.27 steps/s eta=0.432s
+Sweep complete. Elapsed: 4.750s
+Output turned OFF.
+
+
+00395 J4_01 = 0 : NULL : WAIT = 0.1
+00396 #test for lockup
+00396 NULL : Port_3B = 0 | 0.1 | 0.1
+00396 TEST: Port_3B 0.0 +/- 0.1
+00396 PASS: Port_3B 0.0
+00397 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00398 NULL : Port_3B = 5.0 | 0.1 | 0.1
+00398 TEST: Port_3B 5.0 +/- 0.1
+00398 PASS: Port_3B 4.98
+00399 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00400 NULL : Port_3B = 0 | 0.1 | 0.1
+00400 TEST: Port_3B 0.0 +/- 0.1
+00400 PASS: Port_3B 0.0
+00401 
+00401 #Finished with port
+00401 #switch out input
+00401 J2_04 = 0 : NULL : WAIT = 0.1
+00402 
+00402 
+00402 #Finished with mode
+00402 #cycle IGN to reset lockup
+00402 RLY_K1 = 1 : NULL : WAIT = 2
+00403 RLY_K1 = 0 : NULL : WAIT = 1
+00404 #-----setup 39009-----
+00404 #configure as Output Digital ON/OFF
+00404 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00405 Command = 83, MODE1A = 0, MODE1B = 0, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00406 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00407 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00408 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00409 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00410 #clear multiplex
+00410 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00411 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00412 #clear multiplex
+00412 Command = 0, SaveSettings = 0 : NULL
+00413 #switch input to load line
+00413 J2_01 = 1 : NULL : WAIT = 0.1
+00414 
+00414 #Finished with port
+00414 #switch out input
+00414 J2_01 = 0 : NULL : WAIT = 0.1
+00415 
+00415 #cycle IGN to reset lockup
+00415 RLY_K1 = 1 : NULL : WAIT = 2
+00416 RLY_K1 = 0 : NULL : WAIT = 1
+00417 #-----setup 39009-----
+00417 #configure as Output Digital ON/OFF
+00417 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00418 Command = 83, MODE1A = 0, MODE1B = 0, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00419 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00420 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00421 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00422 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00423 #clear multiplex
+00423 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00424 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00425 #clear multiplex
+00425 Command = 0, SaveSettings = 0 : NULL
+00426 #switch input to load line
+00426 J2_02 = 1 : NULL : WAIT = 0.1
+00427 
+00427 #Finished with port
+00427 #switch out input
+00427 J2_02 = 0 : NULL : WAIT = 0.1
+00428 
+00428 #cycle IGN to reset lockup
+00428 RLY_K1 = 1 : NULL : WAIT = 2
+00429 RLY_K1 = 0 : NULL : WAIT = 1
+00430 #-----setup 39009-----
+00430 #configure as Output Digital ON/OFF
+00430 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00431 Command = 83, MODE1A = 0, MODE1B = 0, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00432 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00433 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00434 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00435 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00436 #clear multiplex
+00436 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00437 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00438 #clear multiplex
+00438 Command = 0, SaveSettings = 0 : NULL
+00439 #switch input to load line
+00439 J2_03 = 1 : NULL : WAIT = 0.1
+00440 
+00440 J4_01 = 1 : NULL : WAIT = 0.1
+00441 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.016s rate=62.50 steps/s
+      50/220 set=4.370000 V elapsed=1.094s rate=46.62 steps/s eta=3.647s
+     100/220 set=4.420000 V elapsed=2.188s rate=46.16 steps/s eta=2.600s
+     150/220 set=4.390000 V elapsed=3.250s rate=46.46 steps/s eta=1.507s
+     200/220 set=4.340000 V elapsed=4.329s rate=46.43 steps/s eta=0.431s
+Sweep complete. Elapsed: 4.750s
+Output turned OFF.
+
+
+00441 J4_01 = 0 : NULL : WAIT = 0.1
+00442 #test for lockup
+00442 NULL : Port_3A = 0 | 0.1 | 0.1
+00442 TEST: Port_3A 0.0 +/- 0.1
+00442 PASS: Port_3A 0.064
+00443 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00444 NULL : Port_3A = 5.0 | 0.1 | 0.1
+00444 TEST: Port_3A 5.0 +/- 0.1
+00444 PASS: Port_3A 4.968
+00445 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00446 NULL : Port_3A = 0 | 0.1 | 0.1
+00446 TEST: Port_3A 0.0 +/- 0.1
+00446 PASS: Port_3A 0.081
+00447 
+00447 #Finished with port
+00447 #switch out input
+00447 J2_03 = 0 : NULL : WAIT = 0.1
+00448 
+00448 #cycle IGN to reset lockup
+00448 RLY_K1 = 1 : NULL : WAIT = 2
+00449 RLY_K1 = 0 : NULL : WAIT = 1
+00450 #-----setup 39009-----
+00450 #configure as Output Digital ON/OFF
+00450 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00451 Command = 83, MODE1A = 0, MODE1B = 0, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00452 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00453 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00454 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00455 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00456 #clear multiplex
+00456 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00457 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00458 #clear multiplex
+00458 Command = 0, SaveSettings = 0 : NULL
+00459 #switch input to load line
+00459 J2_04 = 1 : NULL : WAIT = 0.1
+00460 
+00460 J4_01 = 1 : NULL : WAIT = 0.1
+00461 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.015s rate=66.67 steps/s
+      50/220 set=4.370000 V elapsed=1.078s rate=47.31 steps/s eta=3.593s
+     100/220 set=4.420000 V elapsed=2.156s rate=46.85 steps/s eta=2.562s
+     150/220 set=4.390000 V elapsed=3.250s rate=46.46 steps/s eta=1.507s
+     200/220 set=4.340000 V elapsed=4.343s rate=46.28 steps/s eta=0.432s
+Sweep complete. Elapsed: 4.781s
+Output turned OFF.
+
+
+00461 J4_01 = 0 : NULL : WAIT = 0.1
+00462 #test for lockup
+00462 NULL : Port_3B = 0 | 0.1 | 0.1
+00462 TEST: Port_3B 0.0 +/- 0.1
+00462 PASS: Port_3B 0.0
+00463 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00464 NULL : Port_3B = 5.0 | 0.1 | 0.1
+00464 TEST: Port_3B 5.0 +/- 0.1
+00464 PASS: Port_3B 4.98
+00465 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00466 NULL : Port_3B = 0 | 0.1 | 0.1
+00466 TEST: Port_3B 0.0 +/- 0.1
+00466 PASS: Port_3B 0.0
+00467 
+00467 #Finished with port
+00467 #switch out input
+00467 J2_04 = 0 : NULL : WAIT = 0.1
+00468 
+00468 
+00468 #Finished with mode
+00468 #cycle IGN to reset lockup
+00468 RLY_K1 = 1 : NULL : WAIT = 2
+00469 RLY_K1 = 0 : NULL : WAIT = 1
+00470 #-----setup 39009-----
+00470 #configure as Output Digital ON/OFF
+00470 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00471 Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 0, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00472 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00473 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00474 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00475 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00476 #clear multiplex
+00476 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00477 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00478 #clear multiplex
+00478 Command = 0, SaveSettings = 0 : NULL
+00479 #switch input to load line
+00479 J2_01 = 1 : NULL : WAIT = 0.1
+00480 
+00480 AfgFreqSet = 100 : NULL : WAIT = 0.1
+00481 #test for lockup
+00481 NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+00481 TEST: Hertz_Count_Input1A 0.0 +/- 0.1
+00481 PASS: Hertz_Count_Input1A 0.0
+00482 J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+00483 NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+00483 TEST: Hertz_Count_Input1A 100.0 +/- 30.0
+00483 PASS: Hertz_Count_Input1A 99.0
+00484 J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+00485 NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+00485 TEST: Hertz_Count_Input1A 0.0 +/- 0.1
+00485 PASS: Hertz_Count_Input1A 0.0
+00486 
+00486 #Finished with port
+00486 #switch out input
+00486 J2_01 = 0 : NULL : WAIT = 0.1
+00487 
+00487 #cycle IGN to reset lockup
+00487 RLY_K1 = 1 : NULL : WAIT = 2
+00488 RLY_K1 = 0 : NULL : WAIT = 1
+00489 #-----setup 39009-----
+00489 #configure as Output Digital ON/OFF
+00489 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00490 Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 0, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00491 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00492 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00493 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00494 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00495 #clear multiplex
+00495 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00496 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00497 #clear multiplex
+00497 Command = 0, SaveSettings = 0 : NULL
+00498 #switch input to load line
+00498 J2_02 = 1 : NULL : WAIT = 0.1
+00499 
+00499 AfgFreqSet = 100 : NULL : WAIT = 0.1
+00500 #test for lockup
+00500 NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+00500 TEST: Hertz_Count_Input1B 0.0 +/- 0.1
+00500 PASS: Hertz_Count_Input1B 0.0
+00501 J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+00502 NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+00502 TEST: Hertz_Count_Input1B 100.0 +/- 30.0
+00502 PASS: Hertz_Count_Input1B 99.0
+00503 J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+00504 NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+00504 TEST: Hertz_Count_Input1B 0.0 +/- 0.1
+00504 PASS: Hertz_Count_Input1B 0.0
+00505 
+00505 #Finished with port
+00505 #switch out input
+00505 J2_02 = 0 : NULL : WAIT = 0.1
+00506 
+00506 #cycle IGN to reset lockup
+00506 RLY_K1 = 1 : NULL : WAIT = 2
+00507 RLY_K1 = 0 : NULL : WAIT = 1
+00508 #-----setup 39009-----
+00508 #configure as Output Digital ON/OFF
+00508 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00509 Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 0, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00510 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00511 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00512 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00513 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00514 #clear multiplex
+00514 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00515 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00516 #clear multiplex
+00516 Command = 0, SaveSettings = 0 : NULL
+00517 #switch input to load line
+00517 J2_03 = 1 : NULL : WAIT = 0.1
+00518 
+00518 #Finished with port
+00518 #switch out input
+00518 J2_03 = 0 : NULL : WAIT = 0.1
+00519 
+00519 #cycle IGN to reset lockup
+00519 RLY_K1 = 1 : NULL : WAIT = 2
+00520 RLY_K1 = 0 : NULL : WAIT = 1
+00521 #-----setup 39009-----
+00521 #configure as Output Digital ON/OFF
+00521 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00522 Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 0, MODE3B = 6, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00523 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00524 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00525 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00526 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00527 #clear multiplex
+00527 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00528 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00529 #clear multiplex
+00529 Command = 0, SaveSettings = 0 : NULL
+00530 #switch input to load line
+00530 J2_04 = 1 : NULL : WAIT = 0.1
+00531 
+00531 J4_01 = 1 : NULL : WAIT = 0.1
+00532 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.016s rate=62.50 steps/s
+      50/220 set=4.370000 V elapsed=1.109s rate=45.99 steps/s eta=3.697s
+     100/220 set=4.420000 V elapsed=2.188s rate=46.16 steps/s eta=2.600s
+     150/220 set=4.390000 V elapsed=3.250s rate=46.46 steps/s eta=1.507s
+     200/220 set=4.340000 V elapsed=4.313s rate=46.60 steps/s eta=0.429s
+Sweep complete. Elapsed: 4.750s
+Output turned OFF.
+
+
+00532 J4_01 = 0 : NULL : WAIT = 0.1
+00533 #test for lockup
+00533 NULL : Port_3B = 0 | 0.1 | 0.1
+00533 TEST: Port_3B 0.0 +/- 0.1
+00533 PASS: Port_3B 0.0
+00534 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00535 NULL : Port_3B = 5.0 | 0.1 | 0.1
+00535 TEST: Port_3B 5.0 +/- 0.1
+00535 FAIL: Port_3B 0.0
+00536 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00537 NULL : Port_3B = 0 | 0.1 | 0.1
+00537 TEST: Port_3B 0.0 +/- 0.1
+00537 PASS: Port_3B 0.0
+00538 
+00538 #Finished with port
+00538 #switch out input
+00538 J2_04 = 0 : NULL : WAIT = 0.1
+00539 
+00539 
+00539 #Finished with mode
+00539 #cycle IGN to reset lockup
+00539 RLY_K1 = 1 : NULL : WAIT = 2
+00540 RLY_K1 = 0 : NULL : WAIT = 1
+00541 #-----setup 39009-----
+00541 #configure as Output Digital ON/OFF
+00541 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00542 Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 0, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00543 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00544 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00545 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00546 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00547 #clear multiplex
+00547 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00548 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00549 #clear multiplex
+00549 Command = 0, SaveSettings = 0 : NULL
+00550 #switch input to load line
+00550 J2_01 = 1 : NULL : WAIT = 0.1
+00551 
+00551 AfgFreqSet = 100 : NULL : WAIT = 0.1
+00552 #test for lockup
+00552 NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+00552 TEST: Hertz_Count_Input1A 0.0 +/- 0.1
+00552 PASS: Hertz_Count_Input1A 0.0
+00553 J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+00554 NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+00554 TEST: Hertz_Count_Input1A 100.0 +/- 30.0
+00554 PASS: Hertz_Count_Input1A 99.0
+00555 J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+00556 NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+00556 TEST: Hertz_Count_Input1A 0.0 +/- 0.1
+00556 PASS: Hertz_Count_Input1A 0.0
+00557 
+00557 #Finished with port
+00557 #switch out input
+00557 J2_01 = 0 : NULL : WAIT = 0.1
+00558 
+00558 #cycle IGN to reset lockup
+00558 RLY_K1 = 1 : NULL : WAIT = 2
+00559 RLY_K1 = 0 : NULL : WAIT = 1
+00560 #-----setup 39009-----
+00560 #configure as Output Digital ON/OFF
+00560 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00561 Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 0, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00562 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00563 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00564 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00565 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00566 #clear multiplex
+00566 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00567 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00568 #clear multiplex
+00568 Command = 0, SaveSettings = 0 : NULL
+00569 #switch input to load line
+00569 J2_02 = 1 : NULL : WAIT = 0.1
+00570 
+00570 AfgFreqSet = 100 : NULL : WAIT = 0.1
+00571 #test for lockup
+00571 NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+00571 TEST: Hertz_Count_Input1B 0.0 +/- 0.1
+00571 PASS: Hertz_Count_Input1B 0.0
+00572 J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+00573 NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+00573 TEST: Hertz_Count_Input1B 100.0 +/- 30.0
+00573 PASS: Hertz_Count_Input1B 99.0
+00574 J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+00575 NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+00575 TEST: Hertz_Count_Input1B 0.0 +/- 0.1
+00575 PASS: Hertz_Count_Input1B 0.0
+00576 
+00576 #Finished with port
+00576 #switch out input
+00576 J2_02 = 0 : NULL : WAIT = 0.1
+00577 
+00577 #cycle IGN to reset lockup
+00577 RLY_K1 = 1 : NULL : WAIT = 2
+00578 RLY_K1 = 0 : NULL : WAIT = 1
+00579 #-----setup 39009-----
+00579 #configure as Output Digital ON/OFF
+00579 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00580 Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 0, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00581 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00582 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00583 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00584 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00585 #clear multiplex
+00585 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00586 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00587 #clear multiplex
+00587 Command = 0, SaveSettings = 0 : NULL
+00588 #switch input to load line
+00588 J2_03 = 1 : NULL : WAIT = 0.1
+00589 
+00589 J4_01 = 1 : NULL : WAIT = 0.1
+00590 SWEEP-RUNNING DEATHSWEEP!
+Connected: RIGOL TECHNOLOGIES,DP832,DP8C180100022,00.01.19
+VISA resource: USB0::0x1AB1::0x0E11::DP8C180100022::INSTR
+Sweeping CH2 mode=updown: 4.320000 V -> 4.430000 V -> 4.320000 V in 0.001000 V steps (221 points)
+       0/220 set=4.320000 V elapsed=0.031s rate=32.26 steps/s
+      50/220 set=4.370000 V elapsed=1.078s rate=47.31 steps/s eta=3.593s
+     100/220 set=4.420000 V elapsed=2.156s rate=46.85 steps/s eta=2.562s
+     150/220 set=4.390000 V elapsed=3.235s rate=46.68 steps/s eta=1.500s
+     200/220 set=4.340000 V elapsed=4.328s rate=46.44 steps/s eta=0.431s
+Sweep complete. Elapsed: 4.750s
+Output turned OFF.
+
+
+00590 J4_01 = 0 : NULL : WAIT = 0.1
+00591 #test for lockup
+00591 NULL : Port_3A = 0 | 0.1 | 0.1
+00591 TEST: Port_3A 0.0 +/- 0.1
+00591 PASS: Port_3A 0.0
+00592 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1
+00593 NULL : Port_3A = 5.0 | 0.1 | 0.1
+00593 TEST: Port_3A 5.0 +/- 0.1
+00593 PASS: Port_3A 4.972
+00594 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1
+00595 NULL : Port_3A = 0 | 0.1 | 0.1
+00595 TEST: Port_3A 0.0 +/- 0.1
+00595 PASS: Port_3A 0.083
+00596 
+00596 #Finished with port
+00596 #switch out input
+00596 J2_03 = 0 : NULL : WAIT = 0.1
+00597 
+00597 #cycle IGN to reset lockup
+00597 RLY_K1 = 1 : NULL : WAIT = 2
+00598 RLY_K1 = 0 : NULL : WAIT = 1
+00599 #-----setup 39009-----
+00599 #configure as Output Digital ON/OFF
+00599 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00600 Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 0, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00601 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00602 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00603 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00604 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00605 #clear multiplex
+00605 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00606 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00607 #clear multiplex
+00607 Command = 0, SaveSettings = 0 : NULL
+00608 #switch input to load line
+00608 J2_04 = 1 : NULL : WAIT = 0.1
+00609 
+00609 #Finished with port
+00609 #switch out input
+00609 J2_04 = 0 : NULL : WAIT = 0.1
+00610 
+00610 
+00610 #Finished with mode
+00610 #cycle IGN to reset lockup
+00610 RLY_K1 = 1 : NULL : WAIT = 2
+00611 RLY_K1 = 0 : NULL : WAIT = 1
+00612 #-----setup 39009-----
+00612 #configure as Output Digital ON/OFF
+00612 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00613 Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 0, MODE3B = 0, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00614 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00615 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00616 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00617 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00618 #clear multiplex
+00618 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00619 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00620 #clear multiplex
+00620 Command = 0, SaveSettings = 0 : NULL
+00621 #switch input to load line
+00621 J2_01 = 1 : NULL : WAIT = 0.1
+00622 
+00622 AfgFreqSet = 100 : NULL : WAIT = 0.1
+00623 #test for lockup
+00623 NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+00623 TEST: Hertz_Count_Input1A 0.0 +/- 0.1
+00623 PASS: Hertz_Count_Input1A 0.0
+00624 J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+00625 NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+00625 TEST: Hertz_Count_Input1A 100.0 +/- 30.0
+00625 PASS: Hertz_Count_Input1A 99.0
+00626 J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+00627 NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+00627 TEST: Hertz_Count_Input1A 0.0 +/- 0.1
+00627 PASS: Hertz_Count_Input1A 0.0
+00628 
+00628 #Finished with port
+00628 #switch out input
+00628 J2_01 = 0 : NULL : WAIT = 0.1
+00629 
+00629 #cycle IGN to reset lockup
+00629 RLY_K1 = 1 : NULL : WAIT = 2
+00630 RLY_K1 = 0 : NULL : WAIT = 1
+00631 #-----setup 39009-----
+00631 #configure as Output Digital ON/OFF
+00631 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00632 Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 0, MODE3B = 0, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00633 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00634 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00635 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00636 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00637 #clear multiplex
+00637 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00638 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00639 #clear multiplex
+00639 Command = 0, SaveSettings = 0 : NULL
+00640 #switch input to load line
+00640 J2_02 = 1 : NULL : WAIT = 0.1
+00641 
+00641 AfgFreqSet = 100 : NULL : WAIT = 0.1
+00642 #test for lockup
+00642 NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+00642 TEST: Hertz_Count_Input1B 0.0 +/- 0.1
+00642 PASS: Hertz_Count_Input1B 0.0
+00643 J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+00644 NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+00644 TEST: Hertz_Count_Input1B 100.0 +/- 30.0
+00644 PASS: Hertz_Count_Input1B 99.0
+00645 J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+00646 NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+00646 TEST: Hertz_Count_Input1B 0.0 +/- 0.1
+00646 PASS: Hertz_Count_Input1B 0.0
+00647 
+00647 #Finished with port
+00647 #switch out input
+00647 J2_02 = 0 : NULL : WAIT = 0.1
+00648 
+00648 #cycle IGN to reset lockup
+00648 RLY_K1 = 1 : NULL : WAIT = 2
+00649 RLY_K1 = 0 : NULL : WAIT = 1
+00650 #-----setup 39009-----
+00650 #configure as Output Digital ON/OFF
+00650 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00651 Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 0, MODE3B = 0, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00652 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00653 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00654 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00655 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00656 #clear multiplex
+00656 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00657 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00658 #clear multiplex
+00658 Command = 0, SaveSettings = 0 : NULL
+00659 #switch input to load line
+00659 J2_03 = 1 : NULL : WAIT = 0.1
+00660 
+00660 #Finished with port
+00660 #switch out input
+00660 J2_03 = 0 : NULL : WAIT = 0.1
+00661 
+00661 #cycle IGN to reset lockup
+00661 RLY_K1 = 1 : NULL : WAIT = 2
+00662 RLY_K1 = 0 : NULL : WAIT = 1
+00663 #-----setup 39009-----
+00663 #configure as Output Digital ON/OFF
+00663 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00664 Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 0, MODE3B = 0, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.5
+00665 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+00666 Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5
+00667 Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+00668 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00669 #clear multiplex
+00669 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00670 Command = 82, SaveSettings = 1 : NULL : WAIT = 0.5
+00671 #clear multiplex
+00671 Command = 0, SaveSettings = 0 : NULL
+00672 #switch input to load line
+00672 J2_04 = 1 : NULL : WAIT = 0.1
+00673 
+00673 #Finished with port
+00673 #switch out input
+00673 J2_04 = 0 : NULL : WAIT = 0.1
+00674 
+00674 
+00674 #Finished with mode
+00674 #switch out load line, set current
+00674 J2_04 = 0 : NULL : WAIT = 0.1
+00675 LdRemote = 0 : NULL : WAIT = 0.1
+00676 LdEnable = 0 : NULL : WAIT = 0.1
+00677 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00678 J0_08_METER_LOAD = 0 : NULL : WAIT = 0.1
+00679 #tear down PS1
+00679 PwrSetCurrent = 0 : NULL : WAIT = 0.1
+00680 PwrSetVoltage = 0 : NULL : WAIT = 0.1
+00681 PwrEnable = 0 : NULL : WAIT = 0.1
+00682 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1
+00683 PwrRemote = 0 : NULL : WAIT = 0.1
+00684 J4_03 = 0 : NULL : WAIT = 0.2
+00685 SAVE
+00685 END
+Fail count: 7
+Finished on: 2026-01-22-09:40:16
+elapsed time: 0:06:29.063795

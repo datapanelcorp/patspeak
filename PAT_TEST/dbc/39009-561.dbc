@@ -1,0 +1,272 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: UUT CTRL
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ DutyCycle_SP_Input1A : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DutyCycle_SP_Input1B : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DutyCycle_SP_Input3A : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DutyCycle_SP_Input3B : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ LowBYTE_Counter_1A_Setpoint m87 : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ LowBYTE_Counter_3A_Setpoint m87 : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2565857489 CTRL1: 8 CTRL
+ SG_ Command M : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPWR1_BattEn m81 : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPWR1_On m81 : 10|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Output2A m81 : 12|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Output2B m81 : 14|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPWR3_BattEn m81 : 16|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPWR3_On m81 : 18|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Output4A m81 : 20|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Output4B m81 : 22|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPWR5_BattEn m81 : 24|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPWR5_On m81 : 26|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Output6A m81 : 28|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Output6B m81 : 30|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPWR7_BattEn m81 : 32|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPWR7_On m81 : 34|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Output8A m81 : 36|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Output8B m81 : 38|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPWR9_BattEn m81 : 40|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPWR9_On m81 : 42|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Output10A m81 : 44|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Output10B m81 : 46|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ n5V_SNSR m81 : 48|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Enable_Fault_Reset m82 : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Enable_DPLF1 m82 : 10|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Enable_DPLF2 m82 : 12|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Enable_DPLTx m82 : 14|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Enable_24VDC m82 : 16|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Save_Configuration m82 : 18|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Analog_Raw_Value m82 : 20|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ FREQ1 m82 : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE1 m82 : 48|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE2 m82 : 52|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ ID1 m82 : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE1A m83 : 8|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE1B m83 : 12|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE2A m83 : 16|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE2B m83 : 20|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE3A m83 : 24|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE3B m83 : 28|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE4A m83 : 32|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE4B m83 : 36|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE5A m83 : 40|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE5B m83 : 44|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE6A m83 : 48|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE6B m83 : 52|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE7A m83 : 56|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE7B m83 : 60|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE8A m84 : 8|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE8B m84 : 12|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE9A m84 : 16|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE9B m84 : 20|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE10A m84 : 24|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ MODE10B m84 : 28|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ GLOBAL_KP m84 : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ GLOBAL_KI m84 : 40|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port2A_Kp m85 : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port2A_Ki m85 : 16|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port2B_Kp m85 : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port2B_Ki m85 : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port4A_Kp m85 : 40|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port4A_Ki m85 : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port4B_Kp m85 : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port4B_Ki m86 : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port6A_Kp m86 : 16|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port6A_Ki m86 : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port6B_Kp m86 : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port6B_Ki m86 : 40|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port8A_Kp m86 : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port8A_Ki m86 : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Counter_1A_ON_OFF m87 : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Counter_1A_Reset m87 : 10|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Counter_1B_ON_OFF m87 : 12|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Counter_1B_Reset m87 : 14|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Counter_3A_ON_OFF m87 : 16|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Counter_3A_Reset m87 : 18|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Counter_3B_ON_OFF m87 : 20|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Counter_3B_Reset m87 : 22|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port8B_Kp m88 : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port8B_Ki m88 : 16|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port10A_Kp m88 : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port10A_Ki m88 : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port10B_Kp m88 : 40|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Port10B_Ki m88 : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566855889 PWM1: 8 CTRL
+ SG_ PWM_CTRL_2A : 0|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PWM_CTRL_2B : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PWM_CTRL_4A : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PWM_CTRL_4B : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566856145 PWM2: 8 CTRL
+ SG_ PWM_CTRL_6A : 0|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PWM_CTRL_6B : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PWM_CTRL_8A : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PWM_CTRL_8B : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566856401 PWM3: 8 CTRL
+ SG_ PWM_CTRL_10A : 0|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PWM_CTRL_10B : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566854112 DIGIN: 8 UUT
+ SG_ Input_1A : 0|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_1B : 2|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_3A : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_3B : 10|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_5A : 16|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_5B : 18|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_7A : 24|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_7B : 26|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_9A : 32|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_9B : 34|2@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566854368 AD2: 8 UUT
+ SG_ Port_1A : 0|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Port_1B : 16|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Port_3A : 32|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Port_3B : 48|16@1+ (0.001,0) [0|0] "" Vector__XXX
+
+BO_ 2566854624 AD3: 8 UUT
+ SG_ Port_5A : 0|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Port_5B : 16|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Port_7A : 32|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Port_7B : 48|16@1+ (0.001,0) [0|0] "" Vector__XXX
+
+BO_ 2566854880 AD4: 8 UUT
+ SG_ Port_9A : 0|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Port_9B : 16|16@1+ (0.001,0) [0|0] "" Vector__XXX
+
+BO_ 2566855392 FREQ1: 8 UUT
+ SG_ Hertz_Count_Input1A : 0|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Hertz_Count_Input1B : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ EncoderValue1 : 0|32@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566855648 FREQ2: 8 UUT
+ SG_ Count_Input3A : 0|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Count_Input3B : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ EncoderValue3 : 0|32@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2565853664 STAT: 8 UUT
+ SG_ Software_Version : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Software_Revision : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Factory_Default_Configuration : 16|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Configuration_Saved : 18|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Alternate_Configuration_Saved : 20|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Node_Alive : 22|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Node_Fault_Present : 24|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Fault_Counter_Not_Zero : 26|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Active_Fault_Code : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ UserID : 40|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CMND_52h_RCVD : 48|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CMND_53h_RCVD : 50|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CMND_54h_RCVD : 52|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CMND_55h_RCVD : 54|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CMND_56h_RCVD : 56|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CMND_57h_RCVD : 58|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Hardware_Dash : 60|4@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566912992 DPLF1: 8 UUT
+ SG_ Input_1_BAUD1 : 0|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_2_BAUD2 : 2|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_3_CNFG_IN1 : 4|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_4_CNFG_IN2 : 6|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_5_CNFG_IN3 : 8|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_6_CNFG_IN4 : 10|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Input_7_CNFG_IN5 : 12|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ PowerBusP1 : 14|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SpwrStat1 : 16|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OutStat2A : 20|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OutStat2B : 22|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SpwrStat3 : 24|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OutStat4A : 28|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OutStat4B : 30|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SpwrStat5 : 32|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OutStat6A : 36|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OutStat6B : 38|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SpwrStat7 : 40|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OutStat8A : 44|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OutStat8B : 46|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SpwrStat9 : 48|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OutStat10A : 52|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ OutStat10B : 54|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Save_Counter : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566913248 DPLF2: 8 UUT
+ SG_ CNFG1 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CNFG2 : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ VBAT : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ TEMP : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ CNFG3 : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566910944 DPLT1: 8 UUT
+ SG_ Feedback2A : 0|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Feedback2B : 16|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Feedback4A : 32|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Feedback4B : 48|16@1+ (0.001,0) [0|0] "" Vector__XXX
+
+BO_ 2566911200 DPLT2: 8 UUT
+ SG_ Feedback6A : 0|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Feedback6B : 16|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Feedback8A : 32|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Feedback8B : 48|16@1+ (0.001,0) [0|0] "" Vector__XXX
+
+BO_ 2566911456 DPLT3: 8 UUT
+ SG_ Feedback10A : 0|16@1+ (0.001,0) [0|0] "" Vector__XXX
+ SG_ Feedback10B : 16|16@1+ (0.001,0) [0|0] "" Vector__XXX
+
+BO_ 2566911712 DPLT4: 8 UUT
+ SG_ IGN_D2 : 0|16@1- (1,0) [0|0] "" Vector__XXX
+ SG_ n5VSNSRPWR : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ AN4VRef2p2 : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ AN5VRef2p2 : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2566907616 FAULT: 8 UUT
+ SG_ FLTCNT1 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ FLTCNT2 : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ FLTCNT3 : 16|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ FLTCNT4 : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ FLTCNT5 : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ FLTCNT6 : 40|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ FLTCNT7 : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ FLTCNT8 : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+
+
+
+
