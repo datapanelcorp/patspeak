@@ -71,32 +71,29 @@ ExpFreq = FreqInc
 PortMode = IN_MODE_A32V
 PortUnderTest = PortMode
 
-PortIndex = 1
+PortIndex = 0
+MaxPort = 3
 
 ModeIndex = 0
-MaxMode = 1
+MaxMode = 2#35
 
 while ModeIndex <= MaxMode:
 
-    while PortIndex <= 3:
+    while PortIndex <= MaxPort:
         Port1AMode = IN_MODE_OFF
         Port1BMode = IN_MODE_OFF
         Port3AMode = IN_MODE_OFF
         Port3BMode = IN_MODE_OFF
         
         if (ModeIndex == 0):
-            # Port1AMode = IN_MODE_A05V
-            # Port1BMode = IN_MODE_FREQ
-            Port1AMode = IN_MODE_FREQ
-            Port1BMode = IN_MODE_A05V
+            Port1AMode = IN_MODE_A05V
+            Port1BMode = IN_MODE_FREQ
             Port3AMode = IN_MODE_DPOS
             Port3BMode = IN_MODE_A05V
 
         elif (ModeIndex == 1):
-            # Port1AMode = IN_MODE_FREQ
-            # Port1BMode = IN_MODE_A05V
-            Port1AMode = IN_MODE_A05V
-            Port1BMode = IN_MODE_FREQ
+            Port1AMode = IN_MODE_FREQ
+            Port1BMode = IN_MODE_A05V
             Port3AMode = IN_MODE_A05V
             Port3BMode = IN_MODE_DPOS
 
@@ -337,60 +334,66 @@ while ModeIndex <= MaxMode:
         InputName = Feedback
 
         outstr += "#cycle IGN to reset lockup\n"
-        outstr += "RLY_K1 = 1 : NULL : WAIT = 2\n"
+        outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
         outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 
         outstr += "#-----setup 39009-----\n"
         outstr += "#configure\n"
-        outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.5\n"
-        outstr += "Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.5\n"
-        outstr += "Command = 83, MODE1A = " + Port1AMode + ", MODE1B = " + Port1BMode + ", MODE2A = 1, MODE2B = 1, MODE3A = " + Port3AMode + ", MODE3B = " + Port3BMode + ", MODE4A = 1, MODE4B = 1, MODE5A = " + PortMode + ", MODE5B = " + PortMode + ", MODE6A = 1, MODE6B = 1, MODE7A = " + PortMode + ", MODE7B = " + PortMode + " : NULL : WAIT = 0.5\n"
+        outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2\n"
+        outstr += "Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL\n"
+        outstr += "Command = 83, MODE1A = " + Port1AMode + ", MODE1B = " + Port1BMode + ", MODE2A = 1, MODE2B = 1, MODE3A = " + Port3AMode + ", MODE3B = " + Port3BMode + ", MODE4A = 1, MODE4B = 1, MODE5A = " + PortMode + ", MODE5B = " + PortMode + ", MODE6A = 1, MODE6B = 1, MODE7A = " + PortMode + ", MODE7B = " + PortMode + " : NULL : WAIT = 0.2\n"
         outstr += "Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL\n"
-        outstr += "Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = " + PortMode + ", MODE9B = " + PortMode + ", MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5\n"
+        outstr += "Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = " + PortMode + ", MODE9B = " + PortMode + ", MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2\n"
         outstr += "Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL\n"
 
-        outstr += "Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
-        outstr += "#clear multiplex\n"
+        outstr += "Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2\n"
         outstr += "Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
 
-        outstr += "#switch input to load line\n"
-        outstr += OutputConnector + " = 1 : NULL : WAIT = 0.1\n"
+        # outstr += "#cycle IGN to reset hardware\n"
+        # outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
+        # outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 
+        outstr += "#switch input to load line\n"
+        outstr += OutputConnector + " = 1 : NULL : WAIT = 1\n"
+        
         outstr += "\n"
 
         outstr += "#TESTING - ModeIndex " + str(ModeIndex) +  " PortIndex " + str(PortIndex) + "\n"
 
         if((PortUnderTest==IN_MODE_A05V)|(PortUnderTest==IN_MODE_A32V)):
             TEST_VOLTS = 5.0
-            outstr += "PwrSetVoltage = " + str(TEST_VOLTS*10) + " : NULL : WAIT = 0.1\n"
+            #outstr += "PwrSetVoltage = " + str(TEST_VOLTS*10) + " : NULL : WAIT = 0.1\n"
             outstr += DeathSweep + " = 1 : NULL : WAIT = 0.1\n"
             outstr += "SWEEP-RUNNING DEATHSWEEP!\n"
             outstr += DeathSweep + " = 0 : NULL : WAIT = 0.1\n"
             outstr += "#test for lockup\n"
-            outstr += "NULL : " + Feedback + " = 0 | 0.1 | 0.1\n"
-            outstr += "J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1\n"
-            outstr += "NULL : " + Feedback + " = " + str(TEST_VOLTS) + " | 0.1 | 0.1\n"
-            outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1\n"
-            outstr += "NULL : " + Feedback + " = 0 | 0.1 | 0.1\n"
-            outstr += "\n"
+            outstr += "UUT_TXCHECK-2.0\n"
+            # outstr += "NULL : " + Feedback + " = 0 | 0.1 | 0.1\n"
+            # outstr += "J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1\n"
+            # outstr += "NULL : " + Feedback + " = " + str(TEST_VOLTS) + " | 0.1 | 0.1\n"
+            # outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1\n"
+            # outstr += "NULL : " + Feedback + " = 0 | 0.1 | 0.1\n"
+            # outstr += "\n"
 
         if(PortUnderTest==IN_MODE_DPOS):
             TEST_VOLTS = 5.0
-            outstr += "PwrSetVoltage = " + str(TEST_VOLTS*10) + " : NULL : WAIT = 0.1\n"
+            #outstr += "PwrSetVoltage = " + str(TEST_VOLTS*10) + " : NULL : WAIT = 0.1\n"
             outstr += DeathSweep + " = 1 : NULL : WAIT = 0.1\n"
             outstr += "SWEEP-RUNNING DEATHSWEEP!\n"
             outstr += DeathSweep + " = 0 : NULL : WAIT = 0.1\n"
             outstr += "#test for lockup\n"
-            outstr += "NULL : " + Status + " = 0 | 0.1 | 0.1\n"
-            outstr += "J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1\n"
-            outstr += "NULL : " + Status + " = 1 | 0.1 | 0.1\n"
-            outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1\n"
-            outstr += "NULL : " + Status + " = 0 | 0.1 | 0.1\n"
-            outstr += "\n"
+            outstr += "UUT_TXCHECK-2.0\n"
+            # outstr += "NULL : " + Status + " = 0 | 0.1 | 0.1\n"
+            # outstr += "J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.1\n"
+            # outstr += "NULL : " + Status + " = 1 | 0.1 | 0.1\n"
+            # outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.1\n"
+            # outstr += "NULL : " + Status + " = 0 | 0.1 | 0.1\n"
+            # outstr += "\n"
 
         if(PortUnderTest==IN_MODE_FREQ):
             outstr += "AfgFreqSet = " + str(ExpFreq) + " : NULL : WAIT = 0.1\n"
             outstr += "#test for lockup\n"
+            outstr += "UUT_TXCHECK-2.0\n"
             outstr += "NULL : " + FreqFeedback + " = 0 | 0.1 | 0.1\n"
             outstr += "J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1\n"
             outstr += "NULL : " + FreqFeedback + " = " + str(ExpFreq) + " | 30 | 0.1\n" 
@@ -422,7 +425,7 @@ outstr += "#tear down PS1\n"
 outstr += "PwrSetCurrent = 0 : NULL : WAIT = 0.1\n"
 outstr += "PwrSetVoltage = 0 : NULL : WAIT = 0.1\n"
 outstr += "PwrEnable = 0 : NULL : WAIT = 0.1\n"
-outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1\n"
+outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.5\n"
 outstr += "PwrRemote = 0 : NULL : WAIT = 0.1\n"
 
 #outstr += "#switch out o-scope\n"

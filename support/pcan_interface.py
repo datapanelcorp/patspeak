@@ -57,21 +57,36 @@ def CANThread(i):
         try:
             # can_frame = ch.read(timeout=100)
             can_frame = ch.recv(timeout=0.1)  # Timeout in seconds
-            
-            can_id = can_frame.arbitration_id
-            data = can_frame.data
-            
-            if(channel_number == 0):
-                msg = globals.uut_db.get_message_by_id(can_id, kvadblib.MessageFlag.EXT)
-                for s in msg.signals():
-                    value = s.phys_from(data)
-                    globals.UUT_Fdbk[s.name] = value
-            else:
-                if globals.SuppressPatSupport == 'False': # skip if suppressed
-                    msg = globals.pat_db.get_message_by_id(can_id, kvadblib.MessageFlag.EXT)
+
+            if can_frame is not None:
+                can_id = can_frame.arbitration_id
+                data = can_frame.data
+
+                # Track raw UUT-originated traffic (per DBC Tx Node tagging)
+                if(channel_number == 0):
+                    try:
+                        if hasattr(globals, 'UUT_TxMsgIds') and globals.UUT_TxMsgIds:
+                            arb_id = int(can_id)
+                            is_ext = bool(getattr(can_frame, 'is_extended_id', False))
+                            key = (arb_id, is_ext)
+                            if (key in globals.UUT_TxMsgIds) or (arb_id in globals.UUT_TxMsgIds):
+                                globals.UUT_TxSeenCount += 1
+                                globals.UUT_TxLastSeen = time.time()
+                                globals.UUT_TxLastSeenId = arb_id
+                    except:
+                        pass
+
+                if(channel_number == 0):
+                    msg = globals.uut_db.get_message_by_id(can_id, kvadblib.MessageFlag.EXT)
                     for s in msg.signals():
                         value = s.phys_from(data)
-                        globals.PAT_Fdbk[s.name] = value
+                        globals.UUT_Fdbk[s.name] = value
+                else:
+                    if globals.SuppressPatSupport == 'False': # skip if suppressed
+                        msg = globals.pat_db.get_message_by_id(can_id, kvadblib.MessageFlag.EXT)
+                        for s in msg.signals():
+                            value = s.phys_from(data)
+                            globals.PAT_Fdbk[s.name] = value
         except:
             ErrorTrap(0)
 

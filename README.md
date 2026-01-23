@@ -39,7 +39,9 @@ Optional Flags:
 	
 Single Commands:
 	END			REQUIRED - Ends the test and triggers saving the collected data
-	SAVE		saves the collected data without ending the test
+	SAVE		saves the collected data
+	UUT_TXCHECK	verifies the UUT is still transmitting CAN after disruptive operations (e.g., SWEEP). PASS if any message whose DBC Tx Node is tagged 'UUT' is observed within the timeout.
+				Optional timeout: UUT_TXCHECK-<seconds> or UUT_TXCHECK=<seconds> (default 2.0s) without ending the test
 
 	
 Note: multipule SingalName's can set on a single line seperated by comma.
@@ -57,6 +59,9 @@ Examples:
 	
 	wait for voltmeter to read 1.0v +/- 0.5 for 500ms
 		NULL : MeterVolts = 1.0 | 0.5 | 0.5
+
+	check that the UUT is still talking on CAN (per DBC Tx Node tagged UUT)
+		UUT_TXCHECK-2.0
 
 
 

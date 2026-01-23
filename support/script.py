@@ -6,6 +6,7 @@ from datetime import datetime
 import support.globals as globals
 from datetime import timedelta
 import subprocess
+import re
 
 def DeathSpeep():
 
@@ -34,6 +35,41 @@ def DeathSpeep():
     print(result.stderr)
     globals.UUT_TestLog += result.stdout + "\n"
     globals.UUT_TestLog += result.stderr + "\n"
+
+def CheckUUTTxTraffic(timeout_s: float = 2.0, tx_node: str = "UUT"):
+    """Wait up to timeout_s seconds for any UUT-transmitted CAN message to be observed.
+
+    'UUT-transmitted' is determined by parsing the loaded UUT DBC's BO_ Tx Node field (sender == tx_node).
+    Returns (ok, seen_id, seen_name).
+    """
+    try:
+        msg_ids = getattr(globals, "UUT_TxMsgIds", set()) or set()
+        msg_info = getattr(globals, "UUT_TxMsgInfo", {}) or {}
+    except:
+        msg_ids = set()
+        msg_info = {}
+
+    if not msg_ids:
+        return (False, None, None)
+
+    start_count = getattr(globals, "UUT_TxSeenCount", 0)
+    start_time = time.time()
+
+    while (time.time() - start_time) < float(timeout_s):
+        try:
+            if getattr(globals, "UUT_TxSeenCount", 0) > start_count:
+                seen_id = getattr(globals, "UUT_TxLastSeenId", None)
+                seen_name = None
+                if seen_id is not None:
+                    seen_name = msg_info.get(seen_id) or msg_info.get((seen_id, True)) or msg_info.get((seen_id, False))
+                return (True, seen_id, seen_name)
+        except:
+            pass
+        time.sleep(0.01)
+
+    return (False, None, None)
+
+
 def SaveData():
 
     print("Writing Data Collected.")
@@ -134,6 +170,40 @@ def ProcessScript():
     if(globals.TestLine.startswith("SWEEP")):
         DeathSpeep()
         globals.TestLine = "" #clear to stop further processing
+
+    if(globals.TestLine.startswith("UUT_TXCHECK")):
+        # Optional syntax: UUT_TXCHECK-<timeout_seconds> or UUT_TXCHECK=<timeout_seconds>
+        timeout_s = 2.0
+        try:
+            parts = re.split(r"[-=]", globals.TestLine, maxsplit=1)
+            if len(parts) == 2 and parts[1].strip() != "":
+                timeout_s = float(parts[1].strip())
+        except:
+            pass
+
+        ok, seen_id, seen_name = CheckUUTTxTraffic(timeout_s=timeout_s)
+        if ok:
+            detail = ""
+            if seen_name:
+                detail = f" ({seen_name})"
+            msg = str(globals.TestStep).zfill(5) + " PASS: UUT_TXCHECK" + detail
+            globals.UUT_TestLog += msg + "\n"
+            print(msg)
+        else:
+            reason = "no UUT-tagged TX messages seen"
+            if not getattr(globals, "UUT_TxMsgIds", set()):
+                reason = "no messages in DBC tagged with Tx Node UUT"
+            msg = str(globals.TestStep).zfill(5) + " FAIL: UUT_TXCHECK (" + str(reason) + ")"
+            globals.UUT_TestLog += msg + "\n"
+            print(msg)
+            globals.FailCount += 1
+
+        # advance like a normal test step
+        globals.TestLine = "" #read next line
+        globals.PassTime = 0
+        globals.StepTime = 0
+        globals.WaitDone = 0
+        globals.TestStep += 1
 
     if(globals.TestLine == "SAVE"):
         SaveData()

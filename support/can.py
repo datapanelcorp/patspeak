@@ -39,6 +39,19 @@ def CANThread(i):
         #receive status messages
         try:
             can_frame = ch.read(timeout=100)
+            # Track raw UUT-originated traffic (per DBC Tx Node tagging)
+            if(channel_number == 0):
+                try:
+                    if hasattr(globals, 'UUT_TxMsgIds') and globals.UUT_TxMsgIds:
+                        # Normalize IDs (DBC exports may include SocketCAN flag bits; Kvaser exposes arbitration_id).
+                        arb_id = int(can_frame.id) & 0x1FFFFFFF
+                        key = (arb_id, True)
+                        if (key in globals.UUT_TxMsgIds) or (arb_id in globals.UUT_TxMsgIds):
+                            globals.UUT_TxSeenCount += 1
+                            globals.UUT_TxLastSeen = time.time()
+                            globals.UUT_TxLastSeenId = arb_id
+                except:
+                    pass
             if(channel_number == 0):
                 msg = globals.uut_db.get_message_by_id(can_frame.id, kvadblib.MessageFlag.EXT)
                 for s in msg.signals():
