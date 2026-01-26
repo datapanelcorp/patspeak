@@ -75,7 +75,7 @@ PortIndex = 0
 MaxPort = 3
 
 ModeIndex = 0
-MaxMode = 2#35
+MaxMode = 35
 
 while ModeIndex <= MaxMode:
 
@@ -333,9 +333,9 @@ while ModeIndex <= MaxMode:
 
         InputName = Feedback
 
-        outstr += "#cycle IGN to reset lockup\n"
-        outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
-        outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
+        # outstr += "#cycle IGN to reset lockup\n"
+        # outstr += "RLY_K1 = 1 : NULL : WAIT = 2\n"
+        # outstr += "RLY_K1 = 0 : NULL : WAIT = 2\n"
 
         outstr += "#-----setup 39009-----\n"
         outstr += "#configure\n"
@@ -349,9 +349,9 @@ while ModeIndex <= MaxMode:
         outstr += "Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2\n"
         outstr += "Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
 
-        # outstr += "#cycle IGN to reset hardware\n"
-        # outstr += "RLY_K1 = 1 : NULL : WAIT = 1\n"
-        # outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
+        outstr += "#cycle IGN to reset hardware\n"
+        outstr += "RLY_K1 = 1 : NULL : WAIT = 2\n"
+        outstr += "RLY_K1 = 0 : NULL : WAIT = 2\n"
 
         outstr += "#switch input to load line\n"
         outstr += OutputConnector + " = 1 : NULL : WAIT = 1\n"

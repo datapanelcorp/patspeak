@@ -28,8 +28,8 @@ AfgEnable = 1 : NULL : WAIT = 0.1
 J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
 J4_03 = 1 : NULL : WAIT = 0.2
 #cycle IGN to reset lockup
-RLY_K1 = 1 : NULL : WAIT = 1
-RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
 #-----setup 39009-----
 #configure
 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
@@ -54,8 +54,8 @@ UUT_TXCHECK-2.0
 J2_01 = 0 : NULL : WAIT = 0.1
 
 #cycle IGN to reset lockup
-RLY_K1 = 1 : NULL : WAIT = 1
-RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
 #-----setup 39009-----
 #configure
 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
@@ -84,8 +84,8 @@ NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
 J2_02 = 0 : NULL : WAIT = 0.1
 
 #cycle IGN to reset lockup
-RLY_K1 = 1 : NULL : WAIT = 1
-RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
 #-----setup 39009-----
 #configure
 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
@@ -110,8 +110,8 @@ UUT_TXCHECK-2.0
 J2_03 = 0 : NULL : WAIT = 0.1
 
 #cycle IGN to reset lockup
-RLY_K1 = 1 : NULL : WAIT = 1
-RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
 #-----setup 39009-----
 #configure
 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
@@ -138,8 +138,8 @@ J2_04 = 0 : NULL : WAIT = 0.1
 
 #Finished with mode
 #cycle IGN to reset lockup
-RLY_K1 = 1 : NULL : WAIT = 1
-RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
 #-----setup 39009-----
 #configure
 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
@@ -168,8 +168,8 @@ NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
 J2_01 = 0 : NULL : WAIT = 0.1
 
 #cycle IGN to reset lockup
-RLY_K1 = 1 : NULL : WAIT = 1
-RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
 #-----setup 39009-----
 #configure
 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
@@ -194,8 +194,8 @@ UUT_TXCHECK-2.0
 J2_02 = 0 : NULL : WAIT = 0.1
 
 #cycle IGN to reset lockup
-RLY_K1 = 1 : NULL : WAIT = 1
-RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
 #-----setup 39009-----
 #configure
 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
@@ -220,8 +220,8 @@ UUT_TXCHECK-2.0
 J2_03 = 0 : NULL : WAIT = 0.1
 
 #cycle IGN to reset lockup
-RLY_K1 = 1 : NULL : WAIT = 1
-RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
 #-----setup 39009-----
 #configure
 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
@@ -248,8 +248,8 @@ J2_04 = 0 : NULL : WAIT = 0.1
 
 #Finished with mode
 #cycle IGN to reset lockup
-RLY_K1 = 1 : NULL : WAIT = 1
-RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
 #-----setup 39009-----
 #configure
 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
@@ -274,8 +274,8 @@ UUT_TXCHECK-2.0
 J2_01 = 0 : NULL : WAIT = 0.1
 
 #cycle IGN to reset lockup
-RLY_K1 = 1 : NULL : WAIT = 1
-RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
 #-----setup 39009-----
 #configure
 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
@@ -300,8 +300,8 @@ UUT_TXCHECK-2.0
 J2_02 = 0 : NULL : WAIT = 0.1
 
 #cycle IGN to reset lockup
-RLY_K1 = 1 : NULL : WAIT = 1
-RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
 #-----setup 39009-----
 #configure
 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
@@ -326,8 +326,8 @@ UUT_TXCHECK-2.0
 J2_03 = 0 : NULL : WAIT = 0.1
 
 #cycle IGN to reset lockup
-RLY_K1 = 1 : NULL : WAIT = 1
-RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
 #-----setup 39009-----
 #configure
 Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
@@ -342,6 +342,3596 @@ Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, E
 J2_04 = 1 : NULL : WAIT = 1
 
 #TESTING - ModeIndex 2 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 3 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 3 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 3 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 3 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 4 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 4 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 4 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 4 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 5 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 5 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 5 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 5 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 6 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 6 PortIndex 1
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 6 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 6 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 7 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 7 PortIndex 1
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 7 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 7 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 8 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 8 PortIndex 1
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 8 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 8 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 9 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 9 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 9 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 9 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 10 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 10 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 10 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 10 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 11 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 11 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 11 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 11 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 12 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 12 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 12 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 12 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 13 PortIndex 0
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 13 PortIndex 1
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 13 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 13 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 14 PortIndex 0
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 14 PortIndex 1
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 14 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 14 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 15 PortIndex 0
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 15 PortIndex 1
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 15 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 15 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 16 PortIndex 0
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 16 PortIndex 1
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 16 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 16 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 17 PortIndex 0
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 17 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 17 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 17 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 18 PortIndex 0
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 18 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 18 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 18 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 19 PortIndex 0
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 19 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 19 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 19 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 20 PortIndex 0
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 20 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 20 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 20 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 21 PortIndex 0
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 21 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 21 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 21 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 22 PortIndex 0
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 22 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 22 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 22 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 23 PortIndex 0
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1A = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 23 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 23 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 7, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 23 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 24 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 24 PortIndex 1
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 24 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 4, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 24 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 25 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 25 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 25 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 25 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 26 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 26 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 26 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 26 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 27 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 27 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 27 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 27 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 28 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 28 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 28 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 4, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 28 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 29 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 29 PortIndex 1
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 29 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 29 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 30 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 30 PortIndex 1
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 30 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 30 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 31 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 31 PortIndex 1
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 31 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 31 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 32 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 32 PortIndex 1
+AfgFreqSet = 100 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+J0_11_FREQ_GEN = 1 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 100 | 30 | 0.1
+J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
+NULL : Hertz_Count_Input1B = 0 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 32 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 7, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 32 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 33 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 33 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 33 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 33 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 34 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 34 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 34 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 34 PortIndex 3
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_04 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_01 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 35 PortIndex 0
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_01 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_02 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 35 PortIndex 1
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_02 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_03 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 35 PortIndex 2
+J4_01 = 1 : NULL : WAIT = 0.1
+SWEEP-RUNNING DEATHSWEEP!
+J4_01 = 0 : NULL : WAIT = 0.1
+#test for lockup
+UUT_TXCHECK-2.0
+#Finished with port
+#switch out input
+J2_03 = 0 : NULL : WAIT = 0.1
+
+#cycle IGN to reset lockup
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 2
+#-----setup 39009-----
+#configure
+Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 4, MODE4A = 1, MODE4B = 1, MODE5A = 6, MODE5B = 6, MODE6A = 1, MODE6B = 1, MODE7A = 6, MODE7B = 6 : NULL : WAIT = 0.2
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL
+Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = 6, MODE9B = 6, MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.2
+Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL
+Command = 82, Enable_Fault_Reset = 1, Save_Configuration = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2
+Command = 0, Enable_Fault_Reset = 0, Save_Configuration = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#switch input to load line
+J2_04 = 1 : NULL : WAIT = 1
+
+#TESTING - ModeIndex 35 PortIndex 3
 J4_01 = 1 : NULL : WAIT = 0.1
 SWEEP-RUNNING DEATHSWEEP!
 J4_01 = 0 : NULL : WAIT = 0.1
