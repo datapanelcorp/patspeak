@@ -99,7 +99,7 @@ BO_ 2565855697 CTRL1: 8 CTRL
  SG_ Enable_DPLF2 m82 : 12|2@1+ (1,0) [0|3] ""  CTRL
  SG_ Enable_FAULT m82 : 14|2@1+ (1,0) [0|3] ""  CTRL
  SG_ SaveSettings m82 : 18|2@1+ (1,0) [0|3] ""  CTRL
- SG_ Analog_Raw_Value m82 : 20|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ ADRaw m82 : 20|2@1+ (1,0) [0|3] ""  CTRL
  SG_ MODE2 m82 : 52|4@1+ (1,0) [0|15] ""  CTRL
  SG_ ID1 m82 : 56|8@1+ (1,0) [0|255] ""  CTRL
  SG_ MODE1A m83 : 8|4@1+ (1,0) [0|15] ""  CTRL

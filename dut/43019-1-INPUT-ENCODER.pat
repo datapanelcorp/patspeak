@@ -19,7 +19,7 @@ J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1
 
 #-----setup 39009-----
 #configure as Output Digital ON/OFF
-Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE1 = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 10, MODE3B = 10, MODE4A = 10, MODE4B = 10, MODE5A = 0, MODE5B = 0 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL
 
@@ -136,7 +136,7 @@ J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1
 
 #-----setup 39009-----
 #configure as Output Digital ON/OFF
-Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE1 = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 10, MODE3B = 10, MODE4A = 10, MODE4B = 10, MODE5A = 0, MODE5B = 0 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL
 

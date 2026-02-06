@@ -18,7 +18,7 @@ outstr += "UUT_DBC = 43019-560.dbc\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
 
-outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5\n"
+outstr += "Command = 82, MODE1 = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5\n"
 outstr += "Command = 83, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = " + PortMode + ", MODE3B = 0, MODE4A = " + PortMode + ", MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL : WAIT = 0.5\n"
 outstr += "Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0 : NULL\n"
 

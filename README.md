@@ -9,7 +9,7 @@ This repo contains:
 - Example DUT/UUT test scripts in `dut/`
 - DBC files in `dbc/` (UUT-specific DBCs + `PAT.dbc` for the fixture)
 
-> Note on history: the project was updated **02/06/26** to migrate to **python-can + cantools** for CAN + DBC handling (no longer depends on Kvaser `kvadblib` for DBC parsing).
+> Note on history: the project was updated **08/28/25** to migrate to **python-can + cantools** for CAN + DBC handling (no longer depends on Kvaser `kvadblib` for DBC parsing).
 
 ---
 
@@ -418,6 +418,28 @@ export PATSPEAK_CAN_CH1=can1
 
 
 ## Troubleshooting / gotchas
+
+### Preflight: validate signal names against the DBCs
+Before starting CAN I/O, PATSpeak scans the `.pat` script and verifies that every
+signal referenced by the test exists in the configured DBC(s):
+
+- the UUT DBC named by `UUT_DBC = ...`
+- `dbc/PAT.dbc` (PAT support signals)
+
+This is meant to catch typos and DBC/test drift early (rather than discovering it
+mid-test with “signal not found!”).
+
+You can control preflight behavior with an environment variable:
+
+- `PATSPEAK_PREFLIGHT_MODE`
+  - `off`: disable preflight
+  - `warn`: print issues but continue
+  - `error` (default): abort on errors, continue on warnings
+  - `strict`: abort on errors and warnings
+
+Optional:
+
+- `PATSPEAK_PREFLIGHT_MAX_ISSUES` (default `200`): cap how many issues are printed
 
 ### “signal not found!”
 - The signal may not exist in the chosen UUT DBC (or in `PAT.dbc`)

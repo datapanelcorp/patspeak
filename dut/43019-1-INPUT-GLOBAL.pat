@@ -30,8 +30,8 @@ NULL : Input_4A = 0 | 0.1 | 0.1
 NULL : Input_4B = 0 | 0.1 | 0.1
 #-----setup 43019-----
 #configure Global to 4 with Ports as 1 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 4, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -96,8 +96,8 @@ J1_01 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 4 with Ports as 1 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 4, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -162,8 +162,8 @@ J1_02 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 4 with Ports as 1 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 4, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -228,8 +228,8 @@ J1_03 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 4 with Ports as 1 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 4, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -294,8 +294,8 @@ J1_04 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 4 with Ports as 1 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 4, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -360,8 +360,8 @@ J1_05 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 4 with Ports as 1 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 4, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -426,8 +426,8 @@ J1_06 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 4 with Ports as 1 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 4, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -492,8 +492,8 @@ J1_07 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 4 with Ports as 1 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 4, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -564,8 +564,8 @@ RLY_K1 = 1 : NULL : WAIT = 2
 RLY_K1 = 0 : NULL : WAIT = 1
 #-----setup 43019-----
 #configure Global to 5 with Ports as 4 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A =4, MODE2B = 4, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 5, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -644,8 +644,8 @@ J1_01 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 5 with Ports as 4 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A =4, MODE2B = 4, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 5, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -724,8 +724,8 @@ J1_02 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 5 with Ports as 4 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A =4, MODE2B = 4, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 5, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -804,8 +804,8 @@ J1_03 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 5 with Ports as 4 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A =4, MODE2B = 4, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 5, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -884,8 +884,8 @@ J1_04 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 5 with Ports as 4 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A =4, MODE2B = 4, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 5, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -964,8 +964,8 @@ J1_05 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 5 with Ports as 4 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A =4, MODE2B = 4, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 5, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -1044,8 +1044,8 @@ J1_06 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 5 with Ports as 4 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A =4, MODE2B = 4, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 5, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -1124,8 +1124,8 @@ J1_07 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 5 with Ports as 4 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A =4, MODE2B = 4, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 5, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -1210,8 +1210,8 @@ RLY_K1 = 1 : NULL : WAIT = 2
 RLY_K1 = 0 : NULL : WAIT = 1
 #-----setup 43019-----
 #configure Global to 6 with Ports as 2 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 2, MODE1B = 2, MODE2A =2, MODE2B = 2, MODE3A = 2, MODE3B = 2, MODE4A = 2, MODE4B = 2 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 6, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -1325,8 +1325,8 @@ J1_01 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 6 with Ports as 2 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 2, MODE1B = 2, MODE2A =2, MODE2B = 2, MODE3A = 2, MODE3B = 2, MODE4A = 2, MODE4B = 2 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 6, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -1440,8 +1440,8 @@ J1_02 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 6 with Ports as 2 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 2, MODE1B = 2, MODE2A =2, MODE2B = 2, MODE3A = 2, MODE3B = 2, MODE4A = 2, MODE4B = 2 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 6, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -1555,8 +1555,8 @@ J1_03 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 6 with Ports as 2 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 2, MODE1B = 2, MODE2A =2, MODE2B = 2, MODE3A = 2, MODE3B = 2, MODE4A = 2, MODE4B = 2 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 6, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -1670,8 +1670,8 @@ J1_04 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 6 with Ports as 2 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 2, MODE1B = 2, MODE2A =2, MODE2B = 2, MODE3A = 2, MODE3B = 2, MODE4A = 2, MODE4B = 2 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 6, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -1785,8 +1785,8 @@ J1_05 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 6 with Ports as 2 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 2, MODE1B = 2, MODE2A =2, MODE2B = 2, MODE3A = 2, MODE3B = 2, MODE4A = 2, MODE4B = 2 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 6, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -1900,8 +1900,8 @@ J1_06 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 6 with Ports as 2 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 2, MODE1B = 2, MODE2A =2, MODE2B = 2, MODE3A = 2, MODE3B = 2, MODE4A = 2, MODE4B = 2 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 6, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -2015,8 +2015,8 @@ J1_07 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure Global to 6 with Ports as 2 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
-Command = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 2, MODE1B = 2, MODE2A =2, MODE2B = 2, MODE3A = 2, MODE3B = 2, MODE4A = 2, MODE4B = 2 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, MODE2 = 6, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5

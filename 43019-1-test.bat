@@ -2,32 +2,36 @@ echo off
 @REM python pat.py RESET.pat -v 
 @REM python pat.py 43019-1-INPUT-GLOBAL.pat -v 
 
-python pat.py RESET.pat -v 
-python pat.py 43019-1-INPUT-RATIO-12.pat -v 
+@REM python pat.py RESET.pat -v 
+@REM python pat.py 43019-1-INPUT-RATIO-12.pat -v 
 
-python pat.py RESET.pat -v 
-python pat.py 43019-1-INPUT-RATIO-14_5.pat -v 
+@REM python pat.py RESET.pat -v 
+@REM python pat.py 43019-1-INPUT-RATIO-14_5.pat -v 
 
-python pat.py RESET.pat -v 
-python pat.py 43019-1-INPUT-ALL.pat -v 
+@REM python pat.py RESET.pat -v 
+@REM python pat.py 43019-1-INPUT-ALL.pat -v 
 
-python pat.py RESET.pat -v
-python pat.py 43019-1-INPUT-ENCODER.pat -v
+@REM python pat.py RESET.pat -v
+@REM python pat.py 43019-1-INPUT-ENCODER.pat -v
 
-python pat.py RESET.pat -v
-python pat.py 43019-1-INPUT-420MA.pat -v
+
+@REM python pat.py RESET.pat -v
+@REM python pat.py 43019-1-INPUT-420MA.pat -v
 
 python pat.py RESET.pat -v 
 python pat.py 43019-1-SENSOR-POWER.pat -v 
 
-python pat.py RESET.pat -v 
-python pat.py 43019-1-SENSOR-POWER-XTRA.pat -v 
+@REM python pat.py RESET.pat -v 
+@REM python pat.py 43019-1-SENSOR-POWER-XTRA.pat -v 
 
-python pat.py RESET.pat -v 
-python pat.py 43019-1-INPUT-FREQ.pat -v 
+@REM python pat.py RESET.pat -v 
+@REM python pat.py 43019-1-INPUT-FREQ.pat -v 
 
-python pat.py RESET.pat -v 
-python pat.py 43019-1-INPUT-COUNT.pat -v 
+@REM python pat.py RESET.pat -v 
+@REM python pat.py 43019-1-INPUT-COUNT.pat -v 
+
+@REM python pat.py RESET.pat -v
+@REM python pat.py 43019-1-INPUT-ENCODER.pat -v
 
 
 @REM python pat.py 43019-1-INPUT-ISR-LOCKUP.pat -v

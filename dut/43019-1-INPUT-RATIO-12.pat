@@ -30,7 +30,7 @@ J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 1
 J4_03 = 1 : NULL : WAIT = 0.2
 #-----setup 43019-----
 #configure as Outputs to 9 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 9, MODE1B = 9, MODE2A =9, MODE2B = 9, MODE3A = 9, MODE3B = 9, MODE4A = 9, MODE4B = 9 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -191,7 +191,7 @@ J1_01 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure as Outputs to 9 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 9, MODE1B = 9, MODE2A =9, MODE2B = 9, MODE3A = 9, MODE3B = 9, MODE4A = 9, MODE4B = 9 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -352,7 +352,7 @@ J1_02 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure as Outputs to 9 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 9, MODE1B = 9, MODE2A =9, MODE2B = 9, MODE3A = 9, MODE3B = 9, MODE4A = 9, MODE4B = 9 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -513,7 +513,7 @@ J1_03 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure as Outputs to 9 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 9, MODE1B = 9, MODE2A =9, MODE2B = 9, MODE3A = 9, MODE3B = 9, MODE4A = 9, MODE4B = 9 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -674,7 +674,7 @@ J1_04 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure as Outputs to 9 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 9, MODE1B = 9, MODE2A =9, MODE2B = 9, MODE3A = 9, MODE3B = 9, MODE4A = 9, MODE4B = 9 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -835,7 +835,7 @@ J1_05 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure as Outputs to 9 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 9, MODE1B = 9, MODE2A =9, MODE2B = 9, MODE3A = 9, MODE3B = 9, MODE4A = 9, MODE4B = 9 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -996,7 +996,7 @@ J1_06 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure as Outputs to 9 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 9, MODE1B = 9, MODE2A =9, MODE2B = 9, MODE3A = 9, MODE3B = 9, MODE4A = 9, MODE4B = 9 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -1157,7 +1157,7 @@ J1_07 = 0 : NULL : WAIT = 0.1
 
 #-----setup 43019-----
 #configure as Outputs to 9 
-Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 9, MODE1B = 9, MODE2A =9, MODE2B = 9, MODE3A = 9, MODE3B = 9, MODE4A = 9, MODE4B = 9 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
