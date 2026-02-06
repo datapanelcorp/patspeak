@@ -5,6 +5,7 @@ import os
 import support.globals as globals
 
 from support.can_db import CanDb
+from support.preflight import run_preflight
 
 
 def initialize(): 
@@ -85,22 +86,31 @@ def initialize():
             break
                     
     # read uut
-    DBCFileName = UUTDBCName[1].strip()
-    filename = os.path.join(DBCPath, DBCFileName)
-    print("Loading", DBCFileName + "...")
+    uut_dbc_name = UUTDBCName[1].strip()
+    filename = os.path.join(DBCPath, uut_dbc_name)
+    print("Loading", uut_dbc_name + "...")
     uut_db = CanDb(dbc_filename=filename)
     print("Updating UUT_Fdbk...")
+
+    pat_dbc_name = "PAT.dbc"
+    pat_db_for_check = None
         
     # Load PAT.dbc file only if SuppressPatSupport is not set to True
     if(SuppressPatSupport == 'True'):
         print("Suppression of PAT support active; UUT testing only")
         pat_db = None
+        # For preflight only, we still try to load PAT.dbc so we can give
+        # better error messages if a script references PAT-only signals.
+        try:
+            pat_db_for_check = CanDb(dbc_filename=os.path.join(DBCPath, pat_dbc_name))
+        except Exception:
+            pat_db_for_check = None
     else:
         # read pat
-        DBCFileName = "PAT.dbc"
-        filename = os.path.join(DBCPath, DBCFileName)
-        print("Loading", DBCFileName + "...")
+        filename = os.path.join(DBCPath, pat_dbc_name)
+        print("Loading", pat_dbc_name + "...")
         pat_db = CanDb(dbc_filename=filename)
+        pat_db_for_check = pat_db
         
         # compare uut and pat. skip if pat suppressed
         print("Verifing...")
@@ -128,6 +138,21 @@ def initialize():
             if(globals.Verbose == 1):
                 print(message.name, s.name)
 
-    #TODO: check signal names are in script.
+    # -----------------
+    # Preflight checks
+    # -----------------
+    pat_support_active = (SuppressPatSupport == 'False') and (pat_db is not None)
+    ok = run_preflight(
+        Lines,
+        uut_db=uut_db,
+        pat_db_runtime=pat_db,
+        pat_db_for_check=pat_db_for_check,
+        uut_dbc_name=uut_dbc_name,
+        pat_dbc_name=pat_dbc_name,
+        pat_support_active=pat_support_active,
+    )
+    if not ok:
+        quit()
+
     #TODO: check test commands are not
     

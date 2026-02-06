@@ -29,8 +29,8 @@ J0_11_FREQ_GEN = 0 : NULL : WAIT = 0.1
 J4_03 = 1 : NULL : WAIT = 0.2
 #-----setup 39009-----
 #configure
-Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
-Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 82, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 7, MODE3B = 1, MODE4A = 7, MODE4B = 1, MODE5A = 0, MODE5B = 0 : NULL : WAIT = 0.2
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -58,8 +58,8 @@ J1_05 = 0 : NULL : WAIT = 0.1
 
 #-----setup 39009-----
 #configure
-Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
-Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 82, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 7, MODE3B = 1, MODE4A = 7, MODE4B = 1, MODE5A = 0, MODE5B = 0 : NULL : WAIT = 0.2
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -83,8 +83,8 @@ J1_06 = 0 : NULL : WAIT = 0.1
 
 #-----setup 39009-----
 #configure
-Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
-Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 82, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 7, MODE3B = 1, MODE4A = 7, MODE4B = 1, MODE5A = 0, MODE5B = 0 : NULL : WAIT = 0.2
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -112,8 +112,8 @@ J1_07 = 0 : NULL : WAIT = 0.1
 
 #-----setup 39009-----
 #configure
-Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
-Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 82, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 7, MODE3B = 1, MODE4A = 7, MODE4B = 1, MODE5A = 0, MODE5B = 0 : NULL : WAIT = 0.2
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -139,8 +139,8 @@ J1_08 = 0 : NULL : WAIT = 0.1
 #Finished with mode
 #-----setup 39009-----
 #configure
-Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
-Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 82, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4, MODE5A = 0, MODE5B = 0 : NULL : WAIT = 0.2
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -164,8 +164,8 @@ J1_05 = 0 : NULL : WAIT = 0.1
 
 #-----setup 39009-----
 #configure
-Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
-Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 82, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4, MODE5A = 0, MODE5B = 0 : NULL : WAIT = 0.2
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -189,8 +189,8 @@ J1_06 = 0 : NULL : WAIT = 0.1
 
 #-----setup 39009-----
 #configure
-Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
-Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 82, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4, MODE5A = 0, MODE5B = 0 : NULL : WAIT = 0.2
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -214,8 +214,8 @@ J1_07 = 0 : NULL : WAIT = 0.1
 
 #-----setup 39009-----
 #configure
-Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
-Command = 0, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, Analog_Raw_Value = 0 : NULL
+Command = 82, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2
+Command = 0, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL
 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4, MODE5A = 0, MODE5B = 0 : NULL : WAIT = 0.2
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
