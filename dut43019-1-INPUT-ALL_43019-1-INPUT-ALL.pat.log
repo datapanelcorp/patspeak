@@ -1,0 +1,269 @@
+Esc - user interruption @ 2026-02-06-14:52:39
+Started on: 2026-02-06-14:52:07
+00000 #43019-1
+00000 #Verion 0.0
+00000 #input test
+00000 UUT_DBC = 43019-560.dbc
+00000 UUT_DATANAME = 43019-1-INPUT-ALL
+00000 
+00000 
+00000 #-----setup pat-----
+00000 #setup meter
+00000 LdRemote = 1 : NULL : WAIT = 0.1
+00001 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00002 LdEnable = 0 : NULL : WAIT = 0.1
+00003 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
+00004 
+00004 #setup PS1
+00004 PwrRemote = 1 : NULL : WAIT = 0.1
+00005 PwrSetCurrent = 100 : NULL : WAIT = 0.1
+00006 PwrSetVoltage = 0 : NULL : WAIT = 0.1
+00007 PwrEnable = 1 : NULL : WAIT = 0.1
+00008 J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1
+00009 
+00009 J4_03 = 1 : NULL : WAIT = 0.2
+00010 NULL : Input_1A = 0 | 0.1 | 0.1
+00010 TEST: Input_1A 0.0 +/- 0.1
+00010 PASS: Input_1A 0.0
+00011 NULL : Input_1B = 0 | 0.1 | 0.1
+00011 TEST: Input_1B 0.0 +/- 0.1
+00011 PASS: Input_1B 0.0
+00012 NULL : Input_2A = 0 | 0.1 | 0.1
+00012 TEST: Input_2A 0.0 +/- 0.1
+00012 PASS: Input_2A 0.0
+00013 NULL : Input_2B = 0 | 0.1 | 0.1
+00013 TEST: Input_2B 0.0 +/- 0.1
+00013 PASS: Input_2B 0.0
+00014 NULL : Input_3A = 0 | 0.1 | 0.1
+00014 TEST: Input_3A 0.0 +/- 0.1
+00014 PASS: Input_3A 0.0
+00015 NULL : Input_3B = 0 | 0.1 | 0.1
+00015 TEST: Input_3B 0.0 +/- 0.1
+00015 PASS: Input_3B 0.0
+00016 NULL : Input_4A = 0 | 0.1 | 0.1
+00016 TEST: Input_4A 0.0 +/- 0.1
+00016 PASS: Input_4A 0.0
+00017 NULL : Input_4B = 0 | 0.1 | 0.1
+00017 TEST: Input_4B 0.0 +/- 0.1
+00017 PASS: Input_4B 0.0
+00018 #-----setup 43019-----
+00018 #configure as Outputs to 4
+00018 Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00019 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A =4, MODE2B = 4, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4 : NULL : WAIT = 0.5
+00020 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
+00021 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00022 #clear multiplex
+00022 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_FAULT = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00023 #set power supply and wait
+00023 PwrSetVoltage = 10 : NULL : WAIT = 0.1
+00024 #Sweep of Port_1A from 1 to 5 in 0.5 increments
+00024 J0_07_GND_LOAD = 0 : NULL : WAIT = 1
+00025 PwrSetVoltage = 10 : NULL : WAIT = 0.1
+00026 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 1
+00027 #test power supply
+00027 NULL : MeterVolts = 1 | 0.155 | 1
+00027 TEST: MeterVolts 1.0 +/- 0.155
+00027 PASS: MeterVolts 1.007
+00028 #switch input to load line
+00028 J1_01 = 1 : NULL : WAIT = 0.1
+00029 
+00029 #set power supply
+00029 PwrSetVoltage = 10 : NULL
+00030 #test power supply
+00030 NULL : MeterVolts = 1 | 0.155 | 0.1
+00030 TEST: MeterVolts 1.0 +/- 0.155
+00030 PASS: MeterVolts 1.006
+00031 #test feedback
+00031 NULL : Port_1A = 1 | 0.155 | 0.1
+00031 TEST: Port_1A 1.0 +/- 0.155
+00031 PASS: Port_1A 0.992
+00032 NULL : Input_1A = 1 | 0.1 | 0.1
+00032 TEST: Input_1A 1.0 +/- 0.1
+00032 PASS: Input_1A 1.0
+00033 #set power supply
+00033 PwrSetVoltage = 15 : NULL
+00034 #test power supply
+00034 NULL : MeterVolts = 1.5 | 0.155 | 0.1
+00034 TEST: MeterVolts 1.5 +/- 0.155
+00034 PASS: MeterVolts 1.52
+00035 #test feedback
+00035 NULL : Port_1A = 1.5 | 0.155 | 0.1
+00035 TEST: Port_1A 1.5 +/- 0.155
+00035 PASS: Port_1A 1.507
+00036 NULL : Input_1A = 1 | 0.1 | 0.1
+00036 TEST: Input_1A 1.0 +/- 0.1
+00036 PASS: Input_1A 1.0
+00037 #set power supply
+00037 PwrSetVoltage = 20 : NULL
+00038 #test power supply
+00038 NULL : MeterVolts = 2.0 | 0.155 | 0.1
+00038 TEST: MeterVolts 2.0 +/- 0.155
+00038 PASS: MeterVolts 2.016
+00039 #test feedback
+00039 NULL : Port_1A = 2.0 | 0.155 | 0.1
+00039 TEST: Port_1A 2.0 +/- 0.155
+00039 PASS: Port_1A 2.003
+00040 NULL : Input_1A = 1 | 0.1 | 0.1
+00040 TEST: Input_1A 1.0 +/- 0.1
+00040 PASS: Input_1A 1.0
+00041 #set power supply
+00041 PwrSetVoltage = 25 : NULL
+00042 #test power supply
+00042 NULL : MeterVolts = 2.5 | 0.155 | 0.1
+00042 TEST: MeterVolts 2.5 +/- 0.155
+00042 PASS: MeterVolts 2.514
+00043 #test feedback
+00043 NULL : Port_1A = 2.5 | 0.155 | 0.1
+00043 TEST: Port_1A 2.5 +/- 0.155
+00043 PASS: Port_1A 2.5
+00044 NULL : Input_1A = 1 | 0.1 | 0.1
+00044 TEST: Input_1A 1.0 +/- 0.1
+00044 PASS: Input_1A 1.0
+00045 #set power supply
+00045 PwrSetVoltage = 30 : NULL
+00046 #test power supply
+00046 NULL : MeterVolts = 3.0 | 0.155 | 0.1
+00046 TEST: MeterVolts 3.0 +/- 0.155
+00046 PASS: MeterVolts 2.913
+00047 #test feedback
+00047 NULL : Port_1A = 3.0 | 0.155 | 0.1
+00047 TEST: Port_1A 3.0 +/- 0.155
+00047 PASS: Port_1A 2.988
+00048 NULL : Input_1A = 1 | 0.1 | 0.1
+00048 TEST: Input_1A 1.0 +/- 0.1
+00048 PASS: Input_1A 1.0
+00049 #set power supply
+00049 PwrSetVoltage = 35 : NULL
+00050 #test power supply
+00050 NULL : MeterVolts = 3.5 | 0.155 | 0.1
+00050 TEST: MeterVolts 3.5 +/- 0.155
+00050 PASS: MeterVolts 3.418
+00051 #test feedback
+00051 NULL : Port_1A = 3.5 | 0.155 | 0.1
+00051 TEST: Port_1A 3.5 +/- 0.155
+00051 PASS: Port_1A 3.485
+00052 NULL : Input_1A = 1 | 0.1 | 0.1
+00052 TEST: Input_1A 1.0 +/- 0.1
+00052 PASS: Input_1A 1.0
+00053 #set power supply
+00053 PwrSetVoltage = 40 : NULL
+00054 #test power supply
+00054 NULL : MeterVolts = 4.0 | 0.155 | 0.1
+00054 TEST: MeterVolts 4.0 +/- 0.155
+00054 PASS: MeterVolts 3.923
+00055 #test feedback
+00055 NULL : Port_1A = 4.0 | 0.155 | 0.1
+00055 TEST: Port_1A 4.0 +/- 0.155
+00055 PASS: Port_1A 3.982
+00056 NULL : Input_1A = 1 | 0.1 | 0.1
+00056 TEST: Input_1A 1.0 +/- 0.1
+00056 PASS: Input_1A 1.0
+00057 #set power supply
+00057 PwrSetVoltage = 45 : NULL
+00058 #test power supply
+00058 NULL : MeterVolts = 4.5 | 0.155 | 0.1
+00058 TEST: MeterVolts 4.5 +/- 0.155
+00058 PASS: MeterVolts 4.49
+00059 #test feedback
+00059 NULL : Port_1A = 4.5 | 0.155 | 0.1
+00059 TEST: Port_1A 4.5 +/- 0.155
+00059 PASS: Port_1A 4.475
+00060 NULL : Input_1A = 1 | 0.1 | 0.1
+00060 TEST: Input_1A 1.0 +/- 0.1
+00060 PASS: Input_1A 1.0
+00061 #set power supply
+00061 PwrSetVoltage = 50 : NULL
+00062 #test power supply
+00062 NULL : MeterVolts = 5.0 | 0.155 | 0.1
+00062 TEST: MeterVolts 5.0 +/- 0.155
+00062 PASS: MeterVolts 4.991
+00063 #test feedback
+00063 NULL : Port_1A = 5.0 | 0.155 | 0.1
+00063 TEST: Port_1A 5.0 +/- 0.155
+00063 PASS: Port_1A 4.975
+00064 NULL : Input_1A = 1 | 0.1 | 0.1
+00064 TEST: Input_1A 1.0 +/- 0.1
+00064 PASS: Input_1A 1.0
+00065 #set power supply
+00065 PwrSetVoltage = 55 : NULL
+00066 #test power supply
+00066 NULL : MeterVolts = 5.5 | 0.155 | 0.1
+00066 TEST: MeterVolts 5.5 +/- 0.155
+00066 PASS: MeterVolts 5.482
+00067 #test feedback
+00067 NULL : Port_1A = 5.5 | 0.155 | 0.1
+00067 TEST: Port_1A 5.5 +/- 0.155
+00067 PASS: Port_1A 5.467
+00068 NULL : Input_1A = 1 | 0.1 | 0.1
+00068 TEST: Input_1A 1.0 +/- 0.1
+00068 PASS: Input_1A 1.0
+00069 #set power supply
+00069 PwrSetVoltage = 60 : NULL
+00070 #test power supply
+00070 NULL : MeterVolts = 6.0 | 0.155 | 0.1
+00070 TEST: MeterVolts 6.0 +/- 0.155
+00070 PASS: MeterVolts 5.981
+00071 #test feedback
+00071 NULL : Port_1A = 0 | 0.1 | 0.1
+00071 TEST: Port_1A 0.0 +/- 0.1
+00071 PASS: Port_1A 0.0
+00072 NULL : Input_1A = 2 | 0.1 | 0.1
+00072 TEST: Input_1A 2.0 +/- 0.1
+00072 PASS: Input_1A 2.0
+00073 #set power supply
+00073 PwrSetVoltage = 61 : NULL
+00074 #test power supply
+00074 NULL : MeterVolts = 6.1 | 0.155 | 0.1
+00074 TEST: MeterVolts 6.1 +/- 0.155
+00074 PASS: MeterVolts 5.981
+00075 #test feedback
+00075 NULL : Port_1A = 0 | 0.1 | 0.1
+00075 TEST: Port_1A 0.0 +/- 0.1
+00075 PASS: Port_1A 0.0
+00076 NULL : Input_1A = 2 | 0.1 | 0.1
+00076 TEST: Input_1A 2.0 +/- 0.1
+00076 PASS: Input_1A 2.0
+00077 
+00077 #Finished with port
+00077 #switch out input
+00077 J1_01 = 0 : NULL : WAIT = 0.1
+00078 
+00078 #-----setup 43019-----
+00078 #configure as Outputs to 4
+00078 Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00079 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A =4, MODE2B = 4, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4 : NULL : WAIT = 0.5
+00080 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
+00081 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00082 #clear multiplex
+00082 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_FAULT = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00083 #set power supply and wait
+00083 PwrSetVoltage = 10 : NULL : WAIT = 0.1
+00084 #Sweep of Port_1B from 1 to 5 in 0.5 increments
+00084 J0_07_GND_LOAD = 0 : NULL : WAIT = 1
+00085 PwrSetVoltage = 10 : NULL : WAIT = 0.1
+00086 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 1
+00087 #test power supply
+00087 NULL : MeterVolts = 1 | 0.155 | 1
+00087 TEST: MeterVolts 1.0 +/- 0.155
+00087 PASS: MeterVolts 1.008
+00088 #switch input to load line
+00088 J1_02 = 1 : NULL : WAIT = 0.1
+00089 
+00089 #set power supply
+00089 PwrSetVoltage = 10 : NULL
+00090 #test power supply
+00090 NULL : MeterVolts = 1 | 0.155 | 0.1
+00090 TEST: MeterVolts 1.0 +/- 0.155
+00090 PASS: MeterVolts 1.008
+00091 #test feedback
+00091 NULL : Port_1B = 1 | 0.155 | 0.1
+00091 TEST: Port_1B 1.0 +/- 0.155
+00091 PASS: Port_1B 0.991
+00092 NULL : Input_1B = 1 | 0.1 | 0.1
+00092 TEST: Input_1B 1.0 +/- 0.1
+00092 PASS: Input_1B 1.0
+00093 #set power supply
+00093 PwrSetVoltage = 15 : NULL
+00094 #test power supply
+00094 NULL : MeterVolts = 1.5 | 0.155 | 0.1
+00094 TEST: MeterVolts 1.5 +/- 0.155

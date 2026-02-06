@@ -164,30 +164,47 @@ def ProcessScript():
         TestTime = 0
         RealValue = 0
 
+
         for o in Outs:
             s = o.split("=")
             SignalName = s[0]
-            if(s[0] == "NULL"):
+            if s[0] == "NULL":
                 pass
             else:
-                if(s[1] == "DATALOG"):
-                    TestTime = globals.PassTime = 0 #force pass
-                    RealValue = globals.pat_framebox_out.signal(SignalName).phys
-                    globals.UUT_Results[str(globals.TestStep) + "-" + SignalName + "-" + globals.DataLogTag] = RealValue 
+                if s[1] == "DATALOG":
+                    TestTime = globals.PassTime = 0  # force pass
+
+                    RealValue = None
+                    # Prefer PAT (if enabled), otherwise fall back to UUT.
+                    if globals.SuppressPatSupport == 'False' and globals.pat_db is not None:
+                        RealValue = globals.pat_db.get_tx_signal(SignalName)
+                    if RealValue is None:
+                        RealValue = globals.uut_db.get_tx_signal(SignalName)
+                    if RealValue is None:
+                        print("signal not found!", SignalName)
+                        RealValue = 0
+
+                    globals.UUT_Results[
+                        str(globals.TestStep) + "-" + SignalName + "-" + globals.DataLogTag
+                    ] = RealValue
                 else:
                     try:
-                        globals.pat_framebox_out.signal(SignalName).phys = float(s[1])
-                        globals.PAT_Fdbk[SignalName] = float(s[1])
-                        RealValue = float(s[1])
-                    except:
-                        pass
-                    #TODO: why is this called twice?    
-                    try:
-                        globals.uut_framebox_out.signal(SignalName).phys = float(s[1])
-                        globals.UUT_Fdbk[SignalName] = float(s[1])
-                        RealValue = float(s[1])
-                    except:
-                        pass
+                        v = float(s[1])
+                    except Exception:
+                        # Non-numeric outputs aren't supported here.
+                        v = None
+
+                    if v is not None:
+                        # PAT outputs (if enabled)
+                        if globals.SuppressPatSupport == 'False' and globals.pat_db is not None:
+                            if globals.pat_db.set_tx_signal(SignalName, v):
+                                globals.PAT_Fdbk[SignalName] = v
+                                RealValue = v
+
+                        # UUT outputs
+                        if globals.uut_db.set_tx_signal(SignalName, v):
+                            globals.UUT_Fdbk[SignalName] = v
+                            RealValue = v
         
         if(Wait):
             globals.WaitTime += time_delta

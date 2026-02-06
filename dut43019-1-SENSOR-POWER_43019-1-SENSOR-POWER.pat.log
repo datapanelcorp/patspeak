@@ -1,0 +1,95 @@
+Esc - user interruption @ 2026-02-06-14:59:28
+Started on: 2026-02-06-14:58:59
+00000 #43019-1
+00000 #Verion 0.0
+00000 UUT_DBC = 43019-560.dbc
+00000 UUT_DATANAME = 43019-1-SENSOR-POWER
+00000 
+00000 #-----setup 43019-----
+00000 #configure as Output Digital ON/OFF
+00000 Command = 82, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5
+00001 Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1, MODE5A = 1, MODE5B = 1 : NULL : WAIT = 0.5
+00002 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL
+00003 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+00004 #clear multiplex
+00004 Command = 0, FaultReset = 0, SaveSettings = 0, Enable_FAULT = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+00005 
+00005 #-----setup PAT-----
+00005 #setup load
+00005 LdRemote = 1 : NULL : WAIT = 0.1
+00006 LdEnable = 0 : NULL : WAIT = 0.1
+00007 LdCurrentSet = 0 : NULL : WAIT = 0.1
+00008 LdShort = 1 : NULL : WAIT = 1
+00009 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
+00010 NULL : SpwrStat1 = 0 | 0.1 | 0.1
+00010 TEST: SpwrStat1 0.0 +/- 0.1
+00010 PASS: SpwrStat1 0.0
+00011 NULL : SpwrStat2 = 0 | 0.1 | 0.1
+00011 TEST: SpwrStat2 0.0 +/- 0.1
+00011 PASS: SpwrStat2 0.0
+00012 NULL : SpwrStat3 = 0 | 0.1 | 0.1
+00012 TEST: SpwrStat3 0.0 +/- 0.1
+00012 PASS: SpwrStat3 0.0
+00013 NULL : SpwrStat4 = 0 | 0.1 | 0.1
+00013 TEST: SpwrStat4 0.0 +/- 0.1
+00013 PASS: SpwrStat4 0.0
+00014 #switch in load line, set current
+00014 J2_02 = 1 : NULL : WAIT = 0.1
+00015 #turn on sensor power
+00015 Command = 81, SPWR1_On = 1 : NULL : WAIT = 0.1
+00016 Command = 92, SPWR1_5V = 1 : NULL : WAIT = 0.1
+00017 #check for 5VDC
+00017 NULL : MeterVolts = 5 | 0.2 | 0.1
+00017 TEST: MeterVolts 5.0 +/- 0.2
+00017 FAIL: MeterVolts 4.771
+00018 #short output (#1)
+00018 LdEnable = 1 : NULL : WAIT = 0.1
+00019 #verify fault
+00019 NULL : SpwrStat1 = 2 | 0.1 | 0.1
+00019 TEST: SpwrStat1 2.0 +/- 0.1
+00019 PASS: SpwrStat1 2.0
+00020 LdEnable = 0 : NULL : WAIT = 0.1
+00021 #verify volotage
+00021 NULL : MeterVolts = 0 | 0.2 | 0.1
+00021 TEST: MeterVolts 0.0 +/- 0.2
+00021 PASS: MeterVolts 0.0
+00022 #clear fault
+00022 Command = 81, SPWR1_On = 0 : NULL : WAIT = 0.5
+00023 Command = 81, SPWR1_On = 1 : NULL
+00024 NULL : SpwrStat1 = 1 | 0.1 | 0.1
+00024 TEST: SpwrStat1 1.0 +/- 0.1
+00024 PASS: SpwrStat1 1.0
+00025 #enable VBAT
+00025 Command = 92, SPWR1_5V = 0 : NULL : WAIT = 0.1
+00026 #check for VBAT
+00026 NULL : MeterVolts = 14 | 0.2 | 0.1
+00026 TEST: MeterVolts 14.0 +/- 0.2
+00026 FAIL: MeterVolts 13.786
+00027 #short output (#2)
+00027 LdEnable = 1 : NULL : WAIT = 0.1
+00028 #verify fault
+00028 NULL : SpwrStat1 = 2 | 0.1 | 0.1
+00028 TEST: SpwrStat1 2.0 +/- 0.1
+00028 PASS: SpwrStat1 2.0
+00029 LdEnable = 0 : NULL : WAIT = 0.1
+00030 #verify volotage
+00030 NULL : MeterVolts = 0 | 0.2 | 0.1
+00030 TEST: MeterVolts 0.0 +/- 0.2
+00030 PASS: MeterVolts 0.0
+00031 #clear fault
+00031 Command = 81, SPWR1_On = 0 : NULL : WAIT = 0.5
+00032 Command = 81, SPWR1_On = 1 : NULL
+00033 NULL : SpwrStat1 = 1 | 0.1 | 0.1
+00033 TEST: SpwrStat1 1.0 +/- 0.1
+00033 PASS: SpwrStat1 1.0
+00034 #check for VBAT
+00034 NULL : MeterVolts = 14 | 0.2 | 0.1
+00034 TEST: MeterVolts 14.0 +/- 0.2
+00034 FAIL: MeterVolts 13.786
+00035 #short output (#3)
+00035 LdEnable = 1 : NULL : WAIT = 0.1
+00036 #verify fault
+00036 NULL : SpwrStat1 = 2 | 0.1 | 0.1
+00036 TEST: SpwrStat1 2.0 +/- 0.1
+00036 PASS: SpwrStat1 2.0
+00037 LdEnable = 0 : NULL : WAIT = 0.1

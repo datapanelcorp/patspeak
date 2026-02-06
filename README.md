@@ -4,7 +4,12 @@ PATSpeak is a collection of scripts allowing the automation of the PAT test fixt
 Updated 08/28/25 w/ ROI interface
 
 Setup Requirements:
-	Run prerequisite_setup.py to install necessary python libraries and CAN drivers
+	Run prerequisite_setup.py to install necessary python libraries.
+	
+	NOTE: Vendor CAN drivers are only required if you're using that vendor's hardware:
+	  - PCAN hardware on Windows: install PEAK PCAN-Basic
+	  - Kvaser hardware on Windows: install Kvaser CANlib drivers
+	  - Linux: prefer SocketCAN (can0/can1); many adapters (including some Kvaser) work without proprietary user-space libs
 
 Test Execution: 
 	Run pat.py, passing the name of the .pat test file as an argument. Executable test files are stored within the /dut folder.

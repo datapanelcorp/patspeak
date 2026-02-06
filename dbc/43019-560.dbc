@@ -1,0 +1,321 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: UUT CTRL
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ DUTY_SP3A : 16|16@1+ (1,0) [0|0] ""  CTRL
+ SG_ h : 16|16@1+ (1,0) [0|0] ""  CTRL
+ SG_ Output5B m81 : 26|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Output5A m81 : 24|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Output4B m81 : 22|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Output4A m81 : 20|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Output3B m81 : 18|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Output3A m81 : 16|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Output2B m81 : 14|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Output2A m81 : 12|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Output1B m81 : 10|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Output1A m81 : 8|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Port1A_Kp m84 : 8|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port4B_Ki m86 : 32|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port4B_Kp m86 : 24|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port4A_Ki m86 : 16|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port4A_Kp m86 : 8|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port3B_Ki m85 : 48|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port3B_Kp m85 : 40|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port3A_Ki m85 : 32|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port3A_Kp m85 : 24|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port2B_Ki m85 : 16|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port2B_Kp m85 : 8|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port2A_Ki m84 : 48|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port2A_Kp m84 : 40|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port1B_Ki m84 : 32|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port1B_Kp m84 : 24|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Port1A_Ki m84 : 16|8@1+ (1,0) [0|250] ""  CTRL
+ SG_ Reboot_Module_D32 m226 : 62|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Bit_Rate_Set m226 : 32|8@1+ (1,0) [0|255] ""  CTRL
+ SG_ Source_Address_Set m226 : 24|8@1+ (1,0) [0|255] ""  CTRL
+ SG_ Unlock_Key_2 m226 : 16|8@1+ (1,0) [0|255] ""  CTRL
+ SG_ Unlock_Key_1 m226 : 8|8@1+ (1,0) [0|255] ""  CTRL
+ SG_ Port_5_ID m225 : 56|8@1+ (1,0) [0|255] ""  CTRL
+ SG_ Port_4_ID m225 : 48|8@1+ (1,0) [0|255] ""  CTRL
+ SG_ Port_3_ID m225 : 40|8@1+ (1,0) [0|255] ""  CTRL
+ SG_ Port_2_ID m225 : 32|8@1+ (1,0) [0|255] ""  CTRL
+ SG_ Port_1_ID m225 : 24|8@1+ (1,0) [0|255] ""  CTRL
+ SG_ Enable_DPLogic_D14 m224 : 26|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Calibration_Mode_Enable_D13 m224 : 24|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Reset_Fault_Counters_D12 m224 : 22|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Reset_EEPROM_Factory_D11 m224 : 20|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Req_Calibration_Data_D10 m224 : 18|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Req_Config_Data_D9 m224 : 16|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Request_Key m224 : 8|8@1+ (1,0) [0|0] ""  CTRL
+ SG_ Port4_Output_Config m93 : 20|4@1+ (1,0) [0|15] ""  CTRL
+ SG_ Port3_Output_Config m93 : 16|4@1+ (1,0) [0|15] ""  CTRL
+ SG_ Port2_Output_Config m93 : 12|4@1+ (1,0) [0|15] ""  CTRL
+ SG_ Port1_Output_Config m93 : 8|4@1+ (1,0) [0|15] ""  CTRL
+
+BO_ 2565855697 CTRL1: 8 CTRL
+ SG_ Command M : 0|8@1+ (1,0) [0|0] ""  CTRL
+ SG_ SPWR1_On m81 : 40|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ SPWR2_On m81 : 42|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ SPWR3_On m81 : 44|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ SPWR4_On m81 : 46|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ SPWR5_On m81 : 48|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ FaultReset m82 : 8|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Enable_DPLF1 m82 : 10|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Enable_DPLF2 m82 : 12|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Enable_FAULT m82 : 14|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ SaveSettings m82 : 18|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Analog_Raw_Value m82 : 20|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ MODE2 m82 : 52|4@1+ (1,0) [0|15] ""  CTRL
+ SG_ ID1 m82 : 56|8@1+ (1,0) [0|255] ""  CTRL
+ SG_ MODE1A m83 : 8|4@1+ (1,0) [0|15] ""  CTRL
+ SG_ MODE1B m83 : 12|4@1+ (1,0) [0|15] ""  CTRL
+ SG_ MODE2A m83 : 16|4@1+ (1,0) [0|15] ""  CTRL
+ SG_ MODE2B m83 : 20|4@1+ (1,0) [0|15] ""  CTRL
+ SG_ MODE3A m83 : 24|4@1+ (1,0) [0|15] ""  CTRL
+ SG_ MODE3B m83 : 28|4@1+ (1,0) [0|15] ""  CTRL
+ SG_ MODE4A m83 : 32|4@1+ (1,0) [0|15] ""  CTRL
+ SG_ MODE4B m83 : 36|4@1+ (1,0) [0|15] ""  CTRL
+ SG_ MODE5A m83 : 40|4@1+ (1,0) [0|15] ""  CTRL
+ SG_ MODE5B m83 : 44|4@1+ (1,0) [0|15] ""  CTRL
+ SG_ Counter_3A_ON_OFF m87 : 8|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Counter_3A_Reset m87 : 10|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Counter_3B_ON_OFF m87 : 12|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Counter_3B_Reset m87 : 14|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Counter_4A_ON_OFF m87 : 16|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Counter_4A_Reset m87 : 18|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Counter_4B_ON_OFF m87 : 20|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ Counter_4B_Reset m87 : 22|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ DIGIN_Tx_Cycle_Time m91 : 8|8@1+ (10,0) [10|2500] "ms"  CTRL
+ SG_ AD2_Tx_Cycle_Time m91 : 16|8@1+ (10,0) [10|2500] "ms"  CTRL
+ SG_ AD3_Tx_Cycle_Time m91 : 24|8@1+ (10,0) [10|2500] "ms"  CTRL
+ SG_ AD4_Tx_Cycle_Time m91 : 32|8@1+ (10,0) [10|2500] "ms"  CTRL
+ SG_ SPWR1_AlwaysOn m92 : 8|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ SPWR2_AlwaysOn m92 : 10|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ SPWR3_AlwaysOn m92 : 12|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ SPWR4_AlwaysOn m92 : 14|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ SPWR5_AlwaysOn m92 : 16|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ SPWR1_5V m92 : 18|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ SPWR2_5V m92 : 20|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ SPWR3_5V m92 : 22|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ SPWR4_5V m92 : 24|2@1+ (1,0) [0|3] ""  CTRL
+ SG_ SPWR5_5V m92 : 26|2@1+ (1,0) [0|3] ""  CTRL
+
+BO_ 2566854105 DIGIN: 8 UUT
+ SG_ Input_1A : 0|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ Input_1B : 2|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ Input_2A : 4|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ Input_2B : 6|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ Input_3A : 8|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ Input_3B : 10|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ Input_4A : 12|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ Input_4B : 14|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ IGNREF : 48|16@1+ (1,0) [0|0] ""  CTRL
+
+BO_ 2566854361 AD2: 8 UUT
+ SG_ Port_1A : 0|16@1+ (0.001,0) [0|0] ""  CTRL
+ SG_ Port_1B : 16|16@1+ (0.001,0) [0|0] ""  CTRL
+ SG_ Port_2A : 32|16@1+ (0.001,0) [0|0] ""  CTRL
+ SG_ Port_2B : 48|16@1+ (0.001,0) [0|0] ""  CTRL
+
+BO_ 2566854617 AD3: 8 UUT
+ SG_ Port_3A : 0|16@1+ (0.001,0) [0|0] ""  CTRL
+ SG_ Port_3B : 16|16@1+ (0.001,0) [0|0] ""  CTRL
+ SG_ Port_4A : 32|16@1+ (0.001,0) [0|0] ""  CTRL
+ SG_ Port_4B : 48|16@1+ (0.001,0) [0|0] ""  CTRL
+
+BO_ 2566854873 AD4: 8 UUT
+ SG_ Port_5A : 0|16@1+ (0.001,0) [0|0] ""  CTRL
+ SG_ Port_5B : 16|16@1+ (0.001,0) [0|0] ""  CTRL
+
+BO_ 2566855385 FREQ1: 8 UUT
+ SG_ Hertz_Count_Input3A : 0|16@1+ (1,0) [0|0] ""  CTRL
+ SG_ Hertz_Count_Input4A : 32|16@1+ (1,0) [0|0] ""  CTRL
+ SG_ EncoderValue3 : 0|32@1+ (1,0) [0|0] ""  CTRL
+
+BO_ 2566855641 FREQ2: 8 UUT
+ SG_ Count_Input4A : 0|16@1+ (1,0) [0|0] ""  CTRL
+ SG_ Count_Input4B : 32|16@1+ (1,0) [0|0] ""  CTRL
+ SG_ EncoderValue4 : 0|32@1+ (1,0) [0|0] ""  CTRL
+
+BO_ 2565853657 STAT: 8 UUT
+ SG_ Software_Version : 0|8@1+ (1,0) [0|0] ""  CTRL
+ SG_ Software_Revision : 8|8@1+ (1,0) [0|0] ""  CTRL
+ SG_ Factory_Default_Configuration : 16|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ Configuration_Saved : 18|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ Alternate_Configuration_Received : 20|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ Node_Alive : 22|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ Node_Fault_Present : 24|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ Fault_Counters_Not_Zero : 26|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ Active_Fault_Code : 32|8@1+ (1,0) [0|0] ""  CTRL
+ SG_ UserID : 40|8@1+ (1,0) [0|0] ""  CTRL
+ SG_ CMND_52h_RCVD : 48|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ CMND_53h_RCVD : 50|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ CMND_54h_RCVD : 52|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ CMND_55h_RCVD : 54|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ CMND_56h_RCVD : 56|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ CMND_57h_RCVD : 58|2@1+ (1,0) [0|0] ""  CTRL
+
+BO_ 2566912985 DPLF1: 8 UUT
+ SG_ MagSensor : 0|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ PortStat_1A : 16|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ PortStat_1B : 18|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ PortStat_2A : 20|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ PortStat_2B : 22|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ PortStat_3A : 24|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ PortStat_3B : 26|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ PortStat_4A : 28|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ PortStat_4B : 30|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ PortStat_5A : 32|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ PortStat_5B : 34|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ SpwrStat1 : 36|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ SpwrStat2 : 38|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ SpwrStat3 : 40|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ SpwrStat4 : 42|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ SpwrStat5 : 44|2@1+ (1,0) [0|0] ""  CTRL
+ SG_ Save_Counter : 56|8@1+ (1,0) [0|0] ""  CTRL
+
+BO_ 2566913241 DPLF2: 8 UUT
+ SG_ CNFG1 : 0|8@1+ (1,0) [0|0] ""  CTRL
+ SG_ CNFG2 : 8|8@1+ (1,0) [0|0] ""  CTRL
+ SG_ VBAT : 16|16@1+ (1,0) [0|0] ""  CTRL
+ SG_ TEMP : 32|16@1+ (1,0) [0|0] ""  CTRL
+ SG_ CNFG3 : 48|8@1+ (1,0) [0|0] ""  CTRL
+
+BO_ 2566907609 FAULT: 8 UUT
+ SG_ FLTCNT1 : 0|8@1+ (1,0) [0|0] ""  CTRL
+ SG_ FLTCNT2 : 8|8@1+ (1,0) [0|0] ""  CTRL
+ SG_ FLTCNT3 : 16|8@1+ (1,0) [0|0] ""  CTRL
+ SG_ FLTCNT4 : 24|8@1+ (1,0) [0|0] ""  CTRL
+ SG_ FLTCNT5 : 32|8@1+ (1,0) [0|0] ""  CTRL
+ SG_ FLTCNT6 : 40|8@1+ (1,0) [0|0] ""  CTRL
+ SG_ FLTCNT7 : 48|8@1+ (1,0) [0|0] ""  CTRL
+
+
+
+CM_ SG_ 3221225472 DUTY_SP3A "DUTY-SP3A";
+CM_ SG_ 3221225472 h "DUTY-SP4A";
+CM_ SG_ 3221225472 Output4B "Output 4B";
+CM_ SG_ 3221225472 Output4A "Output 4A";
+CM_ SG_ 3221225472 Output3B "Output 3B";
+CM_ SG_ 3221225472 Output3A "Output 3A";
+CM_ SG_ 3221225472 Output2B "Output 2B";
+CM_ SG_ 3221225472 Output2A "Output 2A";
+CM_ SG_ 3221225472 Output1B "Output 1B";
+CM_ SG_ 3221225472 Output1A "Output 1A";
+CM_ BO_ 2565855697 "CTRL1 (msg_type=OUTPUT, timeout=255)";
+CM_ SG_ 2565855697 SPWR1_On "Sensor Power Control J1";
+CM_ SG_ 2565855697 SPWR2_On "Sensor Power Control J2";
+CM_ SG_ 2565855697 SPWR3_On "Sensor Power Control J3";
+CM_ SG_ 2565855697 SPWR4_On "Sensor Power Control J4";
+CM_ SG_ 2565855697 SPWR5_On "Sensor Power Control J5";
+CM_ BO_ 2566854105 "DIGIN (msg_type=INPUT, timeout=255)";
+CM_ SG_ 2566854105 Input_1A "I/O Status 1A";
+CM_ SG_ 2566854105 Input_1B "I/O Status 1B";
+CM_ SG_ 2566854105 Input_2A "I/O Status 2A";
+CM_ SG_ 2566854105 Input_2B "I/O Status 2B";
+CM_ SG_ 2566854105 Input_3A "I/O Status 3A";
+CM_ SG_ 2566854105 Input_3B "I/O Status 3B";
+CM_ SG_ 2566854105 Input_4A "I/O Status 4A";
+CM_ SG_ 2566854105 Input_4B "I/O Status 4B";
+CM_ SG_ 2566854105 IGNREF "Raw Battery Data [IGNREF]";
+CM_ BO_ 2566854361 "AD2 (msg_type=INPUT, timeout=255)";
+CM_ SG_ 2566854361 Port_1A "Analog Port1A";
+CM_ SG_ 2566854361 Port_1B "Analog Port1B";
+CM_ SG_ 2566854361 Port_2A "Analog Port2A";
+CM_ SG_ 2566854361 Port_2B "Analog Port2B";
+CM_ BO_ 2566854617 "AD3 (msg_type=INPUT, timeout=255)";
+CM_ SG_ 2566854617 Port_3A "Analog Port3A";
+CM_ SG_ 2566854617 Port_3B "Analog Port3B";
+CM_ SG_ 2566854617 Port_4A "Analog Port4A";
+CM_ SG_ 2566854617 Port_4B "Analog Port4B";
+CM_ BO_ 2566854873 "AD4 (msg_type=INPUT, timeout=255)";
+CM_ SG_ 2566854873 Port_5A "Analog Port5A";
+CM_ SG_ 2566854873 Port_5B "Analog Port5B";
+CM_ BO_ 2566855385 "FREQ1 (msg_type=INPUT, timeout=50)";
+CM_ SG_ 2566855385 Hertz_Count_Input3A "HZ-CNT3A";
+CM_ BO_ 2566855641 "FREQ2 (msg_type=INPUT, timeout=50)";
+CM_ SG_ 2566855641 Count_Input4A "HZ-CNT4A";
+CM_ BO_ 2565853657 "STAT (msg_type=INPUT, timeout=255)";
+CM_ SG_ 2565853657 Software_Version "Firmware Version";
+CM_ SG_ 2565853657 Software_Revision "Firmware Revision";
+CM_ SG_ 2565853657 Factory_Default_Configuration "Factory Default Configuration";
+CM_ SG_ 2565853657 Configuration_Saved "Configuration Saved";
+CM_ SG_ 2565853657 Alternate_Configuration_Received "Alternate Configuration Received";
+CM_ SG_ 2565853657 Node_Alive "Node Alive";
+CM_ SG_ 2565853657 Node_Fault_Present "Node Fault Present";
+CM_ SG_ 2565853657 Fault_Counters_Not_Zero "Fault Counters Not Zero";
+CM_ SG_ 2565853657 Active_Fault_Code "Active Fault Code";
+CM_ SG_ 2565853657 UserID "User ID [ID1]";
+CM_ SG_ 2565853657 CMND_52h_RCVD "Command 52h Received";
+CM_ SG_ 2565853657 CMND_53h_RCVD "Command 53h Received";
+CM_ SG_ 2565853657 CMND_54h_RCVD "Command 54h Received";
+CM_ SG_ 2565853657 CMND_55h_RCVD "Command 55h Received";
+CM_ SG_ 2565853657 CMND_56h_RCVD "Command 56h Received";
+CM_ SG_ 2565853657 CMND_57h_RCVD "Command 57h Received";
+CM_ BO_ 2566912985 "DPLF1 (msg_type=INPUT, timeout=255)";
+CM_ SG_ 2566912985 PortStat_1A "I/O Status 1A";
+CM_ SG_ 2566912985 PortStat_1B "I/O Status 1B";
+CM_ SG_ 2566912985 PortStat_2A "I/O Status 2A";
+CM_ SG_ 2566912985 PortStat_2B "I/O Status 2B";
+CM_ SG_ 2566912985 PortStat_3A "I/O Status 3A";
+CM_ SG_ 2566912985 PortStat_3B "I/O Status 3B";
+CM_ SG_ 2566912985 PortStat_4A "I/O Status 4A";
+CM_ SG_ 2566912985 PortStat_4B "I/O Status 4B";
+CM_ SG_ 2566912985 PortStat_5A "I/O Status 5A";
+CM_ SG_ 2566912985 PortStat_5B "I/O Status 5B";
+CM_ SG_ 2566912985 SpwrStat1 "Sensor Power 1";
+CM_ SG_ 2566912985 SpwrStat2 "Sensor Power 2";
+CM_ SG_ 2566912985 SpwrStat3 "Sensor Power 3";
+CM_ SG_ 2566912985 SpwrStat4 "Sensor Power 4";
+CM_ SG_ 2566912985 SpwrStat5 "Sensor Power 5";
+CM_ SG_ 2566912985 Save_Counter "Configuration Counter (SAVECNFG)";
+CM_ BO_ 2566913241 "DPLF2 (msg_type=INPUT, timeout=255)";
+CM_ SG_ 2566913241 CNFG1 "Hardware Configuration (CNFG1)";
+CM_ SG_ 2566913241 CNFG2 "PC Board Revision (CNFG2)";
+CM_ SG_ 2566913241 VBAT "Battery Voltage";
+CM_ SG_ 2566913241 TEMP "Module Temperature";
+CM_ SG_ 2566913241 CNFG3 "Additional Configuration (CNFG3)";
+CM_ BO_ 2566907609 "FAULT (msg_type=INPUT, timeout=255)";
+CM_ SG_ 2566907609 FLTCNT1 "Fault Counter 1";
+CM_ SG_ 2566907609 FLTCNT2 "Fault Counter 2";
+CM_ SG_ 2566907609 FLTCNT3 "Fault Counter 3";
+CM_ SG_ 2566907609 FLTCNT4 "Fault Counter 4";
+CM_ SG_ 2566907609 FLTCNT5 "Fault Counter 5";
+CM_ SG_ 2566907609 FLTCNT6 "Fault Counter 6";
+CM_ SG_ 2566907609 FLTCNT7 "Fault Counter 7";
+

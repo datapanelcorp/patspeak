@@ -1,56 +1,45 @@
+"""Install Python prerequisites for PATSpeak.
+
+This script intentionally **does not** install vendor CAN drivers.
+
+Why?
+  - PATSpeak can run with different CAN interfaces (PCAN, Kvaser, SocketCAN, ...)
+  - Installing Kvaser software when you're using a different interface is
+    unnecessary and confusing.
+
+What you still may need:
+  - PCAN hardware: install PEAK "PCAN-Basic" (vendor driver)
+  - Kvaser hardware on Windows: install Kvaser CANlib drivers
+  - Linux SocketCAN: no vendor user-space libs required (drivers are usually in-kernel)
+"""
+
 import subprocess
 import sys
-import os
-import requests
 
-def install(package):
+
+def install(package: str) -> None:
     """Install a package using pip."""
+
     try:
         subprocess.check_call([sys.executable, "-m", "pip", "install", package])
         print(f"Successfully installed {package}")
     except subprocess.CalledProcessError:
         print(f"Failed to install {package}")
 
-def download_and_install_kvaser():
-    """Download and install the Kvaser driver from the provided link."""
-    url = "https://www.kvaser.com/download/?utm_source=software&utm_ean=7330130980150&utm_status=latest"
-    file_name = "kvaser_driver.exe"
-    
-    try:
-        # Download the file
-        print(f"Downloading Kvaser driver from {url}...")
-        response = requests.get(url, stream=True)
-        response.raise_for_status()
-        
-        with open(file_name, "wb") as file:
-            for chunk in response.iter_content(chunk_size=8192):
-                file.write(chunk)
-        print(f"Downloaded {file_name} successfully.")
-        
-        # Run the installer with elevated privileges
-        print(f"Running the installer for {file_name} with admin privileges...")
-        process = subprocess.Popen(
-            ["powershell", "-Command", f"Start-Process '{file_name}' -Verb runAs -Wait"],
-            shell=True
-        )
-        process.wait()  # Wait for the installer process to complete
-        print("Kvaser driver installed successfully.")
-        
-        # Clean up the installer file
-        os.remove(file_name)
-        print(f"Removed installer file {file_name}.")
-    except requests.RequestException as e:
-        print(f"Failed to download the Kvaser driver: {e}")
-    except subprocess.CalledProcessError:
-        print(f"Failed to install the Kvaser driver.")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
 
-# List of packages to install
-packages = ["python-can", "keyboard", "canlib"]
+# Core Python deps:
+#  - python-can: CAN interface layer
+#  - cantools: DBC parsing/encoding/decoding (replaces kvadblib)
+#  - keyboard: existing UI behavior (optional; kept for compatibility)
+packages = ["python-can", "cantools", "keyboard"]
 
 for package in packages:
     install(package)
 
-# Download and install the Kvaser driver
-download_and_install_kvaser()
+print(
+    "\nDone.\n\n"
+    "Driver note:\n"
+    "  - If you are using a Kvaser USBCan on Windows, you still need the Kvaser driver/CANlib install.\n"
+    "  - If you are using PEAK PCAN hardware on Windows, install PCAN-Basic.\n"
+    "  - On Linux, prefer SocketCAN (e.g. can0/can1).\n"
+)

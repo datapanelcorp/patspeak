@@ -1,0 +1,13 @@
+Started on: 2026-02-06-14:58:55
+00000 UUT_DBC = 43019-560.dbc
+00000 UUT_DATANAME = RESET
+00000 LdRemote = 1 : NULL : WAIT = 0.2
+00001 LdEnable = 0 : NULL : WAIT = 0.2
+00002 LdShort = 0 : NULL : WAIT = 0.2
+00003 #cycle IGN to clean slate
+00003 RLY_K1 = 1 : NULL : WAIT = 1
+00004 RLY_K1 = 0 : NULL : WAIT = 0.5
+00005 END
+Fail count: 0
+Finished on: 2026-02-06-14:58:59
+elapsed time: 0:00:02.144936

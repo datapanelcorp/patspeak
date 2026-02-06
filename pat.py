@@ -6,17 +6,20 @@ import time
 import keyboard
 from datetime import datetime
 
-import can # Imports python-can library for pcan support : "pip install python-can"
+"""PATSpeak main entry.
+
+This version uses python-can + cantools, and no longer depends on Kvaser's
+kvadblib for DBC handling.
+"""
 
 #from support.events import ProcessEvents
 from support.script import ProcessScript
 import support.globals as globals
 
 def ErrorTrap(error):
-    sink = error #sink errors for now
-    globals.CAN1.terminate() 
-    if globals.SuppressPatSupport == 'False':
-        globals.CAN2.terminate() 
+    # Historically this attempted to terminate thread objects directly.
+    # Threads are now stopped via the globals.finished flag.
+    print("Fatal error:", error)
     globals.finished = 1
     quit()
     
@@ -56,18 +59,11 @@ if(globals.Verbose == 1):
 
 globals.initialize()
 
-try:
-    bus = can.Bus(channel='PCAN_USBBUS1', interface='pcan', bitrate=250000)
-    print("PCAN1 Detected")
-    bus.shutdown()
-    if globals.SuppressPatSupport == 'False':
-        bus = can.Bus(channel='PCAN_USBBUS2', interface='pcan', bitrate=250000)
-        print("PCAN2 Detected")
-        bus.shutdown()
-    from support.pcan_interface import CANThread 
-except can.CanError:
-    print("No PCAN device detected")
-    from support.can import CANThread
+# All CAN interfaces (PCAN, Kvaser, SocketCAN, ...) are handled by support.can.
+from support.can import CANThread, autodetect_can_backend
+
+# Auto-detect and report which CAN backend will be used.
+autodetect_can_backend()
 
 #start CAN
 globals.CAN_1 = threading.Thread(target=CANThread, args=(0,))
