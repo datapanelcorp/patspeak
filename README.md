@@ -462,4 +462,18 @@ Common causes:
 `pat.py` currently imports `msvcrt` to detect the ESC key in the terminal, which is Windows-only.
 If you want to run on Linux, you may need to adjust that section (or remove ESC handling).
 
+### Colored PASS/FAIL output
+PATSpeak will colorize terminal output similar to pytest:
+
+- **PASS** in green
+- **FAIL** in red
+- **TEST** in cyan
+
+Color is automatically disabled when output is not a TTY, or when `NO_COLOR` is set.
+
+Optional override:
+
+- `PATSPEAK_COLOR=always` (force color)
+- `PATSPEAK_COLOR=never` (disable color)
+
 ---

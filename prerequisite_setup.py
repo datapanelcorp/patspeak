@@ -31,7 +31,7 @@ def install(package: str) -> None:
 #  - python-can: CAN interface layer
 #  - cantools: DBC parsing/encoding/decoding (replaces kvadblib)
 #  - keyboard: existing UI behavior (optional; kept for compatibility)
-packages = ["python-can", "cantools", "keyboard"]
+packages = ["python-can", "cantools", "keyboard", "colorama"]
 
 for package in packages:
     install(package)

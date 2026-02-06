@@ -5,6 +5,7 @@ import os
 from datetime import datetime
 import support.globals as globals
 from datetime import timedelta
+from support.console import colorize_status_line
 
 
 def SaveData():
@@ -270,7 +271,7 @@ def ProcessScript():
                     else:
                         TestString = StepStr + "PASS:" + " " + SignalName + " " + str(RealValue)
                     globals.UUT_TestLog += TestString + "\n"
-                    print(TestString)
+                    print(colorize_status_line(TestString))
                     
                     name_header = "Step,"
                     the_fdbk_values = str(globals.TestStep) + ","
@@ -302,7 +303,7 @@ def ProcessScript():
                 if(print_test):
                     TestString = StepStr + "TEST:" + " " + SignalName + " " + str(TestValue) + " " + TestToStr
                     globals.UUT_TestLog += TestString + "\n"
-                    print(TestString)
+                    print(colorize_status_line(TestString))
 
         
     
