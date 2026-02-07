@@ -61,37 +61,47 @@ def initialize(*, run_preflight_checks: bool = True):
     SoundFail = os.path.join(os.path.dirname(__file__), "..", "..", "fail.wav")
     SoundPass = os.path.join(os.path.dirname(__file__), "..", "..", "tada.wav")  
 
-    #find UUT DBC file name
-    test_file = open(os.path.join(DataPath, TestFile), 'r')
+    # find UUT DBC file name
+    test_file = open(os.path.join(DataPath, TestFile), 'r', encoding='utf-8', errors='replace')
     Lines = test_file.readlines()
     test_file.seek(0)
-    
-    UUTDBCName = ""
+
+    uut_dbc_name = ""
     for line in Lines:
-        if(line.startswith("UUT_DBC")):
-            UUTDBCName = line.split("=")
-            
-    TempCheck = ""
+        s = line.strip()
+        if s.startswith("UUT_DBC"):
+            if "=" not in s:
+                print("Malformed UUT_DBC line (missing '='):\n  " + s)
+                quit()
+            uut_dbc_name = s.split("=", 1)[1].strip().strip('"').strip("'")
+            break
+
+    tmp_dataname = ""
     for line in Lines:
-        if(line.startswith("UUT_DATANAME")):
-            TempCheck = line.split("=")
-    
-    UnitName = ""
-    if(TempCheck != ""):
-        UnitName = TempCheck[1].strip()
-        
-    if(UUTDBCName == ""):
+        s = line.strip()
+        if s.startswith("UUT_DATANAME"):
+            if "=" not in s:
+                print("Malformed UUT_DATANAME line (missing '='):\n  " + s)
+                quit()
+            tmp_dataname = s.split("=", 1)[1].strip().strip('"').strip("'")
+            break
+
+    UnitName = tmp_dataname if tmp_dataname else ""
+
+    if uut_dbc_name == "":
         print("No DBC file specified, add 'UUT_DBC = filename.dbc' to script")
         quit()
 
     for line in Lines:
-        if(line.startswith("SUPPRESS_PAT_SUPPORT")):
-            SuppressPatSupport = line.split("=")
-            SuppressPatSupport = SuppressPatSupport[1].strip()
+        s = line.strip()
+        if s.startswith("SUPPRESS_PAT_SUPPORT"):
+            if "=" not in s:
+                print("Malformed SUPPRESS_PAT_SUPPORT line (missing '='):\n  " + s)
+                quit()
+            SuppressPatSupport = s.split("=", 1)[1].strip().strip('"').strip("'")
             break
                     
     # read uut
-    uut_dbc_name = UUTDBCName[1].strip()
     filename = os.path.join(DBCPath, uut_dbc_name)
     print("Loading", uut_dbc_name + "...")
     uut_db = CanDb(dbc_filename=filename)

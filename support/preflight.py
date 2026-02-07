@@ -30,7 +30,9 @@ from typing import Any, Iterable, List, Optional, Sequence, Set, Tuple
 
 @dataclass
 class Issue:
-    severity: str  # "ERROR" | "WARN"
+    # NOTE: "FATAL" means the script would crash or hang at runtime.
+    # Preflight will abort even in "warn" mode if any FATAL issues exist.
+    severity: str  # "FATAL" | "ERROR" | "WARN"
     file_line: int
     step: Optional[int]  # only populated for step lines
     section: str  # "OUT" | "IN" | "LINE"
@@ -132,6 +134,47 @@ def run_preflight(
 
     issues: List[Issue] = []
 
+    # -----------------
+    # Basic script sanity
+    # -----------------
+    # Missing END causes the runner to loop forever at EOF.
+    end_any = False
+    end_exact = False
+    for raw in lines:
+        s = raw.strip()
+        if not s or s.startswith("#"):
+            continue
+        if s.upper() == "END":
+            end_any = True
+        if s == "END":
+            end_exact = True
+    if not end_any:
+        issues.append(
+            Issue(
+                severity="FATAL",
+                file_line=1,
+                step=None,
+                section="LINE",
+                signal="END",
+                reason="Missing END line (runner will never finish at EOF)",
+                line_text="(file)",
+                hint="Add a final line containing exactly: END",
+            )
+        )
+    elif not end_exact:
+        issues.append(
+            Issue(
+                severity="FATAL",
+                file_line=1,
+                step=None,
+                section="LINE",
+                signal="END",
+                reason="END must be uppercase exactly (runner checks for 'END')",
+                line_text="(file)",
+                hint="Change 'end' / 'End' to 'END'.",
+            )
+        )
+
     # Build signal universes.
     uut_signals: Set[str] = set(uut_db.iter_signal_names())
     pat_signals: Set[str] = set(pat_db_for_check.iter_signal_names()) if pat_db_for_check is not None else set()
@@ -165,19 +208,267 @@ def run_preflight(
                 return pat_dbc_name, None
             return None, None
 
+    def _boolish(val: str) -> bool:
+        v = (val or "").strip().strip('"').strip("'").lower()
+        return v in {"1", "true", "yes", "on", "0", "false", "no", "off"}
+
     step_idx = 0
     for file_line, raw in enumerate(lines, start=1):
         raw = raw.rstrip("\n").rstrip("\r")
         stripped = raw.strip()
         if not stripped or stripped.startswith("#"):
             continue
-        if _is_directive(stripped) or _is_control(stripped):
+
+        # The runner uses exact-case keywords. Catch common capitalization mistakes
+        # early so they don't show up as confusing "malformed step line" errors.
+        upper = stripped.upper()
+
+        if upper in {"END", "SAVE"} and stripped not in {"END", "SAVE"}:
+            issues.append(
+                Issue(
+                    severity="FATAL",
+                    file_line=file_line,
+                    step=None,
+                    section="LINE",
+                    signal=stripped,
+                    reason="Control keyword must be uppercase exactly",
+                    line_text=stripped,
+                    hint="Use END or SAVE in uppercase.",
+                )
+            )
             continue
 
-        # Step line: mimic runtime by stripping spaces.
+        if upper.startswith("PAUSE") and not stripped.startswith("PAUSE"):
+            issues.append(
+                Issue(
+                    severity="FATAL",
+                    file_line=file_line,
+                    step=None,
+                    section="LINE",
+                    signal=stripped.split("-", 1)[0],
+                    reason="PAUSE must be uppercase exactly",
+                    line_text=stripped,
+                    hint="Example: PAUSE-Press Enter to continue",
+                )
+            )
+            continue
+
+        if upper.startswith("UUT_DBC") and not stripped.startswith("UUT_DBC"):
+            issues.append(
+                Issue(
+                    severity="FATAL",
+                    file_line=file_line,
+                    step=None,
+                    section="LINE",
+                    signal=stripped.split("=", 1)[0].strip(),
+                    reason="UUT_DBC must be uppercase exactly (runner won't detect it otherwise)",
+                    line_text=stripped,
+                    hint="Use: UUT_DBC = filename.dbc",
+                )
+            )
+            continue
+
+        if upper.startswith("UUT_DATANAME") and not stripped.startswith("UUT_DATANAME"):
+            issues.append(
+                Issue(
+                    severity="FATAL",
+                    file_line=file_line,
+                    step=None,
+                    section="LINE",
+                    signal=stripped.split("=", 1)[0].strip(),
+                    reason="UUT_DATANAME must be uppercase exactly (runner won't detect it otherwise)",
+                    line_text=stripped,
+                    hint="Use: UUT_DATANAME = SomeName",
+                )
+            )
+            continue
+
+        if upper.startswith("SUPPRESS_PAT_SUPPORT") and not stripped.startswith("SUPPRESS_PAT_SUPPORT"):
+            issues.append(
+                Issue(
+                    severity="FATAL",
+                    file_line=file_line,
+                    step=None,
+                    section="LINE",
+                    signal=stripped.split("=", 1)[0].strip(),
+                    reason="SUPPRESS_PAT_SUPPORT must be uppercase exactly (runner won't detect it otherwise)",
+                    line_text=stripped,
+                    hint="Use: SUPPRESS_PAT_SUPPORT = True",
+                )
+            )
+            continue
+
+        # -----------------
+        # Directives / controls syntax
+        # -----------------
+        if _is_directive(stripped):
+            if "=" not in stripped:
+                issues.append(
+                    Issue(
+                        severity="FATAL",
+                        file_line=file_line,
+                        step=None,
+                        section="LINE",
+                        signal=stripped.split()[0],
+                        reason="Directive is missing '=' (this would crash during initialization)",
+                        line_text=stripped,
+                        hint="Use 'NAME = value' (spaces optional).",
+                    )
+                )
+                continue
+            key, val = stripped.split("=", 1)
+            key = key.strip()
+            val = val.strip().strip('"').strip("'")
+            if not val:
+                issues.append(
+                    Issue(
+                        severity="FATAL",
+                        file_line=file_line,
+                        step=None,
+                        section="LINE",
+                        signal=key,
+                        reason="Directive value is empty (this would crash during initialization)",
+                        line_text=stripped,
+                    )
+                )
+                continue
+            if "#" in val:
+                issues.append(
+                    Issue(
+                        severity="WARN" if mode != "strict" else "ERROR",
+                        file_line=file_line,
+                        step=None,
+                        section="LINE",
+                        signal=key,
+                        reason="Inline comments are not supported on directive lines; value includes '#'.",
+                        line_text=stripped,
+                        hint="Put comments on their own line starting with '#'.",
+                    )
+                )
+
+            if key == "UUT_DBC" and not val.lower().endswith(".dbc"):
+                issues.append(
+                    Issue(
+                        severity="WARN" if mode != "strict" else "ERROR",
+                        file_line=file_line,
+                        step=None,
+                        section="LINE",
+                        signal=key,
+                        reason="UUT_DBC value does not end with '.dbc'",
+                        line_text=stripped,
+                    )
+                )
+            if key.startswith("SUPPRESS_PAT_SUPPORT") and not _boolish(val):
+                issues.append(
+                    Issue(
+                        severity="WARN",
+                        file_line=file_line,
+                        step=None,
+                        section="LINE",
+                        signal=key,
+                        reason="SUPPRESS_PAT_SUPPORT value is not a recognized boolean literal",
+                        line_text=stripped,
+                        hint="Use True/False (or 1/0).",
+                    )
+                )
+            continue
+
+        if _is_control(stripped):
+            if stripped.startswith("PAUSE"):
+                if "-" not in stripped:
+                    issues.append(
+                        Issue(
+                            severity="FATAL",
+                            file_line=file_line,
+                            step=None,
+                            section="LINE",
+                            signal="PAUSE",
+                            reason="PAUSE is missing '-' prompt separator (this would crash at runtime)",
+                            line_text=stripped,
+                            hint="Example: PAUSE-Press Enter to continue",
+                        )
+                    )
+                else:
+                    prompt = stripped.split("-", 1)[1].strip()
+                    if not prompt:
+                        issues.append(
+                            Issue(
+                                severity="FATAL",
+                                file_line=file_line,
+                                step=None,
+                                section="LINE",
+                                signal="PAUSE",
+                                reason="PAUSE prompt is empty (this would crash at runtime)",
+                                line_text=stripped,
+                                hint="Example: PAUSE-Press Enter to continue",
+                            )
+                        )
+            elif stripped.upper() in {"END", "SAVE"} and stripped not in {"END", "SAVE"}:
+                # Runner checks exact case for these.
+                issues.append(
+                    Issue(
+                        severity="FATAL",
+                        file_line=file_line,
+                        step=None,
+                        section="LINE",
+                        signal=stripped,
+                        reason="Control keyword must be uppercase exactly",
+                        line_text=stripped,
+                        hint="Use END or SAVE in uppercase.",
+                    )
+                )
+            continue
+
+        # -----------------
+        # Step line syntax
+        # -----------------
+        if "\t" in raw:
+            issues.append(
+                Issue(
+                    severity="WARN" if mode != "strict" else "ERROR",
+                    file_line=file_line,
+                    step=step_idx,
+                    section="LINE",
+                    signal="(whitespace)",
+                    reason="Tab character found; runtime only strips spaces and this may break parsing",
+                    line_text=stripped,
+                    hint="Replace tabs with spaces.",
+                )
+            )
+
+        if "#" in stripped:
+            issues.append(
+                Issue(
+                    severity="WARN" if mode != "strict" else "ERROR",
+                    file_line=file_line,
+                    step=step_idx,
+                    section="LINE",
+                    signal="(comment)",
+                    reason="Inline comments are not supported; '#' will be parsed as part of the step",
+                    line_text=stripped,
+                    hint="Put comments on their own line starting with '#'.",
+                )
+            )
+
+        # Mimic runtime: it strips ONLY space characters, not all whitespace.
         step_line = stripped.replace(" ", "")
         parts = step_line.split(":")
         if len(parts) < 2:
+            issues.append(
+                Issue(
+                    severity="FATAL",
+                    file_line=file_line,
+                    step=step_idx,
+                    section="LINE",
+                    signal="(line)",
+                    reason="Malformed step line (expected 'outs:ins[:flags]') (this would crash at runtime)",
+                    line_text=stripped,
+                )
+            )
+            # Do not increment step_idx for malformed lines.
+            continue
+
+        if len(parts) > 3:
             issues.append(
                 Issue(
                     severity="ERROR",
@@ -185,25 +476,85 @@ def run_preflight(
                     step=step_idx,
                     section="LINE",
                     signal="(line)",
-                    reason="Malformed step line (expected 'outs : ins' with ':' separators)",
+                    reason="Too many ':' sections (runner only supports 'outs:ins' or 'outs:ins:flags')",
                     line_text=stripped,
+                    hint="Remove extra ':' characters (e.g. in MESSAGE text).",
                 )
             )
-            # Do not increment step_idx for malformed lines.
-            continue
 
-        outs = [t for t in parts[0].split(",") if t]
-        ins = [t for t in parts[1].split(",") if t]
+        outs_raw = parts[0]
+        ins_raw = parts[1] if len(parts) >= 2 else ""
+        flags_raw = parts[2] if len(parts) >= 3 else None
+
+        # Runtime does Outs = IO[0].split(',') and Ins = IO[1].split(',') WITHOUT filtering.
+        outs = outs_raw.split(",")
+        ins = ins_raw.split(",")
+        flags = flags_raw.split(",") if flags_raw is not None else []
+
+        if len(outs) == 1 and outs[0] == "":
+            issues.append(
+                Issue(
+                    severity="FATAL",
+                    file_line=file_line,
+                    step=step_idx,
+                    section="OUT",
+                    signal="(empty)",
+                    reason="OUT section is empty (this would crash at runtime)",
+                    line_text=stripped,
+                    hint="Use 'NULL' if you have no outputs.",
+                )
+            )
+        if len(ins) == 1 and ins[0] == "":
+            issues.append(
+                Issue(
+                    severity="FATAL",
+                    file_line=file_line,
+                    step=step_idx,
+                    section="IN",
+                    signal="(empty)",
+                    reason="IN section is empty (this would crash at runtime)",
+                    line_text=stripped,
+                    hint="Use 'NULL' if you have no inputs.",
+                )
+            )
 
         # ---- Outputs ----
         for tok in outs:
+            if tok == "":
+                issues.append(
+                    Issue(
+                        severity="FATAL",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="OUT",
+                        signal="(empty token)",
+                        reason="Empty output token (trailing/double comma) (this would crash at runtime)",
+                        line_text=stripped,
+                        hint="Remove trailing commas or add 'NULL'.",
+                    )
+                )
+                continue
+
+            if tok.count("=") > 1:
+                issues.append(
+                    Issue(
+                        severity="WARN" if mode != "strict" else "ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="OUT",
+                        signal=tok.split("=", 1)[0],
+                        reason="Output token contains multiple '='; runner uses the first value only",
+                        line_text=stripped,
+                    )
+                )
+
             sig, val = _split_kv(tok)
             if sig == "NULL":
                 continue
             if val is None:
                 issues.append(
                     Issue(
-                        severity="ERROR",
+                        severity="FATAL",
                         file_line=file_line,
                         step=step_idx,
                         section="OUT",
@@ -213,6 +564,40 @@ def run_preflight(
                     )
                 )
                 continue
+
+            if val == "":
+                issues.append(
+                    Issue(
+                        severity="ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="OUT",
+                        signal=sig,
+                        reason="Output has an empty value; runner will ignore it",
+                        line_text=stripped,
+                        hint="Use a numeric value (e.g. 1) or DATALOG.",
+                    )
+                )
+                # Still allow existence checks below.
+
+            # Output values must be numeric or DATALOG. Non-numeric outputs don't crash
+            # but become a no-op in the runner.
+            if val and val != "DATALOG":
+                try:
+                    float(val)
+                except Exception:
+                    issues.append(
+                        Issue(
+                            severity="WARN" if mode != "strict" else "ERROR",
+                            file_line=file_line,
+                            step=step_idx,
+                            section="OUT",
+                            signal=sig,
+                            reason="Output value is not numeric (and not DATALOG); runner will ignore it",
+                            line_text=stripped,
+                            hint="Use a numeric value, or exactly: DATALOG",
+                        )
+                    )
 
             dbc_name, db = resolve_db(sig)
             if dbc_name is None:
@@ -275,13 +660,41 @@ def run_preflight(
 
         # ---- Inputs ----
         for tok in ins:
+            if tok == "":
+                issues.append(
+                    Issue(
+                        severity="FATAL",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="IN",
+                        signal="(empty token)",
+                        reason="Empty input token (trailing/double comma) (this would crash at runtime)",
+                        line_text=stripped,
+                        hint="Remove trailing commas or add 'NULL'.",
+                    )
+                )
+                continue
+
+            if tok.count("=") > 1:
+                issues.append(
+                    Issue(
+                        severity="WARN" if mode != "strict" else "ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="IN",
+                        signal=tok.split("=", 1)[0],
+                        reason="Input token contains multiple '='; runner uses the first value only",
+                        line_text=stripped,
+                    )
+                )
+
             sig, val = _split_kv(tok)
             if sig == "NULL":
                 continue
             if val is None:
                 issues.append(
                     Issue(
-                        severity="ERROR",
+                        severity="FATAL",
                         file_line=file_line,
                         step=step_idx,
                         section="IN",
@@ -291,6 +704,56 @@ def run_preflight(
                     )
                 )
                 continue
+
+            if val == "":
+                issues.append(
+                    Issue(
+                        severity="FATAL",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="IN",
+                        signal=sig,
+                        reason="Input has an empty value (this would crash at runtime)",
+                        line_text=stripped,
+                        hint="Use DATALOG or 'value|tol|time'.",
+                    )
+                )
+                continue
+
+            # Input values must be either DATALOG or value|tol|time.
+            if val != "DATALOG":
+                parts_v = val.split("|")
+                if len(parts_v) != 3:
+                    issues.append(
+                        Issue(
+                            severity="FATAL",
+                            file_line=file_line,
+                            step=step_idx,
+                            section="IN",
+                            signal=sig,
+                            reason="Input must be 'DATALOG' or 'value|tol|time' (this would crash at runtime)",
+                            line_text=stripped,
+                            hint="Example: Port_1A=5.0|0.155|0.1",
+                        )
+                    )
+                else:
+                    try:
+                        float(parts_v[0])
+                        float(parts_v[1])
+                        float(parts_v[2])
+                    except Exception:
+                        issues.append(
+                            Issue(
+                                severity="FATAL",
+                                file_line=file_line,
+                                step=step_idx,
+                                section="IN",
+                                signal=sig,
+                                reason="Input value|tol|time parts must be numeric (this would crash at runtime)",
+                                line_text=stripped,
+                                hint="Example: Port_1A=5.0|0.155|0.1",
+                            )
+                        )
 
             dbc_name, db = resolve_db(sig)
             if dbc_name is None:
@@ -327,10 +790,103 @@ def run_preflight(
                 )
                 continue
 
-        # Only count as a step if it looks like a real step line.
+        # ---- Flags (3rd section) ----
+        if flags_raw is not None:
+            if flags_raw == "":
+                issues.append(
+                    Issue(
+                        severity="WARN" if mode != "strict" else "ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="LINE",
+                        signal="(flags)",
+                        reason="Empty flags section (trailing ':') has no effect",
+                        line_text=stripped,
+                    )
+                )
+
+            for ftok in flags:
+                if ftok == "":
+                    issues.append(
+                        Issue(
+                            severity="WARN" if mode != "strict" else "ERROR",
+                            file_line=file_line,
+                            step=step_idx,
+                            section="LINE",
+                            signal="(flags)",
+                            reason="Empty flag token (trailing/double comma) will be ignored",
+                            line_text=stripped,
+                        )
+                    )
+                    continue
+
+                key, fval = _split_kv(ftok)
+                key_up = key.upper()
+                known = {"TIMEOUT", "HOLD", "WAIT", "MESSAGE", "TAG"}
+
+                if key_up in known:
+                    if fval is None:
+                        issues.append(
+                            Issue(
+                                severity="FATAL",
+                                file_line=file_line,
+                                step=step_idx,
+                                section="LINE",
+                                signal=key,
+                                reason="Flag is missing '=value' (this would crash at runtime)",
+                                line_text=stripped,
+                            )
+                        )
+                        continue
+                    if fval == "":
+                        issues.append(
+                            Issue(
+                                severity="FATAL",
+                                file_line=file_line,
+                                step=step_idx,
+                                section="LINE",
+                                signal=key,
+                                reason="Flag has an empty value (this would crash at runtime)",
+                                line_text=stripped,
+                            )
+                        )
+                        continue
+
+                    if key_up in {"TIMEOUT", "HOLD", "WAIT"}:
+                        try:
+                            float(fval)
+                        except Exception:
+                            issues.append(
+                                Issue(
+                                    severity="FATAL",
+                                    file_line=file_line,
+                                    step=step_idx,
+                                    section="LINE",
+                                    signal=key,
+                                    reason="Flag value must be numeric (this would crash at runtime)",
+                                    line_text=stripped,
+                                    hint=f"Example: {key_up}=0.5",
+                                )
+                            )
+                else:
+                    # Unknown flags are ignored by runtime, but it's usually a typo.
+                    issues.append(
+                        Issue(
+                            severity="WARN" if mode != "strict" else "ERROR",
+                            file_line=file_line,
+                            step=step_idx,
+                            section="LINE",
+                            signal=key,
+                            reason="Unknown flag (runner will ignore it)",
+                            line_text=stripped,
+                        )
+                    )
+
+        # Count this as a step line (even if it has issues).
         step_idx += 1
 
     # Print + decide.
+    fatals = [i for i in issues if i.severity == "FATAL"]
     errors = [i for i in issues if i.severity == "ERROR"]
     warnings = [i for i in issues if i.severity == "WARN"]
 
@@ -341,9 +897,17 @@ def run_preflight(
     _print_issues(issues)
 
     print(
-        f"\nPreflight summary: {len(errors)} error(s), {len(warnings)} warning(s). "
+        f"\nPreflight summary: {len(fatals)} fatal, {len(errors)} error(s), {len(warnings)} warning(s). "
         f"Mode={mode!r}."
     )
+
+    # Fatal issues mean the runner would crash/hang; do not continue.
+    if fatals:
+        if suite:
+            print("Preflight failed due to fatal syntax/config issues -> this test would crash/hang.")
+        else:
+            print("Preflight failed due to fatal syntax/config issues -> aborting.")
+        return False
     if mode == "warn":
         if suite:
             print("Preflight mode is 'warn' -> continuing despite issues (suite preflight).")
@@ -543,6 +1107,11 @@ def suite_preflight(
         )
         if not ok:
             suite_ok = False
+            # In warn mode, run_preflight() only returns False when there are
+            # FATAL issues (runner would crash/hang). Treat that as a hard fail
+            # regardless of mode.
+            if mode == "warn":
+                hard_fail = True
 
     print("\n" + "=" * 80)
     if suite_ok:
