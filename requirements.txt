@@ -6,4 +6,3 @@
 python-can
 cantools
 colorama
-keyboard

@@ -5,17 +5,6 @@ import threading
 import time
 from datetime import datetime
 
-# msvcrt is Windows-only; we use it for ESC handling in the terminal.
-try:
-    import msvcrt  # type: ignore
-except Exception:  # pragma: no cover
-    msvcrt = None
-
-# keyboard is a legacy dependency; kept for backwards compatibility.
-try:
-    import keyboard  # type: ignore  # noqa: F401
-except Exception:
-    keyboard = None  # noqa: F401
 
 """PATSpeak main entry.
 
@@ -386,7 +375,7 @@ def _run_one_test(
 ) -> bool:
     """Run a single .pat script (test or hook).
 
-    Returns True if the script completed, False if it was aborted early (Esc).
+    Returns True if the script completed. (Early stops are handled via Ctrl+C / SIGINT.)
     """
     globals.TestFile = test_ref
 
@@ -411,7 +400,7 @@ def _run_one_test(
     if globals.UnitName == "":
         if not suite_unit_name.get("name"):
             suite_unit_name["name"] = input(
-                "Pressing Esc will end the test early.\n\n"
+                "Press Ctrl+C to stop the test early.\n\n"
                 "Type a name for the test and press Enter to begin: "
             ).strip()
             if suite_unit_name["name"] == "":
@@ -426,23 +415,6 @@ def _run_one_test(
     # (instead of letting it bubble out and potentially hang on shutdown).
     try:
         while (not globals.finished) and (not getattr(globals, "test_done", 0)):
-            # ESC key handling (Windows terminal only).
-            if msvcrt is not None and msvcrt.kbhit():
-                key = msvcrt.getch()
-                if key == b"\x1b":  # ESC
-                    userinput = input(
-                        "Are you sure you want to stop?\nPress Y to stop, any key to continue: "
-                    )
-                    if userinput in ("y", "Y"):
-                        _write_interrupt_log("Esc - user interruption")
-                        try:
-                            globals.test_file.close()
-                        except Exception:
-                            pass
-                        globals.test_done = 1
-                        globals.finished = 1
-                        return False
-
             ProcessScript()
             time.sleep(0.01)
     except KeyboardInterrupt:
