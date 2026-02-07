@@ -15,13 +15,14 @@ kvadblib for DBC handling.
 from support.script import ProcessScript
 from support.preflight import suite_preflight
 import support.globals as globals
-from support.console import make_log_path, style
+from support.console import make_log_path, style, color_enabled
 from support.progress import (
     install as progress_install,
     set_suite as progress_set_suite,
     start_script as progress_start,
     finish_script as progress_finish,
     disable as progress_disable,
+    emergency_restore_terminal as progress_emergency_restore_terminal,
 )
 
 
@@ -158,6 +159,15 @@ def _install_sigint_handler() -> None:
         # Second Ctrl+C => force exit (avoid indefinite hangs).
         try:
             print("\n^C received again — forcing exit.")
+        except Exception:
+            pass
+        # If the progress UI is using the flicker-free "sticky" mode, it may
+        # have changed the terminal scroll region to reserve the last row.
+        # A hard os._exit() bypasses normal cleanup, so restore the terminal
+        # *before* exiting to avoid leaving the user's console in a stuck
+        # state.
+        try:
+            progress_emergency_restore_terminal()
         except Exception:
             pass
         os._exit(130)
@@ -499,6 +509,15 @@ def main() -> int:
         # Optional bottom-row progress UI (auto-enabled when stdout is a TTY).
         # This installs a stdout wrapper that keeps the status line visible
         # while normal prints scroll above.
+        # Force ANSI / color initialization *before* installing the progress UI.
+        # On Windows, colorama may wrap sys.stdout/sys.stderr when first used.
+        # If that happens after we install the progress wrapper, it can replace it.
+        # Calling color_enabled() here ensures any required wrapping happens first.
+        try:
+            color_enabled()
+        except Exception:
+            pass
+
         try:
             progress_install()
             progress_set_suite(len(tests))
@@ -691,6 +710,13 @@ def main() -> int:
                 time.sleep(0.25)
             except Exception:
                 pass
+            # os._exit() bypasses atexit and may skip other cleanup.
+            # Make sure the terminal isn't left with a modified scroll region
+            # (sticky progress UI) before we hard exit.
+            try:
+                progress_emergency_restore_terminal()
+            except Exception:
+                pass
             os._exit(130)
 
 
@@ -711,6 +737,15 @@ if __name__ == "__main__":
             pass
         try:
             _stop_can_threads()
+        except Exception:
+            pass
+        try:
+            progress_disable()
+        except Exception:
+            pass
+        # Ensure the terminal scroll region is restored even on hard-exit.
+        try:
+            progress_emergency_restore_terminal()
         except Exception:
             pass
         os._exit(130)

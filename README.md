@@ -157,6 +157,23 @@ You can control this with:
 - `PATSPEAK_PROGRESS=on` — force enable
 - `PATSPEAK_PROGRESS=off` — disable
 
+Renderer mode:
+
+- `PATSPEAK_PROGRESS_MODE=auto` (default) — prefer a **flicker-free** sticky
+  bottom-row renderer when the terminal supports ANSI cursor control (Windows
+  Terminal / modern consoles); otherwise fall back to a compatibility renderer.
+- `PATSPEAK_PROGRESS_MODE=sticky` — force the flicker-free renderer.
+- `PATSPEAK_PROGRESS_MODE=compat` — force the compatibility renderer (works
+  everywhere but can flicker on very chatty output).
+
+Step bar style (only matters when a script has more steps than your terminal
+can display):
+
+- `PATSPEAK_STEPBAR_STYLE=hybrid` (default) — show an **overview** bar for the
+  whole test *plus* a **scrolling tape** of the most recent steps.
+- `PATSPEAK_STEPBAR_STYLE=overview` — show only the overview (downsampled) bar.
+- `PATSPEAK_STEPBAR_STYLE=scroll` — show only the scrolling per-step tape.
+
 ### Optional hook scripts for suites
 
 When running a *folder* (suite) of tests, you can place optional `.pat` hook
