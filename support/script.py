@@ -6,6 +6,7 @@ from datetime import datetime
 import support.globals as globals
 from datetime import timedelta
 from support.console import colorize_status_line, make_log_path, make_csv_path
+from support.progress import note_step_started, note_step_result
 def SaveData():
 
     print("Writing Data Collected.")
@@ -86,6 +87,21 @@ def ProcessScript():
             globals.StartTime = time.time()
         globals.UUT_TestLog += StepStr + globals.TestLine + "\n" 
         print_test = 1 #only print om new lines
+
+        # Progress UI: mark a step as started as soon as we consume a *step* line.
+        # (Avoid marking comments/directives/END as steps so the bar stays aligned.)
+        try:
+            s = (globals.TestLine or "").strip()
+            is_step = bool(s) and (not s.startswith("#"))
+            if is_step:
+                if s in {"END", "SAVE"} or s.startswith("PAUSE"):
+                    is_step = False
+                elif s.startswith("UUT_DBC") or s.startswith("UUT_DATANAME") or s.startswith("SUPPRESS_PAT_SUPPORT"):
+                    is_step = False
+            if is_step:
+                note_step_started(globals.TestStep)
+        except Exception:
+            pass
 
         # Super-verbose: echo every .pat line as it is consumed.
         if(getattr(globals, "Verbose", 0) >= 2):
@@ -325,8 +341,16 @@ def ProcessScript():
                     if((Timeout)&(globals.StepTime >= Timeout)):
                         TestString = StepStr + "FAIL:" + " " + SignalName + " " + str(RealValue)
                         globals.FailCount += 1
+                        try:
+                            note_step_result(globals.TestStep, passed=False)
+                        except Exception:
+                            pass
                     else:
                         TestString = StepStr + "PASS:" + " " + SignalName + " " + str(RealValue)
+                        try:
+                            note_step_result(globals.TestStep, passed=True)
+                        except Exception:
+                            pass
                     globals.UUT_TestLog += TestString + "\n"
                     print(colorize_status_line(TestString))
                     

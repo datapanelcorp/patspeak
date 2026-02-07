@@ -13,7 +13,7 @@ def initialize(*, run_preflight_checks: bool = True):
     global PassTime, tracker_last_time, StepTime, UUT_Results, UUT_TestLog
     global WaitTime, WaitDone, SoundStart, SoundFail, SoundPass, TimeStampFormat, RunStamp, UnitName, HeaderAdded
     global MeterData, UUTData, TestFile, DataLogTag, DataPath, LogPath, CAN_1, CAN_2, Verbose, AllCollectedData, SuppressPatSupport
-    global CAN_INTERFACE, CAN_CHANNELS, CAN_BITRATE
+    global CAN_INTERFACE, CAN_CHANNELS, CAN_BITRATE, TotalSteps
 
     UnitNumber = 0
     MeterData = []
@@ -37,6 +37,7 @@ def initialize(*, run_preflight_checks: bool = True):
     DataLogTag = ""
     HeaderAdded = 0
     FailCount = 0
+    TotalSteps = 0
     SuppressPatSupport = 'False'
 
     # CAN backend config (python-can).
@@ -90,6 +91,28 @@ def initialize(*, run_preflight_checks: bool = True):
     test_file = open(_abs_test, 'r', encoding='utf-8', errors='replace')
     Lines = test_file.readlines()
     test_file.seek(0)
+
+    # -----------------
+    # Step count (for progress UI)
+    # -----------------
+    # PATSpeak treats any non-empty, non-comment line that is not a directive
+    # or control keyword as a "step".
+    def _is_step_line(raw: str) -> bool:
+        s = (raw or "").strip()
+        if not s:
+            return False
+        if s.startswith("#"):
+            return False
+        if s == "END" or s == "SAVE" or s.startswith("PAUSE"):
+            return False
+        if s.startswith("UUT_DBC") or s.startswith("UUT_DATANAME") or s.startswith("SUPPRESS_PAT_SUPPORT"):
+            return False
+        return True
+
+    try:
+        TotalSteps = sum(1 for ln in Lines if _is_step_line(ln))
+    except Exception:
+        TotalSteps = 0
 
     uut_dbc_name = ""
     for line in Lines:

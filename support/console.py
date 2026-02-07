@@ -30,23 +30,21 @@ _COLOR_ENABLED: Optional[bool] = None
 
 
 def _enable_windows_ansi() -> bool:
-    """Best-effort attempt to enable ANSI escape sequences on Windows."""
+    """Best-effort attempt to enable ANSI escape sequences on Windows.
+
+    Important:
+      - Prefer enabling Windows 10+ VT processing via ctypes because it *does not*
+        wrap/replace sys.stdout or sys.stderr.
+      - Fall back to colorama wrapping only when VT processing can't be enabled.
+
+    Wrapping sys.stdout can interfere with other stream proxies (like the
+    progress UI), so the order here is intentional.
+    """
 
     if os.name != "nt":
         return True
 
-    # Prefer colorama if present.
-    try:
-        import colorama  # type: ignore
-
-        # just_fix_windows_console() enables ANSI processing on newer Windows
-        # and wraps stdout/stderr on older versions.
-        colorama.just_fix_windows_console()
-        return True
-    except Exception:
-        pass
-
-    # Fallback: enable ENABLE_VIRTUAL_TERMINAL_PROCESSING via ctypes.
+    # First try: enable VT processing directly (no stream wrapping).
     try:
         import ctypes
 
@@ -54,12 +52,21 @@ def _enable_windows_ansi() -> bool:
         STD_OUTPUT_HANDLE = -11
         handle = kernel32.GetStdHandle(STD_OUTPUT_HANDLE)
         mode = ctypes.c_uint()
-        if kernel32.GetConsoleMode(handle, ctypes.byref(mode)) == 0:
-            return False
-        ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004
-        new_mode = mode.value | ENABLE_VIRTUAL_TERMINAL_PROCESSING
-        if kernel32.SetConsoleMode(handle, new_mode) == 0:
-            return False
+        if kernel32.GetConsoleMode(handle, ctypes.byref(mode)) != 0:
+            ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004
+            new_mode = mode.value | ENABLE_VIRTUAL_TERMINAL_PROCESSING
+            if kernel32.SetConsoleMode(handle, new_mode) != 0:
+                return True
+    except Exception:
+        pass
+
+    # Second try: colorama wrapper (older Windows terminals).
+    try:
+        import colorama  # type: ignore
+
+        # just_fix_windows_console() enables ANSI processing on newer Windows
+        # and wraps stdout/stderr on older versions.
+        colorama.just_fix_windows_console()
         return True
     except Exception:
         return False
