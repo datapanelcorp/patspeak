@@ -48,7 +48,7 @@ def _write_interrupt_log(reason: str) -> None:
         if not log_dir:
             return
 
-        logfile = make_log_path(log_dir, unit, test_file)
+        logfile = make_log_path(log_dir, unit, test_file, getattr(globals, "RunStamp", None))
         os.makedirs(os.path.dirname(logfile), exist_ok=True)
         stamp = datetime.today().strftime(getattr(globals, "TimeStampFormat", "%Y-%m-%d-%H:%M:%S"))
 

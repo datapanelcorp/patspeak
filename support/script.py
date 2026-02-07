@@ -46,7 +46,9 @@ def SaveData():
                 # f.write(str(FullValue) + "\n")
                 # f.close()
             
-    datafile = make_csv_path(globals.DataPath, str(globals.UnitName))
+    # Save CSV alongside the per-test logs.
+    # globals.LogPath is set to a per-test "results" folder during globals.initialize().
+    datafile = make_csv_path(globals.LogPath, str(globals.UnitName), getattr(globals, "RunStamp", None))
     f = open(datafile, 'a')
     f.write(globals.AllCollectedData)
     #f = open(datafile, 'w')
@@ -64,7 +66,12 @@ def ProcessScript():
         time_delta = tracker_time - globals.tracker_last_time
     globals.tracker_last_time = tracker_time
     
-    logfile = make_log_path(globals.LogPath, str(globals.UnitName), str(globals.TestFile))
+    logfile = make_log_path(
+        globals.LogPath,
+        str(globals.UnitName),
+        str(globals.TestFile),
+        getattr(globals, "RunStamp", None),
+    )
     #logfile = globals.LogPath + globals.TestFile + ".log"
     print_test = 0
     

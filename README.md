@@ -110,13 +110,21 @@ That name becomes the **UnitName** used for log/CSV output.
   - If something is wedged in a driver call, pressing **Ctrl+C a second time** forces exit.
 
 ### Outputs generated
-PATSpeak writes into `dut/` (by default):
+PATSpeak writes outputs into a per-test `results/` subfolder **next to the `.pat` file** (by default):
 
-- Log: `dut/<UnitName>_<TestId>.log`
-  - `<TestId>` is derived from the test path and is made filename-safe.
-  - Example: `43019\43019-1-INPUT-420MA.pat` becomes `43019__43019-1-INPUT-420MA.pat`
+- Log: `<test_folder>/results/<UnitName>_<TestName>.log`
+  - `<TestName>` is the `.pat` filename **stem** (basename without extension) and is made filename-safe.
+  - If `UnitName` already matches the test name (common when users set `UUT_DATANAME` to the script name), the filename is de-duplicated to:
+    - `<test_folder>/results/<TestName>.log`
+  - Example: `dut/43019/43019-1-INPUT-420MA.pat` with `UnitName=SN123` becomes:
+    - `dut/43019/results/SN123_43019-1-INPUT-420MA.log`
+  - Example (de-dup): `UnitName=43019-1-INPUT-420MA` becomes:
+    - `dut/43019/results/43019-1-INPUT-420MA.log`
 
-- CSV: `dut/<UnitName>.csv` (only written when the script runs `SAVE`)
+- CSV: `<test_folder>/results/<UnitName>.csv` (only written when the script runs `SAVE`)
+
+Notes:
+- If the test lives at `dut/RESET.pat`, outputs go to `dut/results/`.
 
 ---
 
