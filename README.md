@@ -141,6 +141,22 @@ set PATSPEAK_TRACE_TX=1
 python pat.py 43019
 ```
 
+### Optional bottom-row progress bar (interactive)
+
+When running in a real terminal, PATSpeak can display a 1-line progress bar at
+the **bottom row** that updates in-place while the normal log output scrolls.
+It shows:
+
+- suite progress (all tests)
+- current test step progress
+- per-step pass/fail coloring
+
+You can control this with:
+
+- `PATSPEAK_PROGRESS=auto` (default) — enable only when stdout is a TTY
+- `PATSPEAK_PROGRESS=on` — force enable
+- `PATSPEAK_PROGRESS=off` — disable
+
 ### Optional hook scripts for suites
 
 When running a *folder* (suite) of tests, you can place optional `.pat` hook

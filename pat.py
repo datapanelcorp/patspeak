@@ -16,6 +16,13 @@ from support.script import ProcessScript
 from support.preflight import suite_preflight
 import support.globals as globals
 from support.console import make_log_path, style
+from support.progress import (
+    install as progress_install,
+    set_suite as progress_set_suite,
+    start_script as progress_start,
+    finish_script as progress_finish,
+    disable as progress_disable,
+)
 
 
 # -----------------
@@ -372,6 +379,7 @@ def _run_one_test(
     suite_unit_name: dict,
     run_preflight_checks: bool = True,
     kind: str = "test",
+    suite_index: int = 0,
 ) -> bool:
     """Run a single .pat script (test or hook).
 
@@ -409,10 +417,26 @@ def _run_one_test(
 
     print("Test Name:", globals.UnitName)
 
+    # Start the bottom-row progress UI for this script.
+    # (For hooks, we still show the current suite index but do not mark the
+    # suite item as running/complete.)
+    try:
+        progress_start(
+            test_ref=test_ref,
+            kind=kind_norm,
+            suite_index=int(suite_index or 0),
+            suite_mark_running=(kind_norm == "test" and int(suite_index or 0) > 0),
+            unit_name=str(globals.UnitName or ""),
+            total_steps=int(getattr(globals, "TotalSteps", 0) or 0),
+        )
+    except Exception:
+        pass
+
     # Main step loop for this test.
     # NOTE: Ctrl+C can arrive while we're in ProcessScript() or in the sleep.
     # We catch KeyboardInterrupt here to ensure we always request a clean stop
     # (instead of letting it bubble out and potentially hang on shutdown).
+    ok_pass = None
     try:
         while (not globals.finished) and (not getattr(globals, "test_done", 0)):
             ProcessScript()
@@ -423,7 +447,20 @@ def _run_one_test(
         # main() can return an appropriate exit code.
         _write_interrupt_log("Ctrl+C - user interruption")
         _stop_can_threads()
+        ok_pass = False
         raise
+
+    finally:
+        # Mark this script complete in the progress UI.
+        try:
+            if kind_norm == "test" and int(suite_index or 0) > 0:
+                if ok_pass is None:
+                    ok_pass = bool(getattr(globals, "FailCount", 0) == 0)
+                progress_finish(passed=ok_pass, suite_index=int(suite_index or 0))
+            else:
+                progress_finish(passed=None, suite_index=0)
+        except Exception:
+            pass
 
     return True
 
@@ -458,6 +495,15 @@ def main() -> int:
             print("Super Verbose Enabled")
         elif globals.Verbose >= 1:
             print("Verbose Enabled")
+
+        # Optional bottom-row progress UI (auto-enabled when stdout is a TTY).
+        # This installs a stdout wrapper that keeps the status line visible
+        # while normal prints scroll above.
+        try:
+            progress_install()
+            progress_set_suite(len(tests))
+        except Exception:
+            pass
 
         # Optional per-folder hook scripts (next to the tests).
         hook_start = find_hook_next_to(tests[0], HOOK_START)
@@ -550,7 +596,7 @@ def main() -> int:
 
         last_run_abs: str | None = None
 
-        def _run_script(ref: str, kind: str) -> bool:
+        def _run_script(ref: str, kind: str, *, suite_index: int = 0) -> bool:
             """Run a test/hook by reference, skipping consecutive duplicates."""
 
             nonlocal last_run_abs
@@ -570,13 +616,14 @@ def main() -> int:
                 suite_unit_name=suite_unit_name,
                 run_preflight_checks=not suite_run,
                 kind=kind,
+                suite_index=int(suite_index or 0),
             )
             last_run_abs = abs_ref
             return ok
 
         # Start hook (once, before the first test).
         if hook_start:
-            ok = _run_script(hook_start, "hook-start")
+            ok = _run_script(hook_start, "hook-start", suite_index=1)
             if not ok:
                 return 0
 
@@ -589,22 +636,22 @@ def main() -> int:
 
             transition = find_hook_next_to(test_ref, HOOK_TRANSITION)
             if transition:
-                ok = _run_script(transition, "hook-transition")
+                ok = _run_script(transition, "hook-transition", suite_index=idx)
                 if not ok:
                     break
 
-            ok = _run_script(test_ref, "test")
+            ok = _run_script(test_ref, "test", suite_index=idx)
             if not ok:
                 break
 
             if transition:
-                ok = _run_script(transition, "hook-transition")
+                ok = _run_script(transition, "hook-transition", suite_index=idx)
                 if not ok:
                     break
 
         # End hook (once, after the last test).
         if not globals.finished and hook_end:
-            _run_script(hook_end, "hook-end")
+            _run_script(hook_end, "hook-end", suite_index=len(tests))
 
         return 0
 
@@ -620,6 +667,13 @@ def main() -> int:
         return 130
 
     finally:
+        # Clear the bottom-row progress UI so the user's shell prompt doesn't
+        # end up on the same line.
+        try:
+            progress_disable()
+        except Exception:
+            pass
+
         _stop_can_threads()
 
         # On some Windows CAN backends (or when vendor driver calls wedge), the
