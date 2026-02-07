@@ -77,10 +77,12 @@ When you run `pat.py`, pass a **test selector** that is relative to `dut/`:
 ```bash
 python pat.py "44018-PWM-100-DUTY.pat"
 python pat.py "RESET.pat" -v
+python pat.py "RESET.pat" -vv
 python pat.py "43019-1-SENSOR-POWER.pat" -v
 
 # Run all tests in a subfolder (example: dut/43019/*.pat)
 python pat.py 43019
+python pat.py 43019 -vv
 
 # Run one test in a subfolder (extension optional)
 python pat.py 43019\43019-1-INPUT-420MA
@@ -94,7 +96,21 @@ python pat.py "dut/RESET.pat"
 
 Flags:
 
-- `-v` enables verbose prints (signal enumeration + echoes comment lines)
+- `-v` / `--verbose` enables verbose prints (signal enumeration + echoes comment lines)
+
+- `-vv` / `--super-verbose` enables **super verbose** tracing intended for debugging wiring and relay/switching:
+  - echoes every `.pat` line as it is consumed (including comments)
+  - prints each output assignment as it is applied (e.g. `SET PAT ...`, `SET UUT ...`)
+  - prints `DATALOG` capture values at the time they are recorded
+  - prints CAN TX frames **only when the payload changes** (avoids 10ms spam while still showing actual switching)
+
+Tip: if you only want the “TX frames on change” trace without full `-vv` output,
+you can set an environment variable:
+
+```bash
+set PATSPEAK_TRACE_TX=1
+python pat.py 43019
+```
 
 ### Optional hook scripts for suites
 
