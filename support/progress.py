@@ -292,6 +292,9 @@ class _ProgressState:
 
     # Timing
     # ------
+    # Monotonic start time for the whole suite/batch (set on the first script start).
+    suite_start_monotonic: float = 0.0
+
     # Monotonic start time for the current script (test or hook). Used to
     # display an elapsed timer in the sticky header.
     script_start_monotonic: float = 0.0
@@ -433,7 +436,11 @@ class _StdoutProxy:
             pass
 
     def _draw_status_line(self) -> None:
-        line = render_progress_line(self._state)
+        # Render into a "safe" width (<terminal columns - 1>) to avoid
+        # Windows autowrap quirks in the last column.
+        w = _term_width()
+        max_w = max(1, w - 1)
+        line = render_progress_line(self._state, width=max_w)
         if not line:
             # If we decide not to render (too narrow, etc.), make sure we
             # don't leave a stale status line behind.
@@ -449,9 +456,7 @@ class _StdoutProxy:
         try:
             # Clamp to <terminal width> - 1 to avoid an edge-case where
             # writing a character in the last column triggers autowrap in
-            # some Windows consoles, causing the "sticky" line to jump down.
-            w = _term_width()
-            max_w = max(1, w - 1)
+            # some Windows consoles.
             line = _strip_to_width(line, max_w)
 
             vis = _visible_len(line)
@@ -649,8 +654,11 @@ class _StickyAnsiRenderer:
         if (cols, rows) != self._last_size:
             self._apply_scroll_region(force=True)
 
-        header = render_header_line(self._state)
-        footer = render_progress_line(self._state)
+        # Render into a "safe" width (<terminal columns - 1>) to avoid
+        # Windows autowrap quirks in the last column.
+        max_w = max(1, cols - 1)
+        header = render_header_line(self._state, width=max_w)
+        footer = render_progress_line(self._state, width=max_w)
 
         if not header and not footer:
             self.clear()
@@ -659,7 +667,8 @@ class _StickyAnsiRenderer:
             self._last_draw = now
             return
 
-        max_w = max(1, cols - 1)
+        # render_* already clamps to the requested width, but keep a defensive
+        # clamp in case of unexpected ANSI-width accounting bugs.
         if header:
             header = _strip_to_width(header, max_w)
         if footer:
@@ -756,7 +765,7 @@ class _StickyAnsiRenderer:
         self._installed = False
 
 
-def render_header_line(state: _ProgressState) -> str:
+def render_header_line(state: _ProgressState, *, width: Optional[int] = None) -> str:
     """Build the 1-line header UI (ANSI-colored).
 
     In sticky mode this line is drawn on the **top row** of the terminal and
@@ -771,7 +780,11 @@ def render_header_line(state: _ProgressState) -> str:
     if not state.enabled:
         return ""
 
-    width = _term_width()
+    # NOTE: Some Windows terminals behave badly if we print into the *last*
+    # column (autowrap / cursor jumps). The sticky renderer therefore renders
+    # into a "safe" width (typically <terminal columns - 1>) and passes it
+    # here.
+    width = int(width if width is not None else _term_width())
     if width < 40:
         return ""
 
@@ -845,24 +858,48 @@ def render_header_line(state: _ProgressState) -> str:
     return _strip_to_width(out, width)
 
 
-def render_progress_line(state: _ProgressState) -> str:
+def render_progress_line(state: _ProgressState, *, width: Optional[int] = None) -> str:
     """Build the 1-line footer progress UI (ANSI-colored).
 
     The user-facing design for the footer is intentionally minimal:
       - Fail count (F:<n>)
       - Step progress bar for the current file (S:)
       - Suite/batch progress bar (T:)
+      - Total runtime (right-justified)
 
-    The test index/name is displayed in the *header* (top row) instead.
+    The test index/name and per-script elapsed time are displayed in the *header*
+    (top row) instead.
     """
 
     if not state.enabled:
         return ""
 
-    width = _term_width()
+    # Render into an optional "safe" width (see render_header_line).
+    width = int(width if width is not None else _term_width())
     if width < 40:
         # Too narrow to be useful; don't risk wrapping.
         return ""
+
+    # -----------------
+    # Right side (total runtime)
+    # -----------------
+    right = ""
+    if getattr(state, "suite_start_monotonic", 0.0):
+        try:
+            total_elapsed = _format_elapsed(time.monotonic() - float(state.suite_start_monotonic))
+        except Exception:
+            total_elapsed = "00:00:00"
+        # Keep this short but explicit (avoids confusion with the per-script timer in the header).
+        right = style("TOTAL", fg="gray", dim=True) + " " + style(total_elapsed, fg="gray", bold=True)
+
+    R = _visible_len(right)
+
+    # Only show the total runtime if we can still keep useful progress bars.
+    if right and (width - R - 1) < 25:
+        right = ""
+        R = 0
+
+    left_width = width if not right else max(1, width - R - 1)
 
     # -----------------
     # Fixed left side
@@ -880,9 +917,13 @@ def render_progress_line(state: _ProgressState) -> str:
 
     left = fail_part
     left_len = _visible_len(left)
-    remaining = width - left_len
+    remaining = left_width - left_len
     if remaining < 10:
-        return _strip_to_width(left, width)
+        left_out = _strip_to_width(left, left_width)
+        if not right:
+            return _strip_to_width(left_out, width)
+        pad = max(1, (width - R) - _visible_len(left_out))
+        return _strip_to_width(left_out + (" " * pad) + right, width)
 
     # -----------------
     # Bars
@@ -902,15 +943,19 @@ def render_progress_line(state: _ProgressState) -> str:
     if show_suite_bar:
         overhead += 1 + _visible_len(suite_label)
 
-    remaining_for_bars = width - left_len - overhead
+    remaining_for_bars = left_width - left_len - overhead
     if remaining_for_bars < 8 and show_suite_bar:
         # Not enough room for both; drop the suite bar first.
         show_suite_bar = False
         overhead = 1 + _visible_len(step_label) if show_step_bar else 0
-        remaining_for_bars = width - left_len - overhead
+        remaining_for_bars = left_width - left_len - overhead
 
     if remaining_for_bars < 5:
-        return _strip_to_width(left, width)
+        left_out = _strip_to_width(left, left_width)
+        if not right:
+            return _strip_to_width(left_out, width)
+        pad = max(1, (width - R) - _visible_len(left_out))
+        return _strip_to_width(left_out + (" " * pad) + right, width)
 
     suite_bar_width = 0
     if show_suite_bar:
@@ -949,7 +994,17 @@ def render_progress_line(state: _ProgressState) -> str:
     if show_suite_bar:
         out += " " + suite_label + suite_bar
 
+    out = _strip_to_width(out, left_width)
+
+    if not right:
+        return _strip_to_width(out, width)
+
+    pad = max(1, (width - R) - _visible_len(out))
+    out += " " * pad
+    out += right
     return _strip_to_width(out, width)
+
+
 def _strip_to_width(s: str, width: int) -> str:
     """Clamp *s* to a maximum visible width, preserving ANSI sequences."""
 
@@ -1440,6 +1495,7 @@ def set_suite(total_tests: int) -> None:
         _STATE.suite_total = max(0, int(total_tests or 0))
         _STATE.suite_index = 0
         _STATE.suite_statuses = ["pending"] * _STATE.suite_total
+        _STATE.suite_start_monotonic = 0.0
     redraw()
 
 
@@ -1459,6 +1515,8 @@ def start_script(
         _STATE.test_ref = str(test_ref or "")
         _STATE.unit_name = str(unit_name or "")
         _STATE.script_start_monotonic = time.monotonic()
+        if not _STATE.suite_start_monotonic:
+            _STATE.suite_start_monotonic = _STATE.script_start_monotonic
         _STATE.total_steps = max(0, int(total_steps or 0))
         _STATE.step_index = 0
         _STATE.step_statuses = ["pending"] * _STATE.total_steps if _STATE.total_steps else []

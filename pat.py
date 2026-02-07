@@ -149,11 +149,25 @@ def _install_sigint_handler() -> None:
             # Request a clean stop.
             _stop_can_threads()
 
-            # Break out of any blocking call in the main thread.
-            try:
-                threading.interrupt_main()
-            except Exception:
-                pass
+            # IMPORTANT:
+            # We install a custom SIGINT handler, which replaces Python's
+            # default behavior of raising KeyboardInterrupt.
+            #
+            # The earlier implementation used threading.interrupt_main(), but
+            # on some Windows setups that results in a *delayed* (or missed)
+            # KeyboardInterrupt, which makes users press Ctrl+C twice.
+            #
+            # Call the default int handler explicitly so the first Ctrl+C
+            # reliably aborts the run.
+            # Raise KeyboardInterrupt *now* so the main loop stops scheduling
+            # additional scripts (hooks/tests) after the current one unwinds.
+            #
+            # If something is wedged badly enough that KeyboardInterrupt can't
+            # unwind, the user can still press Ctrl+C again to force-exit.
+            signal.default_int_handler(signum, frame)
+
+            # Unreachable (default_int_handler raises), but keep explicit for
+            # readability.
             return
 
         # Second Ctrl+C => force exit (avoid indefinite hangs).
