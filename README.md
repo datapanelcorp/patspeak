@@ -65,7 +65,12 @@ If a test contains `SUPPRESS_PAT_SUPPORT = True`, PATSpeak will run **UUT-only**
 ### Where test files live (important)
 PATSpeak assumes test scripts live in `dut/`.
 
-When you run `pat.py`, pass the **file name** (not a path). The runner automatically looks in `dut/`.
+When you run `pat.py`, pass a **test selector** that is relative to `dut/`:
+
+- a single file (with or without `.pat`)
+- a subfolder + file (with or without `.pat`)
+- a folder name to run **all** `*.pat` tests in that folder (non-recursive)
+
 
 ✅ Works:
 
@@ -73,9 +78,15 @@ When you run `pat.py`, pass the **file name** (not a path). The runner automatic
 python pat.py "44018-PWM-100-DUTY.pat"
 python pat.py "RESET.pat" -v
 python pat.py "43019-1-SENSOR-POWER.pat" -v
+
+# Run all tests in a subfolder (example: dut/43019/*.pat)
+python pat.py 43019
+
+# Run one test in a subfolder (extension optional)
+python pat.py 43019\43019-1-INPUT-420MA
 ```
 
-🚫 Does **not** work (it will look for `dut/dut/...`):
+Note: you *can* include the `dut/` prefix if you want — it will be stripped automatically:
 
 ```bash
 python pat.py "dut/RESET.pat"
@@ -95,8 +106,9 @@ That name becomes the **UnitName** used for log/CSV output.
 ### Outputs generated
 PATSpeak writes into `dut/` (by default):
 
-- Log: `dut/<UnitName>_<TestFile>.log`  
-  (note: `<TestFile>` includes the `.pat` extension, so logs often look like `MyUnit_RESET.pat.log`)
+- Log: `dut/<UnitName>_<TestId>.log`
+  - `<TestId>` is derived from the test path and is made filename-safe.
+  - Example: `43019\43019-1-INPUT-420MA.pat` becomes `43019__43019-1-INPUT-420MA.pat`
 
 - CSV: `dut/<UnitName>.csv` (only written when the script runs `SAVE`)
 
@@ -221,7 +233,10 @@ Supported flags:
   Writes collected step data to `dut/<UnitName>.csv` (append mode) and clears the in-memory buffer.
 
 - `END` (**required**)  
-  Ends the test, writes the `.log`, and exits.
+  Ends the current test and writes the `.log`.
+
+  - If you started PATSpeak with a **single** test file, the program ends after `END`.
+  - If you started PATSpeak with a **folder selector**, PATSpeak continues on to the next `.pat` in that folder.
 
   ⚠️ If a script reaches EOF without an `END`, the runner will effectively idle forever (it keeps reading empty lines).
 
@@ -428,6 +443,9 @@ signal referenced by the test exists in the configured DBC(s):
 
 This is meant to catch typos and DBC/test drift early (rather than discovering it
 mid-test with “signal not found!”).
+
+When you run a *folder* selector (e.g. `python pat.py 43019`), PATSpeak will **preflight the entire suite**:
+it scans every `.pat` in that folder first and prints **all** issues before starting execution.
 
 You can control preflight behavior with an environment variable:
 

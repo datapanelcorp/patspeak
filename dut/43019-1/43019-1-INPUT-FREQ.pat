@@ -3,7 +3,7 @@
 UUT_DBC = 43019-560.dbc
 UUT_DATANAME = 43019-1-INPUT-FREQ
 
-Command = 82, MODE1 = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 7, MODE3B = 0, MODE4A = 7, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5

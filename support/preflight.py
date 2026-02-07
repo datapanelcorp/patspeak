@@ -119,6 +119,7 @@ def run_preflight(
     uut_dbc_name: str,
     pat_dbc_name: str,
     pat_support_active: bool,
+    suite: bool = False,
 ) -> bool:
     """Run preflight checks.
 
@@ -343,20 +344,224 @@ def run_preflight(
         f"\nPreflight summary: {len(errors)} error(s), {len(warnings)} warning(s). "
         f"Mode={mode!r}."
     )
-
     if mode == "warn":
-        print("Preflight mode is 'warn' -> continuing despite issues.")
+        if suite:
+            print("Preflight mode is 'warn' -> continuing despite issues (suite preflight).")
+        else:
+            print("Preflight mode is 'warn' -> continuing despite issues.")
         return True
 
     # mode == "error" or "strict"
     if errors:
-        print("Preflight failed due to errors -> aborting.")
+        if suite:
+            print("Preflight failed due to errors -> this test would abort.")
+        else:
+            print("Preflight failed due to errors -> aborting.")
         return False
 
     if mode == "strict" and warnings:
-        print("Preflight strict mode: warnings are treated as fatal -> aborting.")
+        if suite:
+            print("Preflight strict mode: warnings are treated as fatal -> this test would abort.")
+        else:
+            print("Preflight strict mode: warnings are treated as fatal -> aborting.")
         return False
 
     # Warnings only in "error" mode.
-    print("Preflight completed with warnings -> continuing.")
+    if suite:
+        print("Preflight completed with warnings -> continuing (suite preflight).")
+    else:
+        print("Preflight completed with warnings -> continuing.")
     return True
+
+
+def suite_preflight(
+    test_refs: Sequence[str],
+    *,
+    dut_root: str,
+    dbc_root: str,
+) -> bool:
+    """Run preflight across a suite of tests and show *all* issues up front.
+
+    This is intended for folder runs (many .pat files). We preflight every test
+    first, print all issues, and only then decide whether the run should start.
+
+    Returns True if the suite should continue, False if it should abort.
+
+    Decision policy is governed by PATSPEAK_PREFLIGHT_MODE (same as run_preflight).
+    """
+
+    mode = _env_mode()
+    if mode == "off":
+        return True
+
+    if not test_refs:
+        return True
+
+    # Lazy import to keep this module lightweight for single-test paths.
+    from support.can_db import CanDb
+
+    print("\n" + "=" * 80)
+    print(f"Suite preflight: {len(test_refs)} test(s)  (Mode={mode!r})")
+    print("=" * 80)
+
+    # Simple DBC cache to avoid re-loading the same file repeatedly.
+    dbc_cache: dict[str, Any] = {}
+
+    def load_dbc(abs_path: str) -> Any:
+        abs_path = os.path.abspath(abs_path)
+        if abs_path in dbc_cache:
+            return dbc_cache[abs_path]
+        db = CanDb(dbc_filename=abs_path)
+        dbc_cache[abs_path] = db
+        return db
+
+    pat_dbc_name = "PAT.dbc"
+    pat_abs = os.path.join(os.path.abspath(dbc_root), pat_dbc_name)
+
+    suite_ok = True
+    hard_fail = False
+
+    for idx, test_ref in enumerate(test_refs, start=1):
+        print("\n" + "-" * 80)
+        print(f"[{idx}/{len(test_refs)}] Preflight: {test_ref}")
+        print("-" * 80)
+
+        # Resolve test path.
+        test_path = test_ref if os.path.isabs(test_ref) else os.path.join(os.path.abspath(dut_root), test_ref)
+
+        try:
+            with open(test_path, "r", encoding="utf-8", errors="replace") as f:
+                lines = f.readlines()
+        except Exception as e:
+            print(f"ERROR: Could not read test file: {test_path}")
+            print(f"  {e}")
+            suite_ok = False
+            hard_fail = True
+            continue
+
+        # Parse directives.
+        uut_dbc_name: Optional[str] = None
+        suppress_pat = False
+
+        for raw in lines:
+            line = raw.strip()
+            if not line or line.startswith("#"):
+                continue
+            up = line.upper()
+            if up.startswith("UUT_DBC"):
+                if "=" not in line:
+                    continue
+                uut_dbc_name = line.split("=", 1)[1].strip().strip('"').strip("'")
+                continue
+            if up.startswith("SUPPRESS_PAT_SUPPORT"):
+                if "=" not in line:
+                    continue
+                val = line.split("=", 1)[1].strip().strip('"').strip("'").lower()
+                suppress_pat = val in {"1", "true", "yes", "on"}
+                continue
+
+        if not uut_dbc_name:
+            print("ERROR: No DBC file specified in script.")
+            print("  Add:  UUT_DBC = filename.dbc")
+            suite_ok = False
+            hard_fail = True
+            continue
+
+        uut_abs = os.path.join(os.path.abspath(dbc_root), uut_dbc_name)
+        if not os.path.isfile(uut_abs):
+            print(f"ERROR: UUT DBC file not found: {uut_abs}")
+            suite_ok = False
+            hard_fail = True
+            continue
+
+        # Load DBCs.
+        try:
+            uut_db = load_dbc(uut_abs)
+        except Exception as e:
+            print(f"ERROR: Failed to load UUT DBC: {uut_dbc_name}")
+            print(f"  {e}")
+            suite_ok = False
+            hard_fail = True
+            continue
+
+        pat_db_runtime = None
+        pat_db_for_check = None
+
+        if suppress_pat:
+            # PAT suppressed: runtime DB is None.
+            # For preflight messaging only, we *try* to load PAT.dbc.
+            if os.path.isfile(pat_abs):
+                try:
+                    pat_db_for_check = load_dbc(pat_abs)
+                except Exception:
+                    pat_db_for_check = None
+        else:
+            # PAT enabled: PAT.dbc must be loadable.
+            if not os.path.isfile(pat_abs):
+                print(f"ERROR: PAT support enabled but {pat_dbc_name} not found: {pat_abs}")
+                suite_ok = False
+                hard_fail = True
+                continue
+            try:
+                pat_db_runtime = load_dbc(pat_abs)
+                pat_db_for_check = pat_db_runtime
+            except Exception as e:
+                print(f"ERROR: Failed to load {pat_dbc_name} (PAT support is enabled)")
+                print(f"  {e}")
+                suite_ok = False
+                hard_fail = True
+                continue
+
+            # Duplicate signals are fatal when PAT support is active.
+            try:
+                pat_signals = set(pat_db_runtime.iter_signal_names())
+                uut_signals = set(uut_db.iter_signal_names())
+                dupes = sorted(pat_signals.intersection(uut_signals))
+            except Exception:
+                dupes = []
+
+            if dupes:
+                show = ", ".join(dupes[:10])
+                more = "" if len(dupes) <= 10 else f" (+{len(dupes) - 10} more)"
+                print("ERROR: Duplicate signal(s) found in both UUT and PAT DBCs. This run would abort.")
+                print(f"  Examples: {show}{more}")
+                suite_ok = False
+                hard_fail = True
+                # Skip deeper per-line checks; fix duplicates first.
+                continue
+
+        pat_support_active = (not suppress_pat) and (pat_db_runtime is not None)
+        ok = run_preflight(
+            lines,
+            uut_db=uut_db,
+            pat_db_runtime=pat_db_runtime,
+            pat_db_for_check=pat_db_for_check,
+            uut_dbc_name=uut_dbc_name,
+            pat_dbc_name=pat_dbc_name,
+            pat_support_active=pat_support_active,
+            suite=True,
+        )
+        if not ok:
+            suite_ok = False
+
+    print("\n" + "=" * 80)
+    if suite_ok:
+        print("Suite preflight: OK -> starting execution")
+        print("=" * 80)
+        return True
+
+    print("Suite preflight: FAILED -> fix the issues above before running")
+    print("=" * 80)
+
+    # Some issues are not 'preflight-mode controllable' (e.g. missing files/DBCs).
+    # If we hit those, we cannot continue even in warn mode.
+    if hard_fail:
+        print("Suite preflight detected configuration errors that prevent running -> aborting.")
+        return False
+
+    # In warn mode, suite_preflight is informational only for signal/step issues.
+    if mode == "warn":
+        print("Preflight mode is 'warn' -> continuing despite suite issues.")
+        return True
+
+    return False

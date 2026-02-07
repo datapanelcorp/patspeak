@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import os
 import sys
+import re
 from typing import Dict, Optional
 
 
@@ -151,3 +152,33 @@ def colorize_status_line(line: str) -> str:
     if "TEST:" in line:
         return line.replace("TEST:", style("TEST:", fg="cyan", bold=True), 1)
     return line
+
+
+# -----------------
+# Path/name helpers
+# -----------------
+
+def safe_test_id(test_file: str) -> str:
+    """Return a filesystem-safe identifier for *test_file*.
+
+    We keep the filename + folder context, but replace path separators with
+    double-underscores so logs won't try to create nested directories.
+
+    Examples:
+      "RESET.pat" -> "RESET.pat"
+      "43019\\43019-1-INPUT-420MA.pat" -> "43019__43019-1-INPUT-420MA.pat"
+      "43019/43019-1-INPUT-420MA.pat"   -> "43019__43019-1-INPUT-420MA.pat"
+    """
+    parts = [p for p in re.split(r"[\\/]+", str(test_file).strip()) if p]
+    return "__".join(parts) if parts else "unknown_test"
+
+
+def make_log_path(log_dir: str, unit_name: str, test_file: str) -> str:
+    """Build a log file path for a given unit + test."""
+    safe_id = safe_test_id(test_file)
+    return os.path.join(str(log_dir), f"{unit_name}_{safe_id}.log")
+
+
+def make_csv_path(data_dir: str, unit_name: str) -> str:
+    """Build the CSV output path for a unit."""
+    return os.path.join(str(data_dir), f"{unit_name}.csv")

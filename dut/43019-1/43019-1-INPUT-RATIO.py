@@ -1,4 +1,4 @@
-MaxVolts = 12
+MaxVolts = 14.5
 
 PortIndex = 0
 ModeIndex = 0

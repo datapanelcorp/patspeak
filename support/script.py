@@ -5,9 +5,7 @@ import os
 from datetime import datetime
 import support.globals as globals
 from datetime import timedelta
-from support.console import colorize_status_line
-
-
+from support.console import colorize_status_line, make_log_path, make_csv_path
 def SaveData():
 
     print("Writing Data Collected.")
@@ -48,7 +46,7 @@ def SaveData():
                 # f.write(str(FullValue) + "\n")
                 # f.close()
             
-    datafile = globals.DataPath + str(globals.UnitName) + ".csv"
+    datafile = make_csv_path(globals.DataPath, str(globals.UnitName))
     f = open(datafile, 'a')
     f.write(globals.AllCollectedData)
     #f = open(datafile, 'w')
@@ -66,7 +64,7 @@ def ProcessScript():
         time_delta = tracker_time - globals.tracker_last_time
     globals.tracker_last_time = tracker_time
     
-    logfile = globals.LogPath + str(globals.UnitName) + "_" + str(globals.TestFile) + ".log"
+    logfile = make_log_path(globals.LogPath, str(globals.UnitName), str(globals.TestFile))
     #logfile = globals.LogPath + globals.TestFile + ".log"
     print_test = 0
     
@@ -93,12 +91,16 @@ def ProcessScript():
         f = open(logfile, 'w')
         f.write(globals.UUT_TestLog)
         f.close()        
-        globals.finished = 1
+        try:
+            globals.test_file.close()
+        except Exception:
+            pass
+        globals.test_done = 1
         #playsound(globals.SoundPass)
         #TODO: prompt for another and start over
         #yn = input("Do you want to test another unit? y/n")
         #if(yn != "y"):
-        quit()
+        return
         
     if(globals.TestLine.startswith("PAUSE")):
         the_prompt = globals.TestLine.split("-")

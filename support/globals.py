@@ -8,8 +8,8 @@ from support.can_db import CanDb
 from support.preflight import run_preflight
 
 
-def initialize(): 
-    global finished, TestStep, TestPhase, TestLine, PAT_Fdbk, UUT_Fdbk, pat_db, uut_db, test_file, TotalTime, StartTime, FailCount
+def initialize(*, run_preflight_checks: bool = True): 
+    global finished, test_done, TestStep, TestPhase, TestLine, PAT_Fdbk, UUT_Fdbk, pat_db, uut_db, test_file, TotalTime, StartTime, FailCount
     global PassTime, tracker_last_time, StepTime, UUT_Results, UUT_TestLog
     global WaitTime, WaitDone, SoundStart, SoundFail, SoundPass, TimeStampFormat, UnitName, HeaderAdded
     global MeterData, UUTData, TestFile, DataLogTag, DataPath, LogPath, CAN_1, CAN_2, Verbose, AllCollectedData, SuppressPatSupport
@@ -29,6 +29,7 @@ def initialize():
     TestPhase = 0
     TestLine = ""
     finished = 0
+    test_done = 0
     PAT_Fdbk = { }
     UUT_Fdbk = { }
     UUT_Results = { }
@@ -48,9 +49,13 @@ def initialize():
     
     UUT_TestLog = "Started on: " + str(datetime.today().strftime(TimeStampFormat)) + "\n"
     
-    DBCPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","dbc/"))
-    DataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","dut/"))
-    LogPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","dut/"))
+    DBCPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "dbc"))
+    DataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "dut"))
+    LogPath = DataPath
+
+    # Ensure output directories exist
+    os.makedirs(DataPath, exist_ok=True)
+    os.makedirs(DBCPath, exist_ok=True)
     
     SoundStart = os.path.join(os.path.dirname(__file__), "..", "..", "startup.wav")
     SoundFail = os.path.join(os.path.dirname(__file__), "..", "..", "fail.wav")
@@ -137,22 +142,22 @@ def initialize():
             globals.UUT_Fdbk[s.name] = 0
             if(globals.Verbose == 1):
                 print(message.name, s.name)
-
     # -----------------
     # Preflight checks
     # -----------------
-    pat_support_active = (SuppressPatSupport == 'False') and (pat_db is not None)
-    ok = run_preflight(
-        Lines,
-        uut_db=uut_db,
-        pat_db_runtime=pat_db,
-        pat_db_for_check=pat_db_for_check,
-        uut_dbc_name=uut_dbc_name,
-        pat_dbc_name=pat_dbc_name,
-        pat_support_active=pat_support_active,
-    )
-    if not ok:
-        quit()
+    if run_preflight_checks:
+        pat_support_active = (SuppressPatSupport == 'False') and (pat_db is not None)
+        ok = run_preflight(
+            Lines,
+            uut_db=uut_db,
+            pat_db_runtime=pat_db,
+            pat_db_for_check=pat_db_for_check,
+            uut_dbc_name=uut_dbc_name,
+            pat_dbc_name=pat_dbc_name,
+            pat_support_active=pat_support_active,
+        )
+        if not ok:
+            quit()
 
     #TODO: check test commands are not
     

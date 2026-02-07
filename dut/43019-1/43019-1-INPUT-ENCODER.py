@@ -34,7 +34,7 @@ def WriteEncoderTest(outstr, TheChannel, StartValue):
 
     outstr += "#-----setup 39009-----\n"
     outstr += "#configure as Output Digital ON/OFF\n"
-    outstr += "Command = 82, MODE1 = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5\n"
+    outstr += "Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5\n"
     outstr += "Command = 83, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = " + PortMode + ", MODE3B = " + PortMode + ", MODE4A = " + PortMode + ", MODE4B = " + PortMode + ", MODE5A = 0, MODE5B = 0 : NULL : WAIT = 0.5\n"
     outstr += "Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL\n"
     outstr += "\n"
@@ -57,9 +57,9 @@ def WriteEncoderTest(outstr, TheChannel, StartValue):
     outstr += "Command = 0, " + Reset + " = 0, " + Enable + " = 0 : NULL\n"
     outstr += "\n"
 
-    outstr += "Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
+    outstr += "Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
     outstr += "#clear multiplex\n"
-    outstr += "Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
+    outstr += "Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
 
     outstr += "#switch in test supply\n"
     outstr += "J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2\n"
