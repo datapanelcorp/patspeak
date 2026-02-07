@@ -24,11 +24,17 @@ def test_discover_tests_file_and_directory(monkeypatch, tmp_path):
     #   <tmp>/dut/RESET.pat
     #   <tmp>/dut/43019/a.pat
     #   <tmp>/dut/43019/b.PAT
+    #   <tmp>/dut/43019/pat_start.pat        (suite hook)
+    #   <tmp>/dut/43019/pat_transition.pat   (suite hook)
+    #   <tmp>/dut/43019/pat_end.pat          (suite hook)
     dut_root = tmp_path / "dut"
     _write(dut_root / "RESET.pat", "UUT_DBC = foo.dbc\nEND\n")
 
     _write(dut_root / "43019" / "b.PAT", "UUT_DBC = foo.dbc\nEND\n")
     _write(dut_root / "43019" / "a.pat", "UUT_DBC = foo.dbc\nEND\n")
+    _write(dut_root / "43019" / "pat_start.pat", "UUT_DBC = foo.dbc\nEND\n")
+    _write(dut_root / "43019" / "pat_transition.pat", "UUT_DBC = foo.dbc\nEND\n")
+    _write(dut_root / "43019" / "pat_end.pat", "UUT_DBC = foo.dbc\nEND\n")
 
     monkeypatch.setattr(pat, "_dut_root", lambda: str(dut_root))
 
@@ -39,9 +45,15 @@ def test_discover_tests_file_and_directory(monkeypatch, tmp_path):
     # Without extension.
     assert pat.discover_tests("RESET") == ["RESET.pat"]
 
-    # Directory selector: should return all .pat files in that folder, sorted case-insensitively.
+    # Directory selector: should return all .pat files in that folder,
+    # sorted case-insensitively, excluding reserved hook scripts.
     out = pat.discover_tests("43019")
     assert out == [os.path.join("43019", "a.pat"), os.path.join("43019", "b.PAT")]
+
+    # But hook files are still runnable when explicitly selected.
+    assert pat.discover_tests(os.path.join("43019", "pat_transition.pat")) == [
+        os.path.join("43019", "pat_transition.pat")
+    ]
 
 
 @pytest.mark.parametrize(

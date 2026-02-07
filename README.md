@@ -96,6 +96,29 @@ Flags:
 
 - `-v` enables verbose prints (signal enumeration + echoes comment lines)
 
+### Optional hook scripts for suites
+
+When running a *folder* (suite) of tests, you can place optional `.pat` hook
+scripts alongside the other tests to automate common setup/teardown actions
+(e.g. cycling a relay like `RESET.pat`).
+
+Hook filenames (case-insensitive):
+
+- `pat_start.pat` — run once, before the first test in the folder
+- `pat_transition.pat` — run before **and** after every test
+  - consecutive duplicates are automatically skipped, so between two tests you
+    only get one transition run
+- `pat_end.pat` — run once, after the last test in the folder
+
+Notes:
+
+- Hook scripts are **not** treated as normal tests when you run a folder (they
+  won't show up in the discovered test list).
+- You *can* still run a hook directly by selecting it explicitly (same as any
+  other `.pat` file).
+- If a hook file is missing, nothing changes — the suite runs exactly as it did
+  before.
+
 ### What you’ll be prompted for
 If your `.pat` file **does not** include `UUT_DATANAME = ...`, the runner will prompt:
 
