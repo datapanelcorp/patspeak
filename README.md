@@ -30,18 +30,47 @@ This repo contains:
 
 ## Setup requirements
 
-### 1) Python dependencies
-Run:
+### 1) Python dependencies (recommended: venv)
+PATSpeak is typically run directly from the repo root (it is not installed as a package).
+Using a virtual environment keeps dependencies isolated.
+
+#### Linux (bash/zsh)
+
+```bash
+./scripts/setup_venv.sh
+source .venv/bin/activate
+python pat.py RESET.pat -v
+```
+
+#### Windows (PowerShell)
+
+```powershell
+.\scripts\setup_venv.ps1
+# If activation is blocked:
+#   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\.venv\Scripts\Activate.ps1
+python pat.py RESET.pat -v
+```
+
+#### Dev / test dependencies (optional)
+
+- Linux: `./scripts/setup_venv.sh --dev`
+- Windows: `.\scripts\setup_venv.ps1 -Dev`
+
+#### Without activating (either OS)
+You can always call the venv Python directly:
+
+- Linux: `./.venv/bin/python pat.py RESET.pat -v`
+- Windows: `.\.venv\Scripts\python.exe pat.py RESET.pat -v`
+
+#### Legacy (no venv)
+If you intentionally want to install into your current Python environment:
 
 ```bash
 python prerequisite_setup.py
 ```
 
-This installs:
-
-- `python-can` (CAN interface layer)
-- `cantools` (DBC parsing/encoding/decoding)
-- `keyboard` (legacy dependency; not required for core execution today)
+This installs the runtime deps listed in `requirements.txt` (`python-can`, `cantools`, `colorama`, `keyboard`).
 
 ### 2) CAN hardware + drivers
 Vendor CAN drivers are only required if you're using that vendor's hardware:

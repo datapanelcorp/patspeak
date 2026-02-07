@@ -1,0 +1,9 @@
+# Runtime dependencies for PATSpeak.
+#
+# Keep this list small and conservative. Most other dependencies are pulled
+# transitively (e.g. by cantools).
+
+python-can
+cantools
+colorama
+keyboard

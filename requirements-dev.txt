@@ -1,0 +1,5 @@
+# Development / test dependencies.
+#
+# Install these only if you're running unit tests or doing development work.
+
+pytest
