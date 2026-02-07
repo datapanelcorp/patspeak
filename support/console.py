@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import os
 import sys
+import re
 from typing import Dict, Optional
 
 
@@ -151,3 +152,100 @@ def colorize_status_line(line: str) -> str:
     if "TEST:" in line:
         return line.replace("TEST:", style("TEST:", fg="cyan", bold=True), 1)
     return line
+
+
+
+# -----------------
+# Path/name helpers
+# -----------------
+
+def _safe_filename_component(text: str, *, default: str = "") -> str:
+    """Return *text* made safe for use in a filename.
+
+    - Removes/normalizes path separators
+    - Replaces Windows-forbidden characters with "_"
+    - Collapses repeated "_"
+    """
+
+    t = str(text or "").strip()
+    if not t:
+        return default
+
+    # Never allow directory components inside the "name".
+    t = re.sub(r"[\\/]+", "_", t)
+
+    # Make it robust for absolute Windows paths too (e.g. "C:\\dut\\43019\\test.pat").
+    # Windows disallows characters like ':' in filenames.
+    t = re.sub(r'[<>:"/\\|?*]', "_", t)
+
+    # Keep filenames readable.
+    t = re.sub(r"_+", "_", t)
+    t = t.strip(" ._")
+
+    return t or default
+
+
+def safe_test_id(test_file: str) -> str:
+    """Return a filesystem-safe identifier for *test_file*.
+
+    Since outputs are now written to a per-test-folder `results/` directory
+    (next to the `.pat` file), we no longer need to embed the full relative
+    path into the log filename.
+
+    We therefore use the **test file stem** (basename without extension).
+
+    Examples:
+      "RESET.pat" -> "RESET"
+      "43019/43019-1-INPUT-420MA.pat" -> "43019-1-INPUT-420MA"
+      "C:\\dut\\43019\\foo.pat" -> "foo"
+    """
+
+    base = os.path.basename(str(test_file or "").strip())
+    stem = os.path.splitext(base)[0] if base else ""
+    return _safe_filename_component(stem, default="unknown_test")
+
+
+def make_log_path(log_dir: str, unit_name: str, test_file: str, run_stamp: Optional[str] = None) -> str:
+    """Build a log file path for a given unit + test.
+
+    Naming goals:
+      - clean and readable
+      - unique per UnitName when you test multiple units
+      - avoid duplicated names when UnitName matches the test name
+
+    By default, PATSpeak writes a single log per (UnitName, TestFile) into the
+    per-test results folder.
+
+    If *run_stamp* is provided, it will be appended to the filename to prevent
+    overwriting outputs on reruns.
+
+    Examples:
+      UnitName="SN123"  Test="43019-1-INPUT-420MA.pat" -> "SN123_43019-1-INPUT-420MA.log"
+      UnitName="43019-1-INPUT-420MA" Test=".../43019-1-INPUT-420MA.pat" -> "43019-1-INPUT-420MA.log"
+      (with run_stamp="20260206-201122-123") -> "..._20260206-201122-123.log"
+    """
+
+    safe_unit = _safe_filename_component(unit_name, default="")
+    safe_test = safe_test_id(test_file)
+
+    # De-dup if the user uses UnitName as the test name.
+    if safe_unit and safe_unit.lower() != safe_test.lower():
+        base = f"{safe_unit}_{safe_test}"
+    else:
+        base = f"{safe_test}"
+
+    safe_stamp = _safe_filename_component(run_stamp, default="") if run_stamp else ""
+    filename = f"{base}_{safe_stamp}.log" if safe_stamp else f"{base}.log"
+
+    return os.path.join(str(log_dir), filename)
+
+
+def make_csv_path(data_dir: str, unit_name: str, run_stamp: Optional[str] = None) -> str:
+    """Build the CSV output path for a unit.
+
+    If *run_stamp* is provided, it will be appended to avoid overwriting on reruns.
+    """
+    safe_unit = _safe_filename_component(unit_name, default="untitled")
+    safe_stamp = _safe_filename_component(run_stamp, default="") if run_stamp else ""
+    filename = f"{safe_unit}_{safe_stamp}.csv" if safe_stamp else f"{safe_unit}.csv"
+    return os.path.join(str(data_dir), filename)

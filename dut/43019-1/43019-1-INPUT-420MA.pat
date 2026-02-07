@@ -16,7 +16,7 @@ NULL : Input_4A = 0 | 0.1 | 0.1
 NULL : Input_4B = 0 | 0.1 | 0.1
 #-----setup 39009-----
 #configure as Output Digital ON/OFF
-Command = 82, MODE1 = 0, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 3, MODE1B = 3, MODE2A = 3, MODE2B = 3, MODE3A = 3, MODE3B = 3, MODE4A = 3, MODE4B = 3 : NULL : WAIT = 0.5
 Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
 Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
@@ -75,12 +75,12 @@ J1_03 = 0 : NULL : WAIT = 0.2
 J1_04 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Port2B from 5000 to 20000 in 5000 increments
+#Sweep of Port_2B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
 NULL : MeterAmps = 0.005 | 0.0001 | 0.5
 #test feedback
-NULL : Port2B = 5.0 | 0.155 | 0.1
+NULL : Port_2B = 5.0 | 0.155 | 0.1
 
 #Finished with port
 #switch out input
@@ -196,12 +196,12 @@ J1_03 = 0 : NULL : WAIT = 0.2
 J1_04 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Port2B from 5000 to 20000 in 5000 increments
+#Sweep of Port_2B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
 NULL : MeterAmps = 0.01 | 0.0001 | 0.5
 #test feedback
-NULL : Port2B = 10.0 | 0.155 | 0.1
+NULL : Port_2B = 10.0 | 0.155 | 0.1
 
 #Finished with port
 #switch out input
@@ -317,12 +317,12 @@ J1_03 = 0 : NULL : WAIT = 0.2
 J1_04 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Port2B from 5000 to 20000 in 5000 increments
+#Sweep of Port_2B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
 NULL : MeterAmps = 0.015 | 0.0001 | 0.5
 #test feedback
-NULL : Port2B = 15.0 | 0.155 | 0.1
+NULL : Port_2B = 15.0 | 0.155 | 0.1
 
 #Finished with port
 #switch out input
@@ -438,12 +438,12 @@ J1_03 = 0 : NULL : WAIT = 0.2
 J1_04 = 1 : NULL : WAIT = 0.1
 
 
-#Sweep of Port2B from 5000 to 20000 in 5000 increments
+#Sweep of Port_2B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
 NULL : MeterAmps = 0.02 | 0.0001 | 0.5
 #test feedback
-NULL : Port2B = 20.0 | 0.155 | 0.1
+NULL : Port_2B = 20.0 | 0.155 | 0.1
 
 #Finished with port
 #switch out input

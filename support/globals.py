@@ -8,10 +8,10 @@ from support.can_db import CanDb
 from support.preflight import run_preflight
 
 
-def initialize(): 
-    global finished, TestStep, TestPhase, TestLine, PAT_Fdbk, UUT_Fdbk, pat_db, uut_db, test_file, TotalTime, StartTime, FailCount
+def initialize(*, run_preflight_checks: bool = True): 
+    global finished, test_done, TestStep, TestPhase, TestLine, PAT_Fdbk, UUT_Fdbk, pat_db, uut_db, test_file, TotalTime, StartTime, FailCount
     global PassTime, tracker_last_time, StepTime, UUT_Results, UUT_TestLog
-    global WaitTime, WaitDone, SoundStart, SoundFail, SoundPass, TimeStampFormat, UnitName, HeaderAdded
+    global WaitTime, WaitDone, SoundStart, SoundFail, SoundPass, TimeStampFormat, RunStamp, UnitName, HeaderAdded
     global MeterData, UUTData, TestFile, DataLogTag, DataPath, LogPath, CAN_1, CAN_2, Verbose, AllCollectedData, SuppressPatSupport
     global CAN_INTERFACE, CAN_CHANNELS, CAN_BITRATE
 
@@ -29,6 +29,7 @@ def initialize():
     TestPhase = 0
     TestLine = ""
     finished = 0
+    test_done = 0
     PAT_Fdbk = { }
     UUT_Fdbk = { }
     UUT_Results = { }
@@ -45,48 +46,87 @@ def initialize():
     CAN_BITRATE = 250000
     
     TimeStampFormat = '%Y-%m-%d-%H:%M:%S'
+
+    # A filesystem-safe run identifier used to prevent output overwrites.
+    # We include millisecond precision so rapid reruns still get unique names.
+    _now = datetime.now()
+    RunStamp = _now.strftime('%Y%m%d-%H%M%S') + f"-{_now.microsecond // 1000:03d}"
     
     UUT_TestLog = "Started on: " + str(datetime.today().strftime(TimeStampFormat)) + "\n"
     
-    DBCPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","dbc/"))
-    DataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","dut/"))
-    LogPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","dut/"))
+    # Repo paths
+    DBCPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "dbc"))
+
+    # Where .pat scripts live.
+    # NOTE: historically DataPath was also used as the output folder. We now
+    # keep DataPath as the DUT root (script root), and place outputs in a
+    # per-test "results" subfolder next to the .pat file.
+    DataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "dut"))
+
+    # Compute output directory based on the current test file location.
+    # Example:
+    #   dut/43019/example.pat  -> dut/43019/results/
+    #   dut/RESET.pat          -> dut/results/
+    _abs_test = TestFile
+    if not os.path.isabs(str(_abs_test)):
+        _abs_test = os.path.join(DataPath, str(_abs_test))
+    _abs_test = os.path.abspath(str(_abs_test))
+    _test_dir = os.path.dirname(_abs_test)
+
+    # "results" is a common convention in test automation repos.
+    LogPath = os.path.join(_test_dir, "results")
+
+    # Ensure required directories exist
+    os.makedirs(DataPath, exist_ok=True)
+    os.makedirs(DBCPath, exist_ok=True)
+    os.makedirs(LogPath, exist_ok=True)
     
     SoundStart = os.path.join(os.path.dirname(__file__), "..", "..", "startup.wav")
     SoundFail = os.path.join(os.path.dirname(__file__), "..", "..", "fail.wav")
     SoundPass = os.path.join(os.path.dirname(__file__), "..", "..", "tada.wav")  
 
-    #find UUT DBC file name
-    test_file = open(os.path.join(DataPath, TestFile), 'r')
+    # find UUT DBC file name
+    # (open via absolute path so outputs can live elsewhere)
+    test_file = open(_abs_test, 'r', encoding='utf-8', errors='replace')
     Lines = test_file.readlines()
     test_file.seek(0)
-    
-    UUTDBCName = ""
+
+    uut_dbc_name = ""
     for line in Lines:
-        if(line.startswith("UUT_DBC")):
-            UUTDBCName = line.split("=")
-            
-    TempCheck = ""
+        s = line.strip()
+        if s.startswith("UUT_DBC"):
+            if "=" not in s:
+                print("Malformed UUT_DBC line (missing '='):\n  " + s)
+                quit()
+            uut_dbc_name = s.split("=", 1)[1].strip().strip('"').strip("'")
+            break
+
+    tmp_dataname = ""
     for line in Lines:
-        if(line.startswith("UUT_DATANAME")):
-            TempCheck = line.split("=")
-    
-    UnitName = ""
-    if(TempCheck != ""):
-        UnitName = TempCheck[1].strip()
-        
-    if(UUTDBCName == ""):
+        s = line.strip()
+        if s.startswith("UUT_DATANAME"):
+            if "=" not in s:
+                print("Malformed UUT_DATANAME line (missing '='):\n  " + s)
+                quit()
+            tmp_dataname = s.split("=", 1)[1].strip().strip('"').strip("'")
+            break
+
+    UnitName = tmp_dataname if tmp_dataname else ""
+
+    if uut_dbc_name == "":
         print("No DBC file specified, add 'UUT_DBC = filename.dbc' to script")
         quit()
 
     for line in Lines:
-        if(line.startswith("SUPPRESS_PAT_SUPPORT")):
-            SuppressPatSupport = line.split("=")
-            SuppressPatSupport = SuppressPatSupport[1].strip()
+        s = line.strip()
+        if s.startswith("SUPPRESS_PAT_SUPPORT"):
+            if "=" not in s:
+                print("Malformed SUPPRESS_PAT_SUPPORT line (missing '='):\n  " + s)
+                quit()
+            SuppressPatSupport = s.split("=", 1)[1].strip().strip('"').strip("'")
             break
                     
     # read uut
-    uut_dbc_name = UUTDBCName[1].strip()
     filename = os.path.join(DBCPath, uut_dbc_name)
     print("Loading", uut_dbc_name + "...")
     uut_db = CanDb(dbc_filename=filename)
@@ -137,22 +177,22 @@ def initialize():
             globals.UUT_Fdbk[s.name] = 0
             if(globals.Verbose == 1):
                 print(message.name, s.name)
-
     # -----------------
     # Preflight checks
     # -----------------
-    pat_support_active = (SuppressPatSupport == 'False') and (pat_db is not None)
-    ok = run_preflight(
-        Lines,
-        uut_db=uut_db,
-        pat_db_runtime=pat_db,
-        pat_db_for_check=pat_db_for_check,
-        uut_dbc_name=uut_dbc_name,
-        pat_dbc_name=pat_dbc_name,
-        pat_support_active=pat_support_active,
-    )
-    if not ok:
-        quit()
+    if run_preflight_checks:
+        pat_support_active = (SuppressPatSupport == 'False') and (pat_db is not None)
+        ok = run_preflight(
+            Lines,
+            uut_db=uut_db,
+            pat_db_runtime=pat_db,
+            pat_db_for_check=pat_db_for_check,
+            uut_dbc_name=uut_dbc_name,
+            pat_dbc_name=pat_dbc_name,
+            pat_support_active=pat_support_active,
+        )
+        if not ok:
+            quit()
 
     #TODO: check test commands are not
     
