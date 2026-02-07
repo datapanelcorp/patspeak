@@ -103,6 +103,12 @@ If your `.pat` file **does not** include `UUT_DATANAME = ...`, the runner will p
 
 That name becomes the **UnitName** used for log/CSV output.
 
+### Stopping a run early
+
+- **Esc** (Windows console) prompts to stop the current test.
+- **Ctrl+C** requests an immediate shutdown (stops CAN threads + exits cleanly).
+  - If something is wedged in a driver call, pressing **Ctrl+C a second time** forces exit.
+
 ### Outputs generated
 PATSpeak writes into `dut/` (by default):
 
