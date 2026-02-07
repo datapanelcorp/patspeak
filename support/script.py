@@ -76,12 +76,20 @@ def ProcessScript():
     print_test = 0
     
     StepStr = str(globals.TestStep).zfill(5) + ' ' #* len(str(globals.TestStep))
+
+    # Keep a copy of the raw line for debugging (before whitespace stripping).
+    raw_line = None
     if(globals.TestLine == ""):
         globals.TestLine = globals.test_file.readline().rstrip()
+        raw_line = globals.TestLine
         if(globals.TestStep == 0):
             globals.StartTime = time.time()
         globals.UUT_TestLog += StepStr + globals.TestLine + "\n" 
         print_test = 1 #only print om new lines
+
+        # Super-verbose: echo every .pat line as it is consumed.
+        if(getattr(globals, "Verbose", 0) >= 2):
+            print(StepStr + str(raw_line))
 
     if(globals.TestLine == "END"): 
         globals.UUT_TestLog += "Fail count: " + str(globals.FailCount) + "\n"
@@ -129,7 +137,7 @@ def ProcessScript():
 
     #TODO: verify format
     if((globals.TestLine.startswith("#")) or (globals.TestLine=="")):
-        if(globals.Verbose == 1):
+        if(getattr(globals, "Verbose", 0) >= 1):
             if(globals.TestLine.startswith("#")):
                 print(StepStr + globals.TestLine)
         globals.TestLine = ""
@@ -147,18 +155,32 @@ def ProcessScript():
         Hold = 0
         Wait = 0
 
+        # Track which timing flags were explicitly specified on the line.
+        timeout_specified = False
+        hold_specified = False
+        wait_specified = False
+
+        # Super-verbose helper: only emit debug once per step (when we first
+        # read the line) to avoid spamming during WAIT/HOLD polling.
+        def _dbg(msg: str) -> None:
+            if(getattr(globals, "Verbose", 0) >= 2 and print_test):
+                print(StepStr + msg)
+
         if(len(IO) == 3):
             Flags = IO[2].split(",")
             for o in Flags:
                 s = o.split("=")
                 if(s[0] == "TIMEOUT"):
                     Timeout = float(s[1])
+                    timeout_specified = True
                 if(s[0] == "HOLD"):
                     Hold = float(s[1])
+                    hold_specified = True
                     Timeout = 0
                 if(s[0] == "WAIT"):
                     if(globals.WaitDone == 0):
                         Wait = float(s[1])
+                    wait_specified = True
                     Timeout = 0
                 if(s[0] == "MESSAGE"):
                     input(s[1] + "\nPress Enter to continue...")
@@ -166,6 +188,15 @@ def ProcessScript():
                 if(s[0] == "TAG"):
                     globals.DataLogTag = s[1]
                     Timeout = 0
+
+        # Super-verbose: show per-step timing flags.
+        if(print_test and getattr(globals, "Verbose", 0) >= 2):
+            if(wait_specified):
+                _dbg(f"FLAG WAIT={Wait}")
+            if(hold_specified):
+                _dbg(f"FLAG HOLD={Hold}")
+            if(timeout_specified):
+                _dbg(f"FLAG TIMEOUT={Timeout}")
 
         TestToStr = ""
         SignalName = ""
@@ -194,6 +225,9 @@ def ProcessScript():
                         print("signal not found!", SignalName)
                         RealValue = 0
 
+                    # Super-verbose: show the logged value.
+                    _dbg(f"DATALOG {SignalName}: {RealValue}")
+
                     globals.UUT_Results[
                         str(globals.TestStep) + "-" + SignalName + "-" + globals.DataLogTag
                     ] = RealValue
@@ -205,16 +239,30 @@ def ProcessScript():
                         v = None
 
                     if v is not None:
+                        pat_set = False
+                        uut_set = False
+
                         # PAT outputs (if enabled)
                         if globals.SuppressPatSupport == 'False' and globals.pat_db is not None:
+                            prev = globals.pat_db.get_tx_signal(SignalName)
                             if globals.pat_db.set_tx_signal(SignalName, v):
+                                pat_set = True
                                 globals.PAT_Fdbk[SignalName] = v
                                 RealValue = v
+                                _dbg(f"SET PAT  {SignalName}: {prev} -> {v}")
 
                         # UUT outputs
+                        prev = globals.uut_db.get_tx_signal(SignalName)
                         if globals.uut_db.set_tx_signal(SignalName, v):
+                            uut_set = True
                             globals.UUT_Fdbk[SignalName] = v
                             RealValue = v
+                            _dbg(f"SET UUT  {SignalName}: {prev} -> {v}")
+
+                        # If the script references an output that isn't in any TX message,
+                        # call it out loudly in super-verbose mode.
+                        if not pat_set and not uut_set:
+                            _dbg(f"SET ???  {SignalName}: {v} (signal not found in TX)")
         
         if(Wait):
             globals.WaitTime += time_delta

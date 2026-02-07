@@ -29,6 +29,31 @@ import support.globals as globals
 from support.console import make_log_path, style
 
 
+# -----------------
+# Optional suite hooks
+# -----------------
+#
+# Hook scripts allow users to place small .pat programs next to their normal
+# DUT tests and have them run automatically.
+#
+# Reserved filenames (case-insensitive):
+#   - pat_start.pat
+#   - pat_transition.pat
+#   - pat_end.pat
+#
+# When present next to a test script, the runner will execute:
+#   1) pat_start.pat         (once, before the first test in that folder)
+#   2) pat_transition.pat    (before and after each test; consecutive duplicates are skipped)
+#   3) pat_end.pat           (once, after the last test in that folder)
+#
+# Hook scripts are *not* included in directory discovery output.
+
+HOOK_START = "pat_start.pat"
+HOOK_TRANSITION = "pat_transition.pat"
+HOOK_END = "pat_end.pat"
+_HOOK_BASENAMES = {HOOK_START.lower(), HOOK_TRANSITION.lower(), HOOK_END.lower()}
+
+
 def _write_interrupt_log(reason: str) -> None:
     """Best-effort: persist whatever log we have so far.
 
@@ -198,6 +223,39 @@ def _abs_test_path(test_ref: str) -> str:
     return os.path.join(_dut_root(), test_ref)
 
 
+def _is_hook_filename(path: str) -> bool:
+    """Return True if `path` looks like a reserved hook script name."""
+    try:
+        base = os.path.basename(str(path)).strip().lower()
+    except Exception:
+        return False
+    return base in _HOOK_BASENAMES
+
+
+def find_hook_next_to(test_ref: str, hook_basename: str) -> str | None:
+    """Return a test reference for a hook file next to `test_ref`, if present.
+
+    The returned reference is suitable for globals.TestFile:
+      - relative to dut/ when the file is under dut/
+      - otherwise an absolute path
+    """
+
+    hook_basename = (hook_basename or "").strip()
+    if not hook_basename:
+        return None
+
+    test_path = _abs_test_path(test_ref)
+    test_dir = os.path.dirname(os.path.abspath(test_path))
+    cand = os.path.join(test_dir, hook_basename)
+    if not os.path.isfile(cand):
+        return None
+
+    dut_root = _dut_root()
+    if _is_under_root(cand, dut_root):
+        return os.path.relpath(cand, dut_root)
+    return os.path.abspath(cand)
+
+
 def discover_tests(selector: str) -> list[str]:
     """Expand a selector into one or more .pat tests.
 
@@ -216,6 +274,11 @@ def discover_tests(selector: str) -> list[str]:
     if os.path.isdir(abs_candidate):
         pats = []
         for name in os.listdir(abs_candidate):
+            # Hook scripts are special and should not be treated as normal
+            # tests when running a whole folder.
+            if _is_hook_filename(name):
+                continue
+
             if name.lower().endswith(".pat"):
                 pats.append(os.path.join(abs_candidate, name))
 
@@ -273,36 +336,76 @@ def test_uses_pat_support(test_ref: str) -> bool:
     return True
 
 
-def _parse_cli(argv: list[str]) -> tuple[str, bool]:
-    """Return (selector, verbose)."""
+def _parse_cli(argv: list[str]) -> tuple[str, int]:
+    """Return (selector, verbosity_level).
+
+    Verbosity levels:
+      0 = default
+      1 = verbose (existing behaviour)
+      2 = super-verbose (trace signal switching + CAN TX diffs)
+
+    Supported flags:
+      -v, --verbose
+      -vv, --super-verbose
+    """
+
     selector = ""
-    verbose = False
+    verbosity = 0
 
     for a in argv:
-        a = a.strip()
-        if a in ("-v", "--verbose"):
-            verbose = True
+        a = (a or "").strip()
+
+        # Most common forms.
+        if a in ("-vv", "--vv", "--super-verbose"):
+            verbosity = max(verbosity, 2)
             continue
+        if a in ("-v", "--verbose"):
+            verbosity = max(verbosity, 1)
+            continue
+
+        # Common "stacked" short flag style: -vvv, -vvvv, etc.
+        if a.startswith("-") and len(a) > 2 and set(a[1:]) == {"v"}:
+            verbosity = max(verbosity, min(2, len(a) - 1))
+            continue
+
+        # ignore unknown flags (for now)
         if a.startswith("-"):
-            # ignore unknown flags (for now)
             continue
         if not selector:
             selector = a
 
-    return selector, verbose
+    return selector, verbosity
 
 
-def _run_one_test(*, test_ref: str, suite_unit_name: dict, run_preflight_checks: bool = True) -> bool:
-    """Run a single .pat test. Returns True if completed, False if aborted."""
+def _run_one_test(
+    *,
+    test_ref: str,
+    suite_unit_name: dict,
+    run_preflight_checks: bool = True,
+    kind: str = "test",
+) -> bool:
+    """Run a single .pat script (test or hook).
+
+    Returns True if the script completed, False if it was aborted early (Esc).
+    """
     globals.TestFile = test_ref
+
+    kind_norm = (kind or "test").strip().lower()
 
     # Show a friendly label.
     print("\n" + "=" * 80)
-    print("Running:", test_ref)
+    label = "Running" if kind_norm == "test" else f"Running ({kind_norm})"
+    print(label + ":", test_ref)
     print("=" * 80)
 
     # Re-initialize globals for this test.
     globals.initialize(run_preflight_checks=run_preflight_checks)
+
+    # Hooks are typically used for setup/teardown/relay-cycling.
+    # If the suite already has a UnitName (serial number, etc.), force hooks
+    # to use it so they don't accidentally change output naming.
+    if kind_norm != "test" and suite_unit_name.get("name"):
+        globals.UnitName = str(suite_unit_name["name"])
 
     # Prompt for UnitName only once per suite (unless script sets UUT_DATANAME).
     if globals.UnitName == "":
@@ -361,7 +464,7 @@ def main() -> int:
     interrupted = False
 
     try:
-        selector, verbose = _parse_cli(sys.argv[1:])
+        selector, verbosity = _parse_cli(sys.argv[1:])
         if not selector:
             print("\nNo test specified...\n")
             print("Examples:")
@@ -369,6 +472,7 @@ def main() -> int:
             print('  python pat.py 43019')
             print(r'  python pat.py 43019\43019-1-INPUT-420MA')
             print('  python pat.py "43019\\43019-1-INPUT-420MA.pat" -v')
+            print('  python pat.py "43019\\43019-1-INPUT-420MA.pat" -vv')
             return 2
 
         tests = discover_tests(selector)
@@ -377,19 +481,67 @@ def main() -> int:
             print("Looked under:", _dut_root())
             return 2
 
-        globals.Verbose = 1 if verbose else 0
-        if globals.Verbose:
+        globals.Verbose = int(verbosity)
+        if globals.Verbose >= 2:
+            print("Super Verbose Enabled")
+        elif globals.Verbose >= 1:
             print("Verbose Enabled")
+
+        # Optional per-folder hook scripts (next to the tests).
+        hook_start = find_hook_next_to(tests[0], HOOK_START)
+        hook_end = find_hook_next_to(tests[-1], HOOK_END)
+        transition_hooks: list[str] = []
+        for t in tests:
+            h = find_hook_next_to(t, HOOK_TRANSITION)
+            if h:
+                transition_hooks.append(h)
+
+        # Keep hook refs unique (but preserve first-seen order).
+        def _uniq(items: list[str]) -> list[str]:
+            seen: set[str] = set()
+            out: list[str] = []
+            for it in items:
+                if not it:
+                    continue
+                key = os.path.abspath(_abs_test_path(it)).lower()
+                if key in seen:
+                    continue
+                seen.add(key)
+                out.append(it)
+            return out
+
+        transition_hooks = _uniq(transition_hooks)
 
         suite_run = len(tests) > 1
         if suite_run:
             dbc_root = os.path.abspath(os.path.join(_repo_root(), "dbc"))
-            ok = suite_preflight(tests, dut_root=_dut_root(), dbc_root=dbc_root)
+
+            # Preflight *everything* we might run (tests + hooks), but only
+            # show each script once.
+            preflight_refs: list[str] = []
+            if hook_start:
+                preflight_refs.append(hook_start)
+            preflight_refs.extend(transition_hooks)
+            preflight_refs.extend(tests)
+            if hook_end:
+                preflight_refs.append(hook_end)
+            preflight_refs = _uniq(preflight_refs)
+
+            ok = suite_preflight(preflight_refs, dut_root=_dut_root(), dbc_root=dbc_root)
             if not ok:
                 return 1
 
         # Decide whether we must open channel 1 at startup.
-        need_pat_channel = any(test_uses_pat_support(t) for t in tests)
+        pat_support_refs: list[str] = []
+        if hook_start:
+            pat_support_refs.append(hook_start)
+        pat_support_refs.extend(transition_hooks)
+        pat_support_refs.extend(tests)
+        if hook_end:
+            pat_support_refs.append(hook_end)
+        pat_support_refs = _uniq(pat_support_refs)
+
+        need_pat_channel = any(test_uses_pat_support(t) for t in pat_support_refs)
 
         # Initialize globals using the *first* test so DBCs / signal dicts exist
         # before we start CAN threads.
@@ -424,20 +576,63 @@ def main() -> int:
         # Suite UnitName cache (for scripts that don't specify UUT_DATANAME).
         suite_unit_name: dict = {"name": globals.UnitName or ""}
 
-        # Run the first test we already initialized, then the rest.
-        # Note: _run_one_test() will re-initialize, so include tests[0] too.
+        last_run_abs: str | None = None
+
+        def _run_script(ref: str, kind: str) -> bool:
+            """Run a test/hook by reference, skipping consecutive duplicates."""
+
+            nonlocal last_run_abs
+
+            if not ref:
+                return True
+
+            abs_ref = os.path.abspath(_abs_test_path(ref))
+            if last_run_abs is not None and abs_ref.lower() == last_run_abs.lower():
+                # Common case: transition runs after test N and before test N+1.
+                # If both would execute the same file back-to-back, skip the
+                # second invocation.
+                return True
+
+            ok = _run_one_test(
+                test_ref=ref,
+                suite_unit_name=suite_unit_name,
+                run_preflight_checks=not suite_run,
+                kind=kind,
+            )
+            last_run_abs = abs_ref
+            return ok
+
+        # Start hook (once, before the first test).
+        if hook_start:
+            ok = _run_script(hook_start, "hook-start")
+            if not ok:
+                return 0
+
+        # Run tests (with optional transition hook before/after each).
         for idx, test_ref in enumerate(tests, start=1):
             if globals.finished:
                 break
 
             print(style(f"\n[{idx}/{len(tests)}] ", fg="gray", bold=True) + str(test_ref))
-            ok = _run_one_test(
-                test_ref=test_ref,
-                suite_unit_name=suite_unit_name,
-                run_preflight_checks=not suite_run,
-            )
+
+            transition = find_hook_next_to(test_ref, HOOK_TRANSITION)
+            if transition:
+                ok = _run_script(transition, "hook-transition")
+                if not ok:
+                    break
+
+            ok = _run_script(test_ref, "test")
             if not ok:
                 break
+
+            if transition:
+                ok = _run_script(transition, "hook-transition")
+                if not ok:
+                    break
+
+        # End hook (once, after the last test).
+        if not globals.finished and hook_end:
+            _run_script(hook_end, "hook-end")
 
         return 0
 
