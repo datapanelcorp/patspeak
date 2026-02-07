@@ -189,6 +189,13 @@ def CANThread(i: int) -> None:
     tracker_last_time = 0.0
     tx_accum = 0.0
 
+    # Super-verbose: only print TX frames when they *change*.
+    # This avoids spamming every 10ms, while still showing relay/signal switching.
+    trace_tx = getattr(globals, "Verbose", 0) >= 2 or bool(
+        os.environ.get("PATSPEAK_TRACE_TX", "")
+    )
+    last_tx_payload: Dict[Tuple[int, bool], bytes] = {}
+
     # Tune as needed; original behavior was ~10ms.
     tx_period_s = 0.01
 
@@ -244,6 +251,29 @@ def CANThread(i: int) -> None:
 
                 for f in frames:
                     try:
+                        if trace_tx:
+                            key = (int(f.arbitration_id), bool(f.is_extended_id))
+                            data = bytes(getattr(f, "data", b""))
+                            prev = last_tx_payload.get(key)
+                            if prev != data:
+                                last_tx_payload[key] = data
+                                ext = " EXT" if key[1] else ""
+
+                                # Add a bit of context so the operator can
+                                # correlate switching to a specific .pat line.
+                                step = getattr(globals, "TestStep", None)
+                                step_s = str(step).zfill(5) + " " if isinstance(step, int) else ""
+                                test = os.path.basename(str(getattr(globals, "TestFile", "") or ""))
+                                if test:
+                                    test = f" [{test}]"
+
+                                print(
+                                    step_s
+                                    + f"CAN{channel_number} TX 0x{key[0]:X}{ext} : "
+                                    + " ".join(f"{b:02X}" for b in data)
+                                    + test
+                                )
+
                         out = can.Message(
                             arbitration_id=f.arbitration_id,
                             data=f.data,

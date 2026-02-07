@@ -167,7 +167,7 @@ def initialize(*, run_preflight_checks: bool = True):
         for message in pat_db.messages:
             for s in message.signals:
                 globals.PAT_Fdbk[s.name] = 0
-                if(globals.Verbose == 1):
+                if(getattr(globals, "Verbose", 0) >= 1):
                     print(message.name, s.name)
 
     # init uut
@@ -175,7 +175,7 @@ def initialize(*, run_preflight_checks: bool = True):
     for message in uut_db.messages:
         for s in message.signals:
             globals.UUT_Fdbk[s.name] = 0
-            if(globals.Verbose == 1):
+            if(getattr(globals, "Verbose", 0) >= 1):
                 print(message.name, s.name)
     # -----------------
     # Preflight checks

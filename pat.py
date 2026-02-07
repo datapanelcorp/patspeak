@@ -336,23 +336,45 @@ def test_uses_pat_support(test_ref: str) -> bool:
     return True
 
 
-def _parse_cli(argv: list[str]) -> tuple[str, bool]:
-    """Return (selector, verbose)."""
+def _parse_cli(argv: list[str]) -> tuple[str, int]:
+    """Return (selector, verbosity_level).
+
+    Verbosity levels:
+      0 = default
+      1 = verbose (existing behaviour)
+      2 = super-verbose (trace signal switching + CAN TX diffs)
+
+    Supported flags:
+      -v, --verbose
+      -vv, --super-verbose
+    """
+
     selector = ""
-    verbose = False
+    verbosity = 0
 
     for a in argv:
-        a = a.strip()
-        if a in ("-v", "--verbose"):
-            verbose = True
+        a = (a or "").strip()
+
+        # Most common forms.
+        if a in ("-vv", "--vv", "--super-verbose"):
+            verbosity = max(verbosity, 2)
             continue
+        if a in ("-v", "--verbose"):
+            verbosity = max(verbosity, 1)
+            continue
+
+        # Common "stacked" short flag style: -vvv, -vvvv, etc.
+        if a.startswith("-") and len(a) > 2 and set(a[1:]) == {"v"}:
+            verbosity = max(verbosity, min(2, len(a) - 1))
+            continue
+
+        # ignore unknown flags (for now)
         if a.startswith("-"):
-            # ignore unknown flags (for now)
             continue
         if not selector:
             selector = a
 
-    return selector, verbose
+    return selector, verbosity
 
 
 def _run_one_test(
@@ -442,7 +464,7 @@ def main() -> int:
     interrupted = False
 
     try:
-        selector, verbose = _parse_cli(sys.argv[1:])
+        selector, verbosity = _parse_cli(sys.argv[1:])
         if not selector:
             print("\nNo test specified...\n")
             print("Examples:")
@@ -450,6 +472,7 @@ def main() -> int:
             print('  python pat.py 43019')
             print(r'  python pat.py 43019\43019-1-INPUT-420MA')
             print('  python pat.py "43019\\43019-1-INPUT-420MA.pat" -v')
+            print('  python pat.py "43019\\43019-1-INPUT-420MA.pat" -vv')
             return 2
 
         tests = discover_tests(selector)
@@ -458,8 +481,10 @@ def main() -> int:
             print("Looked under:", _dut_root())
             return 2
 
-        globals.Verbose = 1 if verbose else 0
-        if globals.Verbose:
+        globals.Verbose = int(verbosity)
+        if globals.Verbose >= 2:
+            print("Super Verbose Enabled")
+        elif globals.Verbose >= 1:
             print("Verbose Enabled")
 
         # Optional per-folder hook scripts (next to the tests).
