@@ -1,0 +1,50 @@
+[run]
+# Option A coverage scope: focus on the unit-testable core library modules.
+source =
+    support
+
+# Omit tests + integration/CLI/glue modules that aren't practical to unit-test.
+omit =
+    */tests/*
+    *\\tests\\*
+
+    # Hardware / UI / integration layers
+    */support/can.py
+    *\\support\\can.py
+    */support/events.py
+    *\\support\\events.py
+    */support/pcan_interface.py
+    *\\support\\pcan_interface.py
+    */support/progress.py
+    *\\support\\progress.py
+    */support/screens.py
+    *\\support\\screens.py
+
+    # Runner / filesystem glue (covered by integration/system tests, not unit tests)
+    */support/script.py
+    *\\support\\script.py
+    */support/globals.py
+    *\\support\\globals.py
+
+[report]
+show_missing = True
+skip_covered = True
+
+# Keep report output consistent with [run].
+omit =
+    */tests/*
+    *\\tests\\*
+    */support/can.py
+    *\\support\\can.py
+    */support/events.py
+    *\\support\\events.py
+    */support/pcan_interface.py
+    *\\support\\pcan_interface.py
+    */support/progress.py
+    *\\support\\progress.py
+    */support/screens.py
+    *\\support\\screens.py
+    */support/script.py
+    *\\support\\script.py
+    */support/globals.py
+    *\\support\\globals.py
