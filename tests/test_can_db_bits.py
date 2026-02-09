@@ -4,7 +4,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from support import can_db
+from patspeak import can_db
 
 
 def test_dbc_to_arbitration_id_strips_extended_flag():

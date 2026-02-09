@@ -4,8 +4,8 @@ import os
 
 import pytest
 
-from support import can_db
-from support import preflight
+from patspeak import can_db
+from patspeak import preflight
 
 
 class FakeCanDb:

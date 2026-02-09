@@ -22,7 +22,7 @@ import os
 import time
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
-import support.globals as globals
+import patspeak.runtime as rt
 
 
 try:
@@ -59,7 +59,7 @@ def _try_open(interface: str, channel: Any, bitrate: int) -> bool:
 
 
 def autodetect_can_backend() -> None:
-    """Populate globals.CAN_INTERFACE / globals.CAN_CHANNELS / globals.CAN_BITRATE.
+    """Populate rt.CAN_INTERFACE / rt.CAN_CHANNELS / rt.CAN_BITRATE.
 
     This is designed to be called once near startup (before starting CAN threads).
     """
@@ -67,8 +67,8 @@ def autodetect_can_backend() -> None:
     _require_python_can()
 
     # If already configured, keep it.
-    if getattr(globals, "CAN_INTERFACE", None) not in (None, "", "auto") and getattr(
-        globals, "CAN_CHANNELS", None
+    if getattr(rt, "CAN_INTERFACE", None) not in (None, "", "auto") and getattr(
+        rt, "CAN_CHANNELS", None
     ):
         return
 
@@ -77,7 +77,7 @@ def autodetect_can_backend() -> None:
     ch0_env = os.environ.get("PATSPEAK_CAN_CH0")
     ch1_env = os.environ.get("PATSPEAK_CAN_CH1")
 
-    need_ch1 = getattr(globals, "SuppressPatSupport", "False") == "False"
+    need_ch1 = getattr(rt, "SuppressPatSupport", "False") == "False"
 
     # Helper to validate both channels if needed.
     def ok(interface: str, ch0: Any, ch1: Any) -> bool:
@@ -112,9 +112,9 @@ def autodetect_can_backend() -> None:
                 "Check drivers / permissions / cable / device."
             )
 
-        globals.CAN_INTERFACE = interface
-        globals.CAN_CHANNELS = channels
-        globals.CAN_BITRATE = bitrate
+        rt.CAN_INTERFACE = interface
+        rt.CAN_CHANNELS = channels
+        rt.CAN_BITRATE = bitrate
         print(f"CAN backend forced via env: {interface} {channels} @ {bitrate} bps")
         return
 
@@ -145,9 +145,9 @@ def autodetect_can_backend() -> None:
 
     for iface, ch0, ch1 in candidates:
         if ok(iface, ch0, ch1):
-            globals.CAN_INTERFACE = iface
-            globals.CAN_CHANNELS = [ch0, ch1]
-            globals.CAN_BITRATE = bitrate
+            rt.CAN_INTERFACE = iface
+            rt.CAN_CHANNELS = [ch0, ch1]
+            rt.CAN_BITRATE = bitrate
             print(f"CAN backend auto-detected: {iface} {[ch0, ch1]} @ {bitrate} bps")
             return
 
@@ -161,9 +161,9 @@ def _open_bus(channel_number: int):
     _require_python_can()
     autodetect_can_backend()
 
-    iface = globals.CAN_INTERFACE
-    channels = globals.CAN_CHANNELS
-    bitrate = globals.CAN_BITRATE
+    iface = rt.CAN_INTERFACE
+    channels = rt.CAN_CHANNELS
+    bitrate = rt.CAN_BITRATE
 
     channel = channels[channel_number]
     return can.Bus(interface=iface, channel=channel, bitrate=bitrate)
@@ -183,7 +183,7 @@ def CANThread(i: int) -> None:
         bus = _open_bus(channel_number)
     except Exception as e:
         print(f"Failed to open CAN channel {channel_number}: {e}")
-        globals.finished = 1
+        rt.finished = 1
         return
 
     tracker_last_time = 0.0
@@ -191,7 +191,7 @@ def CANThread(i: int) -> None:
 
     # Super-verbose: only print TX frames when they *change*.
     # This avoids spamming every 10ms, while still showing relay/signal switching.
-    trace_tx = getattr(globals, "Verbose", 0) >= 2 or bool(
+    trace_tx = getattr(rt, "Verbose", 0) >= 2 or bool(
         os.environ.get("PATSPEAK_TRACE_TX", "")
     )
     last_tx_payload: Dict[Tuple[int, bool], bytes] = {}
@@ -200,7 +200,7 @@ def CANThread(i: int) -> None:
     tx_period_s = 0.01
 
     try:
-        while not globals.finished:
+        while not rt.finished:
             now = time.time()
             dt = 0.0
             if tracker_last_time:
@@ -223,14 +223,14 @@ def CANThread(i: int) -> None:
                     data = bytes(getattr(msg, "data", b""))
 
                     if channel_number == 0:
-                        decoded = globals.uut_db.decode(arbitration_id, data)
+                        decoded = rt.uut_db.decode(arbitration_id, data)
                         if decoded:
-                            globals.UUT_Fdbk.update(decoded)
+                            rt.UUT_Fdbk.update(decoded)
                     else:
-                        if globals.SuppressPatSupport == 'False' and globals.pat_db is not None:
-                            decoded = globals.pat_db.decode(arbitration_id, data)
+                        if rt.SuppressPatSupport == 'False' and rt.pat_db is not None:
+                            decoded = rt.pat_db.decode(arbitration_id, data)
                             if decoded:
-                                globals.PAT_Fdbk.update(decoded)
+                                rt.PAT_Fdbk.update(decoded)
             except Exception:
                 # Keep looping; a malformed frame shouldn't kill the test.
                 pass
@@ -242,10 +242,10 @@ def CANThread(i: int) -> None:
                 tx_accum = 0.0
 
                 if channel_number == 0:
-                    frames = globals.uut_db.encode_tx()
+                    frames = rt.uut_db.encode_tx()
                 else:
-                    if globals.SuppressPatSupport == 'False' and globals.pat_db is not None:
-                        frames = globals.pat_db.encode_tx()
+                    if rt.SuppressPatSupport == 'False' and rt.pat_db is not None:
+                        frames = rt.pat_db.encode_tx()
                     else:
                         frames = []
 
@@ -261,9 +261,9 @@ def CANThread(i: int) -> None:
 
                                 # Add a bit of context so the operator can
                                 # correlate switching to a specific .pat line.
-                                step = getattr(globals, "TestStep", None)
+                                step = getattr(rt, "TestStep", None)
                                 step_s = str(step).zfill(5) + " " if isinstance(step, int) else ""
-                                test = os.path.basename(str(getattr(globals, "TestFile", "") or ""))
+                                test = os.path.basename(str(getattr(rt, "TestFile", "") or ""))
                                 if test:
                                     test = f" [{test}]"
 

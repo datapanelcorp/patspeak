@@ -65,7 +65,7 @@ import atexit
 from dataclasses import dataclass, field
 from typing import List, Optional
 
-from support.console import style
+from .console import style
 
 
 _ANSI_RE = re.compile(r"\x1b\[[0-9;]*m")
@@ -1320,7 +1320,7 @@ def install() -> None:
         # and the bottom-row UI will stop updating. Doing this up-front keeps
         # the progress proxy as the outermost stream wrapper.
         try:
-            from support.console import color_enabled as _color_enabled
+            from .console import color_enabled as _color_enabled
 
             _color_enabled()
         except Exception:

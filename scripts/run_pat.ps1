@@ -28,5 +28,13 @@ if (-not (Test-Path $VenvPython)) {
   exit 1
 }
 
+# Prefer the console-script entrypoint if it exists (installed by setup_venv).
+$PatExe = Join-Path $VenvDir "Scripts\pat.exe"
+if (Test-Path $PatExe) {
+  & $PatExe @Args
+  exit $LASTEXITCODE
+}
+
+# Fallback: run the repo entrypoint directly.
 & $VenvPython (Join-Path $RepoRoot "pat.py") @Args
 exit $LASTEXITCODE

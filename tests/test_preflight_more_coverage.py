@@ -4,11 +4,11 @@ from dataclasses import dataclass
 
 import pytest
 
-from support import preflight
+from patspeak import preflight
 
 
 class FakeDb:
-    """Minimal stand-in for support.can_db.CanDb used by preflight."""
+    """Minimal stand-in for patspeak.can_db.CanDb used by preflight."""
 
     def __init__(self, signals: set[str], tx_signals: set[str] | None = None, *, raise_iter: bool = False):
         self._signals = set(signals)

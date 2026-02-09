@@ -5,7 +5,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from support import console
+from patspeak import console
 
 
 class _FakeStdout:

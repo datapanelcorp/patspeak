@@ -1,7 +1,7 @@
 import pygame
 import psutil
 import os
-import support.globals as globals
+import patspeak.runtime as rt
 
 cpu_avg = []
 
@@ -39,7 +39,7 @@ def DrawScreen(screen, ScreenMode):
     
     
     try:
-        Voltage = globals.PAT_Fdbk["MeterVolts"]
+        Voltage = rt.PAT_Fdbk["MeterVolts"]
     except:
         Voltage = 0
         
