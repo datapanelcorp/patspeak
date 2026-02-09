@@ -16,8 +16,10 @@ from datetime import datetime
 from .script import ProcessScript
 from .preflight import suite_preflight
 from . import runtime as rt
+from . import __version__
 from .paths import get_paths
 from .console import make_log_path, style, color_enabled
+from .revision import startup_banner
 from .progress import (
     install as progress_install,
     set_suite as progress_set_suite,
@@ -495,6 +497,16 @@ def main() -> int:
     # Make Ctrl+C predictable: request a clean stop, and avoid interpreter hangs
     # caused by live non-daemon threads.
     _install_sigint_handler()
+
+    # Print a one-line version/revision banner up front.
+    # (Disable with: PATSPEAK_BANNER=0)
+    try:
+        banner = startup_banner(base_version=__version__)
+        if banner:
+            print(banner)
+    except Exception:
+        # Never let banner/revision logic prevent running tests.
+        pass
 
     interrupted = False
 
