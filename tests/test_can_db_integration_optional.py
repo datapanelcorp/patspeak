@@ -10,7 +10,7 @@ def test_can_db_loads_dbc_and_encodes_frames(tmp_path):
     # encode/decode path. It is skipped unless cantools is installed.
     pytest.importorskip("cantools")
 
-    from support.can_db import CanDb
+    from patspeak.can_db import CanDb
 
     repo_root = Path(__file__).resolve().parents[1]
     dbc_file = repo_root / "dbc" / "PAT.dbc"
@@ -42,7 +42,7 @@ def test_can_db_loads_dbc_and_encodes_frames(tmp_path):
 def test_can_db_set_and_get_tx_signal_when_available():
     pytest.importorskip("cantools")
 
-    from support.can_db import CanDb
+    from patspeak.can_db import CanDb
 
     repo_root = Path(__file__).resolve().parents[1]
     dbc_file = repo_root / "dbc" / "PAT.dbc"

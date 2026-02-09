@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-import pat
+import patspeak.cli as pat
 
 
 def _write(path: Path, text: str) -> None:

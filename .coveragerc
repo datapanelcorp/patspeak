@@ -1,30 +1,32 @@
 [run]
-# Option A coverage scope: focus on the unit-testable core library modules.
+# Coverage scope: focus on the unit-testable core library modules.
 source =
-    support
+    patspeak
 
-# Omit tests + integration/CLI/glue modules that aren't practical to unit-test.
+# Omit tests + glue modules that aren't practical to unit-test.
 omit =
     */tests/*
     *\\tests\\*
 
     # Hardware / UI / integration layers
-    */support/can.py
-    *\\support\\can.py
-    */support/events.py
-    *\\support\\events.py
-    */support/pcan_interface.py
-    *\\support\\pcan_interface.py
-    */support/progress.py
-    *\\support\\progress.py
-    */support/screens.py
-    *\\support\\screens.py
+    */patspeak/can.py
+    *\\patspeak\\can.py
+    */patspeak/pcan_interface.py
+    *\\patspeak\\pcan_interface.py
+    */patspeak/progress.py
+    *\\patspeak\\progress.py
 
     # Runner / filesystem glue (covered by integration/system tests, not unit tests)
-    */support/script.py
-    *\\support\\script.py
-    */support/globals.py
-    *\\support\\globals.py
+    */patspeak/script.py
+    *\\patspeak\\script.py
+    */patspeak/runtime.py
+    *\\patspeak\\runtime.py
+    */patspeak/cli.py
+    *\\patspeak\\cli.py
+    */patspeak/paths.py
+    *\\patspeak\\paths.py
+    */patspeak/__main__.py
+    *\\patspeak\\__main__.py
 
 [report]
 show_missing = True
@@ -34,17 +36,19 @@ skip_covered = True
 omit =
     */tests/*
     *\\tests\\*
-    */support/can.py
-    *\\support\\can.py
-    */support/events.py
-    *\\support\\events.py
-    */support/pcan_interface.py
-    *\\support\\pcan_interface.py
-    */support/progress.py
-    *\\support\\progress.py
-    */support/screens.py
-    *\\support\\screens.py
-    */support/script.py
-    *\\support\\script.py
-    */support/globals.py
-    *\\support\\globals.py
+    */patspeak/can.py
+    *\\patspeak\\can.py
+    */patspeak/pcan_interface.py
+    *\\patspeak\\pcan_interface.py
+    */patspeak/progress.py
+    *\\patspeak\\progress.py
+    */patspeak/script.py
+    *\\patspeak\\script.py
+    */patspeak/runtime.py
+    *\\patspeak\\runtime.py
+    */patspeak/cli.py
+    *\\patspeak\\cli.py
+    */patspeak/paths.py
+    *\\patspeak\\paths.py
+    */patspeak/__main__.py
+    *\\patspeak\\__main__.py

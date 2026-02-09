@@ -6,7 +6,7 @@ from typing import Any, Dict, List, Optional
 
 import pytest
 
-from support import can_db
+from patspeak import can_db
 
 
 # -----------------

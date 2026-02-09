@@ -1,0 +1,304 @@
+"""Runtime state (legacy global-variable model).
+
+PATSpeak historically used a single module full of globals that are reset
+between tests.
+
+For now, we keep that model because it matches the existing runner and keeps
+behavior stable. The goal of this module is therefore:
+
+- centralize all run-time mutable state
+- make path handling robust when the package is installed
+- keep initialization predictable (no implicit cwd assumptions)
+
+The CLI sets ``TestFile`` and then calls :func:`initialize`.
+"""
+
+from __future__ import annotations
+
+from datetime import datetime
+import os
+from typing import Any
+
+from .can_db import CanDb
+from .paths import get_paths
+from .preflight import run_preflight
+
+
+def _truthy(value: str) -> bool:
+    v = str(value or "").strip().lower()
+    return v in {"1", "true", "yes", "on"}
+
+
+def _falsey(value: str) -> bool:
+    v = str(value or "").strip().lower()
+    return v in {"0", "false", "no", "off"}
+
+
+# If True, PAT support is forcibly disabled regardless of script headers.
+# This is used when only one physical CAN channel is available (or when the
+# CAN backend auto-falls back to a single-channel configuration).
+FORCE_SUPPRESS_PAT_SUPPORT: bool = False
+
+# Avoid spamming the operator: we only print the forced-suppression warning once.
+_FORCE_SUPPRESS_PAT_SUPPORT_ANNOUNCED: bool = False
+
+
+def initialize(*, run_preflight_checks: bool = True) -> None:
+    """Reset globals and load DBC(s) for the current ``TestFile``."""
+
+    # NOTE: we intentionally declare a big `global ...` list.
+    # This mirrors the legacy codebase and makes it obvious which names are
+    # meant to be shared across modules.
+    global finished, test_done, TestStep, TestPhase, TestLine, PAT_Fdbk, UUT_Fdbk
+    global pat_db, uut_db, test_file, TotalTime, StartTime, FailCount
+    global PassTime, tracker_last_time, StepTime, UUT_Results, UUT_TestLog
+    global WaitTime, WaitDone, TimeStampFormat, RunStamp, UnitName, HeaderAdded
+    global MeterData, UUTData, TestFile, DataLogTag, DataPath, LogPath
+    global CAN_1, CAN_2, Verbose, AllCollectedData, SuppressPatSupport
+    global CAN_INTERFACE, CAN_CHANNELS, CAN_BITRATE, TotalSteps
+    global DBCPath
+
+    # -----------------
+    # Baseline defaults
+    # -----------------
+    MeterData = []
+    UUTData = []
+
+    WaitTime = 0
+    WaitDone = 0
+
+    TotalTime = 0
+    StartTime = 0
+    tracker_last_time = 0
+    StepTime = 0
+    PassTime = 0
+
+    TestStep = 0
+    TestPhase = 0
+    TestLine = ""
+
+    finished = 0
+    test_done = 0
+
+    PAT_Fdbk = {}
+    UUT_Fdbk = {}
+    UUT_Results = {}
+
+    AllCollectedData = ""
+    DataLogTag = ""
+    HeaderAdded = 0
+    FailCount = 0
+    TotalSteps = 0
+
+    # Default: PAT support enabled unless suppressed by script.
+    SuppressPatSupport = "False"
+
+    # CAN backend config (python-can).
+    # patspeak.can.autodetect_can_backend() will populate these if left as "auto".
+    CAN_INTERFACE = "auto"
+    CAN_CHANNELS = None
+    CAN_BITRATE = 250000
+
+    TimeStampFormat = "%Y-%m-%d-%H:%M:%S"
+
+    # A filesystem-safe run identifier used to prevent output overwrites.
+    _now = datetime.now()
+    RunStamp = _now.strftime("%Y%m%d-%H%M%S") + f"-{_now.microsecond // 1000:03d}"
+
+    UUT_TestLog = "Started on: " + str(datetime.today().strftime(TimeStampFormat)) + "\n"
+
+    _verbose = int(globals().get("Verbose", 0) or 0)
+
+    # -----------------
+    # Workspace paths
+    # -----------------
+    paths = get_paths()
+
+    # Where DBC files live.
+    DBCPath = str(paths.dbc)
+
+    # Where .pat scripts live.
+    # NOTE: historically DataPath was also used as the output folder. We now
+    # keep DataPath as the DUT root (script root), and place outputs in a
+    # per-test "results" subfolder next to the .pat file.
+    DataPath = str(paths.dut)
+
+    # Ensure directories exist (helpful for first-run / fresh zip users).
+    os.makedirs(DataPath, exist_ok=True)
+    os.makedirs(DBCPath, exist_ok=True)
+
+    # -----------------
+    # Resolve current test path
+    # -----------------
+    _abs_test: str = str(TestFile)
+    if not os.path.isabs(_abs_test):
+        _abs_test = os.path.join(DataPath, _abs_test)
+    _abs_test = os.path.abspath(_abs_test)
+
+    _test_dir = os.path.dirname(_abs_test)
+
+    # Per-test output directory (next to the .pat file).
+    LogPath = os.path.join(_test_dir, "results")
+    os.makedirs(LogPath, exist_ok=True)
+
+    # -----------------
+    # Read script file
+    # -----------------
+    try:
+        test_file = open(_abs_test, "r", encoding="utf-8", errors="replace")
+    except OSError as e:
+        raise SystemExit(f"ERROR: could not open test file: {_abs_test}\n{e}")
+
+    Lines = test_file.readlines()
+    test_file.seek(0)
+
+    # -----------------
+    # Step count (for progress UI)
+    # -----------------
+    def _is_step_line(raw: str) -> bool:
+        s = (raw or "").strip()
+        if not s:
+            return False
+        if s.startswith("#"):
+            return False
+        if s == "END" or s == "SAVE" or s.startswith("PAUSE"):
+            return False
+        if s.startswith("UUT_DBC") or s.startswith("UUT_DATANAME") or s.startswith("SUPPRESS_PAT_SUPPORT"):
+            return False
+        return True
+
+    try:
+        TotalSteps = sum(1 for ln in Lines if _is_step_line(ln))
+    except Exception:
+        TotalSteps = 0
+
+    # -----------------
+    # Parse header directives
+    # -----------------
+    uut_dbc_name = ""
+    for line in Lines:
+        s = (line or "").strip()
+        if s.startswith("UUT_DBC"):
+            if "=" not in s:
+                raise SystemExit(f"Malformed UUT_DBC line (missing '='):\n  {s}")
+            uut_dbc_name = s.split("=", 1)[1].strip().strip('"').strip("'")
+            break
+
+    tmp_dataname = ""
+    for line in Lines:
+        s = (line or "").strip()
+        if s.startswith("UUT_DATANAME"):
+            if "=" not in s:
+                raise SystemExit(f"Malformed UUT_DATANAME line (missing '='):\n  {s}")
+            tmp_dataname = s.split("=", 1)[1].strip().strip('"').strip("'")
+            break
+
+    UnitName = tmp_dataname if tmp_dataname else ""
+
+    if not uut_dbc_name:
+        raise SystemExit("No DBC file specified, add 'UUT_DBC = filename.dbc' to script")
+
+    # SUPPRESS_PAT_SUPPORT parsing
+    for line in Lines:
+        s = (line or "").strip()
+        if s.startswith("SUPPRESS_PAT_SUPPORT"):
+            if "=" not in s:
+                raise SystemExit(f"Malformed SUPPRESS_PAT_SUPPORT line (missing '='):\n  {s}")
+
+            raw = s.split("=", 1)[1].strip().strip('"').strip("'")
+            if _truthy(raw):
+                SuppressPatSupport = "True"
+            elif _falsey(raw):
+                SuppressPatSupport = "False"
+            else:
+                # Be forgiving, but warn.
+                print(
+                    "Warning: unrecognized SUPPRESS_PAT_SUPPORT value; treating as False:\n  "
+                    + s
+                )
+                SuppressPatSupport = "False"
+            break
+
+    # Hardware/driver fallback:
+    # If the CAN layer determined that only one physical CAN channel is
+    # available, force UUT-only mode regardless of script headers.
+    force_suppress_pat = _truthy(
+        os.environ.get("PATSPEAK_FORCE_SUPPRESS_PAT_SUPPORT", "")
+    ) or _truthy(str(globals().get("FORCE_SUPPRESS_PAT_SUPPORT", False)))
+
+    if force_suppress_pat:
+        global _FORCE_SUPPRESS_PAT_SUPPORT_ANNOUNCED
+        if not _FORCE_SUPPRESS_PAT_SUPPORT_ANNOUNCED:
+            print(
+                "WARNING: Only one CAN channel is available; forcing SUPPRESS_PAT_SUPPORT=True (UUT-only)."
+            )
+            _FORCE_SUPPRESS_PAT_SUPPORT_ANNOUNCED = True
+        SuppressPatSupport = "True"
+
+    # -----------------
+    # Load DBC(s)
+    # -----------------
+    uut_path = os.path.join(DBCPath, uut_dbc_name)
+    print("Loading", uut_dbc_name + "...")
+    uut_db = CanDb(dbc_filename=uut_path)
+
+    pat_dbc_name = "PAT.dbc"
+    pat_db_for_check: Any = None
+
+    # Load PAT.dbc only if PAT support is enabled.
+    if SuppressPatSupport == "True":
+        print("Suppression of PAT support active; UUT testing only")
+        pat_db = None
+
+        # For preflight only, try to load PAT.dbc so we can give better errors
+        # if a script references PAT-only signals.
+        try:
+            pat_db_for_check = CanDb(dbc_filename=os.path.join(DBCPath, pat_dbc_name))
+        except Exception:
+            pat_db_for_check = None
+
+    else:
+        pat_path = os.path.join(DBCPath, pat_dbc_name)
+        print("Loading", pat_dbc_name + "...")
+        pat_db = CanDb(dbc_filename=pat_path)
+        pat_db_for_check = pat_db
+
+        # Ensure signal namespaces don't collide.
+        pat_signals = set(pat_db.iter_signal_names())
+        uut_signals = set(uut_db.iter_signal_names())
+        dupes = pat_signals.intersection(uut_signals)
+        if dupes:
+            dupe = sorted(dupes)[0]
+            raise SystemExit(f"Duplicate Signal Found, Aborting... {dupe}")
+
+        # Initialize PAT feedback dictionary.
+        for message in pat_db.messages:
+            for s in message.signals:
+                PAT_Fdbk[s.name] = 0
+                if _verbose >= 1:
+                    print(message.name, s.name)
+
+    # Initialize UUT feedback dictionary.
+    print("Setting up UUT I/O...")
+    for message in uut_db.messages:
+        for s in message.signals:
+            UUT_Fdbk[s.name] = 0
+            if _verbose >= 1:
+                print(message.name, s.name)
+
+    # -----------------
+    # Preflight checks
+    # -----------------
+    if run_preflight_checks:
+        pat_support_active = (SuppressPatSupport == "False") and (pat_db is not None)
+        ok = run_preflight(
+            Lines,
+            uut_db=uut_db,
+            pat_db_runtime=pat_db,
+            pat_db_for_check=pat_db_for_check,
+            uut_dbc_name=uut_dbc_name,
+            pat_dbc_name=pat_dbc_name,
+            pat_support_active=pat_support_active,
+        )
+        if not ok:
+            raise SystemExit(1)

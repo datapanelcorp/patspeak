@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "patspeak"
+version = "0.2.0"
+description = "CAN-based test runner for .pat scripts"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "UNLICENSED" }
+authors = [{ name = "PATSpeak contributors" }]
+keywords = ["can", "test", "dbc", "automation"]
+
+dependencies = [
+  "python-can>=4.0",
+  "cantools>=39.0",
+  "colorama>=0.4.6",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+]
+
+[project.scripts]
+pat = "patspeak.cli:main"
+patspeak = "patspeak.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = [
+  "-ra",
+  "--cov=patspeak",
+  "--cov-config=.coveragerc",
+  "--cov-report=term-missing:skip-covered",
+  "--cov-report=xml",
+  "--cov-fail-under=95",
+]

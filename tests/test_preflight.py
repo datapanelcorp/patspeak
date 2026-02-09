@@ -4,11 +4,11 @@ from dataclasses import dataclass
 
 import pytest
 
-from support.preflight import run_preflight
+from patspeak.preflight import run_preflight
 
 
 class FakeDb:
-    """Minimal stand-in for support.can_db.CanDb used by preflight.
+    """Minimal stand-in for patspeak.can_db.CanDb used by preflight.
 
     The real CanDb provides:
       - iter_signal_names()

@@ -4,7 +4,7 @@ import os
 
 import pytest
 
-from support import console
+from patspeak import console
 
 
 def test_safe_filename_component_strips_separators_and_forbidden_chars():

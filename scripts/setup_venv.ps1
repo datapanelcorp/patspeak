@@ -1,6 +1,6 @@
-<#{
+<#
 .SYNOPSIS
-  Create a local virtual environment and install PATSpeak dependencies.
+  Create a local virtual environment and install PATSpeak.
 
 .EXAMPLE
   # Runtime deps only
@@ -16,7 +16,7 @@
 
   If activation is blocked by execution policy, run:
     Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-#}
+#>
 
 [CmdletBinding()]
 param(
@@ -76,13 +76,15 @@ if (-not (Test-Path $VenvPython)) {
   throw "Expected venv Python at: $VenvPython"
 }
 
-# Install deps
-Write-Host "Installing pip + requirements..."
+Write-Host "Upgrading pip..."
 & $VenvPython -m pip install --upgrade pip
-& $VenvPython -m pip install -r (Join-Path $RepoRoot "requirements.txt")
 
+# Install PATSpeak itself (editable) so the `pat` console command exists.
+Write-Host "Installing PATSpeak (editable)..."
 if ($Dev) {
-  & $VenvPython -m pip install -r (Join-Path $RepoRoot "requirements-dev.txt")
+  & $VenvPython -m pip install -e ".[dev]"
+} else {
+  & $VenvPython -m pip install -e .
 }
 
 Write-Host ""
@@ -92,10 +94,11 @@ Write-Host "Activate (recommended):"
 Write-Host "  & `"$VenvDir\Scripts\Activate.ps1`""
 Write-Host ""
 Write-Host "Run PATSpeak:"
-Write-Host "  python pat.py RESET.pat -v"
+Write-Host "  pat 43019-1"
+Write-Host "  pat RESET.pat -v"
 Write-Host ""
 Write-Host "Or without activating:"
-Write-Host "  & `"$VenvPython`" pat.py RESET.pat -v"
+Write-Host "  & `"$VenvDir\Scripts\pat.exe`" 43019-1"
 Write-Host ""
 Write-Host "If activation is blocked, run (PowerShell):"
 Write-Host "  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass"

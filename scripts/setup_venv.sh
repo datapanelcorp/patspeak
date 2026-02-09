@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Create a local virtual environment and install PATSpeak dependencies.
+# Create a local virtual environment and install PATSpeak.
 #
 # Usage:
 #   ./scripts/setup_venv.sh           # runtime deps only
@@ -9,9 +9,9 @@
 # Notes:
 #   - This script does NOT require you to "activate" the venv.
 #   - After setup, you can run PATSpeak with either:
-#       source .venv/bin/activate && python pat.py RESET.pat -v
+#       source .venv/bin/activate && pat 43019-1
 #     or without activating:
-#       ./.venv/bin/python pat.py RESET.pat -v
+#       ./.venv/bin/pat 43019-1
 
 set -euo pipefail
 
@@ -95,13 +95,17 @@ if [[ ! -x "$VENV_PY" ]]; then
   exit 1
 fi
 
-# Install deps
 "$VENV_PY" -m pip install --upgrade pip
-"$VENV_PY" -m pip install -r "$ROOT/requirements.txt"
 
-if [[ $DEV -eq 1 ]]; then
-  "$VENV_PY" -m pip install -r "$ROOT/requirements-dev.txt"
-fi
+# Install PATSpeak itself (editable) so the `pat` command exists.
+(
+  cd "$ROOT"
+  if [[ $DEV -eq 1 ]]; then
+    "$VENV_PY" -m pip install -e ".[dev]"
+  else
+    "$VENV_PY" -m pip install -e .
+  fi
+)
 
 cat <<NEXT
 
@@ -111,8 +115,9 @@ Activate (recommended):
   source "$VENV_DIR/bin/activate"
 
 Run PATSpeak:
-  python pat.py RESET.pat -v
+  pat 43019-1
+  pat RESET.pat -v
 
 Or without activating:
-  "$VENV_PY" pat.py RESET.pat -v
+  "$VENV_DIR/bin/pat" 43019-1
 NEXT

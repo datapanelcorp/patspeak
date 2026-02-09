@@ -962,7 +962,7 @@ def suite_preflight(
         return True
 
     # Lazy import to keep this module lightweight for single-test paths.
-    from support.can_db import CanDb
+    from .can_db import CanDb
 
     print("\n" + "=" * 80)
     print(f"Suite preflight: {len(test_refs)} test(s)  (Mode={mode!r})")
