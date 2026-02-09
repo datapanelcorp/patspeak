@@ -21,13 +21,16 @@ from functools import lru_cache
 from pathlib import Path
 
 
-# Environment variables we will accept as an explicit revision override.
-#
-# - PATSPEAK_REVISION / PATSPEAK_GIT_SHA: project-specific knobs
-# - GITHUB_SHA / CI_COMMIT_SHA / etc: common CI providers
+# Environment variables we accept as an explicit revision override.
+# These are project-specific and should beat everything else.
 _REV_ENV_CANDIDATES = (
     "PATSPEAK_REVISION",
     "PATSPEAK_GIT_SHA",
+)
+
+# CI-provided SHAs (fallback only).
+# These should NOT preempt the generated module or git fallback.
+_CI_REV_ENV_CANDIDATES = (
     "GIT_COMMIT",
     "GITHUB_SHA",
     "CI_COMMIT_SHA",
@@ -84,16 +87,17 @@ def get_revision(*, short: bool = True) -> str | None:
     """Return a git-derived revision string (commit hash), if available.
 
     Resolution order:
-      1) Explicit env var override (PATSPEAK_REVISION, GITHUB_SHA, ...)
+      1) Explicit env override (PATSPEAK_REVISION, PATSPEAK_GIT_SHA)
       2) A generated module: ``patspeak._revision`` containing ``GIT_SHA``
       3) If we're inside a git worktree and git is installed: ``git rev-parse``
+      4) CI env fallback (GITHUB_SHA, CI_COMMIT_SHA, ...) when not in git
 
     Returns:
       - a string commit hash (shortened by default)
       - None if no revision can be determined
     """
 
-    # 1) Environment override.
+    # 1) Explicit env override (project-specific knobs).
     for key in _REV_ENV_CANDIDATES:
         v = os.environ.get(key)
         if v:
@@ -111,15 +115,24 @@ def get_revision(*, short: bool = True) -> str | None:
 
     # 3) Live git lookup (best-effort).
     root = _find_repo_root(Path(__file__).parent)
-    if not root:
-        return None
+    if root:
+        try:
+            sha = _git(["rev-parse", "HEAD"], cwd=root)
+            sha = _clean_sha(sha, short=short)
+            return sha or None
+        except Exception:
+            # Important for determinism in tests: if we're "in git" but git fails,
+            # do not fall back to CI env vars.
+            return None
 
-    try:
-        sha = _git(["rev-parse", "HEAD"], cwd=root)
-        sha = _clean_sha(sha, short=short)
-        return sha or None
-    except Exception:
-        return None
+    # 4) CI env fallback (only when not in a git worktree).
+    for key in _CI_REV_ENV_CANDIDATES:
+        v = os.environ.get(key)
+        if v:
+            cleaned = _clean_sha(v, short=short)
+            return cleaned or None
+
+    return None
 
 
 def get_full_version(base_version: str, *, short: bool = True) -> str:
