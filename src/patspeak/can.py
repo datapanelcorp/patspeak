@@ -14,6 +14,11 @@ Environment overrides (optional):
   - PATSPEAK_CAN_CH0: override channel 0 (e.g. PCAN_USBBUS1, 0, can0)
   - PATSPEAK_CAN_CH1: override channel 1 (e.g. PCAN_USBBUS2, 1, can1)
   - PATSPEAK_CAN_BITRATE: default 250000
+
+Auto-detect order (when PATSPEAK_CAN_INTERFACE=auto):
+  1) Kvaser (CANlib)
+  2) PCAN (PCAN-Basic)
+  3) SocketCAN (Linux)
 """
 
 from __future__ import annotations
@@ -79,52 +84,131 @@ def autodetect_can_backend() -> None:
 
     need_ch1 = getattr(rt, "SuppressPatSupport", "False") == "False"
 
-    # Helper to validate both channels if needed.
-    def ok(interface: str, ch0: Any, ch1: Any) -> bool:
-        if not _try_open(interface, ch0, bitrate):
-            return False
-        if need_ch1 and not _try_open(interface, ch1, bitrate):
-            return False
-        return True
+    def _coerce_channel(ch: str) -> Any:
+        """Coerce env channel strings to ints when appropriate (Kvaser uses ints)."""
 
-    # User-forced config (via env)
-    if interface_env != "auto":
-        interface = interface_env
-        if ch0_env is None or (need_ch1 and ch1_env is None):
-            raise RuntimeError(
-                "PATSPEAK_CAN_INTERFACE is set but PATSPEAK_CAN_CH0/CH1 are missing. "
-                "Set PATSPEAK_CAN_CH0 (and CH1 if PAT support is enabled)."
-            )
+        ch = (ch or "").strip()
+        try:
+            return int(ch)
+        except Exception:
+            return ch
 
-        # Allow integer-like channels for Kvaser.
-        def _coerce(ch: str) -> Any:
-            ch = ch.strip()
-            try:
-                return int(ch)
-            except Exception:
-                return ch
-
-        channels = [_coerce(ch0_env), _coerce(ch1_env) if ch1_env is not None else None]
-
-        if not ok(interface, channels[0], channels[1]):
-            raise RuntimeError(
-                f"Failed to open CAN interface={interface!r} channels={channels!r} bitrate={bitrate}. "
-                "Check drivers / permissions / cable / device."
-            )
-
+    def _apply_backend(interface: str, channels: List[Any], *, note: str = "") -> None:
         rt.CAN_INTERFACE = interface
         rt.CAN_CHANNELS = channels
         rt.CAN_BITRATE = bitrate
-        print(f"CAN backend forced via env: {interface} {channels} @ {bitrate} bps")
-        return
+        msg = f"CAN backend {'forced' if interface_env != 'auto' else 'auto-detected'}: {interface} {channels} @ {bitrate} bps"
+        if note:
+            msg += f" ({note})"
+        print(msg)
 
+    def _force_single_channel(interface: str, ch0: Any, *, note: str = "") -> None:
+        # Persist this across tests: runtime.initialize will treat this as if
+        # SUPPRESS_PAT_SUPPORT=True regardless of what's in the .pat file.
+        try:
+            rt.FORCE_SUPPRESS_PAT_SUPPORT = True
+        except Exception:
+            pass
+
+        # Match the legacy runtime flag as well so the running process
+        # immediately behaves as UUT-only.
+        try:
+            rt.SuppressPatSupport = "True"
+        except Exception:
+            pass
+
+        # Keep runtime state consistent (inputs fall back to UUT, no PAT TX).
+        try:
+            rt.pat_db = None
+        except Exception:
+            pass
+        try:
+            rt.PAT_Fdbk = {}
+        except Exception:
+            pass
+
+        _apply_backend(interface, [ch0], note=note or "only 1 CAN channel available; PAT support suppressed")
+
+    def _ok_single(interface: str, ch0: Any) -> bool:
+        return _try_open(interface, ch0, bitrate)
+
+    # Helper to validate both channels (when PAT support is required).
+    def _ok_dual(interface: str, ch0: Any, ch1: Any) -> bool:
+        if not _ok_single(interface, ch0):
+            return False
+        if ch1 is None:
+            return False
+        return _try_open(interface, ch1, bitrate)
+
+    # -----------------
+    # User-forced config (via env)
+    # -----------------
+    if interface_env != "auto":
+        interface = interface_env
+
+        if ch0_env is None:
+            raise RuntimeError(
+                "PATSPEAK_CAN_INTERFACE is set but PATSPEAK_CAN_CH0 is missing. "
+                "Set PATSPEAK_CAN_CH0 (and CH1 if you want PAT support)."
+            )
+
+        ch0 = _coerce_channel(ch0_env)
+        ch1 = _coerce_channel(ch1_env) if ch1_env is not None else None
+
+        # If PAT support is requested but CH1 wasn't specified, treat this as a
+        # single-channel configuration and suppress PAT support.
+        if need_ch1 and ch1 is None:
+            if _ok_single(interface, ch0):
+                _force_single_channel(interface, ch0, note="PATSPEAK_CAN_CH1 not set")
+                return
+            raise RuntimeError(
+                "PATSPEAK_CAN_INTERFACE is set but PATSPEAK_CAN_CH0 could not be opened. "
+                "Check drivers / permissions / cable / device."
+            )
+
+        # Normal forced open.
+        if (need_ch1 and _ok_dual(interface, ch0, ch1)) or (not need_ch1 and _ok_single(interface, ch0)):
+            channels = [ch0, ch1] if (need_ch1 and ch1 is not None) else [ch0]
+            _apply_backend(interface, channels)
+            return
+
+        # If channel 0 works but channel 1 doesn't, fall back to UUT-only.
+        if need_ch1 and _ok_single(interface, ch0):
+            _force_single_channel(interface, ch0, note="channel 1 unavailable")
+            return
+
+        # Special case requested: if Kvaser was forced but isn't available,
+        # fall back to PCAN USB (and then SocketCAN).
+        if interface == "kvaser":
+            for fb_iface, fb_ch0, fb_ch1 in [
+                ("pcan", "PCAN_USBBUS1", "PCAN_USBBUS2"),
+                ("socketcan", "can0", "can1"),
+            ]:
+                if need_ch1 and _ok_dual(fb_iface, fb_ch0, fb_ch1):
+                    _apply_backend(fb_iface, [fb_ch0, fb_ch1], note="Kvaser not detected; fell back")
+                    return
+                if not need_ch1 and _ok_single(fb_iface, fb_ch0):
+                    _apply_backend(fb_iface, [fb_ch0], note="Kvaser not detected; fell back")
+                    return
+                if need_ch1 and _ok_single(fb_iface, fb_ch0):
+                    _force_single_channel(fb_iface, fb_ch0, note="Kvaser not detected; only 1 CAN channel available")
+                    return
+
+        raise RuntimeError(
+            f"Failed to open CAN interface={interface!r} channel0={ch0!r} channel1={ch1!r} bitrate={bitrate}. "
+            "Check drivers / permissions / cable / device."
+        )
+
+    # -----------------
+    # Auto-detect
+    # -----------------
     # Auto-detect in a reasonable order.
     candidates: List[Tuple[str, Any, Any]] = []
 
-    # 1) PCAN (common on Windows)
-    candidates.append(("pcan", "PCAN_USBBUS1", "PCAN_USBBUS2"))
-    # 2) Kvaser (Windows typically needs Kvaser CANlib installed)
+    # 1) Kvaser (Windows typically needs Kvaser CANlib installed)
     candidates.append(("kvaser", 0, 1))
+    # 2) PCAN (common on Windows)
+    candidates.append(("pcan", "PCAN_USBBUS1", "PCAN_USBBUS2"))
     # 3) SocketCAN (Linux / RPi, including many Kvaser devices via kvaser_usb)
     candidates.append(("socketcan", "can0", "can1"))
 
@@ -132,27 +216,33 @@ def autodetect_can_backend() -> None:
     if ch0_env is not None:
         # Try overrides as-is against each candidate interface.
         # If user specifies custom channel names, they probably know what they're doing.
-        def _coerce(ch: str) -> Any:
-            ch = ch.strip()
-            try:
-                return int(ch)
-            except Exception:
-                return ch
-
-        ch0_override = _coerce(ch0_env)
-        ch1_override = _coerce(ch1_env) if ch1_env is not None else None
+        ch0_override = _coerce_channel(ch0_env)
+        ch1_override = _coerce_channel(ch1_env) if ch1_env is not None else None
         candidates = [(iface, ch0_override, ch1_override) for (iface, _, _) in candidates]
 
+    single_fallback: Optional[Tuple[str, Any]] = None
+
     for iface, ch0, ch1 in candidates:
-        if ok(iface, ch0, ch1):
-            rt.CAN_INTERFACE = iface
-            rt.CAN_CHANNELS = [ch0, ch1]
-            rt.CAN_BITRATE = bitrate
-            print(f"CAN backend auto-detected: {iface} {[ch0, ch1]} @ {bitrate} bps")
-            return
+        if need_ch1:
+            if _ok_dual(iface, ch0, ch1):
+                _apply_backend(iface, [ch0, ch1])
+                return
+            # Remember the first interface where channel 0 works; we can still
+            # run UUT-only if only 1 channel is available.
+            if single_fallback is None and _ok_single(iface, ch0):
+                single_fallback = (iface, ch0)
+        else:
+            if _ok_single(iface, ch0):
+                _apply_backend(iface, [ch0])
+                return
+
+    if need_ch1 and single_fallback is not None:
+        iface, ch0 = single_fallback
+        _force_single_channel(iface, ch0)
+        return
 
     raise RuntimeError(
-        "No CAN interface detected. Tried: PCAN, Kvaser, SocketCAN. "
+        "No CAN interface detected. Tried: Kvaser, PCAN, SocketCAN. "
         "Install the correct vendor driver for your hardware or set PATSPEAK_CAN_INTERFACE/CH0/CH1."
     )
 
@@ -164,6 +254,11 @@ def _open_bus(channel_number: int):
     iface = rt.CAN_INTERFACE
     channels = rt.CAN_CHANNELS
     bitrate = rt.CAN_BITRATE
+
+    if not channels or channel_number >= len(channels) or channels[channel_number] is None:
+        raise RuntimeError(
+            f"CAN channel {channel_number} is not available (detected channels: {channels!r})."
+        )
 
     channel = channels[channel_number]
     return can.Bus(interface=iface, channel=channel, bitrate=bitrate)
@@ -183,7 +278,19 @@ def CANThread(i: int) -> None:
         bus = _open_bus(channel_number)
     except Exception as e:
         print(f"Failed to open CAN channel {channel_number}: {e}")
-        rt.finished = 1
+
+        # Channel 0 is mandatory. Channel 1 (PAT) is optional; if it fails we
+        # fall back to UUT-only by forcing SUPPRESS_PAT_SUPPORT.
+        if channel_number == 0:
+            rt.finished = 1
+        else:
+            try:
+                rt.FORCE_SUPPRESS_PAT_SUPPORT = True
+                rt.SuppressPatSupport = "True"
+                rt.pat_db = None
+                rt.PAT_Fdbk = {}
+            except Exception:
+                pass
         return
 
     tracker_last_time = 0.0

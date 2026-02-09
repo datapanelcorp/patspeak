@@ -614,7 +614,15 @@ def main() -> int:
         saved = getattr(rt, "SuppressPatSupport", "False")
         rt.SuppressPatSupport = "False" if need_pat_channel else "True"
         autodetect_can_backend()
-        rt.SuppressPatSupport = saved
+
+        # If the CAN layer had to fall back to a single available CAN channel,
+        # it will force SUPPRESS_PAT_SUPPORT for the whole process. In that
+        # case we must *not* start CAN-CH1.
+        if getattr(rt, "FORCE_SUPPRESS_PAT_SUPPORT", False):
+            need_pat_channel = False
+            rt.SuppressPatSupport = "True"
+        else:
+            rt.SuppressPatSupport = saved
 
         # Threads are daemon threads as a last-resort safety valve: if a driver
         # call wedges and a clean shutdown can't join, the interpreter won't hang.

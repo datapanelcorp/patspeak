@@ -34,6 +34,15 @@ def _falsey(value: str) -> bool:
     return v in {"0", "false", "no", "off"}
 
 
+# If True, PAT support is forcibly disabled regardless of script headers.
+# This is used when only one physical CAN channel is available (or when the
+# CAN backend auto-falls back to a single-channel configuration).
+FORCE_SUPPRESS_PAT_SUPPORT: bool = False
+
+# Avoid spamming the operator: we only print the forced-suppression warning once.
+_FORCE_SUPPRESS_PAT_SUPPORT_ANNOUNCED: bool = False
+
+
 def initialize(*, run_preflight_checks: bool = True) -> None:
     """Reset globals and load DBC(s) for the current ``TestFile``."""
 
@@ -209,6 +218,22 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
                 )
                 SuppressPatSupport = "False"
             break
+
+    # Hardware/driver fallback:
+    # If the CAN layer determined that only one physical CAN channel is
+    # available, force UUT-only mode regardless of script headers.
+    force_suppress_pat = _truthy(
+        os.environ.get("PATSPEAK_FORCE_SUPPRESS_PAT_SUPPORT", "")
+    ) or _truthy(str(globals().get("FORCE_SUPPRESS_PAT_SUPPORT", False)))
+
+    if force_suppress_pat:
+        global _FORCE_SUPPRESS_PAT_SUPPORT_ANNOUNCED
+        if not _FORCE_SUPPRESS_PAT_SUPPORT_ANNOUNCED:
+            print(
+                "WARNING: Only one CAN channel is available; forcing SUPPRESS_PAT_SUPPORT=True (UUT-only)."
+            )
+            _FORCE_SUPPRESS_PAT_SUPPORT_ANNOUNCED = True
+        SuppressPatSupport = "True"
 
     # -----------------
     # Load DBC(s)
