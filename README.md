@@ -69,6 +69,29 @@ Run a single file:
 pat RESET.pat -v
 ```
 
+### Check the installed version / build revision
+
+To print the PATSpeak version and (when available) the **git commit hash**:
+
+```powershell
+pat --version
+# or
+pat -V
+```
+
+Example output:
+
+```text
+PATSpeak 0.2.0 (a1b2c3d)
+```
+
+If PATSpeak can’t determine a revision (for example: running from a source zip
+without a `.git/` folder, or `git` is not installed), it will fall back to:
+
+```text
+PATSpeak 0.2.0
+```
+
 ### No activation option
 
 If you don’t want to activate the venv:
@@ -138,6 +161,44 @@ pat 43019-1
 pat 43019-1\43019-1-INPUT-420MA
 pat "43019-1\43019-1-INPUT-420MA.pat"
 ```
+
+### Version / revision banner
+
+PATSpeak prints a one-line banner on startup:
+
+```text
+PATSpeak <version> (<git-sha>)
+```
+
+The git SHA is shown when PATSpeak can determine it (for example: when running
+from a git checkout and `git` is available, or when CI provides a commit SHA).
+
+To print the same information and exit immediately:
+
+```bash
+pat --version
+pat -V
+pat --revision
+```
+
+Environment overrides:
+
+- `PATSPEAK_BANNER=0` disables the startup banner.
+- `PATSPEAK_REVISION=<sha>` (or `PATSPEAK_GIT_SHA=<sha>`) forces the displayed
+  revision. Useful for CI builds or zipped source drops where `.git/` is not
+  present.
+
+### Progress UI (bottom-row status line)
+
+When stdout is a real terminal, PATSpeak shows a lightweight progress line that
+stays visible on the bottom row while normal output scrolls above.
+
+You can control it via environment variables:
+
+- `PATSPEAK_PROGRESS=auto|on|off` (default: `auto`)
+- `PATSPEAK_PROGRESS_MODE=auto|sticky|compat` (default: `auto`)
+  - `sticky` uses ANSI cursor control (smoothest, no flicker)
+  - `compat` uses inline redraw (most compatible)
 
 ### Verbosity
 
