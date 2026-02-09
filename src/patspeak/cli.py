@@ -498,21 +498,35 @@ def main() -> int:
     # caused by live non-daemon threads.
     _install_sigint_handler()
 
-    # Print a one-line version/revision banner up front.
+    # Compute the banner early, but *print it later*.
+    #
+    # Why? The progress UI's "sticky" mode reserves the terminal's top row and
+    # clears it during installation. If we print the banner before installing
+    # the progress UI, it can be immediately wiped/hidden.
+    #
     # (Disable with: PATSPEAK_BANNER=0)
     try:
         banner = startup_banner(base_version=__version__)
-        if banner:
-            print(banner)
     except Exception:
         # Never let banner/revision logic prevent running tests.
-        pass
+        banner = ""
+
+    # Convenience: show version/revision and exit.
+    argv_raw = [str(a or "").strip() for a in sys.argv[1:]]
+    if any(a in {"-V", "--version", "--revision"} for a in argv_raw):
+        if banner:
+            print(banner)
+        else:
+            print(f"PATSpeak {__version__}")
+        return 0
 
     interrupted = False
 
     try:
-        selector, verbosity = _parse_cli(sys.argv[1:])
+        selector, verbosity = _parse_cli(argv_raw)
         if not selector:
+            if banner:
+                print(banner)
             print("\nNo test specified...\n")
             print("Examples:")
             # Preferred (after running scripts/setup_venv and activating the venv):
@@ -529,6 +543,8 @@ def main() -> int:
 
         tests = discover_tests(selector)
         if not tests:
+            if banner:
+                print(banner)
             print("\nCould not find any .pat tests for:", selector)
             print("Looked under:", _dut_root())
             return 2
@@ -554,6 +570,14 @@ def main() -> int:
         try:
             progress_install()
             progress_set_suite(len(tests))
+        except Exception:
+            pass
+
+        # Print the banner *after* progress UI install so sticky mode can't
+        # overwrite it.
+        try:
+            if banner:
+                print(banner, flush=True)
         except Exception:
             pass
 
