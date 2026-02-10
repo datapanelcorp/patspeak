@@ -1,12 +1,342 @@
 import csv
 import time
 import os
+import re
+import shlex
+import subprocess
+import sys
+from pathlib import Path
 #from playsound import playsound
 from datetime import datetime
 import patspeak.runtime as rt
 from datetime import timedelta
 from .console import colorize_status_line, make_log_path, make_csv_path
 from .progress import note_step_started, note_step_result
+
+
+_PATSPEAK_RESULT_RE = re.compile(r"^\s*PATSPEAK_RESULT\s*=\s*(PASS|FAIL)\s*$", re.IGNORECASE)
+
+
+def _iter_script_roots() -> list[Path]:
+    """Return search roots for external PAT scripts.
+
+    Search order (highest priority first):
+      1) PATSPEAK_SCRIPT_DIR (os.pathsep-separated list)
+      2) <current_test_dir>/scripts
+      3) <workspace_home>/scripts/pat_scripts
+
+    This keeps per-suite scripts easy, while still allowing a global shared pool.
+    """
+
+    roots: list[Path] = []
+
+    # 1) Explicit env override(s)
+    raw = os.environ.get("PATSPEAK_SCRIPT_DIR", "").strip()
+    if raw:
+        for part in raw.split(os.pathsep):
+            p = Path(part).expanduser()
+            if not p.is_absolute():
+                # Interpret relative paths relative to workspace home when available.
+                try:
+                    p = Path(getattr(rt, "HomePath", ".") or ".") / p
+                except Exception:
+                    pass
+            try:
+                roots.append(p.resolve())
+            except Exception:
+                roots.append(p)
+
+    # 2) Suite-local scripts folder (next to the .pat file)
+    try:
+        td = Path(getattr(rt, "TestDir", "") or "")
+        if td:
+            roots.append((td / "scripts").resolve())
+    except Exception:
+        pass
+
+    # 3) Global scripts folder in the workspace
+    try:
+        home = Path(getattr(rt, "HomePath", "") or "")
+        if home:
+            roots.append((home / "scripts" / "pat_scripts").resolve())
+    except Exception:
+        pass
+
+    # De-dupe while preserving order.
+    seen: set[str] = set()
+    out: list[Path] = []
+    for r in roots:
+        k = str(r)
+        if k not in seen:
+            seen.add(k)
+            out.append(r)
+    return out
+
+
+def _resolve_script_path(script_token: str) -> Path | None:
+    """Resolve a script token to an existing file path.
+
+    - Absolute paths are used directly.
+    - Relative paths are searched under the script roots.
+    - Bare names are searched under script roots; ".py" is appended if missing.
+    """
+
+    tok = (script_token or "").strip().strip('"').strip("'")
+    if not tok:
+        return None
+
+    p = Path(tok)
+    candidates: list[Path] = []
+
+    # Direct absolute path.
+    if p.is_absolute():
+        candidates.append(p)
+    else:
+        roots = _iter_script_roots()
+
+        # If the token includes a directory component, treat it as a relative path.
+        if p.parent != Path("."):
+            for r in roots:
+                candidates.append(r / p)
+        else:
+            for r in roots:
+                candidates.append(r / p)
+                if p.suffix == "":
+                    candidates.append(r / (tok + ".py"))
+
+    for c in candidates:
+        try:
+            if c.exists() and c.is_file():
+                return c.resolve()
+        except Exception:
+            continue
+    return None
+
+
+def _parse_pat_command_line(line: str) -> list[str]:
+    """Parse a PAT command line into argv tokens.
+
+    Accepted forms:
+      - "PAT <script> [args...]"
+      - "PAT-<script> [args...]"   (legacy-friendly, like PAUSE-...)
+    """
+
+    s = (line or "").rstrip("\n").rstrip("\r")
+    if s.startswith("PAT-"):
+        cmdline = s.split("-", 1)[1].strip()
+    elif s.startswith("PAT "):
+        cmdline = s[len("PAT ") :].strip()
+    elif s == "PAT":
+        cmdline = ""
+    else:
+        # Not a PAT command.
+        return []
+
+    if not cmdline:
+        return []
+
+    # shlex: POSIX parsing on *nix, Windows-style on Windows.
+    posix = os.name != "nt"
+    try:
+        return shlex.split(cmdline, posix=posix)
+    except Exception:
+        # Fall back to naive split.
+        return cmdline.split()
+
+
+def _extract_explicit_result_marker(output_text: str) -> bool | None:
+    """Look for a line like 'PATSPEAK_RESULT=PASS' or 'PATSPEAK_RESULT=FAIL'."""
+
+    try:
+        last: bool | None = None
+        for raw in (output_text or "").splitlines():
+            m = _PATSPEAK_RESULT_RE.match(raw)
+            if not m:
+                continue
+            last = (m.group(1).upper() == "PASS")
+        return last
+    except Exception:
+        return None
+
+
+def _run_external_script(argv: list[str]) -> tuple[int, str]:
+    """Run an external script and stream its output.
+
+    Returns:
+      (return_code, combined_output)
+    """
+
+    def _emit(text: str) -> None:
+        """Best-effort mirror of streamed output for early failures."""
+
+        if not text:
+            return
+        for ln in text.splitlines(True):
+            try:
+                print(ln.rstrip("\n"))
+            except Exception:
+                pass
+            try:
+                rt.UUT_TestLog += "    " + ln
+            except Exception:
+                pass
+
+    if not argv:
+        msg = "PAT: missing script\n"
+        _emit(msg)
+        return 2, msg
+
+    script_token = argv[0]
+    args = argv[1:]
+
+    script_path = _resolve_script_path(script_token)
+    if script_path is None:
+        roots = _iter_script_roots()
+        msg = "PAT: script not found: " + str(script_token) + "\n"
+        if roots:
+            msg += "PAT: searched roots:\n" + "\n".join("  - " + str(r) for r in roots) + "\n"
+        _emit(msg)
+        return 2, msg
+
+    # Build subprocess argv.
+    if script_path.suffix.lower() == ".py":
+        # -u: unbuffered so progress prints show up live.
+        cmd = [sys.executable, "-u", str(script_path), *args]
+    else:
+        cmd = [str(script_path), *args]
+
+    # Environment: pass useful run context to the script.
+    env = os.environ.copy()
+    env.setdefault("PATSPEAK_HOME", str(getattr(rt, "HomePath", "") or ""))
+    env.setdefault("PATSPEAK_DUT_DIR", str(getattr(rt, "DataPath", "") or ""))
+    env.setdefault("PATSPEAK_DBC_DIR", str(getattr(rt, "DBCPath", "") or ""))
+    env.setdefault("PATSPEAK_TEST_FILE", str(getattr(rt, "TestFile", "") or ""))
+    env.setdefault("PATSPEAK_TEST_DIR", str(getattr(rt, "TestDir", "") or ""))
+    env.setdefault("PATSPEAK_RESULTS_DIR", str(getattr(rt, "LogPath", "") or ""))
+    env.setdefault("PATSPEAK_UNITNAME", str(getattr(rt, "UnitName", "") or ""))
+    env.setdefault("PATSPEAK_RUNSTAMP", str(getattr(rt, "RunStamp", "") or ""))
+    env.setdefault("PATSPEAK_STEP", str(getattr(rt, "TestStep", "") or ""))
+    env["PATSPEAK_SCRIPT_PATH"] = str(script_path)
+
+    # Run relative to the current test folder by default.
+    cwd = str(getattr(rt, "TestDir", "") or os.getcwd())
+
+    combined: list[str] = []
+    try:
+        p = subprocess.Popen(
+            cmd,
+            cwd=cwd,
+            env=env,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            bufsize=1,
+        )
+    except Exception as e:
+        msg = f"PAT: failed to start script: {e}\n"
+        _emit(msg)
+        return 2, msg
+
+    # Stream output line-by-line.
+    try:
+        assert p.stdout is not None
+        for line in p.stdout:
+            combined.append(line)
+            try:
+                print(line.rstrip("\n"))
+            except Exception:
+                pass
+            try:
+                rt.UUT_TestLog += "    " + line
+            except Exception:
+                pass
+    except Exception as e:
+        combined.append(f"PAT: error while reading script output: {e}\n")
+    finally:
+        try:
+            rc = int(p.wait())
+        except Exception:
+            rc = 2
+
+    return rc, "".join(combined)
+
+
+def _handle_pat_command(line: str) -> bool:
+    """Handle a PAT external-script step.
+
+    Returns True if the line was a PAT command and was handled.
+    """
+
+    if not (line.startswith("PAT-") or line.startswith("PAT ") or line == "PAT"):
+        return False
+
+    StepStr = str(rt.TestStep).zfill(5) + " "
+
+    argv = _parse_pat_command_line(line)
+    if not argv:
+        msg = StepStr + "FAIL: PAT (missing script)"
+        rt.UUT_TestLog += msg + "\n"
+        print(colorize_status_line(msg))
+        rt.FailCount += 1
+        try:
+            note_step_result(rt.TestStep, passed=False)
+        except Exception:
+            pass
+
+        # Advance to next step.
+        rt.TestLine = ""
+        rt.PassTime = 0
+        rt.StepTime = 0
+        rt.WaitDone = 0
+        rt.TestStep += 1
+        rt.tracker_last_time = time.time()
+        return True
+
+    # Echo a one-line "TEST" marker so the operator sees what's running.
+    try:
+        show = " ".join(argv[:4]) + (" ..." if len(argv) > 4 else "")
+        msg = StepStr + "TEST: PAT " + show
+        rt.UUT_TestLog += msg + "\n"
+        print(colorize_status_line(msg))
+    except Exception:
+        pass
+
+    rc, out = _run_external_script(argv)
+
+    explicit = _extract_explicit_result_marker(out)
+    passed = bool(explicit) if explicit is not None else (rc == 0)
+
+    if passed:
+        msg = StepStr + "PASS: PAT " + str(argv[0]) + f" (rc={rc})"
+        rt.UUT_TestLog += msg + "\n"
+        print(colorize_status_line(msg))
+        try:
+            note_step_result(rt.TestStep, passed=True)
+        except Exception:
+            pass
+    else:
+        msg = StepStr + "FAIL: PAT " + str(argv[0]) + f" (rc={rc})"
+        rt.UUT_TestLog += msg + "\n"
+        print(colorize_status_line(msg))
+        rt.FailCount += 1
+        try:
+            note_step_result(rt.TestStep, passed=False)
+        except Exception:
+            pass
+
+    # Advance to next step.
+    rt.TestLine = ""
+    rt.PassTime = 0
+    rt.StepTime = 0
+    rt.WaitDone = 0
+    rt.TestStep += 1
+
+    # IMPORTANT: this step blocks while the script runs; reset the timing
+    # tracker so the next step doesn't inherit a giant time_delta.
+    rt.tracker_last_time = time.time()
+    return True
+
+
 def SaveData():
 
     print("Writing Data Collected.")
@@ -138,6 +468,11 @@ def ProcessScript():
         yn = input(the_prompt[1])
         rt.TestLine = "" #clear to stop further processing
         rt.tracker_last_time = time.time() # <--- ADD THIS LINE
+
+    # External custom-step hook: PAT <script> [args...]
+    # This must run before we strip spaces and parse ':' step lines.
+    if _handle_pat_command(rt.TestLine):
+        return
         
     if(rt.TestLine == "SAVE"):
         SaveData()

@@ -57,6 +57,7 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
     global CAN_1, CAN_2, Verbose, AllCollectedData, SuppressPatSupport
     global CAN_INTERFACE, CAN_CHANNELS, CAN_BITRATE, TotalSteps
     global DBCPath
+    global HomePath, TestDir
 
     # -----------------
     # Baseline defaults
@@ -114,6 +115,9 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
     # -----------------
     paths = get_paths()
 
+    # Workspace root (folder that contains both dut/ and dbc/).
+    HomePath = str(paths.home)
+
     # Where DBC files live.
     DBCPath = str(paths.dbc)
 
@@ -135,7 +139,9 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
         _abs_test = os.path.join(DataPath, _abs_test)
     _abs_test = os.path.abspath(_abs_test)
 
+    # Directory containing the current .pat file.
     _test_dir = os.path.dirname(_abs_test)
+    TestDir = _test_dir
 
     # Per-test output directory (next to the .pat file).
     LogPath = os.path.join(_test_dir, "results")
