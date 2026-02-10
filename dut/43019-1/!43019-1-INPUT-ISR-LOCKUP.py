@@ -171,8 +171,8 @@ while ModeIndex <= MaxMode:
             TEST_VOLTS = 5.0
             #outstr += "PwrSetVoltage = " + str(TEST_VOLTS*10) + " : NULL : WAIT = 0.1\n"
             outstr += DeathSweep + " = 1 : NULL : WAIT = 0.1\n"
-            outstr += "#SWEEP-RUNNING DEATHSWEEP!\\n"
-            outstr += "PAT dp800/rigol_dp800_sweep_ch2.py --resource USB0::0x1AB1::0x0E11::DP8C180100022::INSTR --channel 2 --start 4.32 --stop 4.43 --step 0.001 --mode updown --dwell 0.020 --opc-every 25 --output-off-at-end\\n"
+            outstr += "#SWEEP-RUNNING DEATHSWEEP!\n"
+            outstr += "PAT dp800/rigol_dp800_sweep_ch2.py --resource USB0::0x1AB1::0x0E11::DP8C180100022::INSTR --channel 2 --start 4.32 --stop 4.43 --step 0.001 --mode updown --dwell 0.020 --opc-every 25 --output-off-at-end\n"
             outstr += DeathSweep + " = 0 : NULL : WAIT = 0.1\n"
             outstr += "#test for lockup\n"
             outstr += "UUT_TXCHECK-2.0\n"

@@ -152,7 +152,9 @@ J1_05 = 1 : NULL : WAIT = 1
 
 #TESTING - ModeIndex 1 PortIndex 0
 J4_01 = 1 : NULL : WAIT = 0.1
-#SWEEP-RUNNING DEATHSWEEP!\nPAT dp800/rigol_dp800_sweep_ch2.py --resource USB0::0x1AB1::0x0E11::DP8C180100022::INSTR --channel 2 --start 4.32 --stop 4.43 --step 0.001 --mode updown --dwell 0.020 --opc-every 25 --output-off-at-end\nJ4_01 = 0 : NULL : WAIT = 0.1
+#SWEEP-RUNNING DEATHSWEEP!
+PAT dp800/rigol_dp800_sweep_ch2.py --resource USB0::0x1AB1::0x0E11::DP8C180100022::INSTR --channel 2 --start 4.32 --stop 4.43 --step 0.001 --mode updown --dwell 0.020 --opc-every 25 --output-off-at-end
+J4_01 = 0 : NULL : WAIT = 0.1
 #test for lockup
 UUT_TXCHECK-2.0
 #Finished with port
@@ -176,7 +178,9 @@ J1_06 = 1 : NULL : WAIT = 1
 
 #TESTING - ModeIndex 1 PortIndex 1
 J4_01 = 1 : NULL : WAIT = 0.1
-#SWEEP-RUNNING DEATHSWEEP!\nPAT dp800/rigol_dp800_sweep_ch2.py --resource USB0::0x1AB1::0x0E11::DP8C180100022::INSTR --channel 2 --start 4.32 --stop 4.43 --step 0.001 --mode updown --dwell 0.020 --opc-every 25 --output-off-at-end\nJ4_01 = 0 : NULL : WAIT = 0.1
+#SWEEP-RUNNING DEATHSWEEP!
+PAT dp800/rigol_dp800_sweep_ch2.py --resource USB0::0x1AB1::0x0E11::DP8C180100022::INSTR --channel 2 --start 4.32 --stop 4.43 --step 0.001 --mode updown --dwell 0.020 --opc-every 25 --output-off-at-end
+J4_01 = 0 : NULL : WAIT = 0.1
 #test for lockup
 UUT_TXCHECK-2.0
 #Finished with port
@@ -200,7 +204,9 @@ J1_07 = 1 : NULL : WAIT = 1
 
 #TESTING - ModeIndex 1 PortIndex 2
 J4_01 = 1 : NULL : WAIT = 0.1
-#SWEEP-RUNNING DEATHSWEEP!\nPAT dp800/rigol_dp800_sweep_ch2.py --resource USB0::0x1AB1::0x0E11::DP8C180100022::INSTR --channel 2 --start 4.32 --stop 4.43 --step 0.001 --mode updown --dwell 0.020 --opc-every 25 --output-off-at-end\nJ4_01 = 0 : NULL : WAIT = 0.1
+#SWEEP-RUNNING DEATHSWEEP!
+PAT dp800/rigol_dp800_sweep_ch2.py --resource USB0::0x1AB1::0x0E11::DP8C180100022::INSTR --channel 2 --start 4.32 --stop 4.43 --step 0.001 --mode updown --dwell 0.020 --opc-every 25 --output-off-at-end
+J4_01 = 0 : NULL : WAIT = 0.1
 #test for lockup
 UUT_TXCHECK-2.0
 #Finished with port
@@ -224,7 +230,9 @@ J1_08 = 1 : NULL : WAIT = 1
 
 #TESTING - ModeIndex 1 PortIndex 3
 J4_01 = 1 : NULL : WAIT = 0.1
-#SWEEP-RUNNING DEATHSWEEP!\nPAT dp800/rigol_dp800_sweep_ch2.py --resource USB0::0x1AB1::0x0E11::DP8C180100022::INSTR --channel 2 --start 4.32 --stop 4.43 --step 0.001 --mode updown --dwell 0.020 --opc-every 25 --output-off-at-end\nJ4_01 = 0 : NULL : WAIT = 0.1
+#SWEEP-RUNNING DEATHSWEEP!
+PAT dp800/rigol_dp800_sweep_ch2.py --resource USB0::0x1AB1::0x0E11::DP8C180100022::INSTR --channel 2 --start 4.32 --stop 4.43 --step 0.001 --mode updown --dwell 0.020 --opc-every 25 --output-off-at-end
+J4_01 = 0 : NULL : WAIT = 0.1
 #test for lockup
 UUT_TXCHECK-2.0
 #Finished with port
