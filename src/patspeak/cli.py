@@ -22,6 +22,7 @@ from .console import make_log_path, style, color_enabled
 from .revision import startup_banner
 from .progress import (
     install as progress_install,
+    enable as progress_enable,
     set_suite as progress_set_suite,
     start_script as progress_start,
     finish_script as progress_finish,
@@ -53,6 +54,11 @@ HOOK_START = "pat_start.pat"
 HOOK_TRANSITION = "pat_transition.pat"
 HOOK_END = "pat_end.pat"
 _HOOK_BASENAMES = {HOOK_START.lower(), HOOK_TRANSITION.lower(), HOOK_END.lower()}
+
+# Status codes returned by test runner functions
+STATUS_EXIT = -1  # User requested abort/exit
+STATUS_NEXT = 0  # Normal completion or skip (proceed to next)
+# Any value > 0 represents a request to JUMP to that specific 1-based suite index.
 
 
 def _write_interrupt_log(reason: str) -> None:
@@ -121,69 +127,31 @@ def _stop_can_threads() -> None:
             pass
 
 
-def _install_sigint_handler() -> None:
-    """Install a SIGINT handler that requests shutdown.
+# Track consecutive Ctrl+C presses globally.
+_SIGINT_COUNT = 0
 
-    First Ctrl+C: request graceful stop.
-    Second Ctrl+C: hard-exit (in case a driver thread is wedged).
+
+def _install_sigint_handler() -> None:
+    """Install a SIGINT handler.
+
+    First Ctrl+C: Raise KeyboardInterrupt (to show menu).
+    Second Ctrl+C: Force hard-exit.
     """
 
-    state = {"count": 0}
-
     def _handler(signum, frame):  # noqa: ARG001
-        """Handle Ctrl+C.
+        global _SIGINT_COUNT
+        _SIGINT_COUNT += 1
 
-        On Windows, raising KeyboardInterrupt directly from a signal handler
-        can behave inconsistently depending on how the program is running.
-        Using threading.interrupt_main() is more reliable at breaking out of
-        time.sleep()/input() without leaving stray threads.
-        """
-
-        state["count"] += 1
-
-        if state["count"] == 1:
-            try:
-                print("\n^C received — stopping…")
-            except Exception:
-                pass
-
-            # Persist whatever we have so far.
-            _write_interrupt_log("Ctrl+C - user interruption")
-
-            # Request a clean stop.
-            _stop_can_threads()
-
-            # IMPORTANT:
-            # We install a custom SIGINT handler, which replaces Python's
-            # default behavior of raising KeyboardInterrupt.
-            #
-            # The earlier implementation used threading.interrupt_main(), but
-            # on some Windows setups that results in a *delayed* (or missed)
-            # KeyboardInterrupt, which makes users press Ctrl+C twice.
-            #
-            # Call the default int handler explicitly so the first Ctrl+C
-            # reliably aborts the run.
-            # Raise KeyboardInterrupt *now* so the main loop stops scheduling
-            # additional scripts (hooks/tests) after the current one unwinds.
-            #
-            # If something is wedged badly enough that KeyboardInterrupt can't
-            # unwind, the user can still press Ctrl+C again to force-exit.
+        if _SIGINT_COUNT == 1:
+            # First press: raise KeyboardInterrupt to let the loop handle the menu.
             signal.default_int_handler(signum, frame)
-
-            # Unreachable (default_int_handler raises), but keep explicit for
-            # readability.
             return
 
-        # Second Ctrl+C => force exit (avoid indefinite hangs).
+        # Second Ctrl+C => force exit.
         try:
             print("\n^C received again — forcing exit.")
         except Exception:
             pass
-        # If the progress UI is using the flicker-free "sticky" mode, it may
-        # have changed the terminal scroll region to reserve the last row.
-        # A hard os._exit() bypasses normal cleanup, so restore the terminal
-        # *before* exiting to avoid leaving the user's console in a stuck
-        # state.
         try:
             progress_emergency_restore_terminal()
         except Exception:
@@ -408,10 +376,13 @@ def _run_one_test(
     run_preflight_checks: bool = True,
     kind: str = "test",
     suite_index: int = 0,
-) -> bool:
+    all_tests: list[str] | None = None,
+) -> int:
     """Run a single .pat script (test or hook).
 
-    Returns True if the script completed. (Early stops are handled via Ctrl+C / SIGINT.)
+    Returns:
+        int: One of STATUS_NEXT (0), STATUS_EXIT (-1), or a positive integer
+             representing a 1-based index to jump to.
     """
     rt.TestFile = test_ref
 
@@ -446,8 +417,6 @@ def _run_one_test(
     print("Test Name:", rt.UnitName)
 
     # Start the bottom-row progress UI for this script.
-    # (For hooks, we still show the current suite index but do not mark the
-    # suite item as running/complete.)
     try:
         progress_start(
             test_ref=test_ref,
@@ -461,22 +430,109 @@ def _run_one_test(
         pass
 
     # Main step loop for this test.
-    # NOTE: Ctrl+C can arrive while we're in ProcessScript() or in the sleep.
-    # We catch KeyboardInterrupt here to ensure we always request a clean stop
-    # (instead of letting it bubble out and potentially hang on shutdown).
     ok_pass = None
+    exit_status = STATUS_NEXT
+
     try:
         while (not rt.finished) and (not getattr(rt, "test_done", 0)):
-            ProcessScript()
-            time.sleep(0.01)
-    except KeyboardInterrupt:
-        # Ctrl+C during test execution.
-        # Do best-effort cleanup/logging here, but let the exception bubble so
-        # main() can return an appropriate exit code.
-        _write_interrupt_log("Ctrl+C - user interruption")
-        _stop_can_threads()
-        ok_pass = False
-        raise
+            try:
+                ProcessScript()
+                time.sleep(0.01)
+
+            except KeyboardInterrupt:
+                # Ctrl+C caught. Show the pause menu.
+                try:
+                    progress_disable()
+                except Exception:
+                    pass
+
+                print("\n\n" + "=" * 30)
+                print(" PAUSED BY USER")
+                print("=" * 30)
+                print(" (C)ontinue testing")
+                print(" (S)kip current test")
+                if kind_norm == "test" and all_tests and len(all_tests) > 1:
+                    print(" (J)ump to test...")
+                print(" (E)xit execution")
+                print("-" * 30)
+
+                should_break_loop = False
+
+                while True:
+                    try:
+                        choice = input("Select option: ").strip().lower()
+                    except ValueError:
+                        continue
+
+                    if choice.startswith("c"):
+                        print("Resuming...")
+                        # Reset interrupt count so next Ctrl+C is treated as a pause.
+                        global _SIGINT_COUNT
+                        _SIGINT_COUNT = 0
+                        try:
+                            # Use ENABLE, not install, to force the renderer back on.
+                            progress_enable()
+                        except Exception:
+                            pass
+                        # Break menu loop, continue test loop
+                        break
+
+                    if choice.startswith("s"):
+                        print("Skipping test...")
+                        _write_interrupt_log("Skipped by user command")
+                        rt.test_done = 1
+                        ok_pass = False
+                        exit_status = STATUS_NEXT
+                        should_break_loop = True
+                        break
+
+                    if choice.startswith("e"):
+                        print("Exiting...")
+                        _write_interrupt_log("Aborted by user command")
+                        _stop_can_threads()
+                        rt.finished = 1
+                        exit_status = STATUS_EXIT
+                        should_break_loop = True
+                        break
+
+                    if (
+                        choice.startswith("j")
+                        and kind_norm == "test"
+                        and all_tests
+                        and len(all_tests) > 1
+                    ):
+                        print("\nAvailable Tests:")
+                        for idx, t_name in enumerate(all_tests, start=1):
+                            marker = "   "
+                            if idx == suite_index:
+                                marker = "-> "
+                            elif idx < suite_index:
+                                marker = " * "
+                            print(f"{marker} {idx}. {t_name}")
+
+                        print("\nEnter test number to jump to (or Enter to cancel).")
+                        try:
+                            val = input("Jump to #: ").strip()
+                            if not val:
+                                continue
+                            tgt = int(val)
+                            if 1 <= tgt <= len(all_tests):
+                                print(f"Jumping to test #{tgt}...")
+                                _write_interrupt_log(f"User jumped to test #{tgt}")
+                                rt.test_done = 1
+                                # Do NOT set rt.finished = 1 here; that aborts the entire suite.
+                                ok_pass = False
+                                exit_status = tgt  # Return the target index
+                                should_break_loop = True
+                                break
+                            else:
+                                print("Invalid index.")
+                        except ValueError:
+                            print("Invalid input.")
+                        continue
+
+                if should_break_loop:
+                    break
 
     finally:
         # Mark this script complete in the progress UI.
@@ -490,28 +546,19 @@ def _run_one_test(
         except Exception:
             pass
 
-    return True
+    return exit_status
 
 
 def main() -> int:
-    # Make Ctrl+C predictable: request a clean stop, and avoid interpreter hangs
-    # caused by live non-daemon threads.
+    # Make Ctrl+C predictable.
     _install_sigint_handler()
 
-    # Compute the banner early, but *print it later*.
-    #
-    # Why? The progress UI's "sticky" mode reserves the terminal's top row and
-    # clears it during installation. If we print the banner before installing
-    # the progress UI, it can be immediately wiped/hidden.
-    #
-    # (Disable with: PATSPEAK_BANNER=0)
+    # Compute banner early.
     try:
         banner = startup_banner(base_version=__version__)
     except Exception:
-        # Never let banner/revision logic prevent running tests.
         banner = ""
 
-    # Convenience: show version/revision and exit.
     argv_raw = [str(a or "").strip() for a in sys.argv[1:]]
     if any(a in {"-V", "--version", "--revision"} for a in argv_raw):
         if banner:
@@ -529,16 +576,9 @@ def main() -> int:
                 print(banner)
             print("\nNo test specified...\n")
             print("Examples:")
-            # Preferred (after running scripts/setup_venv and activating the venv):
             print('  pat "RESET.pat"')
             print('  pat 43019-1')
             print(r'  pat 43019-1\43019-1-INPUT-420MA')
-            print('  pat "43019-1\\43019-1-INPUT-420MA.pat" -v')
-            print('  pat "43019-1\\43019-1-INPUT-420MA.pat" -vv')
-            print("")
-            # Fallback (run directly from the repo root):
-            print('  python pat.py "RESET.pat"')
-            print('  python pat.py 43019-1')
             return 2
 
         tests = discover_tests(selector)
@@ -555,13 +595,6 @@ def main() -> int:
         elif rt.Verbose >= 1:
             print("Verbose Enabled")
 
-        # Optional bottom-row progress UI (auto-enabled when stdout is a TTY).
-        # This installs a stdout wrapper that keeps the status line visible
-        # while normal prints scroll above.
-        # Force ANSI / color initialization *before* installing the progress UI.
-        # On Windows, colorama may wrap sys.stdout/sys.stderr when first used.
-        # If that happens after we install the progress wrapper, it can replace it.
-        # Calling color_enabled() here ensures any required wrapping happens first.
         try:
             color_enabled()
         except Exception:
@@ -573,15 +606,13 @@ def main() -> int:
         except Exception:
             pass
 
-        # Print the banner *after* progress UI install so sticky mode can't
-        # overwrite it.
         try:
             if banner:
                 print(banner, flush=True)
         except Exception:
             pass
 
-        # Optional per-folder hook scripts (next to the tests).
+        # Hooks
         hook_start = find_hook_next_to(tests[0], HOOK_START)
         hook_end = find_hook_next_to(tests[-1], HOOK_END)
         transition_hooks: list[str] = []
@@ -590,7 +621,6 @@ def main() -> int:
             if h:
                 transition_hooks.append(h)
 
-        # Keep hook refs unique (but preserve first-seen order).
         def _uniq(items: list[str]) -> list[str]:
             seen: set[str] = set()
             out: list[str] = []
@@ -609,9 +639,6 @@ def main() -> int:
         suite_run = len(tests) > 1
         if suite_run:
             dbc_root = str(get_paths().dbc)
-
-            # Preflight *everything* we might run (tests + hooks), but only
-            # show each script once.
             preflight_refs: list[str] = []
             if hook_start:
                 preflight_refs.append(hook_start)
@@ -625,7 +652,7 @@ def main() -> int:
             if not ok:
                 return 1
 
-        # Decide whether we must open channel 1 at startup.
+        # Check PAT channel requirements
         pat_support_refs: list[str] = []
         if hook_start:
             pat_support_refs.append(hook_start)
@@ -637,31 +664,24 @@ def main() -> int:
 
         need_pat_channel = any(test_uses_pat_support(t) for t in pat_support_refs)
 
-        # Initialize globals using the *first* test so DBCs / signal dicts exist
-        # before we start CAN threads.
+        # Initialize globals
         rt.TestFile = tests[0]
         print("\nLoading", str(rt.TestFile) + "...")
         rt.initialize(run_preflight_checks=not suite_run)
 
-        # Start CAN threads (once for the whole run).
+        # Start CAN
         from .can import CANThread, autodetect_can_backend
 
-        # Auto-detect CAN backend; temporarily force the "need ch1" decision.
         saved = getattr(rt, "SuppressPatSupport", "False")
         rt.SuppressPatSupport = "False" if need_pat_channel else "True"
         autodetect_can_backend()
 
-        # If the CAN layer had to fall back to a single available CAN channel,
-        # it will force SUPPRESS_PAT_SUPPORT for the whole process. In that
-        # case we must *not* start CAN-CH1.
         if getattr(rt, "FORCE_SUPPRESS_PAT_SUPPORT", False):
             need_pat_channel = False
             rt.SuppressPatSupport = "True"
         else:
             rt.SuppressPatSupport = saved
 
-        # Threads are daemon threads as a last-resort safety valve: if a driver
-        # call wedges and a clean shutdown can't join, the interpreter won't hang.
         rt.CAN_1 = threading.Thread(
             target=CANThread, args=(0,), daemon=True, name="CAN-CH0"
         )
@@ -675,84 +695,109 @@ def main() -> int:
 
         time.sleep(2)
 
-        # Suite UnitName cache (for scripts that don't specify UUT_DATANAME).
         suite_unit_name: dict = {"name": rt.UnitName or ""}
-
         last_run_abs: str | None = None
 
-        def _run_script(ref: str, kind: str, *, suite_index: int = 0) -> bool:
-            """Run a test/hook by reference, skipping consecutive duplicates."""
+        def _run_script(
+            ref: str, kind: str, *, suite_index: int = 0, all_tests_ref: list[str] | None = None
+        ) -> int:
+            """Run a test/hook. Returns status code (0=next, -1=exit, >0=jump)."""
 
             nonlocal last_run_abs
-
             if not ref:
-                return True
+                return STATUS_NEXT
 
             abs_ref = os.path.abspath(_abs_test_path(ref))
             if last_run_abs is not None and abs_ref.lower() == last_run_abs.lower():
-                # Common case: transition runs after test N and before test N+1.
-                # If both would execute the same file back-to-back, skip the
-                # second invocation.
-                return True
+                return STATUS_NEXT
 
-            ok = _run_one_test(
+            status = _run_one_test(
                 test_ref=ref,
                 suite_unit_name=suite_unit_name,
                 run_preflight_checks=not suite_run,
                 kind=kind,
                 suite_index=int(suite_index or 0),
+                all_tests=all_tests_ref,
             )
+            
+            # If valid run, update duplicate-check cache
             last_run_abs = abs_ref
-            return ok
+            return status
 
-        # Start hook (once, before the first test).
+        # Main suite execution index
+        idx = 1
+        
+        # Start hook
         if hook_start:
-            ok = _run_script(hook_start, "hook-start", suite_index=1)
-            if not ok:
+            status = _run_script(hook_start, "hook-start", suite_index=1, all_tests_ref=tests)
+            if status == STATUS_EXIT:
                 return 0
+            if status > 0:
+                # Jump from start hook? Interpret as jumping to that test index
+                idx = status
+                last_run_abs = None
 
-        # Run tests (with optional transition hook before/after each).
-        for idx, test_ref in enumerate(tests, start=1):
+        # Run tests loop
+        while idx <= len(tests):
             if rt.finished:
                 break
-
+            
+            test_ref = tests[idx - 1]
             print(style(f"\n[{idx}/{len(tests)}] ", fg="gray", bold=True) + str(test_ref))
 
+            # Pre-transition
             transition = find_hook_next_to(test_ref, HOOK_TRANSITION)
             if transition:
-                ok = _run_script(transition, "hook-transition", suite_index=idx)
-                if not ok:
+                status = _run_script(
+                    transition, "hook-transition", suite_index=idx, all_tests_ref=tests
+                )
+                if status == STATUS_EXIT:
                     break
+                if status > 0:
+                    idx = status
+                    last_run_abs = None
+                    continue
 
-            ok = _run_script(test_ref, "test", suite_index=idx)
-            if not ok:
+            # Actual test
+            status = _run_script(test_ref, "test", suite_index=idx, all_tests_ref=tests)
+            if status == STATUS_EXIT:
                 break
+            if status > 0:
+                idx = status
+                last_run_abs = None
+                continue
 
+            # Post-transition
             if transition:
-                ok = _run_script(transition, "hook-transition", suite_index=idx)
-                if not ok:
+                status = _run_script(
+                    transition, "hook-transition", suite_index=idx, all_tests_ref=tests
+                )
+                if status == STATUS_EXIT:
                     break
+                if status > 0:
+                    idx = status
+                    last_run_abs = None
+                    continue
 
-        # End hook (once, after the last test).
+            # Normal advance
+            idx += 1
+
+        # End hook
         if not rt.finished and hook_end:
-            _run_script(hook_end, "hook-end", suite_index=len(tests))
+            _run_script(hook_end, "hook-end", suite_index=len(tests), all_tests_ref=tests)
 
         return 0
 
     except KeyboardInterrupt:
-        # We suppress the stack trace and do best-effort cleanup in finally.
         interrupted = True
         try:
             print("\nInterrupted (Ctrl+C)")
         except Exception:
             pass
-        # Persist what we have so far.
         _write_interrupt_log("Ctrl+C - user interruption")
         return 130
 
     finally:
-        # Clear the bottom-row progress UI so the user's shell prompt doesn't
-        # end up on the same line.
         try:
             progress_disable()
         except Exception:
@@ -760,24 +805,16 @@ def main() -> int:
 
         _stop_can_threads()
 
-        # On some Windows CAN backends (or when vendor driver calls wedge), the
-        # interpreter can still hang on shutdown waiting for stray non-daemon
-        # threads. If the user explicitly requested interruption, make exit
-        # deterministic.
         if interrupted:
             try:
                 sys.stdout.flush()
                 sys.stderr.flush()
             except Exception:
                 pass
-            # Give the threads a brief moment to unwind, then hard-exit.
             try:
                 time.sleep(0.25)
             except Exception:
                 pass
-            # os._exit() bypasses atexit and may skip other cleanup.
-            # Make sure the terminal isn't left with a modified scroll region
-            # (sticky progress UI) before we hard exit.
             try:
                 progress_emergency_restore_terminal()
             except Exception:
@@ -786,9 +823,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    # Last-resort guard: even if a KeyboardInterrupt bubbles past main()
-    # (e.g. if local edits remove the try/except), do not leave the process
-    # half-alive with CAN threads running.
     try:
         raise SystemExit(main())
     except KeyboardInterrupt:
@@ -808,7 +842,6 @@ if __name__ == "__main__":
             progress_disable()
         except Exception:
             pass
-        # Ensure the terminal scroll region is restored even on hard-exit.
         try:
             progress_emergency_restore_terminal()
         except Exception:
