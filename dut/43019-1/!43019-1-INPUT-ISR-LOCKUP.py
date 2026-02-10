@@ -147,8 +147,8 @@ while ModeIndex <= MaxMode:
 
         outstr += "#-----setup 39009-----\n"
         outstr += "#configure\n"
-        outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL : WAIT = 0.2\n"
-        outstr += "Command = 0, MODE1 = 0, MODE2 = 0, Analog_Raw_Value = 0 : NULL\n"
+        outstr += "Command = 82, MODE2 = 0 : NULL : WAIT = 0.2\n"
+        outstr += "Command = 0, MODE2 = 0 : NULL\n"
         outstr += "Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A = " + Port3AMode + ", MODE3B = " + Port3BMode + ", MODE4A = " + Port4AMode + ", MODE4B = " + Port4BMode + ", MODE5A = 0, MODE5B = 0 : NULL : WAIT = 0.2\n"
         outstr += "Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL\n"
 
@@ -171,7 +171,8 @@ while ModeIndex <= MaxMode:
             TEST_VOLTS = 5.0
             #outstr += "PwrSetVoltage = " + str(TEST_VOLTS*10) + " : NULL : WAIT = 0.1\n"
             outstr += DeathSweep + " = 1 : NULL : WAIT = 0.1\n"
-            outstr += "SWEEP-RUNNING DEATHSWEEP!\n"
+            outstr += "#SWEEP-RUNNING DEATHSWEEP!\\n"
+            outstr += "PAT dp800/rigol_dp800_sweep_ch2.py --resource USB0::0x1AB1::0x0E11::DP8C180100022::INSTR --channel 2 --start 4.32 --stop 4.43 --step 0.001 --mode updown --dwell 0.020 --opc-every 25 --output-off-at-end\\n"
             outstr += DeathSweep + " = 0 : NULL : WAIT = 0.1\n"
             outstr += "#test for lockup\n"
             outstr += "UUT_TXCHECK-2.0\n"
@@ -186,7 +187,8 @@ while ModeIndex <= MaxMode:
             TEST_VOLTS = 5.0
             #outstr += "PwrSetVoltage = " + str(TEST_VOLTS*10) + " : NULL : WAIT = 0.1\n"
             outstr += DeathSweep + " = 1 : NULL : WAIT = 0.1\n"
-            outstr += "SWEEP-RUNNING DEATHSWEEP!\n"
+            outstr += "#SWEEP-RUNNING DEATHSWEEP!\\n"
+            outstr += "PAT dp800/rigol_dp800_sweep_ch2.py --resource USB0::0x1AB1::0x0E11::DP8C180100022::INSTR --channel 2 --start 4.32 --stop 4.43 --step 0.001 --mode updown --dwell 0.020 --opc-every 25 --output-off-at-end\\n"
             outstr += DeathSweep + " = 0 : NULL : WAIT = 0.1\n"
             outstr += "#test for lockup\n"
             outstr += "UUT_TXCHECK-2.0\n"
