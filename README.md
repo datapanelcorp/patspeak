@@ -346,6 +346,27 @@ If you want a prompt that preserves spaces, use `PAUSE-...`.
 - `END` (**required**) ends the current test and writes the `.log`
 - `PAUSE-<prompt text>` prompts the operator and waits for Enter (spaces preserved)
 
+- `PAT <script> [args...]` run an external script as a **custom step**
+  - Also accepts `PAT-<script> [args...]` (legacy-friendly, like `PAUSE-...`)
+  - Step result is **PASS** when the script exits with code `0`, otherwise **FAIL**
+  - Scripts may optionally print `PATSPEAK_RESULT=PASS` or `PATSPEAK_RESULT=FAIL` to override exit-code interpretation
+  - Script search roots (in order):
+    1. `PATSPEAK_SCRIPT_DIR` (os.pathsep-separated list)
+    2. `<test_folder>/scripts/`
+    3. `<workspace>/scripts/pat_scripts/`
+
+**Example (Rigol DP800 sweep):**
+
+This repo includes an example script at:
+
+- `scripts/pat_scripts/dp800/rigol_dp800_sweep_ch2.py`
+
+You can call it from a `.pat` file like:
+
+```text
+PAT dp800/rigol_dp800_sweep_ch2.py --channel 2 --start 4.00 --stop 5.00 --step 0.001 --mode updown --dwell 0.070 --opc-every 10 --output-off-at-end
+```
+
 > Important: `END` and `SAVE` must be **uppercase exactly**. Preflight will flag other casing as fatal.
 
 ---

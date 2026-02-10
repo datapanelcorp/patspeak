@@ -76,6 +76,16 @@ def _is_control(line: str) -> bool:
     return line == "END" or line == "SAVE" or line.startswith("PAUSE")
 
 
+def _is_pat_command(line: str) -> bool:
+    """Return True if *line* is an external-script PAT step.
+
+    We intentionally require a delimiter after the keyword so we don't
+    misclassify normal signal names like "PAT_ONLY".
+    """
+
+    return line.startswith("PAT-") or line.startswith("PAT ")
+
+
 def _closest(signal: str, universe: Sequence[str], n: int = 3) -> List[str]:
     try:
         return difflib.get_close_matches(signal, universe, n=n, cutoff=0.6)
@@ -253,6 +263,24 @@ def run_preflight(
             )
             continue
 
+        # External script step: PAT <script> [args...] or PAT-<script> ...
+        # The runtime checks these case-sensitively before parsing ':' steps,
+        # so wrong-case usage would fall through and crash as a malformed step.
+        if (upper.startswith("PAT-") or upper.startswith("PAT ")) and not _is_pat_command(stripped):
+            issues.append(
+                Issue(
+                    severity="FATAL",
+                    file_line=file_line,
+                    step=None,
+                    section="LINE",
+                    signal=stripped.split("-", 1)[0].split(" ", 1)[0],
+                    reason="PAT must be uppercase exactly",
+                    line_text=stripped,
+                    hint="Example: PAT my_script.py --arg 1",
+                )
+            )
+            continue
+
         if upper.startswith("UUT_DBC") and not stripped.startswith("UUT_DBC"):
             issues.append(
                 Issue(
@@ -417,6 +445,37 @@ def run_preflight(
                         hint="Use END or SAVE in uppercase.",
                     )
                 )
+            continue
+
+        # -----------------
+        # PAT external-script step (no ':' grammar)
+        # -----------------
+        if _is_pat_command(stripped):
+            # Validate that a script token exists. The runtime will treat a
+            # missing token as a FAIL step (not a crash), but it's almost
+            # certainly a test authoring error.
+            rest = ""
+            if stripped.startswith("PAT-"):
+                rest = stripped.split("-", 1)[1].strip()
+            elif stripped.startswith("PAT "):
+                rest = stripped[len("PAT ") :].strip()
+
+            if not rest:
+                issues.append(
+                    Issue(
+                        severity="ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="LINE",
+                        signal="PAT",
+                        reason="PAT is missing a script name",
+                        line_text=stripped,
+                        hint="Example: PAT dp800_sweep_ch2.py --channel 2",
+                    )
+                )
+
+            # Count this as a step line and move on.
+            step_idx += 1
             continue
 
         # -----------------
