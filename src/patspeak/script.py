@@ -337,6 +337,48 @@ def _handle_pat_command(line: str) -> bool:
     return True
 
 
+def CheckUUTTxTraffic(timeout_s: float = 2.0, tx_node: str = "UUT"):
+    """Wait up to timeout_s seconds for any UUT-transmitted CAN message to be observed.
+
+    "UUT-transmitted" is determined by parsing the loaded UUT DBC's BO_ Tx Node
+    field (sender == tx_node) during runtime.initialize().
+
+    Returns:
+        (ok, seen_id, seen_name)
+    """
+
+    try:
+        msg_ids = getattr(rt, "UUT_TxMsgIds", set()) or set()
+        msg_info = getattr(rt, "UUT_TxMsgInfo", {}) or {}
+    except Exception:
+        msg_ids = set()
+        msg_info = {}
+
+    if not msg_ids:
+        return (False, None, None)
+
+    start_count = int(getattr(rt, "UUT_TxSeenCount", 0) or 0)
+    start_time = time.time()
+
+    while (time.time() - start_time) < float(timeout_s):
+        try:
+            if int(getattr(rt, "UUT_TxSeenCount", 0) or 0) > start_count:
+                seen_id = getattr(rt, "UUT_TxLastSeenId", None)
+                seen_name = None
+                if seen_id is not None:
+                    seen_name = (
+                        msg_info.get(seen_id)
+                        or msg_info.get((seen_id, True))
+                        or msg_info.get((seen_id, False))
+                    )
+                return (True, seen_id, seen_name)
+        except Exception:
+            pass
+        time.sleep(0.01)
+
+    return (False, None, None)
+
+
 def SaveData():
 
     print("Writing Data Collected.")
@@ -472,6 +514,53 @@ def ProcessScript():
     # External custom-step hook: PAT <script> [args...]
     # This must run before we strip spaces and parse ':' step lines.
     if _handle_pat_command(rt.TestLine):
+        return
+
+    # UUT TX traffic check: UUT_TXCHECK-<timeout_s>
+    #
+    # This step blocks (up to timeout) while it listens for any CAN message
+    # transmitted by the UUT (per DBC Tx Node tagging).
+    _compact = (rt.TestLine or "").replace(" ", "")
+    if _compact.startswith("UUT_TXCHECK"):
+        # Optional syntax: UUT_TXCHECK-<timeout_seconds> or UUT_TXCHECK=<timeout_seconds>
+        timeout_s = 2.0
+        try:
+            parts = re.split(r"[-=]", _compact, maxsplit=1)
+            if len(parts) == 2 and parts[1].strip() != "":
+                timeout_s = float(parts[1].strip())
+        except Exception:
+            pass
+
+        ok, seen_id, seen_name = CheckUUTTxTraffic(timeout_s=timeout_s)
+        if ok:
+            detail = f" ({seen_name})" if seen_name else ""
+            msg = str(rt.TestStep).zfill(5) + " PASS: UUT_TXCHECK" + detail
+            rt.UUT_TestLog += msg + "\n"
+            print(colorize_status_line(msg))
+            try:
+                note_step_result(rt.TestStep, passed=True)
+            except Exception:
+                pass
+        else:
+            reason = "no UUT-tagged TX messages seen"
+            if not getattr(rt, "UUT_TxMsgIds", set()):
+                reason = "no messages in DBC tagged with Tx Node UUT"
+            msg = str(rt.TestStep).zfill(5) + " FAIL: UUT_TXCHECK (" + str(reason) + ")"
+            rt.UUT_TestLog += msg + "\n"
+            print(colorize_status_line(msg))
+            rt.FailCount += 1
+            try:
+                note_step_result(rt.TestStep, passed=False)
+            except Exception:
+                pass
+
+        # Advance like a normal test step.
+        rt.TestLine = ""
+        rt.PassTime = 0
+        rt.StepTime = 0
+        rt.WaitDone = 0
+        rt.TestStep += 1
+        rt.tracker_last_time = time.time()
         return
         
     if(rt.TestLine == "SAVE"):

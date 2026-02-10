@@ -86,6 +86,18 @@ def _is_pat_command(line: str) -> bool:
     return line.startswith("PAT-") or line.startswith("PAT ")
 
 
+def _is_uut_txcheck_command(line: str) -> bool:
+    """Return True if *line* is a UUT TX traffic check step.
+
+    Accepted forms:
+      - UUT_TXCHECK
+      - UUT_TXCHECK-2.0
+      - UUT_TXCHECK=2.0
+    """
+
+    return line.startswith("UUT_TXCHECK")
+
+
 def _closest(signal: str, universe: Sequence[str], n: int = 3) -> List[str]:
     try:
         return difflib.get_close_matches(signal, universe, n=n, cutoff=0.6)
@@ -277,6 +289,22 @@ def run_preflight(
                     reason="PAT must be uppercase exactly",
                     line_text=stripped,
                     hint="Example: PAT my_script.py --arg 1",
+                )
+            )
+            continue
+
+        # UUT_TXCHECK is also checked case-sensitively before ':' parsing.
+        if upper.startswith("UUT_TXCHECK") and not stripped.startswith("UUT_TXCHECK"):
+            issues.append(
+                Issue(
+                    severity="FATAL",
+                    file_line=file_line,
+                    step=None,
+                    section="LINE",
+                    signal=stripped.split("-", 1)[0].split("=", 1)[0],
+                    reason="UUT_TXCHECK must be uppercase exactly",
+                    line_text=stripped,
+                    hint="Example: UUT_TXCHECK-2.0",
                 )
             )
             continue
@@ -473,6 +501,49 @@ def run_preflight(
                         hint="Example: PAT dp800_sweep_ch2.py --channel 2",
                     )
                 )
+
+            # Count this as a step line and move on.
+            step_idx += 1
+            continue
+
+        # -----------------
+        # UUT TX traffic check step (no ':' grammar)
+        # -----------------
+        if _is_uut_txcheck_command(stripped):
+            # Optional syntax: UUT_TXCHECK-<timeout_s> or UUT_TXCHECK=<timeout_s>
+            rest = stripped[len("UUT_TXCHECK") :].strip()
+            if rest:
+                if rest[0] not in {"-", "="}:
+                    issues.append(
+                        Issue(
+                            severity="WARN" if mode != "strict" else "ERROR",
+                            file_line=file_line,
+                            step=step_idx,
+                            section="LINE",
+                            signal="UUT_TXCHECK",
+                            reason="Unexpected UUT_TXCHECK syntax (expected '-' or '=' timeout separator)",
+                            line_text=stripped,
+                            hint="Example: UUT_TXCHECK-2.0",
+                        )
+                    )
+                else:
+                    val = rest[1:].strip()
+                    if val:
+                        try:
+                            float(val)
+                        except Exception:
+                            issues.append(
+                                Issue(
+                                    severity="ERROR" if mode != "warn" else "WARN",
+                                    file_line=file_line,
+                                    step=step_idx,
+                                    section="LINE",
+                                    signal="UUT_TXCHECK",
+                                    reason="Timeout value is not a valid number",
+                                    line_text=stripped,
+                                    hint="Example: UUT_TXCHECK-2.0",
+                                )
+                            )
 
             # Count this as a step line and move on.
             step_idx += 1

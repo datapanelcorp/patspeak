@@ -330,6 +330,28 @@ def CANThread(i: int) -> None:
                     data = bytes(getattr(msg, "data", b""))
 
                     if channel_number == 0:
+                        # Track raw UUT-originated traffic (per DBC Tx Node tagging).
+                        # This powers the UUT_TXCHECK PAT command.
+                        try:
+                            ids = getattr(rt, "UUT_TxMsgIds", None)
+                            if ids:
+                                # python-can gives the on-the-wire 11/29-bit arbitration id.
+                                arb_id = int(arbitration_id) & 0x1FFFFFFF
+                                is_ext = bool(getattr(msg, "is_extended_id", False)) or (arb_id > 0x7FF)
+
+                                # Be forgiving about representation mismatches.
+                                if (
+                                    (arb_id, is_ext) in ids
+                                    or (arb_id, True) in ids
+                                    or (arb_id, False) in ids
+                                    or arb_id in ids
+                                ):
+                                    rt.UUT_TxSeenCount = int(getattr(rt, "UUT_TxSeenCount", 0) or 0) + 1
+                                    rt.UUT_TxLastSeen = time.time()
+                                    rt.UUT_TxLastSeenId = arb_id
+                        except Exception:
+                            pass
+
                         decoded = rt.uut_db.decode(arbitration_id, data)
                         if decoded:
                             rt.UUT_Fdbk.update(decoded)
