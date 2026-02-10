@@ -29,8 +29,8 @@ pat 43019-1
 
 2) **Install your CAN vendor drivers** (PATSpeak does *not* install these):
 
-- PEAK PCAN: install **PCAN-Basic**
-- Kvaser on Windows: install **Kvaser CANlib**
+- PEAK PCAN: install **PCAN-Basic** (Download from peak-system.com)
+- Kvaser on Windows: install **Kvaser CANlib** (Download from kvaser.com)
 
 ### 1) Create the local venv + install PATSpeak
 
@@ -51,8 +51,14 @@ That script will:
 
 ### 2) Activate the venv
 
+**Windows (PowerShell):**
 ```powershell
 & .\.venv\Scripts\Activate.ps1
+```
+
+**Linux / Git Bash:**
+```bash
+source .venv/bin/activate
 ```
 
 ### 3) Run a test
@@ -129,7 +135,7 @@ pat.py                  # compatibility shim (python pat.py ...) — optional
 src/patspeak/           # the actual Python package
 
 dbc/                    # DBC files
-  PAT.dbc
+  PAT.dbc               # REQUIRED (unless SUPPRESS_PAT_SUPPORT=True)
   ...
 
 dut/                    # DUT test suites (.pat) and optional generators (.py)
@@ -264,6 +270,7 @@ Parsed once at startup:
 
 - `UUT_DATANAME = <name>` (optional)
   - if present, becomes the `UnitName` and avoids the runtime prompt
+  - **REQUIRED** for headless/automated testing.
 
 - `SUPPRESS_PAT_SUPPORT = True|False` (optional; default `False`)
   - if truthy, PATSpeak runs in “UUT-only” mode
@@ -315,6 +322,7 @@ Supported input forms:
   Meaning: `MeterVolts` must stay within `14.5 ± 0.5` continuously for `0.5s`.
 
 - `SignalName = DATALOG` (record current feedback value; step completes immediately)
+  - **NOTE:** `DATALOG` is a reserved keyword. Do not use it as a signal name in your DBC.
 - `NULL`
 
 #### Optional flags
@@ -347,7 +355,7 @@ If you want a prompt that preserves spaces, use `PAUSE-...`.
 If you place any of these files **next to your tests**, PATSpeak will run them automatically:
 
 - `pat_start.pat` (once, before first test in that folder)
-- `pat_transition.pat` (before and after each test; consecutive duplicates skipped)
+- `pat_transition.pat` (Runs **before AND after** each test; consecutive duplicates skipped)
 - `pat_end.pat` (once, after last test in that folder)
 
 Hook scripts are ignored during folder discovery (they won’t appear as “tests”), but can still be run explicitly.

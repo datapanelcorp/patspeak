@@ -163,7 +163,7 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
             return False
         if s == "END" or s == "SAVE" or s.startswith("PAUSE"):
             return False
-        if s.startswith("UUT_DBC") or s.startswith("UUT_DATANAME") or s.startswith("SUPPRESS_PAT_SUPPORT"):
+        if s.upper().startswith("UUT_DBC") or s.upper().startswith("UUT_DATANAME") or s.upper().startswith("SUPPRESS_PAT_SUPPORT"):
             return False
         return True
 
@@ -173,12 +173,12 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
         TotalSteps = 0
 
     # -----------------
-    # Parse header directives
+    # Parse header directives (updated to be case-insensitive)
     # -----------------
     uut_dbc_name = ""
     for line in Lines:
         s = (line or "").strip()
-        if s.startswith("UUT_DBC"):
+        if s.upper().startswith("UUT_DBC"):
             if "=" not in s:
                 raise SystemExit(f"Malformed UUT_DBC line (missing '='):\n  {s}")
             uut_dbc_name = s.split("=", 1)[1].strip().strip('"').strip("'")
@@ -187,7 +187,7 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
     tmp_dataname = ""
     for line in Lines:
         s = (line or "").strip()
-        if s.startswith("UUT_DATANAME"):
+        if s.upper().startswith("UUT_DATANAME"):
             if "=" not in s:
                 raise SystemExit(f"Malformed UUT_DATANAME line (missing '='):\n  {s}")
             tmp_dataname = s.split("=", 1)[1].strip().strip('"').strip("'")
@@ -198,10 +198,10 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
     if not uut_dbc_name:
         raise SystemExit("No DBC file specified, add 'UUT_DBC = filename.dbc' to script")
 
-    # SUPPRESS_PAT_SUPPORT parsing
+    # SUPPRESS_PAT_SUPPORT parsing (case-insensitive)
     for line in Lines:
         s = (line or "").strip()
-        if s.startswith("SUPPRESS_PAT_SUPPORT"):
+        if s.upper().startswith("SUPPRESS_PAT_SUPPORT"):
             if "=" not in s:
                 raise SystemExit(f"Malformed SUPPRESS_PAT_SUPPORT line (missing '='):\n  {s}")
 
@@ -262,15 +262,18 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
         print("Loading", pat_dbc_name + "...")
         pat_db = CanDb(dbc_filename=pat_path)
         pat_db_for_check = pat_db
-
-        # Ensure signal namespaces don't collide.
-        pat_signals = set(pat_db.iter_signal_names())
+        
+    # Ensure signal namespaces don't collide.
+    # This check now runs even in suppressed mode IF the PAT DBC is available on disk.
+    if pat_db_for_check:
+        pat_signals = set(pat_db_for_check.iter_signal_names())
         uut_signals = set(uut_db.iter_signal_names())
         dupes = pat_signals.intersection(uut_signals)
         if dupes:
             dupe = sorted(dupes)[0]
             raise SystemExit(f"Duplicate Signal Found, Aborting... {dupe}")
 
+    if pat_db:
         # Initialize PAT feedback dictionary.
         for message in pat_db.messages:
             for s in message.signals:
