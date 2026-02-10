@@ -137,6 +137,7 @@ def ProcessScript():
         the_prompt = rt.TestLine.split("-")
         yn = input(the_prompt[1])
         rt.TestLine = "" #clear to stop further processing
+        rt.tracker_last_time = time.time() # <--- ADD THIS LINE
         
     if(rt.TestLine == "SAVE"):
         SaveData()
