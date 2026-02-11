@@ -86,10 +86,10 @@ while ModeIndex <= MaxMode:
         Port4BMode = IN_MODE_OFF
         
         if (ModeIndex == 0):
-            Port3AMode = IN_MODE_FREQ 
-            Port3BMode = IN_MODE_DPOS
-            Port4AMode = IN_MODE_FREQ
-            Port4BMode = IN_MODE_DPOS
+            Port3AMode = IN_MODE_A05V 
+            Port3BMode = IN_MODE_A05V
+            Port4AMode = IN_MODE_A05V
+            Port4BMode = IN_MODE_A05V
 
         elif (ModeIndex == 1):
             Port3AMode = IN_MODE_A05V
