@@ -17,6 +17,7 @@ from __future__ import annotations
 
 from datetime import datetime
 import os
+import re
 from typing import Any
 
 from .can_db import CanDb
@@ -43,6 +44,78 @@ FORCE_SUPPRESS_PAT_SUPPORT: bool = False
 _FORCE_SUPPRESS_PAT_SUPPORT_ANNOUNCED: bool = False
 
 
+# -----------------
+# UUT TX traffic tracking support
+# -----------------
+#
+# The legacy PATSpeak scripts can include a step like:
+#   UUT_TXCHECK-2.0
+#
+# That step waits up to N seconds for *any* CAN message transmitted by the
+# device-under-test to be observed on the UUT bus.
+#
+# We determine which messages are "UUT-transmitted" by reading the raw DBC
+# 'BO_' Tx Node field (the last token on the BO_ line). This intentionally
+# mirrors the older tx-branch implementation so DBC authoring behavior is the
+# source of truth.
+
+
+_DBC_BO_RE = re.compile(r"^BO_\s+(\d+)\s+([A-Za-z0-9_]+)\s*:\s*(\d+)\s+([A-Za-z0-9_]+)")
+
+# SocketCAN-style ID flags that sometimes appear in DBC exports (e.g. ID ORed
+# with 0x80000000 for extended frames).
+_CAN_EFF_FLAG = 0x80000000
+_CAN_RTR_FLAG = 0x40000000
+_CAN_ERR_FLAG = 0x20000000
+_CAN_EFF_MASK = 0x1FFFFFFF
+_CAN_SFF_MASK = 0x7FF
+
+
+def _normalize_dbc_bo_id(raw_id: int) -> tuple[int, bool]:
+    """Normalize a DBC BO_ message ID to (arbitration_id, is_extended).
+
+    Some DBC exports store extended-frame messages as SocketCAN-style can_id
+    values with flags ORed in (e.g., CAN_EFF_FLAG=0x80000000). python-can
+    exposes the on-the-wire arbitration_id without these flag bits, so we
+    strip them here to ensure matching works.
+    """
+
+    arb = int(raw_id) & _CAN_EFF_MASK
+    is_ext = bool(int(raw_id) & _CAN_EFF_FLAG) or (arb > _CAN_SFF_MASK)
+    if not is_ext:
+        arb = arb & _CAN_SFF_MASK
+    return arb, is_ext
+
+
+def _dbc_get_tx_messages_by_node(
+    dbc_filename: str, tx_node: str = "UUT"
+) -> tuple[set[tuple[int, bool]], dict[tuple[int, bool], str]]:
+    """Parse a .dbc and return (ids_set, id_to_name) for messages sent by tx_node."""
+
+    ids: set[tuple[int, bool]] = set()
+    info: dict[tuple[int, bool], str] = {}
+
+    try:
+        with open(dbc_filename, "r", encoding="utf-8", errors="ignore") as f:
+            for line in f:
+                m = _DBC_BO_RE.match(line.strip())
+                if not m:
+                    continue
+                raw_id = int(m.group(1))
+                msg_id, is_ext = _normalize_dbc_bo_id(raw_id)
+                msg_name = m.group(2)
+                sender = m.group(4)
+                if sender == tx_node:
+                    ids.add((msg_id, is_ext))
+                    info[(msg_id, is_ext)] = msg_name
+    except FileNotFoundError:
+        pass
+    except OSError:
+        pass
+
+    return ids, info
+
+
 def initialize(*, run_preflight_checks: bool = True) -> None:
     """Reset globals and load DBC(s) for the current ``TestFile``."""
 
@@ -58,6 +131,7 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
     global CAN_INTERFACE, CAN_CHANNELS, CAN_BITRATE, TotalSteps
     global DBCPath
     global HomePath, TestDir
+    global UUT_TxMsgIds, UUT_TxMsgInfo, UUT_TxSeenCount, UUT_TxLastSeen, UUT_TxLastSeenId
 
     # -----------------
     # Baseline defaults
@@ -90,6 +164,14 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
     HeaderAdded = 0
     FailCount = 0
     TotalSteps = 0
+
+    # UUT traffic tracking (messages whose Tx Node is tagged 'UUT' in the
+    # selected UUT DBC). This powers the UUT_TXCHECK command.
+    UUT_TxMsgIds = set()
+    UUT_TxMsgInfo = {}
+    UUT_TxSeenCount = 0
+    UUT_TxLastSeen = 0.0
+    UUT_TxLastSeenId = None
 
     # Default: PAT support enabled unless suppressed by script.
     SuppressPatSupport = "False"
@@ -245,6 +327,18 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
     # Load DBC(s)
     # -----------------
     uut_path = os.path.join(DBCPath, uut_dbc_name)
+
+    # Precompute IDs of messages tagged as being transmitted by the UUT.
+    # This powers the UUT_TXCHECK command.
+    UUT_TxMsgIds, UUT_TxMsgInfo = _dbc_get_tx_messages_by_node(uut_path, tx_node="UUT")
+    if len(UUT_TxMsgIds) == 0:
+        print(
+            "WARNING: No BO_ messages with Tx Node 'UUT' found in the selected UUT_DBC. "
+            "UUT_TXCHECK will always fail."
+        )
+    else:
+        print(f"UUT_TXCHECK: monitoring {len(UUT_TxMsgIds)} message IDs tagged Tx Node 'UUT'.")
+
     print("Loading", uut_dbc_name + "...")
     uut_db = CanDb(dbc_filename=uut_path)
 
