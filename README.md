@@ -397,6 +397,22 @@ If you want a prompt that preserves spaces, use `PAUSE-...`.
   - passes when traffic is seen before timeout (default timeout: `2.0s`)
   - fails if no UUT-tagged TX traffic is observed
 
+- `SEND_CAN <channel> <id> [b0 b1 ...]`
+  - sends a one-shot raw CAN frame on the selected channel
+  - `<channel>` accepts `CH0` or `CH1` (also `0` or `1`)
+  - `<id>` accepts decimal or `0x...` hex, range `0..0x1FFFFFFF`
+  - data bytes are optional, each `0..255`, max 8 bytes
+  - `CH1` requires PAT support enabled and an active channel-1 CAN thread
+  - step is synchronous: **PASS** on successful send, **FAIL** on parse/channel/send timeout/send error
+
+  Examples:
+
+  ```text
+  SEND_CAN CH0 0x18FED927 5 5 1 9 7 7 0 0
+  SEND_CAN CH1 0x123 0x05 0x00 0xFF
+  SEND_CAN 0 100
+  ```
+
 ### PAT external script environment
 
 When PATSpeak runs a `PAT` script, it provides these env vars:
@@ -418,7 +434,7 @@ You can call it from a `.pat` file like:
 PAT dp800/rigol_dp800_sweep_ch2.py --channel 2 --start 4.00 --stop 5.00 --step 0.001 --mode updown --dwell 0.070 --opc-every 10 --output-off-at-end
 ```
 
-> Important: `END` and `SAVE` must be **uppercase exactly**. Preflight will flag other casing as fatal.
+> Important: keyword case is significant. Use uppercase for control/special commands and directives (for example: `END`, `SAVE`, `PAT`, `UUT_TXCHECK`, `SEND_CAN`, `UUT_DBC`, `UUT_DATANAME`, `SUPPRESS_PAT_SUPPORT`). Preflight flags wrong-case forms.
 
 ---
 
@@ -467,6 +483,7 @@ Notes:
 
 - If only one CAN channel is available, PATSpeak automatically forces UUT-only mode.
 - In that state, PAT channel traffic is suppressed even if tests do not set `SUPPRESS_PAT_SUPPORT=True`.
+- In UUT-only mode, `SEND_CAN CH1 ...` will fail (use `CH0`).
 
 ---
 

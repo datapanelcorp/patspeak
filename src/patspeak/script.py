@@ -10,11 +10,29 @@ from pathlib import Path
 from datetime import datetime
 import patspeak.runtime as rt
 from datetime import timedelta
+from .can import send_raw_can
 from .console import colorize_status_line, make_log_path, make_csv_path
 from .progress import note_step_started, note_step_result
 
 
 _PATSPEAK_RESULT_RE = re.compile(r"^\s*PATSPEAK_RESULT\s*=\s*(PASS|FAIL)\s*$", re.IGNORECASE)
+
+
+def _parse_int_auto(tok: str) -> int:
+    """Parse an int token as decimal unless it has a 0x prefix."""
+
+    t = (tok or "").strip()
+    base = 16 if t.lower().startswith("0x") else 10
+    return int(t, base)
+
+
+def _fmt_bytes_hex(data: bytes | bytearray | list[int]) -> str:
+    try:
+        if not isinstance(data, (bytes, bytearray)):
+            data = bytes(int(b) & 0xFF for b in data)
+        return " ".join(f"{b:02X}" for b in data)
+    except Exception:
+        return ""
 
 
 def _iter_script_roots() -> list[Path]:
@@ -560,6 +578,128 @@ def ProcessScript():
             if not getattr(rt, "UUT_TxMsgIds", set()):
                 reason = "no messages in DBC tagged with Tx Node UUT"
             msg = str(rt.TestStep).zfill(5) + " FAIL: UUT_TXCHECK (" + str(reason) + ")"
+            rt.UUT_TestLog += msg + "\n"
+            print(colorize_status_line(msg))
+            rt.FailCount += 1
+            try:
+                note_step_result(rt.TestStep, passed=False)
+            except Exception:
+                pass
+
+        # Advance like a normal test step.
+        rt.TestLine = ""
+        rt.PassTime = 0
+        rt.StepTime = 0
+        rt.WaitDone = 0
+        rt.TestStep += 1
+        rt.tracker_last_time = time.time()
+        return
+
+    # SEND_CAN raw CAN frame: SEND_CAN CH0 <id> [b0 b1 ...]
+    #
+    # Example:
+    #   SEND_CAN CH0 0x18FED927 5 5 1 9 7 7 0 0
+    #
+    # ID and bytes accept either decimal (default) or hex prefixed by 0x.
+    stripped = (rt.TestLine or "").strip()
+    if stripped == "SEND_CAN" or stripped.startswith("SEND_CAN "):
+        tokens = stripped.split()
+
+        ok = False
+        reason = None
+
+        # Parse: SEND_CAN <channel> <id> [bytes...]
+        try:
+            if len(tokens) < 3:
+                raise ValueError("missing args (expected: SEND_CAN CH0 <id> [b0 b1 ...])")
+
+            ch_tok = tokens[1].strip().upper()
+            id_tok = tokens[2].strip()
+            data_toks = tokens[3:]
+
+            ch = None
+            if ch_tok.startswith("CH") and ch_tok[2:].isdigit():
+                ch = int(ch_tok[2:])
+            elif ch_tok.isdigit():
+                ch = int(ch_tok)
+
+            if ch not in (0, 1):
+                raise ValueError(f"invalid channel {tokens[1]!r} (expected CH0 or CH1)")
+
+            # If CH1 is requested but PAT support is suppressed, fail early.
+            if ch == 1:
+                if getattr(rt, "SuppressPatSupport", "True") == "True":
+                    raise ValueError("CH1 unavailable (SUPPRESS_PAT_SUPPORT=True)")
+                th = getattr(rt, "CAN_2", None)
+                if th is None or (hasattr(th, "is_alive") and not th.is_alive()):
+                    raise ValueError("CH1 unavailable (CAN thread not running)")
+
+            arb = _parse_int_auto(id_tok)
+            if arb < 0 or arb > 0x1FFFFFFF:
+                raise ValueError("CAN id out of range (expected 0..0x1FFFFFFF)")
+
+            data: list[int] = []
+            for bt in data_toks:
+                b = _parse_int_auto(bt)
+                if b < 0 or b > 255:
+                    raise ValueError(f"data byte out of range (0..255): {bt!r}")
+                data.append(int(b))
+
+            if len(data) > 8:
+                raise ValueError(f"too many data bytes ({len(data)}); max is 8")
+
+            ok, err = send_raw_can(
+                channel_number=int(ch),
+                arbitration_id=int(arb),
+                data=data,
+                # Let send_raw_can infer extended-id based on id > 0x7FF.
+                is_extended_id=None,
+            )
+            if not ok:
+                raise RuntimeError(err or "CAN send failed")
+
+        except Exception as e:
+            ok = False
+            reason = str(e)
+
+        # Log step result.
+        if ok:
+            ch_s = tokens[1].strip().upper()
+            try:
+                # Normalize CH token to CH0/CH1 for display.
+                if ch_s.isdigit():
+                    ch_s = "CH" + ch_s
+            except Exception:
+                pass
+
+            try:
+                arb_s = int(_parse_int_auto(tokens[2]))
+            except Exception:
+                arb_s = 0
+
+            try:
+                payload = [int(_parse_int_auto(t)) & 0xFF for t in tokens[3:]]
+            except Exception:
+                payload = []
+
+            msg = (
+                str(rt.TestStep).zfill(5)
+                + f" PASS: SEND_CAN {ch_s} 0x{arb_s:X} : "
+                + _fmt_bytes_hex(payload)
+            )
+            rt.UUT_TestLog += msg + "\n"
+            print(colorize_status_line(msg))
+            try:
+                note_step_result(rt.TestStep, passed=True)
+            except Exception:
+                pass
+        else:
+            msg = (
+                str(rt.TestStep).zfill(5)
+                + " FAIL: SEND_CAN ("
+                + str(reason or "unknown error")
+                + ")"
+            )
             rt.UUT_TestLog += msg + "\n"
             print(colorize_status_line(msg))
             rt.FailCount += 1

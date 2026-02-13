@@ -98,6 +98,19 @@ def _is_uut_txcheck_command(line: str) -> bool:
     return line.startswith("UUT_TXCHECK")
 
 
+def _is_send_can_command(line: str) -> bool:
+    """Return True if *line* is a raw CAN send step.
+
+    Accepted form:
+      - SEND_CAN CH0 <id> [b0 b1 ...]
+
+    We require a delimiter after the keyword so we don't misclassify a
+    normal signal name like "SEND_CAN_ENABLE".
+    """
+
+    return line == "SEND_CAN" or line.startswith("SEND_CAN ")
+
+
 def _closest(signal: str, universe: Sequence[str], n: int = 3) -> List[str]:
     try:
         return difflib.get_close_matches(signal, universe, n=n, cutoff=0.6)
@@ -305,6 +318,22 @@ def run_preflight(
                     reason="UUT_TXCHECK must be uppercase exactly",
                     line_text=stripped,
                     hint="Example: UUT_TXCHECK-2.0",
+                )
+            )
+            continue
+
+        # SEND_CAN is also checked case-sensitively before ':' parsing.
+        if (upper == "SEND_CAN" or upper.startswith("SEND_CAN ")) and not _is_send_can_command(stripped):
+            issues.append(
+                Issue(
+                    severity="FATAL",
+                    file_line=file_line,
+                    step=None,
+                    section="LINE",
+                    signal=stripped.split(" ", 1)[0],
+                    reason="SEND_CAN must be uppercase exactly",
+                    line_text=stripped,
+                    hint="Example: SEND_CAN CH0 0x18FED927 5 5 1 9 7 7 0 0",
                 )
             )
             continue
@@ -544,6 +573,167 @@ def run_preflight(
                                     hint="Example: UUT_TXCHECK-2.0",
                                 )
                             )
+
+            # Count this as a step line and move on.
+            step_idx += 1
+            continue
+
+        # -----------------
+        # SEND_CAN raw CAN step (no ':' grammar)
+        # -----------------
+        if _is_send_can_command(stripped):
+            tokens = stripped.split()
+
+            # Minimal form: SEND_CAN CH0 <id>
+            if len(tokens) < 3:
+                issues.append(
+                    Issue(
+                        severity="ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="LINE",
+                        signal="SEND_CAN",
+                        reason="SEND_CAN is missing required fields (expected: SEND_CAN CH0 <id> [b0 b1 ...])",
+                        line_text=stripped,
+                        hint="Example: SEND_CAN CH0 0x18FED927 5 5 1 9 7 7 0 0",
+                    )
+                )
+                step_idx += 1
+                continue
+
+            ch_tok = tokens[1].strip().upper()
+            id_tok = tokens[2].strip()
+            data_toks = tokens[3:]
+
+            # Channel parsing: CH0/CH1 (also allow bare 0/1 for convenience).
+            ch: int | None = None
+            if ch_tok.startswith("CH") and ch_tok[2:].isdigit():
+                try:
+                    ch = int(ch_tok[2:])
+                except Exception:
+                    ch = None
+            elif ch_tok.isdigit():
+                try:
+                    ch = int(ch_tok)
+                except Exception:
+                    ch = None
+
+            if ch not in (0, 1):
+                issues.append(
+                    Issue(
+                        severity="ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="LINE",
+                        signal="SEND_CAN",
+                        reason=f"Invalid channel token {tokens[1]!r} (expected CH0 or CH1)",
+                        line_text=stripped,
+                        hint="Example: SEND_CAN CH0 0x18FED927 5 5 1 9 7 7 0 0",
+                    )
+                )
+                step_idx += 1
+                continue
+
+            if ch == 1 and not pat_support_active:
+                issues.append(
+                    Issue(
+                        severity="ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="LINE",
+                        signal="SEND_CAN",
+                        reason="SEND_CAN CH1 requires PAT support (but SUPPRESS_PAT_SUPPORT=True for this run)",
+                        line_text=stripped,
+                        hint="Use CH0 or remove SUPPRESS_PAT_SUPPORT = True.",
+                    )
+                )
+                step_idx += 1
+                continue
+
+            def _parse_int_auto(tok: str) -> int:
+                t = (tok or "").strip()
+                base = 16 if t.lower().startswith("0x") else 10
+                return int(t, base)
+
+            # Arbitration ID
+            try:
+                arb = _parse_int_auto(id_tok)
+            except Exception:
+                issues.append(
+                    Issue(
+                        severity="ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="LINE",
+                        signal="SEND_CAN",
+                        reason=f"CAN id is not a valid integer: {id_tok!r}",
+                        line_text=stripped,
+                        hint="Example: SEND_CAN CH0 0x18FED927 5 5 1 9 7 7 0 0",
+                    )
+                )
+                step_idx += 1
+                continue
+
+            if arb < 0 or arb > 0x1FFFFFFF:
+                issues.append(
+                    Issue(
+                        severity="ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="LINE",
+                        signal="SEND_CAN",
+                        reason="CAN id out of range (expected 0..0x1FFFFFFF)",
+                        line_text=stripped,
+                    )
+                )
+                step_idx += 1
+                continue
+
+            # Data bytes
+            if len(data_toks) > 8:
+                issues.append(
+                    Issue(
+                        severity="ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="LINE",
+                        signal="SEND_CAN",
+                        reason=f"Too many data bytes ({len(data_toks)}); max is 8",
+                        line_text=stripped,
+                    )
+                )
+                step_idx += 1
+                continue
+
+            for bt in data_toks:
+                try:
+                    b = _parse_int_auto(bt)
+                except Exception:
+                    issues.append(
+                        Issue(
+                            severity="ERROR",
+                            file_line=file_line,
+                            step=step_idx,
+                            section="LINE",
+                            signal="SEND_CAN",
+                            reason=f"Data byte is not a valid integer: {bt!r}",
+                            line_text=stripped,
+                        )
+                    )
+                    break
+                if b < 0 or b > 255:
+                    issues.append(
+                        Issue(
+                            severity="ERROR",
+                            file_line=file_line,
+                            step=step_idx,
+                            section="LINE",
+                            signal="SEND_CAN",
+                            reason=f"Data byte out of range (0..255): {bt!r}",
+                            line_text=stripped,
+                        )
+                    )
+                    break
 
             # Count this as a step line and move on.
             step_idx += 1

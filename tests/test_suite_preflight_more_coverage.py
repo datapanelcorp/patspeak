@@ -235,3 +235,47 @@ def test_suite_preflight_non_hard_fail_returns_false(monkeypatch, tmp_path):
 
     ok = preflight.suite_preflight([str(test_path)], dut_root=str(tmp_path), dbc_root=str(dbc_root))
     assert ok is False
+
+
+def test_suite_preflight_empty_list_when_mode_not_off(monkeypatch, tmp_path):
+    monkeypatch.setenv("PATSPEAK_PREFLIGHT_MODE", "error")
+    assert preflight.suite_preflight([], dut_root=str(tmp_path), dbc_root=str(tmp_path)) is True
+
+
+def test_suite_preflight_warn_mode_sets_hard_fail_on_fatal(monkeypatch, tmp_path):
+    monkeypatch.setenv("PATSPEAK_PREFLIGHT_MODE", "warn")
+    dbc_root = tmp_path / "dbc"
+    dbc_root.mkdir()
+    (dbc_root / "uut.dbc").write_text("x", encoding="utf-8")
+    (dbc_root / "PAT.dbc").write_text("x", encoding="utf-8")
+
+    # Missing END -> FATAL in run_preflight. In warn mode this still becomes hard-fail.
+    test_path = tmp_path / "fatal_warn.pat"
+    test_path.write_text("UUT_DBC = uut.dbc\nNULL:NULL\n", encoding="utf-8")
+
+    ok = preflight.suite_preflight([str(test_path)], dut_root=str(tmp_path), dbc_root=str(dbc_root))
+    assert ok is False
+
+
+def test_suite_preflight_directives_without_equals_hit_scan_continue_paths(monkeypatch, tmp_path):
+    monkeypatch.setenv("PATSPEAK_PREFLIGHT_MODE", "error")
+    dbc_root = tmp_path / "dbc"
+    dbc_root.mkdir()
+    (dbc_root / "uut.dbc").write_text("x", encoding="utf-8")
+    (dbc_root / "PAT.dbc").write_text("x", encoding="utf-8")
+
+    test_path = tmp_path / "scan_continue.pat"
+    test_path.write_text(
+        "  # leading comment\n"
+        "UUT_DBC uut.dbc\n"
+        "SUPPRESS_PAT_SUPPORT maybe\n"
+        "UUT_DBC = uut.dbc\n"
+        "NULL:NULL\n"
+        "END\n",
+        encoding="utf-8",
+    )
+
+    ok = preflight.suite_preflight([str(test_path)], dut_root=str(tmp_path), dbc_root=str(dbc_root))
+    # Scan phase continues, but run_preflight correctly treats malformed
+    # directives as fatal.
+    assert ok is False

@@ -25,6 +25,9 @@ from __future__ import annotations
 
 import os
 import time
+import queue
+import threading
+from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 import patspeak.runtime as rt
@@ -40,6 +43,114 @@ else:
 
 
 DEFAULT_BITRATE = 250_000
+
+
+# -----------------
+# Raw CAN TX support (SEND_CAN)
+# -----------------
+
+
+@dataclass
+class RawTxRequest:
+    """A one-shot raw CAN transmission request.
+
+    This is used by the SEND_CAN PAT command to push a raw frame to the CAN
+    thread for a given channel and optionally wait for the send attempt to
+    complete.
+    """
+
+    arbitration_id: int
+    data: bytes
+    is_extended_id: bool
+    done: threading.Event
+    ok: bool | None = None
+    error: str | None = None
+
+
+# Per-channel raw TX queues.
+_RAW_TX_QUEUES: dict[int, "queue.Queue[RawTxRequest]"] = {
+    0: queue.Queue(),
+    1: queue.Queue(),
+}
+
+
+def send_raw_can(
+    *,
+    channel_number: int,
+    arbitration_id: int,
+    data: bytes | bytearray | Sequence[int] = b"",
+    is_extended_id: bool | None = None,
+    timeout_s: float = 0.25,
+) -> tuple[bool, str | None]:
+    """Request a one-shot raw CAN frame send on a given channel.
+
+    This does *not* open a new bus. It hands the request to the existing
+    CAN thread so we don't fight over the hardware handle.
+
+    Returns:
+        (ok, error)
+    """
+
+    try:
+        ch = int(channel_number)
+    except Exception:
+        return False, f"invalid channel: {channel_number!r}"
+
+    if ch not in (0, 1):
+        return False, f"invalid channel: {ch} (expected 0 or 1)"
+
+    try:
+        arb = int(arbitration_id)
+    except Exception:
+        return False, f"invalid arbitration id: {arbitration_id!r}"
+
+    if arb < 0:
+        return False, "arbitration id must be >= 0"
+    if arb > 0x1FFFFFFF:
+        return False, "arbitration id must be <= 0x1FFFFFFF (29-bit max)"
+
+    if is_extended_id is None:
+        is_ext = arb > 0x7FF
+    else:
+        is_ext = bool(is_extended_id)
+
+    # Coerce data.
+    try:
+        if isinstance(data, (bytes, bytearray)):
+            payload = bytes(data)
+        else:
+            payload = bytes(int(x) & 0xFF for x in data)
+    except Exception:
+        return False, "invalid data payload"
+
+    # Classic CAN is 0..8 bytes. The rest of PATSpeak assumes classic CAN.
+    if len(payload) > 8:
+        return False, f"data payload too long ({len(payload)} bytes); max is 8"
+
+    # Hand to the CAN thread.
+    q = _RAW_TX_QUEUES.get(ch)
+    if q is None:
+        return False, f"CAN channel {ch} is not available"
+
+    done = threading.Event()
+    req = RawTxRequest(
+        arbitration_id=arb,
+        data=payload,
+        is_extended_id=is_ext,
+        done=done,
+    )
+    try:
+        q.put(req, block=False)
+    except Exception as e:
+        return False, f"failed to queue CAN TX: {e}"
+
+    # Wait for the CAN thread to attempt the send.
+    if not done.wait(timeout=float(timeout_s)):
+        return False, f"timeout waiting for CAN{ch} thread to send"
+
+    if req.ok:
+        return True, None
+    return False, req.error or "CAN send failed"
 
 
 def _require_python_can() -> None:
@@ -362,6 +473,57 @@ def CANThread(i: int) -> None:
                                 rt.PAT_Fdbk.update(decoded)
             except Exception:
                 # Keep looping; a malformed frame shouldn't kill the test.
+                pass
+
+            # -----------------
+            # TX: one-shot raw frames (SEND_CAN)
+            # -----------------
+            try:
+                q = _RAW_TX_QUEUES.get(channel_number)
+                if q is not None:
+                    while True:
+                        try:
+                            req = q.get_nowait()
+                        except queue.Empty:
+                            break
+
+                        try:
+                            if trace_tx:
+                                ext = " EXT" if req.is_extended_id else ""
+                                step = getattr(rt, "TestStep", None)
+                                step_s = (
+                                    str(step).zfill(5) + " "
+                                    if isinstance(step, int)
+                                    else ""
+                                )
+                                test = os.path.basename(str(getattr(rt, "TestFile", "") or ""))
+                                if test:
+                                    test = f" [{test}]"
+
+                                print(
+                                    step_s
+                                    + f"CAN{channel_number} SEND_CAN 0x{int(req.arbitration_id):X}{ext} : "
+                                    + " ".join(f"{b:02X}" for b in req.data)
+                                    + test
+                                )
+
+                            out = can.Message(
+                                arbitration_id=req.arbitration_id,
+                                data=req.data,
+                                is_extended_id=req.is_extended_id,
+                            )
+                            bus.send(out)
+                            req.ok = True
+                        except Exception as e:
+                            req.ok = False
+                            req.error = str(e)
+                        finally:
+                            try:
+                                req.done.set()
+                            except Exception:
+                                pass
+            except Exception:
+                # Never allow SEND_CAN plumbing to break the CAN thread.
                 pass
 
             # -----------------
