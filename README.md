@@ -15,7 +15,7 @@ The repo is intended to be operator-friendly: after setup, an operator can run a
 pat 43019-1
 ```
 
-…where `43019-1` is a folder under `dut/`.
+...where `43019-1` is a folder under `dut/`.
 
 ---
 
@@ -25,7 +25,7 @@ pat 43019-1
 
 1) **Install Python 3.10+** (from python.org). During install, check:
 
-- ✅ “Add Python to PATH”
+- "Add Python to PATH"
 
 2) **Install your CAN vendor drivers** (PATSpeak does *not* install these):
 
@@ -91,7 +91,7 @@ Example output:
 PATSpeak 0.2.0 (a1b2c3d)
 ```
 
-If PATSpeak can’t determine a revision (for example: running from a source zip
+If PATSpeak can't determine a revision (for example: running from a source zip
 without a `.git/` folder, or `git` is not installed), it will fall back to:
 
 ```text
@@ -100,7 +100,7 @@ PATSpeak 0.2.0
 
 ### No activation option
 
-If you don’t want to activate the venv:
+If you don't want to activate the venv:
 
 ```powershell
 .\scripts\run_pat.ps1 43019-1
@@ -117,11 +117,16 @@ By default, PATSpeak looks for a workspace containing both `dbc/` and `dut/` by 
 If you want to run `pat` from *any* folder, set:
 
 - `PATSPEAK_HOME` = the workspace root (the folder that contains `dbc/` and `dut/`)
+- `PATSPEAK_DUT_DIR` = override path to the `dut/` folder
+- `PATSPEAK_DBC_DIR` = override path to the `dbc/` folder
 
 Example (PowerShell):
 
 ```powershell
 setx PATSPEAK_HOME "C:\path\to\patspeak"
+# optional split overrides:
+setx PATSPEAK_DUT_DIR "D:\lab\pat-tests\dut"
+setx PATSPEAK_DBC_DIR "D:\lab\pat-tests\dbc"
 ```
 
 ---
@@ -130,7 +135,7 @@ setx PATSPEAK_HOME "C:\path\to\patspeak"
 
 ```
 pyproject.toml          # package + dependencies + console script (pat)
-pat.py                  # compatibility shim (python pat.py ...) — optional
+pat.py                  # compatibility shim (python pat.py ...) - optional
 
 src/patspeak/           # the actual Python package
 
@@ -147,7 +152,6 @@ results/                # runtime output (auto-created)
   # (files directly under dut/ write directly into results/)
 
 scripts/                # setup helpers + convenience runners
-extras/legacy_ui/       # old pygame UI code (not used on Windows)
 
 tests/                  # pytest unit tests
 ```
@@ -209,11 +213,33 @@ You can control it via environment variables:
 - `PATSPEAK_PROGRESS_MODE=auto|sticky|compat` (default: `auto`)
   - `sticky` uses ANSI cursor control (smoothest, no flicker)
   - `compat` uses inline redraw (most compatible)
+- `PATSPEAK_STEPBAR_STYLE=overview|scroll|hybrid` (default: `overview`)
+  - `overview` shows a downsampled full-script bar
+  - `scroll` shows a recent-step tape
+  - `hybrid` combines both views (overview + tape)
+
+### Color output
+
+Color is auto-enabled for interactive terminals. You can override it with:
+
+- `PATSPEAK_COLOR=auto|always|never` (default: `auto`)
+- `NO_COLOR=1` to disable ANSI color output
 
 ### Verbosity
 
 - `-v` / `--verbose`: echo comments and show signal setup
 - `-vv` / `--super-verbose`: trace TX diffs and echo consumed `.pat` lines
+
+### Preflight controls
+
+Preflight runs before CAN execution to catch script syntax and DBC signal issues.
+
+- `PATSPEAK_PREFLIGHT_MODE=off|warn|error|strict` (default: `error`)
+  - `off`: disable preflight
+  - `warn`: report issues and continue (except fatal crash/hang cases)
+  - `error`: fail on errors/fatals
+  - `strict`: fail on warnings/errors/fatals
+- `PATSPEAK_PREFLIGHT_MAX_ISSUES=<n>` (default: `200`) limits printed issue count
 
 ---
 
@@ -243,7 +269,7 @@ results/<suite>/<UnitName>_<TestName>_<RunStamp>.log
 Where:
 
 - `<TestName>` is the `.pat` filename **stem** (basename without extension)
-- `<RunStamp>` is a timestamp (millisecond precision) so reruns don’t overwrite
+- `<RunStamp>` is a timestamp (millisecond precision) so reruns don't overwrite
 - If `UnitName` already matches the test name, the filename de-dupes to:
   - `results/<suite>/<TestName>_<RunStamp>.log`
 
@@ -284,7 +310,7 @@ Parsed once at startup:
   - **REQUIRED** for headless/automated testing.
 
 - `SUPPRESS_PAT_SUPPORT = True|False` (optional; default `False`)
-  - if truthy, PATSpeak runs in “UUT-only” mode
+  - if truthy, PATSpeak runs in "UUT-only" mode
   - accepted truthy spellings: `True`, `true`, `1`, `yes`, `on`
 
 ### Comments and blank lines
@@ -314,7 +340,7 @@ Supported output forms:
 - `SignalName = DATALOG` (log the current configured TX value)
 - `NULL` (no output changes)
 
-Output resolution: a signal is considered an “output” only if it appears in a DBC message whose **sender list includes `CTRL`**.
+Output resolution: a signal is considered an "output" only if it appears in a DBC message whose **sender list includes `CTRL`**.
 
 #### Inputs
 
@@ -330,7 +356,7 @@ Supported input forms:
   NULL : MeterVolts = 14.5 | 0.5 | 0.5
   ```
 
-  Meaning: `MeterVolts` must stay within `14.5 ± 0.5` continuously for `0.5s`.
+  Meaning: `MeterVolts` must stay within `14.5 +/- 0.5` continuously for `0.5s`.
 
 - `SignalName = DATALOG` (record current feedback value; step completes immediately)
   - **NOTE:** `DATALOG` is a reserved keyword. Do not use it as a signal name in your DBC.
@@ -366,6 +392,20 @@ If you want a prompt that preserves spaces, use `PAUSE-...`.
     2. `<test_folder>/scripts/`
     3. `<workspace>/scripts/pat_scripts/`
 
+- `UUT_TXCHECK[-<seconds>]` or `UUT_TXCHECK=<seconds>`
+  - waits for any CAN frame from a message tagged with Tx Node `UUT` in `UUT_DBC`
+  - passes when traffic is seen before timeout (default timeout: `2.0s`)
+  - fails if no UUT-tagged TX traffic is observed
+
+### PAT external script environment
+
+When PATSpeak runs a `PAT` script, it provides these env vars:
+
+- `PATSPEAK_HOME`, `PATSPEAK_DUT_DIR`, `PATSPEAK_DBC_DIR`
+- `PATSPEAK_TEST_FILE`, `PATSPEAK_TEST_DIR`, `PATSPEAK_RESULTS_DIR`
+- `PATSPEAK_UNITNAME`, `PATSPEAK_RUNSTAMP`, `PATSPEAK_STEP`
+- `PATSPEAK_SCRIPT_PATH` (resolved absolute script path)
+
 **Example (Rigol DP800 sweep):**
 
 This repo includes an example script at:
@@ -387,10 +427,10 @@ PAT dp800/rigol_dp800_sweep_ch2.py --channel 2 --start 4.00 --stop 5.00 --step 0
 If you place any of these files **next to your tests**, PATSpeak will run them automatically:
 
 - `pat_start.pat` (once, before first test in that folder)
-- `pat_transition.pat` (Runs **before AND after** each test; consecutive duplicates skipped)
+- `pat_transition.pat` (runs **before and after** each test; consecutive duplicates skipped)
 - `pat_end.pat` (once, after last test in that folder)
 
-Hook scripts are ignored during folder discovery (they won’t appear as “tests”), but can still be run explicitly.
+Hook scripts are ignored during folder discovery (they won't appear as "tests"), but can still be run explicitly.
 
 ### Suppressing hook result files
 
@@ -421,6 +461,12 @@ Environment overrides:
 - `PATSPEAK_CAN_CH0`: channel 0 (UUT), e.g. `PCAN_USBBUS1`, `0`, `can0`
 - `PATSPEAK_CAN_CH1`: channel 1 (PAT), e.g. `PCAN_USBBUS2`, `1`, `can1`
 - `PATSPEAK_CAN_BITRATE`: default `250000`
+- `PATSPEAK_FORCE_SUPPRESS_PAT_SUPPORT=1`: force UUT-only mode (single-channel)
+
+Notes:
+
+- If only one CAN channel is available, PATSpeak automatically forces UUT-only mode.
+- In that state, PAT channel traffic is suppressed even if tests do not set `SUPPRESS_PAT_SUPPORT=True`.
 
 ---
 
