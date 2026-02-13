@@ -18,7 +18,7 @@ from .preflight import suite_preflight
 from . import runtime as rt
 from . import __version__
 from .paths import get_paths
-from .console import make_log_path, style, color_enabled
+from .console import make_log_path, safe_test_id, style, color_enabled
 from .revision import startup_banner
 from .progress import (
     install as progress_install,
@@ -61,6 +61,58 @@ STATUS_NEXT = 0  # Normal completion or skip (proceed to next)
 # Any value > 0 represents a request to JUMP to that specific 1-based suite index.
 
 
+def _env_truthy(name: str, default: bool = True) -> bool:
+    """Parse a boolean-ish environment variable.
+
+    Accepts common truthy/falsey spellings.
+
+    This is intentionally duplicated here (instead of importing runtime._truthy)
+    to keep CLI behavior stable even if runtime parsing changes.
+    """
+
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+
+    s = str(raw).strip().lower()
+    if s in {"1", "true", "t", "yes", "y", "on", "enable", "enabled", "all"}:
+        return True
+    if s in {"0", "false", "f", "no", "n", "off", "disable", "disabled", "none"}:
+        return False
+    return default
+
+
+def _hook_results_enabled(kind: str) -> bool:
+    """Return True if this hook kind should write result files.
+
+    By default hooks write logs like any other .pat run.
+
+    Users can suppress hook result files (while still running the hook scripts)
+    via environment variables:
+
+      - PATSPEAK_HOOK_RESULTS=0   (disable results for ALL hooks)
+      - PATSPEAK_HOOK_START_RESULTS=0
+      - PATSPEAK_HOOK_TRANSITION_RESULTS=0
+      - PATSPEAK_HOOK_END_RESULTS=0
+    """
+
+    k = (kind or "").strip().lower()
+
+    # Global override.
+    if not _env_truthy("PATSPEAK_HOOK_RESULTS", default=True):
+        return False
+
+    if k in {"hook-start", "start", "pat_start"}:
+        return _env_truthy("PATSPEAK_HOOK_START_RESULTS", default=True)
+    if k in {"hook-transition", "transition", "pat_transition"}:
+        return _env_truthy("PATSPEAK_HOOK_TRANSITION_RESULTS", default=True)
+    if k in {"hook-end", "end", "pat_end"}:
+        return _env_truthy("PATSPEAK_HOOK_END_RESULTS", default=True)
+
+    # Unknown hook kinds default to enabled.
+    return True
+
+
 def _write_interrupt_log(reason: str) -> None:
     """Best-effort: persist whatever log we have so far.
 
@@ -71,6 +123,10 @@ def _write_interrupt_log(reason: str) -> None:
     """
 
     try:
+        # Respect per-run suppression (used by suite hooks).
+        if not bool(getattr(rt, "WRITE_RESULTS", True)):
+            return
+
         unit = str(getattr(rt, "UnitName", "") or "")
         test_file = str(getattr(rt, "TestFile", "") or "")
         if not unit or not test_file:
@@ -377,6 +433,9 @@ def _run_one_test(
     kind: str = "test",
     suite_index: int = 0,
     all_tests: list[str] | None = None,
+    log_test_ref: str | None = None,
+    unit_name_override: str | None = None,
+    write_results: bool | None = None,
 ) -> int:
     """Run a single .pat script (test or hook).
 
@@ -397,10 +456,24 @@ def _run_one_test(
     # Re-initialize globals for this test.
     rt.initialize(run_preflight_checks=run_preflight_checks)
 
+    # Control whether this run writes any result artifacts (log/CSV).
+    # Defaults to True for normal tests.
+    try:
+        if write_results is None:
+            rt.WRITE_RESULTS = True
+        else:
+            rt.WRITE_RESULTS = bool(write_results)
+    except Exception:
+        pass
+
     # Hooks are typically used for setup/teardown/relay-cycling.
-    # If the suite already has a UnitName (serial number, etc.), force hooks
-    # to use it so they don't accidentally change output naming.
-    if kind_norm != "test" and suite_unit_name.get("name"):
+    # If the suite already has a UnitName that was *prompted* (serial number,
+    # etc.), force hooks to use it so we don't accidentally change output naming.
+    if (
+        kind_norm != "test"
+        and suite_unit_name.get("name")
+        and bool(suite_unit_name.get("prompted", False))
+    ):
         rt.UnitName = str(suite_unit_name["name"])
 
     # Prompt for UnitName only once per suite (unless script sets UUT_DATANAME).
@@ -412,7 +485,26 @@ def _run_one_test(
             ).strip()
             if suite_unit_name["name"] == "":
                 suite_unit_name["name"] = "untitled"
+            suite_unit_name["prompted"] = True
         rt.UnitName = suite_unit_name["name"]
+
+    # Optional naming overrides (primarily for hooks):
+    # - unit_name_override controls the UnitName used for output files
+    # - log_test_ref controls the test identifier used for output file naming
+    if unit_name_override is not None:
+        try:
+            rt.UnitName = str(unit_name_override)
+        except Exception:
+            pass
+
+    if log_test_ref is not None:
+        # rt.initialize already opened the underlying file handle based on the
+        # real test_ref. It's safe to replace rt.TestFile *string* now purely
+        # for output naming purposes.
+        try:
+            rt.TestFile = str(log_test_ref)
+        except Exception:
+            pass
 
     print("Test Name:", rt.UnitName)
 
@@ -695,11 +787,24 @@ def main() -> int:
 
         time.sleep(2)
 
-        suite_unit_name: dict = {"name": rt.UnitName or ""}
+        suite_unit_name: dict = {
+            "name": rt.UnitName or "",
+            # Set True only when the operator was prompted for a suite name.
+            # (If a script sets UUT_DATANAME, that is usually a per-test label,
+            # not a serial number we want to force onto hooks.)
+            "prompted": False,
+        }
         last_run_abs: str | None = None
 
         def _run_script(
-            ref: str, kind: str, *, suite_index: int = 0, all_tests_ref: list[str] | None = None
+            ref: str,
+            kind: str,
+            *,
+            suite_index: int = 0,
+            all_tests_ref: list[str] | None = None,
+            log_test_ref: str | None = None,
+            unit_name_override: str | None = None,
+            write_results: bool | None = None,
         ) -> int:
             """Run a test/hook. Returns status code (0=next, -1=exit, >0=jump)."""
 
@@ -718,6 +823,9 @@ def main() -> int:
                 kind=kind,
                 suite_index=int(suite_index or 0),
                 all_tests=all_tests_ref,
+                log_test_ref=log_test_ref,
+                unit_name_override=unit_name_override,
+                write_results=write_results,
             )
             
             # If valid run, update duplicate-check cache
@@ -726,10 +834,75 @@ def main() -> int:
 
         # Main suite execution index
         idx = 1
+
+        # Track the last *test* we actually ran (used for transition naming,
+        # especially when the user jumps around in the suite).
+        last_test_ref: str | None = None
+
+        def _hook_name_overrides(
+            kind: str,
+            *,
+            from_ref: str | None = None,
+            to_ref: str | None = None,
+        ) -> tuple[str, str | None]:
+            """Return (log_test_ref, unit_name_override) for a hook run.
+
+            We want hook result filenames to clearly show what they are doing.
+            For transition hooks, that means including the *from* and *to* tests.
+
+            Naming rules:
+              - If the suite UnitName was prompted (serial number, etc.), keep
+                it as the filename prefix.
+              - If the suite UnitName comes from UUT_DATANAME (usually a per-test
+                label), do *not* force it onto hooks; instead, de-dupe filenames
+                by setting UnitName == <hook alias>.
+            """
+
+            k = (kind or "").strip().lower()
+
+            def _stem(ref: str | None, *, fallback: str) -> str:
+                if not ref:
+                    return fallback
+                return safe_test_id(ref)
+
+            if k in {"hook-start", "start"}:
+                tgt = _stem(to_ref, fallback="START")
+                alias = f"pat_start_before_{tgt}"
+            elif k in {"hook-transition", "transition"}:
+                src = _stem(from_ref, fallback="START")
+                tgt = _stem(to_ref, fallback="END")
+                alias = f"pat_transition_{src}_to_{tgt}"
+            elif k in {"hook-end", "end"}:
+                src = _stem(from_ref, fallback="END")
+                alias = f"pat_end_after_{src}"
+            else:
+                # Fallback: keep it recognizable.
+                alias = f"hook_{safe_test_id(kind or 'hook')}"
+
+            log_test_ref = f"{alias}.pat"
+
+            # If the suite name was prompted (serial), keep it.
+            if bool(suite_unit_name.get("prompted", False)):
+                return log_test_ref, None
+
+            # Otherwise, produce clean hook filenames without a misleading
+            # prefix from the first test.
+            return log_test_ref, alias
         
         # Start hook
         if hook_start:
-            status = _run_script(hook_start, "hook-start", suite_index=1, all_tests_ref=tests)
+            start_log_ref, start_unit_override = _hook_name_overrides(
+                "hook-start", to_ref=tests[0] if tests else None
+            )
+            status = _run_script(
+                hook_start,
+                "hook-start",
+                suite_index=1,
+                all_tests_ref=tests,
+                log_test_ref=start_log_ref,
+                unit_name_override=start_unit_override,
+                write_results=_hook_results_enabled("hook-start"),
+            )
             if status == STATUS_EXIT:
                 return 0
             if status > 0:
@@ -748,8 +921,17 @@ def main() -> int:
             # Pre-transition
             transition = find_hook_next_to(test_ref, HOOK_TRANSITION)
             if transition:
+                pre_log_ref, pre_unit_override = _hook_name_overrides(
+                    "hook-transition", from_ref=last_test_ref, to_ref=test_ref
+                )
                 status = _run_script(
-                    transition, "hook-transition", suite_index=idx, all_tests_ref=tests
+                    transition,
+                    "hook-transition",
+                    suite_index=idx,
+                    all_tests_ref=tests,
+                    log_test_ref=pre_log_ref,
+                    unit_name_override=pre_unit_override,
+                    write_results=_hook_results_enabled("hook-transition"),
                 )
                 if status == STATUS_EXIT:
                     break
@@ -762,6 +944,10 @@ def main() -> int:
             status = _run_script(test_ref, "test", suite_index=idx, all_tests_ref=tests)
             if status == STATUS_EXIT:
                 break
+
+            # Record last executed test (used for transition naming).
+            last_test_ref = test_ref
+
             if status > 0:
                 idx = status
                 last_run_abs = None
@@ -769,8 +955,18 @@ def main() -> int:
 
             # Post-transition
             if transition:
+                next_ref = tests[idx] if (idx < len(tests)) else None
+                post_log_ref, post_unit_override = _hook_name_overrides(
+                    "hook-transition", from_ref=test_ref, to_ref=next_ref
+                )
                 status = _run_script(
-                    transition, "hook-transition", suite_index=idx, all_tests_ref=tests
+                    transition,
+                    "hook-transition",
+                    suite_index=idx,
+                    all_tests_ref=tests,
+                    log_test_ref=post_log_ref,
+                    unit_name_override=post_unit_override,
+                    write_results=_hook_results_enabled("hook-transition"),
                 )
                 if status == STATUS_EXIT:
                     break
@@ -784,7 +980,18 @@ def main() -> int:
 
         # End hook
         if not rt.finished and hook_end:
-            _run_script(hook_end, "hook-end", suite_index=len(tests), all_tests_ref=tests)
+            end_log_ref, end_unit_override = _hook_name_overrides(
+                "hook-end", from_ref=last_test_ref or (tests[-1] if tests else None)
+            )
+            _run_script(
+                hook_end,
+                "hook-end",
+                suite_index=len(tests),
+                all_tests_ref=tests,
+                log_test_ref=end_log_ref,
+                unit_name_override=end_unit_override,
+                write_results=_hook_results_enabled("hook-end"),
+            )
 
         return 0
 

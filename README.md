@@ -7,7 +7,7 @@ You point it at a single `.pat` file or a **folder of tests** under `dut/`, and 
 - loads the requested DBC(s) from `dbc/`
 - starts CAN RX/TX threads (via `python-can`)
 - steps through your `.pat` lines, logging **PASS / FAIL / TEST** output
-- writes results into a per-test `results/` folder
+- writes results into a workspace-level `results/` folder (mirroring the `dut/` structure)
 
 The repo is intended to be operator-friendly: after setup, an operator can run a suite like:
 
@@ -142,6 +142,10 @@ dut/                    # DUT test suites (.pat) and optional generators (.py)
   43019-1/
   RESET.pat
 
+results/                # runtime output (auto-created)
+  43019-1/              # results for dut/43019-1/
+  # (files directly under dut/ write directly into results/)
+
 scripts/                # setup helpers + convenience runners
 extras/legacy_ui/       # old pygame UI code (not used on Windows)
 
@@ -215,10 +219,17 @@ You can control it via environment variables:
 
 ## Outputs generated
 
-By default, PATSpeak writes outputs into a per-test `results/` subfolder **next to the `.pat` file**:
+By default, PATSpeak writes outputs under a workspace-level `results/` folder that mirrors the `dut/` structure:
+
+- `<suite>` is the folder containing the `.pat` file, relative to `dut/`.
+  - Example: `dut/43019-1/...` writes to `results/43019-1/`
+
+You can override the results root with:
+
+- `PATSPEAK_RESULTS_ROOT` (absolute path, or a path relative to the workspace root)
 
 ```
-dut/<suite>/results/
+results/<suite>/
 ```
 
 ### Log file
@@ -226,7 +237,7 @@ dut/<suite>/results/
 Log filename format:
 
 ```
-<test_folder>/results/<UnitName>_<TestName>_<RunStamp>.log
+results/<suite>/<UnitName>_<TestName>_<RunStamp>.log
 ```
 
 Where:
@@ -234,14 +245,14 @@ Where:
 - `<TestName>` is the `.pat` filename **stem** (basename without extension)
 - `<RunStamp>` is a timestamp (millisecond precision) so reruns don’t overwrite
 - If `UnitName` already matches the test name, the filename de-dupes to:
-  - `<test_folder>/results/<TestName>_<RunStamp>.log`
+  - `results/<suite>/<TestName>_<RunStamp>.log`
 
 ### CSV file
 
 CSV is written **only when the script runs `SAVE`**:
 
 ```
-<test_folder>/results/<UnitName>_<RunStamp>.csv
+results/<suite>/<UnitName>_<RunStamp>.csv
 ```
 
 Multiple `SAVE` commands within a run append to the same CSV.
@@ -380,6 +391,23 @@ If you place any of these files **next to your tests**, PATSpeak will run them a
 - `pat_end.pat` (once, after last test in that folder)
 
 Hook scripts are ignored during folder discovery (they won’t appear as “tests”), but can still be run explicitly.
+
+### Suppressing hook result files
+
+By default, hook scripts write logs like normal tests. If you want the hooks to
+run **without** generating separate log/CSV artifacts (common when `pat_start`
+and/or `pat_transition` are just relay-cycles), set any of these environment
+variables:
+
+- `PATSPEAK_HOOK_RESULTS=0` (disable results for all hooks)
+- `PATSPEAK_HOOK_START_RESULTS=0`
+- `PATSPEAK_HOOK_TRANSITION_RESULTS=0`
+- `PATSPEAK_HOOK_END_RESULTS=0`
+
+When hook results are enabled, transition hook filenames include the **from/to**
+tests, e.g.:
+
+`pat_transition_<FromTest>_to_<ToTest>_<RunStamp>.log`
 
 ---
 

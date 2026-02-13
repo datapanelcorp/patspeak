@@ -18,6 +18,7 @@ from __future__ import annotations
 from datetime import datetime
 import os
 import re
+from pathlib import Path
 from typing import Any
 
 from .can_db import CanDb
@@ -203,15 +204,29 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
     # Where DBC files live.
     DBCPath = str(paths.dbc)
 
-    # Where .pat scripts live.
+    # Where .pat scripts live (DUT suites).
+    #
     # NOTE: historically DataPath was also used as the output folder. We now
-    # keep DataPath as the DUT root (script root), and place outputs in a
-    # per-test "results" subfolder next to the .pat file.
+    # keep DataPath as the DUT root (script root), and write outputs under a
+    # workspace-level `results/` folder that mirrors the DUT folder structure.
     DataPath = str(paths.dut)
 
     # Ensure directories exist (helpful for first-run / fresh zip users).
     os.makedirs(DataPath, exist_ok=True)
     os.makedirs(DBCPath, exist_ok=True)
+
+    # Workspace-level results root.
+    # Default: <workspace>/results
+    # Override: PATSPEAK_RESULTS_ROOT (absolute, or relative to workspace home)
+    _results_root_raw = os.environ.get("PATSPEAK_RESULTS_ROOT", "").strip()
+    if _results_root_raw:
+        p = Path(_results_root_raw).expanduser()
+        if not p.is_absolute():
+            p = Path(HomePath) / p
+        results_root = p.resolve()
+    else:
+        results_root = (Path(HomePath) / "results").resolve()
+    results_root.mkdir(parents=True, exist_ok=True)
 
     # -----------------
     # Resolve current test path
@@ -225,8 +240,17 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
     _test_dir = os.path.dirname(_abs_test)
     TestDir = _test_dir
 
-    # Per-test output directory (next to the .pat file).
-    LogPath = os.path.join(_test_dir, "results")
+    # Output directory for this suite folder:
+    #   <workspace>/results/<path-relative-to-dut>
+    # Example:
+    #   dut/43019-1/...  -> results/43019-1/
+    try:
+        rel_suite = Path(_test_dir).resolve().relative_to(Path(DataPath).resolve())
+    except Exception:
+        # If the test isn't under the DUT root, fall back to a safe basename.
+        rel_suite = Path(Path(_test_dir).name)
+
+    LogPath = str((results_root / rel_suite).resolve())
     os.makedirs(LogPath, exist_ok=True)
 
     # -----------------

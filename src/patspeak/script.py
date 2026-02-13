@@ -381,6 +381,16 @@ def CheckUUTTxTraffic(timeout_s: float = 2.0, tx_node: str = "UUT"):
 
 def SaveData():
 
+    # Suite hooks (pat_start / pat_transition / pat_end) can be configured to
+    # run *without* writing any result artifacts. Respect that here.
+    if not bool(getattr(rt, "WRITE_RESULTS", True)):
+        try:
+            rt.AllCollectedData = ""
+            rt.UUT_Results.clear()
+        except Exception:
+            pass
+        return
+
     print("Writing Data Collected.")
     print("Fail Count:", rt.FailCount)
     for key,value in rt.UUT_Results.items():
@@ -420,7 +430,8 @@ def SaveData():
                 # f.close()
             
     # Save CSV alongside the per-test logs.
-    # rt.LogPath is set to a per-test "results" folder during rt.initialize().
+    # rt.LogPath points at the suite's workspace results folder:
+    #   <workspace>/results/<path-relative-to-dut>
     datafile = make_csv_path(rt.LogPath, str(rt.UnitName), getattr(rt, "RunStamp", None))
     f = open(datafile, 'a')
     f.write(rt.AllCollectedData)
@@ -490,10 +501,13 @@ def ProcessScript():
         print("elapsed time:", convert)
         print("END OF TEST")
         
-        print(logfile)
-        f = open(logfile, 'w')
-        f.write(rt.UUT_TestLog)
-        f.close()        
+        # Write the per-test log unless this run has result output suppressed
+        # (commonly used for suite hooks like pat_start / pat_transition).
+        if bool(getattr(rt, "WRITE_RESULTS", True)):
+            print(logfile)
+            f = open(logfile, 'w', encoding='utf-8', errors='replace')
+            f.write(rt.UUT_TestLog)
+            f.close()
         try:
             rt.test_file.close()
         except Exception:

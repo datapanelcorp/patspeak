@@ -84,6 +84,7 @@ def test_preflight_strict_mode_and_syntax_edge_cases():
 
 def test_encode_tx_fallback_exception_handling():
     """Cover exception handlers in encode_tx that fallback to bit_encode."""
+    pytest.importorskip("cantools")
     with patch("cantools.database.load_file") as mock_load:
         # Setup a message that fails to encode via cantools
         msg = MagicMock()
@@ -111,6 +112,7 @@ def test_encode_tx_fallback_exception_handling():
 
 def test_decode_fallback_exception_handling():
     """Cover exception handler in decode that fallbacks to bit_decode."""
+    pytest.importorskip("cantools")
     with patch("cantools.database.load_file") as mock_load:
         msg = MagicMock()
         msg.name = "TestMsg"
