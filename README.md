@@ -48,6 +48,7 @@ That script will:
 - create `.venv/`
 - install PATSpeak (and its dependencies) into the venv
 - make the **`pat` command** available inside the venv
+- configure PowerShell tab completion (`pat` test selector autocomplete) in your `$PROFILE`
 
 ### 2) Activate the venv
 
@@ -174,6 +175,41 @@ pat 43019-1
 # A specific file inside a folder (extension optional)
 pat 43019-1\43019-1-INPUT-420MA
 pat "43019-1\43019-1-INPUT-420MA.pat"
+```
+
+### PowerShell tab completion
+
+`.\scripts\setup_venv.ps1` now configures completion in your PowerShell profile automatically.
+
+If you want to register it manually in the current shell, use:
+
+```powershell
+. .\scripts\pat_completion.ps1
+Register-PatCompletion
+```
+
+If your shell blocks scripts, run:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
+
+After registering, you can tab-complete suite names and test names directly:
+
+```powershell
+pat 43019-1\43019-1-INPUT-4<Tab>
+```
+
+To enable this for every new PowerShell session, add this line to your profile:
+
+```powershell
+Add-Content -Path $PROFILE -Value ". `"$PWD\scripts\pat_completion.ps1`"; Register-PatCompletion"
+```
+
+To skip auto profile setup during venv install:
+
+```powershell
+.\scripts\setup_venv.ps1 -SkipCompletion
 ```
 
 ### Version / revision banner
