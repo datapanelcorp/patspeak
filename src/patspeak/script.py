@@ -900,7 +900,7 @@ def ProcessScript():
                         RealValue = round(RealValue, 4)
                         TestValue = round(TestValue, 4)
                         
-                        if((RealValue <= (TestValue + TestTol))&(RealValue >= (TestValue - TestTol))):
+                        if((RealValue <= (TestValue + TestTol)) and (RealValue >= (TestValue - TestTol))):
                             #if(RealValue >= (TestValue - TestTol)):
                             rt.PassTime += time_delta
                         else:
@@ -914,10 +914,13 @@ def ProcessScript():
             if(Timeout):
                 rt.StepTime += time_delta
 
-            if((rt.PassTime >= TestTime)|((Timeout)&(rt.StepTime >= Timeout))):
+            timed_out = (Timeout > 0) and (rt.StepTime >= Timeout)
+            passed_time = (rt.PassTime >= TestTime)
+
+            if(passed_time or timed_out):
                 if(SignalName != 'NULL'):
                     rt.UUT_Results[str(rt.TestStep) + "-" + SignalName + "-" + rt.DataLogTag] = RealValue
-                    if((Timeout)&(rt.StepTime >= Timeout)):
+                    if(timed_out):
                         TestString = StepStr + "FAIL:" + " " + SignalName + " " + str(RealValue)
                         rt.FailCount += 1
                         try:

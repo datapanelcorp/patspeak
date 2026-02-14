@@ -28,12 +28,14 @@ METER_MODE = 1 : NULL : WAIT = 0.2
 MrSignalSetValue = 5.0 : NULL : WAIT = 0.5
 #switch input to load line
 J1_01 = 1 : NULL : WAIT = 0.1
+#warm-up first meter sample
+NULL : NULL : WAIT = 0.8
 
 
 #Sweep of Port_1A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.005 | 0.0001 | 0.5
+NULL : MeterAmps = 0.005 | 0.0001 | 0.5 : TIMEOUT = 12
 #test feedback
 NULL : Port_1A = 5.0 | 0.155 | 0.1
 

@@ -99,6 +99,9 @@ while AmpsValue <= AmpsMax:
 
         outstr += "#switch input to load line\n"
         outstr += OutputConnector + " = 1 : NULL : WAIT = 0.1\n"
+        if(AmpsValue == AmpsStart and PortIndex == 0):
+            outstr += "#warm-up first meter sample\n"
+            outstr += "NULL : NULL : WAIT = 0.8\n"
         outstr += "\n"
         outstr += "\n"
         outstr += "#Sweep of " + InputName + " from " + str(AmpsStart) + " to " + str(AmpsMax)  + " in " + str(AmpsInc) + " increments\n"
@@ -106,7 +109,10 @@ while AmpsValue <= AmpsMax:
         
         #outstr += "PAUSE- TESTING " + InputName + ", SET GEN TO " + str(AmpsValue) + "ma\n"
         outstr += "#test ammmeter\n"
-        outstr += "NULL : MeterAmps = " + str(AmpsValue/1000000) + " | 0.0001 | 0.5\n"
+        if(AmpsValue == AmpsStart and PortIndex == 0):
+            outstr += "NULL : MeterAmps = " + str(AmpsValue/1000000) + " | 0.0001 | 0.5 : TIMEOUT = 12\n"
+        else:
+            outstr += "NULL : MeterAmps = " + str(AmpsValue/1000000) + " | 0.0001 | 0.5\n"
         outstr += "#test feedback\n"
         outstr += "NULL : " + Feedback + " = " + str(AmpsValue/1000) + " | 0.155 | 0.1\n" 
 
@@ -139,4 +145,3 @@ print(outstr)
 
 
 print(TestName + ".pat")
-
