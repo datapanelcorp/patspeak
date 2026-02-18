@@ -43,12 +43,12 @@ outstr += "NULL : Input_3B = 0 | 0.1 | 0.1\n"
 outstr += "NULL : Input_4A = 0 | 0.1 | 0.1\n"
 outstr += "NULL : Input_4B = 0 | 0.1 | 0.1\n"
 
-PortStart = 0
+PortStart = 3
 PortIndex = PortStart
 MaxPort = 7
 
 
-ModeIndex = 1
+ModeIndex = 3
 MaxMode = 4
 
 while ModeIndex <= MaxMode:

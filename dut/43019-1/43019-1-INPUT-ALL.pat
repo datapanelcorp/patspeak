@@ -29,6 +29,252 @@ NULL : Input_3B = 0 | 0.1 | 0.1
 NULL : Input_4A = 0 | 0.1 | 0.1
 NULL : Input_4B = 0 | 0.1 | 0.1
 #-----setup 43019-----
+#configure as Outputs to 1 
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
+Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+#clear multiplex
+Command = 0, FaultReset = 0, SaveSettings = 0, Enable_FAULT = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#set power supply and wait
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+#Positive Test Port_1A
+J0_07_GND_LOAD = 0 : NULL : WAIT = 1
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 1
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 1
+#switch input to load line
+J1_01 = 1 : NULL : WAIT = 0.1
+
+#set power supply
+PwrSetVoltage = 140 : NULL
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 0.1
+#test feedback
+NULL : Input_1A = 1 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J1_01 = 0 : NULL : WAIT = 0.1
+
+#-----setup 43019-----
+#configure as Outputs to 1 
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
+Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+#clear multiplex
+Command = 0, FaultReset = 0, SaveSettings = 0, Enable_FAULT = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#set power supply and wait
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+#Positive Test Port_1B
+J0_07_GND_LOAD = 0 : NULL : WAIT = 1
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 1
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 1
+#switch input to load line
+J1_02 = 1 : NULL : WAIT = 0.1
+
+#set power supply
+PwrSetVoltage = 140 : NULL
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 0.1
+#test feedback
+NULL : Input_1B = 1 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J1_02 = 0 : NULL : WAIT = 0.1
+
+#-----setup 43019-----
+#configure as Outputs to 1 
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
+Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+#clear multiplex
+Command = 0, FaultReset = 0, SaveSettings = 0, Enable_FAULT = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#set power supply and wait
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+#Positive Test Port_2A
+J0_07_GND_LOAD = 0 : NULL : WAIT = 1
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 1
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 1
+#switch input to load line
+J1_03 = 1 : NULL : WAIT = 0.1
+
+#set power supply
+PwrSetVoltage = 140 : NULL
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 0.1
+#test feedback
+NULL : Input_2A = 1 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J1_03 = 0 : NULL : WAIT = 0.1
+
+#-----setup 43019-----
+#configure as Outputs to 1 
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
+Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+#clear multiplex
+Command = 0, FaultReset = 0, SaveSettings = 0, Enable_FAULT = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#set power supply and wait
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+#Positive Test Port_2B
+J0_07_GND_LOAD = 0 : NULL : WAIT = 1
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 1
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 1
+#switch input to load line
+J1_04 = 1 : NULL : WAIT = 0.1
+
+#set power supply
+PwrSetVoltage = 140 : NULL
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 0.1
+#test feedback
+NULL : Input_2B = 1 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J1_04 = 0 : NULL : WAIT = 0.1
+
+#-----setup 43019-----
+#configure as Outputs to 1 
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
+Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+#clear multiplex
+Command = 0, FaultReset = 0, SaveSettings = 0, Enable_FAULT = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#set power supply and wait
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+#Positive Test Port_3A
+J0_07_GND_LOAD = 0 : NULL : WAIT = 1
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 1
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 1
+#switch input to load line
+J1_05 = 1 : NULL : WAIT = 0.1
+
+#set power supply
+PwrSetVoltage = 140 : NULL
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 0.1
+#test feedback
+NULL : Input_3A = 1 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J1_05 = 0 : NULL : WAIT = 0.1
+
+#-----setup 43019-----
+#configure as Outputs to 1 
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
+Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+#clear multiplex
+Command = 0, FaultReset = 0, SaveSettings = 0, Enable_FAULT = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#set power supply and wait
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+#Positive Test Port_3B
+J0_07_GND_LOAD = 0 : NULL : WAIT = 1
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 1
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 1
+#switch input to load line
+J1_06 = 1 : NULL : WAIT = 0.1
+
+#set power supply
+PwrSetVoltage = 140 : NULL
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 0.1
+#test feedback
+NULL : Input_3B = 1 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J1_06 = 0 : NULL : WAIT = 0.1
+
+#-----setup 43019-----
+#configure as Outputs to 1 
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
+Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+#clear multiplex
+Command = 0, FaultReset = 0, SaveSettings = 0, Enable_FAULT = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#set power supply and wait
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+#Positive Test Port_4A
+J0_07_GND_LOAD = 0 : NULL : WAIT = 1
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 1
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 1
+#switch input to load line
+J1_07 = 1 : NULL : WAIT = 0.1
+
+#set power supply
+PwrSetVoltage = 140 : NULL
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 0.1
+#test feedback
+NULL : Input_4A = 1 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J1_07 = 0 : NULL : WAIT = 0.1
+
+#-----setup 43019-----
+#configure as Outputs to 1 
+Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
+Command = 83, MODE1A = 1, MODE1B = 1, MODE2A =1, MODE2B = 1, MODE3A = 1, MODE3B = 1, MODE4A = 1, MODE4B = 1 : NULL : WAIT = 0.5
+Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL
+Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
+#clear multiplex
+Command = 0, FaultReset = 0, SaveSettings = 0, Enable_FAULT = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
+#set power supply and wait
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+#Positive Test Port_4B
+J0_07_GND_LOAD = 0 : NULL : WAIT = 1
+PwrSetVoltage = 140 : NULL : WAIT = 0.1
+J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 1
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 1
+#switch input to load line
+J1_08 = 1 : NULL : WAIT = 0.1
+
+#set power supply
+PwrSetVoltage = 140 : NULL
+#test power supply
+NULL : MeterVolts = 14 | 0.050 | 0.1
+#test feedback
+NULL : Input_4B = 1 | 0.1 | 0.1
+
+#Finished with port
+#switch out input
+J1_08 = 0 : NULL : WAIT = 0.1
+
+
+#Finished with mode
+#cycle IGN to clean slate
+RLY_K1 = 0 : NULL : WAIT = 1
+RLY_K1 = 1 : NULL : WAIT = 2
+RLY_K1 = 0 : NULL : WAIT = 1
+#-----setup 43019-----
 #configure as Outputs to 4 
 Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5
 Command = 83, MODE1A = 4, MODE1B = 4, MODE2A =4, MODE2B = 4, MODE3A = 4, MODE3B = 4, MODE4A = 4, MODE4B = 4 : NULL : WAIT = 0.5
@@ -6727,7 +6973,6 @@ RLY_K1 = 0 : NULL : WAIT = 1
 RLY_K1 = 1 : NULL : WAIT = 2
 RLY_K1 = 0 : NULL : WAIT = 1
 #switch out load line, set current
-J1_08 = 0 : NULL : WAIT = 0.1
 LdRemote = 0 : NULL : WAIT = 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 LdCurrentSet = 0 : NULL : WAIT = 0.1

@@ -1,0 +1,154 @@
+import os
+
+#global setup
+script_name = os.path.basename(__file__)
+print(f"The name of the running script is: {script_name}")
+TestName = os.path.splitext(script_name)[0]
+datafile = TestName + ".pat"
+
+PortMode = 0
+
+outstr = ""
+outstr += "#39009-1\n"
+outstr += "#Verion 0.0\n"
+outstr += "#input test\n"
+outstr += "UUT_DBC = 39009-561.dbc\n"
+outstr += "UUT_DATANAME = " + TestName + "\n"
+outstr += "\n"
+
+
+outstr += "#switch in 420ma gen\n"
+outstr += "J4_05 = 1 : NULL : WAIT = 0.2\n"
+
+outstr += "NULL : Input_1A = 0 | 0.1 | 0.1\n"
+outstr += "NULL : Input_1B = 0 | 0.1 | 0.1\n"
+outstr += "NULL : Input_3A = 0 | 0.1 | 0.1\n"
+outstr += "NULL : Input_3B = 0 | 0.1 | 0.1\n"
+outstr += "NULL : Input_5A = 0 | 0.1 | 0.1\n"
+outstr += "NULL : Input_5B = 0 | 0.1 | 0.1\n"
+outstr += "NULL : Input_7A = 0 | 0.1 | 0.1\n"
+outstr += "NULL : Input_7B = 0 | 0.1 | 0.1\n"
+outstr += "NULL : Input_9A = 0 | 0.1 | 0.1\n"
+outstr += "NULL : Input_9B = 0 | 0.1 | 0.1\n"
+
+PortIndex = 0
+ModeIndex = 0
+
+PortAMode = "0"
+PortBMode = "3"
+
+AmpsInc = 5000
+AmpsStart = AmpsInc
+AmpsMax = 20000
+AmpsValue = AmpsStart
+
+outstr += "#-----setup 39009-----\n"
+outstr += "#configure as Output Digital ON/OFF\n"
+outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0 : NULL : WAIT = 0.5\n"
+outstr += "Command = 83, MODE1A = " + PortBMode + ", MODE1B = " + PortBMode + ", MODE2A = 1, MODE2B = 1, MODE3A = " + PortBMode + ", MODE3B = " + PortBMode + ", MODE4A = 1, MODE4B = 1, MODE5A = " + PortBMode + ", MODE5B = " + PortBMode + ", MODE6A = 1, MODE6B = 1, MODE7A = " + PortBMode + ", MODE7B = " + PortBMode + " : NULL : WAIT = 0.5\n"
+outstr += "Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL\n"
+outstr += "Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = " + PortBMode + ", MODE9B = " + PortBMode + ", MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5\n"
+outstr += "Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL\n"
+
+outstr += "Command = 82, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
+outstr += "#clear multiplex\n"
+outstr += "Command = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
+        
+while AmpsValue <= AmpsMax:
+    outstr += "#promp user\n"
+    outstr += "PAUSE- SET GEN TO " + str(AmpsValue) + "ma\n"
+    PortIndex = 0
+    
+    while PortIndex <= 9:
+        
+        if(PortIndex == 0):
+            Feedback = "Port_1A"
+            OutputConnector = "J2_01"
+            Status = "Input_1A"
+        if(PortIndex == 1):
+            Feedback = "Port_1B"
+            OutputConnector = "J2_02"
+            Status = "Input_1B"
+        if(PortIndex == 2):
+            Feedback = "Port_3A"
+            OutputConnector = "J2_03"
+            Status = "Input_3A"
+        if(PortIndex == 3):
+            Feedback = "Port_3B"
+            OutputConnector = "J2_04"
+            Status = "Input_3B"
+        if(PortIndex == 4):
+            Feedback = "Port_5A"
+            OutputConnector = "J2_05"
+            Status = "Input_5A"
+        if(PortIndex == 5):
+            Feedback = "Port_5B"
+            OutputConnector = "J2_06"
+            Status = "Input_5B"
+        if(PortIndex == 6):
+            Feedback = "Port_7A"
+            OutputConnector = "J2_07"
+            Status = "Input_7A"
+        if(PortIndex == 7):
+            Feedback = "Port_7B"
+            OutputConnector = "J2_08"
+            Status = "Input_7B"
+        if(PortIndex == 8):
+            Feedback = "Port_9A"
+            OutputConnector = "J2_09"
+            Status = "Input_9A"
+        if(PortIndex == 9):
+            Feedback = "Port_9B"
+            OutputConnector = "J2_10"
+            Status = "Input_9B"
+
+        InputName = Feedback
+
+        outstr += "METER_MODE = 1 : NULL : WAIT = 0.2\n"
+        
+
+
+        
+        outstr += "#switch input to load line\n"
+        outstr += OutputConnector + " = 1 : NULL : WAIT = 0.1\n"
+        outstr += "\n"
+        outstr += "\n"
+        outstr += "#Sweep of " + InputName + " from " + str(AmpsStart) + " to " + str(AmpsMax)  + " in " + str(AmpsInc) + " increments\n"
+        outstr += "\n"
+        
+        #outstr += "PAUSE- TESTING " + InputName + ", SET GEN TO " + str(AmpsValue) + "ma\n"
+        outstr += "#test ammmeter\n"
+        #outstr += "NULL : MeterAmps = " + str(AmpsValue/1000000) + " | 0.01 | 0.5\n"
+        outstr += "#test feedback\n"
+        outstr += "NULL : " + Feedback + " = " + str(AmpsValue/1000) + " | 0.155 | 0.1\n" 
+
+        outstr += "\n"
+        outstr += "#Finished with port\n"
+        outstr += "#switch out input\n"
+        outstr += OutputConnector + " = 0 : NULL : WAIT = 0.2\n"
+        PortIndex += 1
+
+        outstr += "\n"
+        
+    AmpsValue += AmpsInc
+
+PortIndex = 0
+outstr += "\n"
+outstr += "#Finished with mode"
+outstr += "\n"
+    
+outstr += "#switch out load line\n"
+outstr += OutputConnector + " = 0 : NULL : WAIT = 0.1\n"
+outstr += "#switch out 420ma gen\n"
+outstr += "J4_05 = 0 : NULL : WAIT = 0.2\n"
+outstr += "SAVE\n"
+outstr += "END\n"
+
+f = open(datafile, 'w')
+f.write(outstr)
+f.close()    
+print(outstr)
+
+
+print(TestName + ".pat")
+
