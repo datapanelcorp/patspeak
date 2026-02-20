@@ -152,14 +152,14 @@ outstr += "\n"
 
 outstr += "#-----setup 39009-----\n"
 outstr += "#configure as Output Digital ON/OFF\n"
-outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0 : NULL : WAIT = 0.5\n"
+outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0 : NULL : WAIT = 0.5\n"
 outstr += "Command = 83, MODE1A = 4, MODE1B = 4, MODE2A = " + str(OutputMode) + ", MODE2B = " + str(OutputMode) + ", MODE3A = 4, MODE3B = 4, MODE4A = " + str(OutputMode) + ", MODE4B = " + str(OutputMode) + ", MODE5A = 4, MODE5B = 4, MODE6A = " + str(OutputMode) + ", MODE6B = " + str(OutputMode) + ", MODE7A = 4, MODE7B = 4 : NULL : WAIT = 0.5\n"
 outstr += "Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL\n"
 outstr += "Command = 84, MODE8A = " + str(OutputMode) + ", MODE8B = " + str(OutputMode) + ", MODE9A = 4, MODE9B = 4, MODE10A = " + str(OutputMode) + ", MODE10B = " + str(OutputMode) + ", GLOBAL_KP = " + f"{255}" + ", GLOBAL_KI =  " + f"{255}" + " : NULL : WAIT = 0.5\n"
 outstr += "Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL\n"
 Frequancy = 1000
-outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", SaveSettings = 1, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
-outstr += "Command = 0, FREQ1 = 0, SaveSettings = 0, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
+outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
+outstr += "Command = 0, FREQ1 = 0, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
 
 outstr += "METER_MODE = 1 : NULL : WAIT = 0.2\n"
 
@@ -185,7 +185,7 @@ Frequancy = 1000
 outstr += "#test at 1000hz\n"
 #outstr += "sdo[0x3000] = " + str(Frequancy) + " : NULL : WAIT = 0.5\n"
 #outstr += "OPERATIONAL\n"
-outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", SaveSettings = 1, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
+outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
 outstr = WriteOutputTest(outstr, Frequancy, 7, OutputMode)
 
 Frequancy = 500
@@ -193,7 +193,7 @@ Frequancy = 500
 outstr += "#test at 500hz\n"
 #outstr += "sdo[0x3000] = " + str(Frequancy) + " : NULL : WAIT = 0.5\n"
 #outstr += "OPERATIONAL\n"
-outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", SaveSettings = 1, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
+outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
 outstr = WriteOutputTest(outstr, Frequancy, 7, OutputMode)
 
 Frequancy = 64
@@ -201,7 +201,7 @@ Frequancy = 64
 outstr += "#test at 64hz\n"
 #outstr += "sdo[0x3000] = " + str(Frequancy) + " : NULL : WAIT = 0.5\n"
 #outstr += "OPERATIONAL\n"
-outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", SaveSettings = 1, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
+outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
 outstr = WriteOutputTest(outstr, Frequancy, 7, OutputMode)
 
 #shut down test

@@ -45,21 +45,41 @@ outstr += "NULL : Input_7B = 0 | 0.1 | 0.1\n"
 outstr += "NULL : Input_9A = 0 | 0.1 | 0.1\n"
 outstr += "NULL : Input_9B = 0 | 0.1 | 0.1\n"
 
-PortIndex = 2
-ModeIndex = 0
+PortIndex = 0
 
 ModeIndex = 0
-MaxMode = 1
+MaxMode = 3
 
 while ModeIndex <= MaxMode:
     
-    if(ModeIndex==0):#5VDC
+    if(ModeIndex==0):#GROUND
+        PortMode = "2"
+        StartVolts = 14
+        MaxVolts = 14
+        FaultLimit = 14
+        BVoltInc = 0.5
+        SVoltInc = 0.1
+        MaxValue = StartVolts
+        Tol = "0.050"
+        
+    if(ModeIndex==1):#POSITVE
+        PortMode = "1"
+        StartVolts = 14
+        MaxVolts = 14
+        FaultLimit = 14
+        BVoltInc = 0.5
+        SVoltInc = 0.1
+        MaxValue = StartVolts
+        Tol = "0.050"
+        
+    if(ModeIndex==2):#5VDC
         PortMode = "4"
         StartVolts = 1
         MaxVolts = 5
         FaultLimit = 5.5
         BVoltInc = 0.1
         SVoltInc = 0.1
+        Tol = "0.050"
         
     # if(ModeIndex==1):#10VDC
     #     PortAMode = "0"
@@ -70,14 +90,15 @@ while ModeIndex <= MaxMode:
     #     BVoltInc = 0.5
     #     SVoltInc = 0.1
         
-    if(ModeIndex==1):#32VDC
+    if(ModeIndex==3):#32VDC
         PortMode = "6"
         StartVolts = 1
         MaxVolts = 32
         FaultLimit = 33.5
         BVoltInc = 0.5
         SVoltInc = 0.1
-
+        Tol = "0.320"
+        
     while PortIndex <= 9:
 
         VoltInc = BVoltInc
@@ -140,32 +161,58 @@ while ModeIndex <= MaxMode:
         
         outstr += "#set power supply and wait\n"
         outstr += "PwrSetVoltage = " + str(int(StartVolts * 10)) + " : NULL : WAIT = 0.1\n"
-        outstr += "#test power supply\n"
-        outstr += "NULL : MeterVolts = " + str(StartVolts) + " | 0.155 | 0.1\n"
+        #outstr += "#test power supply\n"
+        #outstr += "NULL : MeterVolts = " + str(StartVolts) + " | 0.155 | 0.1\n"
 
+        if(ModeIndex==0):
+            outstr += "#Ground Test " + InputName + "\n"
+        elif(ModeIndex==1):
+            outstr += "#Positive Test " + InputName + "\n"
+        else:
+            outstr += "#Sweep of " + InputName + " from " + str(StartVolts) + " to " + str(MaxVolts)  + " in " + str(VoltInc) + " increments\n"
+        outstr += "\n"
+        
+        Voltage = StartVolts
+        
+        if(ModeIndex==0):
+            outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1\n"
+            outstr += "J0_01_3A_LOAD = 1 : NULL : WAIT = 1\n"
+        else:
+            outstr += "J0_01_3A_LOAD = 0 : NULL : WAIT = 1\n"
+            outstr += "PwrSetVoltage = " + str(int(Voltage * 10)) + " : NULL : WAIT = 0.1\n"
+            outstr += "J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 1\n"
+            outstr += "#test power supply\n"
+            if(ModeIndex>1):
+                outstr += "NULL : MeterVolts = " + str(StartVolts) + " | " + Tol  + " | 1\n"
+            else:
+                outstr += "NULL : MeterVolts = " + str(StartVolts) + " | 0.5 | 1\n"
+                
         outstr += "#switch input to load line\n"
         outstr += OutputConnector + " = 1 : NULL : WAIT = 0.1\n"
         outstr += "\n"
         outstr += "\n"
-        outstr += "#Sweep of " + InputName + " from " + str(StartVolts) + " to " + str(MaxVolts)  + " in " + str(VoltInc) + " increments\n"
-        outstr += "\n"
-        
-        Voltage = StartVolts
         
         while Voltage <= (FaultLimit + VoltInc):
             outstr += "#set power supply\n"
             outstr += "PwrSetVoltage = " + str(int(Voltage * 10)) + " : NULL : WAIT = 0.1\n"
             outstr += "#test power supply\n"
-            outstr += "NULL : MeterVolts = " + str(Voltage) + " | 0.155 | 0.1\n"
+            if(ModeIndex>0):
+                outstr += "NULL : MeterVolts = " + str(Voltage) + " | 0.5 | 0.1\n"
             outstr += "#test feedback\n"    
             if(Voltage >= FaultLimit):
                 VoltInc = SVoltInc
-                outstr += "NULL : " + Feedback + " = 0 | 0.1 | 0.1\n"
-                outstr += "NULL : " + Status + " = 2 | 0.1 | 0.1\n"
+                if(ModeIndex>1):
+                    outstr += "NULL : " + Feedback + " = 0 | 0.1 | 0.1\n"
+                    outstr += "NULL : " + Status + " = 2 | 0.1 | 0.1\n"
+                else:
+                    outstr += "NULL : " + Status + " = 1 | 0.1 | 0.1\n"
             else:
                 VoltInc = BVoltInc
-                outstr += "NULL : " + Feedback + " = " + str(Voltage) + " | 0.155 | 0.1\n" 
-                outstr += "NULL : " + Status + " = 0 | 0.1 | 0.1\n"
+                if(ModeIndex>1):
+                    outstr += "NULL : " + Feedback + " = " + str(Voltage) + " | " + Tol + " | 0.1\n" 
+                    outstr += "NULL : " + Status + " = 0 | 0.1 | 0.1\n"
+                else:
+                    outstr += "NULL : " + Status + " = 1 | 0.1 | 0.1\n"
             Voltage += VoltInc
         
         outstr += "\n"
