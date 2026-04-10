@@ -481,6 +481,13 @@ class CanDb:
         self._tx_signal_to_mux_ids: Dict[str, List[int]] = {}
         self._tx_message_mux_info: Dict[str, _MuxInfo] = {}
         self._tx_touched_mux_ids: Dict[str, Set[int]] = {}
+        # Encode shadow caches:
+        #   key = (arbitration_id, is_extended_id, mux_id_or_none)
+        # This mirrors the can_transformer concept (tx shadow -> rx shadow ->
+        # cold start) without changing PATSpeak's parser strictness behavior.
+        self._tx_payload_shadow: Dict[tuple[int, bool, Optional[int]], bytes] = {}
+        self._rx_payload_shadow: Dict[tuple[int, bool, Optional[int]], bytes] = {}
+        self._latest_rx_mux_by_message: Dict[tuple[int, bool], int] = {}
 
         # Multiplexed TX behaviour:
         #
@@ -639,6 +646,188 @@ class CanDb:
 
         return bytes(payload)
 
+    def _message_tx_identity(self, message: Any) -> tuple[int, bool]:
+        """Return (arbitration_id, is_extended_id) for a message."""
+        fid = int(getattr(message, "frame_id", 0))
+        arb_id = _dbc_to_arbitration_id(fid)
+
+        is_ext = getattr(message, "is_extended_frame", None)
+        if is_ext is None:
+            is_ext = (fid & EXTENDED_ID_FLAG) != 0 or arb_id > 0x7FF
+        else:
+            is_ext = bool(is_ext) or (fid & EXTENDED_ID_FLAG) != 0
+
+        return arb_id, bool(is_ext)
+
+    def _normalize_payload_size(
+        self, payload: bytes | bytearray, expected_len: int
+    ) -> bytearray:
+        """Crop/pad payload to message length."""
+        normalized = bytearray(payload[:expected_len])
+        if len(normalized) != expected_len:
+            normalized = (normalized + bytearray(expected_len))[:expected_len]
+        return normalized
+
+    def _build_cold_start_payload(self, message: Any, mux_value: Optional[int]) -> bytearray:
+        """Synthesize a payload from zeroes + mux selector + signal initial values."""
+        try:
+            length_bytes = int(getattr(message, "length", 8) or 8)
+        except Exception:
+            length_bytes = 8
+        if length_bytes <= 0:
+            length_bytes = 8
+
+        payload = bytearray(length_bytes)
+        message_name = getattr(message, "name", "")
+        mux_sig = self._message_mux_signal.get(message_name)
+
+        if mux_sig is not None and mux_value is not None:
+            _patch_signal_raw_into(payload, mux_sig, int(mux_value))
+
+        for s in getattr(message, "signals", []) or []:
+            # If a target mux is known, preserve that selector value.
+            if mux_sig is not None and getattr(s, "name", None) == getattr(mux_sig, "name", None):
+                if mux_value is not None:
+                    continue
+
+            mids = getattr(s, "multiplexer_ids", None)
+            if mids:
+                if mux_value is None:
+                    continue
+                include = False
+                for mid in mids:
+                    try:
+                        if int(mid) == int(mux_value):
+                            include = True
+                            break
+                    except Exception:
+                        pass
+                if not include:
+                    continue
+
+            initial = getattr(s, "initial", None)
+            if initial is None:
+                continue
+
+            raw = _scaled_to_raw(s, initial)
+            raw = _normalize_raw_for_signal(s, raw)
+            _patch_signal_raw_into(payload, s, raw)
+
+        return payload
+
+    def _resolve_encode_base_payload(
+        self,
+        *,
+        message: Any,
+        arbitration_id: int,
+        is_extended_id: bool,
+        mux_value: Optional[int],
+    ) -> bytearray:
+        """Pick TX shadow, then RX shadow, then cold-start payload."""
+        try:
+            length_bytes = int(getattr(message, "length", 8) or 8)
+        except Exception:
+            length_bytes = 8
+        if length_bytes <= 0:
+            length_bytes = 8
+
+        key = (
+            int(arbitration_id),
+            bool(is_extended_id),
+            None if mux_value is None else int(mux_value),
+        )
+        base = self._tx_payload_shadow.get(key)
+        if base is None:
+            base = self._rx_payload_shadow.get(key)
+        if base is not None:
+            return self._normalize_payload_size(base, length_bytes)
+        return self._build_cold_start_payload(message, mux_value)
+
+    def _overlay_encoded_signals(
+        self,
+        *,
+        message: Any,
+        base_payload: bytes | bytearray,
+        encoded_payload: bytes | bytearray,
+        selected_signals: Set[str],
+    ) -> bytearray:
+        """Overlay selected signal bits from encoded payload onto a base payload."""
+        try:
+            length_bytes = int(getattr(message, "length", 8) or 8)
+        except Exception:
+            length_bytes = 8
+        if length_bytes <= 0:
+            length_bytes = 8
+
+        out = self._normalize_payload_size(base_payload, length_bytes)
+        encoded = self._normalize_payload_size(encoded_payload, length_bytes)
+        if not selected_signals:
+            return out
+
+        encoded_bytes = bytes(encoded)
+        for s in getattr(message, "signals", []) or []:
+            name = getattr(s, "name", None)
+            if name not in selected_signals:
+                continue
+            raw = _extract_signal_raw_from(encoded_bytes, s)
+            raw = _normalize_raw_for_signal(s, raw)
+            _patch_signal_raw_into(out, s, raw)
+        return out
+
+    def _cache_tx_shadow(
+        self,
+        *,
+        message: Any,
+        arbitration_id: int,
+        is_extended_id: bool,
+        mux_value: Optional[int],
+        payload: bytes | bytearray,
+    ) -> None:
+        try:
+            length_bytes = int(getattr(message, "length", 8) or 8)
+        except Exception:
+            length_bytes = 8
+        if length_bytes <= 0:
+            length_bytes = 8
+
+        key = (
+            int(arbitration_id),
+            bool(is_extended_id),
+            None if mux_value is None else int(mux_value),
+        )
+        self._tx_payload_shadow[key] = bytes(self._normalize_payload_size(payload, length_bytes))
+
+    def _update_rx_shadow(
+        self,
+        *,
+        message: Any,
+        arbitration_id: int,
+        is_extended_id: bool,
+        payload: bytes,
+    ) -> None:
+        """Cache last received payload by message + mux context."""
+        try:
+            length_bytes = int(getattr(message, "length", 8) or 8)
+        except Exception:
+            length_bytes = 8
+        if length_bytes <= 0:
+            length_bytes = 8
+
+        message_name = getattr(message, "name", "")
+        mux_sig = self._message_mux_signal.get(message_name)
+
+        if mux_sig is None:
+            key = (int(arbitration_id), bool(is_extended_id), None)
+        else:
+            try:
+                mux_raw = int(_extract_signal_raw_from(payload, mux_sig))
+            except Exception:
+                return
+            key = (int(arbitration_id), bool(is_extended_id), mux_raw)
+            self._latest_rx_mux_by_message[(int(arbitration_id), bool(is_extended_id))] = mux_raw
+
+        self._rx_payload_shadow[key] = bytes(self._normalize_payload_size(payload, length_bytes))
+
     def encode_tx(self) -> List[EncodedFrame]:
         """Encode all TX messages using the current signal state."""
 
@@ -648,16 +837,7 @@ class CanDb:
             sig_values = self._tx_signal_values.get(m.name, {})
             mux_info = self._tx_message_mux_info.get(m.name)
 
-            fid = int(getattr(m, "frame_id", 0))
-            arb_id = _dbc_to_arbitration_id(fid)
-
-            # Determine extended-id flag.
-            is_ext = getattr(m, "is_extended_frame", None)
-            if is_ext is None:
-                is_ext = (fid & EXTENDED_ID_FLAG) != 0 or arb_id > 0x7FF
-            else:
-                # Some DBCs embed the extended flag in bit 31.
-                is_ext = bool(is_ext) or (fid & EXTENDED_ID_FLAG) != 0
+            arb_id, is_ext = self._message_tx_identity(m)
 
 
             # -------------------------
@@ -678,10 +858,29 @@ class CanDb:
 
                         data = self._bit_encode_message(m, sig_values)
 
+                merged_payload = self._overlay_encoded_signals(
+                    message=m,
+                    base_payload=self._resolve_encode_base_payload(
+                        message=m,
+                        arbitration_id=arb_id,
+                        is_extended_id=is_ext,
+                        mux_value=None,
+                    ),
+                    encoded_payload=bytes(data),
+                    selected_signals=set(sig_values.keys()),
+                )
+                self._cache_tx_shadow(
+                    message=m,
+                    arbitration_id=arb_id,
+                    is_extended_id=is_ext,
+                    mux_value=None,
+                    payload=merged_payload,
+                )
+
                 frames.append(
                     EncodedFrame(
                         arbitration_id=arb_id,
-                        data=bytes(data),
+                        data=bytes(merged_payload),
                         is_extended_id=is_ext,
                     )
                 )
@@ -755,10 +954,29 @@ class CanDb:
 
                             data = self._bit_encode_message(m, sigs)
 
+                    merged_payload = self._overlay_encoded_signals(
+                        message=m,
+                        base_payload=self._resolve_encode_base_payload(
+                            message=m,
+                            arbitration_id=arb_id,
+                            is_extended_id=is_ext,
+                            mux_value=int(mid),
+                        ),
+                        encoded_payload=bytes(data),
+                        selected_signals=set(sigs.keys()),
+                    )
+                    self._cache_tx_shadow(
+                        message=m,
+                        arbitration_id=arb_id,
+                        is_extended_id=is_ext,
+                        mux_value=int(mid),
+                        payload=merged_payload,
+                    )
+
                     frames.append(
                         EncodedFrame(
                             arbitration_id=arb_id,
-                            data=bytes(data),
+                            data=bytes(merged_payload),
                             is_extended_id=is_ext,
                         )
                     )
@@ -800,10 +1018,29 @@ class CanDb:
                 if mux_signal_obj is not None:
                     _patch_signal_raw_into(payload, mux_signal_obj, int(mid))
 
+                merged_payload = self._overlay_encoded_signals(
+                    message=m,
+                    base_payload=self._resolve_encode_base_payload(
+                        message=m,
+                        arbitration_id=arb_id,
+                        is_extended_id=is_ext,
+                        mux_value=int(mid),
+                    ),
+                    encoded_payload=payload,
+                    selected_signals=set(sigs.keys()) | {mux_info.mux_signal},
+                )
+                self._cache_tx_shadow(
+                    message=m,
+                    arbitration_id=arb_id,
+                    is_extended_id=is_ext,
+                    mux_value=int(mid),
+                    payload=merged_payload,
+                )
+
                 frames.append(
                     EncodedFrame(
                         arbitration_id=arb_id,
-                        data=bytes(payload),
+                        data=bytes(merged_payload),
                         is_extended_id=is_ext,
                     )
                 )
@@ -890,6 +1127,13 @@ class CanDb:
                     return None
 
         name = getattr(m_obj, "name", "")
+        msg_arb_id, msg_is_ext = self._message_tx_identity(m_obj)
+        self._update_rx_shadow(
+            message=m_obj,
+            arbitration_id=msg_arb_id,
+            is_extended_id=msg_is_ext,
+            payload=data,
+        )
 
         # If this message is known to have overlaps, always use bit decode.
         if self._message_has_overlaps.get(name, False):

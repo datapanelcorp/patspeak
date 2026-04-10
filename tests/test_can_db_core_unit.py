@@ -418,6 +418,43 @@ def test_candb_encode_tx_mux_unknown_mid_patches_bits(monkeypatch):
     assert frames[0].data[0] & 0b11 == 0
 
 
+def test_candb_encode_uses_rx_then_tx_shadow_base(monkeypatch):
+    # One 4-bit signal in the low nibble; high nibble is "other context" bits.
+    # Force bit-encode fallback so FakeMessage.encode internals do not dominate
+    # this payload-level shadow behavior test.
+    sig = FakeSignal("A", start=0, length=4)
+    msg = FakeMessage(
+        "MSG_SHADOW",
+        0x321,
+        signals=[sig],
+        senders=["CTRL"],
+        is_extended_frame=False,
+        raise_on_encode_scaling=True,
+        raise_on_encode_plain=True,
+        decode_returns={},
+    )
+    db = FakeDatabase([msg])
+    fake = FakeCantoolsModule(db)
+    monkeypatch.setattr(can_db, "cantools", fake)
+
+    cdb = can_db.CanDb("dummy.dbc")
+
+    # Seed RX shadow with high nibble = 0xB.
+    cdb.decode(0x321, bytes([0xB0, 0, 0, 0, 0, 0, 0, 0]))
+
+    # First encode should use RX shadow as base.
+    assert cdb.set_tx_signal("A", 0x5) is True
+    frames1 = cdb.encode_tx()
+    assert len(frames1) == 1
+    assert frames1[0].data[0] == 0xB5
+
+    # Next encode should use TX shadow as base and keep high nibble context.
+    assert cdb.set_tx_signal("A", 0x7) is True
+    frames2 = cdb.encode_tx()
+    assert len(frames2) == 1
+    assert frames2[0].data[0] == 0xB7
+
+
 def test_candb_bit_encode_message_length_handling(monkeypatch):
     db = _make_db_for_core_tests()
     fake = FakeCantoolsModule(db)
