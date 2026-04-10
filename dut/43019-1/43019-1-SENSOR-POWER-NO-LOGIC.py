@@ -39,7 +39,8 @@ outstr += "#setup load\n"
 outstr += "LdRemote = 1 : NULL : WAIT = 0.1\n"
 outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
 outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
-outstr += "LdShort = 1 : NULL : WAIT = 1\n"
+outstr += "LdShort = 0 : NULL : WAIT = 1\n"
+outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
 outstr += "J0_08_METER_LOAD = 1 : NULL : WAIT = 1\n"
 
 
@@ -90,11 +91,12 @@ while t <= 3:
     outstr += OutputConnector + " = 1 : NULL : WAIT = 0.1\n"
 
     outstr += "#turn on sensor power\n" 
-    outstr += "Command = 81, " + OutputName + " = 1 : NULL : WAIT = 0.1\n"
     outstr += "Command = 92, " + BattEn + " = 1 : NULL : WAIT = 0.1\n"
+    outstr += "Command = 81, " + OutputName + " = 1 : NULL : WAIT = 0.1\n"
     outstr += "#check for 5VDC\n"
     outstr += "NULL : MeterVolts = " + str(5) + " | 0.2 | 0.1\n" 
     outstr += "#short output (#1)\n"
+    outstr += "LdShort = 1 : NULL : WAIT = 1\n"
     outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
     outstr += "#verify fault\n"
     outstr += "NULL : " + OutputStatus + " = 2 | 0.1 | 0.1\n"
@@ -169,13 +171,16 @@ while t <= 3:
     outstr += "NULL : " + OutputStatus + " = 2 | 0.1 | 0.1\n"
     outstr += "Command = 81, " + OutputName + " = 0 : NULL\n"
     outstr += "\n"
-            
+
+    outstr += "Command = 81, " + OutputName + " = 0 : NULL : WAIT = 0.5\n"
+    outstr += OutputConnector + " = 0 : NULL : WAIT = 0.5\n"
+    
+
     outstr += "#switch out load line, clear current\n"
     outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
     outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.5\n"
+    outstr += "LdShort = 0 : NULL : WAIT = 1\n"
 
-    outstr += OutputConnector + " = 0 : NULL : WAIT = 0.5\n"
-    outstr += "Command = 81, " + OutputName + " = 0 : NULL : WAIT = 0.5\n"
     t += 1
 
 

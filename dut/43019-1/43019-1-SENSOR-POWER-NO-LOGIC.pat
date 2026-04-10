@@ -22,7 +22,8 @@ Command = 0, FaultReset = 0, SaveSettings = 0, Enable_FAULT = 0, Enable_DPLF1 = 
 LdRemote = 1 : NULL : WAIT = 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 LdCurrentSet = 0 : NULL : WAIT = 0.1
-LdShort = 1 : NULL : WAIT = 1
+LdShort = 0 : NULL : WAIT = 1
+LdEnable = 0 : NULL : WAIT = 0.1
 J0_08_METER_LOAD = 1 : NULL : WAIT = 1
 Command = 92, SPWR1_AlwaysOn = 0 : NULL : WAIT = 0.1
 Command = 92, SPWR2_AlwaysOn = 0 : NULL : WAIT = 0.1
@@ -39,11 +40,12 @@ NULL : SpwrStat4 = 0 | 0.1 | 0.1
 #switch in load line, set current
 J2_02 = 1 : NULL : WAIT = 0.1
 #turn on sensor power
-Command = 81, SPWR1_On = 1 : NULL : WAIT = 0.1
 Command = 92, SPWR1_5V = 1 : NULL : WAIT = 0.1
+Command = 81, SPWR1_On = 1 : NULL : WAIT = 0.1
 #check for 5VDC
 NULL : MeterVolts = 5 | 0.2 | 0.1
 #short output (#1)
+LdShort = 1 : NULL : WAIT = 1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat1 = 2 | 0.1 | 0.1
@@ -112,19 +114,21 @@ NULL : MeterVolts = 0 | 0.2 | 0.1
 NULL : SpwrStat1 = 2 | 0.1 | 0.1
 Command = 81, SPWR1_On = 0 : NULL
 
+Command = 81, SPWR1_On = 0 : NULL : WAIT = 0.5
+J2_02 = 0 : NULL : WAIT = 0.5
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
 LdCurrentSet = 0 : NULL : WAIT = 0.5
-J2_02 = 0 : NULL : WAIT = 0.5
-Command = 81, SPWR1_On = 0 : NULL : WAIT = 0.5
+LdShort = 0 : NULL : WAIT = 1
 #switch in load line, set current
 J2_04 = 1 : NULL : WAIT = 0.1
 #turn on sensor power
-Command = 81, SPWR2_On = 1 : NULL : WAIT = 0.1
 Command = 92, SPWR2_5V = 1 : NULL : WAIT = 0.1
+Command = 81, SPWR2_On = 1 : NULL : WAIT = 0.1
 #check for 5VDC
 NULL : MeterVolts = 5 | 0.2 | 0.1
 #short output (#1)
+LdShort = 1 : NULL : WAIT = 1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat2 = 2 | 0.1 | 0.1
@@ -193,19 +197,21 @@ NULL : MeterVolts = 0 | 0.2 | 0.1
 NULL : SpwrStat2 = 2 | 0.1 | 0.1
 Command = 81, SPWR2_On = 0 : NULL
 
+Command = 81, SPWR2_On = 0 : NULL : WAIT = 0.5
+J2_04 = 0 : NULL : WAIT = 0.5
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
 LdCurrentSet = 0 : NULL : WAIT = 0.5
-J2_04 = 0 : NULL : WAIT = 0.5
-Command = 81, SPWR2_On = 0 : NULL : WAIT = 0.5
+LdShort = 0 : NULL : WAIT = 1
 #switch in load line, set current
 J2_06 = 1 : NULL : WAIT = 0.1
 #turn on sensor power
-Command = 81, SPWR3_On = 1 : NULL : WAIT = 0.1
 Command = 92, SPWR3_5V = 1 : NULL : WAIT = 0.1
+Command = 81, SPWR3_On = 1 : NULL : WAIT = 0.1
 #check for 5VDC
 NULL : MeterVolts = 5 | 0.2 | 0.1
 #short output (#1)
+LdShort = 1 : NULL : WAIT = 1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat3 = 2 | 0.1 | 0.1
@@ -274,19 +280,21 @@ NULL : MeterVolts = 0 | 0.2 | 0.1
 NULL : SpwrStat3 = 2 | 0.1 | 0.1
 Command = 81, SPWR3_On = 0 : NULL
 
+Command = 81, SPWR3_On = 0 : NULL : WAIT = 0.5
+J2_06 = 0 : NULL : WAIT = 0.5
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
 LdCurrentSet = 0 : NULL : WAIT = 0.5
-J2_06 = 0 : NULL : WAIT = 0.5
-Command = 81, SPWR3_On = 0 : NULL : WAIT = 0.5
+LdShort = 0 : NULL : WAIT = 1
 #switch in load line, set current
 J2_08 = 1 : NULL : WAIT = 0.1
 #turn on sensor power
-Command = 81, SPWR4_On = 1 : NULL : WAIT = 0.1
 Command = 92, SPWR4_5V = 1 : NULL : WAIT = 0.1
+Command = 81, SPWR4_On = 1 : NULL : WAIT = 0.1
 #check for 5VDC
 NULL : MeterVolts = 5 | 0.2 | 0.1
 #short output (#1)
+LdShort = 1 : NULL : WAIT = 1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat4 = 2 | 0.1 | 0.1
@@ -355,11 +363,12 @@ NULL : MeterVolts = 0 | 0.2 | 0.1
 NULL : SpwrStat4 = 2 | 0.1 | 0.1
 Command = 81, SPWR4_On = 0 : NULL
 
+Command = 81, SPWR4_On = 0 : NULL : WAIT = 0.5
+J2_08 = 0 : NULL : WAIT = 0.5
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
 LdCurrentSet = 0 : NULL : WAIT = 0.5
-J2_08 = 0 : NULL : WAIT = 0.5
-Command = 81, SPWR4_On = 0 : NULL : WAIT = 0.5
+LdShort = 0 : NULL : WAIT = 1
 LdRemote = 0 : NULL : WAIT = 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 LdShort = 0 : NULL : WAIT = 1
