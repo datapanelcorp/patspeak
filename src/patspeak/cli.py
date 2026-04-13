@@ -113,6 +113,16 @@ def _hook_results_enabled(kind: str) -> bool:
     return True
 
 
+def _hooks_enabled() -> bool:
+    """Return True if suite hooks should run for this invocation.
+
+    By default hooks are enabled. Set PATSPEAK_HOOKS=0 to disable running
+    pat_start / pat_transition / pat_end scripts for the current process.
+    """
+
+    return _env_truthy("PATSPEAK_HOOKS", default=True)
+
+
 def _write_interrupt_log(reason: str) -> None:
     """Best-effort: persist whatever log we have so far.
 
@@ -705,13 +715,20 @@ def main() -> int:
             pass
 
         # Hooks
-        hook_start = find_hook_next_to(tests[0], HOOK_START)
-        hook_end = find_hook_next_to(tests[-1], HOOK_END)
-        transition_hooks: list[str] = []
-        for t in tests:
-            h = find_hook_next_to(t, HOOK_TRANSITION)
-            if h:
-                transition_hooks.append(h)
+        hooks_enabled = _hooks_enabled()
+        if hooks_enabled:
+            hook_start = find_hook_next_to(tests[0], HOOK_START)
+            hook_end = find_hook_next_to(tests[-1], HOOK_END)
+            transition_hooks: list[str] = []
+            for t in tests:
+                h = find_hook_next_to(t, HOOK_TRANSITION)
+                if h:
+                    transition_hooks.append(h)
+        else:
+            hook_start = None
+            hook_end = None
+            transition_hooks = []
+            print("Hook scripts disabled via PATSPEAK_HOOKS=0")
 
         def _uniq(items: list[str]) -> list[str]:
             seen: set[str] = set()
@@ -919,7 +936,7 @@ def main() -> int:
             print(style(f"\n[{idx}/{len(tests)}] ", fg="gray", bold=True) + str(test_ref))
 
             # Pre-transition
-            transition = find_hook_next_to(test_ref, HOOK_TRANSITION)
+            transition = find_hook_next_to(test_ref, HOOK_TRANSITION) if hooks_enabled else None
             if transition:
                 pre_log_ref, pre_unit_override = _hook_name_overrides(
                     "hook-transition", from_ref=last_test_ref, to_ref=test_ref
