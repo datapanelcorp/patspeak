@@ -16,9 +16,14 @@ Environment overrides (optional):
   - PATSPEAK_CAN_BITRATE: default 250000
 
 Auto-detect order (when PATSPEAK_CAN_INTERFACE=auto):
-  1) Kvaser (CANlib)
-  2) PCAN (PCAN-Basic)
-  3) SocketCAN (Linux)
+  - Windows:
+      1) PCAN (PCAN-Basic)
+      2) Kvaser (CANlib)
+      3) SocketCAN
+  - Non-Windows:
+      1) Kvaser (CANlib)
+      2) PCAN (PCAN-Basic)
+      3) SocketCAN
 """
 
 from __future__ import annotations
@@ -314,14 +319,38 @@ def autodetect_can_backend() -> None:
     # Auto-detect
     # -----------------
     # Auto-detect in a reasonable order.
-    candidates: List[Tuple[str, Any, Any]] = []
+    # On Windows, prefer PEAK first because Kvaser Virtual CAN can be present
+    # without physical Kvaser hardware and may otherwise shadow PCAN adapters.
+    #
+    # Fast-path: when channels are not explicitly overridden, lock onto PCAN
+    # if channel 0 is available, even when only one physical PCAN channel is
+    # present. This avoids accidentally selecting virtual Kvaser channels.
+    if os.name == "nt" and ch0_env is None and ch1_env is None:
+        pcan_ch0, pcan_ch1 = "PCAN_USBBUS1", "PCAN_USBBUS2"
+        if need_ch1:
+            if _ok_dual("pcan", pcan_ch0, pcan_ch1):
+                _apply_backend("pcan", [pcan_ch0, pcan_ch1], note="Windows preferred PCAN")
+                return
+            if _ok_single("pcan", pcan_ch0):
+                _force_single_channel("pcan", pcan_ch0, note="Windows preferred PCAN single-channel")
+                return
+        else:
+            if _ok_single("pcan", pcan_ch0):
+                _apply_backend("pcan", [pcan_ch0], note="Windows preferred PCAN")
+                return
 
-    # 1) Kvaser (Windows typically needs Kvaser CANlib installed)
-    candidates.append(("kvaser", 0, 1))
-    # 2) PCAN (common on Windows)
-    candidates.append(("pcan", "PCAN_USBBUS1", "PCAN_USBBUS2"))
-    # 3) SocketCAN (Linux / RPi, including many Kvaser devices via kvaser_usb)
-    candidates.append(("socketcan", "can0", "can1"))
+    if os.name == "nt":
+        candidates: List[Tuple[str, Any, Any]] = [
+            ("pcan", "PCAN_USBBUS1", "PCAN_USBBUS2"),
+            ("kvaser", 0, 1),
+            ("socketcan", "can0", "can1"),
+        ]
+    else:
+        candidates = [
+            ("kvaser", 0, 1),
+            ("pcan", "PCAN_USBBUS1", "PCAN_USBBUS2"),
+            ("socketcan", "can0", "can1"),
+        ]
 
     # Allow overriding channels but keeping auto interface detection.
     if ch0_env is not None:
