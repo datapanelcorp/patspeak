@@ -418,6 +418,49 @@ def test_candb_encode_tx_mux_unknown_mid_patches_bits(monkeypatch):
     assert frames[0].data[0] & 0b11 == 0
 
 
+def test_candb_encode_tx_mux_unknown_mid_clears_muxed_bits_but_keeps_common(monkeypatch):
+    mux = FakeSignal("MUX", start=0, length=2, is_multiplexer=True)
+    d1 = FakeSignal("D1", start=8, length=4, multiplexer_ids=[1])
+    d2 = FakeSignal("D2", start=12, length=4, multiplexer_ids=[2])
+    common = FakeSignal("C", start=16, length=8)
+    msg = FakeMessage(
+        "MUXMSG2",
+        0x124,
+        signals=[mux, d1, d2, common],
+        senders=["CTRL"],
+        is_extended_frame=False,
+        # Force fallback path to keep behavior deterministic for this unit test.
+        raise_on_encode_scaling=True,
+        raise_on_encode_plain=True,
+    )
+    db = FakeDatabase([msg])
+    fake = FakeCantoolsModule(db)
+    monkeypatch.setattr(can_db, "cantools", fake)
+    monkeypatch.delenv("PATSPEAK_SEND_ALL_MUX", raising=False)
+
+    cdb = can_db.CanDb("dummy.dbc")
+
+    # Seed RX shadow with mux=2, D2 non-zero, and a common byte.
+    seeded = bytearray(8)
+    can_db._patch_signal_raw_into(seeded, mux, 2)
+    can_db._patch_signal_raw_into(seeded, d2, 0xA)
+    can_db._patch_signal_raw_into(seeded, common, 0xCC)
+    cdb.decode(0x124, bytes(seeded))
+
+    # Unknown mux id / clear path.
+    assert cdb.set_tx_signal("MUX", 0) is True
+    frames = cdb.encode_tx()
+    assert len(frames) == 1
+
+    out = frames[0].data
+    # Mux selector is patched to 0.
+    assert out[0] & 0b11 == 0
+    # All muxed variant bits are cleared (both D1 and D2 nibbles).
+    assert out[1] == 0x00
+    # Common field context is preserved.
+    assert out[2] == 0xCC
+
+
 def test_candb_encode_uses_rx_then_tx_shadow_base(monkeypatch):
     # One 4-bit signal in the low nibble; high nibble is "other context" bits.
     # Force bit-encode fallback so FakeMessage.encode internals do not dominate

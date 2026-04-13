@@ -739,6 +739,23 @@ class CanDb:
         base = self._tx_payload_shadow.get(key)
         if base is None:
             base = self._rx_payload_shadow.get(key)
+
+        # If there is no exact mux-group shadow, reuse the latest observed mux
+        # context for this message. This preserves common field context for
+        # clear/unknown mux writes (for example Command=0).
+        if base is None and mux_value is not None:
+            latest_mid = self._latest_rx_mux_by_message.get(
+                (int(arbitration_id), bool(is_extended_id))
+            )
+            if latest_mid is not None:
+                fallback_key = (
+                    int(arbitration_id),
+                    bool(is_extended_id),
+                    int(latest_mid),
+                )
+                base = self._tx_payload_shadow.get(fallback_key)
+                if base is None:
+                    base = self._rx_payload_shadow.get(fallback_key)
         if base is not None:
             return self._normalize_payload_size(base, length_bytes)
         return self._build_cold_start_payload(message, mux_value)
@@ -985,8 +1002,13 @@ class CanDb:
                 # -----------------------------
                 # Unknown / "clear" mux-id path
                 # -----------------------------
-                # Encode a base mux id (first declared) with all its muxed signals forced
-                # to 0. Then patch the mux bits to the requested value.
+                # Backward-compatibility contract:
+                # Command=0 (or any unknown mux id) acts like a "clear" and should
+                # wipe all muxed signal bits across variants, then set the mux selector
+                # to the requested value.
+                #
+                # We still encode using one valid base mux-id first so cantools accepts
+                # the payload, then explicitly clear all muxed signal fields.
                 base_mid = mux_info.mux_ids[0] if mux_info.mux_ids else 0
 
                 for name in mux_info.mux_id_to_signals.get(int(base_mid), []):
@@ -1015,6 +1037,15 @@ class CanDb:
                         data = self._bit_encode_message(m, sigs)
 
                 payload = bytearray(bytes(data))
+                all_muxed_signal_names: Set[str] = set()
+                for names in mux_info.mux_id_to_signals.values():
+                    all_muxed_signal_names.update(names)
+
+                for name in all_muxed_signal_names:
+                    signal_obj = _get_message_signal(m, name)
+                    if signal_obj is not None:
+                        _patch_signal_raw_into(payload, signal_obj, 0)
+
                 if mux_signal_obj is not None:
                     _patch_signal_raw_into(payload, mux_signal_obj, int(mid))
 
@@ -1027,7 +1058,7 @@ class CanDb:
                         mux_value=int(mid),
                     ),
                     encoded_payload=payload,
-                    selected_signals=set(sigs.keys()) | {mux_info.mux_signal},
+                    selected_signals=all_muxed_signal_names | {mux_info.mux_signal},
                 )
                 self._cache_tx_shadow(
                     message=m,
