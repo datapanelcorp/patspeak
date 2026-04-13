@@ -917,20 +917,23 @@ def ProcessScript():
             timed_out = (Timeout > 0) and (rt.StepTime >= Timeout)
             passed_time = (rt.PassTime >= TestTime)
 
+            # If both become true in the same tracker cycle, treat the step as
+            # PASS. Otherwise we can report a false FAIL at the exact timeout
+            # boundary even though the signal satisfied the pass window.
             if(passed_time or timed_out):
                 if(SignalName != 'NULL'):
                     rt.UUT_Results[str(rt.TestStep) + "-" + SignalName + "-" + rt.DataLogTag] = RealValue
-                    if(timed_out):
+                    if(passed_time):
+                        TestString = StepStr + "PASS:" + " " + SignalName + " " + str(RealValue)
+                        try:
+                            note_step_result(rt.TestStep, passed=True)
+                        except Exception:
+                            pass
+                    else:
                         TestString = StepStr + "FAIL:" + " " + SignalName + " " + str(RealValue)
                         rt.FailCount += 1
                         try:
                             note_step_result(rt.TestStep, passed=False)
-                        except Exception:
-                            pass
-                    else:
-                        TestString = StepStr + "PASS:" + " " + SignalName + " " + str(RealValue)
-                        try:
-                            note_step_result(rt.TestStep, passed=True)
                         except Exception:
                             pass
                     rt.UUT_TestLog += TestString + "\n"

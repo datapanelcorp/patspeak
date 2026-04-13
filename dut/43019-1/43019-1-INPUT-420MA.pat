@@ -35,9 +35,9 @@ NULL : NULL : WAIT = 0.8
 #Sweep of Port_1A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.005 | 0.0001 | 0.5 : TIMEOUT = 12
+NULL : MeterAmps = 0.005 | 0.01 | 0.1 : TIMEOUT = 12
 #test feedback
-NULL : Port_1A = 5.0 | 0.155 | 0.1
+NULL : Port_1A = 5.0 | 0.155 | 0.1 : TIMEOUT = 12
 
 #Finished with port
 #switch out input
@@ -50,7 +50,7 @@ J1_02 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_1B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.005 | 0.0001 | 0.5
+NULL : MeterAmps = 0.005 | 0.01 | 0.1
 #test feedback
 NULL : Port_1B = 5.0 | 0.155 | 0.1
 
@@ -65,7 +65,7 @@ J1_03 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_2A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.005 | 0.0001 | 0.5
+NULL : MeterAmps = 0.005 | 0.01 | 0.1
 #test feedback
 NULL : Port_2A = 5.0 | 0.155 | 0.1
 
@@ -80,7 +80,7 @@ J1_04 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_2B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.005 | 0.0001 | 0.5
+NULL : MeterAmps = 0.005 | 0.01 | 0.1
 #test feedback
 NULL : Port_2B = 5.0 | 0.155 | 0.1
 
@@ -95,7 +95,7 @@ J1_05 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_3A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.005 | 0.0001 | 0.5
+NULL : MeterAmps = 0.005 | 0.01 | 0.1
 #test feedback
 NULL : Port_3A = 5.0 | 0.155 | 0.1
 
@@ -110,7 +110,7 @@ J1_06 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_3B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.005 | 0.0001 | 0.5
+NULL : MeterAmps = 0.005 | 0.01 | 0.1
 #test feedback
 NULL : Port_3B = 5.0 | 0.155 | 0.1
 
@@ -125,7 +125,7 @@ J1_07 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_4A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.005 | 0.0001 | 0.5
+NULL : MeterAmps = 0.005 | 0.01 | 0.1
 #test feedback
 NULL : Port_4A = 5.0 | 0.155 | 0.1
 
@@ -140,7 +140,7 @@ J1_08 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_4B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.005 | 0.0001 | 0.5
+NULL : MeterAmps = 0.005 | 0.01 | 0.1
 #test feedback
 NULL : Port_4B = 5.0 | 0.155 | 0.1
 
@@ -151,14 +151,16 @@ J1_08 = 0 : NULL : WAIT = 0.2
 MrSignalSetValue = 10.0 : NULL : WAIT = 0.5
 #switch input to load line
 J1_01 = 1 : NULL : WAIT = 0.1
+#warm-up first meter sample
+NULL : NULL : WAIT = 0.8
 
 
 #Sweep of Port_1A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.01 | 0.0001 | 0.5
+NULL : MeterAmps = 0.01 | 0.01 | 0.1 : TIMEOUT = 12
 #test feedback
-NULL : Port_1A = 10.0 | 0.155 | 0.1
+NULL : Port_1A = 10.0 | 0.155 | 0.1 : TIMEOUT = 12
 
 #Finished with port
 #switch out input
@@ -171,7 +173,7 @@ J1_02 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_1B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.01 | 0.0001 | 0.5
+NULL : MeterAmps = 0.01 | 0.01 | 0.1
 #test feedback
 NULL : Port_1B = 10.0 | 0.155 | 0.1
 
@@ -186,7 +188,7 @@ J1_03 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_2A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.01 | 0.0001 | 0.5
+NULL : MeterAmps = 0.01 | 0.01 | 0.1
 #test feedback
 NULL : Port_2A = 10.0 | 0.155 | 0.1
 
@@ -201,7 +203,7 @@ J1_04 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_2B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.01 | 0.0001 | 0.5
+NULL : MeterAmps = 0.01 | 0.01 | 0.1
 #test feedback
 NULL : Port_2B = 10.0 | 0.155 | 0.1
 
@@ -216,7 +218,7 @@ J1_05 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_3A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.01 | 0.0001 | 0.5
+NULL : MeterAmps = 0.01 | 0.01 | 0.1
 #test feedback
 NULL : Port_3A = 10.0 | 0.155 | 0.1
 
@@ -231,7 +233,7 @@ J1_06 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_3B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.01 | 0.0001 | 0.5
+NULL : MeterAmps = 0.01 | 0.01 | 0.1
 #test feedback
 NULL : Port_3B = 10.0 | 0.155 | 0.1
 
@@ -246,7 +248,7 @@ J1_07 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_4A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.01 | 0.0001 | 0.5
+NULL : MeterAmps = 0.01 | 0.01 | 0.1
 #test feedback
 NULL : Port_4A = 10.0 | 0.155 | 0.1
 
@@ -261,7 +263,7 @@ J1_08 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_4B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.01 | 0.0001 | 0.5
+NULL : MeterAmps = 0.01 | 0.01 | 0.1
 #test feedback
 NULL : Port_4B = 10.0 | 0.155 | 0.1
 
@@ -272,14 +274,16 @@ J1_08 = 0 : NULL : WAIT = 0.2
 MrSignalSetValue = 15.0 : NULL : WAIT = 0.5
 #switch input to load line
 J1_01 = 1 : NULL : WAIT = 0.1
+#warm-up first meter sample
+NULL : NULL : WAIT = 0.8
 
 
 #Sweep of Port_1A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.015 | 0.0001 | 0.5
+NULL : MeterAmps = 0.015 | 0.01 | 0.1 : TIMEOUT = 12
 #test feedback
-NULL : Port_1A = 15.0 | 0.155 | 0.1
+NULL : Port_1A = 15.0 | 0.155 | 0.1 : TIMEOUT = 12
 
 #Finished with port
 #switch out input
@@ -292,7 +296,7 @@ J1_02 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_1B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.015 | 0.0001 | 0.5
+NULL : MeterAmps = 0.015 | 0.01 | 0.1
 #test feedback
 NULL : Port_1B = 15.0 | 0.155 | 0.1
 
@@ -307,7 +311,7 @@ J1_03 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_2A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.015 | 0.0001 | 0.5
+NULL : MeterAmps = 0.015 | 0.01 | 0.1
 #test feedback
 NULL : Port_2A = 15.0 | 0.155 | 0.1
 
@@ -322,7 +326,7 @@ J1_04 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_2B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.015 | 0.0001 | 0.5
+NULL : MeterAmps = 0.015 | 0.01 | 0.1
 #test feedback
 NULL : Port_2B = 15.0 | 0.155 | 0.1
 
@@ -337,7 +341,7 @@ J1_05 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_3A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.015 | 0.0001 | 0.5
+NULL : MeterAmps = 0.015 | 0.01 | 0.1
 #test feedback
 NULL : Port_3A = 15.0 | 0.155 | 0.1
 
@@ -352,7 +356,7 @@ J1_06 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_3B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.015 | 0.0001 | 0.5
+NULL : MeterAmps = 0.015 | 0.01 | 0.1
 #test feedback
 NULL : Port_3B = 15.0 | 0.155 | 0.1
 
@@ -367,7 +371,7 @@ J1_07 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_4A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.015 | 0.0001 | 0.5
+NULL : MeterAmps = 0.015 | 0.01 | 0.1
 #test feedback
 NULL : Port_4A = 15.0 | 0.155 | 0.1
 
@@ -382,7 +386,7 @@ J1_08 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_4B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.015 | 0.0001 | 0.5
+NULL : MeterAmps = 0.015 | 0.01 | 0.1
 #test feedback
 NULL : Port_4B = 15.0 | 0.155 | 0.1
 
@@ -393,14 +397,16 @@ J1_08 = 0 : NULL : WAIT = 0.2
 MrSignalSetValue = 20.0 : NULL : WAIT = 0.5
 #switch input to load line
 J1_01 = 1 : NULL : WAIT = 0.1
+#warm-up first meter sample
+NULL : NULL : WAIT = 0.8
 
 
 #Sweep of Port_1A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.02 | 0.0001 | 0.5
+NULL : MeterAmps = 0.02 | 0.01 | 0.1 : TIMEOUT = 12
 #test feedback
-NULL : Port_1A = 20.0 | 0.155 | 0.1
+NULL : Port_1A = 20.0 | 0.155 | 0.1 : TIMEOUT = 12
 
 #Finished with port
 #switch out input
@@ -413,7 +419,7 @@ J1_02 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_1B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.02 | 0.0001 | 0.5
+NULL : MeterAmps = 0.02 | 0.01 | 0.1
 #test feedback
 NULL : Port_1B = 20.0 | 0.155 | 0.1
 
@@ -428,7 +434,7 @@ J1_03 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_2A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.02 | 0.0001 | 0.5
+NULL : MeterAmps = 0.02 | 0.01 | 0.1
 #test feedback
 NULL : Port_2A = 20.0 | 0.155 | 0.1
 
@@ -443,7 +449,7 @@ J1_04 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_2B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.02 | 0.0001 | 0.5
+NULL : MeterAmps = 0.02 | 0.01 | 0.1
 #test feedback
 NULL : Port_2B = 20.0 | 0.155 | 0.1
 
@@ -458,7 +464,7 @@ J1_05 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_3A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.02 | 0.0001 | 0.5
+NULL : MeterAmps = 0.02 | 0.01 | 0.1
 #test feedback
 NULL : Port_3A = 20.0 | 0.155 | 0.1
 
@@ -473,7 +479,7 @@ J1_06 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_3B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.02 | 0.0001 | 0.5
+NULL : MeterAmps = 0.02 | 0.01 | 0.1
 #test feedback
 NULL : Port_3B = 20.0 | 0.155 | 0.1
 
@@ -488,7 +494,7 @@ J1_07 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_4A from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.02 | 0.0001 | 0.5
+NULL : MeterAmps = 0.02 | 0.01 | 0.1
 #test feedback
 NULL : Port_4A = 20.0 | 0.155 | 0.1
 
@@ -503,7 +509,7 @@ J1_08 = 1 : NULL : WAIT = 0.1
 #Sweep of Port_4B from 5000 to 20000 in 5000 increments
 
 #test ammmeter
-NULL : MeterAmps = 0.02 | 0.0001 | 0.5
+NULL : MeterAmps = 0.02 | 0.01 | 0.1
 #test feedback
 NULL : Port_4B = 20.0 | 0.155 | 0.1
 

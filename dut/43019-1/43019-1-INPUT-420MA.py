@@ -52,6 +52,13 @@ outstr += "MrSignalMode = 0 : NULL : WAIT = 0.1\n"
 outstr += "MrSignalEnable = 1 : NULL : WAIT = 0.5\n"
 outstr += "METER_MODE = 1 : NULL : WAIT = 0.2\n"
 
+FIRST_PORT_SETTLE_WAIT = 0.8
+FIRST_PORT_TIMEOUT = 12
+METER_TOL = 0.01
+METER_TEST_TIME = 0.1
+PORT_TOL = 0.155
+PORT_TEST_TIME = 0.1
+
 while AmpsValue <= AmpsMax:
     outstr += "MrSignalSetValue = " + str(AmpsValue/1000) + " : NULL : WAIT = 0.5\n"
 
@@ -99,9 +106,9 @@ while AmpsValue <= AmpsMax:
 
         outstr += "#switch input to load line\n"
         outstr += OutputConnector + " = 1 : NULL : WAIT = 0.1\n"
-        if(AmpsValue == AmpsStart and PortIndex == 0):
+        if(PortIndex == 0):
             outstr += "#warm-up first meter sample\n"
-            outstr += "NULL : NULL : WAIT = 0.8\n"
+            outstr += "NULL : NULL : WAIT = " + str(FIRST_PORT_SETTLE_WAIT) + "\n"
         outstr += "\n"
         outstr += "\n"
         outstr += "#Sweep of " + InputName + " from " + str(AmpsStart) + " to " + str(AmpsMax)  + " in " + str(AmpsInc) + " increments\n"
@@ -109,12 +116,31 @@ while AmpsValue <= AmpsMax:
         
         #outstr += "PAUSE- TESTING " + InputName + ", SET GEN TO " + str(AmpsValue) + "ma\n"
         outstr += "#test ammmeter\n"
-        if(AmpsValue == AmpsStart and PortIndex == 0):
-            outstr += "NULL : MeterAmps = " + str(AmpsValue/1000000) + " | 0.0001 | 0.5 : TIMEOUT = 12\n"
-        else:
-            outstr += "NULL : MeterAmps = " + str(AmpsValue/1000000) + " | 0.0001 | 0.5\n"
+        meter_step = (
+            "NULL : MeterAmps = "
+            + str(AmpsValue/1000000)
+            + " | "
+            + str(METER_TOL)
+            + " | "
+            + str(METER_TEST_TIME)
+        )
+        if(PortIndex == 0):
+            meter_step += " : TIMEOUT = " + str(FIRST_PORT_TIMEOUT)
+        outstr += meter_step + "\n"
         outstr += "#test feedback\n"
-        outstr += "NULL : " + Feedback + " = " + str(AmpsValue/1000) + " | 0.155 | 0.1\n" 
+        feedback_step = (
+            "NULL : "
+            + Feedback
+            + " = "
+            + str(AmpsValue/1000)
+            + " | "
+            + str(PORT_TOL)
+            + " | "
+            + str(PORT_TEST_TIME)
+        )
+        if(PortIndex == 0):
+            feedback_step += " : TIMEOUT = " + str(FIRST_PORT_TIMEOUT)
+        outstr += feedback_step + "\n"
 
         outstr += "\n"
         outstr += "#Finished with port\n"
