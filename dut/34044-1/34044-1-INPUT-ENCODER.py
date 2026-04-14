@@ -1,0 +1,180 @@
+from input_count_write import WriteCountTest
+from input_count_write import WriteMaxCountTest
+
+PortIndex = 0
+ModeIndex = 0
+PortMode = 0
+
+#global setup
+TestName = "34044-1-INPUT-ENCODER"
+datafile = TestName + ".pat"
+
+outstr = ""
+outstr += "#34044-1\n"
+outstr += "#Verion 0.0\n"
+outstr += "#input test\n"
+outstr += "UUT_DBC = 34044-561.dbc\n"
+outstr += "UUT_DATANAME = " + TestName + "\n"
+outstr += "\n"
+
+outstr += "#-----setup 34044-----\n"
+outstr += "Command = 93, PORT1_MODE = " + str(PortMode) + ", PORT2_MODE = " + str(PortMode) + ", PORT3_MODE = " + str(PortMode) + ", PORT4_MODE = " + str(PortMode) + " : NULL : WAIT = 0.2\n"
+outstr += "#clear multiplex\n"
+outstr += "Command = 0, PORT1_MODE = 0, PORT2_MODE = 0, PORT3_MODE = 0, PORT4_MODE = 0 : NULL\n"
+
+outstr += "#setup meter\n"
+outstr += "LdRemote = 1 : NULL : WAIT = 0.1\n"
+outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
+outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
+outstr += "J0_08_METER_LOAD = 1 : NULL : WAIT = 1\n"
+outstr += "\n"
+
+outstr += "#setup PS1\n"
+outstr += "PwrRemote = 1 : NULL : WAIT = 0.1\n"
+outstr += "PwrSetCurrent = 20 : NULL : WAIT = 0.1\n"
+outstr += "PwrSetVoltage = 0 : NULL : WAIT = 0.1\n"
+outstr += "PwrEnable = 1 : NULL : WAIT = 0.1\n"
+outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1\n"
+outstr += "\n"
+
+InPortAMode = "10"
+InPortBMode = "0"
+OutPortAMode = "0"
+OutPortBMode = "0"
+
+InputConnectorA = "J3_01"
+InputNameA = "Input_7A"
+StatusA = "Input_7A"
+ResetA = "Counter_7A_Reset"
+EnableA = "Counter_7A_ON_OFF"
+
+InputConnectorB = "J3_03"
+InputNameB = "Input_8A"
+StatusB = "Input_8A"
+ResetB = "Counter_8A_Reset"
+EnableB = "Counter_8A_ON_OFF"
+        
+outstr += "#-----setup 34044-----\n"
+outstr += "#configure Port Modes\n"
+outstr += "Command = 83, MODE1A = " + OutPortAMode + ", MODE1B = " + OutPortBMode + ", MODE2A = " + OutPortAMode + ", MODE2B = " + OutPortBMode + ", MODE3A = " + OutPortAMode + ", MODE3B = " + OutPortBMode + ", MODE4A = " + OutPortAMode + ", MODE4B = " + OutPortBMode + " : NULL : WAIT = 0.2\n"
+outstr += "Command = 83, MODE5A = " + InPortAMode + ", MODE5B = " + InPortBMode + ", MODE6A = " + InPortAMode + ", MODE6B = " + InPortBMode + ", MODE7A = " + InPortAMode + ", MODE7B = " + InPortBMode + " : NULL : WAIT = 0.2\n"
+outstr += "Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0 : NULL : WAIT = 0.2\n"
+outstr += "Command = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL : WAIT = 0.2\n"
+
+outstr += "\n"
+outstr += "Command = 84, MODE8A = " + InPortAMode + ", MODE8B = " + InPortBMode + " : NULL : WAIT = 0.2\n"
+outstr += "Command = 0, MODE8A = 0, MODE8B = 0 : NULL\n"
+outstr += "\n"
+
+outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0, ADRaw = 0, Enable_Fault_Reset = 0 : NULL : WAIT = 0.2\n"
+outstr += "Command = 82, FaultReset = 1, SaveSettings = 1, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.2\n"
+outstr += "Command = 0, FaultReset = 0, SaveSettings = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
+
+outstr += "\n"
+outstr += "Command = 87, Counter_7A_Reset = 1, Counter_8A_Reset = 1, Counter_7A_ON_OFF = 1, Counter_8A_ON_OFF = 1, LowBYTE_Counter_7A_Setpoint = 0, LowBYTE_Counter_8A_Setpoint = 0 : NULL : WAIT = 0.2\n"
+
+outstr += "#clear multiplex\n"
+outstr += "Command = 0, Counter_7A_Reset = 0, Counter_8A_Reset = 0, Counter_7A_ON_OFF = 0, Counter_8A_ON_OFF = 0, LowBYTE_Counter_7A_Setpoint = 0, LowBYTE_Counter_8A_Setpoint = 0 : NULL\n"
+outstr += "Command = 0, Counter_7A_Enable_OUT3A = 0, Counter_8A_Enable_OUT4A = 0, Counter_7A_Enable_Overflow = 0, Counter_8A_Enable_Overflow = 0 : NULL\n"
+outstr += "\n"
+
+outstr += "#switch in test supply\n"
+outstr += "J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.2\n"
+
+outstr += "\n"
+
+outstr += "PwrSetVoltage = 140 : NULL\n"
+
+
+TheCount = 0
+MaxCount = 20
+
+outstr += "#testing encoder foward\n"
+while TheCount <= MaxCount:
+    outstr += InputConnectorA + " = 1 : NULL : WAIT = 0.2\n"
+    TheCount += 1
+    outstr += "NULL : EncoderValue = " + str(TheCount) + " | 0 | 0.1\n"
+    outstr += InputConnectorB + " = 1 : NULL : WAIT = 0.2\n"
+    TheCount += 1
+    outstr += "NULL : EncoderValue = " + str(TheCount) + " | 0 | 0.1\n"
+    outstr += InputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
+    TheCount += 1
+    outstr += "NULL : EncoderValue = " + str(TheCount) + " | 0 | 0.1\n"
+    outstr += InputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
+    TheCount += 1
+    outstr += "NULL : EncoderValue = " + str(TheCount) + " | 0 | 0.1\n"
+    outstr += "\n"
+    
+outstr += "#testing encoder reverse\n"
+while TheCount > 0:
+    outstr += InputConnectorB + " = 1 : NULL : WAIT = 0.2\n"
+    TheCount -= 1
+    outstr += "NULL : EncoderValue = " + str(TheCount) + " | 0 | 0.1\n"
+    outstr += InputConnectorA + " = 1 : NULL : WAIT = 0.2\n"
+    TheCount -= 1
+    outstr += "NULL : EncoderValue = " + str(TheCount) + " | 0 | 0.1\n"
+    outstr += InputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
+    TheCount -= 1
+    outstr += "NULL : EncoderValue = " + str(TheCount) + " | 0 | 0.1\n"
+    outstr += InputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
+    TheCount -= 1
+    outstr += "NULL : EncoderValue = " + str(TheCount) + " | 0 | 0.1\n"
+    outstr += "\n"
+    
+outstr += "#testing encoder reverse rollover\n"
+TheRevCount = 4294967295 + 1
+while TheCount <= MaxCount:
+    outstr += InputConnectorB + " = 1 : NULL : WAIT = 0.2\n"
+    TheCount += 1
+    TheRevCount -= 1
+    outstr += "NULL : EncoderValue = " + str(TheRevCount) + " | 0 | 0.1\n"
+    outstr += InputConnectorA + " = 1 : NULL : WAIT = 0.2\n"
+    TheCount += 1
+    TheRevCount -= 1
+    outstr += "NULL : EncoderValue = " + str(TheRevCount) + " | 0 | 0.1\n"
+    outstr += InputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
+    TheCount += 1
+    TheRevCount -= 1
+    outstr += "NULL : EncoderValue = " + str(TheRevCount) + " | 0 | 0.1\n"
+    outstr += InputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
+    TheCount += 1
+    TheRevCount -= 1
+    outstr += "NULL : EncoderValue = " + str(TheRevCount) + " | 0 | 0.1\n"
+    outstr += "\n"
+    
+outstr += "#switch out input\n"
+outstr += InputConnectorA + " = 0 : NULL : WAIT = 0.2\n"
+outstr += InputConnectorB + " = 0 : NULL : WAIT = 0.2\n"
+outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2\n"
+outstr += "#disable counter\n"
+outstr += "Command = 87, " + EnableA + " = 1 : NULL : WAIT = 0.2\n"
+outstr += "Command = 0, " + EnableA + " = 0 : NULL\n"
+outstr += "#verify count\n"
+outstr += "NULL : EncoderValue = " + str(TheRevCount) + " | 0 | 0.1\n" 
+outstr += "#send counter reset\n"
+outstr += "Command = 87, " + ResetA + " = 1 : NULL : WAIT = 0.2\n"
+outstr += "Command = 0, " + ResetA + " = 0 : NULL\n"
+outstr += "#verify count reset\n"
+outstr += "NULL : EncoderValue = 0 | 0 | 0.1\n" 
+outstr += "\n"
+
+    
+outstr += "#switch out load line\n"
+outstr += InputConnectorA + " = 0, " + InputConnectorB + " = 0 : NULL : WAIT = 0.1\n"
+
+outstr += "#switch out power supply\n"
+outstr += "LdRemote = 0 : NULL : WAIT = 0.1\n"
+outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
+outstr += "J0_08_METER_LOAD = 0 : NULL : WAIT = 0.1\n"
+
+outstr += "SAVE\n"
+outstr += "END\n"
+
+f = open(datafile, 'w')
+f.write(outstr)
+f.close()    
+print(outstr)
+
+
+
+
