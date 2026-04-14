@@ -16,12 +16,6 @@ outstr += "UUT_DBC = 43019-560.dbc\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
 
-outstr += "SEND_CAN CH0 0x18FED927 5 5 1 9 7 7 0 0\n"
-outstr += "SEND_CAN CH0 0x18FED927 5 5 1 9 7 7 0 0\n"
-outstr += "SEND_CAN CH0 0x18FED927 5 5 1 9 7 7 0 0\n"
-outstr += "SEND_CAN CH0 0x18FED927 5 5 1 9 7 7 0 0\n"
-outstr += "SEND_CAN CH0 0x18FED927 5 5 1 9 7 7 0 0\n"
-
 outstr += "#-----setup 43019-----\n"
 outstr += "#configure as Output Digital ON/OFF\n"
 outstr += "Command = 82, MODE2 = 0, ADRaw = 0 : NULL : WAIT = 0.5\n"
@@ -29,8 +23,6 @@ outstr += "Command = 83, MODE1A = 1, MODE1B = 1, MODE2A = 1, MODE2B = 1, MODE3A 
 outstr += "Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0 : NULL\n"
 
 outstr += "Command = 82, FaultReset = 1, SaveSettings = 1, Enable_FAULT = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
-outstr += "#clear multiplex\n"
-outstr += "Command = 0, FaultReset = 0, SaveSettings = 0, Enable_FAULT = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
 
 outstr += "\n"
 
@@ -40,27 +32,13 @@ outstr += "LdRemote = 1 : NULL : WAIT = 0.1\n"
 outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
 outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
 outstr += "LdShort = 0 : NULL : WAIT = 1\n"
-outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
 outstr += "J0_08_METER_LOAD = 1 : NULL : WAIT = 1\n"
-
-
-
-outstr += "Command = 92, SPWR1_AlwaysOn = 0 : NULL : WAIT = 0.1\n"
-outstr += "Command = 92, SPWR2_AlwaysOn = 0 : NULL : WAIT = 0.1\n"
-outstr += "Command = 92, SPWR3_AlwaysOn = 0 : NULL : WAIT = 0.1\n"
-outstr += "Command = 92, SPWR4_AlwaysOn = 0 : NULL : WAIT = 0.1\n"
-
-outstr += "Command = 81, SPWR1_On = 0 : NULL : WAIT = 0.1\n"
-outstr += "Command = 81, SPWR2_On = 0 : NULL : WAIT = 0.1\n"
-outstr += "Command = 81, SPWR3_On = 0 : NULL : WAIT = 0.1\n"
-outstr += "Command = 81, SPWR4_On = 0 : NULL : WAIT = 0.1\n"
 
 #verify faults clear
 outstr += "NULL : SpwrStat1 = 0 | 0.1 | 0.1\n"
 outstr += "NULL : SpwrStat2 = 0 | 0.1 | 0.1\n"
 outstr += "NULL : SpwrStat3 = 0 | 0.1 | 0.1\n"
 outstr += "NULL : SpwrStat4 = 0 | 0.1 | 0.1\n"
-
 
 
 t = 0
@@ -86,13 +64,13 @@ while t <= 3:
         OutputConnector = "J2_08"
         OutputStatus = "SpwrStat4"
 
-
+    outstr += "#turn on sensor power\n" 
+    outstr += "Command = 81, " + OutputName + " = 1 : NULL : WAIT = 0.1\n"
+    outstr += "Command = 92, " + BattEn + " = 1 : NULL : WAIT = 0.1\n"
+    
     outstr += "#switch in load line, set current\n"
     outstr += OutputConnector + " = 1 : NULL : WAIT = 0.1\n"
 
-    outstr += "#turn on sensor power\n" 
-    outstr += "Command = 92, " + BattEn + " = 1 : NULL : WAIT = 0.1\n"
-    outstr += "Command = 81, " + OutputName + " = 1 : NULL : WAIT = 0.1\n"
     outstr += "#check for 5VDC\n"
     outstr += "NULL : MeterVolts = " + str(5) + " | 0.2 | 0.1\n" 
     outstr += "#short output (#1)\n"
@@ -100,6 +78,7 @@ while t <= 3:
     outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
     outstr += "#verify fault\n"
     outstr += "NULL : " + OutputStatus + " = 2 | 0.1 | 0.1\n"
+    outstr += "LdShort = 0 : NULL : WAIT = 1\n"
     outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
     outstr += "#verify volotage\n"
     outstr += "NULL : MeterVolts = " + str(0) + " | 0.2 | 0.1\n" 
@@ -114,9 +93,11 @@ while t <= 3:
     outstr += "#check for VBAT\n"
     outstr += "NULL : MeterVolts = " + str(14) + " | 0.2 | 0.1\n"
     outstr += "#short output (#2)\n"
+    outstr += "LdShort = 1 : NULL : WAIT = 1\n"
     outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
     outstr += "#verify fault\n"
     outstr += "NULL : " + OutputStatus + " = 2 | 0.1 | 0.1\n"
+    outstr += "LdShort = 0 : NULL : WAIT = 1\n"
     outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
     outstr += "#verify volotage\n"
     outstr += "NULL : MeterVolts = " + str(0) + " | 0.2 | 0.1\n" 
@@ -128,9 +109,11 @@ while t <= 3:
     outstr += "#check for VBAT\n"
     outstr += "NULL : MeterVolts = " + str(14) + " | 0.2 | 0.1\n"
     outstr += "#short output (#3)\n"
+    outstr += "LdShort = 1 : NULL : WAIT = 1\n"
     outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
     outstr += "#verify fault\n"
     outstr += "NULL : " + OutputStatus + " = 2 | 0.1 | 0.1\n"
+    outstr += "LdShort = 0 : NULL : WAIT = 1\n"
     outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
     outstr += "#verify volotage\n"
     outstr += "NULL : MeterVolts = " + str(0) + " | 0.2 | 0.1\n" 
@@ -142,9 +125,11 @@ while t <= 3:
     outstr += "#check for VBAT\n"
     outstr += "NULL : MeterVolts = " + str(14) + " | 0.2 | 0.1\n"
     outstr += "#short output (#4)\n"
+    outstr += "LdShort = 1 : NULL : WAIT = 1\n"
     outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
     outstr += "#verify fault\n"
     outstr += "NULL : " + OutputStatus + " = 2 | 0.1 | 0.1\n"
+    outstr += "LdShort = 0 : NULL : WAIT = 1\n"
     outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
     outstr += "#verify volotage\n"
     outstr += "NULL : MeterVolts = " + str(0) + " | 0.2 | 0.1\n" 
@@ -156,10 +141,12 @@ while t <= 3:
     outstr += "#check for VBAT\n"
     outstr += "NULL : MeterVolts = " + str(14) + " | 0.2 | 0.1\n"
     outstr += "#short output (#5)\n"
+    outstr += "LdShort = 1 : NULL : WAIT = 1\n"
     outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
     outstr += "#verify fault\n"
     outstr += "NULL : " + OutputStatus + " = 2 | 0.1 | 0.1\n"
     outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
+    outstr += "LdShort = 0 : NULL : WAIT = 1\n"
     outstr += "#verify volotage\n"
     outstr += "NULL : MeterVolts = " + str(0) + " | 0.2 | 0.1\n" 
     outstr += "#clear fault\n"
@@ -171,16 +158,14 @@ while t <= 3:
     outstr += "NULL : " + OutputStatus + " = 2 | 0.1 | 0.1\n"
     outstr += "Command = 81, " + OutputName + " = 0 : NULL\n"
     outstr += "\n"
-
-    outstr += "Command = 81, " + OutputName + " = 0 : NULL : WAIT = 0.5\n"
-    outstr += OutputConnector + " = 0 : NULL : WAIT = 0.5\n"
-    
-
+            
     outstr += "#switch out load line, clear current\n"
     outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
-    outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.5\n"
     outstr += "LdShort = 0 : NULL : WAIT = 1\n"
+    outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.5\n"
 
+    outstr += OutputConnector + " = 0 : NULL : WAIT = 0.5\n"
+    outstr += "Command = 81, " + OutputName + " = 0 : NULL : WAIT = 0.5\n"
     t += 1
 
 
