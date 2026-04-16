@@ -158,7 +158,7 @@ BO_ 2566907609 FAULT: 8 UUT
  SG_ FLTCNT6 : 40|8@1+ (1,0) [0|255] ""  CTRL
  SG_ FLTCNT7 : 48|8@1+ (1,0) [0|255] ""  CTRL
 
-BO_ 2566827225 WheelBrakeLiningRemaining: 8 UUT
+BO_ 2633936089 WheelBrakeLiningRemaining: 8 UUT
  SG_ Count1 : 0|8@1+ (0.4,0) [0|100] "%"  CTRL
  SG_ Count2 : 8|8@1+ (0.4,0) [0|100] "%"  CTRL
  SG_ Count3 : 16|8@1+ (0.4,0) [0|100] "%"  CTRL
@@ -228,15 +228,15 @@ CM_ SG_ 2566907609 FLTCNT4 "Fault Counter 4";
 CM_ SG_ 2566907609 FLTCNT5 "Fault Counter 5";
 CM_ SG_ 2566907609 FLTCNT6 "Fault Counter 6";
 CM_ SG_ 2566907609 FLTCNT7 "Fault Counter 7";
-CM_ BO_ 2566827225 "Wheel brake lining remaining. The DBC scales raw counts 0..250 to 0..100 percent using 0.4 percent per count. Raw value 255 is invalid or faulted. Values 251..254 are not defined by the excerpt.";
-CM_ SG_ 2566827225 Count1 "D0 - Count 1";
-CM_ SG_ 2566827225 Count2 "D1 - Count 2";
-CM_ SG_ 2566827225 Count3 "D2 - Count 3";
-CM_ SG_ 2566827225 Count4 "D3 - Count 4";
-CM_ SG_ 2566827225 Count5 "D4 - Count 5";
-CM_ SG_ 2566827225 Count6 "D5 - Count 6";
-CM_ SG_ 2566827225 Count7 "D6 - Count 7";
-CM_ SG_ 2566827225 Count8 "D7 - Count 8";
+CM_ BO_ 2633936089 "Wheel brake lining remaining. The DBC scales raw counts 0..250 to 0..100 percent using 0.4 percent per count. Raw value 255 is invalid or faulted. Values 251..254 are not defined by the excerpt.";
+CM_ SG_ 2633936089 Count1 "D0 - Count 1";
+CM_ SG_ 2633936089 Count2 "D1 - Count 2";
+CM_ SG_ 2633936089 Count3 "D2 - Count 3";
+CM_ SG_ 2633936089 Count4 "D3 - Count 4";
+CM_ SG_ 2633936089 Count5 "D4 - Count 5";
+CM_ SG_ 2633936089 Count6 "D5 - Count 6";
+CM_ SG_ 2633936089 Count7 "D6 - Count 7";
+CM_ SG_ 2633936089 Count8 "D7 - Count 8";
 BA_DEF_ BO_  "GenMsgCycleTime" INT 0 2147483647;
 BA_DEF_DEF_  "GenMsgCycleTime" 0;
 BA_ "GenMsgCycleTime" BO_ 2565855488 50;
@@ -247,17 +247,17 @@ BA_ "GenMsgCycleTime" BO_ 2566854617 50;
 BA_ "GenMsgCycleTime" BO_ 2566854873 50;
 BA_ "GenMsgCycleTime" BO_ 2566913241 200;
 BA_ "GenMsgCycleTime" BO_ 2566907609 200;
-BA_ "GenMsgCycleTime" BO_ 2566827225 300000;
+BA_ "GenMsgCycleTime" BO_ 2633936089 300000;
 VAL_ 2565855488 Command 0 "Default_Response" 1 "Module_Configuration" 16 "Factory_Flags" 17 "CAN_Configuration" 32 "Request_Information" 62 "Error_or_NACK_special_raw_byte" 63 "Reserved_or_NO_OP" ;
 VAL_ 2565855488 Information_Index 0 "Reserved" 1 "Part_Number" 2 "MAC_Address" 255 "Reserved" ;
 VAL_ 2565800153 Response 0 "Default_Response" 1 "Module_Configuration" 16 "Factory_Flags" 17 "CAN_Configuration" 32 "Request_Information" 62 "Error_or_NACK_special_raw_byte" 63 "Reserved_or_NO_OP" ;
 VAL_ 2565800153 Active_Fault_Code 7 "EEPROM_Fault" 8 "Voltage_Reference_Fault" 9 "I2C_Communication_Fault" 10 "CNFG_Resistor_Fault" 11 "Magnetic_Sensor_Fault" 12 "Checksum_Fault" 13 "Port_ID_Fault" 14 "CAN_Communication_Fault" 20 "Low_Voltage" 21 "High_Voltage" 31 "Source_Address_Arbitration_Fault" 32 "CAN_Hardware_Fault" 33 "Protocol_Unsuccessful" 34 "Temperature_Fault" 35 "Output_Gate_Driver_Warning" 41 "Low_Voltage_Hold_Enabled" 51 "Output_Overcurrent" 52 "Output_Short_Circuit" 53 "Input_Overvoltage" 54 "Invalid_Input_Configuration" ;
-VAL_ 2566827225 Count1 255 "Invalid_or_Faulted" ;
-VAL_ 2566827225 Count2 255 "Invalid_or_Faulted" ;
-VAL_ 2566827225 Count3 255 "Invalid_or_Faulted" ;
-VAL_ 2566827225 Count4 255 "Invalid_or_Faulted" ;
-VAL_ 2566827225 Count5 255 "Invalid_or_Faulted" ;
-VAL_ 2566827225 Count6 255 "Invalid_or_Faulted" ;
-VAL_ 2566827225 Count7 255 "Invalid_or_Faulted" ;
-VAL_ 2566827225 Count8 255 "Invalid_or_Faulted" ;
+VAL_ 2633936089 Count1 255 "Invalid_or_Faulted" ;
+VAL_ 2633936089 Count2 255 "Invalid_or_Faulted" ;
+VAL_ 2633936089 Count3 255 "Invalid_or_Faulted" ;
+VAL_ 2633936089 Count4 255 "Invalid_or_Faulted" ;
+VAL_ 2633936089 Count5 255 "Invalid_or_Faulted" ;
+VAL_ 2633936089 Count6 255 "Invalid_or_Faulted" ;
+VAL_ 2633936089 Count7 255 "Invalid_or_Faulted" ;
+VAL_ 2633936089 Count8 255 "Invalid_or_Faulted" ;
 
