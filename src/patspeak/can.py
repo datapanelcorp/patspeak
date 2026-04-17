@@ -17,8 +17,8 @@ Environment overrides (optional):
 
 Auto-detect order (when PATSPEAK_CAN_INTERFACE=auto):
   - Windows:
-      1) PCAN (PCAN-Basic)
-      2) Kvaser (CANlib)
+      1) Kvaser (CANlib)
+      2) PCAN (PCAN-Basic)
       3) SocketCAN
   - Non-Windows:
       1) Kvaser (CANlib)
@@ -319,30 +319,15 @@ def autodetect_can_backend() -> None:
     # Auto-detect
     # -----------------
     # Auto-detect in a reasonable order.
-    # On Windows, prefer PEAK first because Kvaser Virtual CAN can be present
-    # without physical Kvaser hardware and may otherwise shadow PCAN adapters.
-    #
-    # Fast-path: when channels are not explicitly overridden, lock onto PCAN
-    # if channel 0 is available, even when only one physical PCAN channel is
-    # present. This avoids accidentally selecting virtual Kvaser channels.
-    if os.name == "nt" and ch0_env is None and ch1_env is None:
-        pcan_ch0, pcan_ch1 = "PCAN_USBBUS1", "PCAN_USBBUS2"
-        if need_ch1:
-            if _ok_dual("pcan", pcan_ch0, pcan_ch1):
-                _apply_backend("pcan", [pcan_ch0, pcan_ch1], note="Windows preferred PCAN")
-                return
-            if _ok_single("pcan", pcan_ch0):
-                _force_single_channel("pcan", pcan_ch0, note="Windows preferred PCAN single-channel")
-                return
-        else:
-            if _ok_single("pcan", pcan_ch0):
-                _apply_backend("pcan", [pcan_ch0], note="Windows preferred PCAN")
-                return
+    # On Windows, prefer Kvaser so it can take precedence over connected
+    # single-channel PCAN adapters when PAT requires CH1.
+    # The generic candidate loop below still prefers any dual-channel backend
+    # over a single-channel fallback.
 
     if os.name == "nt":
         candidates: List[Tuple[str, Any, Any]] = [
-            ("pcan", "PCAN_USBBUS1", "PCAN_USBBUS2"),
             ("kvaser", 0, 1),
+            ("pcan", "PCAN_USBBUS1", "PCAN_USBBUS2"),
             ("socketcan", "can0", "can1"),
         ]
     else:
