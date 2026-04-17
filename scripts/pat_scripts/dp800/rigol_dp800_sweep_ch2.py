@@ -127,6 +127,16 @@ def open_instrument(resource: str, backend: Optional[str], timeout_ms: int = 10_
     return inst
 
 
+def tcpip_resource_from_ip(ip_or_resource: str) -> str:
+    """Build a VISA TCPIP resource from a plain IPv4/hostname string."""
+    token = (ip_or_resource or "").strip()
+    if not token:
+        raise ValueError("IP address cannot be empty.")
+    if token.upper().startswith("TCPIP"):
+        return token
+    return f"TCPIP0::{token}::INSTR"
+
+
 def drain_error_queue(inst, max_reads: int = 20) -> None:
     for _ in range(max_reads):
         try:
@@ -157,7 +167,8 @@ def kill_power_best_effort(inst, channel: int) -> None:
 def main() -> int:
     p = argparse.ArgumentParser(description="Rigol DP800: enable channel output and sweep voltage.")
     p.add_argument("--backend", default=None, help="VISA backend, e.g. '@py' for pyvisa-py.")
-    p.add_argument("--resource", help="VISA resource string. If omitted, auto-detect by USB VID/PID.")
+    p.add_argument("--resource", help="Explicit VISA resource string (typically USB).")
+    p.add_argument("--ip", default=None, help="Rigol LAN IP/hostname, e.g. 192.168.45.178.")
     p.add_argument("--list", action="store_true", help="List VISA resources and exit.")
     p.add_argument("--channel", type=int, default=2, choices=[1, 2, 3], help="Channel to control (default: 2)")
     p.add_argument("--start", type=float, default=4.0, help="Start voltage (V). Default: 4.0")
@@ -194,6 +205,10 @@ def main() -> int:
 
     args = p.parse_args()
 
+    if args.resource and args.ip:
+        print("Use only one of --resource or --ip.", file=sys.stderr)
+        return 2
+
     if args.list:
         try:
             res = list_resources(args.backend)
@@ -220,16 +235,21 @@ def main() -> int:
         kill_on_interrupt=bool(args.kill_on_interrupt),
     )
 
-    try:
-        resources = list_resources(args.backend)
-    except Exception as e:
-        print(f"Error initializing VISA (backend={args.backend!r}): {e}", file=sys.stderr)
-        return 2
-
-    resource = args.resource or pick_dp800_resource(resources)
-    if not resource:
-        print("Could not auto-detect a DP800 VISA resource. Use --list, then pass --resource.", file=sys.stderr)
-        return 1
+    resource: str | None = None
+    if args.ip:
+        resource = tcpip_resource_from_ip(args.ip)
+    elif args.resource:
+        resource = args.resource
+    else:
+        try:
+            resources = list_resources(args.backend)
+        except Exception as e:
+            print(f"Error initializing VISA (backend={args.backend!r}): {e}", file=sys.stderr)
+            return 2
+        resource = pick_dp800_resource(resources)
+        if not resource:
+            print("Could not auto-detect a DP800 VISA resource. Use --list, then pass --resource or --ip.", file=sys.stderr)
+            return 1
 
     inst = None
     ch = args.channel
