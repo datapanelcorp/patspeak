@@ -139,20 +139,59 @@ def _write_interrupt_log(reason: str) -> None:
 
         unit = str(getattr(rt, "UnitName", "") or "")
         test_file = str(getattr(rt, "TestFile", "") or "")
-        if not unit or not test_file:
-            return
+        log_dir = str(getattr(rt, "LogPath", "") or "").strip()
 
-        log_dir = getattr(rt, "LogPath", None)
+        # If runtime isn't fully initialized yet, derive a best-effort
+        # results directory so interruption logs are still preserved.
+        if not log_dir:
+            try:
+                root_raw = str(os.environ.get("PATSPEAK_RESULTS_ROOT", "") or "").strip()
+                if root_raw:
+                    root_dir = root_raw if os.path.isabs(root_raw) else os.path.join(_repo_root(), root_raw)
+                else:
+                    root_dir = os.path.join(_repo_root(), "results")
+
+                if test_file:
+                    abs_test = os.path.abspath(_abs_test_path(test_file))
+                    test_dir = os.path.dirname(abs_test)
+                    dut_root = os.path.abspath(_dut_root())
+                    try:
+                        rel_suite = os.path.relpath(test_dir, dut_root)
+                        if rel_suite.startswith(".."):
+                            rel_suite = os.path.basename(test_dir)
+                    except Exception:
+                        rel_suite = os.path.basename(test_dir)
+                else:
+                    rel_suite = "_interrupts"
+
+                log_dir = os.path.join(os.path.abspath(root_dir), rel_suite)
+            except Exception:
+                log_dir = ""
+
         if not log_dir:
             return
 
-        logfile = make_log_path(log_dir, unit, test_file, getattr(rt, "RunStamp", None))
+        # When test metadata is missing (early interruption), use a stable
+        # fallback so we still create an artifact.
+        if not test_file:
+            test_file = "interrupt.pat"
+
+        run_stamp = getattr(rt, "RunStamp", None)
+        if not run_stamp:
+            _now = datetime.now()
+            run_stamp = _now.strftime("%Y%m%d-%H%M%S") + f"-{_now.microsecond // 1000:03d}"
+
+        logfile = make_log_path(log_dir, unit, test_file, run_stamp)
         os.makedirs(os.path.dirname(logfile), exist_ok=True)
         stamp = datetime.today().strftime(getattr(rt, "TimeStampFormat", "%Y-%m-%d-%H:%M:%S"))
 
         with open(logfile, "w", encoding="utf-8", errors="replace") as f:
-            f.write(str(getattr(rt, "UUT_TestLog", "") or ""))
-            f.write(f"\n{reason} @ {stamp}\n")
+            payload = str(getattr(rt, "UUT_TestLog", "") or "")
+            if payload:
+                f.write(payload)
+                if not payload.endswith("\n"):
+                    f.write("\n")
+            f.write(f"{reason} @ {stamp}\n")
     except Exception:
         # Don't let logging failures prevent shutdown.
         pass
@@ -213,9 +252,18 @@ def _install_sigint_handler() -> None:
             signal.default_int_handler(signum, frame)
             return
 
-        # Second Ctrl+C => force exit.
+        # Second Ctrl+C => force exit. Write an interruption log first so
+        # long-running tests still leave breadcrumbs when users hard-abort.
         try:
-            print("\n^C received again — forcing exit.")
+            print("\n^C received again - forcing exit.")
+        except Exception:
+            pass
+        try:
+            _write_interrupt_log("Forced exit by user command (second Ctrl+C)")
+        except Exception:
+            pass
+        try:
+            _stop_can_threads()
         except Exception:
             pass
         try:
