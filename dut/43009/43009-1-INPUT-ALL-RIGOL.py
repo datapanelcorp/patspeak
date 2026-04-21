@@ -10,7 +10,8 @@ datafile = os.path.join(script_dir, TestName + ".pat")
 
 RIGOL_SCRIPT = "dp800/rigol_dp800_set_ch.py"
 RIGOL_CONNECTION = "ip"  # "ip" or "usb"
-RIGOL_IP = "192.168.45.178"
+#RIGOL_IP = "192.168.45.178"
+RIGOL_IP = "192.168.45.197"
 RIGOL_RESOURCE = "USB0::0x1AB1::0x0E11::DP8C180100022::INSTR"
 RIGOL_TRANSPORT = "visa"  # "auto", "socket", or "visa" (IP mode only)
 RIGOL_SOCKET_PORTS = "5025,5555"
