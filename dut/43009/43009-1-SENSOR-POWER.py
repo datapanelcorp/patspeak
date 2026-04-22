@@ -18,6 +18,14 @@ SENSOR_RAILS = [
     ("SPWR4", "J2_08", "Spwr4", "SpwrStat4"),
 ]
 
+# Firmware rejects controller SA 0x00. Use fixed controller SA 0xD1.
+CTRL1_CMD0_CAN_ID = "0x18EFD9D1"
+CTRL1_CMD0_BYTES_RAW = "0 0 0 0 0 0 0 0"
+
+
+def send_can_cmd(can_id: str, payload: str) -> str:
+    return "SEND_CAN CH0 " + can_id + " " + payload + "\n"
+
 
 outstr = ""
 outstr += "#43009-1\n"
@@ -31,6 +39,15 @@ outstr += "#cycle IGN to clean slate\n"
 outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 outstr += "RLY_K1 = 1 : NULL : WAIT = 2\n"
 outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
+outstr += "\n"
+
+outstr += "#force CTRL1 command 0 request frame so STAT has a transmit trigger\n"
+outstr += "#probe command-byte encoding with controller SA=0xD1\n"
+outstr += send_can_cmd(CTRL1_CMD0_CAN_ID, CTRL1_CMD0_BYTES_RAW)
+outstr += "Command = 0 : NULL : WAIT = 0.5\n"
+outstr += "NULL : Response = 0 | 0.1 | 0.3\n"
+outstr += "NULL : Software_Version = 0 | 255 | 0.3\n"
+outstr += "NULL : Software_Revision = 0 | 255 | 0.3\n"
 outstr += "\n"
 
 outstr += "#-----setup PAT-----\n"

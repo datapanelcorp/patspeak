@@ -24,6 +24,9 @@ RIGOL_RELAY = "J4_01"
 
 PWS_REQUEST_CAN_ID = "0x0CEAFFFF"  # Matches sim.py "PWS REQUEST"
 PWS_REQUEST_BYTES = "0 254 172 0 0 0 0 0"  # Data[0..2] = 00 FE AC
+# Firmware rejects controller SA 0x00. Use fixed controller SA 0xD1.
+CTRL1_CMD0_CAN_ID = "0x18EFD9D1"
+CTRL1_CMD0_BYTES_RAW = "0 0 0 0 0 0 0 0"
 # Verify counts in fixture mode with no sensors at powerup (TYPE1 mapping).
 PWS_VERIFY_COUNTS = True
 # "type2" (Count1..8 = 1A..4B), "type1" (Count1..4 = 1B,2B,3B,4B)
@@ -102,6 +105,10 @@ def build_sweep_voltages(start_v: float, stop_v: float, step_v: float) -> list[f
 
 def pws_request_cmd() -> str:
     return "SEND_CAN CH0 " + PWS_REQUEST_CAN_ID + " " + PWS_REQUEST_BYTES + "\n"
+
+
+def send_can_cmd(can_id: str, payload: str) -> str:
+    return "SEND_CAN CH0 " + can_id + " " + payload + "\n"
 
 
 def pws_count_signal_for_port(feedback: str, default_count_signal: str) -> str | None:
@@ -190,7 +197,9 @@ outstr += "J4_03 = 1 : NULL : WAIT = 0.2\n"
 outstr += RIGOL_RELAY + " = 0 : NULL : WAIT = 0.1\n"
 outstr += "\n"
 
-outstr += "#record firmware identifiers in test log\n"
+outstr += "#force CTRL1 command 0 request frame so STAT has a transmit trigger\n"
+outstr += "#probe command-byte encoding with controller SA=0xD1\n"
+outstr += send_can_cmd(CTRL1_CMD0_CAN_ID, CTRL1_CMD0_BYTES_RAW)
 outstr += "Command = 0 : NULL : WAIT = 0.5\n"
 outstr += "NULL : Response = 0 | 0.1 | 0.3\n"
 outstr += "NULL : Software_Version = 0 | 255 | 0.3\n"

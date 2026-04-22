@@ -33,7 +33,9 @@ J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.2
 J4_03 = 1 : NULL : WAIT = 0.2
 J4_01 = 0 : NULL : WAIT = 0.1
 
-#record firmware identifiers in test log
+#force CTRL1 command 0 request frame so STAT has a transmit trigger
+#probe command-byte encoding with controller SA=0xD1
+SEND_CAN CH0 0x18EFD9D1 0 0 0 0 0 0 0 0
 Command = 0 : NULL : WAIT = 0.5
 NULL : Response = 0 | 0.1 | 0.3
 NULL : Software_Version = 0 | 255 | 0.3

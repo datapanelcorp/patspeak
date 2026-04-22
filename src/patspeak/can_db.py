@@ -64,6 +64,68 @@ def _candidate_dbc_frame_ids(arbitration_id: int) -> List[int]:
             out.append(v)
     return out
 
+
+def _j1939_placeholder_score(msg_id: int, rx_id: int) -> int:
+    """Score a relaxed J1939 ID match where 0x00 may be a placeholder.
+
+    This is a fallback for DBCs that pin controller/source or destination
+    bytes to 0x00 (placeholder), while runtime traffic uses a real address.
+
+    Returns:
+      -1 for no match
+      >=0 for match quality (higher is better)
+    """
+
+    msg = int(msg_id) & EXTENDED_ID_MASK
+    rx = int(rx_id) & EXTENDED_ID_MASK
+
+    # J1939 proprietary/control traffic in this codebase is 29-bit.
+    if msg <= 0x7FF or rx <= 0x7FF:
+        return -1
+
+    msg_pdu = (msg >> 8) & 0xFFFF
+    rx_pdu = (rx >> 8) & 0xFFFF
+    msg_pf = (msg >> 16) & 0xFF
+    rx_pf = (rx >> 16) & 0xFF
+    msg_ps = (msg >> 8) & 0xFF
+    rx_ps = (rx >> 8) & 0xFF
+    msg_sa = msg & 0xFF
+    rx_sa = rx & 0xFF
+
+    # Priority/DP/PF must align at least at the PDU level.
+    if ((msg >> 16) & 0x1FFF) != ((rx >> 16) & 0x1FFF):
+        return -1
+
+    score = 0
+
+    # For PDU1 (PF < 240), PS is destination and often varies at runtime.
+    if msg_pf < 240:
+        if msg_ps == rx_ps:
+            score += 2
+        elif msg_ps == 0x00:
+            score += 1
+        else:
+            return -1
+    else:
+        # For PDU2, PS is part of PGN and should match exactly.
+        if msg_ps != rx_ps:
+            return -1
+        score += 2
+
+    # Source may also be placeholder 0x00 in control/response templates.
+    if msg_sa == rx_sa:
+        score += 2
+    elif msg_sa == 0x00:
+        score += 1
+    else:
+        return -1
+
+    # Prefer stronger matches on exact PDU bytes.
+    if msg_pdu == rx_pdu:
+        score += 1
+
+    return score
+
 def _require_cantools() -> None:
     if cantools is None:
         raise ImportError(
@@ -1126,6 +1188,27 @@ class CanDb:
 
         return out if out else None
 
+    def _find_j1939_placeholder_message(self, arbitration_id: int) -> Optional[Any]:
+        """Best-effort relaxed lookup for J1939 placeholder-address IDs."""
+
+        arb = int(arbitration_id) & EXTENDED_ID_MASK
+        best: Optional[Any] = None
+        best_score = -1
+
+        for m in self.messages:
+            try:
+                fid = int(getattr(m, "frame_id", 0))
+            except Exception:
+                continue
+
+            msg_arb = _dbc_to_arbitration_id(fid)
+            score = _j1939_placeholder_score(msg_arb, arb)
+            if score > best_score:
+                best_score = score
+                best = m
+
+        return best if best_score >= 0 else None
+
 
     def decode(self, arbitration_id: int, data: bytes) -> Optional[Dict[str, Any]]:
         """Decode a frame into signal values.
@@ -1146,6 +1229,11 @@ class CanDb:
             m_obj = self._frame_id_to_message.get(fid)
             if m_obj is not None:
                 break
+
+        if m_obj is None:
+            # Relaxed fallback for J1939 templates where DBC uses 0x00
+            # placeholder addressing (e.g., 0x18EF00D9 matching 0x18EFD1D9).
+            m_obj = self._find_j1939_placeholder_message(int(arbitration_id))
 
         if m_obj is None:
             # Last-chance: ask cantools directly.

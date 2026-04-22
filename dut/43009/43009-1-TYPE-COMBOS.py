@@ -9,8 +9,12 @@ datafile = os.path.join(script_dir, TestName + ".pat")
 
 
 PWS_REQUEST_CAN_ID = "0x0CEAFFFF"
-PWS_REQUEST_BYTES = "0 254 172 0 0 0 0 0"  # Request FEAC
-
+#PWS_REQUEST_BYTES = "0 254 172 0 0 0 0 0"  # Request FEAC
+PWS_REQUEST_BYTES = "172 254 0 0 0 0 0 0"  # Request FEAC
+# Firmware rejects controller SA 0x00. Use fixed controller SA 0xD1.
+CTRL1_CMD0_CAN_ID = "0x18EFD9D1"
+# Probe both command-byte encodings observed in the field docs/tools.
+CTRL1_CMD0_BYTES_RAW = "0 0 0 0 0 0 0 0"
 SUPPLY_V = 1.50
 SUPPLY_SET_COUNTS = int(round(SUPPLY_V * 10.0))  # PAT supply uses 0.1 V units
 
@@ -50,6 +54,10 @@ TYPE1_B_MAP = {"1B": 1, "2B": 2, "3B": 3, "4B": 4}
 
 def pws_request_cmd() -> str:
     return "SEND_CAN CH0 " + PWS_REQUEST_CAN_ID + " " + PWS_REQUEST_BYTES + "\n"
+
+
+def send_can_cmd(can_id: str, payload: str) -> str:
+    return "SEND_CAN CH0 " + can_id + " " + payload + "\n"
 
 
 def count_signal_for_label(label: str, use_type2: bool) -> str | None:
@@ -92,6 +100,15 @@ outstr += "RLY_K1 = 1 : NULL : WAIT = 2\n"
 outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 outstr += "\n"
 
+outstr += "#force CTRL1 command 0 request frame so STAT has a transmit trigger\n"
+outstr += "#probe command-byte encoding with controller SA=0xD1\n"
+outstr += send_can_cmd(CTRL1_CMD0_CAN_ID, CTRL1_CMD0_BYTES_RAW)
+outstr += "Command = 0 : NULL : WAIT = 0.5\n"
+outstr += "NULL : Response = 0 | 0.1 | 0.3\n"
+outstr += "NULL : Software_Version = 0 | 255 | 0.3\n"
+outstr += "NULL : Software_Revision = 0 | 255 | 0.3\n"
+outstr += "\n"
+
 outstr += "#-----setup pat-----\n"
 outstr += "LdRemote = 1 : NULL : WAIT = 0.1\n"
 outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
@@ -109,13 +126,6 @@ outstr += "\n"
 
 outstr += "J4_03 = 1 : NULL : WAIT = 0.2\n"
 outstr += relay_assignments(set()) + " : NULL : WAIT = 0.2\n"
-outstr += "\n"
-
-outstr += "#record firmware identifiers in test log\n"
-outstr += "Command = 0 : NULL : WAIT = 0.5\n"
-outstr += "NULL : Response = 0 | 0.1 | 0.3\n"
-outstr += "NULL : Software_Version = 0 | 255 | 0.3\n"
-outstr += "NULL : Software_Revision = 0 | 255 | 0.3\n"
 outstr += "\n"
 
 outstr += "#enable all input processing features used by this test\n"

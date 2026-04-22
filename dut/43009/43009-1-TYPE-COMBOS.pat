@@ -2,12 +2,20 @@
 #Version 0.1
 #WheelBrakeLiningRemaining count-position combination test (PAT supply fixed 1.50V)
 UUT_DBC = 43009-560.dbc
-UUT_DATANAME = 43009-1-WBLR-COMBOS-PATSUPPLY
+UUT_DATANAME = 43009-1-TYPE-COMBOS
 
 #cycle IGN to clean slate
 RLY_K1 = 0 : NULL : WAIT = 1
 RLY_K1 = 1 : NULL : WAIT = 2
 RLY_K1 = 0 : NULL : WAIT = 1
+
+#force CTRL1 command 0 request frame so STAT has a transmit trigger
+#probe command-byte encoding with controller SA=0xD1
+SEND_CAN CH0 0x18EFD9D1 0 0 0 0 0 0 0 0
+Command = 0 : NULL : WAIT = 0.5
+NULL : Response = 0 | 0.1 | 0.3
+NULL : Software_Version = 0 | 255 | 0.3
+NULL : Software_Revision = 0 | 255 | 0.3
 
 #-----setup pat-----
 LdRemote = 1 : NULL : WAIT = 0.1
@@ -24,12 +32,6 @@ J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.5
 
 J4_03 = 1 : NULL : WAIT = 0.2
 J1_01 = 0, J1_02 = 0, J1_03 = 0, J1_04 = 0, J1_05 = 0, J1_06 = 0, J1_07 = 0, J1_08 = 0 : NULL : WAIT = 0.2
-
-#record firmware identifiers in test log
-Command = 0 : NULL : WAIT = 0.5
-NULL : Response = 0 | 0.1 | 0.3
-NULL : Software_Version = 0 | 255 | 0.3
-NULL : Software_Revision = 0 | 255 | 0.3
 
 #enable all input processing features used by this test
 Command = 1, Enable_DIGIN = 1, Enable_AD2 = 1, Enable_AD3 = 1, Enable_AD4 = 1, Enable_DPLF2 = 1, Enable_FAULT = 1 : NULL : WAIT = 0.5
@@ -59,11 +61,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -91,11 +93,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -123,11 +125,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -156,11 +158,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -188,11 +190,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -221,11 +223,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -254,11 +256,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -288,11 +290,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -320,11 +322,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -353,11 +355,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -386,11 +388,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -420,11 +422,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -453,11 +455,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -487,11 +489,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -521,11 +523,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -556,11 +558,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -587,11 +589,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -619,11 +621,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -651,11 +653,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -684,11 +686,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -716,11 +718,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -749,11 +751,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -782,11 +784,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -816,11 +818,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -848,11 +850,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -881,11 +883,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -914,11 +916,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -948,11 +950,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -981,11 +983,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1015,11 +1017,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1049,11 +1051,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -1084,11 +1086,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -1115,11 +1117,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1147,11 +1149,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1179,11 +1181,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1212,11 +1214,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -1244,11 +1246,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1277,11 +1279,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1310,11 +1312,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -1344,11 +1346,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -1376,11 +1378,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -1409,11 +1411,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1442,11 +1444,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -1476,11 +1478,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -1509,11 +1511,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1543,11 +1545,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1577,11 +1579,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -1612,11 +1614,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -1643,11 +1645,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1675,11 +1677,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1707,11 +1709,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -1740,11 +1742,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -1772,11 +1774,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1805,11 +1807,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1838,11 +1840,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -1872,11 +1874,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -1904,11 +1906,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1937,11 +1939,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -1970,11 +1972,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2004,11 +2006,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2037,11 +2039,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2071,11 +2073,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2105,11 +2107,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2140,11 +2142,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2171,11 +2173,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2203,11 +2205,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2235,11 +2237,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2268,11 +2270,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2300,11 +2302,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2333,11 +2335,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2366,11 +2368,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2400,11 +2402,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2432,11 +2434,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2465,11 +2467,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2498,11 +2500,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2532,11 +2534,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2565,11 +2567,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2599,11 +2601,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2633,11 +2635,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2668,11 +2670,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2699,11 +2701,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2731,11 +2733,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2763,11 +2765,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2796,11 +2798,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2828,11 +2830,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2861,11 +2863,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2894,11 +2896,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2928,11 +2930,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -2960,11 +2962,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -2993,11 +2995,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3026,11 +3028,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3060,11 +3062,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3093,11 +3095,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3127,11 +3129,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3161,11 +3163,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3196,11 +3198,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3227,11 +3229,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3259,11 +3261,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3291,11 +3293,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3324,11 +3326,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3356,11 +3358,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3389,11 +3391,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3422,11 +3424,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3456,11 +3458,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3488,11 +3490,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3521,11 +3523,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3554,11 +3556,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3588,11 +3590,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3621,11 +3623,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3655,11 +3657,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3689,11 +3691,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3724,11 +3726,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3755,11 +3757,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3787,11 +3789,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3819,11 +3821,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3852,11 +3854,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3884,11 +3886,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3917,11 +3919,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -3950,11 +3952,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -3984,11 +3986,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4016,11 +4018,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4049,11 +4051,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4082,11 +4084,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4116,11 +4118,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4149,11 +4151,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4183,11 +4185,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4217,11 +4219,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4252,11 +4254,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 0.00 | 0.750 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4283,11 +4285,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4315,11 +4317,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4347,11 +4349,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4380,11 +4382,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4412,11 +4414,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4445,11 +4447,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4478,11 +4480,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4512,11 +4514,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4544,11 +4546,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4577,11 +4579,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4610,11 +4612,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4644,11 +4646,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4677,11 +4679,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4711,11 +4713,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4745,11 +4747,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4780,11 +4782,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4811,11 +4813,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4843,11 +4845,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4875,11 +4877,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4908,11 +4910,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -4940,11 +4942,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -4973,11 +4975,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5006,11 +5008,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5040,11 +5042,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5072,11 +5074,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5105,11 +5107,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5138,11 +5140,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5172,11 +5174,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5205,11 +5207,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5239,11 +5241,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5273,11 +5275,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5308,11 +5310,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5339,11 +5341,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5371,11 +5373,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5403,11 +5405,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5436,11 +5438,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5468,11 +5470,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5501,11 +5503,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5534,11 +5536,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5568,11 +5570,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5600,11 +5602,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5633,11 +5635,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5666,11 +5668,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5700,11 +5702,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5733,11 +5735,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5767,11 +5769,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5801,11 +5803,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5836,11 +5838,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5867,11 +5869,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5899,11 +5901,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -5931,11 +5933,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5964,11 +5966,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -5996,11 +5998,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6029,11 +6031,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6062,11 +6064,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -6096,11 +6098,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -6128,11 +6130,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6161,11 +6163,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6194,11 +6196,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -6228,11 +6230,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -6261,11 +6263,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6295,11 +6297,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6329,11 +6331,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -6364,11 +6366,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 0.00 | 0.750 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -6395,11 +6397,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6427,11 +6429,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6459,11 +6461,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -6492,11 +6494,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -6524,11 +6526,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6557,11 +6559,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6590,11 +6592,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -6624,11 +6626,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -6656,11 +6658,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6689,11 +6691,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6722,11 +6724,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -6756,11 +6758,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -6789,11 +6791,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6823,11 +6825,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6857,11 +6859,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -6892,11 +6894,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -6923,11 +6925,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6955,11 +6957,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -6987,11 +6989,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7020,11 +7022,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7052,11 +7054,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -7085,11 +7087,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -7118,11 +7120,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7152,11 +7154,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7184,11 +7186,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -7217,11 +7219,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -7250,11 +7252,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7284,11 +7286,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7317,11 +7319,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -7351,11 +7353,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -7385,11 +7387,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7420,11 +7422,11 @@ NULL : Port_3B = 0.00 | 0.750 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7451,11 +7453,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -7483,11 +7485,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -7515,11 +7517,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7548,11 +7550,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7580,11 +7582,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -7613,11 +7615,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -7646,11 +7648,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7680,11 +7682,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7712,11 +7714,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -7745,11 +7747,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -7778,11 +7780,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7812,11 +7814,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7845,11 +7847,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -7879,11 +7881,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -7913,11 +7915,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7948,11 +7950,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -7979,11 +7981,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -8011,11 +8013,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -8043,11 +8045,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -8076,11 +8078,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -8108,11 +8110,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -8141,11 +8143,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -8174,11 +8176,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -8208,11 +8210,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -8240,11 +8242,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -8273,11 +8275,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -8306,11 +8308,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -8340,11 +8342,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -8373,11 +8375,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -8407,11 +8409,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 102.0 | 1.0 | 0.1
@@ -8441,11 +8443,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 102.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
@@ -8476,11 +8478,11 @@ NULL : Port_3B = 1.50 | 0.150 | 0.1
 NULL : Port_4A = 1.50 | 0.150 | 0.1
 NULL : Port_4B = 1.50 | 0.150 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.1
 #request WheelBrakeLiningRemaining PGN (FEAC) for validation
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
-SEND_CAN CH0 0x0CEAFFFF 0 254 172 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
+SEND_CAN CH0 0x0CEAFFFF 172 254 0 0 0 0 0 0
 NULL : MeterVolts = 1.50 | 0.080 | 0.40
 NULL : Count1 = 80.0 | 1.0 | 0.1
 NULL : Count2 = 80.0 | 1.0 | 0.1
