@@ -10,8 +10,9 @@ datafile = os.path.join(script_dir, TestName + ".pat")
 
 BASE_SA = 0xD9
 
-MIN_SA = 128#0xD9
-MAX_SA = 247#0xE0
+# Supported 43009 SA window in current firmware.
+MIN_SA = 0xD9
+MAX_SA = 0xE0
 CTRL_SA = 0xD1
 
 # Timeouts/waits tuned to keep the sweep runtime reasonable while still

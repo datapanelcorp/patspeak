@@ -9,8 +9,8 @@ datafile = os.path.join(script_dir, TestName + ".pat")
 # Controller source address used by production tests/firmware.
 CTRL_SA = 0xD1
 
-# Default candidate SA window for current 43009 firmware line.
-# Override with env PAT_UUT_SAS to target any address list.
+# Default candidate SA window matches current firmware support.
+# Override with env PAT_UUT_SAS to target any custom address list/range.
 # Examples:
 #   PAT_UUT_SAS=0xD9
 #   PAT_UUT_SAS=0xD9,0xDA,224
@@ -72,7 +72,7 @@ TARGET_SAS = target_sas_from_env()
 
 outstr = ""
 outstr += "#43009-1\n"
-outstr += "#Version 0.1\n"
+outstr += "#Version 0.2\n"
 outstr += "#factory EEPROM reset using CTRL1 command 0x10 to configurable target SA(s)\n"
 outstr += "UUT_DBC = 43009-560.dbc\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"

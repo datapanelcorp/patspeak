@@ -1,5 +1,5 @@
 #43009-1
-#Version 0.1
+#Version 0.2
 #factory EEPROM reset using CTRL1 command 0x10 to configurable target SA(s)
 UUT_DBC = 43009-560.dbc
 UUT_DATANAME = 43009-1-CNFG_RESET
