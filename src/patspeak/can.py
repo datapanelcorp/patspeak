@@ -455,6 +455,20 @@ def CANThread(i: int) -> None:
                     data = bytes(getattr(msg, "data", b""))
 
                     if channel_number == 0:
+                        # Track raw traffic by arbitration ID (DBC-independent).
+                        # This powers UUT_TXCHECK_ID / UUT_TXCHECK_NOT_ID.
+                        try:
+                            arb_id = int(arbitration_id) & 0x1FFFFFFF
+                            seen_by_id = getattr(rt, "UUT_TxSeenCountById", None)
+                            if isinstance(seen_by_id, dict):
+                                seen_by_id[arb_id] = int(seen_by_id.get(arb_id, 0) or 0) + 1
+
+                            last_by_id = getattr(rt, "UUT_TxLastSeenById", None)
+                            if isinstance(last_by_id, dict):
+                                last_by_id[arb_id] = time.time()
+                        except Exception:
+                            pass
+
                         # Track raw UUT-originated traffic (per DBC Tx Node tagging).
                         # This powers the UUT_TXCHECK PAT command.
                         try:

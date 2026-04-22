@@ -77,6 +77,86 @@ def test_preflight_uut_txcheck_error_on_non_numeric_timeout(monkeypatch):
     assert ok is False
 
 
+def test_preflight_allows_uut_txcheck_id_with_optional_timeout(monkeypatch):
+    monkeypatch.setenv("PATSPEAK_PREFLIGHT_MODE", "error")
+
+    uut = FakeDb(signals=set(), tx_signals=set())
+    ok = run_preflight(
+        _lines("UUT_TXCHECK_ID 0x98FF15D9 2.0"),
+        uut_db=uut,
+        pat_db_runtime=None,
+        pat_db_for_check=None,
+        uut_dbc_name="uut.dbc",
+        pat_dbc_name="PAT.dbc",
+        pat_support_active=False,
+    )
+    assert ok is True
+
+
+def test_preflight_allows_uut_txcheck_not_id_without_timeout(monkeypatch):
+    monkeypatch.setenv("PATSPEAK_PREFLIGHT_MODE", "error")
+
+    uut = FakeDb(signals=set(), tx_signals=set())
+    ok = run_preflight(
+        _lines("UUT_TXCHECK_NOT_ID 2566854105"),
+        uut_db=uut,
+        pat_db_runtime=None,
+        pat_db_for_check=None,
+        uut_dbc_name="uut.dbc",
+        pat_dbc_name="PAT.dbc",
+        pat_support_active=False,
+    )
+    assert ok is True
+
+
+def test_preflight_uut_txcheck_id_errors_on_missing_id(monkeypatch):
+    monkeypatch.setenv("PATSPEAK_PREFLIGHT_MODE", "error")
+
+    uut = FakeDb(signals=set(), tx_signals=set())
+    ok = run_preflight(
+        _lines("UUT_TXCHECK_ID"),
+        uut_db=uut,
+        pat_db_runtime=None,
+        pat_db_for_check=None,
+        uut_dbc_name="uut.dbc",
+        pat_dbc_name="PAT.dbc",
+        pat_support_active=False,
+    )
+    assert ok is False
+
+
+def test_preflight_uut_txcheck_id_errors_on_bad_id(monkeypatch):
+    monkeypatch.setenv("PATSPEAK_PREFLIGHT_MODE", "error")
+
+    uut = FakeDb(signals=set(), tx_signals=set())
+    ok = run_preflight(
+        _lines("UUT_TXCHECK_ID not_a_number 1.0"),
+        uut_db=uut,
+        pat_db_runtime=None,
+        pat_db_for_check=None,
+        uut_dbc_name="uut.dbc",
+        pat_dbc_name="PAT.dbc",
+        pat_support_active=False,
+    )
+    assert ok is False
+
+
+def test_preflight_uut_txcheck_not_id_errors_on_bad_timeout(monkeypatch):
+    monkeypatch.setenv("PATSPEAK_PREFLIGHT_MODE", "error")
+
+    uut = FakeDb(signals=set(), tx_signals=set())
+    ok = run_preflight(
+        _lines("UUT_TXCHECK_NOT_ID 0x98FF15D9 nope"),
+        uut_db=uut,
+        pat_db_runtime=None,
+        pat_db_for_check=None,
+        uut_dbc_name="uut.dbc",
+        pat_dbc_name="PAT.dbc",
+        pat_support_active=False,
+    )
+    assert ok is False
+
+
 def test_preflight_pat_command_missing_script_name_is_error(monkeypatch):
     monkeypatch.setenv("PATSPEAK_PREFLIGHT_MODE", "error")
 
@@ -140,6 +220,8 @@ def test_preflight_case_sensitive_pat_and_uut_txcheck_keywords(monkeypatch):
         _lines(
             "pat-my_script.py",
             "uut_txcheck-1.0",
+            "uut_txcheck_id 0x98FF15D9 1.0",
+            "uut_txcheck_not_id 0x98FF15D9 1.0",
         ),
         uut_db=uut,
         pat_db_runtime=None,

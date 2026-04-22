@@ -397,6 +397,64 @@ def CheckUUTTxTraffic(timeout_s: float = 2.0, tx_node: str = "UUT"):
     return (False, None, None)
 
 
+def _get_uut_tx_seen_count_by_id(arbitration_id: int) -> int:
+    """Return the observed count for a raw arbitration ID on the UUT bus."""
+
+    try:
+        by_id = getattr(rt, "UUT_TxSeenCountById", {}) or {}
+        return int(by_id.get(int(arbitration_id) & 0x1FFFFFFF, 0) or 0)
+    except Exception:
+        return 0
+
+
+def CheckUUTTxTrafficById(arbitration_id: int, timeout_s: float = 2.0) -> tuple[bool, int]:
+    """Wait up to timeout_s seconds for at least one frame with arbitration_id.
+
+    This check is DBC-independent and only looks at raw frame IDs observed on
+    the UUT bus (CAN channel 0).
+
+    Returns:
+        (ok, delta_count)
+    """
+
+    target_id = int(arbitration_id) & 0x1FFFFFFF
+    start_count = _get_uut_tx_seen_count_by_id(target_id)
+    start_time = time.time()
+
+    while (time.time() - start_time) < float(timeout_s):
+        now_count = _get_uut_tx_seen_count_by_id(target_id)
+        if now_count > start_count:
+            return (True, now_count - start_count)
+        time.sleep(0.01)
+
+    now_count = _get_uut_tx_seen_count_by_id(target_id)
+    return (False, max(0, now_count - start_count))
+
+
+def CheckUUTTxNoTrafficById(arbitration_id: int, timeout_s: float = 2.0) -> tuple[bool, int]:
+    """Ensure no frames with arbitration_id arrive during timeout_s seconds.
+
+    This check is DBC-independent and only looks at raw frame IDs observed on
+    the UUT bus (CAN channel 0).
+
+    Returns:
+        (ok, delta_count) where ok=True means no new frames were observed.
+    """
+
+    target_id = int(arbitration_id) & 0x1FFFFFFF
+    start_count = _get_uut_tx_seen_count_by_id(target_id)
+    start_time = time.time()
+
+    while (time.time() - start_time) < float(timeout_s):
+        now_count = _get_uut_tx_seen_count_by_id(target_id)
+        if now_count > start_count:
+            return (False, now_count - start_count)
+        time.sleep(0.01)
+
+    now_count = _get_uut_tx_seen_count_by_id(target_id)
+    return (True, max(0, now_count - start_count))
+
+
 def SaveData():
 
     # Suite hooks (pat_start / pat_transition / pat_end) can be configured to
@@ -548,6 +606,136 @@ def ProcessScript():
     if _handle_pat_command(rt.TestLine):
         return
 
+    stripped = (rt.TestLine or "").strip()
+
+    # UUT raw-ID TX traffic check:
+    #   UUT_TXCHECK_ID <id> [timeout_s]
+    #
+    # This check is DBC-independent and only verifies if a specific
+    # arbitration ID appears on the UUT bus.
+    if stripped == "UUT_TXCHECK_ID" or stripped.startswith("UUT_TXCHECK_ID "):
+        tokens = stripped.split()
+        ok = False
+        reason = None
+        timeout_s = 2.0
+        arb = 0
+
+        try:
+            if len(tokens) < 2:
+                raise ValueError("missing args (expected: UUT_TXCHECK_ID <id> [timeout_s])")
+            if len(tokens) > 3:
+                raise ValueError("too many args (expected: UUT_TXCHECK_ID <id> [timeout_s])")
+
+            arb = _parse_int_auto(tokens[1].strip())
+            if arb < 0 or arb > 0xFFFFFFFF:
+                raise ValueError("CAN id out of range (expected 0..0xFFFFFFFF)")
+            arb = int(arb) & 0x1FFFFFFF
+
+            if len(tokens) == 3:
+                timeout_s = float(tokens[2].strip())
+                if timeout_s < 0:
+                    raise ValueError("timeout must be >= 0")
+
+            ok, _delta = CheckUUTTxTrafficById(arbitration_id=arb, timeout_s=timeout_s)
+            if not ok:
+                raise RuntimeError(
+                    f"no frame 0x{int(arb):X} seen on UUT bus within {timeout_s:g}s"
+                )
+        except Exception as e:
+            ok = False
+            reason = str(e)
+
+        if ok:
+            msg = str(rt.TestStep).zfill(5) + f" PASS: UUT_TXCHECK_ID 0x{int(arb):X}"
+            rt.UUT_TestLog += msg + "\n"
+            print(colorize_status_line(msg))
+            try:
+                note_step_result(rt.TestStep, passed=True)
+            except Exception:
+                pass
+        else:
+            msg = str(rt.TestStep).zfill(5) + " FAIL: UUT_TXCHECK_ID (" + str(reason) + ")"
+            rt.UUT_TestLog += msg + "\n"
+            print(colorize_status_line(msg))
+            rt.FailCount += 1
+            try:
+                note_step_result(rt.TestStep, passed=False)
+            except Exception:
+                pass
+
+        # Advance like a normal test step.
+        rt.TestLine = ""
+        rt.PassTime = 0
+        rt.StepTime = 0
+        rt.WaitDone = 0
+        rt.TestStep += 1
+        rt.tracker_last_time = time.time()
+        return
+
+    # UUT raw-ID TX silence check:
+    #   UUT_TXCHECK_NOT_ID <id> [timeout_s]
+    #
+    # This check is DBC-independent and verifies that a specific arbitration ID
+    # does *not* appear on the UUT bus for the full timeout window.
+    if stripped == "UUT_TXCHECK_NOT_ID" or stripped.startswith("UUT_TXCHECK_NOT_ID "):
+        tokens = stripped.split()
+        ok = False
+        reason = None
+        timeout_s = 2.0
+        arb = 0
+
+        try:
+            if len(tokens) < 2:
+                raise ValueError("missing args (expected: UUT_TXCHECK_NOT_ID <id> [timeout_s])")
+            if len(tokens) > 3:
+                raise ValueError("too many args (expected: UUT_TXCHECK_NOT_ID <id> [timeout_s])")
+
+            arb = _parse_int_auto(tokens[1].strip())
+            if arb < 0 or arb > 0xFFFFFFFF:
+                raise ValueError("CAN id out of range (expected 0..0xFFFFFFFF)")
+            arb = int(arb) & 0x1FFFFFFF
+
+            if len(tokens) == 3:
+                timeout_s = float(tokens[2].strip())
+                if timeout_s < 0:
+                    raise ValueError("timeout must be >= 0")
+
+            ok, delta = CheckUUTTxNoTrafficById(arbitration_id=arb, timeout_s=timeout_s)
+            if not ok:
+                raise RuntimeError(
+                    f"frame 0x{int(arb):X} seen {delta} time(s) within {timeout_s:g}s"
+                )
+        except Exception as e:
+            ok = False
+            reason = str(e)
+
+        if ok:
+            msg = str(rt.TestStep).zfill(5) + f" PASS: UUT_TXCHECK_NOT_ID 0x{int(arb):X}"
+            rt.UUT_TestLog += msg + "\n"
+            print(colorize_status_line(msg))
+            try:
+                note_step_result(rt.TestStep, passed=True)
+            except Exception:
+                pass
+        else:
+            msg = str(rt.TestStep).zfill(5) + " FAIL: UUT_TXCHECK_NOT_ID (" + str(reason) + ")"
+            rt.UUT_TestLog += msg + "\n"
+            print(colorize_status_line(msg))
+            rt.FailCount += 1
+            try:
+                note_step_result(rt.TestStep, passed=False)
+            except Exception:
+                pass
+
+        # Advance like a normal test step.
+        rt.TestLine = ""
+        rt.PassTime = 0
+        rt.StepTime = 0
+        rt.WaitDone = 0
+        rt.TestStep += 1
+        rt.tracker_last_time = time.time()
+        return
+
     # UUT TX traffic check: UUT_TXCHECK-<timeout_s>
     #
     # This step blocks (up to timeout) while it listens for any CAN message
@@ -601,7 +789,6 @@ def ProcessScript():
     #   SEND_CAN CH0 0x18FED927 5 5 1 9 7 7 0 0
     #
     # ID and bytes accept either decimal (default) or hex prefixed by 0x.
-    stripped = (rt.TestLine or "").strip()
     if stripped == "SEND_CAN" or stripped.startswith("SEND_CAN "):
         tokens = stripped.split()
 

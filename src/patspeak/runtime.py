@@ -133,6 +133,7 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
     global DBCPath
     global HomePath, TestDir
     global UUT_TxMsgIds, UUT_TxMsgInfo, UUT_TxSeenCount, UUT_TxLastSeen, UUT_TxLastSeenId
+    global UUT_TxSeenCountById, UUT_TxLastSeenById
 
     # -----------------
     # Baseline defaults
@@ -173,6 +174,8 @@ def initialize(*, run_preflight_checks: bool = True) -> None:
     UUT_TxSeenCount = 0
     UUT_TxLastSeen = 0.0
     UUT_TxLastSeenId = None
+    UUT_TxSeenCountById = {}
+    UUT_TxLastSeenById = {}
 
     # Default: PAT support enabled unless suppressed by script.
     SuppressPatSupport = "False"

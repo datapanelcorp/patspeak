@@ -95,7 +95,34 @@ def _is_uut_txcheck_command(line: str) -> bool:
       - UUT_TXCHECK=2.0
     """
 
-    return line.startswith("UUT_TXCHECK")
+    if not line.startswith("UUT_TXCHECK"):
+        return False
+    # Keep UUT_TXCHECK_ID / UUT_TXCHECK_NOT_ID on their own parser path.
+    if line.startswith("UUT_TXCHECK_ID") or line.startswith("UUT_TXCHECK_NOT_ID"):
+        return False
+    return True
+
+
+def _is_uut_txcheck_id_command(line: str) -> bool:
+    """Return True if *line* is a raw-ID UUT TX traffic check step.
+
+    Accepted forms:
+      - UUT_TXCHECK_ID <id>
+      - UUT_TXCHECK_ID <id> <timeout_s>
+    """
+
+    return line == "UUT_TXCHECK_ID" or line.startswith("UUT_TXCHECK_ID ")
+
+
+def _is_uut_txcheck_not_id_command(line: str) -> bool:
+    """Return True if *line* is a raw-ID UUT TX silence check step.
+
+    Accepted forms:
+      - UUT_TXCHECK_NOT_ID <id>
+      - UUT_TXCHECK_NOT_ID <id> <timeout_s>
+    """
+
+    return line == "UUT_TXCHECK_NOT_ID" or line.startswith("UUT_TXCHECK_NOT_ID ")
 
 
 def _is_send_can_command(line: str) -> bool:
@@ -302,6 +329,41 @@ def run_preflight(
                     reason="PAT must be uppercase exactly",
                     line_text=stripped,
                     hint="Example: PAT my_script.py --arg 1",
+                )
+            )
+            continue
+
+        # UUT_TXCHECK is also checked case-sensitively before ':' parsing.
+        if (upper == "UUT_TXCHECK_ID" or upper.startswith("UUT_TXCHECK_ID ")) and not _is_uut_txcheck_id_command(
+            stripped
+        ):
+            issues.append(
+                Issue(
+                    severity="FATAL",
+                    file_line=file_line,
+                    step=None,
+                    section="LINE",
+                    signal=stripped.split(" ", 1)[0],
+                    reason="UUT_TXCHECK_ID must be uppercase exactly",
+                    line_text=stripped,
+                    hint="Example: UUT_TXCHECK_ID 0x98FF15D9 2.0",
+                )
+            )
+            continue
+
+        if (upper == "UUT_TXCHECK_NOT_ID" or upper.startswith("UUT_TXCHECK_NOT_ID ")) and not _is_uut_txcheck_not_id_command(
+            stripped
+        ):
+            issues.append(
+                Issue(
+                    severity="FATAL",
+                    file_line=file_line,
+                    step=None,
+                    section="LINE",
+                    signal=stripped.split(" ", 1)[0],
+                    reason="UUT_TXCHECK_NOT_ID must be uppercase exactly",
+                    line_text=stripped,
+                    hint="Example: UUT_TXCHECK_NOT_ID 0x98FF15D9 2.0",
                 )
             )
             continue
@@ -573,6 +635,108 @@ def run_preflight(
                                     hint="Example: UUT_TXCHECK-2.0",
                                 )
                             )
+
+            # Count this as a step line and move on.
+            step_idx += 1
+            continue
+
+        # -----------------
+        # UUT raw-ID TX checks (no ':' grammar)
+        # -----------------
+        if _is_uut_txcheck_id_command(stripped) or _is_uut_txcheck_not_id_command(stripped):
+            tokens = stripped.split()
+            cmd = tokens[0] if tokens else "UUT_TXCHECK_ID"
+
+            if len(tokens) < 2:
+                issues.append(
+                    Issue(
+                        severity="ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="LINE",
+                        signal=cmd,
+                        reason=f"{cmd} is missing required fields (expected: {cmd} <id> [timeout_s])",
+                        line_text=stripped,
+                        hint=f"Example: {cmd} 0x98FF15D9 2.0",
+                    )
+                )
+                step_idx += 1
+                continue
+
+            if len(tokens) > 3:
+                issues.append(
+                    Issue(
+                        severity="ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="LINE",
+                        signal=cmd,
+                        reason=f"Too many arguments for {cmd} (expected: {cmd} <id> [timeout_s])",
+                        line_text=stripped,
+                        hint=f"Example: {cmd} 0x98FF15D9 2.0",
+                    )
+                )
+                step_idx += 1
+                continue
+
+            def _parse_int_auto(tok: str) -> int:
+                t = (tok or "").strip()
+                base = 16 if t.lower().startswith("0x") else 10
+                return int(t, base)
+
+            id_tok = tokens[1].strip()
+            try:
+                arb = _parse_int_auto(id_tok)
+            except Exception:
+                issues.append(
+                    Issue(
+                        severity="ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="LINE",
+                        signal=cmd,
+                        reason=f"CAN id is not a valid integer: {id_tok!r}",
+                        line_text=stripped,
+                        hint=f"Example: {cmd} 0x98FF15D9 2.0",
+                    )
+                )
+                step_idx += 1
+                continue
+
+            if arb < 0 or arb > 0xFFFFFFFF:
+                issues.append(
+                    Issue(
+                        severity="ERROR",
+                        file_line=file_line,
+                        step=step_idx,
+                        section="LINE",
+                        signal=cmd,
+                        reason="CAN id out of range (expected 0..0xFFFFFFFF)",
+                        line_text=stripped,
+                    )
+                )
+                step_idx += 1
+                continue
+
+            if len(tokens) == 3:
+                t_tok = tokens[2].strip()
+                try:
+                    timeout_s = float(t_tok)
+                    if timeout_s < 0:
+                        raise ValueError("timeout must be >= 0")
+                except Exception:
+                    issues.append(
+                        Issue(
+                            severity="ERROR",
+                            file_line=file_line,
+                            step=step_idx,
+                            section="LINE",
+                            signal=cmd,
+                            reason=f"Timeout value is not a valid non-negative number: {t_tok!r}",
+                            line_text=stripped,
+                            hint=f"Example: {cmd} 0x98FF15D9 2.0",
+                        )
+                    )
 
             # Count this as a step line and move on.
             step_idx += 1
