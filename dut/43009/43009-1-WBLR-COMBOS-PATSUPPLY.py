@@ -11,16 +11,27 @@ datafile = os.path.join(script_dir, TestName + ".pat")
 PWS_REQUEST_CAN_ID = "0x0CEAFFFF"
 PWS_REQUEST_BYTES = "0 254 172 0 0 0 0 0"  # Request FEAC
 
-SUPPLY_V = 1.00
+SUPPLY_V = 1.50
 SUPPLY_SET_COUNTS = int(round(SUPPLY_V * 10.0))  # PAT supply uses 0.1 V units
 
 METER_TOL = "0.080"
 PORT_TOL = "0.150"
-COUNT_TOL = "2.0"
-COUNT_ACTIVE = 100.0
+# Requirement 5.5.3.c: values below 0.800 V are invalid.
+INVALID_INPUT_MAX_V = 0.800
+INACTIVE_PORT_TOL = f"{(INVALID_INPUT_MAX_V - 0.050):.3f}"
+COUNT_TOL = "1.0"
+COUNT_ACTIVE = 80.0
 # Raw value 255 is "invalid/faulted" in the DBC, which decodes to 102.0%.
 COUNT_INACTIVE = 102.0
 REQUESTS_PER_COMBO = 2
+WARMUP_REQUESTS_PER_COMBO = 1
+RELAY_SETTLE_WAIT_S = 0.35
+A_MODE_SETTLE_WAIT_S = 1.00
+POST_REQUEST_SETTLE_S = 0.40
+AD3_LABELS = {"3A", "3B", "4A", "4B"}
+AD4_SIGNALS = ("Spwr1", "Spwr2", "Spwr3", "Spwr4")
+AD4_EXPECTED_V = 5.00
+AD4_TOL = "0.200"
 
 PORTS = [
     {"label": "1A", "feedback": "Port_1A", "status": "Input_1A", "relay": "J1_01"},
@@ -70,7 +81,7 @@ def relay_assignments(active_labels: set[str]) -> str:
 outstr = ""
 outstr += "#43009-1\n"
 outstr += "#Version 0.1\n"
-outstr += "#WheelBrakeLiningRemaining count-position combination test (PAT supply fixed 1.00V)\n"
+outstr += f"#WheelBrakeLiningRemaining count-position combination test (PAT supply fixed {SUPPLY_V:.2f}V)\n"
 outstr += "UUT_DBC = 43009-560.dbc\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
@@ -114,18 +125,24 @@ outstr += "\n"
 outstr += "#set fixed test voltage\n"
 outstr += f"PwrSetVoltage = {SUPPLY_SET_COUNTS} : NULL : WAIT = 0.3\n"
 outstr += "NULL : MeterVolts = " + f"{SUPPLY_V:.2f}" + " | " + METER_TOL + " | 0.2\n"
+outstr += "#verify AD4 sensor-power telemetry\n"
+for spwr in AD4_SIGNALS:
+    outstr += "NULL : " + spwr + " = " + f"{AD4_EXPECTED_V:.2f}" + " | " + AD4_TOL + " | 0.1\n"
 outstr += "\n"
 
 combo_total = 1 << len(PORTS)
+prev_use_type2 = False
 
 for mask in range(combo_total):
     active_labels = {PORTS[i]["label"] for i in range(len(PORTS)) if (mask & (1 << i))}
     use_type2, expected = expected_counts(active_labels)
     mode_name = "Type2" if use_type2 else "Type1"
     combo_name = "NONE" if not active_labels else ",".join(TYPE2_ORDER[i] for i in range(8) if TYPE2_ORDER[i] in active_labels)
+    entering_type2 = use_type2 and (not prev_use_type2)
+    settle_wait = A_MODE_SETTLE_WAIT_S if entering_type2 else RELAY_SETTLE_WAIT_S
 
     outstr += f"#combo {mask:03d}/{combo_total - 1:03d} active={combo_name} mode={mode_name}\n"
-    outstr += relay_assignments(active_labels) + " : NULL : WAIT = 0.2\n"
+    outstr += relay_assignments(active_labels) + " : NULL : WAIT = " + f"{settle_wait:.2f}" + "\n"
     outstr += "NULL : MeterVolts = " + f"{SUPPLY_V:.2f}" + " | " + METER_TOL + " | 0.1\n"
 
     for p in PORTS:
@@ -133,18 +150,36 @@ for mask in range(combo_total):
         outstr += "NULL : " + p["status"] + " = " + expected_status + " | 0.1 | 0.1\n"
 
     for p in PORTS:
-        if p["label"] in active_labels:
+        if p["label"] in active_labels and p["label"] not in AD3_LABELS:
             outstr += "NULL : " + p["feedback"] + " = " + f"{SUPPLY_V:.2f}" + " | " + PORT_TOL + " | 0.1\n"
 
-    outstr += "#request WheelBrakeLiningRemaining PGN (FEAC)\n"
+    # Explicit AD3 checks (Port_3A..Port_4B) to enforce valid/invalid voltage
+    # behavior that drives Type1 vs Type2 count-byte mapping.
+    for p in PORTS:
+        if p["label"] in AD3_LABELS:
+            if p["label"] in active_labels:
+                outstr += "NULL : " + p["feedback"] + " = " + f"{SUPPLY_V:.2f}" + " | " + PORT_TOL + " | 0.1\n"
+            else:
+                outstr += "NULL : " + p["feedback"] + " = 0.00 | " + INACTIVE_PORT_TOL + " | 0.1\n"
+
+    outstr += "#request WheelBrakeLiningRemaining PGN (FEAC) warm-up (discard)\n"
+    for _ in range(WARMUP_REQUESTS_PER_COMBO):
+        outstr += pws_request_cmd()
+    outstr += "NULL : MeterVolts = " + f"{SUPPLY_V:.2f}" + " | " + METER_TOL + " | 0.1\n"
+
+    outstr += "#request WheelBrakeLiningRemaining PGN (FEAC) for validation\n"
     for _ in range(REQUESTS_PER_COMBO):
         outstr += pws_request_cmd()
+    # Hold after requests so count bytes are sampled from a fresh updated frame
+    # instead of a transition-era stale response.
+    outstr += "NULL : MeterVolts = " + f"{SUPPLY_V:.2f}" + " | " + METER_TOL + " | " + f"{POST_REQUEST_SETTLE_S:.2f}" + "\n"
 
     for idx in range(1, 9):
         sig = f"Count{idx}"
         outstr += "NULL : " + sig + " = " + f"{expected[sig]:.1f}" + " | " + COUNT_TOL + " | 0.1\n"
 
     outstr += "\n"
+    prev_use_type2 = use_type2
 
 outstr += "#restore safe state\n"
 outstr += relay_assignments(set()) + " : NULL : WAIT = 0.2\n"
