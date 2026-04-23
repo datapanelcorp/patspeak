@@ -685,3 +685,195 @@ def test_candb_mux_encode_fallback_paths(monkeypatch):
     cdb2.set_tx_signal("D1", 7)
     frames2 = cdb2.encode_tx()
     assert len(frames2) == 1
+
+
+def test_candb_payload_helper_edge_paths_and_initial_defaults(monkeypatch):
+    init_sig = FakeSignal("INIT_SIG", start=0, length=8, initial=0x11)
+    msg_init = FakeMessage(
+        "INITMSG",
+        0x612,
+        signals=[init_sig],
+        senders=["CTRL"],
+        length=8,
+    )
+
+    mux = FakeSignal("MUX", start=0, length=2, is_multiplexer=True, initial=1)
+    muxed = FakeSignal("MUXED", start=8, length=8, multiplexer_ids=["bad", 1], initial=5)
+    common = FakeSignal("COMMON", start=16, length=8, initial=0x11)
+
+    msg_bad = FakeMessage(
+        "BADLEN",
+        0x610,
+        signals=[mux, muxed, common],
+        senders=None,
+        length="bad",
+        raise_on_encode_scaling=True,
+        raise_on_encode_plain=True,
+    )
+    msg_neg = FakeMessage(
+        "NEGLEN",
+        0x611,
+        signals=[FakeSignal("N", start=0, length=8, initial=2)],
+        senders=None,
+        length=-1,
+        raise_on_encode_scaling=True,
+        raise_on_encode_plain=True,
+    )
+
+    db = FakeDatabase([msg_init, msg_bad, msg_neg])
+    fake = FakeCantoolsModule(db)
+    monkeypatch.setattr(can_db, "cantools", fake)
+    cdb = can_db.CanDb("dummy.dbc")
+
+    # Signals with `initial` should seed TX defaults.
+    assert cdb.get_tx_signal("INIT_SIG") == 0x11
+
+    # _normalize_payload_size: pad path.
+    padded = cdb._normalize_payload_size(b"\xAA", 4)
+    assert padded == bytearray(b"\xAA\x00\x00\x00")
+
+    # _build_cold_start_payload length guards + mux include/skip branches.
+    cold_none = cdb._build_cold_start_payload(msg_bad, mux_value=None)
+    assert len(cold_none) == 8
+    cold_with = cdb._build_cold_start_payload(msg_bad, mux_value=1)
+    assert len(cold_with) == 8
+    cold_neg = cdb._build_cold_start_payload(msg_neg, mux_value=None)
+    assert len(cold_neg) == 8
+
+    # _resolve_encode_base_payload length guards.
+    base_bad = cdb._resolve_encode_base_payload(
+        message=msg_bad,
+        arbitration_id=0x610,
+        is_extended_id=False,
+        mux_value=None,
+    )
+    assert len(base_bad) == 8
+    base_neg = cdb._resolve_encode_base_payload(
+        message=msg_neg,
+        arbitration_id=0x611,
+        is_extended_id=False,
+        mux_value=None,
+    )
+    assert len(base_neg) == 8
+
+    # _overlay_encoded_signals length guards.
+    over_bad = cdb._overlay_encoded_signals(
+        message=msg_bad,
+        base_payload=b"\x00",
+        encoded_payload=b"\xFF",
+        selected_signals=set(),
+    )
+    assert len(over_bad) == 8
+    over_neg = cdb._overlay_encoded_signals(
+        message=msg_neg,
+        base_payload=b"\x00",
+        encoded_payload=b"\xFF",
+        selected_signals=set(),
+    )
+    assert len(over_neg) == 8
+
+    # _cache_tx_shadow length guards.
+    cdb._cache_tx_shadow(
+        message=msg_bad,
+        arbitration_id=0x610,
+        is_extended_id=False,
+        mux_value=None,
+        payload=b"\x01",
+    )
+    cdb._cache_tx_shadow(
+        message=msg_neg,
+        arbitration_id=0x611,
+        is_extended_id=False,
+        mux_value=None,
+        payload=b"\x02",
+    )
+
+    # _update_rx_shadow length guards.
+    cdb._update_rx_shadow(
+        message=msg_bad,
+        arbitration_id=0x610,
+        is_extended_id=False,
+        payload=b"\x03",
+    )
+    cdb._update_rx_shadow(
+        message=msg_neg,
+        arbitration_id=0x611,
+        is_extended_id=False,
+        payload=b"\x04",
+    )
+
+    # Force mux extraction error to hit early-return branch.
+    def _boom_extract(*_args, **_kwargs):
+        raise RuntimeError("boom")
+
+    monkeypatch.setattr(can_db, "_extract_signal_raw_from", _boom_extract)
+    cdb._update_rx_shadow(
+        message=msg_bad,
+        arbitration_id=0x610,
+        is_extended_id=False,
+        payload=b"\x00",
+    )
+
+
+def test_candb_bit_decode_skips_bad_or_nonmatching_mux_ids(monkeypatch):
+    mux = FakeSignal("MUX", start=0, length=2, is_multiplexer=True)
+    gated = FakeSignal("GATED", start=8, length=8, multiplexer_ids=["bad", 2])
+    msg = FakeMessage("RXMUX", 0x620, signals=[mux, gated], senders=None)
+
+    db = FakeDatabase([msg])
+    fake = FakeCantoolsModule(db)
+    monkeypatch.setattr(can_db, "cantools", fake)
+    cdb = can_db.CanDb("dummy.dbc")
+
+    payload = bytearray(8)
+    can_db._patch_signal_raw_into(payload, mux, 1)
+    can_db._patch_signal_raw_into(payload, gated, 0x55)
+
+    out = cdb._bit_decode_message(msg, bytes(payload))
+    assert out is not None
+    assert "MUX" in out
+    assert "GATED" not in out
+
+
+def test_candb_find_j1939_placeholder_message_prefers_best_match(monkeypatch):
+    weak = SimpleNamespace(
+        name="WEAK",
+        frame_id=(can_db.EXTENDED_ID_FLAG | 0x18EF00D9),
+        signals=[],
+        senders=None,
+        is_extended_frame=True,
+    )
+    strong = SimpleNamespace(
+        name="STRONG",
+        frame_id=(can_db.EXTENDED_ID_FLAG | 0x18EFD1D9),
+        signals=[],
+        senders=None,
+        is_extended_frame=True,
+    )
+
+    class DB:
+        def __init__(self, messages):
+            self.messages = list(messages)
+
+        def get_message_by_frame_id(self, fid: int):
+            raise KeyError(fid)
+
+    fake = FakeCantoolsModule(DB([weak, strong]))
+    monkeypatch.setattr(can_db, "cantools", fake)
+    cdb = can_db.CanDb("dummy.dbc")
+
+    # Add an invalid-id message post-init so _find_j1939_placeholder_message
+    # exercises its per-message int() guard path.
+    cdb.messages.append(
+        SimpleNamespace(
+            name="BAD_ID",
+            frame_id=object(),
+            signals=[],
+            senders=None,
+            is_extended_frame=True,
+        )
+    )
+
+    best = cdb._find_j1939_placeholder_message(0x18EFD1D9)
+    assert best is not None
+    assert getattr(best, "name", "") == "STRONG"

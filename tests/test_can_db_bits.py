@@ -28,6 +28,42 @@ def test_candidate_dbc_frame_ids_covers_plain_and_flagged_ids():
     assert len(cands) == len(set(cands))
 
 
+def test_j1939_placeholder_score_exact_match_is_strongest():
+    msg = 0x18EFD1D9
+    rx = 0x18EFD1D9
+    assert can_db._j1939_placeholder_score(msg, rx) == 5
+
+
+def test_j1939_placeholder_score_allows_pdu1_destination_placeholder():
+    # PDU1 frame (PF=0xEF < 240): msg PS=0x00 is treated as a placeholder.
+    msg = 0x18EF00D9
+    rx = 0x18EFD1D9
+    assert can_db._j1939_placeholder_score(msg, rx) == 3
+
+
+def test_j1939_placeholder_score_rejects_standard_ids_and_header_mismatch():
+    assert can_db._j1939_placeholder_score(0x123, 0x18EFD1D9) == -1
+    assert can_db._j1939_placeholder_score(0x18EFD1D9, 0x19EFD1D9) == -1
+
+
+def test_j1939_placeholder_score_rejects_non_placeholder_pdu_mismatch():
+    # PDU1 with non-placeholder destination must match exactly.
+    assert can_db._j1939_placeholder_score(0x18EFAAD9, 0x18EFBBD9) == -1
+    # PDU2 (PF>=240) requires PS to match exactly.
+    assert can_db._j1939_placeholder_score(0x18FF01D9, 0x18FF02D9) == -1
+
+
+def test_j1939_placeholder_score_covers_pdu2_and_source_placeholder_paths():
+    # PDU2 exact match exercises the PF>=240 exact-PS branch.
+    assert can_db._j1939_placeholder_score(0x18FF01D9, 0x18FF01D9) == 5
+
+    # Source placeholder (SA=0x00) is accepted as a relaxed match.
+    assert can_db._j1939_placeholder_score(0x18EFD100, 0x18EFD1D9) == 4
+
+    # Non-placeholder source mismatch rejects the frame.
+    assert can_db._j1939_placeholder_score(0x18EFD1AA, 0x18EFD1BB) == -1
+
+
 def test_iter_signal_bit_positions_little_endian_is_contiguous():
     sig = SimpleNamespace(start=0, length=5, byte_order="little_endian")
     assert list(can_db._iter_signal_bit_positions(sig)) == [0, 1, 2, 3, 4]
