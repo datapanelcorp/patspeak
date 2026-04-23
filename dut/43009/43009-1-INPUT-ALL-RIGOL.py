@@ -10,8 +10,8 @@ datafile = os.path.join(script_dir, TestName + ".pat")
 
 RIGOL_SCRIPT = "dp800/rigol_dp800_set_ch.py"
 RIGOL_CONNECTION = "ip"  # "ip" or "usb"
-#RIGOL_IP = "192.168.45.178"
-RIGOL_IP = "192.168.45.197"
+RIGOL_IP = "192.168.45.178"
+#RIGOL_IP = "192.168.45.197"
 RIGOL_RESOURCE = "USB0::0x1AB1::0x0E11::DP8C180100022::INSTR"
 RIGOL_TRANSPORT = "visa"  # "auto", "socket", or "visa" (IP mode only)
 RIGOL_SOCKET_PORTS = "5025,5555"
@@ -22,8 +22,10 @@ RIGOL_RETRIES = 8
 RIGOL_RETRY_DELAY_S = 0.50
 RIGOL_RELAY = "J4_01"
 
-PWS_REQUEST_CAN_ID = "0x0CEAFFFF"  # Matches sim.py "PWS REQUEST"
-PWS_REQUEST_BYTES = "0 254 172 0 0 0 0 0"  # Data[0..2] = 00 FE AC
+# J1939 Request PGN (0xEA00), destination global (0xFF), controller SA=0xD1.
+PWS_REQUEST_CAN_ID = "0x18EAFFD1"
+# Request PGN FEAC in J1939 byte order: Data[0..2] = AC FE 00.
+PWS_REQUEST_BYTES = "172 254 0 0 0 0 0 0"
 # Firmware rejects controller SA 0x00. Use fixed controller SA 0xD1.
 CTRL1_CMD0_CAN_ID = "0x18EFD9D1"
 CTRL1_CMD0_BYTES_RAW = "0 0 0 0 0 0 0 0"
