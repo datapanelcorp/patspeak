@@ -77,6 +77,14 @@ def format_error(exc):
     return f"{type(exc).__name__}: {exc}"
 
 
+def emit_result(passed):
+    if passed:
+        print("PATSPEAK_RESULT=PASS")
+        return 0
+    print("PATSPEAK_RESULT=FAIL")
+    return 1
+
+
 def parse_args():
     default_interface, default_channel, default_bitrate = _default_can_settings()
     relay_interface, relay_channel, relay_bitrate, auto_cycle_k1 = _default_relay_settings(
@@ -504,10 +512,11 @@ def main():
     try:
         bus = open_can_bus(can_interface, can_channel, can_bitrate)
     except Exception as exc:
-        raise RuntimeError(
-            "Unable to open CAN bus with python-can. "
+        print(
+            "[FAIL] Unable to open CAN bus with python-can. "
             f"Check interface/channel/bitrate and driver install. Details: {format_error(exc)}"
-        ) from exc
+        )
+        return emit_result(False)
 
     diag = {"rx_total": 0, "id_counts": {}}
     runtime = {"last_reset_time": None, "k1_cycle_done_time": None}
@@ -591,6 +600,7 @@ def main():
             top = "none"
         print(f"DIAG rx_total={diag['rx_total']} top_ids={top}")
         print("OVERALL:", "PASS" if overall_pass else "FAIL")
+        return emit_result(overall_pass)
     finally:
         if relay_bus_owns_handle and relay_bus is not None:
             relay_bus.shutdown()
@@ -598,4 +608,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        raise SystemExit(main())
+    except SystemExit:
+        raise
+    except Exception as exc:
+        print(f"[FAIL] Unhandled exception: {format_error(exc)}")
+        print("PATSPEAK_RESULT=FAIL")
+        raise SystemExit(2)

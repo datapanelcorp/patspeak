@@ -1,3 +1,4 @@
+import argparse
 import time
 from time import sleep
 import can
@@ -38,9 +39,15 @@ RELAY_CAN_CHANNEL = _parse_can_channel(
 )
 RELAY_CAN_BITRATE = int(os.environ.get("PATSPEAK_RELAY_CAN_BITRATE", str(CAN_BITRATE)))
 CTRL_RLY_FRAME_ID = 0x8CFF0500  # PAT.dbc: CTRL_RLY
+CTRL_RLY_ARB_ID = CTRL_RLY_FRAME_ID & 0x1FFFFFFF  # python-can expects 29-bit arbitration id
 K1_OFF_WAIT_SEC = 1.0
 K1_ON_WAIT_SEC = 2.0
 K1_SETTLE_WAIT_SEC = 1.0
+K1_CHANNEL_WARMUP_SEC = float(os.environ.get("PATSPEAK_K1_CHANNEL_WARMUP_SEC", "0.10"))
+K1_TX_RETRIES = int(os.environ.get("PATSPEAK_K1_TX_RETRIES", "3"))
+K1_TX_RETRY_DELAY_SEC = float(os.environ.get("PATSPEAK_K1_TX_RETRY_DELAY_SEC", "0.05"))
+K1_TX_BURST_COUNT = int(os.environ.get("PATSPEAK_K1_TX_BURST_COUNT", "5"))
+K1_TX_BURST_SPACING_SEC = float(os.environ.get("PATSPEAK_K1_TX_BURST_SPACING_SEC", "0.02"))
 
 # Use this source address unless your DUT was re-addressed.
 EXPECTED_MODULE_SOURCE_ADDRESS = 0xD9
@@ -100,6 +107,33 @@ UNSUPPORTED_REQUEST_PAYLOAD = [0x23, 0xF1, 0x00]  # PGN 0x00F123
 
 def format_error(exc):
     return f"{type(exc).__name__}: {exc}"
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description=(
+            "43009 default-mode verifier: startup timer, 65196 burst/periodic, "
+            "request behavior, and enable-message checks."
+        )
+    )
+    raw_default = _env_truthy("PATSPEAK_RAW_CAN_LOG", False)
+    raw_max_default = int(os.environ.get("PATSPEAK_RAW_CAN_MAX", "1000"))
+    parser.set_defaults(cycle_k1=AUTO_CYCLE_K1)
+    parser.add_argument("--cycle-k1", dest="cycle_k1", action="store_true", help="Cycle K1 relay before waiting for DUT.")
+    parser.add_argument("--no-cycle-k1", dest="cycle_k1", action="store_false", help="Skip script-level K1 cycling.")
+    parser.set_defaults(raw_can=raw_default)
+    parser.add_argument("--raw-can", dest="raw_can", action="store_true", help="Print raw RX CAN frames while waiting for address claim.")
+    parser.add_argument("--no-raw-can", dest="raw_can", action="store_false", help="Disable raw RX CAN frame logging.")
+    parser.add_argument("--raw-can-max", type=int, default=raw_max_default, help="Maximum raw RX frames to print.")
+    return parser.parse_args()
+
+
+def emit_result(passed):
+    if passed:
+        print("PATSPEAK_RESULT=PASS")
+        return 0
+    print("PATSPEAK_RESULT=FAIL")
+    return 1
 
 
 def open_can_bus():
@@ -175,55 +209,149 @@ def poll_bus_once(bus):
     return message, time.monotonic()
 
 
+def extract_address_claim(message, rx_time):
+    if message is None or not message.is_extended_id:
+        return None, None
+
+    pgn, source_address, destination_address = parse_j1939_id(message.arbitration_id)
+    if pgn != PGN_ADDRESS_CLAIM or destination_address != 0xFF:
+        return None, None
+
+    if EXPECTED_MODULE_SOURCE_ADDRESS is None or source_address == EXPECTED_MODULE_SOURCE_ADDRESS:
+        return source_address, rx_time
+
+    print(
+        "[WARN] Address claim seen from unexpected SA "
+        + f"0x{source_address:02X}; still waiting for expected SA 0x{EXPECTED_MODULE_SOURCE_ADDRESS:02X}."
+    )
+    return None, None
+
+
 def write_k1(relay_bus, state):
     # PAT.dbc CTRL_RLY: RLY_K1 is a 2-bit value at bit 0.
     data = bytearray(8)
     data[0] = int(state) & 0x03
-    return write_ext_message(relay_bus, CTRL_RLY_FRAME_ID, data)
+    return write_ext_message(relay_bus, CTRL_RLY_ARB_ID, data)
 
 
-def cycle_k1(relay_bus):
+def write_k1_with_retry(
+    relay_bus,
+    state,
+    retries=K1_TX_RETRIES,
+    retry_delay_s=K1_TX_RETRY_DELAY_SEC,
+    burst_count=K1_TX_BURST_COUNT,
+    burst_spacing_s=K1_TX_BURST_SPACING_SEC,
+):
+    attempts = max(1, int(retries))
+    burst_frames = max(1, int(burst_count))
+    last_err = None
+    for idx in range(1, attempts + 1):
+        success_count = 0
+        for frame_idx in range(1, burst_frames + 1):
+            ok, err = write_k1(relay_bus, state)
+            if ok:
+                success_count += 1
+            else:
+                last_err = err
+            if frame_idx < burst_frames:
+                sleep(max(0.0, float(burst_spacing_s)))
+        if success_count > 0:
+            if success_count < burst_frames or idx > 1:
+                print(
+                    f"K1 state {int(state) & 0x03} tx delivered {success_count}/{burst_frames} frames "
+                    f"on attempt {idx}/{attempts}."
+                )
+            return True, None
+        if idx < attempts:
+            sleep(max(0.0, float(retry_delay_s)))
+    return False, last_err
+
+
+def _wait_with_claim_poll(rx_bus, wait_s, phase_label, allow_claim_capture=True):
+    deadline = time.monotonic() + float(wait_s)
+    observed_sa = None
+    observed_time = None
+    while time.monotonic() < deadline:
+        message, rx_time = poll_bus_once(rx_bus)
+        if allow_claim_capture:
+            source_address, claim_time = extract_address_claim(message, rx_time)
+            if source_address is not None and observed_sa is None:
+                observed_sa = source_address
+                observed_time = claim_time
+                print(
+                    f"Address claim detected from DUT SA=0x{source_address:02X} during {phase_label}; "
+                    "completing K1 cycle."
+                )
+        sleep(READ_SLEEP_SEC)
+    return observed_sa, observed_time
+
+
+def cycle_k1(relay_bus, rx_bus):
     print("Cycling K1 relay to auto-start DUT...")
+    observed_sa = None
+    observed_claim_time = None
 
-    ok, err = write_k1(relay_bus, 0)
+    if K1_CHANNEL_WARMUP_SEC > 0.0:
+        sleep(K1_CHANNEL_WARMUP_SEC)
+
+    ok, err = write_k1_with_retry(relay_bus, 0)
     if not ok:
-        return False, f"K1 OFF write failed: {err}"
+        return False, f"K1 OFF write failed: {err}", None, None
     print(f"K1=0, wait {K1_OFF_WAIT_SEC:.1f}s")
-    sleep(K1_OFF_WAIT_SEC)
+    _wait_with_claim_poll(rx_bus, K1_OFF_WAIT_SEC, "K1=0 pre", allow_claim_capture=False)
 
-    ok, err = write_k1(relay_bus, 1)
+    ok, err = write_k1_with_retry(relay_bus, 1)
     if not ok:
-        return False, f"K1 ON write failed: {err}"
+        return False, f"K1 ON write failed: {err}", None, None
     print(f"K1=1, wait {K1_ON_WAIT_SEC:.1f}s")
-    sleep(K1_ON_WAIT_SEC)
+    source_address, claim_time = _wait_with_claim_poll(rx_bus, K1_ON_WAIT_SEC, "K1=1 on")
+    if source_address is not None:
+        observed_sa = source_address
+        observed_claim_time = claim_time
 
-    ok, err = write_k1(relay_bus, 0)
+    ok, err = write_k1_with_retry(relay_bus, 0)
     if not ok:
-        return False, f"K1 settle write failed: {err}"
+        return False, f"K1 settle write failed: {err}", None, None
     print(f"K1=0, wait {K1_SETTLE_WAIT_SEC:.1f}s")
-    sleep(K1_SETTLE_WAIT_SEC)
+    source_address, claim_time = _wait_with_claim_poll(rx_bus, K1_SETTLE_WAIT_SEC, "K1=0 settle")
+    if source_address is not None and observed_sa is None:
+        observed_sa = source_address
+        observed_claim_time = claim_time
 
-    return True, None
+    return True, None, observed_sa, observed_claim_time
 
 
-def wait_for_address_claim(bus):
+def _format_raw_frame(message):
+    frame_type = "EXT" if message.is_extended_id else "STD"
+    can_id = int(message.arbitration_id) & 0x1FFFFFFF
+    data = " ".join(f"{b:02X}" for b in bytes(message.data))
+    return f"{frame_type} id=0x{can_id:08X} dlc={len(message.data)} data=[{data}]"
+
+
+def wait_for_address_claim(bus, raw_can=False, raw_can_max=1000):
     print("Waiting for DUT address claim to start 3-minute timer...")
     print("Tip: power-cycle the module now so timing starts from boot.")
 
     deadline = time.monotonic() + ADDRESS_CLAIM_TIMEOUT_SEC
     next_progress = time.monotonic() + 10.0
+    raw_count = 0
+    raw_limit_noted = False
 
     while time.monotonic() < deadline:
         message, rx_time = poll_bus_once(bus)
         if message is not None:
-            if not message.is_extended_id:
-                continue
+            if raw_can:
+                if raw_count < raw_can_max:
+                    print("[RAW RX] " + _format_raw_frame(message))
+                    raw_count += 1
+                elif not raw_limit_noted:
+                    print(f"[RAW RX] print limit reached ({raw_can_max} frames), suppressing additional raw logs.")
+                    raw_limit_noted = True
 
-            pgn, source_address, destination_address = parse_j1939_id(message.arbitration_id)
-            if pgn == PGN_ADDRESS_CLAIM and destination_address == 0xFF:
-                if EXPECTED_MODULE_SOURCE_ADDRESS is None or source_address == EXPECTED_MODULE_SOURCE_ADDRESS:
-                    print(f"Address claim detected from DUT SA=0x{source_address:02X}.")
-                    return source_address, rx_time
+            source_address, claim_time = extract_address_claim(message, rx_time)
+            if source_address is not None:
+                print(f"Address claim detected from DUT SA=0x{source_address:02X}.")
+                return source_address, claim_time
 
         now = time.monotonic()
         if now >= next_progress:
@@ -236,6 +364,7 @@ def wait_for_address_claim(bus):
 
 
 def main():
+    args = parse_args()
     print("Default Mode Operation verifier started.")
     print(
         "Checks under test: startup timer, 65196 burst, periodic/on-request 65196, "
@@ -243,9 +372,15 @@ def main():
     )
     print(f"CAN backend: interface={CAN_INTERFACE}, uut_channel={CAN_CHANNEL}, bitrate={CAN_BITRATE}")
     print(
-        f"K1 relay control: {'enabled' if AUTO_CYCLE_K1 else 'disabled'} "
+        f"K1 relay control: {'enabled' if args.cycle_k1 else 'disabled'} "
         f"(channel={RELAY_CAN_CHANNEL}, bitrate={RELAY_CAN_BITRATE})"
     )
+    if args.cycle_k1:
+        print(
+            "K1 tx strategy: "
+            f"id=0x{CTRL_RLY_ARB_ID:08X}, burst={K1_TX_BURST_COUNT}, "
+            f"retries={K1_TX_RETRIES}, warmup={K1_CHANNEL_WARMUP_SEC:.2f}s"
+        )
 
     try:
         bus = open_can_bus()
@@ -255,13 +390,13 @@ def main():
             "Check python-can driver install, interface name, and channel."
         )
         print(f"       Details: {format_error(exc)}")
-        return
+        return emit_result(False)
 
     relay_bus = None
     relay_bus_owns_handle = False
-    relay_auto_enabled = AUTO_CYCLE_K1
+    relay_auto_enabled = args.cycle_k1
 
-    if AUTO_CYCLE_K1:
+    if args.cycle_k1:
         try:
             if str(RELAY_CAN_CHANNEL).strip() == str(CAN_CHANNEL).strip():
                 relay_bus = bus
@@ -291,21 +426,36 @@ def main():
 
     try:
         if relay_auto_enabled:
-            ok, err = cycle_k1(relay_bus)
+            ok, err, source_address, claim_time = cycle_k1(relay_bus, bus)
             if not ok:
                 relay_auto_enabled = False
                 print(f"[WARN] K1 auto-cycle failed: {err}")
                 print("       Continuing with manual startup flow.")
+                source_address = None
+                claim_time = None
         else:
-            print("Manual startup mode: cycle K1/power now if needed.")
+            source_address = None
+            claim_time = None
 
-        module_sa, t_address_claim = wait_for_address_claim(bus)
+        if source_address is not None and claim_time is not None:
+            module_sa = source_address
+            t_address_claim = claim_time
+            print("Using address claim observed during K1 cycling as startup reference.")
+        else:
+            if not relay_auto_enabled:
+                print("Manual startup mode: cycle K1/power now if needed.")
+
+            module_sa, t_address_claim = wait_for_address_claim(
+                bus,
+                raw_can=args.raw_can,
+                raw_can_max=max(1, int(args.raw_can_max)),
+            )
         if module_sa is None:
             expected_text = (
                 f" SA 0x{EXPECTED_MODULE_SOURCE_ADDRESS:02X}" if EXPECTED_MODULE_SOURCE_ADDRESS is not None else ""
             )
             print(f"[FAIL] No DUT address claim received within timeout{expected_text}.")
-            return
+            return emit_result(False)
 
         # Let AddressClaimed settle before first config command. Without this,
         # early commands can be dropped while MsgIncoming still ignores traffic.
@@ -580,7 +730,9 @@ def main():
         for name, passed in results.items():
             status = "PASS" if passed else "FAIL"
             print(f"{status} - {name}")
-        print("OVERALL:", "PASS" if all(results.values()) else "FAIL")
+        overall_pass = all(results.values())
+        print("OVERALL:", "PASS" if overall_pass else "FAIL")
+        return emit_result(overall_pass)
 
     finally:
         try:
@@ -592,4 +744,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        raise SystemExit(main())
+    except SystemExit:
+        raise
+    except Exception as exc:
+        print(f"[FAIL] Unhandled exception: {format_error(exc)}")
+        print("PATSPEAK_RESULT=FAIL")
+        raise SystemExit(2)
