@@ -569,6 +569,35 @@ class _StickyAnsiRenderer:
         except Exception:
             return False
 
+    def ensure_cursor_in_output_region(self) -> None:
+        """Move cursor into the scrolling output region (best effort).
+
+        The sticky renderer reserves:
+          - row 1 for the header
+          - last row for the footer
+
+        Some interactive prompt paths can leave the cursor on the footer row.
+        If that happens, subsequent log output may stop scrolling and keep
+        overwriting the same line.
+        """
+
+        if not (self._state.enabled and self.isatty()):
+            return
+        try:
+            _cols, _rows = _term_size()
+            if _rows < 4:
+                return
+            target_row = max(2, _rows - 1)
+        except Exception:
+            return
+
+        with self._state._io_lock:
+            try:
+                self._out.write(f"\x1b[{target_row};1H")
+                self._out.flush()
+            except Exception:
+                pass
+
     def install(self) -> None:
         if self._installed:
             return
@@ -595,23 +624,9 @@ class _StickyAnsiRenderer:
         self._apply_scroll_region(force=True)
         self.redraw(force=True)
 
-        # Important: after setting a scroll region that reserves the top/bottom
-        # rows, the current cursor position may be *outside* that region (most
-        # commonly when the user runs PATSpeak from a shell prompt on the last
-        # visible row).
-        #
-        # If we leave the cursor below the bottom margin, many Windows consoles
-        # will stop scrolling and subsequent output will overwrite the same
-        # line. Move the cursor into the scrolling region so log output scrolls
-        # normally on every run.
-        try:
-            _cols, _rows = _term_size()
-            if _rows >= 4:
-                # Output region bottom margin is one row above the footer.
-                self._out.write(f"\x1b[{max(2, _rows - 1)};1H")
-                self._out.flush()
-        except Exception:
-            pass
+        # Important: cursor must be inside the scroll region or output can stop
+        # scrolling on some Windows terminals.
+        self.ensure_cursor_in_output_region()
 
         # Ensure we restore the terminal at exit.
         atexit.register(self.shutdown)
@@ -1347,7 +1362,11 @@ def install() -> None:
         builtins._patspeak_input = builtins.input  # type: ignore[attr-defined]
 
         def _wrapped_input(prompt: str = ""):
+            sticky = _STATE._renderer if isinstance(_STATE._renderer, _StickyAnsiRenderer) else None
             try:
+                # While typing at interactive prompts, avoid ticker redraws.
+                if sticky is not None:
+                    _stop_ticker()
                 # Clear the progress UI so prompts are readable.
                 r = _STATE._renderer
                 if r is not None and hasattr(r, "clear"):
@@ -1360,6 +1379,17 @@ def install() -> None:
                 try:
                     # Restore progress UI.
                     redraw()
+                except Exception:
+                    pass
+                try:
+                    # Ensure subsequent output starts in the scrollable region.
+                    if sticky is not None:
+                        sticky.ensure_cursor_in_output_region()
+                except Exception:
+                    pass
+                try:
+                    if sticky is not None and _STATE.enabled:
+                        _start_ticker()
                 except Exception:
                     pass
 
