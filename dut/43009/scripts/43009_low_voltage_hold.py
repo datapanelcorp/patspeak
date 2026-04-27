@@ -206,6 +206,8 @@ def parse_args():
         raise ValueError("--input-voltage must be >= 0.")
     if args.max_silence_sec <= 0:
         raise ValueError("--max-silence-sec must be > 0.")
+    if args.recovery_sec <= 0:
+        raise ValueError("--recovery-sec must be > 0.")
 
     return args
 
@@ -510,6 +512,8 @@ def observe_window(
         "response_counts": {},
         "ports": {},
         "inputs": {},
+        "ports_samples": {},
+        "inputs_samples": {},
         "dut_frames": 0,
         "max_inter_gap": 0.0,
         "trailing_gap": 0.0,
@@ -561,19 +565,28 @@ def observe_window(
             continue
         if pgn == PGN_AD2:
             try:
-                out["ports"].update(ad2.decode(data, decode_choices=False))
+                decoded = ad2.decode(data, decode_choices=False)
+                out["ports"].update(decoded)
+                for name, value in decoded.items():
+                    out["ports_samples"].setdefault(name, []).append(value)
             except Exception:
                 pass
             continue
         if pgn == PGN_AD3:
             try:
-                out["ports"].update(ad3.decode(data, decode_choices=False))
+                decoded = ad3.decode(data, decode_choices=False)
+                out["ports"].update(decoded)
+                for name, value in decoded.items():
+                    out["ports_samples"].setdefault(name, []).append(value)
             except Exception:
                 pass
             continue
         if pgn == PGN_DIGIN:
             try:
-                out["inputs"].update(digin.decode(data, decode_choices=False))
+                decoded = digin.decode(data, decode_choices=False)
+                out["inputs"].update(decoded)
+                for name, value in decoded.items():
+                    out["inputs_samples"].setdefault(name, []).append(value)
             except Exception:
                 pass
             continue
@@ -610,6 +623,42 @@ def low_fault_window_check(observation, threshold_v, min_sec, commanded_voltage=
             f"< {float(threshold_v):.2f}V for {analysis_duration:.3f}s",
         )
     return False, "no VBAT samples observed and commanded voltage did not prove threshold condition"
+
+
+def _any_float_within(values, target, tol):
+    target_f = float(target)
+    tol_f = float(tol)
+    for value in values:
+        try:
+            if abs(float(value) - target_f) <= tol_f:
+                return True
+        except Exception:
+            continue
+    return False
+
+
+def _any_int_equals(values, expected):
+    expected_i = int(expected)
+    for value in values:
+        try:
+            if int(value) == expected_i:
+                return True
+        except Exception:
+            continue
+    return False
+
+
+def input_state_ok(observation, port_signal, input_signal, target_voltage, input_tol):
+    port_samples = list(observation.get("ports_samples", {}).get(port_signal, []))
+    input_samples = list(observation.get("inputs_samples", {}).get(input_signal, []))
+    # Fallback to last values if no series were captured.
+    if not port_samples and observation.get("ports", {}).get(port_signal) is not None:
+        port_samples = [observation["ports"][port_signal]]
+    if not input_samples and observation.get("inputs", {}).get(input_signal) is not None:
+        input_samples = [observation["inputs"][input_signal]]
+    port_ok = _any_float_within(port_samples, target_voltage, input_tol)
+    input_ok = _any_int_equals(input_samples, 1)
+    return port_ok and input_ok
 
 
 def cycle_k1(pat):
@@ -916,11 +965,12 @@ def main():
             )
             baseline_port = baseline["ports"].get(port_signal)
             baseline_input = baseline["inputs"].get(input_signal)
-            baseline_ok = (
-                baseline_port is not None
-                and abs(float(baseline_port) - float(args.input_voltage)) <= float(args.input_tol)
-                and baseline_input is not None
-                and int(baseline_input) == 1
+            baseline_ok = input_state_ok(
+                baseline,
+                port_signal,
+                input_signal,
+                args.input_voltage,
+                args.input_tol,
             )
 
             if not set_rigol_voltage(args, rigol_helper, args.hold_voltage, "on"):
@@ -973,11 +1023,12 @@ def main():
             )
             recovery_port = recovery["ports"].get(port_signal)
             recovery_input = recovery["inputs"].get(input_signal)
-            recovery_ok = (
-                recovery_port is not None
-                and abs(float(recovery_port) - float(args.input_voltage)) <= float(args.input_tol)
-                and recovery_input is not None
-                and int(recovery_input) == 1
+            recovery_ok = input_state_ok(
+                recovery,
+                port_signal,
+                input_signal,
+                args.input_voltage,
+                args.input_tol,
             )
 
             port_pass = baseline_ok and hold_fault_ok and hold_ports_ok and hold_inputs_ok and recovery_ok

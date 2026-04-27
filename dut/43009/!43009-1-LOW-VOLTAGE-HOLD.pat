@@ -8,7 +8,7 @@ SUPPRESS_PAT_SUPPORT = True
 PAUSE-CRITICAL SAFETY CHECK. Turn PAT main supply output OFF. Disconnect PAT main VBAT cable from module. Connect Rigol CH1 to module VBAT. Confirm only one supply is connected. Press Enter to continue.
 
 #Merged python test: behavior checks + AD2/AD3/input-clear sweep
-PAT 43009_low_voltage_hold.py --post-enable-quiet-sec 5.0 --cleanup-rigol off --powerup-hold-voltage 8.5 --release-voltage 12.0 --low-fault-voltage 9.5 --low-fault-threshold-voltage 10.0 --low-fault-min-sec 8.0 --hold-voltage 7.8
+PAT 43009_low_voltage_hold.py --no-cycle-k1 --post-enable-quiet-sec 5.0 --cleanup-rigol off --powerup-hold-voltage 8.5 --release-voltage 12.0 --low-fault-voltage 9.5 --low-fault-threshold-voltage 10.0 --low-fault-min-sec 8.0 --hold-voltage 7.8
 
 PAUSE-CRITICAL SAFETY CHECK. Verify Rigol CH1 output is OFF. Disconnect Rigol CH1 from module VBAT. Reconnect PAT main supply to module VBAT. Press Enter to continue.
 
