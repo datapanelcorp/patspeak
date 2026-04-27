@@ -9,7 +9,7 @@ datafile = os.path.join(script_dir, TestName + ".pat")
 
 
 SCRIPT_TO_RUN = "43009_GO_Tractor_operation.py"
-SCRIPT_ARGS = "--cycles 1 --no-cycle-k1 --no-verify-timing"
+SCRIPT_ARGS = "--firmware-variant 43009-1 --cycles 1 --no-cycle-k1 --no-verify-timing --verify-com-proto-fault"
 
 
 outstr = ""

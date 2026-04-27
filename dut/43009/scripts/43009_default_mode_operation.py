@@ -70,7 +70,7 @@ PERIODIC_TOLERANCE_SEC = 10.0
 # Script action timeouts
 ADDRESS_CLAIM_TIMEOUT_SEC = 180.0
 ENABLE_VERIFY_TIMEOUT_SEC = 20.0
-FIRST_65196_EXTRA_WAIT_SEC = 45.0
+FIRST_BRAKE_PGN_EXTRA_WAIT_SEC = 45.0
 PERIODIC_EXTRA_WAIT_SEC = 45.0
 REQUEST_RESPONSE_TIMEOUT_SEC = 3.0
 POST_ADDRESS_CLAIM_SETTLE_SEC = 1.0
@@ -80,8 +80,16 @@ CONFIG_RETRY_INTERVAL_SEC = 0.5
 PGN_ADDRESS_CLAIM = 0x00EE00
 PGN_REQUEST = 0x00EA00
 PGN_CMD_CONFIG = 0x00EF00
-PGN_65196 = 0x00FEAC
 PGN_ACKM = 0x00E800
+
+BRAKE_PGN_BY_VARIANT = {
+    "43009-1": 0x00FEAC,  # 65196
+    "43009-2": 0x00FC00,  # 64512
+}
+
+DEFAULT_FIRMWARE_VARIANT = str(os.environ.get("PATSPEAK_43009_FIRMWARE_VARIANT", "43009-1")).strip()
+if DEFAULT_FIRMWARE_VARIANT not in BRAKE_PGN_BY_VARIANT:
+    DEFAULT_FIRMWARE_VARIANT = "43009-1"
 
 REQUIRED_ENABLED_MESSAGES = {
     "DIGIN1": 0x00FF15,
@@ -100,8 +108,6 @@ REQUIRED_ENABLED_MESSAGES = {
 # byte7 user id
 CONFIG_PAYLOAD = [0x01, 0x54, 0x00, 0x05, 0x01, 0x00, 0x00, 69]
 
-# Request PGN 65196 (0x00FEAC) using J1939 LSB-first payload
-REQUEST_65196_PAYLOAD = [0xAC, 0xFE, 0x00]
 UNSUPPORTED_REQUEST_PAYLOAD = [0x23, 0xF1, 0x00]  # PGN 0x00F123
 
 
@@ -109,15 +115,31 @@ def format_error(exc):
     return f"{type(exc).__name__}: {exc}"
 
 
+def brake_pgn_name(pgn):
+    return f"{int(pgn)} (0x{int(pgn):05X})"
+
+
+def request_payload_for_pgn(pgn):
+    # J1939 request payload is PGN encoded LSB-first as 3 bytes.
+    value = int(pgn) & 0x03FFFF
+    return [value & 0xFF, (value >> 8) & 0xFF, (value >> 16) & 0xFF]
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description=(
-            "43009 default-mode verifier: startup timer, 65196 burst/periodic, "
+            "43009 default-mode verifier: startup timer, brake-PGN burst/periodic, "
             "request behavior, and enable-message checks."
         )
     )
     raw_default = _env_truthy("PATSPEAK_RAW_CAN_LOG", False)
     raw_max_default = int(os.environ.get("PATSPEAK_RAW_CAN_MAX", "1000"))
+    parser.add_argument(
+        "--firmware-variant",
+        choices=sorted(BRAKE_PGN_BY_VARIANT.keys()),
+        default=DEFAULT_FIRMWARE_VARIANT,
+        help="Firmware variant that selects expected brake-data PGN.",
+    )
     parser.set_defaults(cycle_k1=AUTO_CYCLE_K1)
     parser.add_argument("--cycle-k1", dest="cycle_k1", action="store_true", help="Cycle K1 relay before waiting for DUT.")
     parser.add_argument("--no-cycle-k1", dest="cycle_k1", action="store_false", help="Skip script-level K1 cycling.")
@@ -365,11 +387,19 @@ def wait_for_address_claim(bus, raw_can=False, raw_can_max=1000):
 
 def main():
     args = parse_args()
+    target_pgn = BRAKE_PGN_BY_VARIANT[args.firmware_variant]
+    target_pgn_name = brake_pgn_name(target_pgn)
+    request_target_payload = request_payload_for_pgn(target_pgn)
+    burst_result_key = f"Brake PGN {target_pgn_name} burst (5x @1s)"
+    periodic_result_key = f"Brake PGN {target_pgn_name} periodic 5-minute + on-request response"
+
     print("Default Mode Operation verifier started.")
     print(
-        "Checks under test: startup timer, 65196 burst, periodic/on-request 65196, "
-        "CAN-control enable, and unsupported-request NACK behavior"
+        f"Checks under test: startup timer, brake PGN {target_pgn_name} burst, "
+        f"periodic/on-request brake PGN {target_pgn_name}, CAN-control enable, "
+        "and unsupported-request NACK behavior"
     )
+    print(f"Firmware variant: {args.firmware_variant} (brake PGN {target_pgn_name})")
     print(f"CAN backend: interface={CAN_INTERFACE}, uut_channel={CAN_CHANNEL}, bitrate={CAN_BITRATE}")
     print(
         f"K1 relay control: {'enabled' if args.cycle_k1 else 'disabled'} "
@@ -415,14 +445,14 @@ def main():
 
     results = {
         "Startup 3-minute timer": False,
-        "65196 burst (5x @1s)": False,
-        "65196 periodic 5-minute + on-request response": False,
+        burst_result_key: False,
+        periodic_result_key: False,
         "DIGIN1/AD2/AD3/DPLF2/FAULT enabled via CAN Control": False,
         "Request behavior: unsupported PGN returns NACK ACKM": False,
     }
 
     seen_enabled = {}
-    pgn65196_timestamps = []
+    brake_pgn_timestamps = []
 
     try:
         if relay_auto_enabled:
@@ -465,10 +495,10 @@ def main():
             message, rx_time = poll_bus_once(bus)
             if message is not None and message.is_extended_id:
                 pgn, source_address, _ = parse_j1939_id(message.arbitration_id)
-                if source_address == module_sa and pgn == PGN_65196:
-                    pgn65196_timestamps.append(rx_time)
+                if source_address == module_sa and pgn == target_pgn:
+                    brake_pgn_timestamps.append(rx_time)
                     rel = rx_time - t_address_claim
-                    print(f"PGN 65196 observed early at +{rel:.2f}s (tracking).")
+                    print(f"PGN {target_pgn_name} observed early at +{rel:.2f}s (tracking).")
             sleep(READ_SLEEP_SEC)
 
         # Enable required messages using CAN Control CMD_CONFIG
@@ -508,10 +538,10 @@ def main():
                             seen_enabled[name] = rx_time
                             rel = rx_time - t_address_claim
                             print(f"Enabled message seen: {name} (PGN 0x{required_pgn:05X}) at +{rel:.2f}s")
-                    if pgn == PGN_65196:
-                        pgn65196_timestamps.append(rx_time)
+                    if pgn == target_pgn:
+                        brake_pgn_timestamps.append(rx_time)
                         rel = rx_time - t_address_claim
-                        print(f"PGN 65196 observed early at +{rel:.2f}s (tracking).")
+                        print(f"PGN {target_pgn_name} observed early at +{rel:.2f}s (tracking).")
             if len(seen_enabled) == len(REQUIRED_ENABLED_MESSAGES):
                 break
             sleep(READ_SLEEP_SEC)
@@ -524,68 +554,70 @@ def main():
             print(f"[FAIL] Missing enabled messages: {', '.join(missing)}")
             print(f"       CMD_CONFIG retries sent: {config_tx_count}, ack observed: {config_ack_seen}")
 
-        # First 65196 after ~3 minutes, then 5x @1s
-        first_65196_deadline = t_address_claim + STARTUP_TIMER_SEC + STARTUP_TOLERANCE_SEC + FIRST_65196_EXTRA_WAIT_SEC
+        # First brake-data PGN after ~3 minutes, then 5x @1s.
+        first_brake_pgn_deadline = (
+            t_address_claim + STARTUP_TIMER_SEC + STARTUP_TOLERANCE_SEC + FIRST_BRAKE_PGN_EXTRA_WAIT_SEC
+        )
         next_progress = time.monotonic() + 15.0
-        while len(pgn65196_timestamps) < 1 and time.monotonic() < first_65196_deadline:
+        while len(brake_pgn_timestamps) < 1 and time.monotonic() < first_brake_pgn_deadline:
             message, rx_time = poll_bus_once(bus)
             if message is not None and message.is_extended_id:
                 pgn, source_address, _ = parse_j1939_id(message.arbitration_id)
-                if source_address == module_sa and pgn == PGN_65196:
-                    pgn65196_timestamps.append(rx_time)
+                if source_address == module_sa and pgn == target_pgn:
+                    brake_pgn_timestamps.append(rx_time)
                     rel = rx_time - t_address_claim
-                    print(f"PGN 65196 #1 seen at +{rel:.2f}s")
+                    print(f"PGN {target_pgn_name} #1 seen at +{rel:.2f}s")
             now = time.monotonic()
             if now >= next_progress:
-                remaining = max(0.0, first_65196_deadline - now)
-                print(f"...waiting for first PGN 65196 ({remaining:.0f}s remaining)")
+                remaining = max(0.0, first_brake_pgn_deadline - now)
+                print(f"...waiting for first PGN {target_pgn_name} ({remaining:.0f}s remaining)")
                 next_progress = now + 15.0
             sleep(READ_SLEEP_SEC)
 
-        if len(pgn65196_timestamps) < 1:
-            print("[FAIL] First PGN 65196 not seen in expected startup window.")
+        if len(brake_pgn_timestamps) < 1:
+            print(f"[FAIL] First PGN {target_pgn_name} not seen in expected startup window.")
         else:
-            first_delay = pgn65196_timestamps[0] - t_address_claim
-            print(f"First PGN 65196 delay from address claim: {first_delay:.3f}s")
+            first_delay = brake_pgn_timestamps[0] - t_address_claim
+            print(f"First PGN {target_pgn_name} delay from address claim: {first_delay:.3f}s")
             if abs(first_delay - STARTUP_TIMER_SEC) <= STARTUP_TOLERANCE_SEC:
                 results["Startup 3-minute timer"] = True
-                print("[PASS] First PGN 65196 aligns with 3-minute startup timer.")
+                print(f"[PASS] First PGN {target_pgn_name} aligns with 3-minute startup timer.")
             else:
                 print(
-                    "[FAIL] First PGN 65196 did not align with 3-minute timer "
+                    f"[FAIL] First PGN {target_pgn_name} did not align with 3-minute timer "
                     f"(target={STARTUP_TIMER_SEC:.1f}s, tolerance=+/-{STARTUP_TOLERANCE_SEC:.1f}s)."
                 )
 
-            burst_deadline = pgn65196_timestamps[0] + (BURST_COUNT * (BURST_INTERVAL_SEC + BURST_TOLERANCE_SEC)) + 5.0
-            while len(pgn65196_timestamps) < BURST_COUNT and time.monotonic() < burst_deadline:
+            burst_deadline = brake_pgn_timestamps[0] + (BURST_COUNT * (BURST_INTERVAL_SEC + BURST_TOLERANCE_SEC)) + 5.0
+            while len(brake_pgn_timestamps) < BURST_COUNT and time.monotonic() < burst_deadline:
                 message, rx_time = poll_bus_once(bus)
                 if message is not None and message.is_extended_id:
                     pgn, source_address, _ = parse_j1939_id(message.arbitration_id)
-                    if source_address == module_sa and pgn == PGN_65196:
-                        pgn65196_timestamps.append(rx_time)
-                        idx = len(pgn65196_timestamps)
-                        delta = pgn65196_timestamps[-1] - pgn65196_timestamps[-2]
-                        rel = pgn65196_timestamps[-1] - t_address_claim
-                        print(f"PGN 65196 #{idx} at +{rel:.2f}s (delta {delta:.3f}s)")
+                    if source_address == module_sa and pgn == target_pgn:
+                        brake_pgn_timestamps.append(rx_time)
+                        idx = len(brake_pgn_timestamps)
+                        delta = brake_pgn_timestamps[-1] - brake_pgn_timestamps[-2]
+                        rel = brake_pgn_timestamps[-1] - t_address_claim
+                        print(f"PGN {target_pgn_name} #{idx} at +{rel:.2f}s (delta {delta:.3f}s)")
                 sleep(READ_SLEEP_SEC)
 
-            if len(pgn65196_timestamps) < BURST_COUNT:
+            if len(brake_pgn_timestamps) < BURST_COUNT:
                 print(
-                    f"[FAIL] Only {len(pgn65196_timestamps)} PGN 65196 "
+                    f"[FAIL] Only {len(brake_pgn_timestamps)} PGN {target_pgn_name} "
                     f"messages seen in initial burst window."
                 )
             else:
                 burst_intervals = []
                 burst_ok = True
                 for i in range(1, BURST_COUNT):
-                    dt = pgn65196_timestamps[i] - pgn65196_timestamps[i - 1]
+                    dt = brake_pgn_timestamps[i] - brake_pgn_timestamps[i - 1]
                     burst_intervals.append(dt)
                     if abs(dt - BURST_INTERVAL_SEC) > BURST_TOLERANCE_SEC:
                         burst_ok = False
 
                 print("Initial burst intervals: " + ", ".join(f"{dt:.3f}s" for dt in burst_intervals))
                 if burst_ok:
-                    results["65196 burst (5x @1s)"] = True
+                    results[burst_result_key] = True
                     print("[PASS] Initial 5-message burst spacing is ~1 second.")
                 else:
                     print(
@@ -598,54 +630,54 @@ def main():
         request_ok = False
         unsupported_request_ok = False
 
-        if len(pgn65196_timestamps) >= BURST_COUNT:
+        if len(brake_pgn_timestamps) >= BURST_COUNT:
             periodic_deadline = (
-                pgn65196_timestamps[BURST_COUNT - 1]
+                brake_pgn_timestamps[BURST_COUNT - 1]
                 + PERIODIC_INTERVAL_SEC
                 + PERIODIC_TOLERANCE_SEC
                 + PERIODIC_EXTRA_WAIT_SEC
             )
             next_progress = time.monotonic() + 30.0
-            while len(pgn65196_timestamps) < BURST_COUNT + 1 and time.monotonic() < periodic_deadline:
+            while len(brake_pgn_timestamps) < BURST_COUNT + 1 and time.monotonic() < periodic_deadline:
                 message, rx_time = poll_bus_once(bus)
                 if message is not None and message.is_extended_id:
                     pgn, source_address, _ = parse_j1939_id(message.arbitration_id)
-                    if source_address == module_sa and pgn == PGN_65196:
-                        pgn65196_timestamps.append(rx_time)
-                        idx = len(pgn65196_timestamps)
-                        delta = pgn65196_timestamps[-1] - pgn65196_timestamps[-2]
-                        rel = pgn65196_timestamps[-1] - t_address_claim
-                        print(f"PGN 65196 #{idx} at +{rel:.2f}s (delta {delta:.3f}s)")
+                    if source_address == module_sa and pgn == target_pgn:
+                        brake_pgn_timestamps.append(rx_time)
+                        idx = len(brake_pgn_timestamps)
+                        delta = brake_pgn_timestamps[-1] - brake_pgn_timestamps[-2]
+                        rel = brake_pgn_timestamps[-1] - t_address_claim
+                        print(f"PGN {target_pgn_name} #{idx} at +{rel:.2f}s (delta {delta:.3f}s)")
                 now = time.monotonic()
                 if now >= next_progress:
                     remaining = max(0.0, periodic_deadline - now)
-                    print(f"...waiting for periodic 5-minute PGN 65196 ({remaining:.0f}s remaining)")
+                    print(f"...waiting for periodic 5-minute PGN {target_pgn_name} ({remaining:.0f}s remaining)")
                     next_progress = now + 30.0
                 sleep(READ_SLEEP_SEC)
 
-            if len(pgn65196_timestamps) >= BURST_COUNT + 1:
-                periodic_gap = pgn65196_timestamps[BURST_COUNT] - pgn65196_timestamps[BURST_COUNT - 1]
+            if len(brake_pgn_timestamps) >= BURST_COUNT + 1:
+                periodic_gap = brake_pgn_timestamps[BURST_COUNT] - brake_pgn_timestamps[BURST_COUNT - 1]
                 print(f"Post-burst periodic gap: {periodic_gap:.3f}s")
                 if abs(periodic_gap - PERIODIC_INTERVAL_SEC) <= PERIODIC_TOLERANCE_SEC:
                     periodic_ok = True
-                    print("[PASS] Periodic check: PGN 65196 repeated at ~5 minutes.")
+                    print(f"[PASS] Periodic check: PGN {target_pgn_name} repeated at ~5 minutes.")
                 else:
                     print(
                         "[FAIL] Periodic check: gap out of tolerance "
                         f"(target={PERIODIC_INTERVAL_SEC:.1f}s, tolerance=+/-{PERIODIC_TOLERANCE_SEC:.1f}s)."
                     )
             else:
-                print("[FAIL] Periodic check: no post-burst 5-minute PGN 65196 observed.")
+                print(f"[FAIL] Periodic check: no post-burst 5-minute PGN {target_pgn_name} observed.")
 
             request_id = build_j1939_id(3, PGN_REQUEST, REQUEST_SOURCE_ADDRESS, module_sa)
-            write_ok, error_text = write_ext_message(bus, request_id, REQUEST_65196_PAYLOAD)
+            write_ok, error_text = write_ext_message(bus, request_id, request_target_payload)
             if not write_ok:
                 print(f"[FAIL] Request check: failed to send request: {error_text}")
             else:
                 request_sent = time.monotonic()
                 print(
-                    f"Sent PGN 65196 request to SA=0x{module_sa:02X}: "
-                    f"{' '.join(f'{value:02X}' for value in REQUEST_65196_PAYLOAD)}"
+                    f"Sent PGN {target_pgn_name} request to SA=0x{module_sa:02X}: "
+                    f"{' '.join(f'{value:02X}' for value in request_target_payload)}"
                 )
 
                 response_deadline = request_sent + REQUEST_RESPONSE_TIMEOUT_SEC
@@ -653,10 +685,10 @@ def main():
                     message, rx_time = poll_bus_once(bus)
                     if message is not None and message.is_extended_id:
                         pgn, source_address, _ = parse_j1939_id(message.arbitration_id)
-                        if source_address == module_sa and pgn == PGN_65196:
+                        if source_address == module_sa and pgn == target_pgn:
                             delay = rx_time - request_sent
                             request_ok = True
-                            print(f"On-request PGN 65196 response delay: {delay:.3f}s")
+                            print(f"On-request PGN {target_pgn_name} response delay: {delay:.3f}s")
                             break
                     sleep(READ_SLEEP_SEC)
 
@@ -664,7 +696,7 @@ def main():
                     print("[PASS] Request check: DUT responded to PGN request.")
                 else:
                     print(
-                        "[FAIL] Request check: no PGN 65196 response within "
+                        f"[FAIL] Request check: no PGN {target_pgn_name} response within "
                         f"{REQUEST_RESPONSE_TIMEOUT_SEC:.1f}s."
                     )
 
@@ -721,7 +753,7 @@ def main():
                         )
 
         if periodic_ok and request_ok:
-            results["65196 periodic 5-minute + on-request response"] = True
+            results[periodic_result_key] = True
         if unsupported_request_ok:
             results["Request behavior: unsupported PGN returns NACK ACKM"] = True
 

@@ -7,14 +7,25 @@ import can
 
 # CAN IDs used by the PWS simulator handshake/state machine
 ID_CMD_CONFIG = 0x18EFD9D1
+ID_STAT = 0x18EFD1D9
 ID_PWS_INIT = 0x000FDB81
 ID_PWS_DATA = 0x000FDB80
 ID_PWS_ACK = 0x000FDB02
 ID_PWS_RESET_TIMER = 0x18EEFFD9
-ID_PGN_65196 = 0x1CFEACD9
-ID_PGN_64512 = 0x1CFC00D9
-ID_REQ_FEAC = 0x0CEAD9FF
+ID_REQ_PGN = 0x0CEAD9FF
 ID_CTRL_RLY = 0x8CFF0500  # PAT.dbc CTRL_RLY, byte0 bits[1:0] = RLY_K1
+CMD0_PAYLOAD = [0x00] * 8
+FAULT_YELLOW_COM_PROTO = 33
+FAULT_NONE = 0
+
+BRAKE_PGN_BY_VARIANT = {
+    "43009-1": 0x00FEAC,  # 65196
+    "43009-2": 0x00FC00,  # 64512
+}
+
+DEFAULT_FIRMWARE_VARIANT = str(os.environ.get("PATSPEAK_43009_FIRMWARE_VARIANT", "43009-1")).strip()
+if DEFAULT_FIRMWARE_VARIANT not in BRAKE_PGN_BY_VARIANT:
+    DEFAULT_FIRMWARE_VARIANT = "43009-1"
 
 PWS_INIT_ACK = 0x81
 PWS_DATA_ACK = 0x80
@@ -77,6 +88,16 @@ def format_error(exc):
     return f"{type(exc).__name__}: {exc}"
 
 
+def brake_pgn_name(pgn):
+    return f"{int(pgn)} (0x{int(pgn):05X})"
+
+
+def request_payload_for_pgn(pgn):
+    # J1939 request payload is PGN encoded LSB-first as 3 bytes.
+    value = int(pgn) & 0x03FFFF
+    return [value & 0xFF, (value >> 8) & 0xFF, (value >> 16) & 0xFF]
+
+
 def emit_result(passed):
     if passed:
         print("PATSPEAK_RESULT=PASS")
@@ -99,6 +120,12 @@ def parse_args():
     parser.add_argument("--interface", default=default_interface, help="python-can interface (default from PATSPEAK_CAN_INTERFACE).")
     parser.add_argument("--channel", default=str(default_channel), help="python-can channel (default from PATSPEAK_CAN_CH0).")
     parser.add_argument("--bitrate", type=int, default=default_bitrate, help="CAN bitrate (default from PATSPEAK_CAN_BITRATE).")
+    parser.add_argument(
+        "--firmware-variant",
+        choices=sorted(BRAKE_PGN_BY_VARIANT.keys()),
+        default=DEFAULT_FIRMWARE_VARIANT,
+        help="Firmware variant that selects brake-data PGN.",
+    )
     parser.add_argument("--cycles", type=int, default=1, help="Number of PWS handshake cycles to verify.")
     parser.add_argument(
         "--startup-timeout",
@@ -145,9 +172,11 @@ def parse_args():
     )
     parser.add_argument("--config-user-id", type=int, default=69, help="User ID byte for CMD_CONFIG (default 69).")
     parser.add_argument(
+        "--request-brake-pgn-once",
         "--request-feac-once",
+        dest="request_brake_pgn_once",
         action="store_true",
-        help="Send one FEAC request frame (0x0CEAD9FF 00 FE AC) at startup; default is passive.",
+        help="Send one J1939 request for the configured brake-data PGN at startup; default is passive.",
     )
     parser.set_defaults(cycle_k1=auto_cycle_k1)
     parser.add_argument("--cycle-k1", dest="cycle_k1", action="store_true", help="Cycle K1 relay before test.")
@@ -160,6 +189,49 @@ def parse_args():
     parser.add_argument("--k1-settle-wait", type=float, default=1.0, help="Seconds to hold K1 off after on pulse.")
     parser.add_argument("--drop-init-acks", type=int, default=0, help="Drop this many INIT ACKs intentionally before acknowledging.")
     parser.add_argument("--drop-data-acks", type=int, default=0, help="Drop this many DATA ACKs intentionally before acknowledging.")
+    parser.set_defaults(verify_com_proto_fault=False)
+    parser.add_argument(
+        "--verify-com-proto-fault",
+        dest="verify_com_proto_fault",
+        action="store_true",
+        help="Induce protocol timeout via dropped INIT ACKs and verify STAT Active_Fault_Code.",
+    )
+    parser.add_argument(
+        "--no-verify-com-proto-fault",
+        dest="verify_com_proto_fault",
+        action="store_false",
+        help="Disable COM_PROTO fault verification.",
+    )
+    parser.add_argument(
+        "--com-proto-drop-init-acks",
+        type=int,
+        default=5,
+        help="Minimum dropped INIT ACKs used to induce protocol-timeout fault when COM_PROTO check is enabled.",
+    )
+    parser.add_argument(
+        "--com-proto-fault-code",
+        type=int,
+        default=FAULT_YELLOW_COM_PROTO,
+        help="Expected Active_Fault_Code for protocol timeout (default 33).",
+    )
+    parser.add_argument(
+        "--com-proto-fault-timeout",
+        type=float,
+        default=12.0,
+        help="Seconds to wait for expected Active_Fault_Code after induced timeout.",
+    )
+    parser.add_argument(
+        "--com-proto-cmd0-period",
+        type=float,
+        default=0.20,
+        help="Polling interval for sending command-0 requests during COM_PROTO fault verification.",
+    )
+    parser.add_argument(
+        "--com-proto-clear-timeout",
+        type=float,
+        default=12.0,
+        help="Seconds to wait for Active_Fault_Code to clear after ACK is sent.",
+    )
     return parser.parse_args()
 
 
@@ -307,6 +379,63 @@ def wait_for_init(bus, timeout_s, strict_init, diag, runtime):
     return False, None, None
 
 
+def wait_for_active_fault_code(bus, expected_fault_code, timeout_s, cmd0_period_s, diag, runtime):
+    deadline = time.monotonic() + max(0.1, float(timeout_s))
+    cmd0_period = max(0.05, float(cmd0_period_s))
+    next_cmd0 = 0.0
+    last_reported_code = None
+
+    while time.monotonic() < deadline:
+        now = time.monotonic()
+        if now >= next_cmd0:
+            send_msg(bus, ID_CMD_CONFIG, CMD0_PAYLOAD, "CMD0_POLL_FAULT")
+            next_cmd0 = now + cmd0_period
+
+        msg, err, stamp = read_next(bus)
+        if err is not None:
+            print(f"[WARN] Read error while polling Active_Fault_Code: {err}")
+            time.sleep(READ_SLEEP_SEC)
+            continue
+        if msg is None:
+            time.sleep(READ_SLEEP_SEC)
+            continue
+        if not msg.is_extended_id:
+            continue
+
+        can_id = int(msg.arbitration_id) & 0x1FFFFFFF
+        update_diag(diag, can_id)
+        payload = [int(value) for value in msg.data]
+
+        if can_id == ID_PWS_RESET_TIMER:
+            runtime["last_reset_time"] = stamp
+            print("[INFO] reset-timer frame seen while polling Active_Fault_Code.")
+            continue
+
+        if can_id != ID_STAT:
+            continue
+        if len(payload) < 5:
+            print(f"[WARN] STAT frame too short while polling Active_Fault_Code (DLC={len(payload)})")
+            continue
+
+        response = payload[0] & 0x3F
+        if response != 0:
+            continue
+
+        active_fault = int(payload[4]) & 0xFF
+        if last_reported_code != active_fault:
+            print(f"[INFO] STAT response=0 Active_Fault_Code={active_fault}")
+            last_reported_code = active_fault
+        if active_fault == expected_fault_code:
+            return True, f"observed Active_Fault_Code={active_fault}"
+
+    if last_reported_code is None:
+        return False, f"timeout waiting for STAT response=0 with Active_Fault_Code={expected_fault_code} (no STAT m0 seen)"
+    return False, (
+        f"timeout waiting for Active_Fault_Code={expected_fault_code}; "
+        f"last observed Active_Fault_Code={last_reported_code}"
+    )
+
+
 def finish_cycle_after_init(bus, cycle_idx, cycle_timeout_s, max_psi, drop_data_acks, diag, runtime, args):
     start = time.monotonic()
     deadline = start + cycle_timeout_s
@@ -447,7 +576,15 @@ def run_cycle(bus, cycle_idx, args, diag, runtime):
                 "init_time": init_time,
             }
 
-    dropped_init_left = int(args.drop_init_acks)
+    drop_init_target = int(args.drop_init_acks)
+    if args.verify_com_proto_fault and cycle_idx == 1:
+        drop_init_target = max(drop_init_target, int(args.com_proto_drop_init_acks))
+        if drop_init_target < 5:
+            print(
+                "[WARN] COM_PROTO check enabled with fewer than 5 dropped INIT ACKs; "
+                "fault may not assert."
+            )
+    dropped_init_left = drop_init_target
     while dropped_init_left > 0:
         dropped_init_left -= 1
         print(f"[TEST] dropped INIT ACK (remaining drops={dropped_init_left})")
@@ -462,7 +599,34 @@ def run_cycle(bus, cycle_idx, args, diag, runtime):
             return {"ok": False, "reason": "timeout_waiting_for_retry_init_after_dropped_ack", "init_time": init_time}
         print(f"RX INIT RETRY cycle#{cycle_idx}: {init_payload[0]:02X} {init_payload[1]:02X}")
 
+    if args.verify_com_proto_fault and cycle_idx == 1:
+        expected_fault_code = int(args.com_proto_fault_code) & 0xFF
+        fault_ok, fault_reason = wait_for_active_fault_code(
+            bus=bus,
+            expected_fault_code=expected_fault_code,
+            timeout_s=args.com_proto_fault_timeout,
+            cmd0_period_s=args.com_proto_cmd0_period,
+            diag=diag,
+            runtime=runtime,
+        )
+        if not fault_ok:
+            return {"ok": False, "reason": fault_reason, "init_time": init_time}
+        print(f"[PASS] COM_PROTO fault check: {fault_reason}")
+
     send_msg(bus, ID_PWS_ACK, [PWS_INIT_ACK], f"INIT_ACK cycle#{cycle_idx}")
+    if args.verify_com_proto_fault and cycle_idx == 1:
+        clear_ok, clear_reason = wait_for_active_fault_code(
+            bus=bus,
+            expected_fault_code=FAULT_NONE,
+            timeout_s=args.com_proto_clear_timeout,
+            cmd0_period_s=args.com_proto_cmd0_period,
+            diag=diag,
+            runtime=runtime,
+        )
+        if not clear_ok:
+            return {"ok": False, "reason": "protocol fault did not clear after ACK: " + clear_reason, "init_time": init_time}
+        print(f"[PASS] COM_PROTO clear check: {clear_reason}")
+
     ok, reason = finish_cycle_after_init(
         bus=bus,
         cycle_idx=cycle_idx,
@@ -478,6 +642,9 @@ def run_cycle(bus, cycle_idx, args, diag, runtime):
 
 def main():
     args = parse_args()
+    target_pgn = BRAKE_PGN_BY_VARIANT[args.firmware_variant]
+    target_pgn_name = brake_pgn_name(target_pgn)
+    request_target_payload = request_payload_for_pgn(target_pgn)
     can_interface = str(args.interface).strip().lower()
     can_channel = _parse_can_channel(args.channel)
     can_bitrate = int(args.bitrate)
@@ -486,6 +653,7 @@ def main():
     relay_bitrate = int(args.relay_bitrate)
 
     print("43009 PWS mode state-machine verifier (sim side)")
+    print(f"Firmware variant: {args.firmware_variant} (brake PGN {target_pgn_name})")
     print(
         f"CAN backend: interface={can_interface}, channel={can_channel}, bitrate={can_bitrate}; "
         f"cycles={args.cycles}"
@@ -498,6 +666,16 @@ def main():
         f"Timing: startup_timeout={args.startup_timeout:.1f}s, "
         f"intercycle_timeout={args.intercycle_timeout:.1f}s, cycle_timeout={args.cycle_timeout:.1f}s"
     )
+    if args.verify_com_proto_fault:
+        print(
+            "COM_PROTO fault check: enabled "
+            f"(drop_init_acks>={max(int(args.drop_init_acks), int(args.com_proto_drop_init_acks))}, "
+            f"expect_code={int(args.com_proto_fault_code) & 0xFF}, "
+            f"fault_timeout={args.com_proto_fault_timeout:.1f}s, "
+            f"clear_timeout={args.com_proto_clear_timeout:.1f}s)"
+        )
+    else:
+        print("COM_PROTO fault check: disabled")
     print(
         f"Timing checks: {'enabled' if args.verify_timing else 'disabled'}"
         + (
@@ -546,8 +724,13 @@ def main():
         else:
             send_mode_config(bus, args.config_user_id)
 
-        if args.request_feac_once:
-            send_msg(bus, ID_REQ_FEAC, [0x00, 0xFE, 0xAC], "REQ_FEAC_ONCE")
+        if args.request_brake_pgn_once:
+            send_msg(
+                bus,
+                ID_REQ_PGN,
+                request_target_payload,
+                f"REQ_BRAKE_PGN_ONCE_{target_pgn_name}",
+            )
 
         previous_init_time = None
         for cycle_idx in range(1, args.cycles + 1):

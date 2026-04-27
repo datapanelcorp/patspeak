@@ -7,5 +7,5 @@ UUT_DATANAME = 43009-1-DEFAULT-MODE-OPERATION
 RLY_K1 = 0 : NULL : WAIT = 1
 RLY_K1 = 1 : NULL : WAIT = 2
 RLY_K1 = 0 : NULL : WAIT = 0
-PAT 43009_default_mode_operation.py --no-cycle-k1 --raw-can --raw-can-max 300
+PAT 43009_default_mode_operation.py --firmware-variant 43009-1 --no-cycle-k1 --raw-can --raw-can-max 300
 END

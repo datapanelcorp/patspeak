@@ -9,15 +9,20 @@ datafile = os.path.join(script_dir, TestName + ".pat")
 
 
 SCRIPT_TO_RUN = "43009_default_mode_operation.py"
-SCRIPT_ARGS = "--firmware-variant 43009-1 --no-cycle-k1 --raw-can --raw-can-max 300"
+SCRIPT_ARGS = "--firmware-variant 43009-2 --no-cycle-k1 --raw-can --raw-can-max 300"
 
 
 outstr = ""
-outstr += "#43009-1\n"
+outstr += "#43009-2\n"
 outstr += "#Version 0.1\n"
-outstr += "#wrapper for default-mode operation verification\n"
+outstr += "#wrapper for default-mode operation verification (43009-2 variant)\n"
 outstr += "UUT_DBC = 43009-560.dbc\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
+outstr += "\n"
+outstr += (
+    "PAUSE Firmware update required. Confirm DUT is flashed with 43009-2 firmware "
+    "(IS_43009_2), powered, and ready. Press Enter to continue.\n"
+)
 outstr += "\n"
 
 # Use PAT-native relay command path for K1 (bench-proven physical click).

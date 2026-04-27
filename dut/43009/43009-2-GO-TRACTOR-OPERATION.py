@@ -8,20 +8,24 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 datafile = os.path.join(script_dir, TestName + ".pat")
 
 
-SCRIPT_TO_RUN = "43009_default_mode_operation.py"
-SCRIPT_ARGS = "--firmware-variant 43009-1 --no-cycle-k1 --raw-can --raw-can-max 300"
+SCRIPT_TO_RUN = "43009_GO_Tractor_operation.py"
+SCRIPT_ARGS = "--firmware-variant 43009-2 --cycles 1 --no-cycle-k1 --no-verify-timing --verify-com-proto-fault"
 
 
 outstr = ""
-outstr += "#43009-1\n"
+outstr += "#43009-2\n"
 outstr += "#Version 0.1\n"
-outstr += "#wrapper for default-mode operation verification\n"
+outstr += "#wrapper for GO/tractor mode operation verification (43009-2 variant)\n"
 outstr += "UUT_DBC = 43009-560.dbc\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
+outstr += (
+    "PAUSE Firmware update required. Confirm DUT is flashed with 43009-2 firmware "
+    "(IS_43009_2), powered, and ready. Press Enter to continue.\n"
+)
+outstr += "\n"
 
 # Use PAT-native relay command path for K1 (bench-proven physical click).
-# Keep final wait near-zero so Python listener starts immediately after power-up edge.
 outstr += "RLY_K1 = 0 : NULL : WAIT = 1\n"
 outstr += "RLY_K1 = 1 : NULL : WAIT = 2\n"
 outstr += "RLY_K1 = 0 : NULL : WAIT = 0\n"
