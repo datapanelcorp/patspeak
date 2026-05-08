@@ -2,9 +2,13 @@ import os
 
 #global setup
 script_name = os.path.basename(__file__)
+script_dir = os.path.dirname(os.path.abspath(__file__))
 print(f"The name of the running script is: {script_name}")
 TestName = os.path.splitext(script_name)[0]
-datafile = TestName + ".pat"
+datafile = os.path.join(script_dir, TestName + ".pat")
+
+def to_decivolts(volts):
+    return int(round(volts * 10))
 
 PortMode = 0
 
@@ -45,7 +49,9 @@ outstr += "NULL : Input_7B = 0 | 0.1 | 0.1\n"
 outstr += "NULL : Input_9A = 0 | 0.1 | 0.1\n"
 outstr += "NULL : Input_9B = 0 | 0.1 | 0.1\n"
 
+
 PortIndex = 0
+MaxPort = 9
 
 ModeIndex = 0
 MaxMode = 3
@@ -76,7 +82,7 @@ while ModeIndex <= MaxMode:
         PortMode = "4"
         StartVolts = 1
         MaxVolts = 5
-        FaultLimit = 5.5
+        FaultLimit = 5.1
         BVoltInc = 0.1
         SVoltInc = 0.1
         Tol = "0.050"
@@ -99,7 +105,7 @@ while ModeIndex <= MaxMode:
         SVoltInc = 0.1
         Tol = "0.320"
         
-    while PortIndex <= 9:
+    while PortIndex <= MaxPort:
 
         VoltInc = BVoltInc
 
@@ -160,7 +166,7 @@ while ModeIndex <= MaxMode:
         outstr += "Command = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
         
         outstr += "#set power supply and wait\n"
-        outstr += "PwrSetVoltage = " + str(int(StartVolts * 10)) + " : NULL : WAIT = 0.1\n"
+        outstr += "PwrSetVoltage = " + str(to_decivolts(StartVolts)) + " : NULL : WAIT = 0.1\n"
         #outstr += "#test power supply\n"
         #outstr += "NULL : MeterVolts = " + str(StartVolts) + " | 0.155 | 0.1\n"
 
@@ -175,17 +181,17 @@ while ModeIndex <= MaxMode:
         Voltage = StartVolts
         
         if(ModeIndex==0):
-            outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 1\n"
-            outstr += "J0_01_3A_LOAD = 1 : NULL : WAIT = 1\n"
+            outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.5\n"
+            outstr += "J0_01_3A_LOAD = 1 : NULL : WAIT = 0.5\n"
         else:
-            outstr += "J0_01_3A_LOAD = 0 : NULL : WAIT = 1\n"
-            outstr += "PwrSetVoltage = " + str(int(Voltage * 10)) + " : NULL : WAIT = 0.1\n"
-            outstr += "J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 1\n"
+            outstr += "J0_01_3A_LOAD = 0 : NULL : WAIT = 0.5\n"
+            outstr += "PwrSetVoltage = " + str(to_decivolts(Voltage)) + " : NULL : WAIT = 0.1\n"
+            outstr += "J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.5\n"
             outstr += "#test power supply\n"
             if(ModeIndex>1):
                 outstr += "NULL : MeterVolts = " + str(StartVolts) + " | " + Tol  + " | 1\n"
             else:
-                outstr += "NULL : MeterVolts = " + str(StartVolts) + " | 0.5 | 1\n"
+                outstr += "NULL : MeterVolts = " + str(StartVolts) + " | " + Tol  + " | 1\n"
                 
         outstr += "#switch input to load line\n"
         outstr += OutputConnector + " = 1 : NULL : WAIT = 0.1\n"
@@ -194,10 +200,10 @@ while ModeIndex <= MaxMode:
         
         while Voltage <= (FaultLimit + VoltInc):
             outstr += "#set power supply\n"
-            outstr += "PwrSetVoltage = " + str(int(Voltage * 10)) + " : NULL : WAIT = 0.1\n"
+            outstr += "PwrSetVoltage = " + str(to_decivolts(Voltage)) + " : NULL : WAIT = 0.1\n"
             outstr += "#test power supply\n"
             if(ModeIndex>0):
-                outstr += "NULL : MeterVolts = " + str(Voltage) + " | 0.5 | 0.1\n"
+                outstr += "NULL : MeterVolts = " + str(Voltage) + " | " + Tol  + " | 1\n"
             outstr += "#test feedback\n"    
             if(Voltage >= FaultLimit):
                 VoltInc = SVoltInc
