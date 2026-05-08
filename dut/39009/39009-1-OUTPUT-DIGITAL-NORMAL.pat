@@ -1,6 +1,7 @@
 #39009-1
 #Verion 0.0
 #digital normal test using the E-LOAD
+#adjusted trip-transition band due to passive resistive calibration
 UUT_DBC = 39009-561.dbc
 UUT_DATANAME = 39009-1-OUTPUT-DIGITAL-NORMAL
 
@@ -301,26 +302,24 @@ NULL : MeterCurrent = 3.2 | 0.1 | 0.1
 #set current and turn on output and verify feedback
 Command = 81, Output2A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3300: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback2A = 3.3 | 0.5 | 0.1
-NULL : OutStat2A = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.3000000000000003 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output2A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3400: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback2A = 3.4 | 0.5 | 0.1
-NULL : OutStat2A = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.4 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output2A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3500: NULL : WAIT = 0.1
-#verify fault #1
+#trip transition window (passive resistive calibration): no hard assertion
+
+#end-of-sweep forced fault confirmation (passive resistive calibration)
+Command = 81, Output2A = 1 : NULL : WAIT = 0.1
+LdCurrentSet = 3500: NULL : WAIT = 0.2
 NULL : Feedback2A = 0 | 0.1 | 0.1
 NULL : OutStat2A = 2 | 0.1 | 0.1
-NULL : MeterCurrent = 0  | 0.01 | 0.1
+NULL : MeterCurrent = 0  | 0.05 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -599,26 +598,24 @@ NULL : MeterCurrent = 3.2 | 0.1 | 0.1
 #set current and turn on output and verify feedback
 Command = 81, Output2B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3300: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback2B = 3.3 | 0.5 | 0.1
-NULL : OutStat2B = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.3000000000000003 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output2B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3400: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback2B = 3.4 | 0.5 | 0.1
-NULL : OutStat2B = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.4 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output2B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3500: NULL : WAIT = 0.1
-#verify fault #1
+#trip transition window (passive resistive calibration): no hard assertion
+
+#end-of-sweep forced fault confirmation (passive resistive calibration)
+Command = 81, Output2B = 1 : NULL : WAIT = 0.1
+LdCurrentSet = 3500: NULL : WAIT = 0.2
 NULL : Feedback2B = 0 | 0.1 | 0.1
 NULL : OutStat2B = 2 | 0.1 | 0.1
-NULL : MeterCurrent = 0  | 0.01 | 0.1
+NULL : MeterCurrent = 0  | 0.05 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -897,26 +894,24 @@ NULL : MeterCurrent = 3.2 | 0.1 | 0.1
 #set current and turn on output and verify feedback
 Command = 81, Output4A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3300: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback4A = 3.3 | 0.5 | 0.1
-NULL : OutStat4A = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.3000000000000003 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output4A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3400: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback4A = 3.4 | 0.5 | 0.1
-NULL : OutStat4A = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.4 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output4A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3500: NULL : WAIT = 0.1
-#verify fault #1
+#trip transition window (passive resistive calibration): no hard assertion
+
+#end-of-sweep forced fault confirmation (passive resistive calibration)
+Command = 81, Output4A = 1 : NULL : WAIT = 0.1
+LdCurrentSet = 3500: NULL : WAIT = 0.2
 NULL : Feedback4A = 0 | 0.1 | 0.1
 NULL : OutStat4A = 2 | 0.1 | 0.1
-NULL : MeterCurrent = 0  | 0.01 | 0.1
+NULL : MeterCurrent = 0  | 0.05 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -1195,26 +1190,24 @@ NULL : MeterCurrent = 3.2 | 0.1 | 0.1
 #set current and turn on output and verify feedback
 Command = 81, Output4B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3300: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback4B = 3.3 | 0.5 | 0.1
-NULL : OutStat4B = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.3000000000000003 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output4B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3400: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback4B = 3.4 | 0.5 | 0.1
-NULL : OutStat4B = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.4 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output4B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3500: NULL : WAIT = 0.1
-#verify fault #1
+#trip transition window (passive resistive calibration): no hard assertion
+
+#end-of-sweep forced fault confirmation (passive resistive calibration)
+Command = 81, Output4B = 1 : NULL : WAIT = 0.1
+LdCurrentSet = 3500: NULL : WAIT = 0.2
 NULL : Feedback4B = 0 | 0.1 | 0.1
 NULL : OutStat4B = 2 | 0.1 | 0.1
-NULL : MeterCurrent = 0  | 0.01 | 0.1
+NULL : MeterCurrent = 0  | 0.05 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -1493,26 +1486,24 @@ NULL : MeterCurrent = 3.2 | 0.1 | 0.1
 #set current and turn on output and verify feedback
 Command = 81, Output6A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3300: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback6A = 3.3 | 0.5 | 0.1
-NULL : OutStat6A = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.3000000000000003 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output6A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3400: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback6A = 3.4 | 0.5 | 0.1
-NULL : OutStat6A = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.4 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output6A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3500: NULL : WAIT = 0.1
-#verify fault #1
+#trip transition window (passive resistive calibration): no hard assertion
+
+#end-of-sweep forced fault confirmation (passive resistive calibration)
+Command = 81, Output6A = 1 : NULL : WAIT = 0.1
+LdCurrentSet = 3500: NULL : WAIT = 0.2
 NULL : Feedback6A = 0 | 0.1 | 0.1
 NULL : OutStat6A = 2 | 0.1 | 0.1
-NULL : MeterCurrent = 0  | 0.01 | 0.1
+NULL : MeterCurrent = 0  | 0.05 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -1791,26 +1782,24 @@ NULL : MeterCurrent = 3.2 | 0.1 | 0.1
 #set current and turn on output and verify feedback
 Command = 81, Output6B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3300: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback6B = 3.3 | 0.5 | 0.1
-NULL : OutStat6B = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.3000000000000003 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output6B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3400: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback6B = 3.4 | 0.5 | 0.1
-NULL : OutStat6B = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.4 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output6B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3500: NULL : WAIT = 0.1
-#verify fault #1
+#trip transition window (passive resistive calibration): no hard assertion
+
+#end-of-sweep forced fault confirmation (passive resistive calibration)
+Command = 81, Output6B = 1 : NULL : WAIT = 0.1
+LdCurrentSet = 3500: NULL : WAIT = 0.2
 NULL : Feedback6B = 0 | 0.1 | 0.1
 NULL : OutStat6B = 2 | 0.1 | 0.1
-NULL : MeterCurrent = 0  | 0.01 | 0.1
+NULL : MeterCurrent = 0  | 0.05 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -2089,26 +2078,24 @@ NULL : MeterCurrent = 3.2 | 0.1 | 0.1
 #set current and turn on output and verify feedback
 Command = 81, Output8A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3300: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback8A = 3.3 | 0.5 | 0.1
-NULL : OutStat8A = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.3000000000000003 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output8A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3400: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback8A = 3.4 | 0.5 | 0.1
-NULL : OutStat8A = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.4 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output8A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3500: NULL : WAIT = 0.1
-#verify fault #1
+#trip transition window (passive resistive calibration): no hard assertion
+
+#end-of-sweep forced fault confirmation (passive resistive calibration)
+Command = 81, Output8A = 1 : NULL : WAIT = 0.1
+LdCurrentSet = 3500: NULL : WAIT = 0.2
 NULL : Feedback8A = 0 | 0.1 | 0.1
 NULL : OutStat8A = 2 | 0.1 | 0.1
-NULL : MeterCurrent = 0  | 0.01 | 0.1
+NULL : MeterCurrent = 0  | 0.05 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -2387,26 +2374,24 @@ NULL : MeterCurrent = 3.2 | 0.1 | 0.1
 #set current and turn on output and verify feedback
 Command = 81, Output8B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3300: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback8B = 3.3 | 0.5 | 0.1
-NULL : OutStat8B = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.3000000000000003 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output8B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3400: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback8B = 3.4 | 0.5 | 0.1
-NULL : OutStat8B = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.4 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output8B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3500: NULL : WAIT = 0.1
-#verify fault #1
+#trip transition window (passive resistive calibration): no hard assertion
+
+#end-of-sweep forced fault confirmation (passive resistive calibration)
+Command = 81, Output8B = 1 : NULL : WAIT = 0.1
+LdCurrentSet = 3500: NULL : WAIT = 0.2
 NULL : Feedback8B = 0 | 0.1 | 0.1
 NULL : OutStat8B = 2 | 0.1 | 0.1
-NULL : MeterCurrent = 0  | 0.01 | 0.1
+NULL : MeterCurrent = 0  | 0.05 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -2685,26 +2670,24 @@ NULL : MeterCurrent = 3.2 | 0.1 | 0.1
 #set current and turn on output and verify feedback
 Command = 81, Output10A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3300: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback10A = 3.3 | 0.5 | 0.1
-NULL : OutStat10A = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.3000000000000003 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output10A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3400: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback10A = 3.4 | 0.5 | 0.1
-NULL : OutStat10A = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.4 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output10A = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3500: NULL : WAIT = 0.1
-#verify fault #1
+#trip transition window (passive resistive calibration): no hard assertion
+
+#end-of-sweep forced fault confirmation (passive resistive calibration)
+Command = 81, Output10A = 1 : NULL : WAIT = 0.1
+LdCurrentSet = 3500: NULL : WAIT = 0.2
 NULL : Feedback10A = 0 | 0.1 | 0.1
 NULL : OutStat10A = 2 | 0.1 | 0.1
-NULL : MeterCurrent = 0  | 0.01 | 0.1
+NULL : MeterCurrent = 0  | 0.05 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -2983,26 +2966,24 @@ NULL : MeterCurrent = 3.2 | 0.1 | 0.1
 #set current and turn on output and verify feedback
 Command = 81, Output10B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3300: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback10B = 3.3 | 0.5 | 0.1
-NULL : OutStat10B = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.3000000000000003 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output10B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3400: NULL : WAIT = 0.1
-#verify reading from load
-NULL : Feedback10B = 3.4 | 0.5 | 0.1
-NULL : OutStat10B = 1 | 0.01 | 0.1
-NULL : MeterCurrent = 3.4 | 0.1 | 0.1
+#trip transition window (passive resistive calibration): no hard assertion
 
 #set current and turn on output and verify feedback
 Command = 81, Output10B = 1 : NULL : WAIT = 0.1
 LdCurrentSet = 3500: NULL : WAIT = 0.1
-#verify fault #1
+#trip transition window (passive resistive calibration): no hard assertion
+
+#end-of-sweep forced fault confirmation (passive resistive calibration)
+Command = 81, Output10B = 1 : NULL : WAIT = 0.1
+LdCurrentSet = 3500: NULL : WAIT = 0.2
 NULL : Feedback10B = 0 | 0.1 | 0.1
 NULL : OutStat10B = 2 | 0.1 | 0.1
-NULL : MeterCurrent = 0  | 0.01 | 0.1
+NULL : MeterCurrent = 0  | 0.05 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1

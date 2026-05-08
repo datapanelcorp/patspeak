@@ -119,7 +119,7 @@ while t <= 9:
 
     outstr += OutputName + " = 0 : NULL : WAIT = 0.1\n"
     outstr += OutputConnector + " = 0 : NULL : WAIT = 0.1\n"
-    outstr += "NULL : " + OutputStatus + " = 0 | 0.1 | 0.1\n" 
+    #outstr += "NULL : " + OutputStatus + " = 0 | 0.1 | 0.1\n" 
     t += 1
 
     

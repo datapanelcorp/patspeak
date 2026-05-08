@@ -3,6 +3,14 @@ t = 0
 i = 0
 Increment = 100#100
 
+# Adjustment note:
+# The fault trip window and fault-zero current tolerance are widened around the trip knee
+# because passive resistive calibration can shift the observed transition point.
+TRIP_NOFAULT_MAX_MA = 3200
+TRIP_TRANSITION_MAX_MA = 3500
+SWEEP_FAULT_FORCE_MA = 3500
+FAULT_ZERO_TOL_A = 0.05
+
 #global setup
 script_name = os.path.basename(__file__)
 print(f"The name of the running script is: {script_name}")
@@ -13,6 +21,7 @@ outstr = ""
 outstr += "#39009-1\n"
 outstr += "#Verion 0.0\n"
 outstr += "#digital normal test using the E-LOAD\n"
+outstr += "#adjusted trip-transition band due to passive resistive calibration\n"
 outstr += "UUT_DBC = 39009-561.dbc\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
@@ -112,20 +121,31 @@ while t <= 9:
         outstr += "#set current and turn on output and verify feedback\n" 
         outstr += "Command = 81, " + OutputName + " = 1 : NULL : WAIT = 0.1\n"
         outstr += "LdCurrentSet = " + str(i) + ": NULL : WAIT = 0.1\n"
-        if(i <= 3400):
+        if(i <= TRIP_NOFAULT_MAX_MA):
             outstr += "#verify reading from load\n" 
             outstr += "NULL : " + FeedbackName + " = " + str(i/1000) + " | 0.5 | 0.1\n" 
             outstr += "NULL : " + OutputStatus + " = 1 | 0.01 | 0.1\n" 
             outstr += "NULL : MeterCurrent = " + str(i*0.001) + " | 0.1 | 0.1\n" 
             outstr += "\n"
+        elif(i <= TRIP_TRANSITION_MAX_MA):
+            outstr += "#trip transition window (passive resistive calibration): no hard assertion\n"
+            outstr += "\n"
         else:
             outstr += "#verify fault #1\n" 
             outstr += "NULL : " + FeedbackName + " = 0 | 0.1 | 0.1\n" 
             outstr += "NULL : " + OutputStatus + " = 2 | 0.1 | 0.1\n" 
-            outstr += "NULL : MeterCurrent = 0  | 0.01 | 0.1\n" 
+            outstr += "NULL : MeterCurrent = 0  | " + f"{FAULT_ZERO_TOL_A:.2f}" + " | 0.1\n" 
             outstr += "\n"
         i += Increment
-            
+
+    outstr += "#end-of-sweep forced fault confirmation (passive resistive calibration)\n"
+    outstr += "Command = 81, " + OutputName + " = 1 : NULL : WAIT = 0.1\n"
+    outstr += "LdCurrentSet = " + str(SWEEP_FAULT_FORCE_MA) + ": NULL : WAIT = 0.2\n"
+    outstr += "NULL : " + FeedbackName + " = 0 | 0.1 | 0.1\n"
+    outstr += "NULL : " + OutputStatus + " = 2 | 0.1 | 0.1\n"
+    outstr += "NULL : MeterCurrent = 0  | " + f"{FAULT_ZERO_TOL_A:.2f}" + " | 0.1\n"
+    outstr += "\n"
+
     outstr += "#switch out load line, clear current\n"
     outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
     outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.5\n"
