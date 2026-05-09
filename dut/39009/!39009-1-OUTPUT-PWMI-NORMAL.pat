@@ -17,6 +17,7 @@ Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10
 Command = 82, FREQ1 = 100, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5
 Command = 0, FREQ1 = 0, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL
 METER_MODE = 1 : NULL : WAIT = 0.2
+PAUSE-Set meter to mA mode. Connect 6.4 Ohm inductive load. Press Enter to continue.
 J4_01 = 1, J4_03 = 1 : NULL : WAIT = 1
 #switch in load line, set current
 J3_01 = 1 : NULL : WAIT = 0.5

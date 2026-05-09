@@ -18,13 +18,13 @@ Ki = Ki * 100
 script_name = os.path.basename(__file__)
 print(f"The name of the running script is: {script_name}")
 TestName = os.path.splitext(script_name)[0]
-datafile = TestName + ".pat"
+datafile = "!" + TestName + ".pat"
 
 
 outstr = ""
 outstr += "#39009-1\n"
 outstr += "#Verion 0.0\n"
-outstr += "#PWMi h-bridge test with a 'red coil' 6.4 ohm inductive load. (2.27 amps @ 14.5 VDC)\n"
+outstr += "#PWMi with a 'red coil' 6.4 ohm inductive load. (2.27 amps @ 14.5 VDC)\n"
 outstr += "UUT_DBC = 39009-561.dbc\n"
 outstr += "UUT_DATANAME = " + TestName + "\n"
 outstr += "\n"
@@ -46,6 +46,7 @@ outstr += "Command = 82, FREQ1 = " + str(Frequancy) + ", MODE1 = 0, MODE2 = 0, E
 outstr += "Command = 0, FREQ1 = 0, MODE1 = 0, MODE2 = 0, Enable_Fault_Reset = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
 
 outstr += "METER_MODE = 1 : NULL : WAIT = 0.2\n"
+outstr += "PAUSE-Set meter to mA mode. Connect 6.4 Ohm inductive load. Press Enter to continue.\n"
 
 t = 0
 while t <= 9:
