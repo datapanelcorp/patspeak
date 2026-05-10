@@ -102,18 +102,18 @@ while AmpsValue <= AmpsMax:
         outstr += "\n"
         outstr += "#Sweep of " + Feedback + " from " + str(AmpsStart) + " to " + str(AmpsMax) + " in " + str(AmpsInc) + " increments\n"
         outstr += "\n"
-        outstr += "#test ammmeter\n"
-        meter_step = (
-            "NULL : MeterAmps = "
-            + str(AmpsValue / 1000000)
-            + " | "
-            + str(METER_TOL)
-            + " | "
-            + str(METER_TEST_TIME)
-        )
-        if PortIndex == 0:
-            meter_step += " : TIMEOUT = " + str(FIRST_PORT_TIMEOUT)
-        outstr += meter_step + "\n"
+        # outstr += "#test ammmeter\n"
+        # meter_step = (
+        #     "NULL : MeterAmps = "
+        #     + str(AmpsValue / 1000000)
+        #     + " | "
+        #     + str(METER_TOL)
+        #     + " | "
+        #     + str(METER_TEST_TIME)
+        # )
+        # if PortIndex == 0:
+        #     meter_step += " : TIMEOUT = " + str(FIRST_PORT_TIMEOUT)
+        # outstr += meter_step + "\n"
         outstr += "#test feedback\n"
         feedback_step = (
             "NULL : "
