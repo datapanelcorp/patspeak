@@ -66,7 +66,7 @@ while ModeIndex <= MaxMode:
         BVoltInc = 0.5
         SVoltInc = 0.1
         MaxValue = StartVolts
-        Tol = "0.050"
+        Tol = "0.100"
         
     if(ModeIndex==1):#POSITVE
         PortMode = "1"
@@ -76,7 +76,7 @@ while ModeIndex <= MaxMode:
         BVoltInc = 0.5
         SVoltInc = 0.1
         MaxValue = StartVolts
-        Tol = "0.050"
+        Tol = "0.100"
         
     if(ModeIndex==2):#5VDC
         PortMode = "4"

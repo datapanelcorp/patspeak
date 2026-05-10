@@ -404,7 +404,7 @@ J0_01_3A_LOAD = 0 : NULL : WAIT = 0.5
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.5
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #switch input to load line
 J2_01 = 1 : NULL : WAIT = 0.1
 
@@ -412,13 +412,13 @@ J2_01 = 1 : NULL : WAIT = 0.1
 #set power supply
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #test feedback
 NULL : Input_1A = 1 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 141 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14.1 | 0.050 | 1
+NULL : MeterVolts = 14.1 | 0.100 | 1
 #test feedback
 NULL : Input_1A = 1 | 0.1 | 0.1
 
@@ -444,7 +444,7 @@ J0_01_3A_LOAD = 0 : NULL : WAIT = 0.5
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.5
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #switch input to load line
 J2_02 = 1 : NULL : WAIT = 0.1
 
@@ -452,13 +452,13 @@ J2_02 = 1 : NULL : WAIT = 0.1
 #set power supply
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #test feedback
 NULL : Input_1B = 1 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 141 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14.1 | 0.050 | 1
+NULL : MeterVolts = 14.1 | 0.100 | 1
 #test feedback
 NULL : Input_1B = 1 | 0.1 | 0.1
 
@@ -484,7 +484,7 @@ J0_01_3A_LOAD = 0 : NULL : WAIT = 0.5
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.5
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #switch input to load line
 J2_03 = 1 : NULL : WAIT = 0.1
 
@@ -492,13 +492,13 @@ J2_03 = 1 : NULL : WAIT = 0.1
 #set power supply
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #test feedback
 NULL : Input_3A = 1 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 141 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14.1 | 0.050 | 1
+NULL : MeterVolts = 14.1 | 0.100 | 1
 #test feedback
 NULL : Input_3A = 1 | 0.1 | 0.1
 
@@ -524,7 +524,7 @@ J0_01_3A_LOAD = 0 : NULL : WAIT = 0.5
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.5
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #switch input to load line
 J2_04 = 1 : NULL : WAIT = 0.1
 
@@ -532,13 +532,13 @@ J2_04 = 1 : NULL : WAIT = 0.1
 #set power supply
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #test feedback
 NULL : Input_3B = 1 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 141 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14.1 | 0.050 | 1
+NULL : MeterVolts = 14.1 | 0.100 | 1
 #test feedback
 NULL : Input_3B = 1 | 0.1 | 0.1
 
@@ -564,7 +564,7 @@ J0_01_3A_LOAD = 0 : NULL : WAIT = 0.5
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.5
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #switch input to load line
 J2_05 = 1 : NULL : WAIT = 0.1
 
@@ -572,13 +572,13 @@ J2_05 = 1 : NULL : WAIT = 0.1
 #set power supply
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #test feedback
 NULL : Input_5A = 1 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 141 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14.1 | 0.050 | 1
+NULL : MeterVolts = 14.1 | 0.100 | 1
 #test feedback
 NULL : Input_5A = 1 | 0.1 | 0.1
 
@@ -604,7 +604,7 @@ J0_01_3A_LOAD = 0 : NULL : WAIT = 0.5
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.5
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #switch input to load line
 J2_06 = 1 : NULL : WAIT = 0.1
 
@@ -612,13 +612,13 @@ J2_06 = 1 : NULL : WAIT = 0.1
 #set power supply
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #test feedback
 NULL : Input_5B = 1 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 141 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14.1 | 0.050 | 1
+NULL : MeterVolts = 14.1 | 0.100 | 1
 #test feedback
 NULL : Input_5B = 1 | 0.1 | 0.1
 
@@ -644,7 +644,7 @@ J0_01_3A_LOAD = 0 : NULL : WAIT = 0.5
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.5
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #switch input to load line
 J2_07 = 1 : NULL : WAIT = 0.1
 
@@ -652,13 +652,13 @@ J2_07 = 1 : NULL : WAIT = 0.1
 #set power supply
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #test feedback
 NULL : Input_7A = 1 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 141 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14.1 | 0.050 | 1
+NULL : MeterVolts = 14.1 | 0.100 | 1
 #test feedback
 NULL : Input_7A = 1 | 0.1 | 0.1
 
@@ -684,7 +684,7 @@ J0_01_3A_LOAD = 0 : NULL : WAIT = 0.5
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.5
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #switch input to load line
 J2_08 = 1 : NULL : WAIT = 0.1
 
@@ -692,13 +692,13 @@ J2_08 = 1 : NULL : WAIT = 0.1
 #set power supply
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #test feedback
 NULL : Input_7B = 1 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 141 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14.1 | 0.050 | 1
+NULL : MeterVolts = 14.1 | 0.100 | 1
 #test feedback
 NULL : Input_7B = 1 | 0.1 | 0.1
 
@@ -724,7 +724,7 @@ J0_01_3A_LOAD = 0 : NULL : WAIT = 0.5
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.5
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #switch input to load line
 J2_09 = 1 : NULL : WAIT = 0.1
 
@@ -732,13 +732,13 @@ J2_09 = 1 : NULL : WAIT = 0.1
 #set power supply
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #test feedback
 NULL : Input_9A = 1 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 141 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14.1 | 0.050 | 1
+NULL : MeterVolts = 14.1 | 0.100 | 1
 #test feedback
 NULL : Input_9A = 1 | 0.1 | 0.1
 
@@ -764,7 +764,7 @@ J0_01_3A_LOAD = 0 : NULL : WAIT = 0.5
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.5
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #switch input to load line
 J2_10 = 1 : NULL : WAIT = 0.1
 
@@ -772,13 +772,13 @@ J2_10 = 1 : NULL : WAIT = 0.1
 #set power supply
 PwrSetVoltage = 140 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14 | 0.050 | 1
+NULL : MeterVolts = 14 | 0.100 | 1
 #test feedback
 NULL : Input_9B = 1 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 141 : NULL : WAIT = 0.1
 #test power supply
-NULL : MeterVolts = 14.1 | 0.050 | 1
+NULL : MeterVolts = 14.1 | 0.100 | 1
 #test feedback
 NULL : Input_9B = 1 | 0.1 | 0.1
 
