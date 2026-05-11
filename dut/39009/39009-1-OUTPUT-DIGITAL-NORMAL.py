@@ -10,6 +10,12 @@ TRIP_NOFAULT_MAX_MA = 3200
 TRIP_TRANSITION_MAX_MA = 3500
 SWEEP_FAULT_FORCE_MA = 3500
 FAULT_ZERO_TOL_A = 0.05
+FINAL_FAULT_STAGE_MA = 3500
+FINAL_FAULT_ENABLE_WAIT_S = 0.2
+FINAL_FAULT_DISABLE_WAIT_S = 0.2
+FINAL_FAULT_CLEAR_SETTLE_S = 0.3
+FINAL_FAULT_STICKY_SETTLE_S = 0.3
+FINAL_FAULT_INTER_CHANNEL_COOLDOWN_S = 0.5
 
 #global setup
 script_name = os.path.basename(__file__)
@@ -223,8 +229,8 @@ while t <= 9:
 
     outstr += "#switch in load line, set current\n"
     outstr += OutputConnector + " = 1 : NULL : WAIT = 0.5\n"
-    outstr += "LdCurrentSet = 5000: NULL : WAIT = 0.1\n"
-    outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
+    outstr += "LdCurrentSet = " + str(FINAL_FAULT_STAGE_MA) + ": NULL : WAIT = " + str(FINAL_FAULT_ENABLE_WAIT_S) + "\n"
+    outstr += "LdEnable = 0 : NULL : WAIT = " + str(FINAL_FAULT_DISABLE_WAIT_S) + "\n"
     
     outstr += "\n"
     outstr += "#verify fault #1 clear\n" 
@@ -232,57 +238,61 @@ while t <= 9:
     outstr += "#turn ON output\n" 
     outstr += "Command = 81, " + OutputName + " = 1 : NULL : WAIT = 0.2\n"
     outstr += "#enable load\n" 
-    outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
+    outstr += "LdEnable = 1 : NULL : WAIT = " + str(FINAL_FAULT_ENABLE_WAIT_S) + "\n"
     outstr += "#verify fault #2\n" 
     outstr += "NULL : " + OutputStatus + " = 2 | 0 | 0.1\n"
     outstr += "#disable load\n"
-    outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
+    outstr += "LdEnable = 0 : NULL : WAIT = " + str(FINAL_FAULT_DISABLE_WAIT_S) + "\n"
     outstr += "#turn OFF output\n"
     outstr += "Command = 81, " + OutputName + " = 0 : NULL : WAIT = 0.2\n"
     
     outstr += "\n"
+    outstr += "NULL : NULL : WAIT = " + str(FINAL_FAULT_CLEAR_SETTLE_S) + "\n"
     outstr += "#verify fault #2 clear\n" 
     outstr += "NULL : " + OutputStatus + " = 0 | 0 | 0.1\n"
     outstr += "#turn ON output\n" 
     outstr += "Command = 81, " + OutputName + " = 1 : NULL : WAIT = 0.2\n"
     outstr += "#enable load\n" 
-    outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
+    outstr += "LdEnable = 1 : NULL : WAIT = " + str(FINAL_FAULT_ENABLE_WAIT_S) + "\n"
     outstr += "#verify fault #3\n" 
     outstr += "NULL : " + OutputStatus + " = 2 | 0 | 0.1\n"
     outstr += "#disable load\n"
-    outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
+    outstr += "LdEnable = 0 : NULL : WAIT = " + str(FINAL_FAULT_DISABLE_WAIT_S) + "\n"
     outstr += "#turn OFF output\n"
     outstr += "Command = 81, " + OutputName + " = 0 : NULL : WAIT = 0.2\n"
     
     outstr += "\n"
+    outstr += "NULL : NULL : WAIT = " + str(FINAL_FAULT_CLEAR_SETTLE_S) + "\n"
     outstr += "#verify fault #3 clear\n" 
     outstr += "NULL : " + OutputStatus + " = 0 | 0 | 0.1\n"
     outstr += "#turn ON output\n" 
     outstr += "Command = 81, " + OutputName + " = 1 : NULL : WAIT = 0.2\n"
     outstr += "#enable load\n" 
-    outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
+    outstr += "LdEnable = 1 : NULL : WAIT = " + str(FINAL_FAULT_ENABLE_WAIT_S) + "\n"
     outstr += "#verify fault #4\n" 
     outstr += "NULL : " + OutputStatus + " = 2 | 0 | 0.1\n"
     outstr += "#disable load\n"
-    outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
+    outstr += "LdEnable = 0 : NULL : WAIT = " + str(FINAL_FAULT_DISABLE_WAIT_S) + "\n"
     outstr += "#turn OFF output\n"
     outstr += "Command = 81, " + OutputName + " = 0 : NULL : WAIT = 0.2\n"
     
     outstr += "\n"
+    outstr += "NULL : NULL : WAIT = " + str(FINAL_FAULT_CLEAR_SETTLE_S) + "\n"
     outstr += "#verify fault #4 clear\n" 
     outstr += "NULL : " + OutputStatus + " = 0 | 0 | 0.1\n"
     outstr += "#turn ON output\n" 
     outstr += "Command = 81, " + OutputName + " = 1 : NULL : WAIT = 0.2\n"
     outstr += "#enable load\n" 
-    outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
+    outstr += "LdEnable = 1 : NULL : WAIT = " + str(FINAL_FAULT_ENABLE_WAIT_S) + "\n"
     outstr += "#verify fault #5\n" 
     outstr += "NULL : " + OutputStatus + " = 2 | 0 | 0.1\n"
     outstr += "#disable load\n"
-    outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
+    outstr += "LdEnable = 0 : NULL : WAIT = " + str(FINAL_FAULT_DISABLE_WAIT_S) + "\n"
     outstr += "#turn OFF output\n"
     outstr += "Command = 81, " + OutputName + " = 0 : NULL : WAIT = 0.2\n"
     
     outstr += "\n"
+    outstr += "NULL : NULL : WAIT = " + str(FINAL_FAULT_STICKY_SETTLE_S) + "\n"
     outstr += "#verify fault #5 sticks\n" 
     outstr += "NULL : " + OutputStatus + " = 2 | 0 | 0.1\n"
     
@@ -290,6 +300,7 @@ while t <= 9:
     outstr += OutputName + " = 0 : NULL : WAIT = 0.1\n"
     outstr += OutputConnector + " = 0 : NULL : WAIT = 0.5\n"
     outstr += "LdCurrentSet = 0 : NULL : WAIT = 0.1\n"
+    outstr += "NULL : NULL : WAIT = " + str(FINAL_FAULT_INTER_CHANNEL_COOLDOWN_S) + "\n"
     t += 1
     
 #verify faults
