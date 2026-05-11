@@ -34,10 +34,9 @@ Tx10Settings = [
     ThisSetting,
     ThisSetting,
     ThisSetting,
-    ThisSetting,
 ]
 
-Tx10LastRx = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Tx10LastRx = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 # TODO NEED TO VERIFY T2, T3 and T4 mirrors T1
 Tx10PGNs = [
@@ -68,10 +67,10 @@ Tx10NAMESs = [
     "MSG_FAULT",
 ]
 
-Tx10Maths = [10, 10, 10, 10, 10, 20, 20, 20, 20, 20, 20]
+Tx10Maths = [10, 10, 10, 10, 10, 10, 20, 20, 20, 20, 20]
 
-Tx10RxTime = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-Tx10Error = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Tx10RxTime = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Tx10Error = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
 class TestPassComplete(Exception):
@@ -167,7 +166,6 @@ def parse_args():
         raise ValueError("--bitrate must be > 0")
     if args.rx_timeout <= 0:
         raise ValueError("--rx-timeout must be > 0")
-
     return args
 
 
@@ -307,18 +305,20 @@ def main(stdscr, args):
             if PrevSetting != ThisSetting:
                 HeartbeatStart = time.time()  # reset kickstart
 
-                OutCommand = 0x5B
+                # PGN_CTRL2 (Command 0x5E): STAT, DPL_Tx, spare, DPL_F1, DPL_F2, FAULT
+                OutCommand = 0x5E
                 SendMessage(
                     OutCommand,
                     Tx10Settings[6],
                     Tx10Settings[7],
+                    0x00,
                     Tx10Settings[8],
                     Tx10Settings[9],
                     Tx10Settings[10],
-                    Tx10Settings[11],
                 )
 
-                OutCommand = 0x5E
+                # PGN_CTRL1 (Command 0x5B): DIGIN, AD2, AD3, AD4, FREQ1, FREQ2
+                OutCommand = 0x5B
                 SendMessage(
                     OutCommand,
                     Tx10Settings[0],
