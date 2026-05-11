@@ -10,6 +10,14 @@ datafile = os.path.join(script_dir, TestName + ".pat")
 def to_decivolts(volts):
     return int(round(volts * 10))
 
+
+EPS = 1e-9
+POST_FAULT_SAMPLES = 2
+FIRST_PORT_SETTLE_WAIT = 0.5
+INTER_PORT_SETTLE_WAIT = 0.1
+FIRST_PORT_METER_TIME = 1
+INTER_PORT_METER_TIME = 0.2
+
 PortMode = 0
 
 outstr = ""
@@ -57,13 +65,17 @@ ModeIndex = 0
 MaxMode = 3
 
 while ModeIndex <= MaxMode:
+    FaultInclusive = True
+    TransitionMinVolts = None
+    TransitionMaxVolts = None
+    MaxAssertVolts = None
     
     if(ModeIndex==0):#GROUND
         PortMode = "2"
         StartVolts = 14
         MaxVolts = 14
         FaultLimit = 14
-        BVoltInc = 0.5
+        BVoltInc = 1.0
         SVoltInc = 0.1
         MaxValue = StartVolts
         Tol = "0.100"
@@ -73,7 +85,7 @@ while ModeIndex <= MaxMode:
         StartVolts = 14
         MaxVolts = 14
         FaultLimit = 14
-        BVoltInc = 0.5
+        BVoltInc = 1.0
         SVoltInc = 0.1
         MaxValue = StartVolts
         Tol = "0.100"
@@ -82,8 +94,13 @@ while ModeIndex <= MaxMode:
         PortMode = "4"
         StartVolts = 1
         MaxVolts = 5
-        FaultLimit = 5.1
-        BVoltInc = 0.1
+        # Spec knee is 5.08V; with 0.1V steps:
+        # 5.0V must be non-fault, 5.1V is transition band, >=5.2V must fault.
+        FaultLimit = 5.0
+        FaultInclusive = False
+        TransitionMinVolts = 5.1
+        TransitionMaxVolts = 5.1
+        BVoltInc = 0.5
         SVoltInc = 0.1
         Tol = "0.050"
         
@@ -100,13 +117,21 @@ while ModeIndex <= MaxMode:
         PortMode = "6"
         StartVolts = 1
         MaxVolts = 32
-        FaultLimit = 33.5
-        BVoltInc = 0.5
+        # Fault knee is around 33.2V; avoid saturating the ADC at 33.4V+.
+        # <=33.0V should be non-fault, 33.1-33.2V transition band, >=33.3V fault.
+        FaultLimit = 33.2
+        TransitionMinVolts = 33.1
+        TransitionMaxVolts = 33.2
+        MaxAssertVolts = 33.4
+        BVoltInc = 2.0
         SVoltInc = 0.1
         Tol = "0.320"
         
     while PortIndex <= MaxPort:
 
+        is_first_port = (PortIndex == 0)
+        settle_wait = FIRST_PORT_SETTLE_WAIT if is_first_port else INTER_PORT_SETTLE_WAIT
+        meter_time = FIRST_PORT_METER_TIME if is_first_port else INTER_PORT_METER_TIME
         VoltInc = BVoltInc
 
         if(PortIndex == 0):
@@ -153,17 +178,18 @@ while ModeIndex <= MaxMode:
         InputName = Feedback
 
 
-        outstr += "#-----setup 39009-----\n"
-        outstr += "#configure as Output Digital ON/OFF\n"
-        outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0 : NULL : WAIT = 0.5\n"
-        outstr += "Command = 83, MODE1A = " + PortMode + ", MODE1B = " + PortMode + ", MODE2A = 1, MODE2B = 1, MODE3A = " + PortMode + ", MODE3B = " + PortMode + ", MODE4A = 1, MODE4B = 1, MODE5A = " + PortMode + ", MODE5B = " + PortMode + ", MODE6A = 1, MODE6B = 1, MODE7A = " + PortMode + ", MODE7B = " + PortMode + " : NULL : WAIT = 0.5\n"
-        outstr += "Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL\n"
-        outstr += "Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = " + PortMode + ", MODE9B = " + PortMode + ", MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5\n"
-        outstr += "Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL\n"
+        if(is_first_port):
+            outstr += "#-----setup 39009-----\n"
+            outstr += "#configure as Output Digital ON/OFF\n"
+            outstr += "Command = 82, MODE1 = 0, MODE2 = 0, Enable_24VDC = 0 : NULL : WAIT = 0.5\n"
+            outstr += "Command = 83, MODE1A = " + PortMode + ", MODE1B = " + PortMode + ", MODE2A = 1, MODE2B = 1, MODE3A = " + PortMode + ", MODE3B = " + PortMode + ", MODE4A = 1, MODE4B = 1, MODE5A = " + PortMode + ", MODE5B = " + PortMode + ", MODE6A = 1, MODE6B = 1, MODE7A = " + PortMode + ", MODE7B = " + PortMode + " : NULL : WAIT = 0.5\n"
+            outstr += "Command = 0, MODE1A = 0, MODE1B = 0, MODE2A = 0, MODE2B = 0, MODE3A = 0, MODE3B = 0, MODE4A = 0, MODE4B = 0, MODE5A = 0, MODE5B = 0, MODE6A = 0, MODE6B = 0, MODE7A = 0, MODE7B = 0 : NULL\n"
+            outstr += "Command = 84, MODE8A = 1, MODE8B = 1, MODE9A = " + PortMode + ", MODE9B = " + PortMode + ", MODE10A = 1, MODE10B = 1, GLOBAL_KP = 255, GLOBAL_KI = 255 : NULL : WAIT = 0.5\n"
+            outstr += "Command = 0, MODE8A = 0, MODE8B = 0, MODE9A = 0, MODE9B = 0, MODE10A = 0, MODE10B = 0, GLOBAL_KP = 0, GLOBAL_KI = 0 : NULL\n"
 
-        outstr += "Command = 82, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
-        outstr += "#clear multiplex\n"
-        outstr += "Command = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
+            outstr += "Command = 82, Enable_DPLTx = 1, Enable_DPLF1 = 1, Enable_DPLF2 = 1 : NULL : WAIT = 0.5\n"
+            outstr += "#clear multiplex\n"
+            outstr += "Command = 0, Enable_DPLTx = 0, Enable_DPLF1 = 0, Enable_DPLF2 = 0 : NULL\n"
         
         outstr += "#set power supply and wait\n"
         outstr += "PwrSetVoltage = " + str(to_decivolts(StartVolts)) + " : NULL : WAIT = 0.1\n"
@@ -181,44 +207,71 @@ while ModeIndex <= MaxMode:
         Voltage = StartVolts
         
         if(ModeIndex==0):
-            outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = 0.5\n"
-            outstr += "J0_01_3A_LOAD = 1 : NULL : WAIT = 0.5\n"
+            outstr += "J0_09_TEST_SUPPLY = 0 : NULL : WAIT = " + str(settle_wait) + "\n"
+            outstr += "J0_01_3A_LOAD = 1 : NULL : WAIT = " + str(settle_wait) + "\n"
         else:
-            outstr += "J0_01_3A_LOAD = 0 : NULL : WAIT = 0.5\n"
+            outstr += "J0_01_3A_LOAD = 0 : NULL : WAIT = " + str(settle_wait) + "\n"
             outstr += "PwrSetVoltage = " + str(to_decivolts(Voltage)) + " : NULL : WAIT = 0.1\n"
-            outstr += "J0_09_TEST_SUPPLY = 1 : NULL : WAIT = 0.5\n"
+            outstr += "J0_09_TEST_SUPPLY = 1 : NULL : WAIT = " + str(settle_wait) + "\n"
             outstr += "#test power supply\n"
             if(ModeIndex>1):
-                outstr += "NULL : MeterVolts = " + str(StartVolts) + " | " + Tol  + " | 1\n"
+                outstr += "NULL : MeterVolts = " + str(StartVolts) + " | " + Tol  + " | " + str(meter_time) + "\n"
             else:
-                outstr += "NULL : MeterVolts = " + str(StartVolts) + " | " + Tol  + " | 1\n"
+                outstr += "NULL : MeterVolts = " + str(StartVolts) + " | " + Tol  + " | " + str(meter_time) + "\n"
                 
         outstr += "#switch input to load line\n"
         outstr += OutputConnector + " = 1 : NULL : WAIT = 0.1\n"
         outstr += "\n"
         outstr += "\n"
         
-        while Voltage <= (FaultLimit + VoltInc):
+        post_fault_seen = 0
+        if(ModeIndex <= 1):
+            target_post_fault_samples = 1
+        elif(ModeIndex == 3):
+            target_post_fault_samples = POST_FAULT_SAMPLES
+        else:
+            target_post_fault_samples = POST_FAULT_SAMPLES
+        while True:
             outstr += "#set power supply\n"
             outstr += "PwrSetVoltage = " + str(to_decivolts(Voltage)) + " : NULL : WAIT = 0.1\n"
             outstr += "#test power supply\n"
             if(ModeIndex>0):
                 outstr += "NULL : MeterVolts = " + str(Voltage) + " | " + Tol  + " | 1\n"
             outstr += "#test feedback\n"    
-            if(Voltage >= FaultLimit):
-                VoltInc = SVoltInc
+            is_fault = ((Voltage + EPS) >= FaultLimit) if FaultInclusive else (Voltage > (FaultLimit + EPS))
+            transition_zone = (
+                TransitionMinVolts is not None
+                and (Voltage + EPS) >= TransitionMinVolts
+                and (Voltage - EPS) <= TransitionMaxVolts
+            )
+            if(transition_zone):
+                outstr += "#transition zone around fault threshold; skip feedback assertion\n"
+            elif(is_fault):
+                post_fault_seen += 1
                 if(ModeIndex>1):
                     outstr += "NULL : " + Feedback + " = 0 | 0.1 | 0.1\n"
                     outstr += "NULL : " + Status + " = 2 | 0.1 | 0.1\n"
                 else:
                     outstr += "NULL : " + Status + " = 1 | 0.1 | 0.1\n"
             else:
-                VoltInc = BVoltInc
                 if(ModeIndex>1):
                     outstr += "NULL : " + Feedback + " = " + str(Voltage) + " | " + Tol + " | 0.1\n" 
                     outstr += "NULL : " + Status + " = 0 | 0.1 | 0.1\n"
                 else:
                     outstr += "NULL : " + Status + " = 1 | 0.1 | 0.1\n"
+
+            if(post_fault_seen >= target_post_fault_samples):
+                break
+            if(MaxAssertVolts is not None and (Voltage + EPS) >= MaxAssertVolts):
+                break
+
+            # Avoid skipping fault edge due to coarse increments.
+            if((Voltage + EPS) < FaultLimit and (Voltage + BVoltInc) > (FaultLimit + EPS)):
+                VoltInc = SVoltInc
+            elif((Voltage + EPS) >= FaultLimit):
+                VoltInc = SVoltInc
+            else:
+                VoltInc = BVoltInc
             Voltage += VoltInc
         
         outstr += "\n"
