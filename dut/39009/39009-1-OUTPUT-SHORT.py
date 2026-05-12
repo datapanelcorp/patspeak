@@ -111,6 +111,7 @@ while t <= 9:
     outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
     outstr += "NULL : MeterVolts = 0 | 0.1 | 0.1\n"
     outstr += "NULL : " + OutputStatus + " = 2 | 0.1 | 0.1\n"
+    outstr += "NULL : Active_Fault_Code = 1 | 0.1 | 0.1\n"
     outstr += "\n"
   
     outstr += "#switch out load line, clear current\n"
@@ -125,15 +126,25 @@ while t <= 9:
     
 #verify faults
 outstr += "NULL : OutStat2A = 2 | 0.1 | 0.1\n"
+outstr += "NULL : Active_Fault_Code = 1 | 0.1 | 0.1\n"
 outstr += "NULL : OutStat2B = 2 | 0.1 | 0.1\n"
+outstr += "NULL : Active_Fault_Code = 1 | 0.1 | 0.1\n"
 outstr += "NULL : OutStat4A = 2 | 0.1 | 0.1\n"
+outstr += "NULL : Active_Fault_Code = 1 | 0.1 | 0.1\n"
 outstr += "NULL : OutStat4B = 2 | 0.1 | 0.1\n"
+outstr += "NULL : Active_Fault_Code = 1 | 0.1 | 0.1\n"
 outstr += "NULL : OutStat6A = 2 | 0.1 | 0.1\n"
+outstr += "NULL : Active_Fault_Code = 1 | 0.1 | 0.1\n"
 outstr += "NULL : OutStat6B = 2 | 0.1 | 0.1\n"
+outstr += "NULL : Active_Fault_Code = 1 | 0.1 | 0.1\n"
 outstr += "NULL : OutStat8A = 2 | 0.1 | 0.1\n"
+outstr += "NULL : Active_Fault_Code = 1 | 0.1 | 0.1\n"
 outstr += "NULL : OutStat8B = 2 | 0.1 | 0.1\n"
+outstr += "NULL : Active_Fault_Code = 1 | 0.1 | 0.1\n"
 outstr += "NULL : OutStat10A = 2 | 0.1 | 0.1\n"
+outstr += "NULL : Active_Fault_Code = 1 | 0.1 | 0.1\n"
 outstr += "NULL : OutStat10B = 2 | 0.1 | 0.1\n"
+outstr += "NULL : Active_Fault_Code = 1 | 0.1 | 0.1\n"
 
 #shut down test
 outstr += "LdRemote = 0 : NULL : WAIT = 0.1\n"

@@ -39,6 +39,7 @@ NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat2A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -53,6 +54,7 @@ NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat2B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -67,6 +69,7 @@ NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat4A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -81,6 +84,7 @@ NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat4B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -95,6 +99,7 @@ NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat6A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -109,6 +114,7 @@ NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat6B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -123,6 +129,7 @@ NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat8A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -137,6 +144,7 @@ NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat8B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -151,6 +159,7 @@ NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat10A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -165,6 +174,7 @@ NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat10B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 
 #switch out load line, clear current
 LdEnable = 0 : NULL : WAIT = 0.1
@@ -172,15 +182,25 @@ LdCurrentSet = 0 : NULL : WAIT = 0.1
 Output10B = 0 : NULL : WAIT = 0.1
 J3_10 = 0 : NULL : WAIT = 0.1
 NULL : OutStat2A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 NULL : OutStat2B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 NULL : OutStat4A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 NULL : OutStat4B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 NULL : OutStat6A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 NULL : OutStat6B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 NULL : OutStat8A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 NULL : OutStat8B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 NULL : OutStat10A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 NULL : OutStat10B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 1 | 0.1 | 0.1
 LdRemote = 0 : NULL : WAIT = 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 LdShort = 0 : NULL : WAIT = 1
