@@ -251,6 +251,7 @@ while ModeIndex <= MaxMode:
                 if(ModeIndex>1):
                     outstr += "NULL : " + Feedback + " = 0 | 0.1 | 0.1\n"
                     outstr += "NULL : " + Status + " = 2 | 0.1 | 0.1\n"
+                    outstr += "NULL : Active_Fault_Code = 5 | 0.1 | 0.1\n"
                 else:
                     outstr += "NULL : " + Status + " = 1 | 0.1 | 0.1\n"
             else:

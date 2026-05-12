@@ -601,6 +601,7 @@ NULL : MeterVolts = 5.199999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_1A = 0 | 0.1 | 0.1
 NULL : Input_1A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 53 : NULL : WAIT = 0.1
 #test power supply
@@ -608,6 +609,7 @@ NULL : MeterVolts = 5.299999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_1A = 0 | 0.1 | 0.1
 NULL : Input_1A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -702,6 +704,7 @@ NULL : MeterVolts = 5.199999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_1B = 0 | 0.1 | 0.1
 NULL : Input_1B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 53 : NULL : WAIT = 0.1
 #test power supply
@@ -709,6 +712,7 @@ NULL : MeterVolts = 5.299999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_1B = 0 | 0.1 | 0.1
 NULL : Input_1B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -803,6 +807,7 @@ NULL : MeterVolts = 5.199999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_3A = 0 | 0.1 | 0.1
 NULL : Input_3A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 53 : NULL : WAIT = 0.1
 #test power supply
@@ -810,6 +815,7 @@ NULL : MeterVolts = 5.299999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_3A = 0 | 0.1 | 0.1
 NULL : Input_3A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -904,6 +910,7 @@ NULL : MeterVolts = 5.199999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_3B = 0 | 0.1 | 0.1
 NULL : Input_3B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 53 : NULL : WAIT = 0.1
 #test power supply
@@ -911,6 +918,7 @@ NULL : MeterVolts = 5.299999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_3B = 0 | 0.1 | 0.1
 NULL : Input_3B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -1005,6 +1013,7 @@ NULL : MeterVolts = 5.199999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_5A = 0 | 0.1 | 0.1
 NULL : Input_5A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 53 : NULL : WAIT = 0.1
 #test power supply
@@ -1012,6 +1021,7 @@ NULL : MeterVolts = 5.299999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_5A = 0 | 0.1 | 0.1
 NULL : Input_5A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -1106,6 +1116,7 @@ NULL : MeterVolts = 5.199999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_5B = 0 | 0.1 | 0.1
 NULL : Input_5B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 53 : NULL : WAIT = 0.1
 #test power supply
@@ -1113,6 +1124,7 @@ NULL : MeterVolts = 5.299999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_5B = 0 | 0.1 | 0.1
 NULL : Input_5B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -1207,6 +1219,7 @@ NULL : MeterVolts = 5.199999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_7A = 0 | 0.1 | 0.1
 NULL : Input_7A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 53 : NULL : WAIT = 0.1
 #test power supply
@@ -1214,6 +1227,7 @@ NULL : MeterVolts = 5.299999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_7A = 0 | 0.1 | 0.1
 NULL : Input_7A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -1308,6 +1322,7 @@ NULL : MeterVolts = 5.199999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_7B = 0 | 0.1 | 0.1
 NULL : Input_7B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 53 : NULL : WAIT = 0.1
 #test power supply
@@ -1315,6 +1330,7 @@ NULL : MeterVolts = 5.299999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_7B = 0 | 0.1 | 0.1
 NULL : Input_7B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -1409,6 +1425,7 @@ NULL : MeterVolts = 5.199999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_9A = 0 | 0.1 | 0.1
 NULL : Input_9A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 53 : NULL : WAIT = 0.1
 #test power supply
@@ -1416,6 +1433,7 @@ NULL : MeterVolts = 5.299999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_9A = 0 | 0.1 | 0.1
 NULL : Input_9A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -1510,6 +1528,7 @@ NULL : MeterVolts = 5.199999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_9B = 0 | 0.1 | 0.1
 NULL : Input_9B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 53 : NULL : WAIT = 0.1
 #test power supply
@@ -1517,6 +1536,7 @@ NULL : MeterVolts = 5.299999999999999 | 0.050 | 1
 #test feedback
 NULL : Port_9B = 0 | 0.1 | 0.1
 NULL : Input_9B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -1689,6 +1709,7 @@ NULL : MeterVolts = 33.300000000000004 | 0.320 | 1
 #test feedback
 NULL : Port_1A = 0 | 0.1 | 0.1
 NULL : Input_1A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 334 : NULL : WAIT = 0.1
 #test power supply
@@ -1696,6 +1717,7 @@ NULL : MeterVolts = 33.400000000000006 | 0.320 | 1
 #test feedback
 NULL : Port_1A = 0 | 0.1 | 0.1
 NULL : Input_1A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -1852,6 +1874,7 @@ NULL : MeterVolts = 33.300000000000004 | 0.320 | 1
 #test feedback
 NULL : Port_1B = 0 | 0.1 | 0.1
 NULL : Input_1B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 334 : NULL : WAIT = 0.1
 #test power supply
@@ -1859,6 +1882,7 @@ NULL : MeterVolts = 33.400000000000006 | 0.320 | 1
 #test feedback
 NULL : Port_1B = 0 | 0.1 | 0.1
 NULL : Input_1B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -2015,6 +2039,7 @@ NULL : MeterVolts = 33.300000000000004 | 0.320 | 1
 #test feedback
 NULL : Port_3A = 0 | 0.1 | 0.1
 NULL : Input_3A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 334 : NULL : WAIT = 0.1
 #test power supply
@@ -2022,6 +2047,7 @@ NULL : MeterVolts = 33.400000000000006 | 0.320 | 1
 #test feedback
 NULL : Port_3A = 0 | 0.1 | 0.1
 NULL : Input_3A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -2178,6 +2204,7 @@ NULL : MeterVolts = 33.300000000000004 | 0.320 | 1
 #test feedback
 NULL : Port_3B = 0 | 0.1 | 0.1
 NULL : Input_3B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 334 : NULL : WAIT = 0.1
 #test power supply
@@ -2185,6 +2212,7 @@ NULL : MeterVolts = 33.400000000000006 | 0.320 | 1
 #test feedback
 NULL : Port_3B = 0 | 0.1 | 0.1
 NULL : Input_3B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -2341,6 +2369,7 @@ NULL : MeterVolts = 33.300000000000004 | 0.320 | 1
 #test feedback
 NULL : Port_5A = 0 | 0.1 | 0.1
 NULL : Input_5A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 334 : NULL : WAIT = 0.1
 #test power supply
@@ -2348,6 +2377,7 @@ NULL : MeterVolts = 33.400000000000006 | 0.320 | 1
 #test feedback
 NULL : Port_5A = 0 | 0.1 | 0.1
 NULL : Input_5A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -2504,6 +2534,7 @@ NULL : MeterVolts = 33.300000000000004 | 0.320 | 1
 #test feedback
 NULL : Port_5B = 0 | 0.1 | 0.1
 NULL : Input_5B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 334 : NULL : WAIT = 0.1
 #test power supply
@@ -2511,6 +2542,7 @@ NULL : MeterVolts = 33.400000000000006 | 0.320 | 1
 #test feedback
 NULL : Port_5B = 0 | 0.1 | 0.1
 NULL : Input_5B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -2667,6 +2699,7 @@ NULL : MeterVolts = 33.300000000000004 | 0.320 | 1
 #test feedback
 NULL : Port_7A = 0 | 0.1 | 0.1
 NULL : Input_7A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 334 : NULL : WAIT = 0.1
 #test power supply
@@ -2674,6 +2707,7 @@ NULL : MeterVolts = 33.400000000000006 | 0.320 | 1
 #test feedback
 NULL : Port_7A = 0 | 0.1 | 0.1
 NULL : Input_7A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -2830,6 +2864,7 @@ NULL : MeterVolts = 33.300000000000004 | 0.320 | 1
 #test feedback
 NULL : Port_7B = 0 | 0.1 | 0.1
 NULL : Input_7B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 334 : NULL : WAIT = 0.1
 #test power supply
@@ -2837,6 +2872,7 @@ NULL : MeterVolts = 33.400000000000006 | 0.320 | 1
 #test feedback
 NULL : Port_7B = 0 | 0.1 | 0.1
 NULL : Input_7B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -2993,6 +3029,7 @@ NULL : MeterVolts = 33.300000000000004 | 0.320 | 1
 #test feedback
 NULL : Port_9A = 0 | 0.1 | 0.1
 NULL : Input_9A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 334 : NULL : WAIT = 0.1
 #test power supply
@@ -3000,6 +3037,7 @@ NULL : MeterVolts = 33.400000000000006 | 0.320 | 1
 #test feedback
 NULL : Port_9A = 0 | 0.1 | 0.1
 NULL : Input_9A = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
@@ -3156,6 +3194,7 @@ NULL : MeterVolts = 33.300000000000004 | 0.320 | 1
 #test feedback
 NULL : Port_9B = 0 | 0.1 | 0.1
 NULL : Input_9B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 #set power supply
 PwrSetVoltage = 334 : NULL : WAIT = 0.1
 #test power supply
@@ -3163,6 +3202,7 @@ NULL : MeterVolts = 33.400000000000006 | 0.320 | 1
 #test feedback
 NULL : Port_9B = 0 | 0.1 | 0.1
 NULL : Input_9B = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 5 | 0.1 | 0.1
 
 #Finished with port
 #switch out input
