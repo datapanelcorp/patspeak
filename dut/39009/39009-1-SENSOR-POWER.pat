@@ -41,6 +41,7 @@ NULL : MeterVolts = 5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat1 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -56,6 +57,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat1 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -69,6 +71,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat1 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -82,6 +85,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat1 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -95,6 +99,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat1 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -104,6 +109,7 @@ Command = 81, SPWR1_On = 1 : NULL
 #check for VBAT
 NULL : MeterVolts = 0 | 0.2 | 0.1
 NULL : SpwrStat1 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 Command = 81, SPWR1_On = 0 : NULL
 
 #switch out load line, clear current
@@ -121,6 +127,7 @@ NULL : MeterVolts = 5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat3 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -136,6 +143,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat3 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -149,6 +157,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat3 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -162,6 +171,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat3 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -175,6 +185,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat3 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -184,6 +195,7 @@ Command = 81, SPWR3_On = 1 : NULL
 #check for VBAT
 NULL : MeterVolts = 0 | 0.2 | 0.1
 NULL : SpwrStat3 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 Command = 81, SPWR3_On = 0 : NULL
 
 #switch out load line, clear current
@@ -201,6 +213,7 @@ NULL : MeterVolts = 5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat5 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -216,6 +229,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat5 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -229,6 +243,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat5 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -242,6 +257,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat5 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -255,6 +271,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat5 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -264,6 +281,7 @@ Command = 81, SPWR5_On = 1 : NULL
 #check for VBAT
 NULL : MeterVolts = 0 | 0.2 | 0.1
 NULL : SpwrStat5 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 Command = 81, SPWR5_On = 0 : NULL
 
 #switch out load line, clear current
@@ -281,6 +299,7 @@ NULL : MeterVolts = 5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat7 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -296,6 +315,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat7 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -309,6 +329,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat7 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -322,6 +343,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat7 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -335,6 +357,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat7 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -344,6 +367,7 @@ Command = 81, SPWR7_On = 1 : NULL
 #check for VBAT
 NULL : MeterVolts = 0 | 0.2 | 0.1
 NULL : SpwrStat7 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 Command = 81, SPWR7_On = 0 : NULL
 
 #switch out load line, clear current
@@ -361,6 +385,7 @@ NULL : MeterVolts = 5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat9 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -376,6 +401,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat9 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -389,6 +415,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat9 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -402,6 +429,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat9 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -415,6 +443,7 @@ NULL : MeterVolts = 14 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 #verify fault
 NULL : SpwrStat9 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 #verify volotage
 NULL : MeterVolts = 0 | 0.2 | 0.1
@@ -424,6 +453,7 @@ Command = 81, SPWR9_On = 1 : NULL
 #check for VBAT
 NULL : MeterVolts = 0 | 0.2 | 0.1
 NULL : SpwrStat9 = 2 | 0.1 | 0.1
+NULL : Active_Fault_Code = 6 | 0.1 | 0.1
 Command = 81, SPWR9_On = 0 : NULL
 
 #switch out load line, clear current
