@@ -187,6 +187,25 @@ def main(stdscr, args):
 
     # Clear screen
     stdscr.clear()
+    command_update_active = False
+    progress_timeout_anchor = time.time()
+    last_observed_pass = float(PassTime)
+
+    def max_expected_period_sec():
+        max_period_ms = 0
+        for idx, setting in enumerate(Tx10Settings):
+            period_ms = int(setting) * int(Tx10Maths[idx])
+            if period_ms > max_period_ms:
+                max_period_ms = period_ms
+        return max_period_ms / 1000.0
+
+    def command_echo_timeout_sec():
+        # Bound command echo wait time to 3x the slowest expected UUT TX period.
+        return max(max_expected_period_sec() * 3.0, 0.5)
+
+    def message_watchdog_timeout_sec():
+        # Fail a step if required UUT TX messages are missing/stale for too long.
+        return max(max_expected_period_sec() * 4.0, 0.5)
 
     def SendMessage(*payload):
         global OutCommand
@@ -200,15 +219,31 @@ def main(stdscr, args):
             data=data,
         )
 
+        timeout_sec = command_echo_timeout_sec()
+        wait_start = time.time()
+        command_waiting_for = OutCommand
+
         while OutCommand:
+            elapsed = time.time() - wait_start
+            if elapsed > timeout_sec:
+                raise TimeoutError(
+                    f"Timeout waiting for command echo 0x{command_waiting_for:02X} within {round(timeout_sec, 2)}s (3x max TX period)"
+                )
+
             bus.send(newMsg)
             sleep(0.1)
-            rx_msg = bus.recv(timeout=args.rx_timeout)
-            if rx_msg is not None:
+            for idx in range(256):
+                timeout = args.rx_timeout if idx == 0 else 0.0
+                rx_msg = bus.recv(timeout=timeout)
+                if rx_msg is None:
+                    break
                 ProcessMessage(rx_msg)
+                if not OutCommand:
+                    break
 
     # Processes a received message, in order to show it in the Message-ListView
     def ProcessMessage(frame):
+        nonlocal command_update_active
         global OutCommand, LastTimeStamp, Tx10Settings, ThisSetting, PassTime, TimeOfPass, TestStart, LastPassTime, KickCounts
         TotalError = 0
         line_number = 0
@@ -266,7 +301,10 @@ def main(stdscr, args):
             if (OutCommand == 0x57) and (data7 == 0x14):
                 OutCommand = 0
 
-        if TotalError:
+        if command_update_active:
+            PassTime = 0
+            TimeOfPass = 0
+        elif TotalError:
             PassTime = 0
             TimeOfPass = 0
         else:
@@ -304,36 +342,76 @@ def main(stdscr, args):
             # ThisSetting gets stuck because the nature of MSG_STAT
             if PrevSetting != ThisSetting:
                 HeartbeatStart = time.time()  # reset kickstart
+                progress_timeout_anchor = time.time()
+                last_observed_pass = 0.0
+                command_update_active = True
+                try:
+                    # PGN_CTRL2 (Command 0x5E): STAT, DPL_Tx, spare, DPL_F1, DPL_F2, FAULT
+                    OutCommand = 0x5E
+                    SendMessage(
+                        OutCommand,
+                        Tx10Settings[6],
+                        Tx10Settings[7],
+                        0x00,
+                        Tx10Settings[8],
+                        Tx10Settings[9],
+                        Tx10Settings[10],
+                    )
 
-                # PGN_CTRL2 (Command 0x5E): STAT, DPL_Tx, spare, DPL_F1, DPL_F2, FAULT
-                OutCommand = 0x5E
-                SendMessage(
-                    OutCommand,
-                    Tx10Settings[6],
-                    Tx10Settings[7],
-                    0x00,
-                    Tx10Settings[8],
-                    Tx10Settings[9],
-                    Tx10Settings[10],
-                )
-
-                # PGN_CTRL1 (Command 0x5B): DIGIN, AD2, AD3, AD4, FREQ1, FREQ2
-                OutCommand = 0x5B
-                SendMessage(
-                    OutCommand,
-                    Tx10Settings[0],
-                    Tx10Settings[1],
-                    Tx10Settings[2],
-                    Tx10Settings[3],
-                    Tx10Settings[4],
-                    Tx10Settings[5],
-                )
+                    # PGN_CTRL1 (Command 0x5B): DIGIN, AD2, AD3, AD4, FREQ1, FREQ2
+                    OutCommand = 0x5B
+                    SendMessage(
+                        OutCommand,
+                        Tx10Settings[0],
+                        Tx10Settings[1],
+                        Tx10Settings[2],
+                        Tx10Settings[3],
+                        Tx10Settings[4],
+                        Tx10Settings[5],
+                    )
+                finally:
+                    command_update_active = False
 
                 PrevSetting = ThisSetting
+                progress_timeout_anchor = time.time()
+                last_observed_pass = 0.0
+                for idx in range(len(Tx10LastRx)):
+                    Tx10LastRx[idx] = 0
+                    Tx10RxTime[idx] = 0
+                    Tx10Error[idx] = 0
 
             result = bus.recv(timeout=args.rx_timeout)
             if result is not None:
                 ProcessMessage(result)
+
+            if not command_update_active:
+                now = time.time()
+                stale_limit = message_watchdog_timeout_sec()
+                if PassTime > last_observed_pass:
+                    last_observed_pass = float(PassTime)
+                    progress_timeout_anchor = now
+
+                no_progress_for = now - progress_timeout_anchor
+                if no_progress_for > stale_limit:
+                    missing_names = []
+                    stale_names = []
+                    for idx, last_rx_us in enumerate(Tx10LastRx):
+                        if not last_rx_us:
+                            missing_names.append(Tx10NAMESs[idx])
+                            continue
+
+                        last_rx_age = now - (last_rx_us / 1000000.0)
+                        if last_rx_age > stale_limit:
+                            stale_names.append(Tx10NAMESs[idx])
+
+                    details = [f"no PASS increase for {round(no_progress_for, 2)}s (last PASS: {last_observed_pass})"]
+                    if missing_names:
+                        details.append("missing: " + ", ".join(missing_names))
+                    if stale_names:
+                        details.append("stale: " + ", ".join(stale_names))
+                    raise TimeoutError(
+                        f"STEP {ThisSetting} failed TX watchdog after {round(stale_limit, 2)}s (4x max TX period): {'; '.join(details)}"
+                    )
 
             HeartbeatTick = time.time() - HeartbeatStart
             if HeartbeatTick > 60:
