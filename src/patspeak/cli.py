@@ -10,7 +10,7 @@ import sys
 import signal
 import threading
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 from .script import ProcessScript
@@ -718,6 +718,87 @@ def main() -> int:
         return 0
 
     interrupted = False
+    suite_results: list[dict[str, object]] = []
+    suite_report_path = ""
+    suite_report_written = False
+
+    def _fmt_elapsed(seconds: float) -> str:
+        try:
+            total = max(0, int(round(float(seconds))))
+        except Exception:
+            total = 0
+        return str(timedelta(seconds=total))
+
+    def _build_suite_summary_lines() -> list[str]:
+        if not suite_results:
+            return []
+
+        title = "SUITE RESULT SUMMARY"
+        lines: list[str] = []
+        lines.append("=" * 80)
+        lines.append(title)
+        lines.append("=" * 80)
+        lines.append(f"{'#':>3}  {'STATUS':<7}  {'FAILS':>5}  {'ELAPSED':>8}  TEST")
+        lines.append("-" * 80)
+
+        pass_count = 0
+        fail_count = 0
+        skip_count = 0
+        abort_count = 0
+        total_elapsed = 0.0
+
+        for row in suite_results:
+            idx = int(row.get("index", 0) or 0)
+            status = str(row.get("status", "UNKNOWN") or "UNKNOWN").upper()
+            fails_raw = row.get("fail_count")
+            fails = "-" if fails_raw is None else str(int(fails_raw))
+            elapsed_s = float(row.get("elapsed_s", 0.0) or 0.0)
+            total_elapsed += elapsed_s
+            elapsed = _fmt_elapsed(elapsed_s)
+            test_name = str(row.get("test_ref", "") or "")
+            lines.append(f"{idx:>3}  {status:<7}  {fails:>5}  {elapsed:>8}  {test_name}")
+
+            if status == "PASS":
+                pass_count += 1
+            elif status == "FAIL":
+                fail_count += 1
+            elif status == "SKIP":
+                skip_count += 1
+            elif status in {"ABORT", "JUMP"}:
+                abort_count += 1
+
+        lines.append("-" * 80)
+        lines.append(
+            f"TOTALS: PASS={pass_count}  FAIL={fail_count}  SKIP={skip_count}  ABORT/JUMP={abort_count}  "
+            f"TESTS={len(suite_results)}  ELAPSED={_fmt_elapsed(total_elapsed)}"
+        )
+        return lines
+
+    def _print_suite_summary() -> None:
+        lines = _build_suite_summary_lines()
+        if not lines:
+            return
+        print("")
+        for line in lines:
+            print(line)
+
+    def _save_suite_summary_report(report_path: str) -> None:
+        nonlocal suite_report_written
+        if suite_report_written:
+            return
+        lines = _build_suite_summary_lines()
+        if not lines:
+            return
+        if not report_path:
+            return
+        try:
+            os.makedirs(os.path.dirname(report_path), exist_ok=True)
+            with open(report_path, "w", encoding="utf-8", errors="replace") as f:
+                f.write("\n".join(lines) + "\n")
+            suite_report_written = True
+            print("Suite summary report saved:", report_path)
+        except OSError as exc:
+            print("Warning: failed to save suite summary report:", exc)
 
     try:
         selector, verbosity = _parse_cli(argv_raw)
@@ -738,6 +819,33 @@ def main() -> int:
             print("\nCould not find any .pat tests for:", selector)
             print("Looked under:", _dut_root())
             return 2
+
+        # Save a per-suite summary report next to other results for this DUT folder.
+        try:
+            _stamp_now = datetime.now()
+            suite_stamp = _stamp_now.strftime("%Y%m%d-%H%M%S") + f"-{_stamp_now.microsecond // 1000:03d}"
+
+            root_raw = str(os.environ.get("PATSPEAK_RESULTS_ROOT", "") or "").strip()
+            if root_raw:
+                results_root = root_raw if os.path.isabs(root_raw) else os.path.join(_repo_root(), root_raw)
+            else:
+                results_root = os.path.join(_repo_root(), "results")
+
+            first_abs = os.path.abspath(_abs_test_path(tests[0]))
+            first_dir = os.path.dirname(first_abs)
+            dut_root = os.path.abspath(_dut_root())
+            try:
+                rel_suite = os.path.relpath(first_dir, dut_root)
+                if rel_suite.startswith(".."):
+                    rel_suite = os.path.basename(first_dir)
+            except Exception:
+                rel_suite = os.path.basename(first_dir)
+
+            suite_dir = os.path.abspath(os.path.join(results_root, rel_suite))
+            report_name = f"SUITE-SUMMARY_{safe_test_id(selector)}_{suite_stamp}.txt"
+            suite_report_path = os.path.join(suite_dir, report_name)
+        except Exception:
+            suite_report_path = ""
 
         rt.Verbose = int(verbosity)
         if rt.Verbose >= 2:
@@ -881,6 +989,8 @@ def main() -> int:
             if last_run_abs is not None and abs_ref.lower() == last_run_abs.lower():
                 return STATUS_NEXT
 
+            kind_norm = (kind or "test").strip().lower()
+            started_at = time.time()
             status = _run_one_test(
                 test_ref=ref,
                 suite_unit_name=suite_unit_name,
@@ -892,7 +1002,37 @@ def main() -> int:
                 unit_name_override=unit_name_override,
                 write_results=write_results,
             )
-            
+            elapsed_s = max(0.0, time.time() - started_at)
+
+            if kind_norm == "test":
+                fail_count_value: int | None
+                try:
+                    fail_count_value = int(getattr(rt, "FailCount", 0) or 0)
+                except Exception:
+                    fail_count_value = None
+
+                test_log = str(getattr(rt, "UUT_TestLog", "") or "")
+                completed_normally = ("Fail count:" in test_log) and ("Finished on:" in test_log)
+
+                if status == STATUS_EXIT or bool(getattr(rt, "finished", 0)):
+                    verdict = "ABORT"
+                elif status > 0:
+                    verdict = "JUMP"
+                elif completed_normally:
+                    verdict = "PASS" if (fail_count_value == 0) else "FAIL"
+                else:
+                    verdict = "SKIP"
+
+                suite_results.append(
+                    {
+                        "index": int(suite_index or 0),
+                        "test_ref": ref,
+                        "status": verdict,
+                        "fail_count": fail_count_value if completed_normally else None,
+                        "elapsed_s": elapsed_s,
+                    }
+                )
+
             # If valid run, update duplicate-check cache
             last_run_abs = abs_ref
             return status
@@ -969,6 +1109,8 @@ def main() -> int:
                 write_results=_hook_results_enabled("hook-start"),
             )
             if status == STATUS_EXIT:
+                _print_suite_summary()
+                _save_suite_summary_report(suite_report_path)
                 return 0
             if status > 0:
                 # Jump from start hook? Interpret as jumping to that test index
@@ -1058,6 +1200,8 @@ def main() -> int:
                 write_results=_hook_results_enabled("hook-end"),
             )
 
+        _print_suite_summary()
+        _save_suite_summary_report(suite_report_path)
         return 0
 
     except KeyboardInterrupt:
@@ -1066,6 +1210,8 @@ def main() -> int:
             print("\nInterrupted (Ctrl+C)")
         except Exception:
             pass
+        _print_suite_summary()
+        _save_suite_summary_report(suite_report_path)
         _write_interrupt_log("Ctrl+C - user interruption")
         return 130
 
