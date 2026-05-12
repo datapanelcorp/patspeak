@@ -1,0 +1,75 @@
+#39009-1
+#Version 0.2
+#Simple DM13 behavior check: stop TX on DM13, auto-resume after 5s quiet window.
+UUT_DBC = 39009-561.dbc
+UUT_DATANAME = 39009-1-CAN-DM13-STOP-BROADCAST
+
+#-----force known SA (0xE0) and clean reboot-----
+J0_01_3A_LOAD = 1 : NULL : WAIT = 0.5
+J4_03 = 1 : NULL : WAIT = 0.2
+J1_03 = 0, J1_04 = 0, J1_05 = 0, J1_06 = 0, J1_07 = 0 : NULL : WAIT = 0.30
+RLY_K1 = 0 : NULL : WAIT = 1.00
+RLY_K1 = 1 : NULL : WAIT = 2.00
+RLY_K1 = 0 : NULL : WAIT = 1.00
+#disable DPLogic transition behavior
+SEND_CAN CH0 0x18FEE627 5 5 1 9 7 7 0 0
+SEND_CAN CH0 0x18FEE627 5 5 1 9 7 7 0 0
+SEND_CAN CH0 0x18FEE627 5 5 1 9 7 7 0 0
+SEND_CAN CH0 0x18FEE627 5 5 1 9 7 7 0 0
+
+#-----bring module online and configure known TX behavior-----
+SEND_CAN CH0 0x0CEFE0D1 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+SEND_CAN CH0 0x0CEFE0D1 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+NULL : NULL : WAIT = 0.20
+#configure inputs so DIGIN/AD/FREQ traffic is available
+SEND_CAN CH0 0x0CEFE0D1 0x52 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+NULL : NULL : WAIT = 0.50
+SEND_CAN CH0 0x0CEFE0D1 0x53 0x68 0x11 0x68 0x11 0x66 0x11 0x66
+NULL : NULL : WAIT = 0.50
+SEND_CAN CH0 0x0CEFE0D1 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+NULL : NULL : WAIT = 0.10
+SEND_CAN CH0 0x0CEFE0D1 0x54 0x11 0x66 0x11 0xFF 0xFF 0x00 0x00
+NULL : NULL : WAIT = 0.50
+SEND_CAN CH0 0x0CEFE0D1 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+NULL : NULL : WAIT = 0.10
+#enable periodic broadcasts
+SEND_CAN CH0 0x0CEFE0D1 0x52 0x54 0x00 0x00 0x00 0x00 0x00 0x00
+NULL : NULL : WAIT = 0.80
+SEND_CAN CH0 0x0CEFE0D1 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+NULL : NULL : WAIT = 0.10
+#set moderate TX period for quick checks (20 * 20 ms = 400 ms)
+#PGN_CTRL2 (0x5E): STAT, DPL_Tx, spare, DPL_F1, DPL_F2, FAULT
+SEND_CAN CH0 0x0CEFE0D1 0x5E 0x14 0x14 0x00 0x14 0x14 0x14 0x00
+NULL : NULL : WAIT = 0.20
+#PGN_CTRL1 (0x5B): DIGIN, AD2, AD3, AD4, FREQ1, FREQ2
+SEND_CAN CH0 0x0CEFE0D1 0x5B 0x14 0x14 0x14 0x14 0x14 0x14 0x00
+NULL : NULL : WAIT = 0.80
+
+#baseline traffic present
+UUT_TXCHECK_ID 0x18EFD1E0 1.50
+UUT_TXCHECK_ID 0x18FF15E0 1.50
+
+#DM13 stop broadcast (current data link stop, other links no-action)
+SEND_CAN CH0 0x18DFFFFF 0x3F 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF
+NULL : NULL : WAIT = 0.10
+SEND_CAN CH0 0x18DFFFFF 0x3F 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF
+NULL : NULL : WAIT = 0.20
+
+#verify TX suppression after DM13
+UUT_TXCHECK_NOT_ID 0x18EFD1E0 1.00
+#still within 5-second quiet window
+NULL : NULL : WAIT = 2.00
+UUT_TXCHECK_NOT_ID 0x18EFD1E0 1.00
+
+#after 5 seconds without DM13, UUT should auto-resume broadcasting
+NULL : NULL : WAIT = 1.20
+UUT_TXCHECK_ID 0x18EFD1E0 1.50
+UUT_TXCHECK_ID 0x18FF15E0 1.50
+
+#-----cleanup-----
+J1_03 = 0, J1_04 = 0, J1_05 = 0, J1_06 = 0, J1_07 = 0 : NULL : WAIT = 0.20
+J4_03 = 0 : NULL : WAIT = 0.20
+J0_01_3A_LOAD = 0 : NULL : WAIT = 0.50
+
+SAVE
+END
