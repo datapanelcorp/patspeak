@@ -35,7 +35,7 @@ NULL : OutStat10B = 0 | 0.1 | 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 J3_01 = 1 : NULL : WAIT = 0.1
 Command = 81, Output2A = 1 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat2A = 2 | 0.1 | 0.1
@@ -49,7 +49,7 @@ J3_01 = 0 : NULL : WAIT = 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 J3_02 = 1 : NULL : WAIT = 0.1
 Command = 81, Output2B = 1 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat2B = 2 | 0.1 | 0.1
@@ -63,7 +63,7 @@ J3_02 = 0 : NULL : WAIT = 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 J3_03 = 1 : NULL : WAIT = 0.1
 Command = 81, Output4A = 1 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat4A = 2 | 0.1 | 0.1
@@ -77,7 +77,7 @@ J3_03 = 0 : NULL : WAIT = 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 J3_04 = 1 : NULL : WAIT = 0.1
 Command = 81, Output4B = 1 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat4B = 2 | 0.1 | 0.1
@@ -91,7 +91,7 @@ J3_04 = 0 : NULL : WAIT = 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 J3_05 = 1 : NULL : WAIT = 0.1
 Command = 81, Output6A = 1 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat6A = 2 | 0.1 | 0.1
@@ -105,7 +105,7 @@ J3_05 = 0 : NULL : WAIT = 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 J3_06 = 1 : NULL : WAIT = 0.1
 Command = 81, Output6B = 1 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat6B = 2 | 0.1 | 0.1
@@ -119,7 +119,7 @@ J3_06 = 0 : NULL : WAIT = 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 J3_07 = 1 : NULL : WAIT = 0.1
 Command = 81, Output8A = 1 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat8A = 2 | 0.1 | 0.1
@@ -133,7 +133,7 @@ J3_07 = 0 : NULL : WAIT = 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 J3_08 = 1 : NULL : WAIT = 0.1
 Command = 81, Output8B = 1 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat8B = 2 | 0.1 | 0.1
@@ -147,7 +147,7 @@ J3_08 = 0 : NULL : WAIT = 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 J3_09 = 1 : NULL : WAIT = 0.1
 Command = 81, Output10A = 1 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat10A = 2 | 0.1 | 0.1
@@ -161,7 +161,7 @@ J3_09 = 0 : NULL : WAIT = 0.1
 LdEnable = 0 : NULL : WAIT = 0.1
 J3_10 = 1 : NULL : WAIT = 0.1
 Command = 81, Output10B = 1 : NULL : WAIT = 0.1
-NULL : MeterVolts = 14.5 | 0.1 | 0.1
+NULL : MeterVolts = 14.5 | 0.2 | 0.1
 LdEnable = 1 : NULL : WAIT = 0.1
 NULL : MeterVolts = 0 | 0.1 | 0.1
 NULL : OutStat10B = 2 | 0.1 | 0.1

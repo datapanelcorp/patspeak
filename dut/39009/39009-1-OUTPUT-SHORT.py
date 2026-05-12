@@ -107,7 +107,7 @@ while t <= 9:
     outstr += "LdEnable = 0 : NULL : WAIT = 0.1\n"
     outstr += OutputConnector + " = 1 : NULL : WAIT = 0.1\n"
     outstr += "Command = 81, " + OutputName + " = 1 : NULL : WAIT = 0.1\n"
-    outstr += "NULL : MeterVolts = 14.5 | 0.1 | 0.1\n"
+    outstr += "NULL : MeterVolts = 14.5 | 0.2 | 0.1\n"
     outstr += "LdEnable = 1 : NULL : WAIT = 0.1\n"
     outstr += "NULL : MeterVolts = 0 | 0.1 | 0.1\n"
     outstr += "NULL : " + OutputStatus + " = 2 | 0.1 | 0.1\n"
