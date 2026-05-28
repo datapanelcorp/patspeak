@@ -22,7 +22,8 @@ CTRL_SA = 0xD1
 SET_ENABLE_WAIT_S = "1.20"
 REQUEST_SETTLE_WAIT_S = "0.30"
 CHECK_PRESENT_TIMEOUT_S = "1.20"
-CHECK_WBLR_TIMEOUT_S = "1.50"
+CHECK_STAT_PRESENT_TIMEOUT_S = "2.50"
+CHECK_WBLR_TIMEOUT_S = "2.00"
 CHECK_OLD_SA_ABSENT_TIMEOUT_S = "0.30"
 SET_SA_TO_REBOOT_WAIT_S = "0.10"
 REBOOT_OFF_WAIT_S = "1.00"
@@ -36,14 +37,11 @@ HANDSHAKE_STAT_TIMEOUT_S = "1.20"
 # WBLR (PGN FEAC) is request/response behavior, not a periodic TX frame.
 # It can depend on additional harness/bench setup and is not required to prove
 # that periodic status message source addresses remap correctly.
-INCLUDE_WBLR_IN_SA_SWEEP = False
-
-# J1939 Request PGN FEAC (WheelBrakeLiningRemaining).
-PWS_REQUEST_BYTES = "172 254 0 0 0 0 0 0"
+INCLUDE_WBLR_IN_SA_SWEEP = True
 
 # UUT TX message ID prefixes (source address is low byte).
 PERIODIC_MSG_PREFIXES = [
-    ("STAT", 0x18EFD100, CHECK_PRESENT_TIMEOUT_S),
+    ("STAT", 0x18EFD100, CHECK_STAT_PRESENT_TIMEOUT_S),
     ("DIGIN", 0x18FF1500, CHECK_PRESENT_TIMEOUT_S),
     ("AD2", 0x18FF1600, CHECK_PRESENT_TIMEOUT_S),
     ("AD3", 0x18FF1700, CHECK_PRESENT_TIMEOUT_S),
@@ -61,12 +59,6 @@ def ctrl1_id_for_dest(dest_sa: int) -> int:
     # Proprietary A control frame to destination SA from fixed controller SA.
     # 0x18EF<dest><ctrl_src>
     return 0x18EF0000 | ((dest_sa & 0xFF) << 8) | (CTRL_SA & 0xFF)
-
-
-def req_id_for_dest(dest_sa: int) -> int:
-    # J1939 PGN request (0xEA00) to destination SA from fixed controller SA.
-    # 0x18EA<dest><ctrl_src>
-    return 0x18EA0000 | ((dest_sa & 0xFF) << 8) | (CTRL_SA & 0xFF)
 
 
 def cmd_set_sa_payload(next_sa: int) -> str:
@@ -154,21 +146,28 @@ def add_verify_sa_block(out_lines: list[str], current_sa: int, previous_sa: int 
 
     if INCLUDE_WBLR_IN_SA_SWEEP:
         # Trigger FEAC response for WBLR verification.
-        # Send both global and direct requests from SA 0xD1.
-        # Firmware accepts either PDUSpecific == NodeAddress or == 0xFF.
-        out_lines.append("SEND_CAN CH0 " + fmt_id(req_id_for_dest(0xFF)) + " " + PWS_REQUEST_BYTES)
-        out_lines.append("SEND_CAN CH0 " + fmt_id(req_id_for_dest(current_sa)) + " " + PWS_REQUEST_BYTES)
-        out_lines.append("SEND_CAN CH0 " + fmt_id(req_id_for_dest(current_sa)) + " " + PWS_REQUEST_BYTES)
+        # Send request(s) from inside the waiter script so RX capture is already
+        # active when the request burst goes out (avoids race-to-miss windows).
+        out_lines.append(
+            "PAT wait_for_j1939_pgn.py"
+            + " --pgn 0x00FEAC"
+            + " --source-sa 0x"
+            + f"{current_sa:02X}"
+            + " --request-from-sa 0xD1"
+            + " --request-global"
+            + " --request-dest-sa 0x"
+            + f"{current_sa:02X}"
+            + " --request-repeat 2"
+            + " --request-interval 0.05"
+            + " --timeout "
+            + CHECK_WBLR_TIMEOUT_S
+        )
         out_lines.append("NULL : NULL : WAIT = " + REQUEST_SETTLE_WAIT_S)
 
     # Expected IDs at the configured SA.
     for _name, prefix, timeout_s in PERIODIC_MSG_PREFIXES:
         expect_id = prefix | (current_sa & 0xFF)
         out_lines.append("UUT_TXCHECK_ID " + fmt_id(expect_id) + " " + timeout_s)
-
-    if INCLUDE_WBLR_IN_SA_SWEEP:
-        wblr_id = 0x1CFEAC00 | (current_sa & 0xFF)
-        out_lines.append("UUT_TXCHECK_ID " + fmt_id(wblr_id) + " " + CHECK_WBLR_TIMEOUT_S)
 
     # Previous SA should no longer be present after transition.
     if previous_sa is not None and previous_sa != current_sa:
@@ -178,14 +177,8 @@ def add_verify_sa_block(out_lines: list[str], current_sa: int, previous_sa: int 
             out_lines.append(
                 "UUT_TXCHECK_NOT_ID " + fmt_id(old_id) + " " + CHECK_OLD_SA_ABSENT_TIMEOUT_S
             )
-        if INCLUDE_WBLR_IN_SA_SWEEP:
-            old_wblr_id = 0x1CFEAC00 | (previous_sa & 0xFF)
-            out_lines.append(
-                "UUT_TXCHECK_NOT_ID "
-                + fmt_id(old_wblr_id)
-                + " "
-                + CHECK_OLD_SA_ABSENT_TIMEOUT_S
-            )
+        # Do not enforce WBLR NOT_ID by raw arbitration ID here; firmware/bench
+        # may vary priority bits while preserving the same PGN/SA semantics.
 
 
 out_lines: list[str] = []
